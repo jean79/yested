@@ -11,7 +11,7 @@ Yested was inspired by:
 
 Project status: Alpha, comments, critics and patches welcome!
 
-# How it works
+# Introduction
 Kotlin applications can be compiled into Javascript. Yested framework is designed for a strongly typed constructions of single page web applications. Compiled application runs whole in a browser. 
 
 To understand the framework please look at [Kotlin HTML builder](http://kotlinlang.org/docs/reference/type-safe-builders.html).
