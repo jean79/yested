@@ -3,7 +3,13 @@ Yested
 Yested is a Kotlin framework for building web applications in Javascript. 
 
 Design goal:
-* Fast and *strongly typed* development of web applications
+* Fast and **strongly typed** development of web applications
+
+Yested was inspired by:
+* Adobe Flex
+* [Kotlin HTML builder](http://kotlinlang.org/docs/reference/type-safe-builders.html)
+
+Project status: Alpha, comments, critics and patches welcome!
 
 # How it works
 Kotlin applications can be compiled into Javascript. Yested framework is designed for a strongly typed constructions of single page web applications. Compiled application runs whole in a browser. 
@@ -50,6 +56,6 @@ Yested is designed for a development of web applications that:
 * Strongly typed development of a whole application.
 * Simple and extensible DSL language for easy application constructon.
 * Simple development of new components and attachement to DSL
-* Damn easy wrapping of 3rd party Java libraries (thanks to Kotlin)
+* Damn easy wrapping of 3rd party Javascript libraries (thanks to Kotlin)
 * Provides wrapper for CSS framework: Twitter Bootstrap 3
 * Provides wrapper for Chart.js charting library 
