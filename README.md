@@ -7,7 +7,7 @@ Kotlin applications can be compiled into Javascript. Yested framework is designe
 
 To understand the framework please look at [Kotlin HTML builder](http://kotlinlang.org/docs/reference/type-safe-builders.html).
 Have you got it?
-Then Yested is written in the same DSL way but each class wraps single HTML element. 
+Then Yested is written in the same DSL way but each class wraps a single HTML element. 
 
 ## Short example
 Let's have a html page with a placeholder div:
@@ -28,3 +28,6 @@ fun main() {
     }
 }
 ```
+What id does: It creates a HTML elements via DOM manipulation and attach this subtree to div with id placeholder.
+
+Main is a Kotlin function which is executed when application is fully loaded.
