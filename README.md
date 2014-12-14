@@ -54,7 +54,7 @@ fun main() {
 }
 ```
 
-Main is a Kotlin function which is executed when application is fully loaded.
+Main is a Kotlin function which is executed when HTML page is fully loaded.
 
 ## What is it suitable for?
 Yested is designed for a development of web applications that:
