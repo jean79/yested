@@ -31,3 +31,18 @@ fun main() {
 What id does: It creates a HTML elements via DOM manipulation and attach this subtree to div with id placeholder.
 
 Main is a Kotlin function which is executed when application is fully loaded.
+
+## What is it suitable for?
+Yested is designed for a development of web applications that:
+* Are dynamic (i.e. it is not a static HTML)
+* Re-use components (grids, tabs)
+* Needs to create it's own components
+* Wants to be developed in a strongly typed way.
+* Are CRUD like.
+
+## What it does NOT allow
+* Design components in HTML - all components have to be written in Yested DSL (in Kotlin language)
+
+## Features
+* Strongly typed development of a whole application
+* 
