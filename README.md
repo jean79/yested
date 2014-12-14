@@ -44,5 +44,9 @@ Yested is designed for a development of web applications that:
 * Design components in HTML - all components have to be written in Yested DSL (in Kotlin language)
 
 ## Features
-* Strongly typed development of a whole application
-* 
+* Strongly typed development of a whole application.
+* Simple and extensible DSL language for easy application constructon.
+* Simple development of new components and attachement to DSL
+* Damn easy wrapping of 3rd party Java libraries (thanks to Kotlin)
+* Provides wrapper for CSS framework: Twitter Bootstrap 3
+* Provides wrapper for Chart.js charting library 
