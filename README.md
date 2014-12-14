@@ -5,18 +5,20 @@ Yested is a Kotlin framework for building web applications in Javascript.
 # How it works
 Kotlin applications can be compiled into Javascript. Yested framework is designed for a strongly typed constructions of single page web applications. Compiled application runs whole in a browser. 
 
-To understand the framework please look at Kotlin HTML builder.
+To understand the framework please look at [Kotlin HTML builder](http://kotlinlang.org/docs/reference/type-safe-builders.html).
+Have you got it?
+Then Yested is written in the same DSL way but each class wraps single HTML element. 
 
 ## Short example
 Let's have a html page with a placeholder div:
 ```
-<div id="page"></div>
+<div id="placeholder"></div>
 ```
 
 Then we can build a Yested application as:
 ```
 fun main() {
-    Page( el("page") as HTMLElement ) with {
+    page("placeholder") {
         content {
             a(href="http://www.wikipedia.org") { +"Wikipedia" }
             br()
