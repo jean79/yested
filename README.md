@@ -41,19 +41,17 @@ It's rather boring, it creates a HTML elements via DOM manipulation and attach t
 
 More complex example:
 ```
-```
 fun main() {
-    val textinput = Textinput() with 
+    val textinput = Textinput(placeholder = "Query")
+    val buton = Button() { println("Content of textinput: ${textinput.value)") }
     page("placeholder") {
         content {
-            a(href="http://www.wikipedia.org") { +"Wikipedia" }
-            br()
-            br()
-            span(clazz="colored") { +"Some colored text" }
+            +textinput
+            +br()
+            +button
         }
     }
 }
-```
 ```
 
 Main is a Kotlin function which is executed when application is fully loaded.
