@@ -37,7 +37,24 @@ fun main() {
     }
 }
 ```
-What id does: It creates a HTML elements via DOM manipulation and attach this subtree to div with id placeholder.
+It's rather boring, it creates a HTML elements via DOM manipulation and attach this subtree to div with id placeholder.
+
+More complex example:
+```
+```
+fun main() {
+    val textinput = Textinput() with 
+    page("placeholder") {
+        content {
+            a(href="http://www.wikipedia.org") { +"Wikipedia" }
+            br()
+            br()
+            span(clazz="colored") { +"Some colored text" }
+        }
+    }
+}
+```
+```
 
 Main is a Kotlin function which is executed when application is fully loaded.
 
