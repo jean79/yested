@@ -10,7 +10,7 @@
     <properties>
         <kotlin.version>0.9.976</kotlin.version>
     </properties>
-
+    <packaging>jar</packaging>
     <dependencies>
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
@@ -24,9 +24,36 @@
         <testSourceDirectory>src/test/kotlin</testSourceDirectory>
         <plugins>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.7</version>
+                <executions>
+                    <execution>
+                        <id>copy-sources</id>
+                        <phase>process-sources</phase>
+                        <configuration>
+                            <target>
+                                <delete dir="${project.build.directory}/generated-js-library" failonerror="false" />
+                                <mkdir dir="${basedir}/target/generated-js-library"/>
+                                <copy todir="${basedir}/target/generated-js-library">
+                                    <fileset dir="${basedir}/src/main/kotlin">
+                                        <include name="**/*.kt"/>
+                                    </fileset>
+                                </copy>
+                            </target>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
                 <groupId>org.jetbrains.kotlin</groupId>
                 <artifactId>kotlin-maven-plugin</artifactId>
-
+                <configuration>
+                    <librarySourceDir>${basedir}/target/generated-js-library</librarySourceDir>
+                </configuration>
                 <dependencies>
                     <dependency>
                         <groupId>org.jetbrains.kotlin</groupId>
@@ -35,43 +62,28 @@
                     </dependency>
                 </dependencies>
                 <executions>
-
-                        <execution>
-                            <id>js</id>
-                            <goals>
-                                <goal>js</goal>
-                            </goals>
-                        </execution>
+                    <execution>
+                        <id>jslib</id>
+                        <goals>
+                            <goal>jslib</goal>
+                        </goals>
+                    </execution>
                 </executions>
-<!--
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.1.2</version>
+                <executions>
                     <execution>
-                        <id>compile</id>
-                        <phase>compile</phase>
+                        <id>attach-sources</id>
+                        <phase>verify</phase>
                         <goals>
-                            <goal>compile</goal>
+                            <goal>jar-no-fork</goal>
                         </goals>
-                        <configuration>
-                            <sourceDirs>
-                                <source>src/main/kotlin</source>
-                            </sourceDirs>
-                        </configuration>
                     </execution>
-                    <execution>
-                        <id>test-compile</id>
-                        <phase>test-compile</phase>
-                        <goals>
-                            <goal>test-compile</goal>
-                        </goals>
-                        <configuration>
-                            <sourceDirs>
-                                <source>src/test/kotlin</source>
-                            </sourceDirs>
-                        </configuration>
-                    </execution>
-                </executions-->
+                </executions>
             </plugin>
         </plugins>
     </build>
-
-
 </project>
