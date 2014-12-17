@@ -6,6 +6,7 @@ import net.yested.HTMLParentComponent
 import net.yested.with
 import net.yested.div
 import kotlin.js.dom.html.HTMLElement
+import net.yested.el
 
 /**
  * Created by jean on 24.11.2014.
@@ -54,4 +55,8 @@ fun HTMLParentComponent.row(device:String = "md", init:Row.()->Unit): Row {
     return row
 }
 
-//fun pageHeader()
+fun page(placeholderElementId:String, init:Page.() -> Unit):Unit {
+    Page(el(placeholderElementId) as HTMLElement) with {
+        this.init()
+    }
+}

@@ -7,6 +7,9 @@ import net.yested.HTMLParentComponent
 import net.yested.ParentComponent
 import net.yested.thead
 import net.yested.tbody
+import java.util.ArrayList
+import net.yested.Span
+import net.yested.with
 
 data class Column<T>(
         val label:HTMLParentComponent.() -> Unit,
@@ -16,20 +19,53 @@ data class Column<T>(
         val defaultSort:Boolean = false,
         val defaultSortOrderAsc:Boolean = true)
 
+class ColumnHeader<T>(val column:Column<T>, sortFunction:(Column<T>) -> Unit) : Span() {
+
+    var sortOrderAsc:Boolean = column.defaultSortOrderAsc
+    var arrowPlaceholder = Span();
+
+    {
+        setAttribute("style", "cursor: pointer;")
+
+        column.label()
+        +arrowPlaceholder
+
+        onclick = {
+            sortFunction(column)
+        }
+
+    }
+
+    fun updateSorting(sorteByColumn:Column<T>?, sortAscending:Boolean) {
+        if (sorteByColumn != column) {
+            arrowPlaceholder.replace("")
+        } else {
+            arrowPlaceholder.replace( glyphicon("arrow-${if (sortAscending) "up" else "down"}"))
+        }
+    }
+
+}
+
 class Grid<T>(val columns:Array<Column<T>>) : ParentComponent("table") {
 
     var sortColumn:Column<T>? = null
     var asc:Boolean = true;
+    val arrowsPlaceholders = ArrayList<Span>();
+    //val columnHeaders = columns.map { ColumnHeader(column = it, sortFunction = { sortByColumn(it)}) } .copyToArray();
+//    val columnHeaders = columns.map { it };
+    var columnHeaders:List<ColumnHeader<T>>? = null
 
     {
         element.className = "table table-striped table-hover table-condensed"
+        columnHeaders = columns.map { ColumnHeader(column = it, sortFunction = { sortByColumn(it)}) }
         renderHeader()
         //sortColumn = columns.first()
         sortColumn = (columns.filter { it.defaultSort } : Iterable<Column<T>>).firstOrNull()
         asc = sortColumn?.defaultSortOrderAsc ?: true
+        setSortingArrow()
     }
 
-    var _list: List<T>? = null
+    private var _list: List<T>? = null
 
     var list: List<T>?
         get() = _list
@@ -38,7 +74,11 @@ class Grid<T>(val columns:Array<Column<T>>) : ParentComponent("table") {
             displayData()
         }
 
-    fun sortByColumn(column:Column<T>) {
+    fun setSortingArrow() {
+        columnHeaders!!.forEach { it.updateSorting(sortColumn, asc) }
+    }
+
+    fun sortByColumn(column:Column<T>):Unit {
         if (column == sortColumn) {
             asc = !asc;
         } else {
@@ -46,20 +86,30 @@ class Grid<T>(val columns:Array<Column<T>>) : ParentComponent("table") {
             sortColumn = column
         }
         displayData()
+        setSortingArrow()
     }
 
     fun renderHeader() {
         add(
             thead {
                 tr {
-                    columns.forEach { column ->
+                    columnHeaders!!.forEach { columnHeader ->
                         th {
-                            "class" .. "text-${column.align.code}";
-                            column.label()
-                            style = "cursor: pointer;"
-                            onclick = { sortByColumn(column) }
+                            "class" .. "text-${columnHeader.column.align.code}";
+                            +columnHeader
                         }
                     }
+                    /*columns.forEach { column ->
+                        th {
+                            +ColumnHeader(column = column, sortFunction = { sortByColumn(it) });
+                            *//*val span = span() { glyphicon("arrow-down") }
+                            "class" .. "text-${column.align.code}";
+                            style = "cursor: pointer;"
+                            column.label()
+                            +span
+                            onclick = { sortByColumn(column) }*//*
+                        }
+                    }*/
                 }
             }
         )

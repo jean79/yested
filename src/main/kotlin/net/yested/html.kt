@@ -149,7 +149,6 @@ open class HTMLParentComponent(tagName:String) : ParentComponent(tagName) {
         add(ul)
     }
 
-
     fun nbsp(times:Int = 1):Unit =
         (1..times).forEach {
             add("&nbsp;")
@@ -168,10 +167,10 @@ open class HTMLParentComponent(tagName:String) : ParentComponent(tagName) {
 
     fun br() = addTag("br") { }
 
-    fun label(forId:String, clazz:String, init:HTMLParentComponent.() -> Unit):HTMLParentComponent {
+    fun label(forId:String? = null, clazz:String? = null, init:HTMLParentComponent.() -> Unit):HTMLParentComponent {
         val l = HTMLParentComponent("label") with {
-            "for"..forId
-            "class"..clazz
+            forId?.let { "for"..forId!! }
+            clazz?.let { "class"..clazz!! }
             init()
         }
         add(l)
@@ -272,7 +271,7 @@ enum class ButtonType(val code:String) {
     RESET : ButtonType("reset")
 }
 
-open class Button(type:ButtonType = ButtonType.BUTTON) : ParentComponent("button") {
+class Button(type:ButtonType = ButtonType.BUTTON) : ParentComponent("button") {
 
     var onclick: Function0<Unit>
         get() = element.onclick
@@ -281,7 +280,7 @@ open class Button(type:ButtonType = ButtonType.BUTTON) : ParentComponent("button
         }
 
     {
-        "type"..type.code
+        setAttribute("type", type.code)
     }
 }
 
@@ -338,3 +337,7 @@ fun tag(tagName:String, init: HTMLParentComponent.() -> Unit): HTMLParentCompone
     HTMLParentComponent(tagName) with {
         init()
     }
+
+fun text(text:String): ParentComponent.() -> Unit = {
+    +text
+}

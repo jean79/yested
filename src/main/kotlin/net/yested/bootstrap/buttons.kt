@@ -27,7 +27,13 @@ class BtsButton(type: ButtonType = ButtonType.BUTTON,
              look:ButtonLook = ButtonLook.DEFAULT,
              size:ButtonSize = ButtonSize.DEFAULT,
              block:Boolean = false,
-             onclick:() -> Unit ) : Button(type) {
+             onclick:() -> Unit ) :  ParentComponent("button") {
+
+    var onclick: Function0<Unit>
+        get() = element.onclick
+        set(f) {
+            element.onclick = f;
+        }
 
     var disabled:Boolean
         get() = element.getAttribute("disabled") == "disabled"
@@ -36,7 +42,8 @@ class BtsButton(type: ButtonType = ButtonType.BUTTON,
         }
 
     {
-        "class".."btn btn-${look.code} btn-${size} ${if (block) "btn-block" else ""}"
+        setAttribute("class", "btn btn-${look.code} btn-${size.code} ${if (block) "btn-block" else ""}")
+        setAttribute("type", type.code)
         this.label()
         this.onclick = onclick
     }
