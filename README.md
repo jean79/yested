@@ -47,7 +47,7 @@ fun main() {
     page("placeholder") {
         content {
             +textinput
-            +br()
+            br()
             +button
         }
     }
