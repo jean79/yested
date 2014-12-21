@@ -143,6 +143,13 @@ open class HTMLParentComponent(tagName:String) : ParentComponent(tagName) {
         })
     }
 
+    fun code(lang:String? = "javascript", init: ParentComponent.() -> Unit) {
+        add(tag("pre") {
+            tag("code") {
+                init()
+            }
+        })
+    }
     fun ul(init:UL.() -> Unit) {
         val ul = UL()
         ul.init()

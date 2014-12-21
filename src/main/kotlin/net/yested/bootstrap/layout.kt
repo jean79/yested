@@ -48,6 +48,12 @@ class PageHeader  : HTMLParentComponent("div") {
     }
 }
 
+fun HTMLParentComponent.pageHeader(init: HTMLParentComponent.() -> Unit) {
+    val pageHeader = PageHeader()
+    pageHeader.init()
+    add(pageHeader)
+}
+
 fun HTMLParentComponent.row(device:String = "md", init:Row.()->Unit): Row {
     val row = Row(device = device)
     row.init()

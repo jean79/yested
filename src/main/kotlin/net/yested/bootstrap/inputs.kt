@@ -13,6 +13,7 @@ import kotlin.dom.addElement
 import kotlin.dom.addText
 import net.yested.Div
 import net.yested.Span
+import net.yested.with
 
 public native trait HTMLInputElementWithOnChange : HTMLInputElement {
     public native var onchange: () -> Unit
@@ -66,6 +67,12 @@ class TextInput(placeholder:String? = null) : ParentComponent("input"), InputEle
         onChangeLiveListeners.add(invoke)
     }
 
+}
+
+public fun HTMLParentComponent.textInput(placeholder: String?, init: TextInput.() -> Unit):Unit {
+    val textInput = TextInput(placeholder = placeholder)
+    textInput.init()
+    add(textInput)
 }
 
 class CheckBox() : ParentComponent("input"), InputElement<Boolean> {

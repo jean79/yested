@@ -10,6 +10,9 @@ import net.yested.HTMLParentComponent
 import net.yested.Li
 import net.yested.Anchor
 import net.yested.with
+import java.util.HashMap
+import java.util.ArrayList
+import net.yested.div
 
 /**
  * <div role="tabpanel">
@@ -28,13 +31,15 @@ import net.yested.with
  */
 class Tabs : ParentComponent("div") {
 
-    val bar = UL() with { role = "tablist"; clazz = "nav nav-tabs"}
+    private val bar = UL() with { role = "tablist"; clazz = "nav nav-tabs"}
 
-    val content = Div() with { clazz = "tab-content"}
+    private val content = Div() with { clazz = "tab-content"}
 
-    val anchorsLi = java.util.ArrayList<HTMLParentComponent>();
+    private val anchorsLi = java.util.ArrayList<HTMLParentComponent>();
 
-    var onselect: Function1<String, Unit>? = null
+    private val tabsRendered = HashMap<Int, Div>()
+
+    private var index = 0;
 
     {
         element.setAttribute("role", "tabpanel")
@@ -44,27 +49,34 @@ class Tabs : ParentComponent("div") {
 
     }
 
-    private fun activateTab(li:Li, code:String, init:HTMLParentComponent.()->Unit) {
+    private fun renderContent(tabId:Int, init:HTMLParentComponent.()->Unit):Div =
+        if (tabsRendered.containsKey(tabId)) {
+            tabsRendered.get(tabId)!!
+        } else {
+            val div = Div() with {
+                "class".."fade in"
+                init()
+            }
+            tabsRendered.put(tabId, div)
+            div
+        }
+
+    private fun activateTab(li:Li, tabId:Int, onSelect:Function0<Unit>?, init:HTMLParentComponent.()->Unit) {
 
         li.clazz = "active"
 
         anchorsLi.filter { it != li} .forEach { it.clazz = "" }
 
-        content.removeChild("div")
+        content.replace(renderContent(tabId, init));
 
-        val div = Div() with {
-            "class".."fade in"
-            init()
-        }
-
-        content.add(div)
-
-        if (onselect != null) {
-            onselect!!(code)
+        if (onSelect != null) {
+            onSelect()
         }
     }
 
-    fun tab(active:Boolean = false, code:String, header:HTMLParentComponent.()->Unit, init:HTMLParentComponent.()->Unit) {
+    public fun tab(active:Boolean = false, header:HTMLParentComponent.()->Unit, onSelect:Function0<Unit>? = null, init:HTMLParentComponent.()->Unit) {
+
+        val tabId = index++;
 
         val a = Anchor() with {
             "role" .. "tab"
@@ -75,17 +87,22 @@ class Tabs : ParentComponent("div") {
         val li = bar.li { +a; role = "presentation" }
 
         a.onclick = {
-            activateTab(li, code, init)
+            activateTab(li, tabId, onSelect, init)
         }
 
         bar.add(li)
         anchorsLi.add(li)
 
         if (active) {
-            activateTab(li, code, init)
+            activateTab(li, tabId, onSelect, init)
         }
+
     }
 
 }
 
-fun tabs(init:Tabs.() -> Unit): Tabs = Tabs() with { init() }
+public fun HTMLParentComponent.tabs(init:Tabs.() -> Unit): Unit {
+    val tabs = Tabs()
+    tabs.init()
+    add(tabs)
+}

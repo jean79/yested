@@ -68,7 +68,7 @@ class Validator<T>(val inputElement: InputElement<T>, override val errorText:Str
 
 }
 
-class Form(val labelDef:String = "col-sm-2", val inputDef:String = "col-sm-10") : HTMLParentComponent("form") {
+class Form(private val labelDef:String = "col-sm-2",private val inputDef:String = "col-sm-10") : HTMLParentComponent("form") {
 
     {
         element.setAttribute("class", "form-horizontal")
@@ -76,7 +76,7 @@ class Form(val labelDef:String = "col-sm-2", val inputDef:String = "col-sm-10") 
         element.setAttribute("onsubmit", "return false")
     }
 
-    fun item(forId:String = "", label:HTMLParentComponent.()->Unit, validator:ValidatorI? = null, content:HTMLParentComponent.()->Unit) {
+    public fun item(forId:String = "", label:HTMLParentComponent.()->Unit, validator:ValidatorI? = null, content:HTMLParentComponent.()->Unit) {
 
         val spanErrMsg = Span() with { clazz = "help-block" }
         val divInput = div(clazz = "$inputDef", init = content) with { +spanErrMsg }
@@ -94,9 +94,10 @@ class Form(val labelDef:String = "col-sm-2", val inputDef:String = "col-sm-10") 
 
 }
 
-fun HTMLParentComponent.form(labelDef:String = "col-sm-2", inputDef:String = "col-sm-10", init:Form.() -> Unit):Form =
-    Form(labelDef = labelDef, inputDef = inputDef) with {
-        init()
-    }
+fun HTMLParentComponent.form(labelDef:String = "col-sm-2", inputDef:String = "col-sm-10", init:Form.() -> Unit):Unit {
+    val form = Form(labelDef = labelDef, inputDef = inputDef)
+    form.init()
+    add(form)
+}
 
 

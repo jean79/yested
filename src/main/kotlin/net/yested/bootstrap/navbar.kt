@@ -48,11 +48,11 @@ import net.yested.Div
   </nav>
  *
  */
-class Navbar() : ParentComponent("nav") {
+public class Navbar() : ParentComponent("nav") {
 
-    val ul = UL() with { clazz = "nav navbar-nav" }
-    val menuItems = ArrayList<Li>();
-    val logoDiv = Div();
+    private val ul = UL() with { clazz = "nav navbar-nav" }
+    private val menuItems = ArrayList<Li>();
+    private val logoDiv = Div();
 
     {
 
@@ -81,13 +81,13 @@ class Navbar() : ParentComponent("nav") {
 
     }
 
-    fun logo(init: HTMLParentComponent.() -> Unit) = logoDiv.init()
+    public fun logo(init: HTMLParentComponent.() -> Unit):Unit = logoDiv.init()
 
     /**
      * Top menu item
      * <li class="active"><a href="#">Home</a></li>
      */
-    fun item(href:String = "#", onclick: Function0<Unit>? = null, init: Anchor.() -> Unit) {
+    public fun item(href:String = "#", onclick: Function0<Unit>? = null, init: Anchor.() -> Unit) {
 
         val li = Li()
 
@@ -104,11 +104,11 @@ class Navbar() : ParentComponent("nav") {
         menuItems.add(li)
     }
 
-    fun dropdown(label: Anchor.()->Unit, init:NavBarDropdown.()->Unit) =
+    public fun dropdown(label: Anchor.()->Unit, init:NavBarDropdown.()->Unit):Unit =
         ul.add(
             NavBarDropdown({ deselectAll() }, label) with { init() } )
 
-    fun deselectAll() {
+    public fun deselectAll() {
         menuItems.forEach { it.clazz = "" }
     }
 
