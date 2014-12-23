@@ -16,26 +16,29 @@ fun createForm(): Div {
             col(12) {
                 pageHeader { h3 { +"Form" } }
             }
+        }
+        row {
             col(4) {
                 div {
-+"""
+                    +"""
 """
                 }
                 br()
                 h4 { +"Demo" }
                 form(labelDef = "col-sm-4", inputDef = "col-sm-8") {
-                    item(label = { +"Username"}) {
+                    item(label = { +"Username" }) {
                         textInput(placeholder = "Enter your username") { }
                     }
-                    item(label = { +"Age"}) {
+                    item(label = { +"Age" }) {
                         textInput(placeholder = "Enter your age") { }
                     }
                 }
             }
             col(8) {
-                h4 { +"Code"}
-                code(lang="kotlin") { +
-"""form(labelDef = "col-sm-4", inputDef = "col-sm-8") {
+                h4 { +"Code" }
+                code(lang = "kotlin") {
+                    +
+                    """form(labelDef = "col-sm-4", inputDef = "col-sm-8") {
     item(label = { +"Username"}) {
         textInput(placeholder = "Enter your username") { }
     }

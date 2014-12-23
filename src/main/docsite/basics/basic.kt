@@ -1,3 +1,5 @@
+package basics
+
 import net.yested.bootstrap.btsButton
 import net.yested.bootstrap.ButtonSize
 import net.yested.bootstrap.ButtonLook
@@ -11,13 +13,10 @@ import net.yested.Div
  */
 fun basicPage(): Div {
 
-    val checkBox = CheckBox()
-    checkBox.value = true
-    checkBox.addOnChangeListener { println("nova hodnota: ${checkBox.value}") }
-
     return div {
-        +checkBox
-        +btsButton(size = ButtonSize.EXTRA_SMALL, look = ButtonLook.WARNING, label = text("Test")) {}
+        +aboutSection()
+        +kotlinSection()
+        +howItWorksSection()
     }
 
 }

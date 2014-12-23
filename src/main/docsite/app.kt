@@ -10,12 +10,14 @@ import net.yested.bootstrap.navbar
 import net.yested.registerHashChangeListener
 import net.yested.div
 import bootstrap.boostrapPage
+import basics.basicPage
+import html.htmlPage
 
 fun main(args: Array<String>) {
 
     val navbar = navbar {
-        logo { a(clazz = "navbar-brand", href="#") {+"Yested"} }
-        item(href = "#/basicComponents") { +"Basic components" }
+        brand(href = "#") { +"Yested" }
+        item(href = "#/html") { +"Basic HTML" }
         item(href = "#/bootstrapComponents") { +"Bootstrap" }
     }
 
@@ -25,8 +27,8 @@ fun main(args: Array<String>) {
         hash ->
         println("hash: ${hash} ${hash.get(1)}")
         when {
-            hash.get(0) == "" -> divContainer.replace(div() { +"uvodni stranka"})
-            hash.get(1) == "basicComponents" -> divContainer.replace(basicPage())
+            hash.size() == 1  -> divContainer.replace(basicPage())
+            hash.get(1) == "html" -> divContainer.replace(htmlPage())
             hash.get(1) == "bootstrapComponents" -> divContainer.replace(boostrapPage())
         }
     }
@@ -35,7 +37,7 @@ fun main(args: Array<String>) {
         topMenu(navbar)
         content {
             div {
-                br(); br(); br(); br();
+                br(); br(); br();
                 +divContainer
             }
         }
