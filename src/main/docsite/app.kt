@@ -25,7 +25,6 @@ fun main(args: Array<String>) {
 
     registerHashChangeListener {
         hash ->
-        println("hash: ${hash} ${hash.get(1)}")
         when {
             hash.size() == 1  -> divContainer.replace(basicPage())
             hash.get(1) == "html" -> divContainer.replace(htmlPage())

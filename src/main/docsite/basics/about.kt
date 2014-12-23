@@ -7,6 +7,7 @@ import net.yested.Div
 import net.yested.bootstrap.btsButton
 import net.yested.bootstrap.ButtonLook
 import net.yested.bootstrap.btsAnchor
+import net.yested.bootstrap.ButtonSize
 
 fun aboutSection(): Div {
 
@@ -37,11 +38,17 @@ fun aboutSection(): Div {
             }
             col(6) {
                 p {
-                    btsAnchor(look = ButtonLook.PRIMARY, href = "https://github.com/jean79/yested") { +"Get on GitHub"}
+                    btsAnchor(size = ButtonSize.LARGE, look = ButtonLook.PRIMARY, href = "https://github.com/jean79/yested") { +"Get on GitHub"}
                 }
                 p {
                     +"Contact: "
                     a(href="mailto:jan.kovar79@gmail.com") { +"jan.kovar79@gmail.com" }
+                }
+                p {
+                    +"This page is developed in Yested framework"
+                    br()
+                    a(href = "https://github.com/jean79/yested/tree/master/src/main/docsite") {
+                        +"See source code for this site" }
                 }
             }
         }
