@@ -2,8 +2,9 @@ Yested
 ======
 Yested is a Kotlin framework for building single-page web applications in Javascript.
 
-# Project page
+# Project and Demo page
 [www.yested.net](http://www.yested.net)
+
 Project page is whole written in Yested framework.
 
 # Main features
@@ -17,4 +18,4 @@ Project page is whole written in Yested framework.
 * Built-in support for Twitter Bootstrap for a quick start 
 
 # Author
-Jan Kovar [mailto:jan.kovar79@gmail.com](jan.kovar79@gmail.com)
+Jan Kovar [jan.kovar79@gmail.com](jan.kovar79@gmail.com)
