@@ -1860,7 +1860,6 @@
     },
     main$f_1: function (divContainer) {
       return function (hash) {
-        Kotlin.println('hash: ' + hash + ' ' + hash[1]);
         if (hash.length === 1)
           divContainer.replace_5f0h2k$(_.basics.basicPage());
         else if (Kotlin.equals(hash[1], 'html'))
@@ -1917,21 +1916,24 @@
         this.plus_pdl1w0$('Minimalistic code');
       },
       f_6: function () {
-        this.plus_pdl1w0$('DSL for layout construction ');
+        this.plus_pdl1w0$('DSL for layout construction');
       },
       f_7: function () {
-        this.plus_pdl1w0$('Component style of development');
+        this.plus_pdl1w0$('Debugging within browser');
       },
       f_8: function () {
-        this.plus_pdl1w0$('Simple re-use of 3rd party Javascript libraries');
+        this.plus_pdl1w0$('Component style of development');
       },
       f_9: function () {
-        this.plus_pdl1w0$('Simple creation and re-use of custom components');
+        this.plus_pdl1w0$('Simple re-use of 3rd party Javascript libraries');
       },
       f_10: function () {
-        this.plus_pdl1w0$('Built-in support for Twitter Bootstrap for a quick start');
+        this.plus_pdl1w0$('Simple creation and re-use of custom components');
       },
       f_11: function () {
+        this.plus_pdl1w0$('Built-in support for Twitter Bootstrap for a quick start');
+      },
+      f_12: function () {
         this.li(_.basics.f_4);
         this.li(_.basics.f_5);
         this.li(_.basics.f_6);
@@ -1939,42 +1941,52 @@
         this.li(_.basics.f_8);
         this.li(_.basics.f_9);
         this.li(_.basics.f_10);
-      },
-      f_12: function () {
-        this.plus_pdl1w0$('Yested is a Kotlin framework for building single-page web applications in Javascript.');
-        this.h5_mfnzi$(_.basics.f_3);
-        this.ul_8qfrsd$(_.basics.f_11);
+        this.li(_.basics.f_11);
       },
       f_13: function () {
-        this.p_omdg96$(_.basics.f_12);
+        this.plus_pdl1w0$('Yested is a Kotlin framework for building single-page web applications in Javascript.');
+        this.h5_mfnzi$(_.basics.f_3);
+        this.ul_8qfrsd$(_.basics.f_12);
       },
       f_14: function () {
-        this.div_5rsex9$(void 0, void 0, _.basics.f_13);
+        this.p_omdg96$(_.basics.f_13);
       },
       f_15: function () {
-        this.plus_pdl1w0$('Get on GitHub');
+        this.div_5rsex9$(void 0, void 0, _.basics.f_14);
       },
       f_16: function () {
-        _.net.yested.bootstrap.btsAnchor(this, 'https://github.com/jean79/yested', _.net.yested.bootstrap.ButtonLook.object.PRIMARY, void 0, void 0, _.basics.f_15);
+        this.plus_pdl1w0$('Get on GitHub');
       },
       f_17: function () {
-        this.plus_pdl1w0$('jan.kovar79@gmail.com');
+        _.net.yested.bootstrap.btsAnchor(this, 'https://github.com/jean79/yested', _.net.yested.bootstrap.ButtonLook.object.PRIMARY, _.net.yested.bootstrap.ButtonSize.object.LARGE, void 0, _.basics.f_16);
       },
       f_18: function () {
-        this.plus_pdl1w0$('Contact: ');
-        this.a_b4th6h$(void 0, 'mailto:jan.kovar79@gmail.com', void 0, _.basics.f_17);
+        this.plus_pdl1w0$('jan.kovar79@gmail.com');
       },
       f_19: function () {
-        this.p_omdg96$(_.basics.f_16);
-        this.p_omdg96$(_.basics.f_18);
+        this.plus_pdl1w0$('Contact: ');
+        this.a_b4th6h$(void 0, 'mailto:jan.kovar79@gmail.com', void 0, _.basics.f_18);
       },
       f_20: function () {
-        this.col(6, _.basics.f_14);
-        this.col(6, _.basics.f_19);
+        this.plus_pdl1w0$('See source code for this site');
+      },
+      f_21: function () {
+        this.plus_pdl1w0$('This page is created in Yested framework');
+        this.br();
+        this.a_b4th6h$(void 0, 'https://github.com/jean79/yested/tree/master/src/main/docsite', void 0, _.basics.f_20);
+      },
+      f_22: function () {
+        this.p_omdg96$(_.basics.f_17);
+        this.p_omdg96$(_.basics.f_19);
+        this.p_omdg96$(_.basics.f_21);
+      },
+      f_23: function () {
+        this.col(6, _.basics.f_15);
+        this.col(6, _.basics.f_22);
       },
       aboutSection$f: function () {
         _.net.yested.bootstrap.row(this, void 0, _.basics.f_2);
-        _.net.yested.bootstrap.row(this, void 0, _.basics.f_20);
+        _.net.yested.bootstrap.row(this, void 0, _.basics.f_23);
       },
       aboutSection: function () {
         return _.net.yested.div(void 0, void 0, _.basics.aboutSection$f);
@@ -1987,176 +1999,176 @@
       basicPage: function () {
         return _.net.yested.div(void 0, void 0, _.basics.basicPage$f);
       },
-      f_21: function () {
+      f_24: function () {
         this.plus_pdl1w0$('Fundamentals of Framework');
       },
-      f_22: function () {
-        this.h3_mfnzi$(_.basics.f_21);
-      },
-      f_23: function () {
-        _.net.yested.bootstrap.pageHeader(this, _.basics.f_22);
-      },
-      f_24: function () {
-        this.col(12, _.basics.f_23);
-      },
       f_25: function () {
-        this.plus_pdl1w0$('Just a single interface');
+        this.h3_mfnzi$(_.basics.f_24);
       },
       f_26: function () {
-        this.plus_pdl1w0$('All framework components are just simple wrappers around HTMLElement.<br />\n                        Then they provide usefull methods for manipulation with HTML. I.e. attribute settings or DOM subtree manipulatio.<br />\n                        All components have to implement trait (interface) Component.');
+        _.net.yested.bootstrap.pageHeader(this, _.basics.f_25);
       },
       f_27: function () {
-        this.h4_mfnzi$(_.basics.f_25);
-        this.div_5rsex9$(void 0, void 0, _.basics.f_26);
+        this.col(12, _.basics.f_26);
       },
       f_28: function () {
-        this.nbsp_za3lpa$();
+        this.plus_pdl1w0$('Just a single interface');
       },
       f_29: function () {
-        this.plus_pdl1w0$('trait Component {\n    val element : HTMLElement\n}');
+        this.plus_pdl1w0$('All framework components are just simple wrappers around HTMLElement.<br />\n                        Then they provide usefull methods for manipulation with HTML. I.e. attribute settings or DOM subtree manipulatio.<br />\n                        All components have to implement trait (interface) Component.');
       },
       f_30: function () {
         this.h4_mfnzi$(_.basics.f_28);
-        this.code_dhuz3b$('kotlin', _.basics.f_29);
+        this.div_5rsex9$(void 0, void 0, _.basics.f_29);
       },
       f_31: function () {
-        this.col(4, _.basics.f_27);
-        this.col(8, _.basics.f_30);
-      },
-      f_32: function () {
-        this.plus_pdl1w0$('Component creation');
-      },
-      f_33: function () {
-        this.plus_pdl1w0$('Typicaly components extend HTMLParentComponent');
-      },
-      f_34: function () {
-        this.h4_mfnzi$(_.basics.f_32);
-        this.div_5rsex9$(void 0, void 0, _.basics.f_33);
-      },
-      f_35: function () {
         this.nbsp_za3lpa$();
       },
+      f_32: function () {
+        this.plus_pdl1w0$('trait Component {\n    val element : HTMLElement\n}');
+      },
+      f_33: function () {
+        this.h4_mfnzi$(_.basics.f_31);
+        this.code_dhuz3b$('kotlin', _.basics.f_32);
+      },
+      f_34: function () {
+        this.col(4, _.basics.f_30);
+        this.col(8, _.basics.f_33);
+      },
+      f_35: function () {
+        this.plus_pdl1w0$('Component creation');
+      },
       f_36: function () {
-        this.plus_pdl1w0$('class Anchor(href:String? = null) : HTMLParentComponent("a") {\n\n    { //this is constructor\n        if (href != null) {\n            href(href)\n        }\n    }\n\n    fun href(url:String) {\n        element.setAttribute("href", url)\n    }\n\n}');
+        this.plus_pdl1w0$('Typicaly components extend HTMLParentComponent');
       },
       f_37: function () {
         this.h4_mfnzi$(_.basics.f_35);
-        this.code_dhuz3b$('kotlin', _.basics.f_36);
+        this.div_5rsex9$(void 0, void 0, _.basics.f_36);
       },
       f_38: function () {
-        this.col(4, _.basics.f_34);
-        this.col(8, _.basics.f_37);
-      },
-      f_39: function () {
-        this.plus_pdl1w0$('Yested application initialization');
-      },
-      f_40: function () {
-        this.plus_pdl1w0$('You need to have a DIV in your html page with id "page". Then Yested app will be renderred into this div using command on the right.');
-      },
-      f_41: function () {
-        this.h4_mfnzi$(_.basics.f_39);
-        this.div_5rsex9$(void 0, void 0, _.basics.f_40);
-      },
-      f_42: function () {
         this.nbsp_za3lpa$();
       },
+      f_39: function () {
+        this.plus_pdl1w0$('class Anchor(href:String? = null) : HTMLParentComponent("a") {\n\n    { //this is constructor\n        if (href != null) {\n            href(href)\n        }\n    }\n\n    fun href(url:String) {\n        element.setAttribute("href", url)\n    }\n\n}');
+      },
+      f_40: function () {
+        this.h4_mfnzi$(_.basics.f_38);
+        this.code_dhuz3b$('kotlin', _.basics.f_39);
+      },
+      f_41: function () {
+        this.col(4, _.basics.f_37);
+        this.col(8, _.basics.f_40);
+      },
+      f_42: function () {
+        this.plus_pdl1w0$('Yested application initialization');
+      },
       f_43: function () {
-        this.plus_pdl1w0$('page("page") {\n        topMenu(navbar)\n        content {\n            div {\n                a(href="http://www.yested.net") { +"Yested homepage" }\n            }\n        }\n    }');
+        this.plus_pdl1w0$('You need to have a DIV in your html page with id "page". Then Yested app will be renderred into this div using command on the right.');
       },
       f_44: function () {
         this.h4_mfnzi$(_.basics.f_42);
-        this.code_dhuz3b$('kotlin', _.basics.f_43);
+        this.div_5rsex9$(void 0, void 0, _.basics.f_43);
       },
       f_45: function () {
-        this.col(4, _.basics.f_41);
-        this.col(8, _.basics.f_44);
-      },
-      f_46: function () {
-        this.plus_pdl1w0$('DSL for layout construction');
-      },
-      f_47: function () {
-        this.plus_pdl1w0$('To understand the DSL please take look at <a href="http://kotlinlang.org/docs/reference/type-safe-builders.html">Kotlin HTML builder<\/a>.\n                    Have you got it? Then Yested is written in the same DSL way but each object wraps a single HTML element and manipulates with it in a runtime.\n                    ');
-      },
-      f_48: function () {
-        this.h4_mfnzi$(_.basics.f_46);
-        this.div_5rsex9$(void 0, void 0, _.basics.f_47);
-      },
-      f_49: function () {
         this.nbsp_za3lpa$();
       },
+      f_46: function () {
+        this.plus_pdl1w0$('page("page") {\n        topMenu(navbar)\n        content {\n            div {\n                a(href="http://www.yested.net") { +"Yested homepage" }\n            }\n        }\n    }');
+      },
+      f_47: function () {
+        this.h4_mfnzi$(_.basics.f_45);
+        this.code_dhuz3b$('kotlin', _.basics.f_46);
+      },
+      f_48: function () {
+        this.col(4, _.basics.f_44);
+        this.col(8, _.basics.f_47);
+      },
+      f_49: function () {
+        this.plus_pdl1w0$('DSL for layout construction');
+      },
       f_50: function () {
-        this.plus_pdl1w0$('div {\n    p {\n        h5 { +"Demo list" }\n        ul {\n            li { a(href="http://www.yested.net") { +"Yested" } }\n            li { emph { +"Bold text" }\n            li { colorized(color="#778822") { +"Colorized text" } }\n        }\n    }\n}\n');
+        this.plus_pdl1w0$('To understand the DSL please take look at <a href="http://kotlinlang.org/docs/reference/type-safe-builders.html">Kotlin HTML builder<\/a>.\n                    Have you got it? Then Yested is written in the same DSL way but each object wraps a single HTML element and manipulates with it in a runtime.\n                    ');
       },
       f_51: function () {
         this.h4_mfnzi$(_.basics.f_49);
-        this.code_dhuz3b$('kotlin', _.basics.f_50);
+        this.div_5rsex9$(void 0, void 0, _.basics.f_50);
       },
       f_52: function () {
-        this.col(4, _.basics.f_48);
-        this.col(8, _.basics.f_51);
+        this.nbsp_za3lpa$();
+      },
+      f_53: function () {
+        this.plus_pdl1w0$('div {\n    p {\n        h5 { +"Demo list" }\n        ul {\n            li { a(href="http://www.yested.net") { +"Yested" } }\n            li { emph { +"Bold text" }\n            li { colorized(color="#778822") { +"Colorized text" } }\n        }\n    }\n}\n');
+      },
+      f_54: function () {
+        this.h4_mfnzi$(_.basics.f_52);
+        this.code_dhuz3b$('kotlin', _.basics.f_53);
+      },
+      f_55: function () {
+        this.col(4, _.basics.f_51);
+        this.col(8, _.basics.f_54);
       },
       howItWorksSection$f: function () {
-        _.net.yested.bootstrap.row(this, void 0, _.basics.f_24);
-        _.net.yested.bootstrap.row(this, void 0, _.basics.f_31);
+        _.net.yested.bootstrap.row(this, void 0, _.basics.f_27);
+        _.net.yested.bootstrap.row(this, void 0, _.basics.f_34);
         this.br();
-        _.net.yested.bootstrap.row(this, void 0, _.basics.f_38);
+        _.net.yested.bootstrap.row(this, void 0, _.basics.f_41);
         this.br();
-        _.net.yested.bootstrap.row(this, void 0, _.basics.f_45);
-        _.net.yested.bootstrap.row(this, void 0, _.basics.f_52);
+        _.net.yested.bootstrap.row(this, void 0, _.basics.f_48);
+        _.net.yested.bootstrap.row(this, void 0, _.basics.f_55);
       },
       howItWorksSection: function () {
         return _.net.yested.div(void 0, void 0, _.basics.howItWorksSection$f);
       },
-      f_53: function () {
+      f_56: function () {
         this.plus_pdl1w0$('Kotlin to Javascript Compiler');
       },
-      f_54: function () {
-        this.h3_mfnzi$(_.basics.f_53);
-      },
-      f_55: function () {
-        _.net.yested.bootstrap.pageHeader(this, _.basics.f_54);
-      },
-      f_56: function () {
-        this.col(12, _.basics.f_55);
-      },
       f_57: function () {
-        this.plus_pdl1w0$('Kotlin');
+        this.h3_mfnzi$(_.basics.f_56);
       },
       f_58: function () {
-        this.a_b4th6h$(void 0, 'http://kotlinlang.org', void 0, _.basics.f_57);
-        this.plus_pdl1w0$(' is a language created by JetBrains company. It compiles to JVM or to Javascript.');
+        _.net.yested.bootstrap.pageHeader(this, _.basics.f_57);
       },
       f_59: function () {
-        this.plus_pdl1w0$('Main method (see example on the right) will be executed when HTML page is loaded.\n                    ');
+        this.col(12, _.basics.f_58);
       },
       f_60: function () {
-        this.plus_pdl1w0$('Kotlin to Javascript compiler allows you to simply call Javascript functions, allowing\n                        us to create a simple strongly typed wrappers.\n                        ');
+        this.plus_pdl1w0$('Kotlin');
       },
       f_61: function () {
-        this.p_omdg96$(_.basics.f_58);
-        this.p_omdg96$(_.basics.f_59);
-        this.p_omdg96$(_.basics.f_60);
+        this.a_b4th6h$(void 0, 'http://kotlinlang.org', void 0, _.basics.f_60);
+        this.plus_pdl1w0$(' is a language created by JetBrains company. It compiles to JVM or to Javascript.');
       },
       f_62: function () {
-        this.div_5rsex9$(void 0, void 0, _.basics.f_61);
+        this.plus_pdl1w0$('Main method (see example on the right) will be executed when HTML page is loaded.\n                    ');
       },
       f_63: function () {
-        this.plus_pdl1w0$('Simplest Kotlin Code');
+        this.plus_pdl1w0$('Kotlin to Javascript compiler allows you to simply call Javascript functions, allowing\n                        us to create a simple strongly typed wrappers.\n                        ');
       },
       f_64: function () {
-        this.plus_pdl1w0$('fun main(args: Array<String>) {\n    println("This will be printed into a Javascript console.")\n}');
+        this.p_omdg96$(_.basics.f_61);
+        this.p_omdg96$(_.basics.f_62);
+        this.p_omdg96$(_.basics.f_63);
       },
       f_65: function () {
-        this.h4_mfnzi$(_.basics.f_63);
-        this.code_dhuz3b$('kotlin', _.basics.f_64);
+        this.div_5rsex9$(void 0, void 0, _.basics.f_64);
       },
       f_66: function () {
-        this.col(4, _.basics.f_62);
-        this.col(8, _.basics.f_65);
+        this.plus_pdl1w0$('Simplest Kotlin Code');
+      },
+      f_67: function () {
+        this.plus_pdl1w0$('fun main(args: Array<String>) {\n    println("This will be printed into a Javascript console.")\n}');
+      },
+      f_68: function () {
+        this.h4_mfnzi$(_.basics.f_66);
+        this.code_dhuz3b$('kotlin', _.basics.f_67);
+      },
+      f_69: function () {
+        this.col(4, _.basics.f_65);
+        this.col(8, _.basics.f_68);
       },
       kotlinSection$f: function () {
-        _.net.yested.bootstrap.row(this, void 0, _.basics.f_56);
-        _.net.yested.bootstrap.row(this, void 0, _.basics.f_66);
+        _.net.yested.bootstrap.row(this, void 0, _.basics.f_59);
+        _.net.yested.bootstrap.row(this, void 0, _.basics.f_69);
       },
       kotlinSection: function () {
         return _.net.yested.div(void 0, void 0, _.basics.kotlinSection$f);
