@@ -17,5 +17,8 @@ Project page is whole written in Yested framework.
 * Simple creation and re-use of custom components 
 * Built-in support for Twitter Bootstrap for a quick start 
 
+# Status
+Under the development, API can change. Feedback and contributions welcome.
+
 # Author
 Jan Kovar (jan.kovar79@gmail.com)
