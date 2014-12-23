@@ -4,6 +4,7 @@ import net.yested.ParentComponent
 import net.yested.HTMLParentComponent
 import net.yested.ButtonType
 import net.yested.Button
+import net.yested.Anchor
 
 enum class ButtonLook(val code:String) {
     DEFAULT: ButtonLook("default")
@@ -50,15 +51,34 @@ class BtsButton(type: ButtonType = ButtonType.BUTTON,
 
 }
 
+class BtsAnchor(href:String,
+                look:ButtonLook = ButtonLook.DEFAULT,
+                size:ButtonSize = ButtonSize.DEFAULT,
+                block:Boolean = false) :  Anchor(href) {
+
+    {
+        setAttribute("class", "btn btn-${look.code} btn-${size.code} ${if (block) "btn-block" else ""}")
+    }
+
+}
+
 fun HTMLParentComponent.btsButton(type: ButtonType = ButtonType.BUTTON,
-                                  label:ParentComponent.()-> Unit,
+                                   label:ParentComponent.()-> Unit,
+                                   look:ButtonLook = ButtonLook.DEFAULT,
+                                   size:ButtonSize = ButtonSize.DEFAULT,
+                                   block:Boolean = false,
+                                   onclick:() -> Unit):Unit {
+    val btn = BtsButton(type = type, label = label, look = look, size = size, block = block, onclick = onclick)
+    this.add(btn)
+}
+
+fun HTMLParentComponent.btsAnchor(href:String,
                                   look:ButtonLook = ButtonLook.DEFAULT,
                                   size:ButtonSize = ButtonSize.DEFAULT,
                                   block:Boolean = false,
-                                  onclick:() -> Unit):BtsButton {
-    val btn = BtsButton(type = type, label = label, look = look, size = size, block = block, onclick = onclick)
-    this.add(btn)
-    return btn
+                                  init:Anchor.() -> Unit):Unit {
+    val btn = BtsAnchor(href = href, look = look, size = size, block = block)
+    btn.init()
+    add(btn)
 }
-
 

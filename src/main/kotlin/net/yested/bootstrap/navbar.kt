@@ -10,6 +10,7 @@ import net.yested.Anchor
 import java.util.ArrayList
 import net.yested.with
 import net.yested.Div
+import net.yested.Span
 
 /**
  * Created by jean on 24.11.2014.
@@ -52,7 +53,7 @@ public class Navbar() : ParentComponent("nav") {
 
     private val ul = UL() with { clazz = "nav navbar-nav" }
     private val menuItems = ArrayList<Li>();
-    private val logoDiv = Div();
+    private val brandLink = Anchor();
 
     {
 
@@ -71,7 +72,7 @@ public class Navbar() : ParentComponent("nav") {
                         span(clazz = "icon-bar") { }
                         span(clazz = "icon-bar") { }
                     }
-                    + logoDiv
+                    +brandLink
                 }
                 div(id = "navbar", clazz = "navbar-collapse collapse") {
                     +ul
@@ -81,7 +82,16 @@ public class Navbar() : ParentComponent("nav") {
 
     }
 
-    public fun logo(init: HTMLParentComponent.() -> Unit):Unit = logoDiv.init()
+    public fun brand(href:String = "/", init: HTMLParentComponent.() -> Unit):Unit {
+        brandLink.href(href)
+        brandLink.clazz = "navbar-brand"
+        brandLink.replace( Span() with { init() })
+        brandLink.onclick = {
+            deselectAll()
+        }
+    }
+
+    //public fun logo(init: HTMLParentComponent.() -> Unit):Unit = brandLink.init()
 
     /**
      * Top menu item

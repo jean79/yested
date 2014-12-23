@@ -38,7 +38,7 @@ open class ParentComponent(tagName:String) : Component {
         element.innerHTML += text
     }
 
-    fun String.plus() = element.addText(this)
+    fun String.plus() = add(this)
 
     fun Component.plus() {
         add(this)
@@ -109,7 +109,7 @@ open class HTMLParentComponent(tagName:String) : ParentComponent(tagName) {
         return span
     }
 
-    fun image(src:String, alt:String? = null, init: Image.() -> Unit) {
+    fun img(src:String, alt:String? = null, init: Image.() -> Unit) {
         +(Image() with {
             this.src = src
             this.alt = alt?:""
@@ -187,6 +187,8 @@ open class HTMLParentComponent(tagName:String) : ParentComponent(tagName) {
 }
 
 class Table : ParentComponent("table") {
+
+    var border:String by Attribute()
 
     fun thead(init:THead.() -> Unit) {
         val thead = THead()
@@ -291,7 +293,7 @@ class Button(type:ButtonType = ButtonType.BUTTON) : ParentComponent("button") {
     }
 }
 
-class Image : ParentComponent("image") {
+class Image : ParentComponent("img") {
 
     var src:String by Attribute()
     var alt:String by Attribute()
@@ -302,7 +304,7 @@ class P : HTMLParentComponent("p") { }
 
 class Li : HTMLParentComponent("li") { }
 
-class Anchor(href:String? = null) : HTMLParentComponent("a") {
+open class Anchor(href:String? = null) : HTMLParentComponent("a") {
 
     {
         if (href != null) {
