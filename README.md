@@ -18,4 +18,4 @@ Project page is whole written in Yested framework.
 * Built-in support for Twitter Bootstrap for a quick start 
 
 # Author
-Jan Kovar [jan.kovar79@gmail.com](jan.kovar79@gmail.com)
+Jan Kovar (jan.kovar79@gmail.com)
