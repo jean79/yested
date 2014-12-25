@@ -25,15 +25,24 @@ enum class ButtonSize(val code:String) {
 
 class BtsButton(type: ButtonType = ButtonType.BUTTON,
              label:ParentComponent.()-> Unit,
-             look:ButtonLook = ButtonLook.DEFAULT,
-             size:ButtonSize = ButtonSize.DEFAULT,
-             block:Boolean = false,
+             val look:ButtonLook = ButtonLook.DEFAULT,
+             val size:ButtonSize = ButtonSize.DEFAULT,
+             val block:Boolean = false,
              onclick:() -> Unit ) :  ParentComponent("button") {
+
+    private var _active:Boolean = false
 
     var onclick: Function0<Unit>
         get() = element.onclick
         set(f) {
             element.onclick = f;
+        }
+
+    var active:Boolean
+        get() = _active
+        set(value) {
+            _active = value
+            setClass()
         }
 
     var disabled:Boolean
@@ -43,10 +52,14 @@ class BtsButton(type: ButtonType = ButtonType.BUTTON,
         }
 
     {
-        setAttribute("class", "btn btn-${look.code} btn-${size.code} ${if (block) "btn-block" else ""}")
+        setClass()
         setAttribute("type", type.code)
         this.label()
         this.onclick = onclick
+    }
+
+    fun setClass() {
+        setAttribute("class", "btn btn-${look.code} btn-${size.code} ${if (block) "btn-block" else ""} ${if (_active) "active" else ""}")
     }
 
 }
