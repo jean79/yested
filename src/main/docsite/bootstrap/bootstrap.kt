@@ -19,6 +19,7 @@ fun boostrapPage():Div =
                 }
             }
             +createButtons()
+            +buttonGroupsSection()
             +createForm()
             +createInputs()
             +createGrid()

@@ -30,6 +30,9 @@ open class ParentComponent(tagName:String) : Component {
         element.setAttribute(name, value)
     }
 
+    fun getAttribute(name:String) =
+        element.getAttribute(name)
+
     fun add(component:Component) {
         element.appendChild(component.element)
     }
@@ -82,7 +85,7 @@ open class HTMLParentComponent(tagName:String) : ParentComponent(tagName) {
             element.onclick = f;
         }
 
-    fun a(clazz:String? = null, href:String?=null, onclick:Function0<Unit>? = null, init:Anchor.() -> Unit) {
+    open fun a(clazz:String? = null, href:String?=null, onclick:Function0<Unit>? = null, init:Anchor.() -> Unit) {
         val anchor = Anchor(href)
         if (onclick != null) {
             anchor.onclick = onclick

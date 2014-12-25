@@ -12,6 +12,7 @@ import net.yested.div
 import bootstrap.boostrapPage
 import basics.basicPage
 import html.htmlPage
+import ajax.ajaxPage
 
 fun main(args: Array<String>) {
 
@@ -19,6 +20,7 @@ fun main(args: Array<String>) {
         brand(href = "#") { +"Yested" }
         item(href = "#/html") { +"Basic HTML" }
         item(href = "#/bootstrapComponents") { +"Bootstrap" }
+        item(href = "#/ajax") { +"Ajax" }
     }
 
     val divContainer = div {}
@@ -29,6 +31,7 @@ fun main(args: Array<String>) {
             hash.size() == 1  -> divContainer.replace(basicPage())
             hash.get(1) == "html" -> divContainer.replace(htmlPage())
             hash.get(1) == "bootstrapComponents" -> divContainer.replace(boostrapPage())
+            hash.get(1) == "ajax" -> divContainer.replace(ajaxPage())
         }
     }
 
