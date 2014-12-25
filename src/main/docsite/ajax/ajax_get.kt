@@ -205,6 +205,22 @@ fun fetchWeather() {
         }
     }
 }
+...
+div {
+    form(labelDef = "col-sm-4", inputDef = "col-sm-8") {
+        item(label = { +"Location"}, validator = validator) {
+            +textInput
+        }
+        item(label = { +"Units"}) {
+            +btnGroup
+        }
+        item(label = { }) {
+            btsButton(type = ButtonType.SUBMIT, label = { +"Get Weather"}, look = ButtonLook.PRIMARY) {
+                fetchWeather()
+            }
+        }
+    }
+}
 """
                 }
             }
