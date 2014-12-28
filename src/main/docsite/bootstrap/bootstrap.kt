@@ -24,5 +24,6 @@ fun boostrapPage():Div =
             +createInputs()
             +createGrid()
             +createTabs()
+            +createPanelSection()
             +createDialogs()
         }

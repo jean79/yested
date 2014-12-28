@@ -1865,14 +1865,14 @@
           }),
           Panel: Kotlin.createClass(function () {
             return [_.net.yested.ParentComponent];
-          }, function $fun(panelStyle) {
-            if (panelStyle === void 0)
-              panelStyle = _.net.yested.bootstrap.PanelStyle.object.DEFAULT;
+          }, function $fun(style) {
+            if (style === void 0)
+              style = _.net.yested.bootstrap.PanelStyle.object.DEFAULT;
             $fun.baseInitializer.call(this, 'div');
             this.heading_6tzak9$ = _.net.yested.with(new _.net.yested.Div(), _.net.yested.bootstrap.Panel.Panel$f);
             this.body_fx0fel$ = _.net.yested.with(new _.net.yested.Div(), _.net.yested.bootstrap.Panel.Panel$f_0);
             this.footer_qhkwty$ = _.net.yested.with(new _.net.yested.Div(), _.net.yested.bootstrap.Panel.Panel$f_1);
-            this.setAttribute_puj7f4$('class', 'panel panel-' + panelStyle.code);
+            this.setAttribute_puj7f4$('class', 'panel panel-' + style.code);
             this.add_5f0h2k$(this.heading_6tzak9$);
             this.add_5f0h2k$(this.body_fx0fel$);
           }, /** @lends _.net.yested.bootstrap.Panel.prototype */ {
@@ -1897,8 +1897,10 @@
               this.clazz = 'panel-footer';
             }
           }),
-          panel: function ($receiver, init) {
-            var panel = new _.net.yested.bootstrap.Panel();
+          panel: function ($receiver, style, init) {
+            if (style === void 0)
+              style = _.net.yested.bootstrap.PanelStyle.object.DEFAULT;
+            var panel = new _.net.yested.bootstrap.Panel(style);
             init.call(panel);
             $receiver.add_5f0h2k$(panel);
           },
@@ -2225,7 +2227,7 @@
         this.h4_mfnzi$(_.ajax.f_31);
       },
       f_33: function () {
-        this.plus_pdl1w0$('//definition of response, just fragment\nnative trait Main {\n    val temp : Double\n    val pressure : Int\n    val humidity: Int\n    val temp_min : Double\n    val temp_max : Double\n}\n\nnative trait WeatherData {\n    ...\n    val base: String?\n    val main : Main?\n    val wind : Wind?\n    ...\n}\n\n...\nval textInput = TextInput(placeholder = "Type city name and press Enter")\nval validator = Validator(inputElement = textInput, errorText = "Enter at least 3 characters", validator = { it.length() > 2})\nval temperatureSpan = Div()\n\nval btnGroup = ButtonGroup() with {\n    button("metric", label = { + "Celcius"})\n    button("imperial", label = { + "Fahrenheit"})\n}\nbtnGroup.select("metric")\n\nfun fetchWeather() {\n    if (validator.isValid()) {\n        ajaxGet&lt;WeatherData&gt;("http://api.openweathermap.org/data/2.5/weather?q=$\\{textInput.value}&units=$\\{btnGroup.value}") {\n            weatherData ->\n            if (weatherData != null && weatherData.main != null) {\n                temperatureSpan.replace(\n                        Panel(panelStyle = PanelStyle.SUCCESS) with {\n                            heading { +"Temperature in $\\{weatherData.name}" }\n                            content { emph { +"$\\{weatherData.main!!.temp}"} }\n                        })\n            } else {\n                temperatureSpan.replace("Location not found")\n            }\n        }\n    }\n}\n\ndiv {\n    form(labelDef = "col-sm-4", inputDef = "col-sm-8") {\n        item(label = { +"Location"}, validator = validator) {\n            +textInput\n        }\n        item(label = { +"Units"}) {\n            +btnGroup\n        }\n        item(label = { }) {\n            btsButton(type = ButtonType.SUBMIT, label = { +"Get Weather"}, look = ButtonLook.PRIMARY) {\n                fetchWeather()\n            }\n        }\n    }\n}\n');
+        this.plus_pdl1w0$('//definition of response, just fragment\nnative trait Main {\n    val temp : Double\n    val pressure : Int\n    val humidity: Int\n    val temp_min : Double\n    val temp_max : Double\n}\n\nnative trait WeatherData {\n    ...\n    val base: String?\n    val main : Main?\n    val wind : Wind?\n    ...\n}\n\n...\nval textInput = TextInput(placeholder = "Type city name and press Enter")\nval validator = Validator(inputElement = textInput, errorText = "Enter at least 3 characters", validator = { it.length() > 2})\nval temperatureSpan = Div()\n\nval btnGroup = ButtonGroup() with {\n    button("metric", label = { + "Celcius"})\n    button("imperial", label = { + "Fahrenheit"})\n}\nbtnGroup.select("metric")\n\nfun fetchWeather() {\n    if (validator.isValid()) {\n        ajaxGet&lt;WeatherData&gt;("http://api.openweathermap.org/data/2.5/weather?q=$\\{textInput.value}&units=$\\{btnGroup.value}") {\n            weatherData ->\n            if (weatherData != null && weatherData.main != null) {\n                temperatureSpan.replace(\n                        Panel(panelStyle = PanelStyle.SUCCESS) with {\n                            heading { +"Temperature in $\\{weatherData.name}" }\n                            content { emph { +"$\\{weatherData.main!!.temp}"} }\n                        })\n            } else {\n                temperatureSpan.replace("Location not found")\n            }\n        }\n    }\n}\n...\ndiv {\n    form(labelDef = "col-sm-4", inputDef = "col-sm-8") {\n        item(label = { +"Location"}, validator = validator) {\n            +textInput\n        }\n        item(label = { +"Units"}) {\n            +btnGroup\n        }\n        item(label = { }) {\n            btsButton(type = ButtonType.SUBMIT, label = { +"Get Weather"}, look = ButtonLook.PRIMARY) {\n                fetchWeather()\n            }\n        }\n    }\n}\n');
       },
       f_34: function () {
         _.net.yested.bootstrap.pageHeader(this, _.ajax.f_32);
@@ -2583,6 +2585,7 @@
         this.plus_pv6laa$(_.bootstrap.createInputs());
         this.plus_pv6laa$(_.bootstrap.createGrid());
         this.plus_pv6laa$(_.bootstrap.createTabs());
+        this.plus_pv6laa$(_.bootstrap.createPanelSection());
         this.plus_pv6laa$(_.bootstrap.createDialogs());
       },
       boostrapPage: function () {
@@ -3085,7 +3088,7 @@
         return _.net.yested.div(void 0, void 0, _.bootstrap.createInputs$f_1(validator, textInput, button));
       },
       f_101: function () {
-        this.plus_pdl1w0$('Tabs');
+        this.plus_pdl1w0$('Panels');
       },
       f_102: function () {
         this.h3_mfnzi$(_.bootstrap.f_101);
@@ -3097,59 +3100,121 @@
         this.col(12, _.bootstrap.f_103);
       },
       f_105: function () {
-        this.plus_pdl1w0$('\nTabs are based on Bootstrap Tabs.\nContent of tab is rendedered upon click on a tab link. When clicking on anoother link, content is preserved.\n');
+        this.plus_pdl1w0$('\nPlease refer to Bootstrap Panels\n');
       },
       f_106: function () {
         this.plus_pdl1w0$('Demo');
       },
       f_107: function () {
+        this.plus_pdl1w0$('Panel Header');
       },
       f_108: function () {
-        _.net.yested.bootstrap.textInput_rha0js$(this, 'Placeholder 1', _.bootstrap.f_107);
+        this.plus_pdl1w0$('This site');
       },
       f_109: function () {
-        this.div_5rsex9$(void 0, void 0, _.bootstrap.f_108);
+        this.a_b4th6h$(void 0, 'http://www.yested.net', void 0, _.bootstrap.f_108);
       },
       f_110: function () {
-        this.plus_pdl1w0$('This tab is selected by default.');
+        this.plus_pdl1w0$('Panel Footer');
       },
       f_111: function () {
-        this.div_5rsex9$(void 0, void 0, _.bootstrap.f_110);
+        this.heading(_.bootstrap.f_107);
+        this.content(_.bootstrap.f_109);
+        this.footer(_.bootstrap.f_110);
       },
       f_112: function () {
-        this.plus_pdl1w0$('Wikipedia');
-      },
-      f_113: function () {
-        this.a_b4th6h$(void 0, 'http://www.wikipedia.org', void 0, _.bootstrap.f_112);
-      },
-      f_114: function () {
-        this.tab(void 0, _.net.yested.text('First'), void 0, _.bootstrap.f_109);
-        this.tab(true, _.net.yested.text('Second'), void 0, _.bootstrap.f_111);
-        this.tab(void 0, _.net.yested.text('Third'), void 0, _.bootstrap.f_113);
-      },
-      f_115: function () {
         this.div_5rsex9$(void 0, void 0, _.bootstrap.f_105);
         this.br();
         this.h4_mfnzi$(_.bootstrap.f_106);
-        _.net.yested.bootstrap.tabs_1nc3b1$(this, _.bootstrap.f_114);
+        _.net.yested.bootstrap.panel(this, _.net.yested.bootstrap.PanelStyle.object.SUCCESS, _.bootstrap.f_111);
       },
-      f_116: function () {
+      f_113: function () {
         this.plus_pdl1w0$('Code');
       },
+      f_114: function () {
+        this.plus_pdl1w0$('panel {\n    heading { +"Panel Header" }\n    content {\n        a(href="http://www.yested.net") { + "This site"}\n    }\n    footer { +"Panel Footer" }\n                }');
+      },
+      f_115: function () {
+        this.h4_mfnzi$(_.bootstrap.f_113);
+        this.code_dhuz3b$('kotlin', _.bootstrap.f_114);
+      },
+      f_116: function () {
+        this.col(4, _.bootstrap.f_112);
+        this.col(8, _.bootstrap.f_115);
+      },
+      createPanelSection$f: function () {
+        _.net.yested.bootstrap.row(this, void 0, _.bootstrap.f_104);
+        _.net.yested.bootstrap.row(this, void 0, _.bootstrap.f_116);
+      },
+      createPanelSection: function () {
+        return _.net.yested.div(void 0, void 0, _.bootstrap.createPanelSection$f);
+      },
       f_117: function () {
-        this.plus_pdl1w0$('tabs {\n    tab(header = text("First")) {\n        div {\n            textInput(placeholder = "Placeholder 1") { }\n        }\n    }\n    tab(active = true, header = text("Second")) {\n        div {\n            +"This tab is selected by default."\n        }\n    }\n    tab(header = text("Third")) {\n        a(href = "http://www.wikipedia.org") { +"Wikipedia"}\n    }\n}');
+        this.plus_pdl1w0$('Tabs');
       },
       f_118: function () {
-        this.h4_mfnzi$(_.bootstrap.f_116);
-        this.code_dhuz3b$('kotlin', _.bootstrap.f_117);
+        this.h3_mfnzi$(_.bootstrap.f_117);
       },
       f_119: function () {
-        this.col(4, _.bootstrap.f_115);
-        this.col(8, _.bootstrap.f_118);
+        _.net.yested.bootstrap.pageHeader(this, _.bootstrap.f_118);
+      },
+      f_120: function () {
+        this.col(12, _.bootstrap.f_119);
+      },
+      f_121: function () {
+        this.plus_pdl1w0$('\nTabs are based on Bootstrap Tabs.\nContent of tab is rendedered upon click on a tab link. When clicking on anoother link, content is preserved.\n');
+      },
+      f_122: function () {
+        this.plus_pdl1w0$('Demo');
+      },
+      f_123: function () {
+      },
+      f_124: function () {
+        _.net.yested.bootstrap.textInput_rha0js$(this, 'Placeholder 1', _.bootstrap.f_123);
+      },
+      f_125: function () {
+        this.div_5rsex9$(void 0, void 0, _.bootstrap.f_124);
+      },
+      f_126: function () {
+        this.plus_pdl1w0$('This tab is selected by default.');
+      },
+      f_127: function () {
+        this.div_5rsex9$(void 0, void 0, _.bootstrap.f_126);
+      },
+      f_128: function () {
+        this.plus_pdl1w0$('Wikipedia');
+      },
+      f_129: function () {
+        this.a_b4th6h$(void 0, 'http://www.wikipedia.org', void 0, _.bootstrap.f_128);
+      },
+      f_130: function () {
+        this.tab(void 0, _.net.yested.text('First'), void 0, _.bootstrap.f_125);
+        this.tab(true, _.net.yested.text('Second'), void 0, _.bootstrap.f_127);
+        this.tab(void 0, _.net.yested.text('Third'), void 0, _.bootstrap.f_129);
+      },
+      f_131: function () {
+        this.div_5rsex9$(void 0, void 0, _.bootstrap.f_121);
+        this.br();
+        this.h4_mfnzi$(_.bootstrap.f_122);
+        _.net.yested.bootstrap.tabs_1nc3b1$(this, _.bootstrap.f_130);
+      },
+      f_132: function () {
+        this.plus_pdl1w0$('Code');
+      },
+      f_133: function () {
+        this.plus_pdl1w0$('tabs {\n    tab(header = text("First")) {\n        div {\n            textInput(placeholder = "Placeholder 1") { }\n        }\n    }\n    tab(active = true, header = text("Second")) {\n        div {\n            +"This tab is selected by default."\n        }\n    }\n    tab(header = text("Third")) {\n        a(href = "http://www.wikipedia.org") { +"Wikipedia"}\n    }\n}');
+      },
+      f_134: function () {
+        this.h4_mfnzi$(_.bootstrap.f_132);
+        this.code_dhuz3b$('kotlin', _.bootstrap.f_133);
+      },
+      f_135: function () {
+        this.col(4, _.bootstrap.f_131);
+        this.col(8, _.bootstrap.f_134);
       },
       createTabs$f: function () {
-        _.net.yested.bootstrap.row(this, void 0, _.bootstrap.f_104);
-        _.net.yested.bootstrap.row(this, void 0, _.bootstrap.f_119);
+        _.net.yested.bootstrap.row(this, void 0, _.bootstrap.f_120);
+        _.net.yested.bootstrap.row(this, void 0, _.bootstrap.f_135);
       },
       createTabs: function () {
         return _.net.yested.div(void 0, void 0, _.bootstrap.createTabs$f);

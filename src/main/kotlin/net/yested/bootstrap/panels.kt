@@ -15,14 +15,14 @@ public enum class PanelStyle(val code:String) {
     DANGER : PanelStyle("danger")
 }
 
-public class Panel(panelStyle : PanelStyle = PanelStyle.DEFAULT) : ParentComponent("div") {
+public class Panel(style : PanelStyle = PanelStyle.DEFAULT) : ParentComponent("div") {
 
     private val heading = Div() with { clazz = "panel-heading" }
     private val body = Div() with { clazz = "panel-body" }
     private val footer = Div() with { clazz = "panel-footer" }
 
     {
-        setAttribute("class", "panel panel-${panelStyle.code}")
+        setAttribute("class", "panel panel-${style.code}")
         add(heading)
         add(body)
     }
@@ -42,8 +42,8 @@ public class Panel(panelStyle : PanelStyle = PanelStyle.DEFAULT) : ParentCompone
 
 }
 
-fun HTMLParentComponent.panel(init:Panel.() -> Unit) {
-    val panel = Panel()
+fun HTMLParentComponent.panel(style:PanelStyle = PanelStyle.DEFAULT, init:Panel.() -> Unit) {
+    val panel = Panel(style = style)
     panel.init()
     add(panel)
 }

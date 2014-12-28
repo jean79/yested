@@ -92,7 +92,7 @@ fun createAjaxGetSection(): Div {
                 weatherData ->
                 if (weatherData != null && weatherData.main != null) {
                     temperatureSpan.replace(
-                            Panel(panelStyle = PanelStyle.SUCCESS) with {
+                            Panel(style = PanelStyle.SUCCESS) with {
                                 heading { +"Temperature in ${weatherData.name}" }
                                 content { emph { +"${weatherData.main!!.temp}"} }
                             })
