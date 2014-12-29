@@ -8,7 +8,7 @@ import net.yested.with
 /**
  * Created by jean on 30.11.2014.
  */
-class Breadcrumbs : ParentComponent("ol") {
+public class Breadcrumbs : ParentComponent("ol") {
 
     {
         setAttribute("class", "breadcrumb")
@@ -29,7 +29,7 @@ class Breadcrumbs : ParentComponent("ol") {
 
 }
 
-fun HTMLParentComponent.breadcrumbs(init: Breadcrumbs.() -> Unit): Breadcrumbs {
+public fun HTMLParentComponent.breadcrumbs(init: Breadcrumbs.() -> Unit): Breadcrumbs {
     val breadcrumbs = Breadcrumbs()
     breadcrumbs.init()
     this.add(breadcrumbs)

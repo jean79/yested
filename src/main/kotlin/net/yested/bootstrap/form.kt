@@ -32,13 +32,13 @@ import net.yested.HTMLParentComponent
 import net.yested.Span
 import net.yested.with
 
-trait ValidatorI {
+public trait ValidatorI {
     fun onchange(invoke:(valid:Boolean)->Unit)
     fun isValid():Boolean
     val errorText:String
 }
 
-class Validator<T>(val inputElement: InputElement<T>, override val errorText:String, val validator:(value:T)->Boolean) : ValidatorI {
+public class Validator<T>(val inputElement: InputElement<T>, override val errorText:String, val validator:(value:T)->Boolean) : ValidatorI {
 
     val onChangeListeners: java.util.ArrayList<Function1<Boolean, Unit>> = java.util.ArrayList();
 
@@ -68,7 +68,7 @@ class Validator<T>(val inputElement: InputElement<T>, override val errorText:Str
 
 }
 
-class Form(private val labelDef:String = "col-sm-2",private val inputDef:String = "col-sm-10") : HTMLParentComponent("form") {
+public class Form(private val labelDef:String = "col-sm-2",private val inputDef:String = "col-sm-10") : HTMLParentComponent("form") {
 
     {
         element.setAttribute("class", "form-horizontal")
@@ -94,7 +94,7 @@ class Form(private val labelDef:String = "col-sm-2",private val inputDef:String 
 
 }
 
-fun HTMLParentComponent.form(labelDef:String = "col-sm-2", inputDef:String = "col-sm-10", init:Form.() -> Unit):Unit {
+public fun HTMLParentComponent.form(labelDef:String = "col-sm-2", inputDef:String = "col-sm-10", init:Form.() -> Unit):Unit {
     val form = Form(labelDef = labelDef, inputDef = inputDef)
     form.init()
     add(form)

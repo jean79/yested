@@ -12,6 +12,33 @@
         <build.number>0.0.1</build.number>
     </properties>
     <packaging>jar</packaging>
+
+    <description>Yested is a Kotlin framework for building single-page web applications in Javascript.</description>
+    <url>http://http://www.yested.net/</url>
+
+    <developers>
+        <developer>
+            <name>Jan Kovar</name>
+            <email>jan.kovar79@gmail.com</email>
+            <organization>Sonatype</organization>
+            <organizationUrl>https://github.com/jean79</organizationUrl>
+        </developer>
+    </developers>
+
+    <licenses>
+        <license>
+            <name>The MIT License (MIT)</name>
+            <url>https://github.com/jean79/yested/blob/master/LICENSE</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <scm>
+        <connection>scm:git:git@github.com:jean79/yested.git</connection>
+        <developerConnection>scm:git:git@github.com:jean79/yested.git</developerConnection>
+        <url>https://github.com/jean79/yested</url>
+    </scm>
+
     <dependencies>
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
@@ -21,10 +48,28 @@
         </dependency>
     </dependencies>
 
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
+
     <build>
         <sourceDirectory>src/main/kotlin</sourceDirectory>
         <testSourceDirectory>src/test/kotlin</testSourceDirectory>
         <plugins>
+            <plugin>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <version>1.6.3</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <serverId>ossrh</serverId>
+                    <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.jetbrains.kotlin</groupId>
                 <artifactId>kotlin-maven-plugin</artifactId>
@@ -106,14 +151,83 @@
                 </executions>
             </plugin>
 
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.9.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.jetbrains.kotlin</groupId>
+                <artifactId>kdoc-maven-plugin</artifactId>
+                <version>${kotlin.version}</version>
+                <configuration>
+                    <sources>
+                        <source>${basedir}/src/main/kotlin</source>
+                    </sources>
+                    <title>Yested Framework (${project.version})</title>
+                    <ignorePackages>
+                        <ignorePackage>com</ignorePackage>
+                        <ignorePackage>sun</ignorePackage>
+                        <ignorePackage>java</ignorePackage>
+                        <ignorePackage>js</ignorePackage>
+                        <ignorePackage>junit</ignorePackage>
+                        <ignorePackage>org</ignorePackage>
+                        <ignorePackage>kotlin</ignorePackage>
+                    </ignorePackages>
+                    <sourceRootHref>https://github.com/jean79/yested</sourceRootHref>
+                    <projectRootDir>${basedir}/src/main/kotlin</projectRootDir>
+                    <!--<packageDescriptionFiles>
+                        <kotlin.swing>${basedir}/src/main/kotlin/libraries/kotlin-swing/ReadMe.md</kotlin.swing>
+                    </packageDescriptionFiles>-->
+                    <packageSummaryText>
+                        <net.yested>Yested Framework</net.yested>
+                        <net.yested.bootstrap>Twitter Bootstrap Wrappers</net.yested.bootstrap>
+                    </packageSummaryText>
+                </configuration>
+
+                <executions>
+                    <execution>
+                        <id>apidoc</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>apidoc</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>1.5</version>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
         </plugins>
     </build>
-
-    <repositories>
-        <repository>
-            <id>jetbrains-all</id>
-            <url>http://repository.jetbrains.com/all</url>
-        </repository>
-    </repositories>
+    <!--
+        <repositories>
+            <repository>
+                <id>jetbrains-all</id>
+                <url>http://repository.jetbrains.com/all</url>
+            </repository>
+        </repositories>-->
 
 </project>

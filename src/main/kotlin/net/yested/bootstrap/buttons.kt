@@ -6,7 +6,7 @@ import net.yested.ButtonType
 import net.yested.Button
 import net.yested.Anchor
 
-enum class ButtonLook(val code:String) {
+public enum class ButtonLook(val code:String) {
     DEFAULT: ButtonLook("default")
     PRIMARY: ButtonLook("primary")
     SUCCESS: ButtonLook("success")
@@ -16,27 +16,21 @@ enum class ButtonLook(val code:String) {
     LINK: ButtonLook("link")
 }
 
-enum class ButtonSize(val code:String) {
+public enum class ButtonSize(val code:String) {
     DEFAULT: ButtonSize("default")
     LARGE: ButtonSize("lg")
     SMALL: ButtonSize("sm")
     EXTRA_SMALL: ButtonSize("xs")
 }
 
-class BtsButton(type: ButtonType = ButtonType.BUTTON,
-             label:ParentComponent.()-> Unit,
+public class BtsButton(type: ButtonType = ButtonType.BUTTON,
+             label:HTMLParentComponent.()-> Unit,
              val look:ButtonLook = ButtonLook.DEFAULT,
              val size:ButtonSize = ButtonSize.DEFAULT,
              val block:Boolean = false,
-             onclick:() -> Unit ) :  ParentComponent("button") {
+             onclick:() -> Unit ) :  HTMLParentComponent("button") {
 
     private var _active:Boolean = false
-
-    var onclick: Function0<Unit>
-        get() = element.onclick
-        set(f) {
-            element.onclick = f;
-        }
 
     var active:Boolean
         get() = _active
@@ -64,7 +58,7 @@ class BtsButton(type: ButtonType = ButtonType.BUTTON,
 
 }
 
-class BtsAnchor(href:String,
+public class BtsAnchor(href:String,
                 look:ButtonLook = ButtonLook.DEFAULT,
                 size:ButtonSize = ButtonSize.DEFAULT,
                 block:Boolean = false) :  Anchor(href) {
@@ -75,8 +69,8 @@ class BtsAnchor(href:String,
 
 }
 
-fun HTMLParentComponent.btsButton(type: ButtonType = ButtonType.BUTTON,
-                                   label:ParentComponent.()-> Unit,
+public fun HTMLParentComponent.btsButton(type: ButtonType = ButtonType.BUTTON,
+                                   label:HTMLParentComponent.()-> Unit,
                                    look:ButtonLook = ButtonLook.DEFAULT,
                                    size:ButtonSize = ButtonSize.DEFAULT,
                                    block:Boolean = false,
@@ -85,7 +79,7 @@ fun HTMLParentComponent.btsButton(type: ButtonType = ButtonType.BUTTON,
     this.add(btn)
 }
 
-fun HTMLParentComponent.btsAnchor(href:String,
+public fun HTMLParentComponent.btsAnchor(href:String,
                                   look:ButtonLook = ButtonLook.DEFAULT,
                                   size:ButtonSize = ButtonSize.DEFAULT,
                                   block:Boolean = false,

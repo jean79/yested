@@ -126,7 +126,7 @@ public class Navbar() : ParentComponent("nav") {
 
 class NavBarDropdown(val deselectFun:() -> Unit, label: Anchor.()->Unit) : ParentComponent("li") {
 
-    val ul = UL() with {
+    private val ul = UL() with {
         "class".."dropdown-menu"
         "role".."menu"
     }
@@ -145,14 +145,16 @@ class NavBarDropdown(val deselectFun:() -> Unit, label: Anchor.()->Unit) : Paren
         add(ul)
     }
 
-    fun item(href:String = "#", onclick: Function0<Unit>? = null, init: Anchor.() -> Unit) {
+    public fun item(href:String = "#", onclick: Function0<Unit>? = null, init: Anchor.() -> Unit) {
         val li = Li() with {
             a(href = href, onclick = { deselectFun(); onclick?.let { onclick() } }, init = init)
         }
         ul.add(li)
     }
 
-    fun divider() = ul.add(tag("li", { "class".."divider" }))
+    public fun divider() {
+        ul.add(tag("li", { "class".."divider" }))
+    }
 
 }
 

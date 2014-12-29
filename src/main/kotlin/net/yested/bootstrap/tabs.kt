@@ -29,7 +29,7 @@ import net.yested.div
     </div>
 </div>
  */
-class Tabs : ParentComponent("div") {
+public class Tabs : ParentComponent("div") {
 
     private val bar = UL() with { role = "tablist"; clazz = "nav nav-tabs"}
 

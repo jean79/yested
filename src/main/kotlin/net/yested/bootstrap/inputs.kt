@@ -19,14 +19,14 @@ public native trait HTMLInputElementWithOnChange : HTMLInputElement {
     public native var onchange: () -> Unit
 }
 
-trait InputElement<T> {
+public trait InputElement<T> {
     fun addOnChangeListener(invoke:()->Unit)
     fun addOnChangeLiveListener(invoke:()->Unit)
     var value:T
     fun decorate(valid:Boolean)
 }
 
-class TextInput(placeholder:String? = null) : ParentComponent("input"), InputElement<String> {
+public class TextInput(placeholder:String? = null) : ParentComponent("input"), InputElement<String> {
 
     private val onChangeListeners: ArrayList<Function0<Unit>> = ArrayList();
     private val onChangeLiveListeners: ArrayList<Function0<Unit>> = ArrayList();
@@ -75,7 +75,7 @@ public fun HTMLParentComponent.textInput(placeholder: String?, init: TextInput.(
     add(textInput)
 }
 
-class CheckBox() : ParentComponent("input"), InputElement<Boolean> {
+public class CheckBox() : ParentComponent("input"), InputElement<Boolean> {
 
     private val onChangeListeners: ArrayList<Function0<Unit>> = ArrayList();
     private val onChangeLiveListeners: ArrayList<Function0<Unit>> = ArrayList();
