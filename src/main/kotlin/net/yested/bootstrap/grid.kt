@@ -11,7 +11,7 @@ import java.util.ArrayList
 import net.yested.Span
 import net.yested.with
 
-data class Column<T>(
+public data class Column<T>(
         val label:HTMLParentComponent.() -> Unit,
         val render:HTMLParentComponent.(T) -> Unit,
         val sortFunction:(T, T) -> Int,
@@ -19,7 +19,7 @@ data class Column<T>(
         val defaultSort:Boolean = false,
         val defaultSortOrderAsc:Boolean = true)
 
-class ColumnHeader<T>(val column:Column<T>, sortFunction:(Column<T>) -> Unit) : Span() {
+public class ColumnHeader<T>(val column:Column<T>, sortFunction:(Column<T>) -> Unit) : Span() {
 
     var sortOrderAsc:Boolean = column.defaultSortOrderAsc
     var arrowPlaceholder = Span();
@@ -46,20 +46,17 @@ class ColumnHeader<T>(val column:Column<T>, sortFunction:(Column<T>) -> Unit) : 
 
 }
 
-class Grid<T>(val columns:Array<Column<T>>) : ParentComponent("table") {
+public class Grid<T>(val columns:Array<Column<T>>) : ParentComponent("table") {
 
-    var sortColumn:Column<T>? = null
-    var asc:Boolean = true;
-    val arrowsPlaceholders = ArrayList<Span>();
-    //val columnHeaders = columns.map { ColumnHeader(column = it, sortFunction = { sortByColumn(it)}) } .copyToArray();
-//    val columnHeaders = columns.map { it };
-    var columnHeaders:List<ColumnHeader<T>>? = null
+    private var sortColumn:Column<T>? = null
+    private var asc:Boolean = true;
+    private val arrowsPlaceholders = ArrayList<Span>();
+    private var columnHeaders:List<ColumnHeader<T>>? = null
 
     {
         element.className = "table table-striped table-hover table-condensed"
         columnHeaders = columns.map { ColumnHeader(column = it, sortFunction = { sortByColumn(it)}) }
         renderHeader()
-        //sortColumn = columns.first()
         sortColumn = (columns.filter { it.defaultSort } : Iterable<Column<T>>).firstOrNull()
         asc = sortColumn?.defaultSortOrderAsc ?: true
         setSortingArrow()
@@ -67,18 +64,18 @@ class Grid<T>(val columns:Array<Column<T>>) : ParentComponent("table") {
 
     private var _list: List<T>? = null
 
-    var list: List<T>?
+    public var list: List<T>?
         get() = _list
         set(value) {
             _list = value
             displayData()
         }
 
-    fun setSortingArrow() {
+    private fun setSortingArrow() {
         columnHeaders!!.forEach { it.updateSorting(sortColumn, asc) }
     }
 
-    fun sortByColumn(column:Column<T>):Unit {
+    private fun sortByColumn(column:Column<T>):Unit {
         if (column == sortColumn) {
             asc = !asc;
         } else {
@@ -89,7 +86,7 @@ class Grid<T>(val columns:Array<Column<T>>) : ParentComponent("table") {
         setSortingArrow()
     }
 
-    fun renderHeader() {
+    private fun renderHeader() {
         add(
             thead {
                 tr {
@@ -99,23 +96,12 @@ class Grid<T>(val columns:Array<Column<T>>) : ParentComponent("table") {
                             +columnHeader
                         }
                     }
-                    /*columns.forEach { column ->
-                        th {
-                            +ColumnHeader(column = column, sortFunction = { sortByColumn(it) });
-                            *//*val span = span() { glyphicon("arrow-down") }
-                            "class" .. "text-${column.align.code}";
-                            style = "cursor: pointer;"
-                            column.label()
-                            +span
-                            onclick = { sortByColumn(column) }*//*
-                        }
-                    }*/
                 }
             }
         )
     }
 
-    fun sortData(toSort:List<T>):List<T> {
+    private fun sortData(toSort:List<T>):List<T> {
         return toSort.sortBy(object: java.util.Comparator<T> {
             override fun compare(obj1: T, obj2: T): Int {
                 return (sortColumn!!.sortFunction(obj1, obj2)) * (if (asc) 1 else -1)
@@ -123,7 +109,7 @@ class Grid<T>(val columns:Array<Column<T>>) : ParentComponent("table") {
         })
     }
 
-    fun displayData() {
+    private fun displayData() {
         removeChild("tbody")
         _list?.let {
 

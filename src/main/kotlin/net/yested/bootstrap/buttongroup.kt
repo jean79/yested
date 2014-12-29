@@ -3,6 +3,7 @@ package net.yested.bootstrap
 import net.yested.ParentComponent
 import java.util.ArrayList
 import java.util.HashMap
+import net.yested.HTMLParentComponent
 
 /**
  * Created by jean on 24.12.2014.
@@ -37,7 +38,7 @@ public class ButtonGroup(val size: ButtonSize = ButtonSize.DEFAULT, val onSelect
         }
     }
 
-    public fun button(value:String, look: ButtonLook = ButtonLook.DEFAULT, label : ParentComponent.() -> Unit) {
+    public fun button(value:String, look: ButtonLook = ButtonLook.DEFAULT, label : HTMLParentComponent.() -> Unit) {
         val button = BtsButton(label = label, look = look, size = size) {
             select(value)
         }

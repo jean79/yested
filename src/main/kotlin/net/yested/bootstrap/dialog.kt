@@ -29,7 +29,7 @@ public native fun JQuery.modal(options: String):Unit = noImpl;
     </div>
  */
 
-class Dialog {
+public class Dialog {
 
     var dialog:Div? = null
     var header: Div? = null

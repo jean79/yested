@@ -15,10 +15,10 @@ trait JQAjax {
 native("$") public var ajaxJQuery: JQAjax = null!!
 
 
-fun <T> ajaxGet(url:String, loaded:(response:T?) -> Unit) : Unit {
+public fun <T> ajaxGet(url:String, loaded:(response:T?) -> Unit) : Unit {
     ajaxJQuery.get(url = url, loaded = loaded)
 }
 
-fun ajaxPost(ajaxRequest: AjaxRequest) : Unit {
+public fun ajaxPost(ajaxRequest: AjaxRequest) : Unit {
     ajaxJQuery.ajax(ajaxRequest)
 }

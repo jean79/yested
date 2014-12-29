@@ -27,22 +27,22 @@ public class Panel(style : PanelStyle = PanelStyle.DEFAULT) : ParentComponent("d
         add(body)
     }
 
-    fun heading(init: HTMLParentComponent.() -> Unit) {
+    public fun heading(init: HTMLParentComponent.() -> Unit) {
         heading.init()
     }
 
-    fun content(init: HTMLParentComponent.() -> Unit) {
+    public fun content(init: HTMLParentComponent.() -> Unit) {
         body.init()
     }
 
-    fun footer(init: HTMLParentComponent.() -> Unit) {
+    public fun footer(init: HTMLParentComponent.() -> Unit) {
         footer.init()
         add(footer)
     }
 
 }
 
-fun HTMLParentComponent.panel(style:PanelStyle = PanelStyle.DEFAULT, init:Panel.() -> Unit) {
+public fun HTMLParentComponent.panel(style:PanelStyle = PanelStyle.DEFAULT, init:Panel.() -> Unit) {
     val panel = Panel(style = style)
     panel.init()
     add(panel)
