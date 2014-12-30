@@ -55,9 +55,7 @@ Please note that validator is also attached to form item.
             }
             col(8) {
                 h4 { +"Code" }
-                code(lang = "kotlin") {
-                    +
-                    """val textInput = TextInput(placeholder = "Mandatory field")
+                code(lang = "kotlin", content="""val textInput = TextInput(placeholder = "Mandatory field")
 
 val validator = Validator(textInput, errorText = "At least 3 chars!!") { value -> value.size > 2 }
 
@@ -77,8 +75,7 @@ form(labelDef = "col-sm-3", inputDef = "col-sm-9") {
         +button
     }
 }
-"""
-                }
+""")
             }
         }
     }

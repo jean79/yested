@@ -51,9 +51,7 @@ Grid is simply a renderred HTML Table element. It is not suitable for too many r
             }
             col(8) {
                 h4 { +"Code" }
-                code(lang = "kotlin") {
-                    +
-                    """data class Person(val name:String, val age:Int)
+                code(lang = "kotlin", content="""data class Person(val name:String, val age:Int)
 val data = listOf(Person("Jan", 15), Person("Peter", 30), Person("Martin", 31))
 
 val grid = Grid(columns = array(
@@ -70,8 +68,7 @@ val grid = Grid(columns = array(
 ))
 
 grid.list = data;
-"""
-                }
+""")
             }
         }
     }

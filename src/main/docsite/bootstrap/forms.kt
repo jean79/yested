@@ -36,17 +36,14 @@ fun createForm(): Div {
             }
             col(8) {
                 h4 { +"Code" }
-                code(lang = "kotlin") {
-                    +
-                    """form(labelDef = "col-sm-4", inputDef = "col-sm-8") {
+                code(lang = "kotlin", content="""form(labelDef = "col-sm-4", inputDef = "col-sm-8") {
     item(label = { +"Username"}) {
         textInput(placeholder = "Enter your username") { }
     }
     item(label = { +"Age"}) {
         textInput(placeholder = "Enter your age") { }
     }
-}"""
-                }
+}""")
             }
         }
     }

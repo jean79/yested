@@ -112,21 +112,17 @@ fun createAjaxGetSection(): Div {
         row {
             col(6) {
                 +"Yested provides JQuery Ajax wrappers:"
-                code(lang = "kotlin") {
-+"""ajaxGet&lt;ResponseType&gt;(url) {
+                code(lang = "kotlin", content="""ajaxGet&lt;ResponseType&gt;(url) {
     response -> do something with response
-}"""
-                }
+}""")
                 br()
                 +"""ResponseType is a native trait. It is a special Kotlin interface.
                     Kotlin data classes cannot be used here as JQuery returns simple JS object parsed from JSON response."""
-                code(lang = "kotlin") {
-+"""native trait Coordinates {
+                code(lang = "kotlin", content="""native trait Coordinates {
     val lon : Double
     val lat : Double
 }
-"""
-                }
+""")
             }
 
         }
@@ -160,8 +156,7 @@ fun createAjaxGetSection(): Div {
         row {
             col(12) {
                 pageHeader { h4 { +"Source for demo" }}
-                code(lang = "kotlin") {
-+"""//definition of response, just fragment
+                code(lang = "kotlin", content="""//definition of response, just fragment
 native trait Main {
     val temp : Double
     val pressure : Int
@@ -221,8 +216,7 @@ div {
         }
     }
 }
-"""
-                }
+""")
             }
         }
     }

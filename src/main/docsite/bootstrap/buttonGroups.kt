@@ -46,8 +46,7 @@ fun buttonGroupsSection(): Div {
             }
             col(8) {
                 h4 { +"Code" }
-                code(lang = "kotlin") {
-+"""val span = Span()
+                code(lang = "kotlin", content="""val span = Span()
 val btnGroup =
     ButtonGroup(
         size = ButtonSize.DEFAULT,
@@ -55,8 +54,7 @@ val btnGroup =
     ) with {
         button(value = "1", label = { + "Option 1"})
         button(value = "2", label = { + "Option 2"})
-    }"""
-                }
+    }""")
             }
         }
     }

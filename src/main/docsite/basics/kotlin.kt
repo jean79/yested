@@ -43,12 +43,10 @@ fun kotlinSection(): Div {
             }
             col(8) {
                 h4 { +"Simplest Kotlin Code" }
-                code(lang = "kotlin") {
-                    +
-                    """fun main(args: Array<String>) {
+                code(lang = "kotlin", content=
+"""fun main(args: Array<String>) {
     println("This will be printed into a Javascript console.")
-}"""
-                }
+}""")
             }
         }
     }

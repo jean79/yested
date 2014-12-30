@@ -49,9 +49,7 @@ Content of tab is rendedered upon click on a tab link. When clicking on anoother
             }
             col(8) {
                 h4 { +"Code" }
-                code(lang = "kotlin") {
-                    +
-                    """tabs {
+                code(lang = "kotlin", content="""tabs {
     tab(header = text("First")) {
         div {
             textInput(placeholder = "Placeholder 1") { }
@@ -65,8 +63,7 @@ Content of tab is rendedered upon click on a tab link. When clicking on anoother
     tab(header = text("Third")) {
         a(href = "http://www.wikipedia.org") { +"Wikipedia"}
     }
-}"""
-                }
+}""")
             }
         }
     }

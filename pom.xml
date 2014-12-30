@@ -6,10 +6,10 @@
 
     <groupId>net.yested</groupId>
     <artifactId>Yested</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>0.0.1</version>
     <properties>
         <kotlin.version>0.10.4</kotlin.version>
-        <build.number>0.0.1</build.number>
+        <build.number>0.0.0.1</build.number>
     </properties>
     <packaging>jar</packaging>
 
@@ -49,27 +49,43 @@
     </dependencies>
 
     <distributionManagement>
-        <snapshotRepository>
+        <!--<snapshotRepository>
             <id>ossrh</id>
             <url>https://oss.sonatype.org/content/repositories/snapshots</url>
         </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
+        </repository>-->
+
+        <snapshotRepository>
+            <id>wedos</id>
+            <url>http://31.31.78.177:8081/nexus/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>wedos</id>
+            <url>http://31.31.78.177:8081/nexus/content/repositories/releases/</url>
+        </repository>
     </distributionManagement>
 
     <build>
         <sourceDirectory>src/main/kotlin</sourceDirectory>
         <testSourceDirectory>src/test/kotlin</testSourceDirectory>
         <plugins>
-            <plugin>
+
+            <!--<plugin>
                 <groupId>org.sonatype.plugins</groupId>
                 <artifactId>nexus-staging-maven-plugin</artifactId>
-                <version>1.6.3</version>
+                <version>1.6.5</version>
                 <extensions>true</extensions>
                 <configuration>
                     <serverId>ossrh</serverId>
                     <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                    <autoReleaseAfterClose>false</autoReleaseAfterClose>
+                    <sslAllowAll>true</sslAllowAll>
                 </configuration>
-            </plugin>
+            </plugin>-->
+
             <plugin>
                 <groupId>org.jetbrains.kotlin</groupId>
                 <artifactId>kotlin-maven-plugin</artifactId>
@@ -223,7 +239,7 @@
                 </executions>
             </plugin>
 
-            <plugin>
+           <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-gpg-plugin</artifactId>
                 <version>1.5</version>

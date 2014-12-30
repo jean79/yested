@@ -43,16 +43,13 @@ Please refer to Bootstrap Panels
             }
             col(8) {
                 h4 { +"Code" }
-                code(lang = "kotlin") {
-                    +
-                    """panel {
+                code(lang = "kotlin", content="""panel {
     heading { +"Panel Header" }
     content {
         a(href="http://www.yested.net") { + "This site"}
     }
     footer { +"Panel Footer" }
-}"""
-                }
+}""")
             }
         }
     }
