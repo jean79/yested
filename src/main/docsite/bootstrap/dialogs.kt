@@ -57,9 +57,7 @@ fun createDialogs(): Div {
             }
             col(8) {
                 h4 { +"Code" }
-                code(lang = "kotlin") {
-                    +
-                    """val dialog = Dialog()
+                code(lang = "kotlin", content="""val dialog = Dialog()
 
 dialog with {
     header { + "This is dialog with text input" }
@@ -83,8 +81,7 @@ dialog with {
 //somewhere in a dom tree:
 div {
     btsButton(label = { +"Open dialog" }, onclick = { dialog.open() })
-}"""
-                }
+}""")
             }
         }
     }

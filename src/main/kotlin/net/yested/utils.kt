@@ -14,3 +14,6 @@ public fun <T> T.with(init:T.()->Unit):T {
 fun el(elementId:String):Element {
     return document.getElementById(elementId);
 }
+
+fun printMarkup(content:String):String =
+    content.replaceAll("<", "&lt;").replaceAll(">", "&gt;")

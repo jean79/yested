@@ -15,7 +15,7 @@ import net.yested.Div
 import net.yested.Span
 import net.yested.with
 
-public native trait HTMLInputElementWithOnChange : HTMLInputElement {
+native trait HTMLInputElementWithOnChange : HTMLInputElement {
     public native var onchange: () -> Unit
 }
 

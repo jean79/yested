@@ -39,9 +39,16 @@ fun main(args: Array<String>) {
         topMenu(navbar)
         content {
             div {
-                br(); br(); br();
+                br(); br();
                 +divContainer
             }
+        }
+        footer {
+            small {
+                emph { +"Contact: " }
+                a(href = "mailto:jan.kovar79@gmail.com") { +"jan.kovar79@gmail.com" }
+            }
+            br(); br()
         }
     }
 

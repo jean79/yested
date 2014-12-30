@@ -75,9 +75,7 @@ fun htmlSection(): Div {
             }
             col(8) {
                 h4 { +"Code" }
-                code(lang = "kotlin") {
-                    +
-                    """div {
+                code(lang = "kotlin", content="""div {
     a(href="http://www.yested.net") { +"Yested"}
     br()
     div {
@@ -119,8 +117,7 @@ fun htmlSection(): Div {
         li { +"List item 4"}
     }
 
-}"""
-                }
+}""")
             }
         }
     }

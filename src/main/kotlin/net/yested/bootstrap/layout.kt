@@ -41,6 +41,15 @@ public class Page(val element: HTMLElement) {
                 }.element)
     }
 
+    public fun footer(init:HTMLParentComponent.() -> Unit): Unit {
+        element.appendChild(
+                div {
+                    div(clazz = "container") {
+                        tag("hr") {}
+                        init()
+                    }
+                }.element)
+    }
 
 }
 

@@ -155,13 +155,14 @@ public open class HTMLParentComponent(tagName:String) : ParentComponent(tagName)
         })
     }
 
-    public fun code(lang:String? = "javascript", init: HTMLParentComponent.() -> Unit) {
+    public fun code(lang:String? = "javascript", content : String) {
         add(tag("pre") {
             tag("code") {
-                init()
+                +printMarkup(content)
             }
         })
     }
+
     public fun ul(init:UL.() -> Unit) {
         val ul = UL()
         ul.init()
@@ -183,6 +184,7 @@ public open class HTMLParentComponent(tagName:String) : ParentComponent(tagName)
     public fun h5(init: HTMLParentComponent.() -> Unit): Unit = addTag("h5", init)
 
     public fun emph(init:HTMLParentComponent.() -> Unit): Unit = addTag("strong", init)
+    public fun small(init: HTMLParentComponent.() -> Unit): Unit = addTag("small", init)
 
     public fun br(): Unit = addTag("br") { }
 

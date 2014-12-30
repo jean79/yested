@@ -47,9 +47,7 @@ Refer to Bootstrap buttons.
             }
             col(8) {
                 h4 { +"Code" }
-                code(lang = "kotlin") {
-                    +
-                    """div {
+                code(lang = "kotlin", content="""div {
     btsButton(
             type = ButtonType.BUTTON,
             label = { +"Primary" },
@@ -63,8 +61,7 @@ Refer to Bootstrap buttons.
             look = ButtonLook.SUCCESS,
             size = ButtonSize.LARGE,
             onclick = { println("Second Button pressed.") })
-}"""
-                }
+}""")
             }
         }
     }

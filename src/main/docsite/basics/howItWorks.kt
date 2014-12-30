@@ -24,11 +24,9 @@ fun howItWorksSection(): Div {
             }
             col(8) {
                 h4 { nbsp() }
-                code(lang="kotlin") {
-                    +"""trait Component {
+                code(lang="kotlin", content="""trait Component {
     val element : HTMLElement
-}"""
-                }
+}"""")
             }
         }
         br()
@@ -41,8 +39,7 @@ fun howItWorksSection(): Div {
             }
             col(8) {
                 h4 { nbsp() }
-                code(lang="kotlin") {
-                    +"""class Anchor(href:String? = null) : HTMLParentComponent("a") {
+                code(lang="kotlin", content="""class Anchor(href:String? = null) : HTMLParentComponent("a") {
 
     { //this is constructor
         if (href != null) {
@@ -54,8 +51,7 @@ fun howItWorksSection(): Div {
         element.setAttribute("href", url)
     }
 
-}"""
-                }
+}""")
             }
         }
         br()
@@ -68,16 +64,14 @@ fun howItWorksSection(): Div {
             }
             col(8) {
                 h4 { nbsp() }
-                code(lang="kotlin") {
-                    +"""page("page") {
-        topMenu(navbar)
-        content {
-            div {
-                a(href="http://www.yested.net") { +"Yested homepage" }
-            }
+                code(lang="kotlin", content="""page("page") {
+    topMenu(navbar)
+    content {
+        div {
+            a(href="http://www.yested.net") { +"Yested homepage" }
         }
-    }"""
-                }
+    }
+ }""")
             }
         }
         row {
@@ -91,8 +85,7 @@ fun howItWorksSection(): Div {
             }
             col(8) {
                 h4 { nbsp() }
-                code(lang = "kotlin") {
-+"""div {
+                code(lang = "kotlin", content="""div {
     p {
         h5 { +"Demo list" }
         ul {
@@ -101,9 +94,7 @@ fun howItWorksSection(): Div {
             li { colorized(color="#778822") { +"Colorized text" } }
         }
     }
-}
-"""
-                }
+}""")
             }
         }
     }
