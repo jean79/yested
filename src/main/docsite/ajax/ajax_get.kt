@@ -91,7 +91,7 @@ fun createAjaxGetSection(): Div {
             ajaxGet<WeatherData>("http://api.openweathermap.org/data/2.5/weather?q=${textInput.value}&units=${btnGroup.value}") {
                 weatherData ->
                 if (weatherData != null && weatherData.main != null) {
-                    temperatureSpan.replace(
+                    temperatureSpan.fade(
                             Panel(style = PanelStyle.SUCCESS) with {
                                 heading { +"Temperature in ${weatherData.name}" }
                                 content { emph { +"${weatherData.main!!.temp}"} }
