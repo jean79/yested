@@ -416,6 +416,9 @@
             this.element.innerHTML = '';
             this.element.appendChild(component.element);
           },
+          fade_5f0h2k$: function (component) {
+            $(this.element).fadeOut(200, _.net.yested.HTMLParentComponent.fade_5f0h2k$f(this, component));
+          },
           onclick: {
             get: function () {
               return this.element.onclick;
@@ -595,6 +598,15 @@
             return l;
           }
         }, /** @lends _.net.yested.HTMLParentComponent */ {
+          f: function () {
+          },
+          fade_5f0h2k$f: function (this$HTMLParentComponent, component) {
+            return function () {
+              this$HTMLParentComponent.element.innerHTML = '';
+              this$HTMLParentComponent.element.appendChild(component.element);
+              $(this$HTMLParentComponent.element).fadeIn(200, _.net.yested.HTMLParentComponent.f);
+            };
+          },
           span_dkuwo$f: function (clazz, span) {
             return function (it) {
               span.clazz = clazz != null ? clazz : Kotlin.throwNPE();
@@ -613,14 +625,14 @@
               this.element.onclick = onclick;
             };
           },
-          f: function (content) {
+          f_0: function (content) {
             return function () {
               this.plus_pdl1w0$(_.net.yested.printMarkup(content));
             };
           },
           code_puj7f4$f: function (content) {
             return function () {
-              this.tag_hgkgkc$('code', _.net.yested.HTMLParentComponent.f(content));
+              this.tag_hgkgkc$('code', _.net.yested.HTMLParentComponent.f_0(content));
             };
           },
           ul_8qfrsd$f: function (init) {
@@ -662,20 +674,20 @@
           },
           br$f: function () {
           },
-          f_0: function (forId, this$) {
+          f_1: function (forId, this$) {
             return function (it) {
               this$.rangeTo_94jgcu$('for', forId != null ? forId : Kotlin.throwNPE());
             };
           },
-          f_1: function (clazz, this$) {
+          f_2: function (clazz, this$) {
             return function (it) {
               this$.rangeTo_94jgcu$('class', clazz != null ? clazz : Kotlin.throwNPE());
             };
           },
           label_y7cemi$f: function (forId, clazz, init) {
             return function () {
-              forId != null ? Kotlin.modules['stdlib'].kotlin.let_7hr6ff$(forId, _.net.yested.HTMLParentComponent.f_0(forId, this)) : null;
-              clazz != null ? Kotlin.modules['stdlib'].kotlin.let_7hr6ff$(clazz, _.net.yested.HTMLParentComponent.f_1(clazz, this)) : null;
+              forId != null ? Kotlin.modules['stdlib'].kotlin.let_7hr6ff$(forId, _.net.yested.HTMLParentComponent.f_1(forId, this)) : null;
+              clazz != null ? Kotlin.modules['stdlib'].kotlin.let_7hr6ff$(clazz, _.net.yested.HTMLParentComponent.f_2(clazz, this)) : null;
               init.call(this);
             };
           }
@@ -2202,7 +2214,7 @@
               li.clazz = 'active';
               tmp$0 = Kotlin.modules['stdlib'].kotlin.filter_azvtw4$(this.anchorsLi_g1z45g$, _.net.yested.bootstrap.Tabs.activateTab$f(li));
               Kotlin.modules['stdlib'].kotlin.forEach_p7e0bo$(tmp$0, _.net.yested.bootstrap.Tabs.activateTab$f_0);
-              this.content_9tda2$.replace_5f0h2k$(this.renderContent(tabId, init));
+              this.content_9tda2$.fade_5f0h2k$(this.renderContent(tabId, init));
               if (onSelect != null) {
                 onSelect();
               }
@@ -2335,13 +2347,13 @@
     main$f_1: function (divContainer) {
       return function (hash) {
         if (hash.length === 1)
-          divContainer.replace_5f0h2k$(_.basics.basicPage());
+          divContainer.fade_5f0h2k$(_.basics.basicPage());
         else if (Kotlin.equals(hash[1], 'html'))
-          divContainer.replace_5f0h2k$(_.html.htmlPage());
+          divContainer.fade_5f0h2k$(_.html.htmlPage());
         else if (Kotlin.equals(hash[1], 'bootstrapComponents'))
-          divContainer.replace_5f0h2k$(_.bootstrap.boostrapPage());
+          divContainer.fade_5f0h2k$(_.bootstrap.boostrapPage());
         else if (Kotlin.equals(hash[1], 'ajax'))
-          divContainer.replace_5f0h2k$(_.ajax.ajaxPage());
+          divContainer.fade_5f0h2k$(_.ajax.ajaxPage());
       };
     },
     f_3: function (divContainer) {
@@ -2432,7 +2444,7 @@
       fetchWeather$f: function (temperatureSpan) {
         return function (weatherData) {
           if (weatherData != null && weatherData.main != null) {
-            temperatureSpan.replace_5f0h2k$(_.net.yested.with_owvm91$(new _.net.yested.bootstrap.Panel(_.net.yested.bootstrap.PanelStyle.object.SUCCESS), _.ajax.f_4(weatherData)));
+            temperatureSpan.fade_5f0h2k$(_.net.yested.with_owvm91$(new _.net.yested.bootstrap.Panel(_.net.yested.bootstrap.PanelStyle.object.SUCCESS), _.ajax.f_4(weatherData)));
           }
            else {
             temperatureSpan.replace_5f0h2k$(_.net.yested.with_owvm91$(new _.net.yested.bootstrap.Alert(_.net.yested.bootstrap.AlertStyle.object.DANGER), _.ajax.f_5));

@@ -7,6 +7,9 @@ import kotlin.js.dom.html.HTMLElement
 import kotlin.js.dom.html.document
 import kotlin.dom.addText
 import kotlin.dom.first
+import jquery.jq
+import jquery.JQuery
+import org.w3c.dom.Element
 
 public class Attribute {
 
@@ -50,6 +53,9 @@ public open class ParentComponent(tagName:String) : Component {
 
 }
 
+native fun JQuery.fadeOut(duration:Int, callback:()->Unit) :Unit = noImpl;
+native fun JQuery.fadeIn(duration:Int, callback:()->Unit) :Unit = noImpl;
+
 public open class HTMLParentComponent(tagName:String) : ParentComponent(tagName) {
 
     public var id:String by Attribute()
@@ -85,6 +91,14 @@ public open class HTMLParentComponent(tagName:String) : ParentComponent(tagName)
     public fun replace(component:Component) {
         element.innerHTML = ""
         element.appendChild(component.element)
+    }
+
+    public fun fade(component:Component) {
+        jq(element).fadeOut(200) {
+            element.innerHTML = ""
+            element.appendChild(component.element)
+            jq(element).fadeIn(200, {})
+        }
     }
 
     public var onclick: Function0<Unit>

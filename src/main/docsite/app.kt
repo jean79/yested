@@ -28,10 +28,10 @@ fun main(args: Array<String>) {
     registerHashChangeListener {
         hash ->
         when {
-            hash.size() == 1  -> divContainer.replace(basicPage())
-            hash.get(1) == "html" -> divContainer.replace(htmlPage())
-            hash.get(1) == "bootstrapComponents" -> divContainer.replace(boostrapPage())
-            hash.get(1) == "ajax" -> divContainer.replace(ajaxPage())
+            hash.size() == 1  -> divContainer.fade(basicPage())
+            hash.get(1) == "html" -> divContainer.fade(htmlPage())
+            hash.get(1) == "bootstrapComponents" -> divContainer.fade(boostrapPage())
+            hash.get(1) == "ajax" -> divContainer.fade(ajaxPage())
         }
     }
 

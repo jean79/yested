@@ -67,7 +67,7 @@ public class Tabs : ParentComponent("div") {
 
         anchorsLi.filter { it != li} .forEach { it.clazz = "" }
 
-        content.replace(renderContent(tabId, init));
+        content.fade(renderContent(tabId, init));
 
         if (onSelect != null) {
             onSelect()
