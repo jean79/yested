@@ -163,11 +163,15 @@ public open class HTMLParentComponent(tagName:String) : ParentComponent(tagName)
         })
     }
 
-    public fun ul(init:UL.() -> Unit) {
-        val ul = UL()
-        ul.init()
-        add(ul)
-    }
+    public fun ul(init:UL.() -> Unit): Unit =
+        add( UL() with { init() })
+
+
+    public fun ol(init:OL.() -> Unit):Unit =
+        add( OL() with { init() })
+
+    public fun dl(init:DL.() -> Unit):Unit =
+            add( DL() with { init() })
 
     public fun nbsp(times:Int = 1):Unit =
         (1..times).forEach {
@@ -185,6 +189,32 @@ public open class HTMLParentComponent(tagName:String) : ParentComponent(tagName)
 
     public fun emph(init:HTMLParentComponent.() -> Unit): Unit = addTag("strong", init)
     public fun small(init: HTMLParentComponent.() -> Unit): Unit = addTag("small", init)
+    public fun mark(init: HTMLParentComponent.() -> Unit): Unit = addTag("mark", init)
+    public fun del(init: HTMLParentComponent.() -> Unit): Unit = addTag("del", init)
+    public fun s(init: HTMLParentComponent.() -> Unit): Unit = addTag("s", init)
+    public fun ins(init: HTMLParentComponent.() -> Unit): Unit = addTag("ins", init)
+    public fun u(init: HTMLParentComponent.() -> Unit): Unit = addTag("u", init)
+    public fun strong(init: HTMLParentComponent.() -> Unit): Unit = addTag("strong", init)
+    public fun em(init: HTMLParentComponent.() -> Unit): Unit = addTag("em", init)
+    public fun b(init: HTMLParentComponent.() -> Unit): Unit = addTag("b", init)
+    public fun i(init: HTMLParentComponent.() -> Unit): Unit = addTag("i", init)
+    public fun kbd(init: HTMLParentComponent.() -> Unit): Unit = addTag("kbd", init)
+    public fun variable(init: HTMLParentComponent.() -> Unit): Unit = addTag("var", init)
+    public fun samp(init: HTMLParentComponent.() -> Unit): Unit = addTag("samp", init)
+    public fun blockquote(init: HTMLParentComponent.() -> Unit): Unit = addTag("blockquote", init)
+
+    public fun textArea(rows:Int = 3, init:HTMLParentComponent.() ->Unit): Unit =
+        add(HTMLParentComponent("textarea") with {
+                setAttribute("rows", rows.toString())
+                init()
+            })
+
+    public fun abbr(title:String, init: HTMLParentComponent.() -> Unit): Unit {
+        add(HTMLParentComponent("abbr") with {
+            setAttribute("title", title)
+            init()
+        })
+    }
 
     public fun br(): Unit = addTag("br") { }
 
@@ -259,6 +289,17 @@ public class TRBody : ParentComponent("tr") {
 
 }
 
+public class OL : HTMLParentComponent("ol") {
+
+    public fun li(init:Li.() -> Unit):Li {
+        val li = Li()
+        li.init()
+        add(li)
+        return li
+    }
+
+}
+
 public class UL : HTMLParentComponent("ul") {
 
     public fun li(init:Li.() -> Unit):Li {
@@ -269,6 +310,16 @@ public class UL : HTMLParentComponent("ul") {
     }
 
 }
+
+public class DL : HTMLParentComponent("dl") {
+
+    public fun item(dt : HTMLParentComponent.() -> Unit, dd : HTMLParentComponent.() -> Unit) {
+        add(tag("dt", dt))
+        add(tag("dd", dd))
+    }
+
+}
+
 
 native trait Context { }
 

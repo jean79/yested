@@ -26,7 +26,7 @@ fun howItWorksSection(): Div {
                 h4 { nbsp() }
                 code(lang="kotlin", content="""trait Component {
     val element : HTMLElement
-}"""")
+}""")
             }
         }
         br()
