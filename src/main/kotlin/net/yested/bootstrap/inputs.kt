@@ -14,6 +14,9 @@ import kotlin.dom.addText
 import net.yested.Div
 import net.yested.Span
 import net.yested.with
+import kotlin.js.dom.html.HTMLSelectElement
+import kotlin.js.dom.html.HTMLOptionElement
+import java.util.HashMap
 
 native trait HTMLInputElementWithOnChange : HTMLInputElement {
     public native var onchange: () -> Unit
@@ -109,3 +112,92 @@ public class CheckBox() : ParentComponent("input"), InputElement<Boolean> {
     }
 
 }
+
+private data class SelectOption<TT>(val tag:HTMLOptionElement, val value:TT)
+
+public class Select<T>(multiple:Boolean = false, size:Int = 1, val renderer:(T)->String) : ParentComponent("select") {
+
+    private val onChangeListeners: ArrayList<Function0<Unit>> = ArrayList();
+
+    private var _selectedItems:List<T> = listOf()
+
+    private var _data:List<T>? = null
+
+    private var _optionTags:ArrayList<SelectOption<T>> = ArrayList()
+
+    public var data:List<T>?
+        get() = _data
+        set(newData) {
+            _data = newData
+            regenerate()
+        }
+
+    public var selectedItems:List<T>
+        get() = _selectedItems
+        set(newData) {
+            selectThese(newData)
+            changeSelected()
+        }
+
+    {
+        element.setAttribute("class", "form-control")
+        element.setAttribute("size", size.toString())
+        if (multiple) { element.setAttribute("multiple", "multiple") }
+
+        (element as HTMLInputElementWithOnChange).onchange = { changeSelected() }
+    }
+
+    private fun changeSelected() {
+        _selectedItems = _optionTags.filter { it.tag.selected }.map { it.value }
+        onChangeListeners.forEach { it() }
+    }
+
+    private fun selectThese(selectedItems:List<T>) {
+        _optionTags.forEach {
+            it.tag.selected = selectedItems.contains(it.value)
+        }
+    }
+
+    private fun regenerate() {
+        element.innerHTML = ""
+        _optionTags =  ArrayList()
+        _selectedItems = listOf()
+        if (_data != null) {
+            _data?.forEach {
+                val optionTag = tag("option", init = { +renderer(it) })
+                val value:T = it
+                val selectOption = SelectOption(tag = optionTag.element as HTMLOptionElement, value = value)
+                _optionTags.add(selectOption)
+                add(optionTag)
+            }
+        }
+    }
+
+    public fun addOnChangeListener(invoke: () -> Unit) {
+        onChangeListeners.add(invoke)
+    }
+
+}
+
+/**
+ * <div class="input-group">
+<div class="input-group-addon">$</div>
+<input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount">
+<div class="input-group-addon">.00</div>
+</div>
+ */
+public fun HTMLParentComponent.inputAddOn(prefix:String? = null, suffix:String? = null, textInput : TextInput):Unit =
+
+    add(
+        div(clazz = "input-group") {
+            prefix?.let {
+                div(clazz = "input-group-addon") { +prefix!! }
+            }
+            +textInput
+            suffix?.let {
+                div(clazz = "input-group-addon") { +suffix!! }
+            }
+        })
+
+
+

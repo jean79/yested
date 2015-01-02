@@ -8,6 +8,8 @@ import net.yested.text
 import net.yested.bootstrap.row
 import net.yested.bootstrap.pageHeader
 import net.yested.bootstrap.form
+import net.yested.bootstrap.inputAddOn
+import net.yested.bootstrap.TextInput
 
 fun createForm(): Div {
 
@@ -29,8 +31,8 @@ fun createForm(): Div {
                     item(label = { +"Username" }) {
                         textInput(placeholder = "Enter your username") { }
                     }
-                    item(label = { +"Age" }) {
-                        textInput(placeholder = "Enter your age") { }
+                    item(label = { +"Salary" }) {
+                        inputAddOn(prefix = "$", suffix = ".00", textInput = TextInput(placeholder = "Your expectation") )
                     }
                 }
             }
@@ -40,8 +42,8 @@ fun createForm(): Div {
     item(label = { +"Username"}) {
         textInput(placeholder = "Enter your username") { }
     }
-    item(label = { +"Age"}) {
-        textInput(placeholder = "Enter your age") { }
+    item(label = { +"Salary" }) {
+        inputAddOn(prefix = "$", suffix = ".00", textInput = TextInput(placeholder = "Your expectation") )
     }
 }""")
             }

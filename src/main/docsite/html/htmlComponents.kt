@@ -35,6 +35,24 @@ fun htmlSection(): Div {
                         span { +"Text in span which is in div" }
                     }
                     p { +"Text in Paragraph" }
+                    s { +"Strikethrough text" }
+                    nbsp()
+                    del { +"Deleted text" }
+                    nbsp()
+                    mark { +"Marked text" }
+                    nbsp()
+                    ins { +"Inserted text" }
+                    nbsp()
+                    u { +"Underlined text" }
+                    nbsp()
+                    small { +"Small text" }
+                    nbsp()
+                    strong { +"Strong text" }
+                    nbsp()
+                    em { +"Italicized text." }
+                    br()
+                    br()
+                    blockquote { +"blockquote" }
                     table {
                         border = "1"
                         thead {
@@ -71,53 +89,101 @@ fun htmlSection(): Div {
                         li { +"List item 4" }
                     }
 
+                    ol {
+                        li { +"List item 1" }
+                        li { +"List item 2" }
+                        li { +"List item 3" }
+                        li { +"List item 4" }
+                    }
+
+                    dl {
+                        clazz = "dl-horizontal"
+                        item(dt = { +"Term 1"}) { +"Definition"}
+                        item(dt = { +"Term 2"}) { +"Definition"}
+                    }
+
+                    kbd { +"cd" }
                 }
             }
             col(8) {
                 h4 { +"Code" }
-                code(lang = "kotlin", content="""div {
-    a(href="http://www.yested.net") { +"Yested"}
-    br()
-    div {
-        span { +"Text in span which is in div"}
-    }
-    p { +"Text in Paragraph" }
-    table { border = "1"
-        thead {
-            tr {
-                th { +"First column" }
-                th { +"Second column"}
-            }
+                code(lang = "kotlin", content=
+"""
+a(href="http://www.yested.net") { +"Yested"}
+br()
+div {
+    span { +"Text in span which is in div"}
+}
+p { +"Text in Paragraph" }
+s { +"Strikethrough text" }
+nbsp()
+del { +"Deleted text" }
+nbsp()
+mark { +"Marked text" }
+nbsp()
+ins { +"Inserted text" }
+nbsp()
+u { +"Underlined text" }
+nbsp()
+small { +"Small text" }
+nbsp()
+strong { +"Strong text" }
+nbsp()
+em { +"Italicized text." }
+br()
+br()
+blockquote { +"blockquote" }
+table { border = "1"
+    thead {
+        tr {
+            th { +"First column" }
+            th { +"Second column"}
         }
-        tbody {
-            tr {
-                td { +"Cell 1"}
-                td { +"Cell 2"}
-            }
-            tr {
-                td { +"Cell 1"}
-                td { +"Cell 2"}
-            }
+    }
+    tbody {
+        tr {
+            td { +"Cell 1"}
+            td { +"Cell 2"}
+        }
+        tr {
+            td { +"Cell 1"}
+            td { +"Cell 2"}
         }
     }
-    img(src = "demo-site/img/sample_img.jpg", alt = "bla") {}
-    emph { +"bold text" }
-    h1 { +"H1" }
-    h2 { +"H2" }
-    h3 { +"H3" }
-    h4 { +"H4" }
-    h5 { +"H5" }
-    button(label = { +"Press me"},
-            type = ButtonType.BUTTON,
-            onclick = { println("Check console!")})
-    ul {
-        li { +"List item 1"}
-        li { +"List item 2"}
-        li { +"List item 3"}
-        li { +"List item 4"}
-    }
+}
+img(src = "demo-site/img/sample_img.jpg", alt = "bla") {}
+emph { +"bold text" }
+h1 { +"H1" }
+h2 { +"H2" }
+h3 { +"H3" }
+h4 { +"H4" }
+h5 { +"H5" }
+button(label = { +"Press me"},
+        type = ButtonType.BUTTON,
+        onclick = { println("Check console!")})
+ul {
+    li { +"List item 1"}
+    li { +"List item 2"}
+    li { +"List item 3"}
+    li { +"List item 4"}
+}
 
-}""")
+ol {
+    li { +"List item 1" }
+    li { +"List item 2" }
+    li { +"List item 3" }
+    li { +"List item 4" }
+}
+
+dl {
+    clazz = "dl-horizontal"
+    item(dt = { +"Term 1"}) { +"Definition"}
+    item(dt = { +"Term 2"}) { +"Definition"}
+}
+
+kbd { +"cd" }
+
+""")
             }
         }
     }
