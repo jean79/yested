@@ -1286,8 +1286,10 @@
             this.inputElement = inputElement;
             this.$errorText_ydsons$ = errorText;
             this.validator = validator;
-            this.onChangeListeners = new Kotlin.ArrayList();
-            this.inputElement.addOnChangeLiveListener_qshda6$(_.net.yested.bootstrap.Validator.Validator$f(this));
+            this.onChangeListeners_f7f7h9$ = new Kotlin.ArrayList();
+            this._listen_wq65ix$ = false;
+            this.inputElement.addOnChangeListener_qshda6$(_.net.yested.bootstrap.Validator.Validator$f(this));
+            this.inputElement.addOnChangeLiveListener_qshda6$(_.net.yested.bootstrap.Validator.Validator$f_0(this));
           }, /** @lends _.net.yested.bootstrap.Validator.prototype */ {
             errorText: {
               get: function () {
@@ -1295,7 +1297,7 @@
               }
             },
             onchange_ra2fzg$: function (invoke) {
-              this.onChangeListeners.add_za3rmp$(invoke);
+              this.onChangeListeners_f7f7h9$.add_za3rmp$(invoke);
             },
             revalidate: function () {
               return _.net.yested.with_owvm91$(this.validator(this.inputElement.value), _.net.yested.bootstrap.Validator.revalidate$f(this));
@@ -1306,13 +1308,21 @@
           }, /** @lends _.net.yested.bootstrap.Validator */ {
             Validator$f: function (this$Validator) {
               return function () {
+                this$Validator._listen_wq65ix$ = true;
                 this$Validator.revalidate();
+              };
+            },
+            Validator$f_0: function (this$Validator) {
+              return function () {
+                if (this$Validator._listen_wq65ix$) {
+                  this$Validator.revalidate();
+                }
               };
             },
             revalidate$f: function (this$Validator) {
               return function () {
                 var tmp$0;
-                tmp$0 = this$Validator.onChangeListeners.iterator();
+                tmp$0 = this$Validator.onChangeListeners_f7f7h9$.iterator();
                 while (tmp$0.hasNext()) {
                   var listener = tmp$0.next();
                   listener(this);

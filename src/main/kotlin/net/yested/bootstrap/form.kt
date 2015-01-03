@@ -40,7 +40,14 @@ public trait ValidatorI {
 
 public class Validator<T>(val inputElement: InputElement<T>, override val errorText:String, val validator:(value:T)->Boolean) : ValidatorI {
 
-    val onChangeListeners: java.util.ArrayList<Function1<Boolean, Unit>> = java.util.ArrayList();
+    private val onChangeListeners: java.util.ArrayList<Function1<Boolean, Unit>> = java.util.ArrayList();
+
+    private var _listen = false;
+
+    {
+        inputElement.addOnChangeListener { _listen = true; revalidate() }
+        inputElement.addOnChangeLiveListener { if (_listen) { revalidate() } }
+    }
 
     override fun onchange(invoke: (Boolean) -> Unit) {
         onChangeListeners.add(invoke)
@@ -52,17 +59,6 @@ public class Validator<T>(val inputElement: InputElement<T>, override val errorT
                 listener(this)
             }
         }
-
-    {
-        inputElement.addOnChangeLiveListener { revalidate() }
-/*
-            isValid = validator(inputElement.value)
-            for (listener in onChangeListeners) {
-                listener(isValid)
-            }
-        }
-*/
-    }
 
     override fun isValid(): Boolean = revalidate()
 
