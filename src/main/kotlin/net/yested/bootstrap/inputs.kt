@@ -130,6 +130,7 @@ public class Select<T>(multiple:Boolean = false, size:Int = 1, val renderer:(T)-
         set(newData) {
             _data = newData
             regenerate()
+            changeSelected()
         }
 
     public var selectedItems:List<T>
@@ -142,8 +143,9 @@ public class Select<T>(multiple:Boolean = false, size:Int = 1, val renderer:(T)-
     {
         element.setAttribute("class", "form-control")
         element.setAttribute("size", size.toString())
-        if (multiple) { element.setAttribute("multiple", "multiple") }
-
+        if (multiple) {
+            element.setAttribute("multiple", "multiple")
+        }
         (element as HTMLInputElementWithOnChange).onchange = { changeSelected() }
     }
 

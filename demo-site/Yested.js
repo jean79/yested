@@ -1286,8 +1286,10 @@
             this.inputElement = inputElement;
             this.$errorText_ydsons$ = errorText;
             this.validator = validator;
-            this.onChangeListeners = new Kotlin.ArrayList();
-            this.inputElement.addOnChangeLiveListener_qshda6$(_.net.yested.bootstrap.Validator.Validator$f(this));
+            this.onChangeListeners_f7f7h9$ = new Kotlin.ArrayList();
+            this._listen_wq65ix$ = false;
+            this.inputElement.addOnChangeListener_qshda6$(_.net.yested.bootstrap.Validator.Validator$f(this));
+            this.inputElement.addOnChangeLiveListener_qshda6$(_.net.yested.bootstrap.Validator.Validator$f_0(this));
           }, /** @lends _.net.yested.bootstrap.Validator.prototype */ {
             errorText: {
               get: function () {
@@ -1295,7 +1297,7 @@
               }
             },
             onchange_ra2fzg$: function (invoke) {
-              this.onChangeListeners.add_za3rmp$(invoke);
+              this.onChangeListeners_f7f7h9$.add_za3rmp$(invoke);
             },
             revalidate: function () {
               return _.net.yested.with_owvm91$(this.validator(this.inputElement.value), _.net.yested.bootstrap.Validator.revalidate$f(this));
@@ -1306,13 +1308,21 @@
           }, /** @lends _.net.yested.bootstrap.Validator */ {
             Validator$f: function (this$Validator) {
               return function () {
+                this$Validator._listen_wq65ix$ = true;
                 this$Validator.revalidate();
+              };
+            },
+            Validator$f_0: function (this$Validator) {
+              return function () {
+                if (this$Validator._listen_wq65ix$) {
+                  this$Validator.revalidate();
+                }
               };
             },
             revalidate$f: function (this$Validator) {
               return function () {
                 var tmp$0;
-                tmp$0 = this$Validator.onChangeListeners.iterator();
+                tmp$0 = this$Validator.onChangeListeners_f7f7h9$.iterator();
                 while (tmp$0.hasNext()) {
                   var listener = tmp$0.next();
                   listener(this);
@@ -1761,6 +1771,7 @@
               set: function (newData) {
                 this._data_mibgy0$ = newData;
                 this.regenerate();
+                this.changeSelected();
               }
             },
             selectedItems: {
@@ -2336,11 +2347,21 @@
     f_2: function () {
       this.plus_pdl1w0$('Ajax');
     },
+    f_3: function () {
+      this.plus_pdl1w0$('Examples');
+    },
+    f_4: function () {
+      this.plus_pdl1w0$('Master/Detail');
+    },
+    f_5: function () {
+      this.item('#/masterdetail', void 0, _.f_4);
+    },
     main$f: function () {
       this.brand_hgkgkc$('#', _.f);
       this.item_b1t645$('#/html', void 0, _.f_0);
       this.item_b1t645$('#/bootstrapComponents', void 0, _.f_1);
       this.item_b1t645$('#/ajax', void 0, _.f_2);
+      this.dropdown_vvlqvy$(_.f_3, _.f_5);
     },
     main$f_0: function () {
     },
@@ -2354,40 +2375,42 @@
           divContainer.fade_5f0h2k$(_.bootstrap.boostrapPage());
         else if (Kotlin.equals(hash[1], 'ajax'))
           divContainer.fade_5f0h2k$(_.ajax.ajaxPage());
+        else if (Kotlin.equals(hash[1], 'masterdetail'))
+          divContainer.fade_5f0h2k$(_.complex.masterDetail());
       };
     },
-    f_3: function (divContainer) {
+    f_6: function (divContainer) {
       return function () {
         this.br();
         this.br();
         this.plus_pv6laa$(divContainer);
       };
     },
-    f_4: function (divContainer) {
+    f_7: function (divContainer) {
       return function () {
-        this.div_5rsex9$(void 0, void 0, _.f_3(divContainer));
+        this.div_5rsex9$(void 0, void 0, _.f_6(divContainer));
       };
     },
-    f_5: function () {
+    f_8: function () {
       this.plus_pdl1w0$('Contact: ');
     },
-    f_6: function () {
+    f_9: function () {
       this.plus_pdl1w0$('jan.kovar79@gmail.com');
     },
-    f_7: function () {
-      this.emph_mfnzi$(_.f_5);
-      this.a_b4th6h$(void 0, 'mailto:jan.kovar79@gmail.com', void 0, _.f_6);
+    f_10: function () {
+      this.emph_mfnzi$(_.f_8);
+      this.a_b4th6h$(void 0, 'mailto:jan.kovar79@gmail.com', void 0, _.f_9);
     },
-    f_8: function () {
-      this.small_mfnzi$(_.f_7);
+    f_11: function () {
+      this.small_mfnzi$(_.f_10);
       this.br();
       this.br();
     },
     main$f_2: function (navbar, divContainer) {
       return function () {
         this.topMenu_tx5hdt$(navbar);
-        this.content_mfnzi$(_.f_4(divContainer));
-        this.footer_mfnzi$(_.f_8);
+        this.content_mfnzi$(_.f_7(divContainer));
+        this.footer_mfnzi$(_.f_11);
       };
     },
     main: function (args) {
@@ -3731,6 +3754,260 @@
       },
       createTypographySection: function () {
         return _.net.yested.div_5rsex9$(void 0, void 0, _.bootstrap.createTypographySection$f);
+      }
+    }),
+    complex: Kotlin.definePackage(null, /** @lends _.complex */ {
+      Continent: Kotlin.createEnumClass(function () {
+        return [Kotlin.Enum];
+      }, function $fun(label) {
+        $fun.baseInitializer.call(this);
+        this.label = label;
+      }, function () {
+        return {
+          EUROPE: new _.complex.Continent('Europe'),
+          AMERICA: new _.complex.Continent('America'),
+          ASIA: new _.complex.Continent('Asia'),
+          AFRICA: new _.complex.Continent('Africa')
+        };
+      }),
+      City: Kotlin.createClass(null, function (name, continent) {
+        this.name = name;
+        this.continent = continent;
+      }, /** @lends _.complex.City.prototype */ {
+        component1: function () {
+          return this.name;
+        },
+        component2: function () {
+          return this.continent;
+        },
+        copy: function (name, continent) {
+          return new _.complex.City(name === void 0 ? this.name : name, continent === void 0 ? this.continent : continent);
+        },
+        toString: function () {
+          return 'City(name=' + Kotlin.toString(this.name) + (', continent=' + Kotlin.toString(this.continent)) + ')';
+        },
+        hashCode: function () {
+          var result = 0;
+          result = result * 31 + Kotlin.hashCode(this.name) | 0;
+          result = result * 31 + Kotlin.hashCode(this.continent) | 0;
+          return result;
+        },
+        equals_za3rmp$: function (other) {
+          return this === other || (other !== null && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.name, other.name) && Kotlin.equals(this.continent, other.continent))));
+        }
+      }),
+      MasterDetail: Kotlin.createClass(null, function () {
+        this.placeholder = new _.net.yested.Div();
+        this.list = Kotlin.modules['stdlib'].kotlin.arrayListOf_9mqe4v$([new _.complex.City('Prague', _.complex.Continent.object.EUROPE), new _.complex.City('London', _.complex.Continent.object.EUROPE), new _.complex.City('New York', _.complex.Continent.object.AMERICA)]);
+        this.grid = new _.net.yested.bootstrap.Grid([new _.net.yested.bootstrap.Column(_.complex.MasterDetail.MasterDetail$f, _.complex.MasterDetail.MasterDetail$f_0, _.bootstrap.compareBy(_.complex.MasterDetail.MasterDetail$f_1), void 0, true), new _.net.yested.bootstrap.Column(_.complex.MasterDetail.MasterDetail$f_2, _.complex.MasterDetail.MasterDetail$f_3, _.bootstrap.compareBy(_.complex.MasterDetail.MasterDetail$f_4)), new _.net.yested.bootstrap.Column(_.complex.MasterDetail.MasterDetail$f_5, _.complex.MasterDetail.MasterDetail$f_6(this), _.bootstrap.compareBy(_.complex.MasterDetail.MasterDetail$f_7)), new _.net.yested.bootstrap.Column(_.complex.MasterDetail.MasterDetail$f_8, _.complex.MasterDetail.MasterDetail$f_9(this), _.bootstrap.compareBy(_.complex.MasterDetail.MasterDetail$f_10))]);
+      }, /** @lends _.complex.MasterDetail.prototype */ {
+        delete: function (city) {
+          this.list.remove_za3rmp$(city);
+          this.grid.list = this.list;
+        },
+        edit: function (editedCity) {
+          if (editedCity === void 0)
+            editedCity = null;
+          var textInput = new _.net.yested.bootstrap.TextInput('City name');
+          var validator = new _.net.yested.bootstrap.Validator(textInput, 'Name is mandatory', _.complex.MasterDetail.edit$f);
+          var select = new _.net.yested.bootstrap.Select(void 0, void 0, _.complex.MasterDetail.edit$f_0);
+          select.data = Kotlin.modules['stdlib'].kotlin.toList_eg9ybj$(_.complex.Continent.values());
+          var close = _.complex.MasterDetail.edit$close(this);
+          var save = _.complex.MasterDetail.edit$save(validator, editedCity, this, textInput, select, close);
+          if (editedCity != null) {
+            textInput.value = editedCity.name;
+            select.selectedItems = Kotlin.modules['stdlib'].kotlin.listOf_9mqe4v$([editedCity.continent]);
+          }
+          this.placeholder.fade_5f0h2k$(_.net.yested.with_owvm91$(new _.net.yested.bootstrap.Form('col-sm-4', 'col-sm-8'), _.complex.MasterDetail.edit$f_1(validator, textInput, select, save, close)));
+        },
+        createMasterView: function () {
+          return _.net.yested.div_5rsex9$(void 0, void 0, _.complex.MasterDetail.createMasterView$f(this));
+        },
+        createDiv: function () {
+          this.placeholder.fade_5f0h2k$(this.createMasterView());
+          this.grid.list = this.list;
+          return _.net.yested.div_5rsex9$(void 0, void 0, _.complex.MasterDetail.createDiv$f(this));
+        }
+      }, /** @lends _.complex.MasterDetail */ {
+        MasterDetail$f: function () {
+          this.plus_pdl1w0$('City name');
+        },
+        MasterDetail$f_0: function (it) {
+          this.plus_pdl1w0$(it.name);
+        },
+        MasterDetail$f_1: function (it) {
+          return it.name;
+        },
+        MasterDetail$f_2: function () {
+          this.plus_pdl1w0$('Continent');
+        },
+        MasterDetail$f_3: function (it) {
+          this.plus_pdl1w0$(it.continent.label);
+        },
+        MasterDetail$f_4: function (it) {
+          return it.continent.label;
+        },
+        MasterDetail$f_5: function () {
+        },
+        f: function () {
+          this.plus_pdl1w0$('Edit');
+        },
+        f_0: function (it, this$MasterDetail) {
+          return function () {
+            this$MasterDetail.edit(it);
+          };
+        },
+        MasterDetail$f_6: function (this$MasterDetail) {
+          return function (it) {
+            _.net.yested.bootstrap.btsButton_j2rvkn$(this, void 0, _.complex.MasterDetail.f, void 0, _.net.yested.bootstrap.ButtonSize.object.EXTRA_SMALL, void 0, _.complex.MasterDetail.f_0(it, this$MasterDetail));
+          };
+        },
+        MasterDetail$f_7: function (it) {
+          return it.name;
+        },
+        MasterDetail$f_8: function () {
+        },
+        f_1: function () {
+          this.plus_pdl1w0$('Delete');
+        },
+        f_2: function (it, this$MasterDetail) {
+          return function () {
+            this$MasterDetail.delete(it);
+          };
+        },
+        MasterDetail$f_9: function (this$MasterDetail) {
+          return function (it) {
+            _.net.yested.bootstrap.btsButton_j2rvkn$(this, void 0, _.complex.MasterDetail.f_1, _.net.yested.bootstrap.ButtonLook.object.DANGER, _.net.yested.bootstrap.ButtonSize.object.EXTRA_SMALL, void 0, _.complex.MasterDetail.f_2(it, this$MasterDetail));
+          };
+        },
+        MasterDetail$f_10: function (it) {
+          return it.name;
+        },
+        edit$f: function (it) {
+          return it.length > 3;
+        },
+        edit$f_0: function (it) {
+          return it.label;
+        },
+        edit$close: function (this$MasterDetail) {
+          return function () {
+            this$MasterDetail.placeholder.fade_5f0h2k$(this$MasterDetail.createMasterView());
+          };
+        },
+        edit$save: function (validator, editedCity, this$MasterDetail, textInput, select, close) {
+          return function () {
+            if (validator.isValid()) {
+              if (editedCity != null) {
+                this$MasterDetail.list.remove_za3rmp$(editedCity);
+              }
+              this$MasterDetail.list.add_za3rmp$(new _.complex.City(textInput.value, Kotlin.modules['stdlib'].kotlin.first_fvq2g0$(select.selectedItems)));
+              this$MasterDetail.grid.list = this$MasterDetail.list;
+              close();
+            }
+          };
+        },
+        f_3: function () {
+          this.plus_pdl1w0$('City name');
+        },
+        f_4: function (textInput) {
+          return function () {
+            this.plus_pv6laa$(textInput);
+          };
+        },
+        f_5: function () {
+          this.plus_pdl1w0$('Continent');
+        },
+        f_6: function (select) {
+          return function () {
+            this.plus_pv6laa$(select);
+          };
+        },
+        f_7: function () {
+        },
+        f_8: function () {
+          this.plus_pdl1w0$('Save');
+        },
+        f_9: function () {
+          this.plus_pdl1w0$('Cancel');
+        },
+        f_10: function (save, close) {
+          return function () {
+            _.net.yested.bootstrap.btsButton_j2rvkn$(this, _.net.yested.ButtonType.object.SUBMIT, _.complex.MasterDetail.f_8, _.net.yested.bootstrap.ButtonLook.object.PRIMARY, void 0, void 0, save);
+            _.net.yested.bootstrap.btsButton_j2rvkn$(this, void 0, _.complex.MasterDetail.f_9, void 0, void 0, void 0, close);
+          };
+        },
+        f_11: function (save, close) {
+          return function () {
+            this.div_5rsex9$(void 0, void 0, _.complex.MasterDetail.f_10(save, close));
+          };
+        },
+        edit$f_1: function (validator, textInput, select, save, close) {
+          return function () {
+            this.item_2xyzwi$(void 0, _.complex.MasterDetail.f_3, validator, _.complex.MasterDetail.f_4(textInput));
+            this.item_2xyzwi$(void 0, _.complex.MasterDetail.f_5, void 0, _.complex.MasterDetail.f_6(select));
+            this.item_2xyzwi$(void 0, _.complex.MasterDetail.f_7, void 0, _.complex.MasterDetail.f_11(save, close));
+          };
+        },
+        f_12: function () {
+          this.plus_pdl1w0$('Add');
+        },
+        f_13: function (this$MasterDetail) {
+          return function () {
+            this$MasterDetail.edit();
+          };
+        },
+        createMasterView$f: function (this$MasterDetail) {
+          return function () {
+            this.plus_pv6laa$(this$MasterDetail.grid);
+            _.net.yested.bootstrap.btsButton_j2rvkn$(this, void 0, _.complex.MasterDetail.f_12, void 0, void 0, void 0, _.complex.MasterDetail.f_13(this$MasterDetail));
+          };
+        },
+        f_14: function () {
+          this.plus_pdl1w0$('Master / Detail');
+        },
+        f_15: function () {
+          this.h3_mfnzi$(_.complex.MasterDetail.f_14);
+        },
+        f_16: function () {
+          _.net.yested.bootstrap.pageHeader_91b1uj$(this, _.complex.MasterDetail.f_15);
+        },
+        f_17: function () {
+          this.col_20433s$(12, _.complex.MasterDetail.f_16);
+        },
+        f_18: function () {
+          this.plus_pdl1w0$('Demo');
+        },
+        f_19: function (this$MasterDetail) {
+          return function () {
+            this.h4_mfnzi$(_.complex.MasterDetail.f_18);
+            this.plus_pv6laa$(this$MasterDetail.placeholder);
+          };
+        },
+        f_20: function () {
+          this.plus_pdl1w0$('Source code');
+        },
+        f_21: function () {
+          this.plus_pdl1w0$('Source code is deployed on GitHub');
+        },
+        f_22: function () {
+          this.h4_mfnzi$(_.complex.MasterDetail.f_20);
+          this.a_b4th6h$(void 0, 'https://github.com/jean79/yested/blob/master/src/main/docsite/complex/masterdetails.kt', void 0, _.complex.MasterDetail.f_21);
+        },
+        f_23: function (this$MasterDetail) {
+          return function () {
+            this.col_20433s$(6, _.complex.MasterDetail.f_19(this$MasterDetail));
+            this.col_20433s$(6, _.complex.MasterDetail.f_22);
+          };
+        },
+        createDiv$f: function (this$MasterDetail) {
+          return function () {
+            _.net.yested.bootstrap.row_o4b7az$(this, void 0, _.complex.MasterDetail.f_17);
+            _.net.yested.bootstrap.row_o4b7az$(this, void 0, _.complex.MasterDetail.f_23(this$MasterDetail));
+          };
+        }
+      }),
+      masterDetail: function () {
+        return (new _.complex.MasterDetail()).createDiv();
       }
     }),
     html: Kotlin.definePackage(null, /** @lends _.html */ {
