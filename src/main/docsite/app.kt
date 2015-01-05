@@ -13,6 +13,7 @@ import bootstrap.boostrapPage
 import basics.basicPage
 import html.htmlPage
 import ajax.ajaxPage
+import complex.masterDetail
 
 fun main(args: Array<String>) {
 
@@ -21,6 +22,9 @@ fun main(args: Array<String>) {
         item(href = "#/html") { +"Basic HTML" }
         item(href = "#/bootstrapComponents") { +"Bootstrap" }
         item(href = "#/ajax") { +"Ajax" }
+        dropdown(label = { +"Examples" }) {
+            item(href = "#/masterdetail") { +"Master/Detail"}
+        }
     }
 
     val divContainer = div {}
@@ -32,6 +36,7 @@ fun main(args: Array<String>) {
             hash.get(1) == "html" -> divContainer.fade(htmlPage())
             hash.get(1) == "bootstrapComponents" -> divContainer.fade(boostrapPage())
             hash.get(1) == "ajax" -> divContainer.fade(ajaxPage())
+            hash.get(1) == "masterdetail" -> divContainer.fade(masterDetail())
         }
     }
 
