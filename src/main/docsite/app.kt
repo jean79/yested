@@ -14,15 +14,17 @@ import basics.basicPage
 import html.htmlPage
 import ajax.ajaxPage
 import complex.masterDetail
+import gettingstarted.gettingStartedSection
 
 fun main(args: Array<String>) {
 
     val navbar = navbar {
         brand(href = "#") { +"Yested" }
-        item(href = "#/html") { +"Basic HTML" }
-        item(href = "#/bootstrapComponents") { +"Bootstrap" }
-        item(href = "#/ajax") { +"Ajax" }
+        item(href = "#/gettingstarted") { +"Getting Started" }
         dropdown(label = { +"Examples" }) {
+            item(href = "#/html") { +"Basic HTML" }
+            item(href = "#/bootstrapComponents") { +"Twitter Bootstrap" }
+            item(href = "#/ajax") { +"Ajax Call" }
             item(href = "#/masterdetail") { +"Master/Detail"}
         }
     }
@@ -33,6 +35,7 @@ fun main(args: Array<String>) {
         hash ->
         when {
             hash.size() == 1  -> divContainer.fade(basicPage())
+            hash.get(1) == "gettingstarted" -> divContainer.fade(gettingStartedSection())
             hash.get(1) == "html" -> divContainer.fade(htmlPage())
             hash.get(1) == "bootstrapComponents" -> divContainer.fade(boostrapPage())
             hash.get(1) == "ajax" -> divContainer.fade(ajaxPage())

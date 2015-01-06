@@ -13,7 +13,7 @@ fun boostrapPage():Div =
             row {
                 col(12) {
                     pageHeader {
-                        h3 { +"Bootstrap wrappers"}
+                        h3 { +"Twitter Bootstrap wrappers"}
                     }
                     +"Yested Framework provides simple wrappers for some Twitter Boootstrap components."
                 }

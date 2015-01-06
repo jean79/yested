@@ -39,17 +39,9 @@ fun howItWorksSection(): Div {
             }
             col(8) {
                 h4 { nbsp() }
-                code(lang="kotlin", content="""class Anchor(href:String? = null) : HTMLParentComponent("a") {
+                code(lang="kotlin", content="""class Anchor() : HTMLParentComponent("a") {
 
-    { //this is constructor
-        if (href != null) {
-            href(href)
-        }
-    }
-
-    fun href(url:String) {
-        element.setAttribute("href", url)
-    }
+    public var href : String by Attribute()
 
 }""")
             }
