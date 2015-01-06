@@ -11,7 +11,7 @@ import net.yested.bootstrap.ButtonSize
 import net.yested.bootstrap.alert
 import net.yested.bootstrap.AlertStyle
 
-val latestVersion = "0.0.2"
+val latestVersion = "0.0.3"
 
 fun aboutSection(): Div {
 

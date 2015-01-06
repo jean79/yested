@@ -61,9 +61,10 @@ public class BtsButton(type: ButtonType = ButtonType.BUTTON,
 public class BtsAnchor(href:String,
                 look:ButtonLook = ButtonLook.DEFAULT,
                 size:ButtonSize = ButtonSize.DEFAULT,
-                block:Boolean = false) :  Anchor(href) {
+                block:Boolean = false) :  Anchor() {
 
     {
+        this.href = href
         setAttribute("class", "btn btn-${look.code} btn-${size.code} ${if (block) "btn-block" else ""}")
     }
 

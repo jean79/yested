@@ -434,7 +434,10 @@
               href = null;
             if (onclick === void 0)
               onclick = null;
-            var anchor = new _.net.yested.Anchor(href);
+            var anchor = new _.net.yested.Anchor();
+            if (href != null) {
+              anchor.href = href;
+            }
             if (onclick != null) {
               anchor.onclick = onclick;
             }
@@ -467,10 +470,10 @@
             this.add_5f0h2k$(span);
             return span;
           },
-          img_7xcz9f$: function (src, alt, init) {
+          img_puj7f4$: function (src, alt) {
             if (alt === void 0)
               alt = null;
-            this.plus_pv6laa$(_.net.yested.with_owvm91$(new _.net.yested.Image(), _.net.yested.HTMLParentComponent.img_7xcz9f$f(src, alt, init)));
+            this.plus_pv6laa$(_.net.yested.with_owvm91$(new _.net.yested.Image(), _.net.yested.HTMLParentComponent.img_puj7f4$f(src, alt)));
           },
           p_omdg96$: function (init) {
             var p = new _.net.yested.P();
@@ -612,11 +615,10 @@
               span.clazz = clazz != null ? clazz : Kotlin.throwNPE();
             };
           },
-          img_7xcz9f$f: function (src, alt, init) {
+          img_puj7f4$f: function (src, alt) {
             return function () {
               this.src = src;
               this.alt = alt != null ? alt : '';
-              init.call(this);
             };
           },
           button_mqmp2n$f: function (label, onclick) {
@@ -875,16 +877,17 @@
         }),
         Anchor: Kotlin.createClass(function () {
           return [_.net.yested.HTMLParentComponent];
-        }, function $fun(href) {
-          if (href === void 0)
-            href = null;
+        }, function $fun() {
           $fun.baseInitializer.call(this, 'a');
-          if (href != null) {
-            this.href_61zpoe$(href);
-          }
+          this.href$delegate = new _.net.yested.Attribute();
         }, /** @lends _.net.yested.Anchor.prototype */ {
-          href_61zpoe$: function (url) {
-            this.element.setAttribute('href', url);
+          href: {
+            get: function () {
+              return this.href$delegate.get_262zbl$(this, new Kotlin.PropertyMetadata('href'));
+            },
+            set: function (href) {
+              this.href$delegate.set_ujvi5f$(this, new Kotlin.PropertyMetadata('href'), href);
+            }
           }
         }),
         div_5rsex9$: function (id, clazz, init) {
@@ -1155,7 +1158,8 @@
               size = _.net.yested.bootstrap.ButtonSize.object.DEFAULT;
             if (block === void 0)
               block = false;
-            $fun.baseInitializer.call(this, href);
+            $fun.baseInitializer.call(this);
+            this.href = href;
             this.setAttribute_puj7f4$('class', 'btn btn-' + look.code + ' btn-' + size.code + ' ' + (block ? 'btn-block' : ''));
           }),
           btsButton_j2rvkn$: function ($receiver, type, label, look, size, block, onclick) {
@@ -1969,7 +1973,7 @@
             brand_hgkgkc$: function (href, init) {
               if (href === void 0)
                 href = '/';
-              this.brandLink_f4xx9w$.href_61zpoe$(href);
+              this.brandLink_f4xx9w$.href = href;
               this.brandLink_f4xx9w$.clazz = 'navbar-brand';
               this.brandLink_f4xx9w$.replace_5f0h2k$(_.net.yested.with_owvm91$(new _.net.yested.Span(), _.net.yested.bootstrap.Navbar.brand_hgkgkc$f(init)));
               this.brandLink_f4xx9w$.onclick = _.net.yested.bootstrap.Navbar.brand_hgkgkc$f_0(this);
@@ -1986,7 +1990,9 @@
               this.menuItems_2kpyr8$.add_za3rmp$(li);
             },
             dropdown_vvlqvy$: function (label, init) {
-              this.ul_6lssbo$.add_5f0h2k$(_.net.yested.with_owvm91$(new _.net.yested.bootstrap.NavBarDropdown(_.net.yested.bootstrap.Navbar.dropdown_vvlqvy$f(this), label), _.net.yested.bootstrap.Navbar.dropdown_vvlqvy$f_0(init)));
+              var dropdown = _.net.yested.with_owvm91$(new _.net.yested.bootstrap.NavBarDropdown(_.net.yested.bootstrap.Navbar.dropdown_vvlqvy$f(this), label), _.net.yested.bootstrap.Navbar.dropdown_vvlqvy$f_0(init));
+              this.ul_6lssbo$.add_5f0h2k$(dropdown);
+              this.menuItems_2kpyr8$.add_za3rmp$(dropdown);
             },
             deselectAll: function () {
               Kotlin.modules['stdlib'].kotlin.forEach_p7e0bo$(this.menuItems_2kpyr8$, _.net.yested.bootstrap.Navbar.deselectAll$f);
@@ -2075,15 +2081,19 @@
             }
           }),
           NavBarDropdown: Kotlin.createClass(function () {
-            return [_.net.yested.ParentComponent];
+            return [_.net.yested.Li];
           }, function $fun(deselectFun, label) {
-            $fun.baseInitializer.call(this, 'li');
+            $fun.baseInitializer.call(this);
             this.deselectFun = deselectFun;
             this.ul_e2is7h$ = _.net.yested.with_owvm91$(new _.net.yested.UL(), _.net.yested.bootstrap.NavBarDropdown.NavBarDropdown$f);
             this.setAttribute_puj7f4$('class', 'dropdown');
-            this.add_5f0h2k$(_.net.yested.with_owvm91$(new _.net.yested.Anchor('#'), _.net.yested.bootstrap.NavBarDropdown.NavBarDropdown$f_0(label)));
+            this.add_5f0h2k$(_.net.yested.with_owvm91$(new _.net.yested.Anchor(), _.net.yested.bootstrap.NavBarDropdown.NavBarDropdown$f_0(label)));
             this.add_5f0h2k$(this.ul_e2is7h$);
           }, /** @lends _.net.yested.bootstrap.NavBarDropdown.prototype */ {
+            selectThis: function () {
+              this.deselectFun();
+              this.setAttribute_puj7f4$('class', 'dropdown active');
+            },
             item: function (href, onclick, init) {
               if (href === void 0)
                 href = '#';
@@ -2093,7 +2103,7 @@
               this.ul_e2is7h$.add_5f0h2k$(li);
             },
             divider: function () {
-              this.ul_e2is7h$.add_5f0h2k$(_.net.yested.tag_hgkgkc$('li', _.net.yested.bootstrap.NavBarDropdown.divider$f));
+              this.ul_e2is7h$.add_5f0h2k$(this.tag_hgkgkc$('li', _.net.yested.bootstrap.NavBarDropdown.divider$f));
             }
           }, /** @lends _.net.yested.bootstrap.NavBarDropdown */ {
             NavBarDropdown$f: function () {
@@ -2108,6 +2118,7 @@
                 this.rangeTo_94jgcu$('data-toggle', 'dropdown');
                 this.rangeTo_94jgcu$('role', 'button');
                 this.rangeTo_94jgcu$('aria-expanded', 'false');
+                this.href = '#';
                 label.call(this);
                 this.span_dkuwo$('caret', _.net.yested.bootstrap.NavBarDropdown.f);
               };
@@ -2119,7 +2130,7 @@
             },
             f_1: function (this$NavBarDropdown, onclick, this$) {
               return function () {
-                this$NavBarDropdown.deselectFun();
+                this$NavBarDropdown.selectThis();
                 onclick != null ? Kotlin.modules['stdlib'].kotlin.let_7hr6ff$(onclick, _.net.yested.bootstrap.NavBarDropdown.f_0(this$)) : null;
               };
             },
@@ -2339,29 +2350,33 @@
       this.plus_pdl1w0$('Yested');
     },
     f_0: function () {
-      this.plus_pdl1w0$('Basic HTML');
+      this.plus_pdl1w0$('Getting Started');
     },
     f_1: function () {
-      this.plus_pdl1w0$('Bootstrap');
-    },
-    f_2: function () {
-      this.plus_pdl1w0$('Ajax');
-    },
-    f_3: function () {
       this.plus_pdl1w0$('Examples');
     },
+    f_2: function () {
+      this.plus_pdl1w0$('Basic HTML');
+    },
+    f_3: function () {
+      this.plus_pdl1w0$('Twitter Bootstrap');
+    },
     f_4: function () {
-      this.plus_pdl1w0$('Master/Detail');
+      this.plus_pdl1w0$('Ajax Call');
     },
     f_5: function () {
-      this.item('#/masterdetail', void 0, _.f_4);
+      this.plus_pdl1w0$('Master/Detail');
+    },
+    f_6: function () {
+      this.item('#/html', void 0, _.f_2);
+      this.item('#/bootstrapComponents', void 0, _.f_3);
+      this.item('#/ajax', void 0, _.f_4);
+      this.item('#/masterdetail', void 0, _.f_5);
     },
     main$f: function () {
       this.brand_hgkgkc$('#', _.f);
-      this.item_b1t645$('#/html', void 0, _.f_0);
-      this.item_b1t645$('#/bootstrapComponents', void 0, _.f_1);
-      this.item_b1t645$('#/ajax', void 0, _.f_2);
-      this.dropdown_vvlqvy$(_.f_3, _.f_5);
+      this.item_b1t645$('#/gettingstarted', void 0, _.f_0);
+      this.dropdown_vvlqvy$(_.f_1, _.f_6);
     },
     main$f_0: function () {
     },
@@ -2369,6 +2384,8 @@
       return function (hash) {
         if (hash.length === 1)
           divContainer.fade_5f0h2k$(_.basics.basicPage());
+        else if (Kotlin.equals(hash[1], 'gettingstarted'))
+          divContainer.fade_5f0h2k$(_.gettingstarted.gettingStartedSection());
         else if (Kotlin.equals(hash[1], 'html'))
           divContainer.fade_5f0h2k$(_.html.htmlPage());
         else if (Kotlin.equals(hash[1], 'bootstrapComponents'))
@@ -2379,38 +2396,38 @@
           divContainer.fade_5f0h2k$(_.complex.masterDetail());
       };
     },
-    f_6: function (divContainer) {
+    f_7: function (divContainer) {
       return function () {
         this.br();
         this.br();
         this.plus_pv6laa$(divContainer);
       };
     },
-    f_7: function (divContainer) {
+    f_8: function (divContainer) {
       return function () {
-        this.div_5rsex9$(void 0, void 0, _.f_6(divContainer));
+        this.div_5rsex9$(void 0, void 0, _.f_7(divContainer));
       };
     },
-    f_8: function () {
+    f_9: function () {
       this.plus_pdl1w0$('Contact: ');
     },
-    f_9: function () {
+    f_10: function () {
       this.plus_pdl1w0$('jan.kovar79@gmail.com');
     },
-    f_10: function () {
-      this.emph_mfnzi$(_.f_8);
-      this.a_b4th6h$(void 0, 'mailto:jan.kovar79@gmail.com', void 0, _.f_9);
-    },
     f_11: function () {
-      this.small_mfnzi$(_.f_10);
+      this.emph_mfnzi$(_.f_9);
+      this.a_b4th6h$(void 0, 'mailto:jan.kovar79@gmail.com', void 0, _.f_10);
+    },
+    f_12: function () {
+      this.small_mfnzi$(_.f_11);
       this.br();
       this.br();
     },
     main$f_2: function (navbar, divContainer) {
       return function () {
         this.topMenu_tx5hdt$(navbar);
-        this.content_mfnzi$(_.f_7(divContainer));
-        this.footer_mfnzi$(_.f_11);
+        this.content_mfnzi$(_.f_8(divContainer));
+        this.footer_mfnzi$(_.f_12);
       };
     },
     main: function (args) {
@@ -2607,7 +2624,7 @@
       }
     }),
     basics: Kotlin.definePackage(function () {
-      this.latestVersion = '0.0.2';
+      this.latestVersion = '0.0.3';
     }, /** @lends _.basics */ {
       f: function () {
         this.plus_pdl1w0$('What is Yested');
@@ -2718,18 +2735,18 @@
         this.plus_pdl1w0$('Binaries: ');
       },
       f_29: function () {
-        this.plus_pdl1w0$('Yested-0.0.2.jar');
+        this.plus_pdl1w0$('Yested-0.0.3.jar');
       },
       f_30: function () {
         this.emph_mfnzi$(_.basics.f_28);
-        this.a_b4th6h$(void 0, 'http://jankovar.net:8081/nexus/content/repositories/releases/net/yested/Yested/0.0.2/Yested-0.0.2.jar', void 0, _.basics.f_29);
+        this.a_b4th6h$(void 0, 'http://jankovar.net:8081/nexus/content/repositories/releases/net/yested/Yested/0.0.3/Yested-0.0.3.jar', void 0, _.basics.f_29);
       },
       f_31: function () {
         this.plus_pdl1w0$('Maven Repository');
       },
       f_32: function () {
         this.h4_mfnzi$(_.basics.f_31);
-        this.code_puj7f4$('xml', '<repository>\n  <id>Yested<\/id>\n  <url>http://jankovar.net:8081/nexus/content/repositories/releases/<\/url>\n<\/repository>\n\n<dependency>\n    <groupId>net.yested<\/groupId>\n    <artifactId>Yested<\/artifactId>\n    <version>0.0.2<\/version>\n<\/dependency>\n');
+        this.code_puj7f4$('xml', '<repository>\n  <id>Yested<\/id>\n  <url>http://jankovar.net:8081/nexus/content/repositories/releases/<\/url>\n<\/repository>\n\n<dependency>\n    <groupId>net.yested<\/groupId>\n    <artifactId>Yested<\/artifactId>\n    <version>0.0.3<\/version>\n<\/dependency>\n');
       },
       f_33: function () {
         this.p_omdg96$(_.basics.f_27);
@@ -2803,7 +2820,7 @@
       },
       f_49: function () {
         this.h4_mfnzi$(_.basics.f_48);
-        this.code_puj7f4$('kotlin', 'class Anchor(href:String? = null) : HTMLParentComponent("a") {\n\n    { //this is constructor\n        if (href != null) {\n            href(href)\n        }\n    }\n\n    fun href(url:String) {\n        element.setAttribute("href", url)\n    }\n\n}');
+        this.code_puj7f4$('kotlin', 'class Anchor() : HTMLParentComponent("a") {\n\n    public var href : String by Attribute()\n\n}');
       },
       f_50: function () {
         this.col_20433s$(4, _.basics.f_47);
@@ -2917,7 +2934,7 @@
     }),
     bootstrap: Kotlin.definePackage(null, /** @lends _.bootstrap */ {
       f: function () {
-        this.plus_pdl1w0$('Bootstrap wrappers');
+        this.plus_pdl1w0$('Twitter Bootstrap wrappers');
       },
       f_0: function () {
         this.h3_mfnzi$(_.bootstrap.f);
@@ -4010,6 +4027,191 @@
         return (new _.complex.MasterDetail()).createDiv();
       }
     }),
+    gettingstarted: Kotlin.definePackage(null, /** @lends _.gettingstarted */ {
+      f: function () {
+        this.plus_pdl1w0$('Getting Started');
+      },
+      f_0: function () {
+        this.h3_mfnzi$(_.gettingstarted.f);
+      },
+      f_1: function () {
+        _.net.yested.bootstrap.pageHeader_91b1uj$(this, _.gettingstarted.f_0);
+      },
+      f_2: function () {
+        this.col_20433s$(12, _.gettingstarted.f_1);
+      },
+      f_3: function () {
+        this.plus_pdl1w0$('1. Get Intellij Idea');
+      },
+      f_4: function () {
+        this.plus_pdl1w0$('Get Intellij Idea 14 from JetBrains.');
+      },
+      f_5: function () {
+        this.a_b4th6h$(void 0, 'https://www.jetbrains.com/idea/', void 0, _.gettingstarted.f_4);
+      },
+      f_6: function () {
+        this.h4_mfnzi$(_.gettingstarted.f_3);
+        this.p_omdg96$(_.gettingstarted.f_5);
+      },
+      f_7: function () {
+        this.div_5rsex9$(void 0, void 0, _.gettingstarted.f_6);
+      },
+      f_8: function () {
+        this.col_20433s$(6, _.gettingstarted.f_7);
+      },
+      f_9: function () {
+        this.plus_pdl1w0$('2. Enable Kotlin Plugin');
+      },
+      f_10: function () {
+        this.plus_pdl1w0$('Install JetBrains Kotlin plugin into Idea.');
+        this.img_puj7f4$('demo-site/img/plugin_install.png');
+      },
+      f_11: function () {
+        this.h4_mfnzi$(_.gettingstarted.f_9);
+        this.p_omdg96$(_.gettingstarted.f_10);
+      },
+      f_12: function () {
+        this.col_20433s$(12, _.gettingstarted.f_11);
+      },
+      f_13: function () {
+        this.plus_pdl1w0$('3. Create Kotlin - Javascript project');
+      },
+      f_14: function () {
+        this.plus_pdl1w0$("Call it 'YestedSample'");
+      },
+      f_15: function () {
+        this.h4_mfnzi$(_.gettingstarted.f_13);
+        this.p_omdg96$(_.gettingstarted.f_14);
+        this.img_puj7f4$('demo-site/img/create_project.png');
+      },
+      f_16: function () {
+        this.col_20433s$(12, _.gettingstarted.f_15);
+      },
+      f_17: function () {
+        this.plus_pdl1w0$('4. Create Kotlin Javascript Library');
+      },
+      f_18: function () {
+        this.h4_mfnzi$(_.gettingstarted.f_17);
+        this.img_puj7f4$('demo-site/img/create_project_create_lib.png');
+      },
+      f_19: function () {
+        this.col_20433s$(12, _.gettingstarted.f_18);
+      },
+      f_20: function () {
+        this.plus_pdl1w0$('Copy to: lib');
+      },
+      f_21: function () {
+        this.plus_pdl1w0$('Select:');
+        this.emph_mfnzi$(_.gettingstarted.f_20);
+      },
+      f_22: function () {
+        this.p_omdg96$(_.gettingstarted.f_21);
+        this.img_puj7f4$('demo-site/img/create_library.png');
+      },
+      f_23: function () {
+        this.col_20433s$(12, _.gettingstarted.f_22);
+      },
+      f_24: function () {
+        this.plus_pdl1w0$('4. Add Yested Library dependency');
+      },
+      f_25: function () {
+        this.h4_mfnzi$(_.gettingstarted.f_24);
+        this.img_puj7f4$('demo-site/img/add_library_dependency.png');
+      },
+      f_26: function () {
+        this.col_20433s$(12, _.gettingstarted.f_25);
+      },
+      f_27: function () {
+        this.plus_pdl1w0$('5. Create index.html file');
+      },
+      f_28: function () {
+        this.h4_mfnzi$(_.gettingstarted.f_27);
+        this.plus_pdl1w0$("Create HTML wrapper for our Yested application. It is a simple HTML that contains placeholder div with id 'page',");
+        this.plus_pdl1w0$('Place index.html in the root of your project.');
+        this.plus_pdl1w0$('It mainly references Boostrap and JQuery libraries. If you are not going to use Boostrap, you can have empty index.html with just placeholder div.');
+        this.code_puj7f4$('html', '<!DOCTYPE html>\n    <html lang="en">\n    <head>\n        <meta charset="utf-8">\n        <meta http-equiv="X-UA-Compatible" content="IE=edge">\n        <meta name="viewport" content="width=device-width, initial-scale=1">\n        <title>Yested Sample<\/title>\n\n        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">\n        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">\n\n        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->\n        <!-- WARNING: Respond.js doesn\'t work if you view the page via file:// -->\n        <!--[if lt IE 9]>\n        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"><\/script>\n        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"><\/script>\n        <![endif]-->\n\n    <\/head>\n\n    <body role="document">\n\n        <div id="page"><\/div>\n\n        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"><\/script>\n        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"><\/script>\n\n        <script src="out/production/YestedSample/lib/kotlin.js"><\/script>\n        <script src="out/production/YestedSample/lib/Yested.js"><\/script>\n        <script src="out/production/YestedSample/YestedSample.js"><\/script>\n\n    <\/body>\n    <\/html>\n    ');
+      },
+      f_29: function () {
+        this.col_20433s$(12, _.gettingstarted.f_28);
+      },
+      f_30: function () {
+        this.plus_pdl1w0$('6. Create basic Yested application');
+      },
+      f_31: function () {
+        this.h4_mfnzi$(_.gettingstarted.f_30);
+      },
+      f_32: function () {
+        this.col_20433s$(12, _.gettingstarted.f_31);
+      },
+      f_33: function () {
+        this.plus_pdl1w0$('Create file sample.kt in src/main/kotlin and insert content on the right.<br />\n                Kotlin Javascript calls this main function when page is loaded.\n                ');
+      },
+      f_34: function () {
+        this.code_puj7f4$('kotlin', 'import net.yested.bootstrap.page\n\nfun main(args: Array<String>) {\n    page("page") {\n        content {\n             +"Hello World"\n            br()\n            a(href = "http://www.yested.net") { +"link to yested.net"}\n            ol {\n                li { +"First item" }\n                li { +"Second item" }\n            }\n        }\n    }\n}\n');
+      },
+      f_35: function () {
+        this.col_20433s$(6, _.gettingstarted.f_33);
+        this.col_20433s$(6, _.gettingstarted.f_34);
+      },
+      f_36: function () {
+        this.plus_pdl1w0$('7. Build Project');
+      },
+      f_37: function () {
+        this.plus_pdl1w0$("Build -> Make Module 'YestedSample'");
+        this.br();
+        this.plus_pdl1w0$('It should generate all javascript libraries into out/production/YestedSample.');
+        this.plus_pdl1w0$('We reference these files in our index.html file.');
+      },
+      f_38: function () {
+        this.h4_mfnzi$(_.gettingstarted.f_36);
+        this.p_omdg96$(_.gettingstarted.f_37);
+      },
+      f_39: function () {
+        this.col_20433s$(12, _.gettingstarted.f_38);
+      },
+      f_40: function () {
+        this.plus_pdl1w0$('8. Create build configuration');
+      },
+      f_41: function () {
+        this.plus_pdl1w0$('Create build configuration - Kotlin - Javascript. ');
+        this.plus_pdl1w0$('Set correct path to our index.html');
+        this.img_puj7f4$('demo-site/img/build.png');
+      },
+      f_42: function () {
+        this.h4_mfnzi$(_.gettingstarted.f_40);
+        this.p_omdg96$(_.gettingstarted.f_41);
+      },
+      f_43: function () {
+        this.col_20433s$(12, _.gettingstarted.f_42);
+      },
+      f_44: function () {
+        this.plus_pdl1w0$('9. Run It!');
+      },
+      f_45: function () {
+        this.h4_mfnzi$(_.gettingstarted.f_44);
+      },
+      f_46: function () {
+        this.col_20433s$(12, _.gettingstarted.f_45);
+      },
+      gettingStartedSection$f: function () {
+        _.net.yested.bootstrap.row_o4b7az$(this, void 0, _.gettingstarted.f_2);
+        _.net.yested.bootstrap.row_o4b7az$(this, void 0, _.gettingstarted.f_8);
+        _.net.yested.bootstrap.row_o4b7az$(this, void 0, _.gettingstarted.f_12);
+        _.net.yested.bootstrap.row_o4b7az$(this, void 0, _.gettingstarted.f_16);
+        _.net.yested.bootstrap.row_o4b7az$(this, void 0, _.gettingstarted.f_19);
+        _.net.yested.bootstrap.row_o4b7az$(this, void 0, _.gettingstarted.f_23);
+        _.net.yested.bootstrap.row_o4b7az$(this, void 0, _.gettingstarted.f_26);
+        _.net.yested.bootstrap.row_o4b7az$(this, void 0, _.gettingstarted.f_29);
+        _.net.yested.bootstrap.row_o4b7az$(this, void 0, _.gettingstarted.f_32);
+        _.net.yested.bootstrap.row_o4b7az$(this, void 0, _.gettingstarted.f_35);
+        _.net.yested.bootstrap.row_o4b7az$(this, void 0, _.gettingstarted.f_39);
+        _.net.yested.bootstrap.row_o4b7az$(this, void 0, _.gettingstarted.f_43);
+        _.net.yested.bootstrap.row_o4b7az$(this, void 0, _.gettingstarted.f_46);
+      },
+      gettingStartedSection: function () {
+        return _.net.yested.div_5rsex9$(void 0, void 0, _.gettingstarted.gettingStartedSection$f);
+      }
+    }),
     html: Kotlin.definePackage(null, /** @lends _.html */ {
       htmlPage$f: function () {
         this.plus_pv6laa$(_.html.htmlSection());
@@ -4123,88 +4325,86 @@
         this.tbody_rj77wk$(_.html.f_30);
       },
       f_32: function () {
-      },
-      f_33: function () {
         this.plus_pdl1w0$('bold text');
       },
-      f_34: function () {
+      f_33: function () {
         this.plus_pdl1w0$('H1');
       },
-      f_35: function () {
+      f_34: function () {
         this.plus_pdl1w0$('H2');
       },
-      f_36: function () {
+      f_35: function () {
         this.plus_pdl1w0$('H3');
       },
-      f_37: function () {
+      f_36: function () {
         this.plus_pdl1w0$('H4');
       },
-      f_38: function () {
+      f_37: function () {
         this.plus_pdl1w0$('H5');
       },
-      f_39: function () {
+      f_38: function () {
         this.plus_pdl1w0$('Press me');
       },
-      f_40: function () {
+      f_39: function () {
         Kotlin.println('Check console!');
       },
-      f_41: function () {
+      f_40: function () {
         this.plus_pdl1w0$('List item 1');
       },
-      f_42: function () {
+      f_41: function () {
         this.plus_pdl1w0$('List item 2');
       },
-      f_43: function () {
+      f_42: function () {
         this.plus_pdl1w0$('List item 3');
       },
-      f_44: function () {
+      f_43: function () {
         this.plus_pdl1w0$('List item 4');
       },
-      f_45: function () {
+      f_44: function () {
+        this.li_8y48wp$(_.html.f_40);
         this.li_8y48wp$(_.html.f_41);
         this.li_8y48wp$(_.html.f_42);
         this.li_8y48wp$(_.html.f_43);
-        this.li_8y48wp$(_.html.f_44);
       },
-      f_46: function () {
+      f_45: function () {
         this.plus_pdl1w0$('List item 1');
       },
-      f_47: function () {
+      f_46: function () {
         this.plus_pdl1w0$('List item 2');
       },
-      f_48: function () {
+      f_47: function () {
         this.plus_pdl1w0$('List item 3');
       },
-      f_49: function () {
+      f_48: function () {
         this.plus_pdl1w0$('List item 4');
       },
-      f_50: function () {
+      f_49: function () {
+        this.li_8y48wp$(_.html.f_45);
         this.li_8y48wp$(_.html.f_46);
         this.li_8y48wp$(_.html.f_47);
         this.li_8y48wp$(_.html.f_48);
-        this.li_8y48wp$(_.html.f_49);
       },
-      f_51: function () {
+      f_50: function () {
         this.plus_pdl1w0$('Term 1');
       },
-      f_52: function () {
+      f_51: function () {
         this.plus_pdl1w0$('Definition');
       },
-      f_53: function () {
+      f_52: function () {
         this.plus_pdl1w0$('Term 2');
       },
-      f_54: function () {
+      f_53: function () {
         this.plus_pdl1w0$('Definition');
       },
-      f_55: function () {
+      f_54: function () {
         this.clazz = 'dl-horizontal';
-        this.item_b459qs$(_.html.f_51, _.html.f_52);
-        this.item_b459qs$(_.html.f_53, _.html.f_54);
+        this.item_b459qs$(_.html.f_50, _.html.f_51);
+        this.item_b459qs$(_.html.f_52, _.html.f_53);
       },
-      f_56: function () {
+      f_55: function () {
         this.plus_pdl1w0$('cd');
       },
-      f_57: function () {
+      f_56: function () {
         this.a_b4th6h$(void 0, 'http://www.yested.net', void 0, _.html.f_7);
         this.br();
         this.div_5rsex9$(void 0, void 0, _.html.f_9);
@@ -4228,38 +4428,38 @@
         this.br();
         this.blockquote_mfnzi$(_.html.f_19);
         this.table_or8fdg$(_.html.f_31);
-        this.img_7xcz9f$('demo-site/img/sample_img.jpg', 'bla', _.html.f_32);
-        this.emph_mfnzi$(_.html.f_33);
-        this.h1_mfnzi$(_.html.f_34);
-        this.h2_mfnzi$(_.html.f_35);
-        this.h3_mfnzi$(_.html.f_36);
-        this.h4_mfnzi$(_.html.f_37);
-        this.h5_mfnzi$(_.html.f_38);
-        this.button_mqmp2n$(_.html.f_39, _.net.yested.ButtonType.object.BUTTON, _.html.f_40);
-        this.ul_8qfrsd$(_.html.f_45);
-        this.ol_t3splz$(_.html.f_50);
-        this.dl_79d1z0$(_.html.f_55);
-        this.kbd_mfnzi$(_.html.f_56);
+        this.img_puj7f4$('demo-site/img/sample_img.jpg', 'bla');
+        this.emph_mfnzi$(_.html.f_32);
+        this.h1_mfnzi$(_.html.f_33);
+        this.h2_mfnzi$(_.html.f_34);
+        this.h3_mfnzi$(_.html.f_35);
+        this.h4_mfnzi$(_.html.f_36);
+        this.h5_mfnzi$(_.html.f_37);
+        this.button_mqmp2n$(_.html.f_38, _.net.yested.ButtonType.object.BUTTON, _.html.f_39);
+        this.ul_8qfrsd$(_.html.f_44);
+        this.ol_t3splz$(_.html.f_49);
+        this.dl_79d1z0$(_.html.f_54);
+        this.kbd_mfnzi$(_.html.f_55);
+      },
+      f_57: function () {
+        this.h4_mfnzi$(_.html.f_6);
+        this.div_5rsex9$(void 0, void 0, _.html.f_56);
       },
       f_58: function () {
-        this.h4_mfnzi$(_.html.f_6);
-        this.div_5rsex9$(void 0, void 0, _.html.f_57);
-      },
-      f_59: function () {
         this.plus_pdl1w0$('Code');
       },
-      f_60: function () {
-        this.h4_mfnzi$(_.html.f_59);
+      f_59: function () {
+        this.h4_mfnzi$(_.html.f_58);
         this.code_puj7f4$('kotlin', '\na(href="http://www.yested.net") { +"Yested"}\nbr()\ndiv {\n    span { +"Text in span which is in div"}\n}\np { +"Text in Paragraph" }\ns { +"Strikethrough text" }\nnbsp()\ndel { +"Deleted text" }\nnbsp()\nmark { +"Marked text" }\nnbsp()\nins { +"Inserted text" }\nnbsp()\nu { +"Underlined text" }\nnbsp()\nsmall { +"Small text" }\nnbsp()\nstrong { +"Strong text" }\nnbsp()\nem { +"Italicized text." }\nbr()\nbr()\nblockquote { +"blockquote" }\ntable { border = "1"\n    thead {\n        tr {\n            th { +"First column" }\n            th { +"Second column"}\n        }\n    }\n    tbody {\n        tr {\n            td { +"Cell 1"}\n            td { +"Cell 2"}\n        }\n        tr {\n            td { +"Cell 1"}\n            td { +"Cell 2"}\n        }\n    }\n}\nimg(src = "demo-site/img/sample_img.jpg", alt = "bla") {}\nemph { +"bold text" }\nh1 { +"H1" }\nh2 { +"H2" }\nh3 { +"H3" }\nh4 { +"H4" }\nh5 { +"H5" }\nbutton(label = { +"Press me"},\n        type = ButtonType.BUTTON,\n        onclick = { println("Check console!")})\nul {\n    li { +"List item 1"}\n    li { +"List item 2"}\n    li { +"List item 3"}\n    li { +"List item 4"}\n}\n\nol {\n    li { +"List item 1" }\n    li { +"List item 2" }\n    li { +"List item 3" }\n    li { +"List item 4" }\n}\n\ndl {\n    clazz = "dl-horizontal"\n    item(dt = { +"Term 1"}) { +"Definition"}\n    item(dt = { +"Term 2"}) { +"Definition"}\n}\n\nkbd { +"cd" }\n\n');
       },
-      f_61: function () {
-        this.col_20433s$(4, _.html.f_58);
-        this.col_20433s$(8, _.html.f_60);
+      f_60: function () {
+        this.col_20433s$(4, _.html.f_57);
+        this.col_20433s$(8, _.html.f_59);
       },
       htmlSection$f: function () {
         _.net.yested.bootstrap.row_o4b7az$(this, void 0, _.html.f_2);
         _.net.yested.bootstrap.row_o4b7az$(this, void 0, _.html.f_5);
-        _.net.yested.bootstrap.row_o4b7az$(this, void 0, _.html.f_61);
+        _.net.yested.bootstrap.row_o4b7az$(this, void 0, _.html.f_60);
       },
       htmlSection: function () {
         return _.net.yested.div_5rsex9$(void 0, void 0, _.html.htmlSection$f);

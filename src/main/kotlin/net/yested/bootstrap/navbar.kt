@@ -83,15 +83,13 @@ public class Navbar() : ParentComponent("nav") {
     }
 
     public fun brand(href:String = "/", init: HTMLParentComponent.() -> Unit):Unit {
-        brandLink.href(href)
+        brandLink.href = href
         brandLink.clazz = "navbar-brand"
         brandLink.replace( Span() with { init() })
         brandLink.onclick = {
             deselectAll()
         }
     }
-
-    //public fun logo(init: HTMLParentComponent.() -> Unit):Unit = brandLink.init()
 
     /**
      * Top menu item
@@ -114,9 +112,11 @@ public class Navbar() : ParentComponent("nav") {
         menuItems.add(li)
     }
 
-    public fun dropdown(label: Anchor.()->Unit, init:NavBarDropdown.()->Unit):Unit =
-        ul.add(
-            NavBarDropdown({ deselectAll() }, label) with { init() } )
+    public fun dropdown(label: Anchor.()->Unit, init:NavBarDropdown.()->Unit):Unit {
+        val dropdown = NavBarDropdown({ deselectAll() }, label) with { init() }
+        ul.add(dropdown)
+        menuItems.add(dropdown)
+    }
 
     public fun deselectAll() {
         menuItems.forEach { it.clazz = "" }
@@ -124,7 +124,7 @@ public class Navbar() : ParentComponent("nav") {
 
 }
 
-class NavBarDropdown(val deselectFun:() -> Unit, label: Anchor.()->Unit) : ParentComponent("li") {
+class NavBarDropdown(val deselectFun:() -> Unit, label: Anchor.()->Unit) : Li() {
 
     private val ul = UL() with {
         "class".."dropdown-menu"
@@ -134,20 +134,26 @@ class NavBarDropdown(val deselectFun:() -> Unit, label: Anchor.()->Unit) : Paren
     {
         setAttribute("class", "dropdown")
         add(
-                Anchor(href = "#") with {
+                Anchor() with {
                     "class".."dropdown-toggle"
                     "data-toggle".."dropdown"
                     "role".."button"
                     "aria-expanded".."false"
+                    href = "#"
                     label()
                     span(clazz = "caret") { }
                 })
         add(ul)
     }
 
+    fun selectThis() {
+        deselectFun();
+        setAttribute("class", "dropdown active");
+    }
+
     public fun item(href:String = "#", onclick: Function0<Unit>? = null, init: Anchor.() -> Unit) {
         val li = Li() with {
-            a(href = href, onclick = { deselectFun(); onclick?.let { onclick() } }, init = init)
+            a(href = href, onclick = { selectThis(); onclick?.let { onclick() } }, init = init)
         }
         ul.add(li)
     }

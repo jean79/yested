@@ -109,7 +109,10 @@ public open class HTMLParentComponent(tagName:String) : ParentComponent(tagName)
 
 
     open public fun a(clazz:String? = null, href:String?=null, onclick:Function0<Unit>? = null, init:Anchor.() -> Unit) {
-        val anchor = Anchor(href)
+        val anchor = Anchor()
+        if (href != null) {
+            anchor.href = href
+        }
         if (onclick != null) {
             anchor.onclick = onclick
         }
@@ -135,11 +138,10 @@ public open class HTMLParentComponent(tagName:String) : ParentComponent(tagName)
         return span
     }
 
-    public fun img(src:String, alt:String? = null, init: Image.() -> Unit) {
+    public fun img(src:String, alt:String? = null) {
         +(Image() with {
             this.src = src
             this.alt = alt?:""
-            this.init()
         })
     }
 
@@ -375,19 +377,11 @@ public class Image : ParentComponent("img") {
 
 public class P : HTMLParentComponent("p") { }
 
-public class Li : HTMLParentComponent("li") { }
+public open class Li : HTMLParentComponent("li") { }
 
-public open class Anchor(href:String? = null) : HTMLParentComponent("a") {
+public open class Anchor() : HTMLParentComponent("a") {
 
-    {
-        if (href != null) {
-            href(href)
-        }
-    }
-
-    public fun href(url:String) {
-        element.setAttribute("href", url)
-    }
+    public var href : String by Attribute()
 
 }
 

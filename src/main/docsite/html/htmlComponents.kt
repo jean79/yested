@@ -72,7 +72,7 @@ fun htmlSection(): Div {
                             }
                         }
                     }
-                    img(src = "demo-site/img/sample_img.jpg", alt = "bla") {}
+                    img(src = "demo-site/img/sample_img.jpg", alt = "bla")
                     emph { +"bold text" }
                     h1 { +"H1" }
                     h2 { +"H2" }
