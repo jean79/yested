@@ -16,6 +16,7 @@ import net.yested.ButtonType
 import net.yested.bootstrap.ButtonLook
 import net.yested.bootstrap.row
 import net.yested.bootstrap.pageHeader
+import net.yested.bootstrap.Medium
 
 enum class Continent(val label:String) {
     EUROPE : Continent("Europe");
@@ -112,16 +113,16 @@ class MasterDetail {
 
         return div {
             row {
-                col(12) {
+                col(Medium(12)) {
                     pageHeader { h3 { +"Master / Detail" } }
                 }
             }
             row {
-                col(6) {
+                col(Medium(6)) {
                     h4 { +"Demo" }
                     +placeholder
                 }
-                col(6) {
+                col(Medium(6)) {
                     h4 { +"Source code"}
                     a(href = "https://github.com/jean79/yested/blob/master/src/main/docsite/complex/masterdetails.kt") {+"Source code is deployed on GitHub"}
                 }

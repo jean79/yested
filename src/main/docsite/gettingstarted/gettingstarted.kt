@@ -4,6 +4,7 @@ import net.yested.Div
 import net.yested.bootstrap.row
 import net.yested.bootstrap.pageHeader
 import net.yested.div
+import net.yested.bootstrap.Medium
 
 /**
  * Created by jean on 6.1.2015.
@@ -12,12 +13,12 @@ fun gettingStartedSection(): Div {
 
     return div {
         row {
-            col(12) {
+            col(Medium(12)) {
                 pageHeader { h3 { +"Getting Started" } }
             }
         }
         row {
-            col(6) {
+            col(Medium(6)) {
                 div {
                     h4 { +"1. Get Intellij Idea" }
                     p {
@@ -27,7 +28,7 @@ fun gettingStartedSection(): Div {
             }
         }
         row {
-            col(12) {
+            col(Medium(12)) {
                 h4 { +"2. Enable Kotlin Plugin" }
                 p {
                     +"Install JetBrains Kotlin plugin into Idea."
@@ -36,20 +37,20 @@ fun gettingStartedSection(): Div {
             }
         }
         row {
-            col(12) {
+            col(Medium(12)) {
                 h4 { +"3. Create Kotlin - Javascript project" }
                 p { +"Call it 'YestedSample'"}
                 img(src = "demo-site/img/create_project.png")
             }
         }
         row {
-            col(12) {
+            col(Medium(12)) {
                 h4 { +"4. Create Kotlin Javascript Library" }
                 img(src = "demo-site/img/create_project_create_lib.png")
             }
         }
         row {
-            col(12) {
+            col(Medium(12)) {
                 p {
                     +"Select:"
                     emph { +"Copy to: lib" }
@@ -58,13 +59,13 @@ fun gettingStartedSection(): Div {
             }
         }
         row {
-            col(12) {
+            col(Medium(12)) {
                 h4 { +"4. Add Yested Library dependency" }
                 img(src = "demo-site/img/add_library_dependency.png")
             }
         }
         row {
-            col(12) {
+            col(Medium(12)) {
                 h4 { +"5. Create index.html file" }
                 +"Create HTML wrapper for our Yested application. It is a simple HTML that contains placeholder div with id 'page',"
                 +"Place index.html in the root of your project."
@@ -107,17 +108,17 @@ fun gettingStartedSection(): Div {
             }
         }
         row  {
-            col(12) {
+            col(Medium(12)) {
                 h4 { + "6. Create basic Yested application"}
             }
         }
         row {
-            col(6) {
+            col(Medium(6)) {
                 +"""Create file sample.kt in src/main/kotlin and insert content on the right.<br />
                 Kotlin Javascript calls this main function when page is loaded.
                 """
             }
-            col(6) {
+            col(Medium(6)) {
                 code(lang="kotlin", content=
 """import net.yested.bootstrap.page
 
@@ -138,7 +139,7 @@ fun main(args: Array<String>) {
             }
         }
         row  {
-            col(12) {
+            col(Medium(12)) {
                 h4 { + "7. Build Project"}
                 p {
                     +"Build -> Make Module 'YestedSample'"
@@ -149,7 +150,7 @@ fun main(args: Array<String>) {
             }
         }
         row  {
-            col(12) {
+            col(Medium(12)) {
                 h4 { + "8. Create build configuration"}
                 p {
                     +"Create build configuration - Kotlin - Javascript. "
@@ -159,7 +160,7 @@ fun main(args: Array<String>) {
             }
         }
         row  {
-            col(12) {
+            col(Medium(12)) {
                 h4 { + "9. Run It!"}
             }
         }

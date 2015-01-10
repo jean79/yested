@@ -11,18 +11,19 @@ import net.yested.bootstrap.btsButton
 import net.yested.ButtonType
 import net.yested.bootstrap.ButtonLook
 import net.yested.bootstrap.ButtonSize
+import net.yested.bootstrap.Medium
 
 fun kotlinSection(): Div {
 
     return div {
         row {
-            col(12) {
+            col(Medium(12)) {
                 pageHeader { h3 { +"Kotlin to Javascript Compiler" } }
             }
         }
         row {
 
-            col(4) {
+            col(Medium(4)) {
                 div {
 
                     p {
@@ -41,7 +42,7 @@ fun kotlinSection(): Div {
 
                 }
             }
-            col(8) {
+            col(Medium(8)) {
                 h4 { +"Simplest Kotlin Code" }
                 code(lang = "kotlin", content=
 """fun main(args: Array<String>) {

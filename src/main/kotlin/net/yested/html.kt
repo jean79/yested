@@ -23,6 +23,12 @@ public class Attribute {
 
 public trait Component {
     val element : HTMLElement
+
+    public var clazz:String
+        get() = element.getAttribute("class")
+        set(value) {
+            element.setAttribute("class", value)
+        }
 }
 
 public open class ParentComponent(tagName:String) : Component {
@@ -61,12 +67,6 @@ public open class HTMLParentComponent(tagName:String) : ParentComponent(tagName)
     public var id:String by Attribute()
     public var role:String by Attribute()
     public var style:String by Attribute()
-
-    public var clazz:String
-        get() = element.getAttribute("class")
-        set(value) {
-            element.setAttribute("class", value)
-        }
 
     public fun String.rangeTo(value:String):Unit = element.setAttribute(this, value)
 
@@ -108,7 +108,7 @@ public open class HTMLParentComponent(tagName:String) : ParentComponent(tagName)
         }
 
 
-    open public fun a(clazz:String? = null, href:String?=null, onclick:Function0<Unit>? = null, init:Anchor.() -> Unit) {
+    open public fun a(clazz:String? = null, href:String?=null, onclick:Function0<Unit>? = null, init:Anchor.() -> Unit = {}) {
         val anchor = Anchor()
         if (href != null) {
             anchor.href = href

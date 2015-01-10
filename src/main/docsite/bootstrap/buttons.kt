@@ -11,17 +11,18 @@ import net.yested.bootstrap.btsButton
 import net.yested.ButtonType
 import net.yested.bootstrap.ButtonLook
 import net.yested.bootstrap.ButtonSize
+import net.yested.bootstrap.Medium
 
 fun createButtons(): Div {
 
     return div {
         row {
-            col(12) {
+            col(Medium(12)) {
                 pageHeader { h3 { +"Buttons" } }
             }
         }
         row {
-            col(4) {
+            col(Medium(4)) {
                 div {
                     +"""
 Refer to Bootstrap buttons.
@@ -45,7 +46,7 @@ Refer to Bootstrap buttons.
                             onclick = { println("Second Button pressed.") })
                 }
             }
-            col(8) {
+            col(Medium(8)) {
                 h4 { +"Code" }
                 code(lang = "kotlin", content="""div {
     btsButton(

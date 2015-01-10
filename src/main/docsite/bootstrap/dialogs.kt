@@ -15,6 +15,7 @@ import net.yested.bootstrap.Form
 import net.yested.bootstrap.form
 import net.yested.bootstrap.btsButton
 import net.yested.bootstrap.textInput
+import net.yested.bootstrap.Medium
 
 fun createDialogs(): Div {
 
@@ -41,12 +42,12 @@ fun createDialogs(): Div {
 
     return div {
         row {
-            col(12) {
+            col(Medium(12)) {
                 pageHeader { h3 { +"Dialogs" } }
             }
         }
         row {
-            col(4) {
+            col(Medium(4)) {
                 div {
                     +"""This is a wrapper around Bootstrap dialogs."""
                 }
@@ -55,7 +56,7 @@ fun createDialogs(): Div {
                     btsButton(label = { +"Open dialog" }, onclick = { dialog.open() })
                 }
             }
-            col(8) {
+            col(Medium(8)) {
                 h4 { +"Code" }
                 code(lang = "kotlin", content="""val dialog = Dialog()
 

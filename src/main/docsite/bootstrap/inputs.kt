@@ -12,6 +12,7 @@ import net.yested.bootstrap.TextInput
 import net.yested.bootstrap.Validator
 import net.yested.bootstrap.form
 import net.yested.bootstrap.BtsButton
+import net.yested.bootstrap.Medium
 
 fun createInputs(): Div {
 
@@ -29,12 +30,12 @@ fun createInputs(): Div {
 
     return div {
         row {
-            col(12) {
+            col(Medium(12)) {
                 pageHeader { h3 { +"Text Input with Validation" } }
             }
         }
         row {
-            col(4) {
+            col(Medium(4)) {
                 div {
                     +"""
 This example demonstrates simple text input with custom validation.
@@ -53,7 +54,7 @@ Please note that validator is also attached to form item.
                     }
                 }
             }
-            col(8) {
+            col(Medium(8)) {
                 h4 { +"Code" }
                 code(lang = "kotlin", content="""val textInput = TextInput(placeholder = "Mandatory field")
 

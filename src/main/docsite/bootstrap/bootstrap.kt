@@ -4,6 +4,7 @@ import net.yested.Div
 import net.yested.div
 import net.yested.bootstrap.row
 import net.yested.bootstrap.pageHeader
+import net.yested.bootstrap.Medium
 
 /**
  * Created by jean on 20.12.2014.
@@ -11,7 +12,7 @@ import net.yested.bootstrap.pageHeader
 fun boostrapPage():Div =
         div {
             row {
-                col(12) {
+                col(Medium(12)) {
                     pageHeader {
                         h3 { +"Twitter Bootstrap wrappers"}
                     }
@@ -28,4 +29,5 @@ fun boostrapPage():Div =
             +createTabs()
             +createPanelSection()
             +createDialogs()
+            +createMediaObjectSection()
         }

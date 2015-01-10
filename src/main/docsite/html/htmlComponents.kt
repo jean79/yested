@@ -8,17 +8,18 @@ import net.yested.bootstrap.btsButton
 import net.yested.ButtonType
 import net.yested.bootstrap.ButtonLook
 import net.yested.bootstrap.ButtonSize
+import net.yested.bootstrap.Medium
 
 fun htmlSection(): Div {
 
     return div {
         row {
-            col(12) {
+            col(Medium(12)) {
                 pageHeader { h3 { +"HTML" } }
             }
         }
         row {
-            col(4) {
+            col(Medium(4)) {
                 div {
                     +"""Yested provides basic DSL for construction of HTML page from HTML basic elements.<br /><br />
                     This DSL can be easily enhanced with your custom or built-in Bootstrap components via Kotlin Extension methods."""
@@ -26,7 +27,7 @@ fun htmlSection(): Div {
             }
         }
         row {
-            col(4) {
+            col(Medium(4)) {
                 h4 { +"Demo" }
                 div {
                     a(href = "http://www.yested.net") { +"Yested" }
@@ -105,7 +106,7 @@ fun htmlSection(): Div {
                     kbd { +"cd" }
                 }
             }
-            col(8) {
+            col(Medium(8)) {
                 h4 { +"Code" }
                 code(lang = "kotlin", content=
 """

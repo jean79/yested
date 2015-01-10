@@ -9,6 +9,7 @@ import net.yested.bootstrap.row
 import net.yested.bootstrap.page
 import net.yested.bootstrap.pageHeader
 import net.yested.Div
+import net.yested.bootstrap.Medium
 
 /**
  * Created by jean on 25.12.2014.
@@ -26,12 +27,12 @@ fun buttonGroupsSection(): Div {
 
     return div {
         row {
-            col(12) {
+            col(Medium(12)) {
                 pageHeader { h3 { +"Button Group" }}
             }
         }
         row {
-            col(4) {
+            col(Medium(4)) {
                 div {
                     +"""Refer to Bootstrap buttons groups. Yested version
                     in addition offers a way to get selected value (via btnGroup.value)"""
@@ -44,7 +45,7 @@ fun buttonGroupsSection(): Div {
                     +span
                 }
             }
-            col(8) {
+            col(Medium(8)) {
                 h4 { +"Code" }
                 code(lang = "kotlin", content="""val span = Span()
 val btnGroup =
