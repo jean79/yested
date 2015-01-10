@@ -14,6 +14,7 @@ import net.yested.bootstrap.form
 import net.yested.bootstrap.BtsButton
 import net.yested.bootstrap.Select
 import net.yested.Span
+import net.yested.bootstrap.Medium
 
 data class Car(val model:String, val color:String)
 
@@ -45,12 +46,12 @@ fun createSelectSection(): Div {
 
     return div {
         row {
-            col(12) {
+            col(Medium(12)) {
                 pageHeader { h3 { +"Select" } }
             }
         }
         row {
-            col(4) {
+            col(Medium(4)) {
                 div {
 +"""HTML Select demo with listener."""
                 }
@@ -65,7 +66,7 @@ fun createSelectSection(): Div {
                 br()
                 + btn
             }
-            col(8) {
+            col(Medium(8)) {
                 h4 { +"Code" }
                 code(lang = "kotlin", content=
 """val someData = listOf(

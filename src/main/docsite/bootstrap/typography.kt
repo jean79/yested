@@ -12,6 +12,7 @@ import net.yested.bootstrap.TextAlign
 import net.yested.bootstrap.uppercase
 import net.yested.bootstrap.lowercase
 import net.yested.bootstrap.capitalize
+import net.yested.bootstrap.Medium
 
 /**
  * Created by jean on 20.12.2014.
@@ -20,12 +21,12 @@ fun createTypographySection(): Div {
 
     return div {
         row {
-            col(12) {
+            col(Medium(12)) {
                 pageHeader { h3 { +"Typography" } }
             }
         }
         row {
-            col(4) {
+            col(Medium(4)) {
                 div {
                     +"""
 Simple Typography support.
@@ -42,7 +43,7 @@ Simple Typography support.
                 p { lowercase { +"ALL IS lowerCase" }}
                 p { capitalize { +"capitalized" }}
             }
-            col(8) {
+            col(Medium(8)) {
                 h4 { +"Code" }
                 code(lang = "kotlin", content=
 """aligned(TextAlign.RIGHT) { +"Right Align"}

@@ -18,6 +18,7 @@ import net.yested.bootstrap.PanelStyle
 import net.yested.bootstrap.ButtonGroup
 import net.yested.bootstrap.Alert
 import net.yested.bootstrap.AlertStyle
+import net.yested.bootstrap.Medium
 
 /**
  * Created by jean on 24.12.2014.
@@ -105,12 +106,12 @@ fun createAjaxGetSection(): Div {
 
     return div {
         row {
-            col(12) {
+            col(Medium(12)) {
                 pageHeader { h3 { +"Ajax Get"} }
             }
         }
         row {
-            col(6) {
+            col(Medium(6)) {
                 +"Yested provides JQuery Ajax wrappers:"
                 code(lang = "kotlin", content="""ajaxGet&lt;ResponseType&gt;(url) {
     response -> do something with response
@@ -127,12 +128,12 @@ fun createAjaxGetSection(): Div {
 
         }
         row {
-            col(12) {
+            col(Medium(12)) {
                 pageHeader { h4 { +"Demo" }}
             }
         }
         row {
-            col(6) {
+            col(Medium(6)) {
                 form(labelDef = "col-sm-4", inputDef = "col-sm-8") {
                     item(label = { +"Location"}, validator = validator) {
                         +textInput
@@ -147,14 +148,14 @@ fun createAjaxGetSection(): Div {
                     }
                 }
             }
-            col(6) {
+            col(Medium(6)) {
                 p {
                     +temperatureSpan
                 }
             }
         }
         row {
-            col(12) {
+            col(Medium(12)) {
                 pageHeader { h4 { +"Source for demo" }}
                 code(lang = "kotlin", content="""//definition of response, just fragment
 native trait Main {

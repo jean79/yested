@@ -4,17 +4,18 @@ import net.yested.bootstrap.row
 import net.yested.bootstrap.pageHeader
 import net.yested.div
 import net.yested.Div
+import net.yested.bootstrap.Medium
 
 fun howItWorksSection(): Div {
 
     return div {
         row {
-            col(12) {
+            col(Medium(12)) {
                 pageHeader { h3 { +"Fundamentals of Framework" } }
             }
         }
         row {
-            col(4) {
+            col(Medium(4)) {
                 h4 { +"Just a single interface"}
                 div {
                     +"""All framework components are just simple wrappers around HTMLElement.<br />
@@ -22,7 +23,7 @@ fun howItWorksSection(): Div {
                         All components have to implement trait (interface) Component."""
                 }
             }
-            col(8) {
+            col(Medium(8)) {
                 h4 { nbsp() }
                 code(lang="kotlin", content="""trait Component {
     val element : HTMLElement
@@ -31,13 +32,13 @@ fun howItWorksSection(): Div {
         }
         br()
         row {
-            col(4) {
+            col(Medium(4)) {
                 h4 { +"Component creation"}
                 div {
                     +"""Typicaly components extend HTMLParentComponent"""
                 }
             }
-            col(8) {
+            col(Medium(8)) {
                 h4 { nbsp() }
                 code(lang="kotlin", content="""class Anchor() : HTMLParentComponent("a") {
 
@@ -48,13 +49,13 @@ fun howItWorksSection(): Div {
         }
         br()
         row {
-            col(4) {
+            col(Medium(4)) {
                 h4 { +"Yested application initialization"}
                 div {
                     +"""You need to have a DIV in your html page with id "page". Then Yested app will be renderred into this div using command on the right."""
                 }
             }
-            col(8) {
+            col(Medium(8)) {
                 h4 { nbsp() }
                 code(lang="kotlin", content="""page("page") {
     topMenu(navbar)
@@ -67,7 +68,7 @@ fun howItWorksSection(): Div {
             }
         }
         row {
-            col(4) {
+            col(Medium(4)) {
                 h4 { +"DSL for layout construction"}
                 div {
                     +"""To understand the DSL please take look at <a href="http://kotlinlang.org/docs/reference/type-safe-builders.html">Kotlin HTML builder</a>.
@@ -75,7 +76,7 @@ fun howItWorksSection(): Div {
                     """
                 }
             }
-            col(8) {
+            col(Medium(8)) {
                 h4 { nbsp() }
                 code(lang = "kotlin", content="""div {
     p {

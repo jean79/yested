@@ -10,6 +10,7 @@ import net.yested.bootstrap.pageHeader
 import net.yested.bootstrap.form
 import net.yested.bootstrap.panel
 import net.yested.bootstrap.PanelStyle
+import net.yested.bootstrap.Medium
 
 /**
  * Created by jean on 28.12.2014.
@@ -18,12 +19,12 @@ fun createPanelSection(): Div {
 
     return div {
         row {
-            col(12) {
+            col(Medium(12)) {
                 pageHeader { h3 { +"Panels" } }
             }
         }
         row {
-            col(4) {
+            col(Medium(4)) {
                 div {
                     +"""
 Please refer to Bootstrap Panels
@@ -41,7 +42,7 @@ Please refer to Bootstrap Panels
                 }
 
             }
-            col(8) {
+            col(Medium(8)) {
                 h4 { +"Code" }
                 code(lang = "kotlin", content="""panel {
     heading { +"Panel Header" }

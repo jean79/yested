@@ -10,17 +10,18 @@ import net.yested.bootstrap.pageHeader
 import net.yested.bootstrap.form
 import net.yested.bootstrap.inputAddOn
 import net.yested.bootstrap.TextInput
+import net.yested.bootstrap.Medium
 
 fun createForm(): Div {
 
     return div {
         row {
-            col(12) {
+            col(Medium(12)) {
                 pageHeader { h3 { +"Form" } }
             }
         }
         row {
-            col(4) {
+            col(Medium(4)) {
                 div {
                     +"""
 """
@@ -36,7 +37,7 @@ fun createForm(): Div {
                     }
                 }
             }
-            col(8) {
+            col(Medium(8)) {
                 h4 { +"Code" }
                 code(lang = "kotlin", content="""form(labelDef = "col-sm-4", inputDef = "col-sm-8") {
     item(label = { +"Username"}) {

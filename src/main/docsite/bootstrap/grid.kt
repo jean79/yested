@@ -9,6 +9,7 @@ import net.yested.bootstrap.tabs
 import net.yested.bootstrap.textInput
 import net.yested.div
 import net.yested.Div
+import net.yested.bootstrap.Medium
 
 /**
  * Created by jean on 17.12.2014.
@@ -34,12 +35,12 @@ fun createGrid(): Div {
 
     return div {
         row {
-            col(12) {
+            col(Medium(12)) {
                 pageHeader { h3 { +"Grid" } }
             }
         }
         row {
-            col(4) {
+            col(Medium(4)) {
                 div {
                     +"""
 Grid is simply a renderred HTML Table element. It is not suitable for too many rows.
@@ -49,7 +50,7 @@ Grid is simply a renderred HTML Table element. It is not suitable for too many r
                 h4 { +"Demo" }
                 +grid
             }
-            col(8) {
+            col(Medium(8)) {
                 h4 { +"Code" }
                 code(lang = "kotlin", content="""data class Person(val name:String, val age:Int)
 val data = listOf(Person("Jan", 15), Person("Peter", 30), Person("Martin", 31))
