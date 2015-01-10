@@ -2756,7 +2756,7 @@
       }
     }),
     basics: Kotlin.definePackage(function () {
-      this.latestVersion = '0.0.3';
+      this.latestVersion = '0.0.4';
     }, /** @lends _.basics */ {
       f: function () {
         this.plus_pdl1w0$('What is Yested');
@@ -2867,18 +2867,18 @@
         this.plus_pdl1w0$('Binaries: ');
       },
       f_29: function () {
-        this.plus_pdl1w0$('Yested-0.0.3.jar');
+        this.plus_pdl1w0$('Yested-0.0.4.jar');
       },
       f_30: function () {
         this.emph_mfnzi$(_.basics.f_28);
-        this.a_b4th6h$(void 0, 'http://jankovar.net:8081/nexus/content/repositories/releases/net/yested/Yested/0.0.3/Yested-0.0.3.jar', void 0, _.basics.f_29);
+        this.a_b4th6h$(void 0, 'http://jankovar.net:8081/nexus/content/repositories/releases/net/yested/Yested/0.0.4/Yested-0.0.4.jar', void 0, _.basics.f_29);
       },
       f_31: function () {
         this.plus_pdl1w0$('Maven Repository');
       },
       f_32: function () {
         this.h4_mfnzi$(_.basics.f_31);
-        this.code_puj7f4$('xml', '<repository>\n  <id>Yested<\/id>\n  <url>http://jankovar.net:8081/nexus/content/repositories/releases/<\/url>\n<\/repository>\n\n<dependency>\n    <groupId>net.yested<\/groupId>\n    <artifactId>Yested<\/artifactId>\n    <version>0.0.3<\/version>\n<\/dependency>\n');
+        this.code_puj7f4$('xml', '<repository>\n  <id>Yested<\/id>\n  <url>http://jankovar.net:8081/nexus/content/repositories/releases/<\/url>\n<\/repository>\n\n<dependency>\n    <groupId>net.yested<\/groupId>\n    <artifactId>Yested<\/artifactId>\n    <version>0.0.4<\/version>\n<\/dependency>\n');
       },
       f_33: function () {
         this.p_omdg96$(_.basics.f_27);
