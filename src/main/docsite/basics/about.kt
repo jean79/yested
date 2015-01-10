@@ -10,6 +10,7 @@ import net.yested.bootstrap.btsAnchor
 import net.yested.bootstrap.ButtonSize
 import net.yested.bootstrap.alert
 import net.yested.bootstrap.AlertStyle
+import net.yested.bootstrap.Medium
 
 val latestVersion = "0.0.3"
 
@@ -17,12 +18,12 @@ fun aboutSection(): Div {
 
     return div {
         row {
-            col(12) {
+            col(Medium(12)) {
                 pageHeader { h3 { +"What is Yested" } }
             }
         }
         row {
-            col(6) {
+            col(Medium(6)) {
                 div {
                     p {
                         +"Yested is a Kotlin framework for building single-page web applications in Javascript."
@@ -63,7 +64,7 @@ fun aboutSection(): Div {
                     }
                 }
             }
-            col(6) {
+            col(Medium(6)) {
                 p {
                     btsAnchor(size = ButtonSize.LARGE, look = ButtonLook.PRIMARY, href = "https://github.com/jean79/yested") { +"Get on GitHub"}
                 }

@@ -8,19 +8,16 @@ import net.yested.div
 import kotlin.js.dom.html.HTMLElement
 import net.yested.el
 
-/**
- * Created by jean on 24.11.2014.
- */
-public class Row(val device:String = "md") : ParentComponent("div") {
+public class Row() : ParentComponent("div") {
 
     {
         setAttribute("class", "row")
     }
 
-    public fun col(dimension:Int, init:HTMLParentComponent.() -> Unit) {
+    public fun col(vararg sizes: DeviceSize, init:HTMLParentComponent.() -> Unit) {
         add(
             Div() with {
-                clazz = "col-${device}-${dimension}"
+                clazz = sizes map {"col-${it.device.code}-${it.size}"} join(" ")
                 init()
             })
     }
@@ -36,7 +33,8 @@ public class Page(val element: HTMLElement) {
     public fun content(init: HTMLParentComponent.() -> Unit): Unit {
         element.appendChild(
                 div {
-                    "class".."container theme-showcase"; "role".."main"
+                    "class".."container theme-showcase"
+                    "role".."main"
                     init()
                 }.element)
     }
@@ -65,8 +63,8 @@ public fun HTMLParentComponent.pageHeader(init: HTMLParentComponent.() -> Unit) 
     add(pageHeader)
 }
 
-public fun HTMLParentComponent.row(device:String = "md", init:Row.()->Unit): Row {
-    val row = Row(device = device)
+public fun HTMLParentComponent.row(init:Row.()->Unit): Row {
+    val row = Row()
     row.init()
     add(row)
     return row
