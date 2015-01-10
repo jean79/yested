@@ -29,4 +29,5 @@ fun boostrapPage():Div =
             +createTabs()
             +createPanelSection()
             +createDialogs()
+            +createMediaObjectSection()
         }
