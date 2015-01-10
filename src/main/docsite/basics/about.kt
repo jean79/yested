@@ -12,7 +12,7 @@ import net.yested.bootstrap.alert
 import net.yested.bootstrap.AlertStyle
 import net.yested.bootstrap.Medium
 
-val latestVersion = "0.0.3"
+val latestVersion = "0.0.4"
 
 fun aboutSection(): Div {
 
