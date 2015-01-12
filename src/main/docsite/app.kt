@@ -15,6 +15,7 @@ import html.htmlPage
 import ajax.ajaxPage
 import complex.masterDetail
 import gettingstarted.gettingStartedSection
+import complex.createSpinner
 
 fun main(args: Array<String>) {
 
@@ -26,6 +27,7 @@ fun main(args: Array<String>) {
             item(href = "#/bootstrapComponents") { +"Twitter Bootstrap" }
             item(href = "#/ajax") { +"Ajax Call" }
             item(href = "#/masterdetail") { +"Master/Detail"}
+            item(href = "#/spinner") { +"Spinner"}
         }
     }
 
@@ -40,6 +42,7 @@ fun main(args: Array<String>) {
             hash.get(1) == "bootstrapComponents" -> divContainer.fade(boostrapPage())
             hash.get(1) == "ajax" -> divContainer.fade(ajaxPage())
             hash.get(1) == "masterdetail" -> divContainer.fade(masterDetail())
+            hash.get(1) == "spinner" -> divContainer.fade(createSpinner())
         }
     }
 
