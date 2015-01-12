@@ -17,29 +17,29 @@ import java.util.ArrayList
  */
 public class Pagination(val count:Int, val defaultSelection:Int = 1, val listener:(Int) -> Unit) : HTMLParentComponent("nav") {
 
-    private var _selected:Int = defaultSelection
+    private var selectedItem:Int = defaultSelection
 
-    private val _list = UL() with { clazz = "pagination" }
+    private val list = UL() with { clazz = "pagination" }
 
-    private var _items:List<Li> = arrayListOf()
+    private var items:List<Li> = arrayListOf()
 
     public var selected:Int
-        get() = _selected
+        get() = selectedItem
         set(newValue) {
-            _selected = newValue
-            redisplay(_selected)
+            selectedItem = newValue
+            redisplay(selectedItem)
         }
 
     {
-        add(_list)
+        add(list)
         replaceItems()
-        redisplay(_selected)
+        redisplay(selectedItem)
     }
 
     private fun replaceItems() {
-        _items = generateItems()
-        _list.replace("")
-        _items.forEach { _list.add(it) }
+        items = generateItems()
+        list.replace("")
+        items.forEach { list.add(it) }
     }
 
     private fun generateItems(): List<Li> {
@@ -53,36 +53,36 @@ public class Pagination(val count:Int, val defaultSelection:Int = 1, val listene
     }
 
     private fun backward() {
-        if (_selected > 1) {
-            _selected--
+        if (selectedItem > 1) {
+            selectedItem--
             changeSelection()
         }
     }
 
     private fun forward() {
-        if (_selected < count) {
-            _selected++
+        if (selectedItem < count) {
+            selectedItem++
             changeSelection()
         }
     }
 
     private fun select(newPosition:Int) {
-        if (newPosition != _selected) {
-            _selected = newPosition
+        if (newPosition != selectedItem) {
+            selectedItem = newPosition
             changeSelection()
         }
     }
 
     private fun changeSelection() {
-        redisplay(_selected)
-        listener(_selected)
+        redisplay(selectedItem)
+        listener(selectedItem)
     }
 
     private fun redisplay(position:Int) {
-        for (i in 1 .. count) { _items.get(i).clazz = "" }
-        _items.get(position).clazz = "active"
-        _items.get(0).clazz = if (position == 1) "disabled" else ""
-        _items.get(_items.size() - 1).clazz = if (position == count) "disabled" else ""
+        for (i in 1 .. count) { items.get(i).clazz = "" }
+        items.get(position).clazz = "active"
+        items.get(0).clazz = if (position == 1) "disabled" else ""
+        items.get(items.size() - 1).clazz = if (position == count) "disabled" else ""
     }
 
 }

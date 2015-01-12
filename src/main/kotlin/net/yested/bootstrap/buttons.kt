@@ -30,12 +30,12 @@ public class BtsButton(type: ButtonType = ButtonType.BUTTON,
              val block:Boolean = false,
              onclick:() -> Unit ) :  HTMLParentComponent("button") {
 
-    private var _active:Boolean = false
+    private var buttonActive:Boolean = false
 
     var active:Boolean
-        get() = _active
+        get() = buttonActive
         set(value) {
-            _active = value
+            buttonActive = value
             setClass()
         }
 
@@ -53,7 +53,7 @@ public class BtsButton(type: ButtonType = ButtonType.BUTTON,
     }
 
     fun setClass() {
-        setAttribute("class", "btn btn-${look.code} btn-${size.code} ${if (block) "btn-block" else ""} ${if (_active) "active" else ""}")
+        setAttribute("class", "btn btn-${look.code} btn-${size.code} ${if (block) "btn-block" else ""} ${if (buttonActive) "active" else ""}")
     }
 
 }

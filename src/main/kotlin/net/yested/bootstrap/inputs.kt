@@ -119,22 +119,22 @@ public class Select<T>(multiple:Boolean = false, size:Int = 1, val renderer:(T)-
 
     private val onChangeListeners: ArrayList<Function0<Unit>> = ArrayList();
 
-    private var _selectedItems:List<T> = listOf()
+    private var selectedItemsInt:List<T> = listOf()
 
-    private var _data:List<T>? = null
+    private var dataInt:List<T>? = null
 
-    private var _optionTags:ArrayList<SelectOption<T>> = ArrayList()
+    private var optionTags:ArrayList<SelectOption<T>> = ArrayList()
 
     public var data:List<T>?
-        get() = _data
+        get() = dataInt
         set(newData) {
-            _data = newData
+            dataInt = newData
             regenerate()
             changeSelected()
         }
 
     public var selectedItems:List<T>
-        get() = _selectedItems
+        get() = selectedItemsInt
         set(newData) {
             selectThese(newData)
             changeSelected()
@@ -150,26 +150,26 @@ public class Select<T>(multiple:Boolean = false, size:Int = 1, val renderer:(T)-
     }
 
     private fun changeSelected() {
-        _selectedItems = _optionTags.filter { it.tag.selected }.map { it.value }
+        selectedItemsInt = optionTags.filter { it.tag.selected }.map { it.value }
         onChangeListeners.forEach { it() }
     }
 
     private fun selectThese(selectedItems:List<T>) {
-        _optionTags.forEach {
+        optionTags.forEach {
             it.tag.selected = selectedItems.contains(it.value)
         }
     }
 
     private fun regenerate() {
         element.innerHTML = ""
-        _optionTags =  ArrayList()
-        _selectedItems = listOf()
-        if (_data != null) {
-            _data?.forEach {
+        optionTags =  ArrayList()
+        selectedItemsInt = listOf()
+        if (dataInt != null) {
+            dataInt?.forEach {
                 val optionTag = tag("option", init = { +renderer(it) })
                 val value:T = it
                 val selectOption = SelectOption(tag = optionTag.element as HTMLOptionElement, value = value)
-                _optionTags.add(selectOption)
+                optionTags.add(selectOption)
                 add(optionTag)
             }
         }

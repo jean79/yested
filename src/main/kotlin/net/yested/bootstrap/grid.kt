@@ -62,12 +62,12 @@ public class Grid<T>(val columns:Array<Column<T>>) : ParentComponent("table") {
         setSortingArrow()
     }
 
-    private var _list: List<T>? = null
+    private var dataList: List<T>? = null
 
     public var list: List<T>?
-        get() = _list
+        get() = dataList
         set(value) {
-            _list = value
+            dataList = value
             displayData()
         }
 
@@ -111,9 +111,9 @@ public class Grid<T>(val columns:Array<Column<T>>) : ParentComponent("table") {
 
     private fun displayData() {
         removeChild("tbody")
-        _list?.let {
+        dataList?.let {
 
-            val values = if (sortColumn != null) sortData(_list!!) else _list!!
+            val values = if (sortColumn != null) sortData(dataList!!) else dataList!!
 
             add(
                 tbody {
