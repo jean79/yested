@@ -2619,6 +2619,179 @@
           capitalize_sxtqq7$: function ($receiver, init) {
             _.net.yested.bootstrap.addSpan($receiver, 'text-capitalize', init);
           }
+        }),
+        spin: Kotlin.definePackage(null, /** @lends _.net.yested.spin */ {
+          SpinnerOptions: Kotlin.createClass(null, function (lines, length, width, radius, corners, rotate, direction, color, speed, trail, shadow, hwaccel, className, zIndex, top, left) {
+            if (lines === void 0)
+              lines = 13;
+            if (length === void 0)
+              length = 20;
+            if (width === void 0)
+              width = 10;
+            if (radius === void 0)
+              radius = 30;
+            if (corners === void 0)
+              corners = 1;
+            if (rotate === void 0)
+              rotate = 0;
+            if (direction === void 0)
+              direction = 1;
+            if (color === void 0)
+              color = '#000';
+            if (speed === void 0)
+              speed = 1;
+            if (trail === void 0)
+              trail = 60;
+            if (shadow === void 0)
+              shadow = false;
+            if (hwaccel === void 0)
+              hwaccel = false;
+            if (className === void 0)
+              className = 'spinner';
+            if (zIndex === void 0)
+              zIndex = 2.0E9;
+            if (top === void 0)
+              top = '50%';
+            if (left === void 0)
+              left = '50%';
+            this.lines = lines;
+            this.length = length;
+            this.width = width;
+            this.radius = radius;
+            this.corners = corners;
+            this.rotate = rotate;
+            this.direction = direction;
+            this.color = color;
+            this.speed = speed;
+            this.trail = trail;
+            this.shadow = shadow;
+            this.hwaccel = hwaccel;
+            this.className = className;
+            this.zIndex = zIndex;
+            this.top = top;
+            this.left = left;
+          }, /** @lends _.net.yested.spin.SpinnerOptions.prototype */ {
+            component1: function () {
+              return this.lines;
+            },
+            component2: function () {
+              return this.length;
+            },
+            component3: function () {
+              return this.width;
+            },
+            component4: function () {
+              return this.radius;
+            },
+            component5: function () {
+              return this.corners;
+            },
+            component6: function () {
+              return this.rotate;
+            },
+            component7: function () {
+              return this.direction;
+            },
+            component8: function () {
+              return this.color;
+            },
+            component9: function () {
+              return this.speed;
+            },
+            component10: function () {
+              return this.trail;
+            },
+            component11: function () {
+              return this.shadow;
+            },
+            component12: function () {
+              return this.hwaccel;
+            },
+            component13: function () {
+              return this.className;
+            },
+            component14: function () {
+              return this.zIndex;
+            },
+            component15: function () {
+              return this.top;
+            },
+            component16: function () {
+              return this.left;
+            },
+            copy: function (lines, length, width, radius, corners, rotate, direction, color, speed, trail, shadow, hwaccel, className, zIndex, top, left) {
+              return new _.net.yested.spin.SpinnerOptions(lines === void 0 ? this.lines : lines, length === void 0 ? this.length : length, width === void 0 ? this.width : width, radius === void 0 ? this.radius : radius, corners === void 0 ? this.corners : corners, rotate === void 0 ? this.rotate : rotate, direction === void 0 ? this.direction : direction, color === void 0 ? this.color : color, speed === void 0 ? this.speed : speed, trail === void 0 ? this.trail : trail, shadow === void 0 ? this.shadow : shadow, hwaccel === void 0 ? this.hwaccel : hwaccel, className === void 0 ? this.className : className, zIndex === void 0 ? this.zIndex : zIndex, top === void 0 ? this.top : top, left === void 0 ? this.left : left);
+            },
+            toString: function () {
+              return 'SpinnerOptions(lines=' + Kotlin.toString(this.lines) + (', length=' + Kotlin.toString(this.length)) + (', width=' + Kotlin.toString(this.width)) + (', radius=' + Kotlin.toString(this.radius)) + (', corners=' + Kotlin.toString(this.corners)) + (', rotate=' + Kotlin.toString(this.rotate)) + (', direction=' + Kotlin.toString(this.direction)) + (', color=' + Kotlin.toString(this.color)) + (', speed=' + Kotlin.toString(this.speed)) + (', trail=' + Kotlin.toString(this.trail)) + (', shadow=' + Kotlin.toString(this.shadow)) + (', hwaccel=' + Kotlin.toString(this.hwaccel)) + (', className=' + Kotlin.toString(this.className)) + (', zIndex=' + Kotlin.toString(this.zIndex)) + (', top=' + Kotlin.toString(this.top)) + (', left=' + Kotlin.toString(this.left)) + ')';
+            },
+            hashCode: function () {
+              var result = 0;
+              result = result * 31 + Kotlin.hashCode(this.lines) | 0;
+              result = result * 31 + Kotlin.hashCode(this.length) | 0;
+              result = result * 31 + Kotlin.hashCode(this.width) | 0;
+              result = result * 31 + Kotlin.hashCode(this.radius) | 0;
+              result = result * 31 + Kotlin.hashCode(this.corners) | 0;
+              result = result * 31 + Kotlin.hashCode(this.rotate) | 0;
+              result = result * 31 + Kotlin.hashCode(this.direction) | 0;
+              result = result * 31 + Kotlin.hashCode(this.color) | 0;
+              result = result * 31 + Kotlin.hashCode(this.speed) | 0;
+              result = result * 31 + Kotlin.hashCode(this.trail) | 0;
+              result = result * 31 + Kotlin.hashCode(this.shadow) | 0;
+              result = result * 31 + Kotlin.hashCode(this.hwaccel) | 0;
+              result = result * 31 + Kotlin.hashCode(this.className) | 0;
+              result = result * 31 + Kotlin.hashCode(this.zIndex) | 0;
+              result = result * 31 + Kotlin.hashCode(this.top) | 0;
+              result = result * 31 + Kotlin.hashCode(this.left) | 0;
+              return result;
+            },
+            equals_za3rmp$: function (other) {
+              return this === other || (other !== null && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.lines, other.lines) && Kotlin.equals(this.length, other.length) && Kotlin.equals(this.width, other.width) && Kotlin.equals(this.radius, other.radius) && Kotlin.equals(this.corners, other.corners) && Kotlin.equals(this.rotate, other.rotate) && Kotlin.equals(this.direction, other.direction) && Kotlin.equals(this.color, other.color) && Kotlin.equals(this.speed, other.speed) && Kotlin.equals(this.trail, other.trail) && Kotlin.equals(this.shadow, other.shadow) && Kotlin.equals(this.hwaccel, other.hwaccel) && Kotlin.equals(this.className, other.className) && Kotlin.equals(this.zIndex, other.zIndex) && Kotlin.equals(this.top, other.top) && Kotlin.equals(this.left, other.left))));
+            }
+          }),
+          Spinner: Kotlin.createClass(function () {
+            return [_.net.yested.Component];
+          }, function (options) {
+            if (options === void 0)
+              options = new _.net.yested.spin.SpinnerOptions();
+            this.options = options;
+            this.jsSpinnerElement_vuqxo$ = new Spinner(this.createOptions()).spin().el;
+          }, /** @lends _.net.yested.spin.Spinner.prototype */ {
+            createOptions: function () {
+              return _.net.yested.spin.Spinner.createOptions$f(this);
+            },
+            element: {
+              get: function () {
+                return this.jsSpinnerElement_vuqxo$;
+              }
+            }
+          }, /** @lends _.net.yested.spin.Spinner */ {
+            createOptions$f: function (this$Spinner) {
+              return Kotlin.createObject(null, function () {
+                this.lines = this$Spinner.options.lines;
+                this.length = this$Spinner.options.length;
+                this.width = this$Spinner.options.width;
+                this.radius = this$Spinner.options.radius;
+                this.corners = this$Spinner.options.corners;
+                this.rotate = this$Spinner.options.rotate;
+                this.direction = this$Spinner.options.direction;
+                this.color = this$Spinner.options.color;
+                this.speed = this$Spinner.options.speed;
+                this.trail = this$Spinner.options.trail;
+                this.shadow = this$Spinner.options.shadow;
+                this.hwaccel = this$Spinner.options.hwaccel;
+                this.className = this$Spinner.options.className;
+                this.zIndex = this$Spinner.options.zIndex;
+                this.top = this$Spinner.options.top;
+                this.left = this$Spinner.options.left;
+              });
+            }
+          }),
+          spinner_oyolqv$: function ($receiver, options) {
+            if (options === void 0)
+              options = new _.net.yested.spin.SpinnerOptions();
+            $receiver.add_5f0h2k$(new _.net.yested.spin.Spinner(options));
+          }
         })
       })
     }),
@@ -2644,15 +2817,19 @@
       this.plus_pdl1w0$('Master/Detail');
     },
     f_6: function () {
+      this.plus_pdl1w0$('Spinner');
+    },
+    f_7: function () {
       this.item('#/html', void 0, _.f_2);
       this.item('#/bootstrapComponents', void 0, _.f_3);
       this.item('#/ajax', void 0, _.f_4);
       this.item('#/masterdetail', void 0, _.f_5);
+      this.item('#/spinner', void 0, _.f_6);
     },
     main$f: function () {
       this.brand_hgkgkc$('#', _.f);
       this.item_b1t645$('#/gettingstarted', void 0, _.f_0);
-      this.dropdown_vvlqvy$(_.f_1, _.f_6);
+      this.dropdown_vvlqvy$(_.f_1, _.f_7);
     },
     main$f_0: function () {
     },
@@ -2670,40 +2847,42 @@
           divContainer.fade_5f0h2k$(_.ajax.ajaxPage());
         else if (Kotlin.equals(hash[1], 'masterdetail'))
           divContainer.fade_5f0h2k$(_.complex.masterDetail());
+        else if (Kotlin.equals(hash[1], 'spinner'))
+          divContainer.fade_5f0h2k$(_.complex.createSpinner());
       };
     },
-    f_7: function (divContainer) {
+    f_8: function (divContainer) {
       return function () {
         this.br();
         this.br();
         this.plus_pv6laa$(divContainer);
       };
     },
-    f_8: function (divContainer) {
+    f_9: function (divContainer) {
       return function () {
-        this.div_5rsex9$(void 0, void 0, _.f_7(divContainer));
+        this.div_5rsex9$(void 0, void 0, _.f_8(divContainer));
       };
     },
-    f_9: function () {
+    f_10: function () {
       this.plus_pdl1w0$('Contact: ');
     },
-    f_10: function () {
+    f_11: function () {
       this.plus_pdl1w0$('jan.kovar79@gmail.com');
     },
-    f_11: function () {
-      this.emph_mfnzi$(_.f_9);
-      this.a_b4th6h$(void 0, 'mailto:jan.kovar79@gmail.com', void 0, _.f_10);
-    },
     f_12: function () {
-      this.small_mfnzi$(_.f_11);
+      this.emph_mfnzi$(_.f_10);
+      this.a_b4th6h$(void 0, 'mailto:jan.kovar79@gmail.com', void 0, _.f_11);
+    },
+    f_13: function () {
+      this.small_mfnzi$(_.f_12);
       this.br();
       this.br();
     },
     main$f_2: function (navbar, divContainer) {
       return function () {
         this.topMenu_tx5hdt$(navbar);
-        this.content_mfnzi$(_.f_8(divContainer));
-        this.footer_mfnzi$(_.f_12);
+        this.content_mfnzi$(_.f_9(divContainer));
+        this.footer_mfnzi$(_.f_13);
       };
     },
     main: function (args) {
@@ -4445,6 +4624,58 @@
       }),
       masterDetail: function () {
         return (new _.complex.MasterDetail()).createDiv();
+      },
+      f: function () {
+        this.plus_pdl1w0$('Spinner');
+      },
+      f_0: function () {
+        this.h3_mfnzi$(_.complex.f);
+      },
+      f_1: function () {
+        _.net.yested.bootstrap.pageHeader_91b1uj$(this, _.complex.f_0);
+      },
+      f_2: function () {
+        this.col_6i15na$([new _.net.yested.bootstrap.Medium(12)], _.complex.f_1);
+      },
+      f_3: function () {
+        this.plus_pdl1w0$('http://fgnass.github.io/spin.js/');
+      },
+      f_4: function () {
+        this.plus_pdl1w0$('\nThis spinner is based on Spinner library:\n');
+        this.a_b4th6h$(void 0, 'http://fgnass.github.io/spin.js/', void 0, _.complex.f_3);
+        this.br();
+        this.plus_pdl1w0$('You need to include spin.js library in your html file.');
+      },
+      f_5: function () {
+        this.plus_pdl1w0$('Demo');
+      },
+      f_6: function () {
+        this.style = 'height: 200px';
+        _.net.yested.spin.spinner_oyolqv$(this, new _.net.yested.spin.SpinnerOptions(void 0, 7));
+      },
+      f_7: function () {
+        this.div_5rsex9$(void 0, void 0, _.complex.f_4);
+        this.br();
+        this.h4_mfnzi$(_.complex.f_5);
+        this.div_5rsex9$(void 0, void 0, _.complex.f_6);
+      },
+      f_8: function () {
+        this.plus_pdl1w0$('Code');
+      },
+      f_9: function () {
+        this.h4_mfnzi$(_.complex.f_8);
+        this.code_puj7f4$('kotlin', 'div {\n    style = "height: 200px"\n    spinner(SpinnerOptions(length = 7))\n}');
+      },
+      f_10: function () {
+        this.col_6i15na$([new _.net.yested.bootstrap.Medium(4)], _.complex.f_7);
+        this.col_6i15na$([new _.net.yested.bootstrap.Medium(8)], _.complex.f_9);
+      },
+      createSpinner$f: function () {
+        _.net.yested.bootstrap.row_siz32v$(this, _.complex.f_2);
+        _.net.yested.bootstrap.row_siz32v$(this, _.complex.f_10);
+      },
+      createSpinner: function () {
+        return _.net.yested.div_5rsex9$(void 0, void 0, _.complex.createSpinner$f);
       }
     }),
     gettingstarted: Kotlin.definePackage(null, /** @lends _.gettingstarted */ {
