@@ -14,10 +14,10 @@ public class Row() : ParentComponent("div") {
         setAttribute("class", "row")
     }
 
-    public fun col(vararg sizes: DeviceSize, init:HTMLParentComponent.() -> Unit) {
+    public fun col(vararg modifiers: ColumnModifier, init:HTMLParentComponent.() -> Unit) {
         add(
             Div() with {
-                clazz = sizes map {"col-${it.device.code}-${it.size}"} join(" ")
+                clazz = modifiers map {it.toString()} join(" ")
                 init()
             })
     }
