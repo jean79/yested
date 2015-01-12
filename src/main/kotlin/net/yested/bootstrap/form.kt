@@ -42,11 +42,11 @@ public class Validator<T>(val inputElement: InputElement<T>, override val errorT
 
     private val onChangeListeners: java.util.ArrayList<Function1<Boolean, Unit>> = java.util.ArrayList();
 
-    private var _listen = false;
+    private var listen = false;
 
     {
-        inputElement.addOnChangeListener { _listen = true; revalidate() }
-        inputElement.addOnChangeLiveListener { if (_listen) { revalidate() } }
+        inputElement.addOnChangeListener { listen = true; revalidate() }
+        inputElement.addOnChangeLiveListener { if (listen) { revalidate() } }
     }
 
     override fun onchange(invoke: (Boolean) -> Unit) {
