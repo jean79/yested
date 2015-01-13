@@ -31,4 +31,5 @@ fun boostrapPage():Div =
             +createDialogs()
             +createMediaObjectSection()
             +createPaginationSection()
+            +createNavbarSection()
         }

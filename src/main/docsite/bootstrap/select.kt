@@ -10,7 +10,7 @@ import net.yested.bootstrap.ButtonLook
 import net.yested.bootstrap.ButtonSize
 import net.yested.bootstrap.TextInput
 import net.yested.bootstrap.Validator
-import net.yested.bootstrap.form
+import net.yested.bootstrap.btsForm
 import net.yested.bootstrap.BtsButton
 import net.yested.bootstrap.Select
 import net.yested.Span

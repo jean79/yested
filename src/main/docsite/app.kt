@@ -16,10 +16,16 @@ import ajax.ajaxPage
 import complex.masterDetail
 import gettingstarted.gettingStartedSection
 import complex.createSpinner
+import net.yested.with
+import net.yested.bootstrap.glyphicon
+import net.yested.bootstrap.textInput
+import net.yested.ButtonType
+import net.yested.bootstrap.NavbarLook
+import net.yested.bootstrap.NavbarPosition
 
 fun main(args: Array<String>) {
 
-    val navbar = navbar {
+    val navbar = Navbar(look = NavbarLook.INVERSE, position = NavbarPosition.FIXED_TOP) with {
         brand(href = "#") { +"Yested" }
         item(href = "#/gettingstarted") { +"Getting Started" }
         dropdown(label = { +"Examples" }) {

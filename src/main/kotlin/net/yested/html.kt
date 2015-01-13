@@ -218,6 +218,7 @@ public open class HTMLParentComponent(tagName:String) : ParentComponent(tagName)
     public fun variable(init: HTMLParentComponent.() -> Unit): Unit = addTag("var", init)
     public fun samp(init: HTMLParentComponent.() -> Unit): Unit = addTag("samp", init)
     public fun blockquote(init: HTMLParentComponent.() -> Unit): Unit = addTag("blockquote", init)
+    public fun form(init: HTMLParentComponent.() -> Unit): Unit = addTag("form", init)
 
     public fun textArea(rows:Int = 3, init:HTMLParentComponent.() ->Unit): Unit =
         add(HTMLParentComponent("textarea") with {

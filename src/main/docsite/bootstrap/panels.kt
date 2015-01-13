@@ -7,7 +7,7 @@ import net.yested.bootstrap.BtsButton
 import net.yested.div
 import net.yested.bootstrap.row
 import net.yested.bootstrap.pageHeader
-import net.yested.bootstrap.form
+import net.yested.bootstrap.btsForm
 import net.yested.bootstrap.panel
 import net.yested.bootstrap.PanelStyle
 import net.yested.bootstrap.Medium

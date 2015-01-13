@@ -1,7 +1,7 @@
 package bootstrap
 
 import net.yested.div
-import net.yested.bootstrap.form
+import net.yested.bootstrap.btsForm
 import net.yested.Div
 import net.yested.bootstrap.textInput
 import net.yested.bootstrap.tabs
