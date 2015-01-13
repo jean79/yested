@@ -8,7 +8,7 @@ import net.yested.div
 import net.yested.Div
 import net.yested.bootstrap.row
 import net.yested.bootstrap.pageHeader
-import net.yested.bootstrap.form
+import net.yested.bootstrap.btsForm
 import net.yested.bootstrap.btsButton
 import net.yested.ButtonType
 import net.yested.bootstrap.ButtonLook
@@ -134,7 +134,7 @@ fun createAjaxGetSection(): Div {
         }
         row {
             col(Medium(6)) {
-                form(labelDef = "col-sm-4", inputDef = "col-sm-8") {
+                btsForm(labelDef = "col-sm-4", inputDef = "col-sm-8") {
                     item(label = { +"Location"}, validator = validator) {
                         +textInput
                     }

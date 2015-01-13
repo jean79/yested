@@ -49,15 +49,29 @@ import net.yested.Span
   </nav>
  *
  */
-public class Navbar() : ParentComponent("nav") {
+
+public enum class NavbarPosition(val code:String) {
+    STATIC_TOP : NavbarPosition("static-top")
+    FIXED_TOP : NavbarPosition("fixed-top")
+    FIXED_BOTTOM : NavbarPosition("fixed-bottom")
+}
+
+public enum class NavbarLook(val code:String) {
+    DEFAULT : NavbarLook("default")
+    INVERSE : NavbarLook("inverse")
+}
+
+public class Navbar(id:String = "navbar", position: NavbarPosition? = null, look:NavbarLook = NavbarLook.DEFAULT) : ParentComponent("nav") {
 
     private val ul = UL() with { clazz = "nav navbar-nav" }
+    private val collapsible = div(id = id, clazz = "navbar-collapse collapse") { +ul }
+
     private val menuItems = ArrayList<Li>();
     private val brandLink = Anchor();
 
     {
 
-        setAttribute("class", "navbar navbar-inverse navbar-fixed-top")
+        setAttribute("class", "navbar navbar-${look.code} ${if (position != null) "navbar-${position.code}" else ""}")
         setAttribute("role", "navigation")
 
         add(
@@ -65,7 +79,7 @@ public class Navbar() : ParentComponent("nav") {
                 div(clazz = "navbar-header") {
                     + tag("button") {
                         "type".."button"; "class".."navbar-toggle collapsed";
-                        "data-toggle".."collapse"; "data-target".."#navbar"
+                        "data-toggle".."collapse"; "data-target".."#${id}"
                         "aria-expanded".."false"; "aria-controls".."navbar"
                         span(clazz = "sr-only") { + "Toogle navigation" }
                         span(clazz = "icon-bar") { }
@@ -74,9 +88,7 @@ public class Navbar() : ParentComponent("nav") {
                     }
                     +brandLink
                 }
-                div(id = "navbar", clazz = "navbar-collapse collapse") {
-                    +ul
-                }
+                +collapsible
             }
         )
 
@@ -122,9 +134,17 @@ public class Navbar() : ParentComponent("nav") {
         menuItems.forEach { it.clazz = "" }
     }
 
+    public fun left(init : Div.()->Unit) {
+        collapsible.add(div(clazz = "navbar-left") { init() })
+    }
+
+    public fun right(init : Div.()->Unit) {
+        collapsible.add(div(clazz = "navbar-right") { init() })
+    }
+
 }
 
-class NavBarDropdown(val deselectFun:() -> Unit, label: Anchor.()->Unit) : Li() {
+class NavBarDropdown(private val deselectFun:() -> Unit, label: Anchor.()->Unit) : Li() {
 
     private val ul = UL() with {
         "class".."dropdown-menu"
@@ -164,4 +184,6 @@ class NavBarDropdown(val deselectFun:() -> Unit, label: Anchor.()->Unit) : Li() 
 
 }
 
-fun navbar(init: Navbar.() -> Unit): Navbar = Navbar() with { init() }
+public fun HTMLParentComponent.navbar(id:String = "navbar", position: NavbarPosition? = null, look:NavbarLook = NavbarLook.DEFAULT, init: Navbar.() -> Unit):Unit {
+    add(Navbar(id = id, position = position, look = look) with { init() })
+}

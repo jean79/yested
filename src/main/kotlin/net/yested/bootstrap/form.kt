@@ -90,7 +90,7 @@ public class Form(private val labelDef:String = "col-sm-2",private val inputDef:
 
 }
 
-public fun HTMLParentComponent.form(labelDef:String = "col-sm-2", inputDef:String = "col-sm-10", init:Form.() -> Unit):Unit {
+public fun HTMLParentComponent.btsForm(labelDef:String = "col-sm-2", inputDef:String = "col-sm-10", init:Form.() -> Unit):Unit {
     val form = Form(labelDef = labelDef, inputDef = inputDef)
     form.init()
     add(form)

@@ -10,7 +10,7 @@ import net.yested.bootstrap.ButtonLook
 import net.yested.bootstrap.ButtonSize
 import net.yested.bootstrap.TextInput
 import net.yested.bootstrap.Validator
-import net.yested.bootstrap.form
+import net.yested.bootstrap.btsForm
 import net.yested.bootstrap.BtsButton
 import net.yested.bootstrap.Medium
 
@@ -45,7 +45,7 @@ Please note that validator is also attached to form item.
                 br()
                 h4 { +"Demo" }
 
-                form(labelDef = "col-sm-3", inputDef = "col-sm-9") {
+                btsForm(labelDef = "col-sm-3", inputDef = "col-sm-9") {
                     item(label = { +"Name" }, validator = validator) {
                         +textInput
                     }

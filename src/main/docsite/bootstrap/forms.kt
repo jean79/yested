@@ -7,7 +7,7 @@ import net.yested.bootstrap.tabs
 import net.yested.text
 import net.yested.bootstrap.row
 import net.yested.bootstrap.pageHeader
-import net.yested.bootstrap.form
+import net.yested.bootstrap.btsForm
 import net.yested.bootstrap.inputAddOn
 import net.yested.bootstrap.TextInput
 import net.yested.bootstrap.Medium
@@ -28,7 +28,7 @@ fun createForm(): Div {
                 }
                 br()
                 h4 { +"Demo" }
-                form(labelDef = "col-sm-4", inputDef = "col-sm-8") {
+                btsForm(labelDef = "col-sm-4", inputDef = "col-sm-8") {
                     item(label = { +"Username" }) {
                         textInput(placeholder = "Enter your username") { }
                     }
@@ -39,7 +39,7 @@ fun createForm(): Div {
             }
             col(Medium(8)) {
                 h4 { +"Code" }
-                code(lang = "kotlin", content="""form(labelDef = "col-sm-4", inputDef = "col-sm-8") {
+                code(lang = "kotlin", content="""btsForm(labelDef = "col-sm-4", inputDef = "col-sm-8") {
     item(label = { +"Username"}) {
         textInput(placeholder = "Enter your username") { }
     }

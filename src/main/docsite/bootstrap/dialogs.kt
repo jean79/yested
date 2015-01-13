@@ -12,7 +12,7 @@ import net.yested.bootstrap.BtsButton
 import net.yested.bootstrap.ButtonLook
 import net.yested.with
 import net.yested.bootstrap.Form
-import net.yested.bootstrap.form
+import net.yested.bootstrap.btsForm
 import net.yested.bootstrap.btsButton
 import net.yested.bootstrap.textInput
 import net.yested.bootstrap.Medium
@@ -24,7 +24,7 @@ fun createDialogs(): Div {
     dialog with {
         header { + "This is dialog with text input" }
         body {
-            form {
+            btsForm {
                 item(forId = "nameId", label = { + "Name" }) {
                     textInput(placeholder = "Name") { id = "nameId"}
                 }
@@ -63,7 +63,7 @@ fun createDialogs(): Div {
 dialog with {
     header { + "This is dialog with text input" }
     body {
-        form {
+        btsForm {
             item(forId = "nameId", label = { + "Name" }) {
                 textInput(placeholder = "Name") { id = "nameId"}
             }
