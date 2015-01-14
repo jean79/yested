@@ -46,11 +46,7 @@ fun main(args: Array<String>) {
 			"#html" -> divContainer.fade(htmlPage())
 			"#bootstrapComponents" -> {
 				if (hash.size() == 1) {
-					divContainer.fade(bootstrapPage()) {
-						// TODO: change it to a more type safe version, unfortunately currently I don't know how to
-						// pass a Javascript map (e.g. {target: '#bootstrapNavbar'} ) to a function.
-						js("$('body').scrollspy({ target: '#bootstrapNavbar' })")
-					}
+					divContainer.fade(bootstrapPage())
 				}
 			}
 			"#ajax" -> divContainer.fade(ajaxPage())
