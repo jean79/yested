@@ -17,7 +17,7 @@ import net.yested.bootstrap.btsButton
 import net.yested.bootstrap.textInput
 import net.yested.bootstrap.Medium
 
-fun createDialogs(): Div {
+fun createDialogs(id: String): Div {
 
     val dialog = Dialog()
 
@@ -26,7 +26,7 @@ fun createDialogs(): Div {
         body {
             btsForm {
                 item(forId = "nameId", label = { + "Name" }) {
-                    textInput(placeholder = "Name") { id = "nameId"}
+                    textInput(placeholder = "Name") { this.id = "nameId"}
                 }
             }
         }
@@ -41,6 +41,7 @@ fun createDialogs(): Div {
     }
 
     return div {
+        this.id = id
         row {
             col(Medium(12)) {
                 pageHeader { h3 { +"Dialogs" } }

@@ -12,11 +12,12 @@ import net.yested.Span
 import net.yested.bootstrap.pagination
 
 
-fun createPaginationSection(): Div {
+fun createPaginationSection(id: String): Div {
 
     val result = Span()
 
     return div {
+        this.id = id
         row {
             col(Medium(12)) {
                 pageHeader { h3 { +"Pagination" } }

@@ -35,6 +35,8 @@ public open class ParentComponent(tagName:String) : Component {
 
     override val element = document.createElement(tagName) as HTMLElement
 
+    public var id:String by Attribute()
+
     protected fun setAttribute(name:String, value:String) {
         element.setAttribute(name, value)
     }
@@ -64,7 +66,6 @@ native fun JQuery.fadeIn(duration:Int, callback:()->Unit) :Unit = noImpl;
 
 public open class HTMLParentComponent(tagName:String) : ParentComponent(tagName) {
 
-    public var id:String by Attribute()
     public var role:String by Attribute()
     public var style:String by Attribute()
 
@@ -93,11 +94,11 @@ public open class HTMLParentComponent(tagName:String) : ParentComponent(tagName)
         element.appendChild(component.element)
     }
 
-    public fun fade(component:Component) {
+    public fun fade(component:Component, callback: () -> Unit = {}) {
         jq(element).fadeOut(200) {
             element.innerHTML = ""
             element.appendChild(component.element)
-            jq(element).fadeIn(200, {})
+            jq(element).fadeIn(200, callback)
         }
     }
 

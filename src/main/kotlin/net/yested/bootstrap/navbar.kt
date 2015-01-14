@@ -61,7 +61,7 @@ public enum class NavbarLook(val code:String) {
     INVERSE : NavbarLook("inverse")
 }
 
-public class Navbar(id:String = "navbar", position: NavbarPosition? = null, look:NavbarLook = NavbarLook.DEFAULT) : ParentComponent("nav") {
+public class Navbar(id:String, position: NavbarPosition? = null, look:NavbarLook = NavbarLook.DEFAULT) : ParentComponent("nav") {
 
     private val ul = UL() with { clazz = "nav navbar-nav" }
     private val collapsible = div(id = id, clazz = "navbar-collapse collapse") { +ul }
@@ -184,6 +184,6 @@ class NavBarDropdown(private val deselectFun:() -> Unit, label: Anchor.()->Unit)
 
 }
 
-public fun HTMLParentComponent.navbar(id:String = "navbar", position: NavbarPosition? = null, look:NavbarLook = NavbarLook.DEFAULT, init: Navbar.() -> Unit):Unit {
+public fun HTMLParentComponent.navbar(id:String, position: NavbarPosition? = null, look:NavbarLook = NavbarLook.DEFAULT, init: Navbar.() -> Unit):Unit {
     add(Navbar(id = id, position = position, look = look) with { init() })
 }

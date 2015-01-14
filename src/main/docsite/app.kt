@@ -9,7 +9,7 @@ import net.yested.bootstrap.Navbar
 import net.yested.bootstrap.navbar
 import net.yested.registerHashChangeListener
 import net.yested.div
-import bootstrap.boostrapPage
+import bootstrap.bootstrapPage
 import basics.basicPage
 import html.htmlPage
 import ajax.ajaxPage
@@ -25,48 +25,51 @@ import net.yested.bootstrap.NavbarPosition
 
 fun main(args: Array<String>) {
 
-    val navbar = Navbar(look = NavbarLook.INVERSE, position = NavbarPosition.FIXED_TOP) with {
-        brand(href = "#") { +"Yested" }
-        item(href = "#/gettingstarted") { +"Getting Started" }
-        dropdown(label = { +"Examples" }) {
-            item(href = "#/html") { +"Basic HTML" }
-            item(href = "#/bootstrapComponents") { +"Twitter Bootstrap" }
-            item(href = "#/ajax") { +"Ajax Call" }
-            item(href = "#/masterdetail") { +"Master/Detail"}
-            item(href = "#/spinner") { +"Spinner"}
-        }
-    }
+	val navbar = Navbar(id = "appMenuBar", look = NavbarLook.INVERSE, position = NavbarPosition.FIXED_TOP) with {
+		brand(href = "#") { +"Yested" }
+		item(href = "#gettingstarted") { +"Getting Started" }
+		dropdown(label = { +"Examples" }) {
+			item(href = "#html") { +"Basic HTML" }
+			item(href = "#bootstrapComponents") { +"Twitter Bootstrap" }
+			item(href = "#ajax") { +"Ajax Call" }
+			item(href = "#masterdetail") { +"Master/Detail" }
+			item(href = "#spinner") { +"Spinner" }
+		}
+	}
 
-    val divContainer = div {}
+	val divContainer = div {}
 
-    registerHashChangeListener {
-        hash ->
-        when {
-            hash.size() == 1  -> divContainer.fade(basicPage())
-            hash.get(1) == "gettingstarted" -> divContainer.fade(gettingStartedSection())
-            hash.get(1) == "html" -> divContainer.fade(htmlPage())
-            hash.get(1) == "bootstrapComponents" -> divContainer.fade(boostrapPage())
-            hash.get(1) == "ajax" -> divContainer.fade(ajaxPage())
-            hash.get(1) == "masterdetail" -> divContainer.fade(masterDetail())
-            hash.get(1) == "spinner" -> divContainer.fade(createSpinner())
-        }
-    }
+	registerHashChangeListener { hash ->
+		when (hash.get(0)) {
+			"#", "" -> divContainer.fade(basicPage())
+			"#gettingstarted" -> divContainer.fade(gettingStartedSection())
+			"#html" -> divContainer.fade(htmlPage())
+			"#bootstrapComponents" -> {
+				if (hash.size() == 1) {
+					divContainer.fade(bootstrapPage())
+				}
+			}
+			"#ajax" -> divContainer.fade(ajaxPage())
+			"#masterdetail" -> divContainer.fade(masterDetail())
+			"#spinner" -> divContainer.fade(createSpinner())
+		}
+	}
 
-    page("page") {
-        topMenu(navbar)
-        content {
-            div {
-                br(); br();
-                +divContainer
-            }
-        }
-        footer {
-            small {
-                emph { +"Contact: " }
-                a(href = "mailto:jan.kovar79@gmail.com") { +"jan.kovar79@gmail.com" }
-            }
-            br(); br()
-        }
-    }
+	page("page") {
+		topMenu(navbar)
+		content {
+			div {
+				br(); br();
+				+divContainer
+			}
+		}
+		footer {
+			small {
+				emph { +"Contact: " }
+				a(href = "mailto:jan.kovar79@gmail.com") { +"jan.kovar79@gmail.com" }
+			}
+			br(); br()
+		}
+	}
 
 }
