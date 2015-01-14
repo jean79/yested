@@ -29,7 +29,7 @@ public trait InputElement<T> {
     fun decorate(valid:Boolean)
 }
 
-public class TextInput(placeholder:String? = null) : ParentComponent("input"), InputElement<String> {
+public class TextInput(placeholder:String? = null) : HTMLParentComponent("input"), InputElement<String> {
 
     private val onChangeListeners: ArrayList<Function0<Unit>> = ArrayList();
     private val onChangeLiveListeners: ArrayList<Function0<Unit>> = ArrayList();

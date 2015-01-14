@@ -21,7 +21,7 @@ fun <T, V : Comparable<V>> compareBy(get: (T) -> V?): (T, T) -> Int {
     return {(l, r) -> compareValues(get(l), get(r)) }
 }
 
-fun createGrid(): Div {
+fun createGrid(id: String): Div {
 
     val data = listOf(Person("Jan", 15), Person("Peter", 30), Person("Martin", 31))
 
@@ -34,6 +34,7 @@ fun createGrid(): Div {
     grid.list = data;
 
     return div {
+        this.id = id
         row {
             col(Medium(12)) {
                 pageHeader { h3 { +"Grid" } }

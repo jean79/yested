@@ -18,7 +18,7 @@ import net.yested.bootstrap.Medium
 
 data class Car(val model:String, val color:String)
 
-fun createSelectSection(): Div {
+fun createSelectSection(id: String): Div {
 
     val someData = listOf(
             Car("Ford", "Black"),
@@ -45,6 +45,7 @@ fun createSelectSection(): Div {
     }
 
     return div {
+        this.id = id
         row {
             col(Medium(12)) {
                 pageHeader { h3 { +"Select" } }
