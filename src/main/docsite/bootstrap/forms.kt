@@ -12,9 +12,10 @@ import net.yested.bootstrap.inputAddOn
 import net.yested.bootstrap.TextInput
 import net.yested.bootstrap.Medium
 
-fun createForm(): Div {
+fun createForm(id: String): Div {
 
     return div {
+        this.id = id
         row {
             col(Medium(12)) {
                 pageHeader { h3 { +"Form" } }

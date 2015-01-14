@@ -10,7 +10,7 @@ private trait JQRouter {
 native("$(window)") private var routerJQuery: JQRouter = null!!
 
 private fun getHashSplitted(): Array<String> {
-    return window.location.hash.split("/")
+    return window.location.hash.split("_")
 }
 
 public fun registerHashChangeListener(runNow:Boolean = true, listener:(Array<String>) -> Unit) {

@@ -18,9 +18,10 @@ import net.yested.bootstrap.NavbarLook
 import net.yested.bootstrap.NavbarPosition
 import net.yested.with
 
-fun createNavbarSection(): Div {
+fun createNavbarSection(id: String): Div {
 
     return div {
+        this.id = id
         row {
             col(Medium(12)) {
                 pageHeader { h3 { +"Navbar" } }
@@ -80,14 +81,14 @@ fun createNavbarSection(): Div {
             col(Medium(12)) {
                 h4 { +"Demo" }
                 navbar(id = "navbarDemo", look = NavbarLook.INVERSE) {
-                    brand(href = "#/bootstrapComponents") { glyphicon(icon = "home"); nbsp(); +"Home"  }
-                    item(href = "#/bootstrapComponents") { +"Some Link 1" }
-                    item(href = "#/bootstrapComponents", onclick = { println("clicked")}) { +"Some Link 2" }
+                    brand(href = "#bootstrapComponents") { glyphicon(icon = "home"); nbsp(); +"Home"  }
+                    item(href = "#bootstrapComponents") { +"Some Link 1" }
+                    item(href = "#bootstrapComponents", onclick = { println("clicked")}) { +"Some Link 2" }
                     dropdown(label = { +"Dropdown"}) {
-                        item(href = "#/bootstrapComponents", onclick = { println("clicked")}) { +"Link 1" }
-                        item(href = "#/bootstrapComponents", onclick = { println("clicked")}) { +"Link 2" }
+                        item(href = "#bootstrapComponents", onclick = { println("clicked")}) { +"Link 1" }
+                        item(href = "#bootstrapComponents", onclick = { println("clicked")}) { +"Link 2" }
                         divider()
-                        item(href = "#/bootstrapComponents", onclick = { println("clicked")}) { +"Link 3" }
+                        item(href = "#bootstrapComponents", onclick = { println("clicked")}) { +"Link 3" }
                     }
                     left {
                         form { "class".."navbar-form"
@@ -110,14 +111,14 @@ fun createNavbarSection(): Div {
                 h4 { +"Code" }
                 code(lang = "kotlin", content =
 """navbar(id = "navbarDemo", look = NavbarLook.INVERSE) {
-    brand(href = "#/bootstrapComponents") {glyphicon(icon = "home"); nbsp(); +" Home" }
-    item(href = "#/bootstrapComponents") { +"Some Link 1" }
-    item(href = "#/bootstrapComponents", onclick = { println("clicked")}) { +"Some Link 2" }
+    brand(href = "#bootstrapComponents") {glyphicon(icon = "home"); nbsp(); +" Home" }
+    item(href = "#bootstrapComponents") { +"Some Link 1" }
+    item(href = "#bootstrapComponents", onclick = { println("clicked")}) { +"Some Link 2" }
     dropdown(label = { +"Dropdown"}) {
-        item(href = "#/bootstrapComponents", onclick = { println("clicked")}) { +"Link 1" }
-        item(href = "#/bootstrapComponents", onclick = { println("clicked")}) { +"Link 2" }
+        item(href = "#bootstrapComponents", onclick = { println("clicked")}) { +"Link 1" }
+        item(href = "#bootstrapComponents", onclick = { println("clicked")}) { +"Link 2" }
         divider()
-        item(href = "#/bootstrapComponents", onclick = { println("clicked")}) { +"Link 3" }
+        item(href = "#bootstrapComponents", onclick = { println("clicked")}) { +"Link 3" }
     }
     left {
         form { "class".."navbar-form"

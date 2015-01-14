@@ -93,11 +93,11 @@ public open class HTMLParentComponent(tagName:String) : ParentComponent(tagName)
         element.appendChild(component.element)
     }
 
-    public fun fade(component:Component) {
+    public fun fade(component:Component, callback: () -> Unit = {}) {
         jq(element).fadeOut(200) {
             element.innerHTML = ""
             element.appendChild(component.element)
-            jq(element).fadeIn(200, {})
+            jq(element).fadeIn(200, callback)
         }
     }
 

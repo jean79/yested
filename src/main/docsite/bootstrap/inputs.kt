@@ -14,7 +14,7 @@ import net.yested.bootstrap.btsForm
 import net.yested.bootstrap.BtsButton
 import net.yested.bootstrap.Medium
 
-fun createInputs(): Div {
+fun createInputs(id: String): Div {
 
     val textInput = TextInput(placeholder = "Mandatory field")
 
@@ -29,6 +29,7 @@ fun createInputs(): Div {
     val button = BtsButton(label = { +"Send" }, onclick = ::submit)
 
     return div {
+        this.id = id
         row {
             col(Medium(12)) {
                 pageHeader { h3 { +"Text Input with Validation" } }

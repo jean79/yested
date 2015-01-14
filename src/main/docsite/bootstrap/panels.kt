@@ -15,9 +15,10 @@ import net.yested.bootstrap.Medium
 /**
  * Created by jean on 28.12.2014.
  */
-fun createPanelSection(): Div {
+fun createPanelSection(id: String): Div {
 
     return div {
+        this.id = id
         row {
             col(Medium(12)) {
                 pageHeader { h3 { +"Panels" } }

@@ -13,9 +13,10 @@ import net.yested.bootstrap.ButtonLook
 import net.yested.bootstrap.ButtonSize
 import net.yested.bootstrap.Medium
 
-fun createButtons(): Div {
+fun createButtons(id: String): Div {
 
     return div {
+        this.id = id
         row {
             col(Medium(12)) {
                 pageHeader { h3 { +"Buttons" } }

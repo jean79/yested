@@ -14,9 +14,10 @@ import net.yested.bootstrap.Medium
 /**
  * Created by jean on 20.12.2014.
  */
-fun createTabs(): Div {
+fun createTabs(id: String): Div {
 
     return div {
+        this.id = id
         row {
             col(Medium(12)) {
                 pageHeader { h3 { +"Tabs" } }

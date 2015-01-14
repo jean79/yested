@@ -17,9 +17,10 @@ import net.yested.bootstrap.mediaObject
 import net.yested.bootstrap.MediaAlign
 import net.yested.replace
 
-fun createMediaObjectSection(): Div {
+fun createMediaObjectSection(id: String): Div {
 
 	return div {
+		this.id = id
 		row {
 			col(Medium(12)) {
 				pageHeader { h3 { +"Media Object" } }

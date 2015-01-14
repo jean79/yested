@@ -14,7 +14,7 @@ import net.yested.bootstrap.Medium
 /**
  * Created by jean on 25.12.2014.
  */
-fun buttonGroupsSection(): Div {
+fun buttonGroupsSection(id: String): Div {
 
     val span = Span()
     val btnGroup = ButtonGroup(
@@ -26,6 +26,7 @@ fun buttonGroupsSection(): Div {
                             }
 
     return div {
+        this.id = id
         row {
             col(Medium(12)) {
                 pageHeader { h3 { +"Button Group" }}
