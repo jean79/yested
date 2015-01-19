@@ -3,16 +3,16 @@
  */
 package net.yested.bootstrap
 
-import net.yested.ParentComponent
 import net.yested.UL
 import net.yested.Div
-import net.yested.HTMLParentComponent
+import net.yested.ComponentContainer
 import net.yested.Li
 import net.yested.Anchor
 import net.yested.with
 import java.util.HashMap
 import java.util.ArrayList
 import net.yested.div
+import net.yested.HTMLComponent
 
 /**
  * <div role="tabpanel">
@@ -29,13 +29,13 @@ import net.yested.div
     </div>
 </div>
  */
-public class Tabs : ParentComponent("div") {
+public class Tabs : HTMLComponent("div") {
 
     private val bar = UL() with { role = "tablist"; clazz = "nav nav-tabs"}
 
     private val content = Div() with { clazz = "tab-content"}
 
-    private val anchorsLi = java.util.ArrayList<HTMLParentComponent>();
+    private val anchorsLi = java.util.ArrayList<ComponentContainer>();
 
     private val tabsRendered = HashMap<Int, Div>()
 
@@ -44,12 +44,12 @@ public class Tabs : ParentComponent("div") {
     {
         element.setAttribute("role", "tabpanel")
 
-        add(bar)
-        add(content)
+        appendChild(bar)
+        appendChild(content)
 
     }
 
-    private fun renderContent(tabId:Int, init:HTMLParentComponent.()->Unit):Div =
+    private fun renderContent(tabId:Int, init: ComponentContainer.()->Unit):Div =
         if (tabsRendered.containsKey(tabId)) {
             tabsRendered.get(tabId)!!
         } else {
@@ -61,7 +61,7 @@ public class Tabs : ParentComponent("div") {
             div
         }
 
-    private fun activateTab(li:Li, tabId:Int, onSelect:Function0<Unit>?, init:HTMLParentComponent.()->Unit) {
+    private fun activateTab(li:Li, tabId:Int, onSelect:Function0<Unit>?, init: ComponentContainer.()->Unit) {
 
         li.clazz = "active"
 
@@ -74,7 +74,7 @@ public class Tabs : ParentComponent("div") {
         }
     }
 
-    public fun tab(active:Boolean = false, header:HTMLParentComponent.()->Unit, onSelect:Function0<Unit>? = null, init:HTMLParentComponent.()->Unit) {
+    public fun tab(active:Boolean = false, header: ComponentContainer.()->Unit, onSelect:Function0<Unit>? = null, init: ComponentContainer.()->Unit) {
 
         val tabId = index++;
 
@@ -90,7 +90,7 @@ public class Tabs : ParentComponent("div") {
             activateTab(li, tabId, onSelect, init)
         }
 
-        bar.add(li)
+        bar.appendChild(li)
         anchorsLi.add(li)
 
         if (active) {
@@ -101,8 +101,8 @@ public class Tabs : ParentComponent("div") {
 
 }
 
-public fun HTMLParentComponent.tabs(init:Tabs.() -> Unit): Unit {
+public fun ComponentContainer.tabs(init:Tabs.() -> Unit): Unit {
     val tabs = Tabs()
     tabs.init()
-    add(tabs)
+    appendChild(tabs)
 }

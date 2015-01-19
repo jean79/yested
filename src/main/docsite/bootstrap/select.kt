@@ -30,14 +30,14 @@ fun createSelectSection(id: String): Div {
     val singleSelect = Select<Car>(renderer = { "${it.model} (${it.color})" })
     singleSelect.data = someData
     singleSelect.addOnChangeListener {
-        resultSingleSelect.replace( "Selected: ${singleSelect.selectedItems.first().model}")
+        resultSingleSelect.setContent( "Selected: ${singleSelect.selectedItems.first().model}")
     }
 
     val resultMultiSelect = Div()
     val multiSelect = Select<Car>(multiple = true, size = 4, renderer = { "${it.model} (${it.color})" })
     multiSelect.data = someData
     multiSelect.addOnChangeListener {
-        resultMultiSelect.replace( "Selected: " + multiSelect.selectedItems.map { "${it.model}" }.join(" and "))
+        resultMultiSelect.setContent( "Selected: " + multiSelect.selectedItems.map { "${it.model}" }.join(" and "))
     }
 
     val btn = BtsButton(label = { +"Select Skoda and Ford" }) {

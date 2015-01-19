@@ -9,9 +9,8 @@ import net.yested.bootstrap.Medium
 import jquery.jq
 import jquery.JQuery
 import net.yested.bootstrap.navbar
-import net.yested.ParentComponent
 import net.yested.with
-import net.yested.HTMLParentComponent
+import net.yested.ComponentContainer
 import net.yested.bootstrap.enableScrollSpy
 
 
