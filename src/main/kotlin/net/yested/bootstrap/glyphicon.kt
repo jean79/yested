@@ -2,6 +2,7 @@ package net.yested.bootstrap
 
 import net.yested.Span
 import net.yested.HTMLParentComponent
+import net.yested.with
 
 public class Glyphicon(icon:String) : Span() {
     {
@@ -9,8 +10,6 @@ public class Glyphicon(icon:String) : Span() {
     }
 }
 
-public fun HTMLParentComponent.glyphicon(icon:String): Glyphicon {
-    val glyphicon = Glyphicon(icon = icon)
-    add(glyphicon)
-    return glyphicon
+public fun HTMLParentComponent.glyphicon(icon:String): Unit {
+    +Glyphicon(icon = icon)
 }

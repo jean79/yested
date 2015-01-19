@@ -4,12 +4,15 @@
 package net.yested.bootstrap
 
 import net.yested.HTMLParentComponent
-import net.yested.ParentComponent
-import net.yested.thead
-import net.yested.tbody
 import java.util.ArrayList
 import net.yested.Span
 import net.yested.with
+import net.yested.Component
+import kotlin.js.dom.html.HTMLElement
+import net.yested.createElement
+import net.yested.add
+import net.yested.THead
+import net.yested.TBody
 
 public data class Column<T>(
         val label:HTMLParentComponent.() -> Unit,
@@ -25,7 +28,7 @@ public class ColumnHeader<T>(val column:Column<T>, sortFunction:(Column<T>) -> U
     var arrowPlaceholder = Span();
 
     {
-        setAttribute("style", "cursor: pointer;")
+        element.setAttribute("style", "cursor: pointer;")
 
         column.label()
         +arrowPlaceholder
@@ -46,7 +49,9 @@ public class ColumnHeader<T>(val column:Column<T>, sortFunction:(Column<T>) -> U
 
 }
 
-public class Grid<T>(val columns:Array<Column<T>>) : ParentComponent("table") {
+public class Grid<T>(val columns:Array<Column<T>>) : Component {
+
+    override val element = createElement("table")
 
     private var sortColumn:Column<T>? = null
     private var asc:Boolean = true;
@@ -87,8 +92,8 @@ public class Grid<T>(val columns:Array<Column<T>>) : ParentComponent("table") {
     }
 
     private fun renderHeader() {
-        add(
-            thead {
+        element.add(THead())
+             {
                 tr {
                     columnHeaders!!.forEach { columnHeader ->
                         th {
@@ -98,7 +103,6 @@ public class Grid<T>(val columns:Array<Column<T>>) : ParentComponent("table") {
                     }
                 }
             }
-        )
     }
 
     private fun sortData(toSort:List<T>):List<T> {
@@ -115,8 +119,8 @@ public class Grid<T>(val columns:Array<Column<T>>) : ParentComponent("table") {
 
             val values = if (sortColumn != null) sortData(dataList!!) else dataList!!
 
-            add(
-                tbody {
+            element.add(TBody())
+                 {
                     values.forEach { item ->
                         tr {
                             columns.forEach { column ->
@@ -126,8 +130,6 @@ public class Grid<T>(val columns:Array<Column<T>>) : ParentComponent("table") {
                         }
                     }
                 }
-
-            )
 
         }
     }

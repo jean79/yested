@@ -17,6 +17,9 @@ import net.yested.with
 import kotlin.js.dom.html.HTMLSelectElement
 import kotlin.js.dom.html.HTMLOptionElement
 import java.util.HashMap
+import net.yested.Component
+import kotlin.js.dom.html.HTMLElement
+import net.yested.createElement
 
 native trait HTMLInputElementWithOnChange : HTMLInputElement {
     public native var onchange: () -> Unit
@@ -29,7 +32,9 @@ public trait InputElement<T> {
     fun decorate(valid:Boolean)
 }
 
-public class TextInput(placeholder:String? = null) : ParentComponent("input"), InputElement<String> {
+public class TextInput(placeholder:String? = null) : Component, InputElement<String> {
+
+    override val element: HTMLElement = createElement("input")
 
     private val onChangeListeners: ArrayList<Function0<Unit>> = ArrayList();
     private val onChangeLiveListeners: ArrayList<Function0<Unit>> = ArrayList();

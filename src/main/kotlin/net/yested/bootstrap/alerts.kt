@@ -31,5 +31,4 @@ public class Alert(style: AlertStyle) : Div() {
 }
 
 fun HTMLParentComponent.alert(style: AlertStyle, init:Alert.() -> Unit) =
-    add(
-            Alert(style = style) with { init() } )
+    +(Alert(style = style) with { init() } )
