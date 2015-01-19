@@ -59,7 +59,6 @@ fun main(args: Array<String>) {
 		topMenu(navbar)
 		content {
 			div {
-				+"Ahoj"
 				br(); br();
 				+divContainer
 			}
