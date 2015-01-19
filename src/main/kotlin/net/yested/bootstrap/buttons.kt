@@ -1,10 +1,10 @@
 package net.yested.bootstrap
 
-import net.yested.ParentComponent
-import net.yested.HTMLParentComponent
+import net.yested.ComponentContainer
 import net.yested.ButtonType
 import net.yested.Button
 import net.yested.Anchor
+import net.yested.HTMLComponentContainer
 
 public enum class ButtonLook(val code:String) {
     DEFAULT: ButtonLook("default")
@@ -24,11 +24,11 @@ public enum class ButtonSize(val code:String) {
 }
 
 public class BtsButton(type: ButtonType = ButtonType.BUTTON,
-             label:HTMLParentComponent.()-> Unit,
+             label: ComponentContainer.()-> Unit,
              val look:ButtonLook = ButtonLook.DEFAULT,
              val size:ButtonSize = ButtonSize.DEFAULT,
              val block:Boolean = false,
-             onclick:() -> Unit ) :  HTMLParentComponent("button") {
+             onclick:() -> Unit ) :  HTMLComponentContainer("button") {
 
     private var buttonActive:Boolean = false
 
@@ -70,23 +70,23 @@ public class BtsAnchor(href:String,
 
 }
 
-public fun HTMLParentComponent.btsButton(type: ButtonType = ButtonType.BUTTON,
-                                   label:HTMLParentComponent.()-> Unit,
+public fun ComponentContainer.btsButton(type: ButtonType = ButtonType.BUTTON,
+                                   label: ComponentContainer.()-> Unit,
                                    look:ButtonLook = ButtonLook.DEFAULT,
                                    size:ButtonSize = ButtonSize.DEFAULT,
                                    block:Boolean = false,
                                    onclick:() -> Unit):Unit {
     val btn = BtsButton(type = type, label = label, look = look, size = size, block = block, onclick = onclick)
-    this.add(btn)
+    this.appendChild(btn)
 }
 
-public fun HTMLParentComponent.btsAnchor(href:String,
+public fun ComponentContainer.btsAnchor(href:String,
                                   look:ButtonLook = ButtonLook.DEFAULT,
                                   size:ButtonSize = ButtonSize.DEFAULT,
                                   block:Boolean = false,
                                   init:Anchor.() -> Unit):Unit {
     val btn = BtsAnchor(href = href, look = look, size = size, block = block)
     btn.init()
-    add(btn)
+    appendChild(btn)
 }
 

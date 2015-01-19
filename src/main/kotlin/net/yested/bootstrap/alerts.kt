@@ -1,6 +1,6 @@
 package net.yested.bootstrap
 
-import net.yested.HTMLParentComponent
+import net.yested.ComponentContainer
 import net.yested.Div
 import net.yested.div
 import net.yested.Anchor
@@ -30,6 +30,5 @@ public class Alert(style: AlertStyle) : Div() {
 
 }
 
-fun HTMLParentComponent.alert(style: AlertStyle, init:Alert.() -> Unit) =
-    add(
-            Alert(style = style) with { init() } )
+fun ComponentContainer.alert(style: AlertStyle, init:Alert.() -> Unit) =
+    appendChild(Alert(style = style) with { init() } )

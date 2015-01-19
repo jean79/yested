@@ -3,17 +3,17 @@
  */
 package net.yested.bootstrap
 
-import net.yested.HTMLParentComponent
-import net.yested.ParentComponent
+import net.yested.ComponentContainer
 import net.yested.thead
 import net.yested.tbody
 import java.util.ArrayList
 import net.yested.Span
 import net.yested.with
+import net.yested.HTMLComponent
 
 public data class Column<T>(
-        val label:HTMLParentComponent.() -> Unit,
-        val render:HTMLParentComponent.(T) -> Unit,
+        val label: ComponentContainer.() -> Unit,
+        val render: ComponentContainer.(T) -> Unit,
         val sortFunction:(T, T) -> Int,
         val align:Align = Align.LEFT,
         val defaultSort:Boolean = false,
@@ -36,17 +36,17 @@ public class ColumnHeader<T>(val column:Column<T>, sortFunction:(Column<T>) -> U
 
     }
 
-    fun updateSorting(sorteByColumn:Column<T>?, sortAscending:Boolean) {
-        if (sorteByColumn != column) {
-            arrowPlaceholder.replace("")
+    fun updateSorting(sortedByColumn:Column<T>?, sortAscending:Boolean) {
+        if (sortedByColumn != column) {
+            arrowPlaceholder.setContent("")
         } else {
-            arrowPlaceholder.replace( glyphicon("arrow-${if (sortAscending) "up" else "down"}"))
+            arrowPlaceholder.setChild( glyphicon("arrow-${if (sortAscending) "up" else "down"}"))
         }
     }
 
 }
 
-public class Grid<T>(val columns:Array<Column<T>>) : ParentComponent("table") {
+public class Grid<T>(val columns:Array<Column<T>>) : HTMLComponent("table") {
 
     private var sortColumn:Column<T>? = null
     private var asc:Boolean = true;
@@ -87,7 +87,7 @@ public class Grid<T>(val columns:Array<Column<T>>) : ParentComponent("table") {
     }
 
     private fun renderHeader() {
-        add(
+        appendChild(
             thead {
                 tr {
                     columnHeaders!!.forEach { columnHeader ->
@@ -115,18 +115,19 @@ public class Grid<T>(val columns:Array<Column<T>>) : ParentComponent("table") {
 
             val values = if (sortColumn != null) sortData(dataList!!) else dataList!!
 
-            add(
+            appendChild(
                 tbody {
                     values.forEach { item ->
                         tr {
                             columns.forEach { column ->
                                 td {
                                     "class" .. "text-${column.align.code}";
-                                    column.render(item) } }
+                                    column.render(item)
+                                }
+                            }
                         }
                     }
                 }
-
             )
 
         }

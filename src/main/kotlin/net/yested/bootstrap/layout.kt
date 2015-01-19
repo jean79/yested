@@ -1,21 +1,22 @@
 package net.yested.bootstrap
 
 import net.yested.Div
-import net.yested.ParentComponent
-import net.yested.HTMLParentComponent
+import net.yested.ComponentContainer
 import net.yested.with
 import net.yested.div
 import kotlin.js.dom.html.HTMLElement
 import net.yested.el
+import net.yested.HTMLComponent
+import net.yested.HTMLComponentContainer
 
-public class Row() : ParentComponent("div") {
+public class Row() : HTMLComponent("div") {
 
     {
         setAttribute("class", "row")
     }
 
-    public fun col(vararg modifiers: ColumnModifier, init:HTMLParentComponent.() -> Unit) {
-        add(
+    public fun col(vararg modifiers: ColumnModifier, init: ComponentContainer.() -> Unit) {
+        appendChild(
             Div() with {
                 clazz = modifiers map {it.toString()} join(" ")
                 init()
@@ -30,7 +31,7 @@ public class Page(val element: HTMLElement) {
         element.appendChild(navbar.element)
     }
 
-    public fun content(init: HTMLParentComponent.() -> Unit): Unit {
+    public fun content(init: ComponentContainer.() -> Unit): Unit {
         element.appendChild(
                 div {
                     "class".."container theme-showcase"
@@ -39,7 +40,7 @@ public class Page(val element: HTMLElement) {
                 }.element)
     }
 
-    public fun footer(init:HTMLParentComponent.() -> Unit): Unit {
+    public fun footer(init: ComponentContainer.() -> Unit): Unit {
         element.appendChild(
                 div {
                     div(clazz = "container") {
@@ -51,22 +52,22 @@ public class Page(val element: HTMLElement) {
 
 }
 
-public class PageHeader  : HTMLParentComponent("div") {
+public class PageHeader  : HTMLComponentContainer("div") {
     {
         clazz = "page-header"
     }
 }
 
-public fun HTMLParentComponent.pageHeader(init: HTMLParentComponent.() -> Unit) {
+public fun ComponentContainer.pageHeader(init: ComponentContainer.() -> Unit) {
     val pageHeader = PageHeader()
     pageHeader.init()
-    add(pageHeader)
+    appendChild(pageHeader)
 }
 
-public fun HTMLParentComponent.row(init:Row.()->Unit): Row {
+public fun ComponentContainer.row(init:Row.()->Unit): Row {
     val row = Row()
     row.init()
-    add(row)
+    appendChild(row)
     return row
 }
 

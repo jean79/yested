@@ -1,27 +1,24 @@
 package net.yested.bootstrap
 
-import net.yested.HTMLParentComponent
-import net.yested.ParentComponent
+import net.yested.ComponentContainer
 import net.yested.Li
 import net.yested.with
+import net.yested.HTMLComponent
 
-/**
- * Created by jean on 30.11.2014.
- */
-public class Breadcrumbs : ParentComponent("ol") {
+public class Breadcrumbs : HTMLComponent("ol") {
 
     {
         setAttribute("class", "breadcrumb")
     }
 
-    fun link(href:String? = null, onclick:Function0<Unit>? = null, init:HTMLParentComponent.() -> Unit) {
-        add(Li() with {
+    fun link(href:String? = null, onclick:Function0<Unit>? = null, init: ComponentContainer.() -> Unit) {
+        appendChild(Li() with {
             a(href = href, onclick = onclick, init = init)
         })
     }
 
-    fun selected(init: HTMLParentComponent.() -> Unit) {
-        add(Li() with {
+    fun selected(init: ComponentContainer.() -> Unit) {
+        appendChild(Li() with {
             clazz = "active"
             init()
         })
@@ -29,9 +26,9 @@ public class Breadcrumbs : ParentComponent("ol") {
 
 }
 
-public fun HTMLParentComponent.breadcrumbs(init: Breadcrumbs.() -> Unit): Breadcrumbs {
+public fun ComponentContainer.breadcrumbs(init: Breadcrumbs.() -> Unit): Breadcrumbs {
     val breadcrumbs = Breadcrumbs()
     breadcrumbs.init()
-    this.add(breadcrumbs)
+    this.appendChild(breadcrumbs)
     return breadcrumbs
 }

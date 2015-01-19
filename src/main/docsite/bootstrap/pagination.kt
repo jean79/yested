@@ -32,7 +32,7 @@ Pagination from Bootstrap.
                 }
                 br()
                 h4 { +"Demo" }
-                pagination(count = 6, defaultSelection = 2) { result.replace("Selected: ${it}")}
+                pagination(count = 6, defaultSelection = 2) { result.setContent("Selected: ${it}")}
                 +result
 
             }
