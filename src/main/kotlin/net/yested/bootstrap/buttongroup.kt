@@ -1,12 +1,12 @@
 package net.yested.bootstrap
 
-import net.yested.ParentComponent
 import java.util.ArrayList
 import java.util.HashMap
-import net.yested.HTMLParentComponent
+import net.yested.HTMLComponent
 import net.yested.Component
 import kotlin.js.dom.html.HTMLElement
 import net.yested.createElement
+import net.yested.appendComponent
 
 /**
  * Created by jean on 24.12.2014.
@@ -43,11 +43,11 @@ public class ButtonGroup(val size: ButtonSize = ButtonSize.DEFAULT, val onSelect
         }
     }
 
-    public fun button(value:String, look: ButtonLook = ButtonLook.DEFAULT, label : HTMLParentComponent.() -> Unit) {
+    public fun button(value:String, look: ButtonLook = ButtonLook.DEFAULT, label : HTMLComponent.() -> Unit) {
         val button = BtsButton(label = label, look = look, size = size) {
             select(value)
         }
-        element.appendChild(button)
+        element.appendComponent(button)
         buttons.put(value, button)
     }
 

@@ -98,7 +98,7 @@ fun createAjaxGetSection(): Div {
                                 content { emph { +"${weatherData.main!!.temp}"} }
                             })
                 } else {
-                    temperatureSpan.replace( Alert(style = AlertStyle.DANGER) with { +"Location not found" })
+                    temperatureSpan.fade( Alert(style = AlertStyle.DANGER) with { +"Location not found" })
                 }
             }
         }

@@ -11,13 +11,13 @@ import jquery.jq
 import jquery.JQuery
 import org.w3c.dom.Element
 
-public class Attribute {
+public class Attribute(val attributeName:String? = null) {
 
     public fun get(thisRef: Component?, prop: PropertyMetadata):String =
-            thisRef!!.element.getAttribute(prop.name)
+            thisRef!!.element.getAttribute(attributeName ?: prop.name)
 
     public fun set(thisRef: Component?, prop: PropertyMetadata, value: String):Unit =
-            thisRef!!.element.setAttribute(prop.name, value)
+            thisRef!!.element.setAttribute(attributeName ?: prop.name, value)
 
 }
 
@@ -27,56 +27,28 @@ public trait Component {
 
 public fun createElement(name:String): HTMLElement = document.createElement(name) as HTMLElement
 
-public fun HTMLElement.appendChild(component:Component):Unit {
+public fun HTMLElement.appendComponent(component:Component):Unit {
     this.appendChild(component.element)
 }
 
-/*public open class ParentComponent(tagName:String) : Component {
-
-    override val element = document.createElement(tagName) as HTMLElement
-
-    public var id:String by Attribute()
-
-    protected fun setAttribute(name:String, value:String) {
-        element.setAttribute(name, value)
+public fun HTMLElement.removeChildByName(childElementName:String) {
+    val child = this.getElementsByTagName(childElementName).first;
+    if (child != null) {
+        this.removeChild(child)
     }
-
-    protected fun getAttribute(name:String):String =
-        element.getAttribute(name)
-
-    open protected fun add(component:Component) {
-        element.appendChild(component.element)
-    }
-
-    open protected fun add(text:String) {
-        element.innerHTML += text
-    }
-
-    protected fun removeChild(childElementName:String) {
-        val child = element.getElementsByTagName(childElementName).first;
-        if (child != null) {
-            element.removeChild(child)
-        }
-    }
-
-}*/
+}
 
 native fun JQuery.fadeOut(duration:Int, callback:()->Unit) :Unit = noImpl;
 native fun JQuery.fadeIn(duration:Int, callback:()->Unit) :Unit = noImpl;
 
-public open class HTMLParentComponent(tagName:String) : Component {
+public open class HTMLComponent(tagName:String) : Component {
 
     override public var element = createElement(tagName)
 
     public var role:String by Attribute()
     public var style:String by Attribute()
     public var id:String by Attribute()
-
-    public var clazz:String
-        get() = element.getAttribute("class")
-        set(value) {
-            element.setAttribute("class", value)
-        }
+    public var clazz:String by Attribute("class")
 
     public fun String.rangeTo(value:String):Unit = element.setAttribute(this, value)
 
@@ -85,14 +57,18 @@ public open class HTMLParentComponent(tagName:String) : Component {
     }
 
     public fun Component.plus() {
-        element.appendChild(this)
+        appendChild(this)
     }
 
-    public fun replace(text:String) {
+    public fun appendChild(component: Component) {
+        element.appendComponent(component)
+    }
+
+    public fun setContent(text:String) {
         element.innerHTML = text
     }
 
-    public fun replace(component:Component) {
+    public fun setChild(component:Component) {
         element.innerHTML = ""
         element.appendChild(component.element)
     }
@@ -122,7 +98,7 @@ public open class HTMLParentComponent(tagName:String) : Component {
         }
         if (clazz != null) { anchor.clazz = clazz }
         anchor.init()
-        element.appendChild(anchor)
+        element.appendComponent(anchor)
     }
 
     public fun div(id:String? = null, clazz:String = "", init:Div.() -> Unit):Div {
@@ -130,7 +106,7 @@ public open class HTMLParentComponent(tagName:String) : Component {
         div.init()
         div.clazz = clazz
         if (id != null) { div.id = id }
-        element.appendChild(div)
+        element.appendComponent(div)
         return div
     }
 
@@ -138,7 +114,7 @@ public open class HTMLParentComponent(tagName:String) : Component {
         val span = Span()
         span.init()
         clazz?.let { span.clazz = clazz!! }
-        element.appendChild(span)
+        element.appendComponent(span)
         return span
     }
 
@@ -153,18 +129,15 @@ public open class HTMLParentComponent(tagName:String) : Component {
         +(P() with { init() })
     }
 
-    public fun tag(tagName:String, init: HTMLParentComponent.() -> Unit): HTMLParentComponent {
-        val tag = HTMLParentComponent(tagName)
-        tag.init()
-        +tag
-        return tag
+    public fun tag(tagName:String, init: HTMLComponent.() -> Unit): Unit {
+        +(HTMLComponent(tagName) with { init() } )
     }
 
     public fun table(init:Table.() -> Unit) {
         +(Table() with { init() })
     }
 
-    public fun button(label:HTMLParentComponent.() -> Unit, type: ButtonType = ButtonType.BUTTON, onclick:() -> Unit) {
+    public fun button(label: HTMLComponent.() -> Unit, type: ButtonType = ButtonType.BUTTON, onclick:() -> Unit) {
         +(Button(type = type) with {
             label()
             element.onclick = onclick
@@ -172,11 +145,11 @@ public open class HTMLParentComponent(tagName:String) : Component {
     }
 
     public fun code(lang:String? = "javascript", content : String) {
-        +(tag("pre") {
+        tag("pre") {
             tag("code") {
                 +printMarkup(content)
             }
-        })
+        }
     }
 
     public fun ul(init:UL.() -> Unit): Unit =
@@ -194,49 +167,46 @@ public open class HTMLParentComponent(tagName:String) : Component {
             +("&nbsp;")
         }
 
-    public fun addTag(tagName:String, init: HTMLParentComponent.() -> Unit): Unit
-            = +( tag(tagName) { init() })
+    public fun h1(init: HTMLComponent.() -> Unit): Unit = tag("h1", init)
+    public fun h2(init: HTMLComponent.() -> Unit): Unit = tag("h2", init)
+    public fun h3(init: HTMLComponent.() -> Unit): Unit = tag("h3", init)
+    public fun h4(init: HTMLComponent.() -> Unit): Unit = tag("h4", init)
+    public fun h5(init: HTMLComponent.() -> Unit): Unit = tag("h5", init)
 
-    public fun h1(init: HTMLParentComponent.() -> Unit): Unit = addTag("h1", init)
-    public fun h2(init: HTMLParentComponent.() -> Unit): Unit = addTag("h2", init)
-    public fun h3(init: HTMLParentComponent.() -> Unit): Unit = addTag("h3", init)
-    public fun h4(init: HTMLParentComponent.() -> Unit): Unit = addTag("h4", init)
-    public fun h5(init: HTMLParentComponent.() -> Unit): Unit = addTag("h5", init)
+    public fun emph(init: HTMLComponent.() -> Unit): Unit = tag("strong", init)
+    public fun small(init: HTMLComponent.() -> Unit): Unit = tag("small", init)
+    public fun mark(init: HTMLComponent.() -> Unit): Unit = tag("mark", init)
+    public fun del(init: HTMLComponent.() -> Unit): Unit = tag("del", init)
+    public fun s(init: HTMLComponent.() -> Unit): Unit = tag("s", init)
+    public fun ins(init: HTMLComponent.() -> Unit): Unit = tag("ins", init)
+    public fun u(init: HTMLComponent.() -> Unit): Unit = tag("u", init)
+    public fun strong(init: HTMLComponent.() -> Unit): Unit = tag("strong", init)
+    public fun em(init: HTMLComponent.() -> Unit): Unit = tag("em", init)
+    public fun b(init: HTMLComponent.() -> Unit): Unit = tag("b", init)
+    public fun i(init: HTMLComponent.() -> Unit): Unit = tag("i", init)
+    public fun kbd(init: HTMLComponent.() -> Unit): Unit = tag("kbd", init)
+    public fun variable(init: HTMLComponent.() -> Unit): Unit = tag("var", init)
+    public fun samp(init: HTMLComponent.() -> Unit): Unit = tag("samp", init)
+    public fun blockquote(init: HTMLComponent.() -> Unit): Unit = tag("blockquote", init)
+    public fun form(init: HTMLComponent.() -> Unit): Unit = tag("form", init)
 
-    public fun emph(init:HTMLParentComponent.() -> Unit): Unit = addTag("strong", init)
-    public fun small(init: HTMLParentComponent.() -> Unit): Unit = addTag("small", init)
-    public fun mark(init: HTMLParentComponent.() -> Unit): Unit = addTag("mark", init)
-    public fun del(init: HTMLParentComponent.() -> Unit): Unit = addTag("del", init)
-    public fun s(init: HTMLParentComponent.() -> Unit): Unit = addTag("s", init)
-    public fun ins(init: HTMLParentComponent.() -> Unit): Unit = addTag("ins", init)
-    public fun u(init: HTMLParentComponent.() -> Unit): Unit = addTag("u", init)
-    public fun strong(init: HTMLParentComponent.() -> Unit): Unit = addTag("strong", init)
-    public fun em(init: HTMLParentComponent.() -> Unit): Unit = addTag("em", init)
-    public fun b(init: HTMLParentComponent.() -> Unit): Unit = addTag("b", init)
-    public fun i(init: HTMLParentComponent.() -> Unit): Unit = addTag("i", init)
-    public fun kbd(init: HTMLParentComponent.() -> Unit): Unit = addTag("kbd", init)
-    public fun variable(init: HTMLParentComponent.() -> Unit): Unit = addTag("var", init)
-    public fun samp(init: HTMLParentComponent.() -> Unit): Unit = addTag("samp", init)
-    public fun blockquote(init: HTMLParentComponent.() -> Unit): Unit = addTag("blockquote", init)
-    public fun form(init: HTMLParentComponent.() -> Unit): Unit = addTag("form", init)
-
-    public fun textArea(rows:Int = 3, init:HTMLParentComponent.() ->Unit): Unit =
-        +(HTMLParentComponent("textarea") with {
+    public fun textArea(rows:Int = 3, init: HTMLComponent.() ->Unit): Unit =
+        +(HTMLComponent("textarea") with {
                 element.setAttribute("rows", rows.toString())
                 init()
             })
 
-    public fun abbr(title:String, init: HTMLParentComponent.() -> Unit): Unit {
-        +(HTMLParentComponent("abbr") with {
+    public fun abbr(title:String, init: HTMLComponent.() -> Unit): Unit {
+        +(HTMLComponent("abbr") with {
             element.setAttribute("title", title)
             init()
         })
     }
 
-    public fun br(): Unit = addTag("br") { }
+    public fun br(): Unit = tag("br") { }
 
-    public fun label(forId:String? = null, clazz:String? = null, init:HTMLParentComponent.() -> Unit):HTMLParentComponent {
-        val l = HTMLParentComponent("label") with {
+    public fun label(forId:String? = null, clazz:String? = null, init: HTMLComponent.() -> Unit): HTMLComponent {
+        val l = HTMLComponent("label") with {
             forId?.let { "for"..forId!! }
             clazz?.let { "class"..clazz!! }
             init()
@@ -247,10 +217,6 @@ public open class HTMLParentComponent(tagName:String) : Component {
 
 }
 
-fun <T:Component> HTMLElement.add(component:T, init:T.() -> Unit) {
-    this.appendChild(component with init)
-}
-
 public class Table : Component {
 
     override public var element = createElement("table")
@@ -258,11 +224,11 @@ public class Table : Component {
     public var border:String by Attribute()
 
     public fun thead(init:THead.() -> Unit) {
-        element.add(THead(), init)
+        element.appendComponent(THead() with { init() })
     }
 
     public fun tbody(init:TBody.() -> Unit) {
-        element.add(TBody(), init)
+        element.appendComponent(TBody() with { init() })
     }
 
 }
@@ -272,7 +238,7 @@ public class THead : Component {
     override public var element = createElement("thead")
 
     public fun tr(init:TRHead.() -> Unit) {
-        element.add(TRHead(), init)
+        element.appendComponent(TRHead() with  { init() })
     }
 
 }
@@ -282,17 +248,17 @@ public class TBody : Component {
     override public var element = createElement("tbody")
 
     public fun tr(init:TRBody.() -> Unit) {
-        element.add(TRBody(), init)
+        element.appendComponent(TRBody() with  { init() })
     }
 
 }
 
 public class TRHead : Component {
 
-    override public var element = createElement("thead")
+    override public var element = createElement("tr")
 
-    public fun th(init:HTMLParentComponent.() -> Unit):Unit {
-        element.add(HTMLParentComponent("th"), init)
+    public fun th(init: HTMLComponent.() -> Unit):Unit {
+        element.appendComponent(HTMLComponent("th") with  { init() })
     }
 
 }
@@ -301,33 +267,33 @@ public class TRBody : Component {
 
     override public var element = createElement("tr")
 
-    public fun td(init:HTMLParentComponent.() -> Unit) {
-        element.add(HTMLParentComponent("td"), init)
+    public fun td(init: HTMLComponent.() -> Unit) {
+        element.appendComponent(HTMLComponent("td") with  { init() })
     }
 
 }
 
-public class OL : HTMLParentComponent("ol") {
+public class OL : HTMLComponent("ol") {
 
     public fun li(init:Li.() -> Unit):Unit {
-        +( Li() with init)
+        +( Li() with  { init() })
     }
 
 }
 
-public class UL : HTMLParentComponent("ul") {
+public class UL : HTMLComponent("ul") {
 
     public fun li(init:Li.() -> Unit) {
-        +( Li() with init)
+        +( Li() with  { init() })
     }
 
 }
 
-public class DL : HTMLParentComponent("dl") {
+public class DL : HTMLComponent("dl") {
 
-    public fun item(dt : HTMLParentComponent.() -> Unit, dd : HTMLParentComponent.() -> Unit) {
-        +(tag("dt", dt))
-        +(tag("dd", dd))
+    public fun item(dt : HTMLComponent.() -> Unit, dd : HTMLComponent.() -> Unit) {
+        +( HTMLComponent("dt") with { dt() } )
+        +( HTMLComponent("dd") with { dd() } )
     }
 
 }
@@ -338,7 +304,7 @@ native trait CanvasI {
     public fun getContext(id:String):Context = noImpl
 }
 
-open class Canvas(val width:Int, val height:Int) : HTMLParentComponent("canvas") {
+open class Canvas(val width:Int, val height:Int) : HTMLComponent("canvas") {
     {
         element.setAttribute("width", "${width}")
         element.setAttribute("height", "${height}")
@@ -346,9 +312,9 @@ open class Canvas(val width:Int, val height:Int) : HTMLParentComponent("canvas")
     fun getContext(id:String):Context = (element as CanvasI).getContext(id)
 }
 
-public open class Div : HTMLParentComponent("div") { }
+public class Div : HTMLComponent("div") { }
 
-public open class Span : HTMLParentComponent("span") { }
+public class Span : HTMLComponent("span") { }
 
 public enum class ButtonType(val code:String) {
     BUTTON : ButtonType("button")
@@ -356,7 +322,7 @@ public enum class ButtonType(val code:String) {
     RESET : ButtonType("reset")
 }
 
-public class Button(type:ButtonType = ButtonType.BUTTON) : HTMLParentComponent("button") {
+public class Button(type:ButtonType = ButtonType.BUTTON) : HTMLComponent("button") {
     {
         element.setAttribute("type", type.code)
     }
@@ -370,11 +336,11 @@ public class Image : Component {
 
 }
 
-public class P : HTMLParentComponent("p") { }
+public class P : HTMLComponent("p") { }
 
-public open class Li : HTMLParentComponent("li") { }
+public class Li : HTMLComponent("li") { }
 
-public open class Anchor() : HTMLParentComponent("a") {
+public class Anchor() : HTMLComponent("a") {
 
     public var href : String by Attribute()
 
@@ -391,24 +357,7 @@ public fun div(id:String? = null, clazz:String? = null, init:Div.() -> Unit):Div
     }
     return div
 }
-/*
-public fun thead(init:THead.() -> Unit):THead {
-    val thead = THead()
-    thead.init()
-    return thead
-}
 
-public fun tbody(init:TBody.() -> Unit):TBody {
-    val tbody = TBody()
-    tbody.init()
-    return tbody
-}*/
-
-public fun tag(tagName:String, init: HTMLParentComponent.() -> Unit): HTMLParentComponent =
-    HTMLParentComponent(tagName) with {
-        init()
-    }
-
-public fun text(text:String): HTMLParentComponent.() -> Unit = {
+public fun text(text:String): HTMLComponent.() -> Unit = {
     +text
 }

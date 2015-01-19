@@ -1,10 +1,11 @@
 package net.yested.bootstrap
 
-import net.yested.ParentComponent
-import net.yested.HTMLParentComponent
+import net.yested.HTMLComponent
 import net.yested.Div
 import net.yested.with
-import net.yested.bootstrap.ButtonSize
+import net.yested.Component
+import net.yested.createElement
+import net.yested.appendComponent
 
 public enum class PanelStyle(val code:String) {
     DEFAULT : PanelStyle("default")
@@ -15,35 +16,35 @@ public enum class PanelStyle(val code:String) {
     DANGER : PanelStyle("danger")
 }
 
-public class Panel(style : PanelStyle = PanelStyle.DEFAULT) : ParentComponent("div") {
+public class Panel(style : PanelStyle = PanelStyle.DEFAULT) : Component {
+
+    override public val element = createElement("div")
 
     private val heading = Div() with { clazz = "panel-heading" }
     private val body = Div() with { clazz = "panel-body" }
     private val footer = Div() with { clazz = "panel-footer" }
 
     {
-        setAttribute("class", "panel panel-${style.code}")
-        add(heading)
-        add(body)
+        element.setAttribute("class", "panel panel-${style.code}")
+        element.appendComponent(heading)
+        element.appendComponent(body)
     }
 
-    public fun heading(init: HTMLParentComponent.() -> Unit) {
+    public fun heading(init: HTMLComponent.() -> Unit) {
         heading.init()
     }
 
-    public fun content(init: HTMLParentComponent.() -> Unit) {
+    public fun content(init: HTMLComponent.() -> Unit) {
         body.init()
     }
 
-    public fun footer(init: HTMLParentComponent.() -> Unit) {
+    public fun footer(init: HTMLComponent.() -> Unit) {
         footer.init()
-        add(footer)
+        element.appendComponent(footer)
     }
 
 }
 
-public fun HTMLParentComponent.panel(style:PanelStyle = PanelStyle.DEFAULT, init:Panel.() -> Unit) {
-    val panel = Panel(style = style)
-    panel.init()
-    add(panel)
+public fun HTMLComponent.panel(style:PanelStyle = PanelStyle.DEFAULT, init:Panel.() -> Unit) {
+    + (Panel(style = style) with  { init() })
 }

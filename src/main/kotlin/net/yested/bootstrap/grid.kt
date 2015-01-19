@@ -3,26 +3,26 @@
  */
 package net.yested.bootstrap
 
-import net.yested.HTMLParentComponent
+import net.yested.HTMLComponent
 import java.util.ArrayList
 import net.yested.Span
 import net.yested.with
 import net.yested.Component
-import kotlin.js.dom.html.HTMLElement
 import net.yested.createElement
-import net.yested.add
+import net.yested.appendComponent
 import net.yested.THead
 import net.yested.TBody
+import net.yested.removeChildByName
 
 public data class Column<T>(
-        val label:HTMLParentComponent.() -> Unit,
-        val render:HTMLParentComponent.(T) -> Unit,
+        val label: HTMLComponent.() -> Unit,
+        val render: HTMLComponent.(T) -> Unit,
         val sortFunction:(T, T) -> Int,
         val align:Align = Align.LEFT,
         val defaultSort:Boolean = false,
         val defaultSortOrderAsc:Boolean = true)
 
-public class ColumnHeader<T>(val column:Column<T>, sortFunction:(Column<T>) -> Unit) : Span() {
+public class ColumnHeader<T>(val column:Column<T>, sortFunction:(Column<T>) -> Unit) : HTMLComponent("span") {
 
     var sortOrderAsc:Boolean = column.defaultSortOrderAsc
     var arrowPlaceholder = Span();
@@ -36,14 +36,13 @@ public class ColumnHeader<T>(val column:Column<T>, sortFunction:(Column<T>) -> U
         onclick = {
             sortFunction(column)
         }
-
     }
 
     fun updateSorting(sorteByColumn:Column<T>?, sortAscending:Boolean) {
         if (sorteByColumn != column) {
-            arrowPlaceholder.replace("")
+            arrowPlaceholder.setContent("")
         } else {
-            arrowPlaceholder.replace( glyphicon("arrow-${if (sortAscending) "up" else "down"}"))
+            arrowPlaceholder.setChild(Glyphicon("arrow-${if (sortAscending) "up" else "down"}"))
         }
     }
 
@@ -92,7 +91,7 @@ public class Grid<T>(val columns:Array<Column<T>>) : Component {
     }
 
     private fun renderHeader() {
-        element.add(THead())
+        element.appendComponent(THead() with
              {
                 tr {
                     columnHeaders!!.forEach { columnHeader ->
@@ -102,7 +101,7 @@ public class Grid<T>(val columns:Array<Column<T>>) : Component {
                         }
                     }
                 }
-            }
+            })
     }
 
     private fun sortData(toSort:List<T>):List<T> {
@@ -114,12 +113,12 @@ public class Grid<T>(val columns:Array<Column<T>>) : Component {
     }
 
     private fun displayData() {
-        removeChild("tbody")
+        element.removeChildByName("tbody")
         dataList?.let {
 
             val values = if (sortColumn != null) sortData(dataList!!) else dataList!!
 
-            element.add(TBody())
+            element.appendComponent(TBody() with
                  {
                     values.forEach { item ->
                         tr {
@@ -129,7 +128,7 @@ public class Grid<T>(val columns:Array<Column<T>>) : Component {
                                     column.render(item) } }
                         }
                     }
-                }
+                })
 
         }
     }

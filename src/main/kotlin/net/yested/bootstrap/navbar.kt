@@ -1,9 +1,7 @@
 package net.yested.bootstrap
 
-import net.yested.ParentComponent
 import net.yested.div
-import net.yested.HTMLParentComponent
-import net.yested.tag
+import net.yested.HTMLComponent
 import net.yested.UL
 import net.yested.Li
 import net.yested.Anchor
@@ -11,6 +9,9 @@ import java.util.ArrayList
 import net.yested.with
 import net.yested.Div
 import net.yested.Span
+import net.yested.createElement
+import net.yested.Component
+import net.yested.appendComponent
 
 /**
  * Created by jean on 24.11.2014.
@@ -61,23 +62,25 @@ public enum class NavbarLook(val code:String) {
     INVERSE : NavbarLook("inverse")
 }
 
-public class Navbar(id:String, position: NavbarPosition? = null, look:NavbarLook = NavbarLook.DEFAULT) : ParentComponent("nav") {
+public class Navbar(id:String, position: NavbarPosition? = null, look:NavbarLook = NavbarLook.DEFAULT) : Component {
+
+    override public var element = createElement("nav")
 
     private val ul = UL() with { clazz = "nav navbar-nav" }
     private val collapsible = div(id = id, clazz = "navbar-collapse collapse") { +ul }
 
-    private val menuItems = ArrayList<Li>();
+    private val menuItems = ArrayList<HTMLComponent>();
     private val brandLink = Anchor();
 
     {
 
-        setAttribute("class", "navbar navbar-${look.code} ${if (position != null) "navbar-${position.code}" else ""}")
-        setAttribute("role", "navigation")
+        element.setAttribute("class", "navbar navbar-${look.code} ${if (position != null) "navbar-${position.code}" else ""}")
+        element.setAttribute("role", "navigation")
 
-        add(
+        element.appendComponent(
             div(clazz = "container") {
                 div(clazz = "navbar-header") {
-                    + tag("button") {
+                    +(HTMLComponent("button") with {
                         "type".."button"; "class".."navbar-toggle collapsed";
                         "data-toggle".."collapse"; "data-target".."#${id}"
                         "aria-expanded".."false"; "aria-controls".."navbar"
@@ -85,7 +88,7 @@ public class Navbar(id:String, position: NavbarPosition? = null, look:NavbarLook
                         span(clazz = "icon-bar") { }
                         span(clazz = "icon-bar") { }
                         span(clazz = "icon-bar") { }
-                    }
+                    })
                     +brandLink
                 }
                 +collapsible
@@ -94,10 +97,10 @@ public class Navbar(id:String, position: NavbarPosition? = null, look:NavbarLook
 
     }
 
-    public fun brand(href:String = "/", init: HTMLParentComponent.() -> Unit):Unit {
+    public fun brand(href:String = "/", init: HTMLComponent.() -> Unit):Unit {
         brandLink.href = href
         brandLink.clazz = "navbar-brand"
-        brandLink.replace( Span() with { init() })
+        brandLink.setChild( Span() with { init() })
         brandLink.onclick = {
             deselectAll()
         }
@@ -120,13 +123,13 @@ public class Navbar(id:String, position: NavbarPosition? = null, look:NavbarLook
         li with {
             a(href = href, onclick = ::linkClicked, init = init)
         }
-        ul.add(li)
+        ul.appendChild(li)
         menuItems.add(li)
     }
 
     public fun dropdown(label: Anchor.()->Unit, init:NavBarDropdown.()->Unit):Unit {
         val dropdown = NavBarDropdown({ deselectAll() }, label) with { init() }
-        ul.add(dropdown)
+        ul.appendChild(dropdown)
         menuItems.add(dropdown)
     }
 
@@ -135,16 +138,16 @@ public class Navbar(id:String, position: NavbarPosition? = null, look:NavbarLook
     }
 
     public fun left(init : Div.()->Unit) {
-        collapsible.add(div(clazz = "navbar-left") { init() })
+        collapsible.appendChild(div(clazz = "navbar-left") { init() })
     }
 
     public fun right(init : Div.()->Unit) {
-        collapsible.add(div(clazz = "navbar-right") { init() })
+        collapsible.appendChild(div(clazz = "navbar-right") { init() })
     }
 
 }
 
-class NavBarDropdown(private val deselectFun:() -> Unit, label: Anchor.()->Unit) : Li() {
+class NavBarDropdown(private val deselectFun:() -> Unit, label: Anchor.()->Unit) : HTMLComponent("li") {
 
     private val ul = UL() with {
         "class".."dropdown-menu"
@@ -152,8 +155,8 @@ class NavBarDropdown(private val deselectFun:() -> Unit, label: Anchor.()->Unit)
     }
 
     {
-        setAttribute("class", "dropdown")
-        add(
+        element.setAttribute("class", "dropdown")
+        element.appendComponent(
                 Anchor() with {
                     "class".."dropdown-toggle"
                     "data-toggle".."dropdown"
@@ -163,27 +166,27 @@ class NavBarDropdown(private val deselectFun:() -> Unit, label: Anchor.()->Unit)
                     label()
                     span(clazz = "caret") { }
                 })
-        add(ul)
+        element.appendComponent(ul)
     }
 
     fun selectThis() {
         deselectFun();
-        setAttribute("class", "dropdown active");
+        element.setAttribute("class", "dropdown active");
     }
 
     public fun item(href:String = "#", onclick: Function0<Unit>? = null, init: Anchor.() -> Unit) {
         val li = Li() with {
             a(href = href, onclick = { selectThis(); onclick?.let { onclick() } }, init = init)
         }
-        ul.add(li)
+        ul.appendChild(li)
     }
 
     public fun divider() {
-        ul.add(tag("li", { "class".."divider" }))
+        ul.appendChild(HTMLComponent("li") with { "class".."divider" })
     }
 
 }
 
-public fun HTMLParentComponent.navbar(id:String, position: NavbarPosition? = null, look:NavbarLook = NavbarLook.DEFAULT, init: Navbar.() -> Unit):Unit {
-    add(Navbar(id = id, position = position, look = look) with { init() })
+public fun HTMLComponent.navbar(id:String, position: NavbarPosition? = null, look:NavbarLook = NavbarLook.DEFAULT, init: Navbar.() -> Unit):Unit {
+    +(Navbar(id = id, position = position, look = look) with { init() })
 }

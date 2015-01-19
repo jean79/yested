@@ -1,10 +1,13 @@
 package net.yested.bootstrap
 
-import net.yested.HTMLParentComponent
+import net.yested.HTMLComponent
 import net.yested.UL
 import net.yested.with
 import net.yested.Li
 import java.util.ArrayList
+import net.yested.createElement
+import net.yested.Component
+import net.yested.appendComponent
 
 /**
  * <nav>
@@ -15,7 +18,9 @@ import java.util.ArrayList
 </ul>
 </nav>
  */
-public class Pagination(val count:Int, val defaultSelection:Int = 1, val listener:(Int) -> Unit) : HTMLParentComponent("nav") {
+public class Pagination(val count:Int, val defaultSelection:Int = 1, val listener:(Int) -> Unit) : Component {
+
+    override public val element = createElement("nav")
 
     private var selectedItem:Int = defaultSelection
 
@@ -31,15 +36,15 @@ public class Pagination(val count:Int, val defaultSelection:Int = 1, val listene
         }
 
     {
-        add(list)
+        element.appendComponent(list)
         replaceItems()
         redisplay(selectedItem)
     }
 
     private fun replaceItems() {
         items = generateItems()
-        list.replace("")
-        items.forEach { list.add(it) }
+        list.setContent("")
+        items.forEach { list.appendChild(it) }
     }
 
     private fun generateItems(): List<Li> {
@@ -87,5 +92,5 @@ public class Pagination(val count:Int, val defaultSelection:Int = 1, val listene
 
 }
 
-public fun HTMLParentComponent.pagination(count:Int, defaultSelection:Int = 1, listener:(Int) -> Unit): Unit =
-    add( net.yested.bootstrap.Pagination(count,defaultSelection, listener) )
+public fun HTMLComponent.pagination(count:Int, defaultSelection:Int = 1, listener:(Int) -> Unit): Unit =
+    +( Pagination(count,defaultSelection, listener) )
