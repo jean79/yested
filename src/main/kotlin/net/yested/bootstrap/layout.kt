@@ -50,7 +50,8 @@ public class Page(val element: HTMLElement) {
                         tag("hr") {}
                         init()
                     }
-                }.element)
+                }.element
+        )
     }
 
 }

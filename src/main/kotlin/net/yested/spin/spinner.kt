@@ -59,8 +59,7 @@ public class Spinner(val options:SpinnerOptions = SpinnerOptions()) : Component 
         val left = options.left
     }
 
-    override val element: HTMLElement
-        get() = jsSpinnerElement
+    override val element: HTMLElement = jsSpinnerElement
 
 }
 

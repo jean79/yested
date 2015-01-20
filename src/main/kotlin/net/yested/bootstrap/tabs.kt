@@ -69,7 +69,7 @@ public class Tabs : Component {
 
         anchorsLi.filter { it != li} .forEach { it.clazz = "" }
 
-        content.fade(renderContent(tabId, init));
+        content.setContentWithFadeEffect(renderContent(tabId, init));
 
         if (onSelect != null) {
             onSelect()

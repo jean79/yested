@@ -1,6 +1,3 @@
-/**
- * Created by jean on 20.11.2014.
- */
 package net.yested
 
 import kotlin.js.dom.html.HTMLElement
@@ -57,7 +54,7 @@ public open class HTMLComponent(tagName:String) : Component {
     }
 
     public fun Component.plus() {
-        appendChild(this)
+        this@HTMLComponent.appendChild(this)
     }
 
     public fun appendChild(component: Component) {
@@ -73,10 +70,10 @@ public open class HTMLComponent(tagName:String) : Component {
         element.appendChild(component.element)
     }
 
-    public fun fade(component:Component, callback: () -> Unit = {}) {
+    public fun setContentWithFadeEffect(newContent:Component, callback: () -> Unit = {}) {
         jq(element).fadeOut(200) {
             element.innerHTML = ""
-            element.appendChild(component.element)
+            element.appendChild(newContent.element)
             jq(element).fadeIn(200, callback)
         }
     }

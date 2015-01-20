@@ -41,17 +41,17 @@ fun main(args: Array<String>) {
 
 	registerHashChangeListener { hash ->
 		when (hash.get(0)) {
-			"#", "" -> divContainer.fade(basicPage())
-			"#gettingstarted" -> divContainer.fade(gettingStartedSection())
-			"#html" -> divContainer.fade(htmlPage())
+			"#", "" -> divContainer.setContentWithFadeEffect(basicPage())
+			"#gettingstarted" -> divContainer.setContentWithFadeEffect(gettingStartedSection())
+			"#html" -> divContainer.setContentWithFadeEffect(htmlPage())
 			"#bootstrapComponents" -> {
 				if (hash.size() == 1) {
-					divContainer.fade(bootstrapPage())
+					divContainer.setContentWithFadeEffect(bootstrapPage())
 				}
 			}
-			"#ajax" -> divContainer.fade(ajaxPage())
-			"#masterdetail" -> divContainer.fade(masterDetail())
-			"#spinner" -> divContainer.fade(createSpinner())
+			"#ajax" -> divContainer.setContentWithFadeEffect(ajaxPage())
+			"#masterdetail" -> divContainer.setContentWithFadeEffect(masterDetail())
+			"#spinner" -> divContainer.setContentWithFadeEffect(createSpinner())
 		}
 	}
 
