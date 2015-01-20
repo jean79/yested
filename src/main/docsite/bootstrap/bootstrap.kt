@@ -38,6 +38,7 @@ fun bootstrapPage(): Div {
                     +createMediaObjectSection(id = "bootstrapComponents_MediaObject")
                     +createPaginationSection(id = "bootstrapComponents_Pagination")
                     +createNavbarSection(id = "bootstrapComponents_Navbar")
+                    +createBreadcrumbsSection(id = "bootstrapComponents_Breadcrumbs")
                 }
                 col(Medium(2)) {
                     div {
