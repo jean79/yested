@@ -2,8 +2,11 @@ package net.yested.bootstrap
 
 import java.util.ArrayList
 import java.util.HashMap
-import net.yested.ComponentContainer
 import net.yested.HTMLComponent
+import net.yested.Component
+import kotlin.js.dom.html.HTMLElement
+import net.yested.createElement
+import net.yested.appendComponent
 
 /**
  * Created by jean on 24.12.2014.
@@ -13,20 +16,24 @@ import net.yested.HTMLComponent
 <button type="button" class="btn btn-default">Right</button>
 </div>
  */
-public class ButtonGroup(val size: ButtonSize = ButtonSize.DEFAULT, val onSelect:Function1<String, Unit>? = null) : HTMLComponent("div") {
+public class ButtonGroup(val size: ButtonSize = ButtonSize.DEFAULT, val onSelect:Function1<String, Unit>? = null) : Component {
+
+    override val element = createElement("div")
 
     private val buttons = HashMap<String, BtsButton>();
 
     {
-        setAttribute("class", "btn-group")
-        setAttribute("role", "group")
+        element.setAttribute("class", "btn-group")
+        element.setAttribute("role", "group")
     }
 
     public var value:String? = null
 
     public fun select(selectValue:String) {
         value = selectValue
-        onSelect?.invoke(selectValue)
+        if (onSelect != null) {
+            onSelect!!(selectValue)
+        }
         for ((key, button) in buttons) {
             if (key == selectValue) {
                 button.active = true
@@ -36,11 +43,11 @@ public class ButtonGroup(val size: ButtonSize = ButtonSize.DEFAULT, val onSelect
         }
     }
 
-    public fun button(value:String, look: ButtonLook = ButtonLook.DEFAULT, label : ComponentContainer.() -> Unit) {
+    public fun button(value:String, look: ButtonLook = ButtonLook.DEFAULT, label : HTMLComponent.() -> Unit) {
         val button = BtsButton(label = label, look = look, size = size) {
             select(value)
         }
-        appendChild(button)
+        element.appendComponent(button)
         buttons.put(value, button)
     }
 

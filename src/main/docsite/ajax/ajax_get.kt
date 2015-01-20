@@ -92,13 +92,13 @@ fun createAjaxGetSection(): Div {
             ajaxGet<WeatherData>("http://api.openweathermap.org/data/2.5/weather?q=${textInput.value}&units=${btnGroup.value}") {
                 weatherData ->
                 if (weatherData != null && weatherData.main != null) {
-                    temperatureSpan.fade(
+                    temperatureSpan.setContentWithFadeEffect(
                             Panel(style = PanelStyle.SUCCESS) with {
                                 heading { +"Temperature in ${weatherData.name}" }
                                 content { emph { +"${weatherData.main!!.temp}"} }
                             })
                 } else {
-                    temperatureSpan.setChild( Alert(style = AlertStyle.DANGER) with { +"Location not found" })
+                    temperatureSpan.setContentWithFadeEffect( Alert(style = AlertStyle.DANGER) with { +"Location not found" })
                 }
             }
         }

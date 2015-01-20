@@ -28,10 +28,9 @@ package net.yested.bootstrap
         </div>
 </form>
  */
-import net.yested.ComponentContainer
+import net.yested.HTMLComponent
 import net.yested.Span
 import net.yested.with
-import net.yested.HTMLComponentContainer
 
 public trait ValidatorI {
     fun onchange(invoke:(valid:Boolean)->Unit)
@@ -65,7 +64,7 @@ public class Validator<T>(val inputElement: InputElement<T>, override val errorT
 
 }
 
-public class Form(private val labelDef:String = "col-sm-2",private val inputDef:String = "col-sm-10") : HTMLComponentContainer("form") {
+public class Form(private val labelDef:String = "col-sm-2",private val inputDef:String = "col-sm-10") : HTMLComponent("form") {
 
     {
         element.setAttribute("class", "form-horizontal")
@@ -73,7 +72,7 @@ public class Form(private val labelDef:String = "col-sm-2",private val inputDef:
         element.setAttribute("onsubmit", "return false")
     }
 
-    public fun item(forId:String = "", label: ComponentContainer.()->Unit, validator:ValidatorI? = null, content: ComponentContainer.()->Unit) {
+    public fun item(forId:String = "", label: HTMLComponent.()->Unit, validator:ValidatorI? = null, content: HTMLComponent.()->Unit) {
 
         val spanErrMsg = Span() with { clazz = "help-block" }
         val divInput = div(clazz = "$inputDef", init = content) with { +spanErrMsg }
@@ -91,10 +90,10 @@ public class Form(private val labelDef:String = "col-sm-2",private val inputDef:
 
 }
 
-public fun ComponentContainer.btsForm(labelDef:String = "col-sm-2", inputDef:String = "col-sm-10", init:Form.() -> Unit):Unit {
+public fun HTMLComponent.btsForm(labelDef:String = "col-sm-2", inputDef:String = "col-sm-10", init:Form.() -> Unit):Unit {
     val form = Form(labelDef = labelDef, inputDef = inputDef)
     form.init()
-    appendChild(form)
+    +form
 }
 
 

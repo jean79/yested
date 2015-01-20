@@ -1,7 +1,7 @@
 package net.yested.bootstrap
 
 import jquery.JQuery
-import net.yested.ComponentContainer
+import net.yested.HTMLComponent
 import net.yested.div
 import net.yested.Div
 import net.yested.with
@@ -36,7 +36,7 @@ public class Dialog {
     var body: Div? = null
     var footer: Div? = null
 
-    fun header(init: ComponentContainer.() -> Unit) {
+    fun header(init: HTMLComponent.() -> Unit) {
 
         header = div(clazz = "modal-header") {
             tag("button") { clazz = "close"; "type".."button"; "data-dismiss".."modal"
@@ -53,11 +53,11 @@ public class Dialog {
 
     }
 
-    fun body(init: ComponentContainer.() -> Unit) {
+    fun body(init: HTMLComponent.() -> Unit) {
         body = div(clazz = "modal-body", init = init)
     }
 
-    fun footer(init: ComponentContainer.() -> Unit) {
+    fun footer(init: HTMLComponent.() -> Unit) {
         footer = div(clazz = "modal-footer", init = init)
     }
 

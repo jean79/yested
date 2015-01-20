@@ -3,29 +3,32 @@
  */
 package net.yested.bootstrap
 
-import net.yested.ComponentContainer
-import net.yested.thead
-import net.yested.tbody
+import net.yested.HTMLComponent
 import java.util.ArrayList
 import net.yested.Span
 import net.yested.with
-import net.yested.HTMLComponent
+import net.yested.Component
+import net.yested.createElement
+import net.yested.appendComponent
+import net.yested.THead
+import net.yested.TBody
+import net.yested.removeChildByName
 
 public data class Column<T>(
-        val label: ComponentContainer.() -> Unit,
-        val render: ComponentContainer.(T) -> Unit,
+        val label: HTMLComponent.() -> Unit,
+        val render: HTMLComponent.(T) -> Unit,
         val sortFunction:(T, T) -> Int,
         val align:Align = Align.LEFT,
         val defaultSort:Boolean = false,
         val defaultSortOrderAsc:Boolean = true)
 
-public class ColumnHeader<T>(val column:Column<T>, sortFunction:(Column<T>) -> Unit) : Span() {
+public class ColumnHeader<T>(val column:Column<T>, sortFunction:(Column<T>) -> Unit) : HTMLComponent("span") {
 
     var sortOrderAsc:Boolean = column.defaultSortOrderAsc
     var arrowPlaceholder = Span();
 
     {
-        setAttribute("style", "cursor: pointer;")
+        element.setAttribute("style", "cursor: pointer;")
 
         column.label()
         +arrowPlaceholder
@@ -33,20 +36,21 @@ public class ColumnHeader<T>(val column:Column<T>, sortFunction:(Column<T>) -> U
         onclick = {
             sortFunction(column)
         }
-
     }
 
-    fun updateSorting(sortedByColumn:Column<T>?, sortAscending:Boolean) {
-        if (sortedByColumn != column) {
+    fun updateSorting(sorteByColumn:Column<T>?, sortAscending:Boolean) {
+        if (sorteByColumn != column) {
             arrowPlaceholder.setContent("")
         } else {
-            arrowPlaceholder.setChild( glyphicon("arrow-${if (sortAscending) "up" else "down"}"))
+            arrowPlaceholder.setChild(Glyphicon("arrow-${if (sortAscending) "up" else "down"}"))
         }
     }
 
 }
 
-public class Grid<T>(val columns:Array<Column<T>>) : HTMLComponent("table") {
+public class Grid<T>(val columns:Array<Column<T>>) : Component {
+
+    override val element = createElement("table")
 
     private var sortColumn:Column<T>? = null
     private var asc:Boolean = true;
@@ -87,8 +91,8 @@ public class Grid<T>(val columns:Array<Column<T>>) : HTMLComponent("table") {
     }
 
     private fun renderHeader() {
-        appendChild(
-            thead {
+        element.appendComponent(THead() with
+             {
                 tr {
                     columnHeaders!!.forEach { columnHeader ->
                         th {
@@ -97,8 +101,7 @@ public class Grid<T>(val columns:Array<Column<T>>) : HTMLComponent("table") {
                         }
                     }
                 }
-            }
-        )
+            })
     }
 
     private fun sortData(toSort:List<T>):List<T> {
@@ -110,25 +113,22 @@ public class Grid<T>(val columns:Array<Column<T>>) : HTMLComponent("table") {
     }
 
     private fun displayData() {
-        removeChild("tbody")
+        element.removeChildByName("tbody")
         dataList?.let {
 
             val values = if (sortColumn != null) sortData(dataList!!) else dataList!!
 
-            appendChild(
-                tbody {
+            element.appendComponent(TBody() with
+                 {
                     values.forEach { item ->
                         tr {
                             columns.forEach { column ->
                                 td {
                                     "class" .. "text-${column.align.code}";
-                                    column.render(item)
-                                }
-                            }
+                                    column.render(item) } }
                         }
                     }
-                }
-            )
+                })
 
         }
     }

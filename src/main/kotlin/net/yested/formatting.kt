@@ -8,7 +8,7 @@ public data class Color(
 
 public fun Color.toHTMLColor(): String = "rgba(${this.red},${this.green},${this.blue},${this.alpha})"
 
-public class Colorized(color:Color? = null, backgroundColor: Color? = null, init: ComponentContainer.() -> Unit) : Span() {
+public class Colorized(color:Color? = null, backgroundColor: Color? = null, init: HTMLComponent.() -> Unit) : HTMLComponent("span") {
 
     {
         style = (if (color != null) "color: ${color.toHTMLColor()};" else "") +

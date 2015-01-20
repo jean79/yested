@@ -5,14 +5,14 @@ package net.yested.bootstrap
 
 import net.yested.UL
 import net.yested.Div
-import net.yested.ComponentContainer
+import net.yested.HTMLComponent
 import net.yested.Li
 import net.yested.Anchor
 import net.yested.with
 import java.util.HashMap
-import java.util.ArrayList
-import net.yested.div
-import net.yested.HTMLComponent
+import net.yested.Component
+import net.yested.createElement
+import net.yested.appendComponent
 
 /**
  * <div role="tabpanel">
@@ -29,13 +29,15 @@ import net.yested.HTMLComponent
     </div>
 </div>
  */
-public class Tabs : HTMLComponent("div") {
+public class Tabs : Component {
+
+    public override val element = createElement("div")
 
     private val bar = UL() with { role = "tablist"; clazz = "nav nav-tabs"}
 
     private val content = Div() with { clazz = "tab-content"}
 
-    private val anchorsLi = java.util.ArrayList<ComponentContainer>();
+    private val anchorsLi = java.util.ArrayList<HTMLComponent>();
 
     private val tabsRendered = HashMap<Int, Div>()
 
@@ -44,12 +46,12 @@ public class Tabs : HTMLComponent("div") {
     {
         element.setAttribute("role", "tabpanel")
 
-        appendChild(bar)
-        appendChild(content)
+        element.appendComponent(bar)
+        element.appendComponent(content)
 
     }
 
-    private fun renderContent(tabId:Int, init: ComponentContainer.()->Unit):Div =
+    private fun renderContent(tabId:Int, init: HTMLComponent.()->Unit):Div =
         if (tabsRendered.containsKey(tabId)) {
             tabsRendered.get(tabId)!!
         } else {
@@ -61,20 +63,20 @@ public class Tabs : HTMLComponent("div") {
             div
         }
 
-    private fun activateTab(li:Li, tabId:Int, onSelect:Function0<Unit>?, init: ComponentContainer.()->Unit) {
+    private fun activateTab(li:Li, tabId:Int, onSelect:Function0<Unit>?, init: HTMLComponent.()->Unit) {
 
         li.clazz = "active"
 
         anchorsLi.filter { it != li} .forEach { it.clazz = "" }
 
-        content.fade(renderContent(tabId, init));
+        content.setContentWithFadeEffect(renderContent(tabId, init));
 
         if (onSelect != null) {
             onSelect()
         }
     }
 
-    public fun tab(active:Boolean = false, header: ComponentContainer.()->Unit, onSelect:Function0<Unit>? = null, init: ComponentContainer.()->Unit) {
+    public fun tab(active:Boolean = false, header: HTMLComponent.()->Unit, onSelect:Function0<Unit>? = null, init: HTMLComponent.()->Unit) {
 
         val tabId = index++;
 
@@ -84,13 +86,14 @@ public class Tabs : HTMLComponent("div") {
             header()
         }
 
-        val li = bar.li { +a; role = "presentation" }
+        val li = Li() with { +a; role = "presentation" }
+        bar.appendChild(li)
 
         a.onclick = {
             activateTab(li, tabId, onSelect, init)
         }
 
-        bar.appendChild(li)
+        //bar.add(li)
         anchorsLi.add(li)
 
         if (active) {
@@ -101,8 +104,6 @@ public class Tabs : HTMLComponent("div") {
 
 }
 
-public fun ComponentContainer.tabs(init:Tabs.() -> Unit): Unit {
-    val tabs = Tabs()
-    tabs.init()
-    appendChild(tabs)
+public fun HTMLComponent.tabs(init:Tabs.() -> Unit): Unit {
+    +(Tabs() with  { init() })
 }

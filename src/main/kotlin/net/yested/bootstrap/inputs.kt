@@ -6,8 +6,7 @@ package net.yested.bootstrap
 import kotlin.js.dom.html.HTMLInputElement
 import java.util.ArrayList
 import net.yested.Attribute
-import net.yested.ComponentContainer
-import net.yested.tag
+import net.yested.HTMLComponent
 import kotlin.dom.addElement
 import kotlin.dom.addText
 import net.yested.Div
@@ -16,20 +15,27 @@ import net.yested.with
 import kotlin.js.dom.html.HTMLSelectElement
 import kotlin.js.dom.html.HTMLOptionElement
 import java.util.HashMap
-import net.yested.HTMLComponent
+import net.yested.Component
+import kotlin.js.dom.html.HTMLElement
+import net.yested.createElement
+import net.yested.appendComponent
 
 native trait HTMLInputElementWithOnChange : HTMLInputElement {
     public native var onchange: () -> Unit
 }
 
 public trait InputElement<T> {
-    fun addOnChangeListener(invoke: () -> Unit)
-    fun addOnChangeLiveListener(invoke: () -> Unit)
-    var value: T
-    fun decorate(valid: Boolean)
+    fun addOnChangeListener(invoke:()->Unit)
+    fun addOnChangeLiveListener(invoke:()->Unit)
+    var value:T
+    fun decorate(valid:Boolean)
 }
 
-public class TextInput(placeholder: String? = null) : HTMLComponent("input"), InputElement<String> {
+public class TextInput(placeholder:String? = null) : Component, InputElement<String> {
+
+    override val element: HTMLElement = createElement("input")
+
+    public var id: String by Attribute()
 
     private val onChangeListeners: ArrayList<Function0<Unit>> = ArrayList();
     private val onChangeLiveListeners: ArrayList<Function0<Unit>> = ArrayList();
@@ -45,9 +51,9 @@ public class TextInput(placeholder: String? = null) : HTMLComponent("input"), In
         }
     }
 
-    override var value: String
+    override var value:String
         get():String = (element as HTMLInputElement).value
-        set(value: String) {
+        set(value:String) {
             (element as HTMLInputElement).value = value
         }
 
@@ -72,13 +78,13 @@ public class TextInput(placeholder: String? = null) : HTMLComponent("input"), In
 
 }
 
-public fun ComponentContainer.textInput(placeholder: String?, init: TextInput.() -> Unit): Unit {
-    val textInput = TextInput(placeholder = placeholder)
-    textInput.init()
-    appendChild(textInput)
+public fun HTMLComponent.textInput(placeholder: String?, init: TextInput.() -> Unit):Unit {
+    +(TextInput(placeholder = placeholder) with  { init() })
 }
 
-public class CheckBox() : HTMLComponent("input"), InputElement<Boolean> {
+public class CheckBox() : Component, InputElement<Boolean> {
+
+    override val element: HTMLElement = createElement("input")
 
     private val onChangeListeners: ArrayList<Function0<Unit>> = ArrayList();
     private val onChangeLiveListeners: ArrayList<Function0<Unit>> = ArrayList();
@@ -86,16 +92,16 @@ public class CheckBox() : HTMLComponent("input"), InputElement<Boolean> {
     private fun getElement(): HTMLInputElementWithOnChange = element as HTMLInputElementWithOnChange
 
     {
-        setAttribute("type", "checkbox")
+        element.setAttribute("type", "checkbox")
         getElement().onchange = {
             onChangeListeners.forEach { it() }
             onChangeLiveListeners.forEach { it() }
         }
     }
 
-    override var value: Boolean
+    override var value:Boolean
         get():Boolean = getElement().checked
-        set(value: Boolean) {
+        set(value:Boolean) {
             getElement().checked = value
         }
 
@@ -113,19 +119,21 @@ public class CheckBox() : HTMLComponent("input"), InputElement<Boolean> {
 
 }
 
-private data class SelectOption<T>(val tag: HTMLOptionElement, val value: T)
+private data class SelectOption<TT>(val tag:HTMLOptionElement, val value:TT)
 
-public class Select<T>(multiple: Boolean = false, size: Int = 1, val renderer: (T) -> String) : HTMLComponent("select") {
+public class Select<T>(multiple:Boolean = false, size:Int = 1, val renderer:(T)->String) : Component {
+
+    override val element: HTMLElement = createElement("select")
 
     private val onChangeListeners: ArrayList<Function0<Unit>> = ArrayList();
 
-    private var selectedItemsInt: List<T> = listOf()
+    private var selectedItemsInt:List<T> = listOf()
 
-    private var dataInt: List<T>? = null
+    private var dataInt:List<T>? = null
 
-    private var optionTags: ArrayList<SelectOption<T>> = ArrayList()
+    private var optionTags:ArrayList<SelectOption<T>> = ArrayList()
 
-    public var data: List<T>?
+    public var data:List<T>?
         get() = dataInt
         set(newData) {
             dataInt = newData
@@ -133,7 +141,7 @@ public class Select<T>(multiple: Boolean = false, size: Int = 1, val renderer: (
             changeSelected()
         }
 
-    public var selectedItems: List<T>
+    public var selectedItems:List<T>
         get() = selectedItemsInt
         set(newData) {
             selectThese(newData)
@@ -154,7 +162,7 @@ public class Select<T>(multiple: Boolean = false, size: Int = 1, val renderer: (
         onChangeListeners.forEach { it() }
     }
 
-    private fun selectThese(selectedItems: List<T>) {
+    private fun selectThese(selectedItems:List<T>) {
         optionTags.forEach {
             it.tag.selected = selectedItems.contains(it.value)
         }
@@ -162,15 +170,15 @@ public class Select<T>(multiple: Boolean = false, size: Int = 1, val renderer: (
 
     private fun regenerate() {
         element.innerHTML = ""
-        optionTags = ArrayList()
+        optionTags =  ArrayList()
         selectedItemsInt = listOf()
         if (dataInt != null) {
             dataInt?.forEach {
-                val optionTag = tag("option", init = { +renderer(it) })
-                val value: T = it
+                val optionTag = HTMLComponent("option") with { +renderer(it) }
+                val value:T = it
                 val selectOption = SelectOption(tag = optionTag.element as HTMLOptionElement, value = value)
                 optionTags.add(selectOption)
-                appendChild(optionTag)
+                element.appendComponent(optionTag)
             }
         }
     }
@@ -188,18 +196,17 @@ public class Select<T>(multiple: Boolean = false, size: Int = 1, val renderer: (
 <div class="input-group-addon">.00</div>
 </div>
  */
-public fun ComponentContainer.inputAddOn(prefix: String? = null, suffix: String? = null, textInput: TextInput): Unit =
-
-        appendChild(
-                div(clazz = "input-group") {
-                    prefix?.let {
-                        div(clazz = "input-group-addon") { +prefix!! }
-                    }
-                    +textInput
-                    suffix?.let {
-                        div(clazz = "input-group-addon") { +suffix!! }
-                    }
-                })
+public fun HTMLComponent.inputAddOn(prefix:String? = null, suffix:String? = null, textInput : TextInput):Unit =
+    +(
+        div(clazz = "input-group") {
+            prefix?.let {
+                div(clazz = "input-group-addon") { +prefix!! }
+            }
+            +textInput
+            suffix?.let {
+                div(clazz = "input-group-addon") { +suffix!! }
+            }
+        })
 
 
 

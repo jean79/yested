@@ -1,16 +1,21 @@
 package net.yested.bootstrap
 
 import net.yested.Span
-import net.yested.ComponentContainer
+import net.yested.HTMLComponent
+import net.yested.with
+import net.yested.createElement
+import net.yested.Component
 
-public class Glyphicon(icon:String) : Span() {
+public class Glyphicon(icon:String) : Component {
+
+    override public val element = createElement("span");
+
     {
-        clazz = "glyphicon glyphicon-${icon}"
+        element.className = "glyphicon glyphicon-${icon}"
     }
+
 }
 
-public fun ComponentContainer.glyphicon(icon:String): Glyphicon {
-    val glyphicon = Glyphicon(icon = icon)
-    appendChild(glyphicon)
-    return glyphicon
+public fun HTMLComponent.glyphicon(icon:String): Unit {
+    +Glyphicon(icon = icon)
 }
