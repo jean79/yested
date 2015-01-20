@@ -6,14 +6,7 @@ import net.yested.bootstrap.row
 import net.yested.bootstrap.pageHeader
 import net.yested.bootstrap.Medium
 
-import jquery.jq
-import jquery.JQuery
-import net.yested.bootstrap.navbar
-import net.yested.ParentComponent
-import net.yested.with
-import net.yested.HTMLParentComponent
 import net.yested.bootstrap.enableScrollSpy
-
 
 fun bootstrapPage(): Div {
 
@@ -45,6 +38,7 @@ fun bootstrapPage(): Div {
                     +createMediaObjectSection(id = "bootstrapComponents_MediaObject")
                     +createPaginationSection(id = "bootstrapComponents_Pagination")
                     +createNavbarSection(id = "bootstrapComponents_Navbar")
+                    +createBreadcrumbsSection(id = "bootstrapComponents_Breadcrumbs")
                 }
                 col(Medium(2)) {
                     div {

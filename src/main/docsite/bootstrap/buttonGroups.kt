@@ -19,7 +19,7 @@ fun buttonGroupsSection(id: String): Div {
     val span = Span()
     val btnGroup = ButtonGroup(
                                 size = ButtonSize.DEFAULT,
-                                onSelect = { value -> span.replace("Selected: ${value}")}
+                                onSelect = { value -> span.setContent("Selected: ${value}")}
                             ) with {
                                 button(value = "1", label = { + "Option 1"})
                                 button(value = "2", label = { + "Option 2"})

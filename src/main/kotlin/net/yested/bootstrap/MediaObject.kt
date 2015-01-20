@@ -1,13 +1,8 @@
 package net.yested.bootstrap
 
-import net.yested.ParentComponent
-import net.yested.HTMLParentComponent
-import net.yested.Div
+import net.yested.HTMLComponent
 import net.yested.with
-import net.yested.bootstrap.ButtonSize
-import net.yested.P
 import net.yested.Anchor
-import net.yested.Component
 import org.w3c.dom.Element
 
 public enum class MediaAlign(val className: String) {
@@ -15,36 +10,37 @@ public enum class MediaAlign(val className: String) {
 	Right : MediaAlign("pull-right")
 }
 
-public class MediaBody() : HTMLParentComponent("div") {
+public class MediaBody() : HTMLComponent("div") {
 
-	private val heading = HTMLParentComponent("h4") with { clazz = "media-heading" }
+	private val heading = HTMLComponent("h4") with { clazz = "media-heading" }
 
 	{
-		setAttribute("class", "media-body")
+		element.setAttribute("class", "media-body")
 	}
 
-	public fun heading(init: HTMLParentComponent.() -> Unit) {
+	public fun heading(init: HTMLComponent.() -> Unit) {
 		heading.init()
-		add(heading)
+		+heading
 	}
 
-	public fun content(init: ParentComponent.() -> Unit) {
+	public fun content(init: HTMLComponent.() -> Unit) {
 		this.init()
 	}
+
 }
 
-public class MediaObject(align: MediaAlign) : HTMLParentComponent("div") {
+public class MediaObject(align: MediaAlign) : HTMLComponent("div") {
 
 	private val media = Anchor() with { clazz = align.className; href = "#" }
 	private val body = MediaBody() with { }
 
 	{
-		setAttribute("class", "media")
-		add(media)
-		add(body)
+		element.setAttribute("class", "media")
+		appendChild(media)
+		appendChild(body)
 	}
 
-	public fun media(init: HTMLParentComponent.() -> Unit) {
+	public fun media(init: HTMLComponent.() -> Unit) {
 		media.init()
 		val childElement = media.element.firstChild as Element
 		val clazz = childElement.getAttribute("class") as String? ?: ""
@@ -56,8 +52,6 @@ public class MediaObject(align: MediaAlign) : HTMLParentComponent("div") {
 	}
 }
 
-public fun HTMLParentComponent.mediaObject(align: MediaAlign, init:MediaObject.() -> Unit) {
-	val mediaObject = MediaObject(align)
-	mediaObject.init()
-	add(mediaObject)
+public fun HTMLComponent.mediaObject(align: MediaAlign, init:MediaObject.() -> Unit) {
+	+(MediaObject(align) with  { init() })
 }

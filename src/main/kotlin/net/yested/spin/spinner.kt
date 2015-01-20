@@ -5,7 +5,7 @@ import kotlin.js.dom.html.HTMLElement
 import net.yested.ChartItem
 import net.yested.LineData
 import net.yested.Context
-import net.yested.HTMLParentComponent
+import net.yested.HTMLComponent
 
 public native class SpinnerNative() {
     public fun spin(): SpinnerCreated = noImpl
@@ -59,11 +59,10 @@ public class Spinner(val options:SpinnerOptions = SpinnerOptions()) : Component 
         val left = options.left
     }
 
-    override val element: HTMLElement
-        get() = jsSpinnerElement
+    override val element: HTMLElement = jsSpinnerElement
 
 }
 
-public fun HTMLParentComponent.spinner(options:SpinnerOptions = SpinnerOptions()) {
-    add(Spinner(options))
+public fun HTMLComponent.spinner(options:SpinnerOptions = SpinnerOptions()) {
+    +(Spinner(options))
 }

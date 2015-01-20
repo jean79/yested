@@ -1,21 +1,25 @@
 package net.yested.bootstrap
 
 import net.yested.Div
-import net.yested.ParentComponent
-import net.yested.HTMLParentComponent
+import net.yested.HTMLComponent
 import net.yested.with
 import net.yested.div
 import kotlin.js.dom.html.HTMLElement
 import net.yested.el
+import net.yested.Component
+import net.yested.createElement
+import net.yested.appendComponent
 
-public class Row() : ParentComponent("div") {
+public class Row(): Component {
+
+    override val element = createElement("div");
 
     {
-        setAttribute("class", "row")
+        element.setAttribute("class", "row")
     }
 
-    public fun col(vararg modifiers: ColumnModifier, init:HTMLParentComponent.() -> Unit) {
-        add(
+    public fun col(vararg modifiers: ColumnModifier, init: HTMLComponent.() -> Unit) {
+        element.appendComponent(
             Div() with {
                 clazz = modifiers map {it.toString()} join(" ")
                 init()
@@ -27,10 +31,10 @@ public class Row() : ParentComponent("div") {
 public class Page(val element: HTMLElement) {
 
     public fun topMenu(navbar: Navbar) {
-        element.appendChild(navbar.element)
+        element.appendComponent(navbar)
     }
 
-    public fun content(init: HTMLParentComponent.() -> Unit): Unit {
+    public fun content(init: HTMLComponent.() -> Unit): Unit {
         element.appendChild(
                 div {
                     "class".."container theme-showcase"
@@ -39,35 +43,31 @@ public class Page(val element: HTMLElement) {
                 }.element)
     }
 
-    public fun footer(init:HTMLParentComponent.() -> Unit): Unit {
+    public fun footer(init: HTMLComponent.() -> Unit): Unit {
         element.appendChild(
                 div {
                     div(clazz = "container") {
                         tag("hr") {}
                         init()
                     }
-                }.element)
+                }.element
+        )
     }
 
 }
 
-public class PageHeader  : HTMLParentComponent("div") {
+public class PageHeader  : HTMLComponent("div") {
     {
         clazz = "page-header"
     }
 }
 
-public fun HTMLParentComponent.pageHeader(init: HTMLParentComponent.() -> Unit) {
-    val pageHeader = PageHeader()
-    pageHeader.init()
-    add(pageHeader)
+public fun HTMLComponent.pageHeader(init: HTMLComponent.() -> Unit) {
+    +(PageHeader() with  { init() })
 }
 
-public fun HTMLParentComponent.row(init:Row.()->Unit): Row {
-    val row = Row()
-    row.init()
-    add(row)
-    return row
+public fun HTMLComponent.row(init:Row.()->Unit) {
+    +(Row() with  { init() })
 }
 
 public fun page(placeholderElementId:String, init:Page.() -> Unit):Unit {

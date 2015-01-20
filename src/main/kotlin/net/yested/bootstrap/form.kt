@@ -28,7 +28,7 @@ package net.yested.bootstrap
         </div>
 </form>
  */
-import net.yested.HTMLParentComponent
+import net.yested.HTMLComponent
 import net.yested.Span
 import net.yested.with
 
@@ -64,7 +64,7 @@ public class Validator<T>(val inputElement: InputElement<T>, override val errorT
 
 }
 
-public class Form(private val labelDef:String = "col-sm-2",private val inputDef:String = "col-sm-10") : HTMLParentComponent("form") {
+public class Form(private val labelDef:String = "col-sm-2",private val inputDef:String = "col-sm-10") : HTMLComponent("form") {
 
     {
         element.setAttribute("class", "form-horizontal")
@@ -72,7 +72,7 @@ public class Form(private val labelDef:String = "col-sm-2",private val inputDef:
         element.setAttribute("onsubmit", "return false")
     }
 
-    public fun item(forId:String = "", label:HTMLParentComponent.()->Unit, validator:ValidatorI? = null, content:HTMLParentComponent.()->Unit) {
+    public fun item(forId:String = "", label: HTMLComponent.()->Unit, validator:ValidatorI? = null, content: HTMLComponent.()->Unit) {
 
         val spanErrMsg = Span() with { clazz = "help-block" }
         val divInput = div(clazz = "$inputDef", init = content) with { +spanErrMsg }
@@ -84,16 +84,16 @@ public class Form(private val labelDef:String = "col-sm-2",private val inputDef:
         validator?.onchange {
             isValid ->
                 divFormGroup.clazz = if (isValid) "form-group" else "form-group has-error"
-                spanErrMsg.replace(if (isValid) "" else validator!!.errorText)
+                spanErrMsg.setContent(if (isValid) "" else validator!!.errorText)
         }
     }
 
 }
 
-public fun HTMLParentComponent.btsForm(labelDef:String = "col-sm-2", inputDef:String = "col-sm-10", init:Form.() -> Unit):Unit {
+public fun HTMLComponent.btsForm(labelDef:String = "col-sm-2", inputDef:String = "col-sm-10", init:Form.() -> Unit):Unit {
     val form = Form(labelDef = labelDef, inputDef = inputDef)
     form.init()
-    add(form)
+    +form
 }
 
 

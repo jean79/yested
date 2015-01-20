@@ -1,9 +1,12 @@
 package net.yested.bootstrap
 
-import net.yested.ParentComponent
 import java.util.ArrayList
 import java.util.HashMap
-import net.yested.HTMLParentComponent
+import net.yested.HTMLComponent
+import net.yested.Component
+import kotlin.js.dom.html.HTMLElement
+import net.yested.createElement
+import net.yested.appendComponent
 
 /**
  * Created by jean on 24.12.2014.
@@ -13,13 +16,15 @@ import net.yested.HTMLParentComponent
 <button type="button" class="btn btn-default">Right</button>
 </div>
  */
-public class ButtonGroup(val size: ButtonSize = ButtonSize.DEFAULT, val onSelect:Function1<String, Unit>? = null) : ParentComponent("div") {
+public class ButtonGroup(val size: ButtonSize = ButtonSize.DEFAULT, val onSelect:Function1<String, Unit>? = null) : Component {
+
+    override val element = createElement("div")
 
     private val buttons = HashMap<String, BtsButton>();
 
     {
-        setAttribute("class", "btn-group")
-        setAttribute("role", "group")
+        element.setAttribute("class", "btn-group")
+        element.setAttribute("role", "group")
     }
 
     public var value:String? = null
@@ -38,11 +43,11 @@ public class ButtonGroup(val size: ButtonSize = ButtonSize.DEFAULT, val onSelect
         }
     }
 
-    public fun button(value:String, look: ButtonLook = ButtonLook.DEFAULT, label : HTMLParentComponent.() -> Unit) {
+    public fun button(value:String, look: ButtonLook = ButtonLook.DEFAULT, label : HTMLComponent.() -> Unit) {
         val button = BtsButton(label = label, look = look, size = size) {
             select(value)
         }
-        add(button)
+        element.appendComponent(button)
         buttons.put(value, button)
     }
 

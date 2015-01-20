@@ -63,7 +63,7 @@ class MasterDetail {
         select.data = Continent.values().toList()
 
         fun close() {
-            placeholder.fade( createMasterView() )
+            placeholder.setContentWithFadeEffect( createMasterView() )
         }
 
         fun save() {
@@ -82,7 +82,7 @@ class MasterDetail {
             select.selectedItems = listOf(editedCity.continent)
         }
 
-        placeholder.fade(
+        placeholder.setContentWithFadeEffect(
             Form(labelDef = "col-sm-4", inputDef = "col-sm-8") with  {
                 item(label = { +"City name"}, validator = validator) {
                     +textInput
@@ -108,7 +108,7 @@ class MasterDetail {
 
     fun createDiv(): Div {
 
-        placeholder.fade(createMasterView())
+        placeholder.setContentWithFadeEffect(createMasterView())
         grid.list = list
 
         return div {

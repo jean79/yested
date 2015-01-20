@@ -1,6 +1,6 @@
 package net.yested.bootstrap
 
-import net.yested.HTMLParentComponent
+import net.yested.HTMLComponent
 import net.yested.Div
 import net.yested.div
 import net.yested.Anchor
@@ -18,18 +18,17 @@ public enum class AlertStyle(val code:String) {
     DANGER :    AlertStyle("danger")
 }
 
-public class Alert(style: AlertStyle) : Div() {
+public class Alert(style: AlertStyle) : HTMLComponent("div") {
 
     {
         clazz = "alert alert-${style.code}"
     }
 
     override fun a(clazz: String?, href: String?, onclick: (() -> Unit)?, init: Anchor.() -> Unit) {
-        super<Div>.a(clazz?:"alert-link", href, onclick, init)
+        super<HTMLComponent>.a(clazz?:"alert-link", href, onclick, init)
     }
 
 }
 
-fun HTMLParentComponent.alert(style: AlertStyle, init:Alert.() -> Unit) =
-    add(
-            Alert(style = style) with { init() } )
+fun HTMLComponent.alert(style: AlertStyle, init:Alert.() -> Unit) =
+    +(Alert(style = style) with { init() } )
