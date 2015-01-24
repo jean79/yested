@@ -28,6 +28,8 @@ public class Row(): Component {
 
 }
 
+//TODO: http://stackoverflow.com/questions/14809313/twitter-bootstrap-float-div-right
+//Do in another branch
 public class Page(val element: HTMLElement) {
 
     public fun topMenu(navbar: Navbar) {

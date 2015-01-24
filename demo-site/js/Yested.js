@@ -2,7 +2,10 @@
   'use strict';
   var _ = Kotlin.defineRootPackage(null, /** @lends _ */ {
     net: Kotlin.definePackage(null, /** @lends _.net */ {
-      yested: Kotlin.definePackage(null, /** @lends _.net.yested */ {
+      yested: Kotlin.definePackage(function () {
+        this.DURATION_huuymz$ = 200;
+        this.SLIDE_DURATION_ip8yfn$ = _.net.yested.DURATION_huuymz$ * 2;
+      }, /** @lends _.net.yested */ {
         AjaxRequest: Kotlin.createClass(null, function (url, type, data, contentType, dataType, success) {
           if (type === void 0)
             type = 'POST';
@@ -263,6 +266,104 @@
             return new Chart(this.getContext_61zpoe$('2d')).Line(data, options);
           }
         }),
+        Effect: Kotlin.createTrait(null),
+        BiDirectionEffect: Kotlin.createTrait(null),
+        call$f: function (function_0) {
+          return function (it) {
+            (function_0 != null ? function_0 : Kotlin.throwNPE())();
+          };
+        },
+        call: function (function_0) {
+          function_0 != null ? Kotlin.modules['stdlib'].kotlin.let_7hr6ff$(function_0, _.net.yested.call$f(function_0)) : null;
+        },
+        SlideUp: Kotlin.createClass(function () {
+          return [_.net.yested.Effect];
+        }, null, /** @lends _.net.yested.SlideUp.prototype */ {
+          apply_suy7ya$: function (component, callback) {
+            if (callback === void 0)
+              callback = null;
+            $(component.element).slideUp(_.net.yested.SLIDE_DURATION_ip8yfn$, _.net.yested.SlideUp.apply_suy7ya$f(callback));
+          }
+        }, /** @lends _.net.yested.SlideUp */ {
+          apply_suy7ya$f: function (callback) {
+            return function () {
+              _.net.yested.call(callback);
+            };
+          }
+        }),
+        SlideDown: Kotlin.createClass(function () {
+          return [_.net.yested.Effect];
+        }, null, /** @lends _.net.yested.SlideDown.prototype */ {
+          apply_suy7ya$: function (component, callback) {
+            if (callback === void 0)
+              callback = null;
+            $(component.element).slideDown(_.net.yested.SLIDE_DURATION_ip8yfn$, _.net.yested.SlideDown.apply_suy7ya$f(callback));
+          }
+        }, /** @lends _.net.yested.SlideDown */ {
+          apply_suy7ya$f: function (callback) {
+            return function () {
+              _.net.yested.call(callback);
+            };
+          }
+        }),
+        FadeOut: Kotlin.createClass(function () {
+          return [_.net.yested.Effect];
+        }, null, /** @lends _.net.yested.FadeOut.prototype */ {
+          apply_suy7ya$: function (component, callback) {
+            if (callback === void 0)
+              callback = null;
+            $(component.element).fadeOut(_.net.yested.DURATION_huuymz$, _.net.yested.FadeOut.apply_suy7ya$f(callback));
+          }
+        }, /** @lends _.net.yested.FadeOut */ {
+          apply_suy7ya$f: function (callback) {
+            return function () {
+              _.net.yested.call(callback);
+            };
+          }
+        }),
+        FadeIn: Kotlin.createClass(function () {
+          return [_.net.yested.Effect];
+        }, null, /** @lends _.net.yested.FadeIn.prototype */ {
+          apply_suy7ya$: function (component, callback) {
+            if (callback === void 0)
+              callback = null;
+            $(component.element).fadeIn(_.net.yested.DURATION_huuymz$, _.net.yested.FadeIn.apply_suy7ya$f(callback));
+          }
+        }, /** @lends _.net.yested.FadeIn */ {
+          apply_suy7ya$f: function (callback) {
+            return function () {
+              _.net.yested.call(callback);
+            };
+          }
+        }),
+        Fade: Kotlin.createClass(function () {
+          return [_.net.yested.BiDirectionEffect];
+        }, null, /** @lends _.net.yested.Fade.prototype */ {
+          applyIn_suy7ya$: function (component, callback) {
+            if (callback === void 0)
+              callback = null;
+            (new _.net.yested.FadeIn()).apply_suy7ya$(component, callback);
+          },
+          applyOut_suy7ya$: function (component, callback) {
+            if (callback === void 0)
+              callback = null;
+            (new _.net.yested.FadeOut()).apply_suy7ya$(component, callback);
+          }
+        }),
+        Slide: Kotlin.createClass(function () {
+          return [_.net.yested.BiDirectionEffect];
+        }, null, /** @lends _.net.yested.Slide.prototype */ {
+          applyIn_suy7ya$: function (component, callback) {
+            if (callback === void 0)
+              callback = null;
+            (new _.net.yested.SlideDown()).apply_suy7ya$(component, callback);
+          },
+          applyOut_suy7ya$: function (component, callback) {
+            if (callback === void 0)
+              callback = null;
+            (new _.net.yested.SlideUp()).apply_suy7ya$(component, callback);
+          }
+        }),
         replaceAll_ex0kps$: function ($receiver, regex, with_0) {
           return $receiver.replace(new RegExp(regex, 'g'), with_0);
         },
@@ -411,10 +512,10 @@
             this.element.innerHTML = '';
             this.element.appendChild(component.element);
           },
-          setContentWithFadeEffect_suy7ya$: function (newContent, callback) {
+          setChild_hu5ove$: function (content, effect, callback) {
             if (callback === void 0)
-              callback = _.net.yested.HTMLComponent.setContentWithFadeEffect_suy7ya$f;
-            $(this.element).fadeOut(200, _.net.yested.HTMLComponent.setContentWithFadeEffect_suy7ya$f_0(this, newContent, callback));
+              callback = null;
+            effect.applyOut_suy7ya$(this, _.net.yested.HTMLComponent.setChild_hu5ove$f(content, this, effect, callback));
           },
           onclick: {
             get: function () {
@@ -593,13 +694,20 @@
             return l;
           }
         }, /** @lends _.net.yested.HTMLComponent */ {
-          setContentWithFadeEffect_suy7ya$f: function () {
+          f: function (callback) {
+            return function (it) {
+              (callback != null ? callback : Kotlin.throwNPE())();
+            };
           },
-          setContentWithFadeEffect_suy7ya$f_0: function (this$HTMLComponent, newContent, callback) {
+          f_0: function (callback) {
             return function () {
-              this$HTMLComponent.element.innerHTML = '';
-              this$HTMLComponent.element.appendChild(newContent.element);
-              $(this$HTMLComponent.element).fadeIn(200, callback);
+              callback != null ? Kotlin.modules['stdlib'].kotlin.let_7hr6ff$(callback, _.net.yested.HTMLComponent.f(callback)) : null;
+            };
+          },
+          setChild_hu5ove$f: function (content, this$HTMLComponent, effect, callback) {
+            return function () {
+              this$HTMLComponent.setChild_5f0h2k$(content);
+              effect.applyIn_suy7ya$(this$HTMLComponent, _.net.yested.HTMLComponent.f_0(callback));
             };
           },
           a_b4th6h$f: function () {
@@ -636,14 +744,14 @@
               this.element.onclick = onclick;
             };
           },
-          f: function (content) {
+          f_1: function (content) {
             return function () {
               this.plus_pdl1w0$(_.net.yested.printMarkup(content));
             };
           },
           code_puj7f4$f: function (content) {
             return function () {
-              this.tag_s8xvdm$('code', _.net.yested.HTMLComponent.f(content));
+              this.tag_s8xvdm$('code', _.net.yested.HTMLComponent.f_1(content));
             };
           },
           ul_8qfrsd$f: function (init) {
@@ -680,20 +788,20 @@
           },
           br$f: function () {
           },
-          f_0: function (forId, this$) {
+          f_2: function (forId, this$) {
             return function (it) {
               this$.rangeTo_94jgcu$('for', forId != null ? forId : Kotlin.throwNPE());
             };
           },
-          f_1: function (clazz, this$) {
+          f_3: function (clazz, this$) {
             return function (it) {
               this$.rangeTo_94jgcu$('class', clazz != null ? clazz : Kotlin.throwNPE());
             };
           },
           label_aisbro$f: function (forId, clazz, init) {
             return function () {
-              forId != null ? Kotlin.modules['stdlib'].kotlin.let_7hr6ff$(forId, _.net.yested.HTMLComponent.f_0(forId, this)) : null;
-              clazz != null ? Kotlin.modules['stdlib'].kotlin.let_7hr6ff$(clazz, _.net.yested.HTMLComponent.f_1(clazz, this)) : null;
+              forId != null ? Kotlin.modules['stdlib'].kotlin.let_7hr6ff$(forId, _.net.yested.HTMLComponent.f_2(forId, this)) : null;
+              clazz != null ? Kotlin.modules['stdlib'].kotlin.let_7hr6ff$(clazz, _.net.yested.HTMLComponent.f_3(clazz, this)) : null;
               init.call(this);
             };
           }
@@ -1172,6 +1280,13 @@
               };
             }
           }),
+          buttonGroup_wnptsr$: function ($receiver, size, onSelect, init) {
+            if (size === void 0)
+              size = _.net.yested.bootstrap.ButtonSize.object.DEFAULT;
+            if (onSelect === void 0)
+              onSelect = null;
+            $receiver.plus_pv6laa$(_.net.yested.with_owvm91$(new _.net.yested.bootstrap.ButtonGroup(size, onSelect), init));
+          },
           ButtonLook: Kotlin.createEnumClass(function () {
             return [Kotlin.Enum];
           }, function $fun(code) {
@@ -2733,7 +2848,7 @@
               li.clazz = 'active';
               tmp$0 = Kotlin.modules['stdlib'].kotlin.filter_azvtw4$(this.anchorsLi_g1z45g$, _.net.yested.bootstrap.Tabs.activateTab$f(li));
               Kotlin.modules['stdlib'].kotlin.forEach_p7e0bo$(tmp$0, _.net.yested.bootstrap.Tabs.activateTab$f_0);
-              this.content_9tda2$.setContentWithFadeEffect_suy7ya$(this.renderContent(tabId, init));
+              this.content_9tda2$.setChild_hu5ove$(this.renderContent(tabId, init), new _.net.yested.Fade());
               if (onSelect != null) {
                 onSelect();
               }
@@ -3045,16 +3160,20 @@
       this.plus_pdl1w0$('Spinner');
     },
     f_7: function () {
+      this.plus_pdl1w0$('Effects');
+    },
+    f_8: function () {
       this.item('#html', void 0, _.f_2);
       this.item('#bootstrapComponents', void 0, _.f_3);
       this.item('#ajax', void 0, _.f_4);
       this.item('#masterdetail', void 0, _.f_5);
       this.item('#spinner', void 0, _.f_6);
+      this.item('#effects', void 0, _.f_7);
     },
     main$f: function () {
       this.brand_s8xvdm$('#', _.f);
       this.item_b1t645$('#gettingstarted', void 0, _.f_0);
-      this.dropdown_vvlqvy$(_.f_1, _.f_7);
+      this.dropdown_vvlqvy$(_.f_1, _.f_8);
     },
     main$f_0: function () {
     },
@@ -3063,56 +3182,58 @@
         var tmp$0;
         tmp$0 = hash[0];
         if (tmp$0 === '#' || tmp$0 === '')
-          divContainer.setContentWithFadeEffect_suy7ya$(_.basics.basicPage());
+          divContainer.setChild_hu5ove$(_.basics.basicPage(), new _.net.yested.Fade());
         else if (tmp$0 === '#gettingstarted')
-          divContainer.setContentWithFadeEffect_suy7ya$(_.gettingstarted.gettingStartedSection());
+          divContainer.setChild_hu5ove$(_.gettingstarted.gettingStartedSection(), new _.net.yested.Fade());
         else if (tmp$0 === '#html')
-          divContainer.setContentWithFadeEffect_suy7ya$(_.html.htmlPage());
+          divContainer.setChild_hu5ove$(_.html.htmlPage(), new _.net.yested.Fade());
         else if (tmp$0 === '#bootstrapComponents') {
           if (hash.length === 1) {
-            divContainer.setContentWithFadeEffect_suy7ya$(_.bootstrap.bootstrapPage());
+            divContainer.setChild_hu5ove$(_.bootstrap.bootstrapPage(), new _.net.yested.Fade());
           }
         }
          else if (tmp$0 === '#ajax')
-          divContainer.setContentWithFadeEffect_suy7ya$(_.ajax.ajaxPage());
+          divContainer.setChild_hu5ove$(_.ajax.ajaxPage(), new _.net.yested.Fade());
         else if (tmp$0 === '#masterdetail')
-          divContainer.setContentWithFadeEffect_suy7ya$(_.complex.masterDetail());
+          divContainer.setChild_hu5ove$(_.complex.masterDetail(), new _.net.yested.Fade());
         else if (tmp$0 === '#spinner')
-          divContainer.setContentWithFadeEffect_suy7ya$(_.complex.createSpinner());
+          divContainer.setChild_hu5ove$(_.complex.createSpinner(), new _.net.yested.Fade());
+        else if (tmp$0 === '#effects')
+          divContainer.setChild_hu5ove$(_.bootstrap.effectsPage(), new _.net.yested.Fade());
       };
     },
-    f_8: function (divContainer) {
+    f_9: function (divContainer) {
       return function () {
         this.br();
         this.br();
         this.plus_pv6laa$(divContainer);
       };
     },
-    f_9: function (divContainer) {
+    f_10: function (divContainer) {
       return function () {
-        this.div_5rsex9$(void 0, void 0, _.f_8(divContainer));
+        this.div_5rsex9$(void 0, void 0, _.f_9(divContainer));
       };
     },
-    f_10: function () {
+    f_11: function () {
       this.plus_pdl1w0$('Contact: ');
     },
-    f_11: function () {
+    f_12: function () {
       this.plus_pdl1w0$('jan.kovar79@gmail.com');
     },
-    f_12: function () {
-      this.emph_kv1miw$(_.f_10);
-      this.a_b4th6h$(void 0, 'mailto:jan.kovar79@gmail.com', void 0, _.f_11);
-    },
     f_13: function () {
-      this.small_kv1miw$(_.f_12);
+      this.emph_kv1miw$(_.f_11);
+      this.a_b4th6h$(void 0, 'mailto:jan.kovar79@gmail.com', void 0, _.f_12);
+    },
+    f_14: function () {
+      this.small_kv1miw$(_.f_13);
       this.br();
       this.br();
     },
     main$f_2: function (navbar, divContainer) {
       return function () {
         this.topMenu_tx5hdt$(navbar);
-        this.content_kv1miw$(_.f_9(divContainer));
-        this.footer_kv1miw$(_.f_13);
+        this.content_kv1miw$(_.f_10(divContainer));
+        this.footer_kv1miw$(_.f_14);
       };
     },
     main: function (args) {
@@ -3169,10 +3290,10 @@
       fetchWeather$f: function (temperatureSpan) {
         return function (weatherData) {
           if (weatherData != null && weatherData.main != null) {
-            temperatureSpan.setContentWithFadeEffect_suy7ya$(_.net.yested.with_owvm91$(new _.net.yested.bootstrap.Panel(_.net.yested.bootstrap.PanelStyle.object.SUCCESS), _.ajax.f_4(weatherData)));
+            temperatureSpan.setChild_hu5ove$(_.net.yested.with_owvm91$(new _.net.yested.bootstrap.Panel(_.net.yested.bootstrap.PanelStyle.object.SUCCESS), _.ajax.f_4(weatherData)), new _.net.yested.Fade());
           }
            else {
-            temperatureSpan.setContentWithFadeEffect_suy7ya$(_.net.yested.with_owvm91$(new _.net.yested.bootstrap.Alert(_.net.yested.bootstrap.AlertStyle.object.DANGER), _.ajax.f_5));
+            temperatureSpan.setChild_hu5ove$(_.net.yested.with_owvm91$(new _.net.yested.bootstrap.Alert(_.net.yested.bootstrap.AlertStyle.object.DANGER), _.ajax.f_5), new _.net.yested.Fade());
           }
         };
       },
@@ -3284,7 +3405,7 @@
       },
       f_31: function () {
         _.net.yested.bootstrap.pageHeader_kzm4yj$(this, _.ajax.f_30);
-        this.code_puj7f4$('kotlin', '//definition of response, just fragment\nnative trait Main {\n    val temp : Double\n    val pressure : Int\n    val humidity: Int\n    val temp_min : Double\n    val temp_max : Double\n}\n\nnative trait WeatherData {\n    ...\n    val base: String?\n    val main : Main?\n    val wind : Wind?\n    ...\n}\n\n...\nval textInput = TextInput(placeholder = "Type city name and press Enter")\nval validator = Validator(inputElement = textInput, errorText = "Enter at least 3 characters", validator = { it.length() > 2})\nval temperatureSpan = Div()\n\nval btnGroup = ButtonGroup() with {\n    button("metric", label = { + "Celcius"})\n    button("imperial", label = { + "Fahrenheit"})\n}\nbtnGroup.select("metric")\n\nfun fetchWeather() {\n    if (validator.isValid()) {\n        ajaxGet&lt;WeatherData&gt;("http://api.openweathermap.org/data/2.5/weather?q=$\\{textInput.value}&units=$\\{btnGroup.value}") {\n            weatherData ->\n            if (weatherData != null && weatherData.main != null) {\n                temperatureSpan.replace(\n                        Panel(panelStyle = PanelStyle.SUCCESS) with {\n                            heading { +"Temperature in $\\{weatherData.name}" }\n                            content { emph { +"$\\{weatherData.main!!.temp}"} }\n                        })\n            } else {\n                temperatureSpan.replace("Location not found")\n            }\n        }\n    }\n}\n...\ndiv {\n    form(labelDef = "col-sm-4", inputDef = "col-sm-8") {\n        item(label = { +"Location"}, validator = validator) {\n            +textInput\n        }\n        item(label = { +"Units"}) {\n            +btnGroup\n        }\n        item(label = { }) {\n            btsButton(type = ButtonType.SUBMIT, label = { +"Get Weather"}, look = ButtonLook.PRIMARY) {\n                fetchWeather()\n            }\n        }\n    }\n}\n');
+        this.code_puj7f4$('kotlin', '//definition of response, just fragment\nnative trait Main {\n    val temp : Double\n    val pressure : Int\n    val humidity: Int\n    val temp_min : Double\n    val temp_max : Double\n}\n\nnative trait WeatherData {\n    ...\n    val base: String?\n    val main : Main?\n    val wind : Wind?\n    ...\n}\n\n...\nval textInput = TextInput(placeholder = "Type city name and press Enter")\nval validator = Validator(inputElement = textInput, errorText = "Enter at least 3 characters", validator = { it.length() > 2})\nval temperatureSpan = Div()\n\nval btnGroup = ButtonGroup() with {\n    button("metric", label = { + "Celcius"})\n    button("imperial", label = { + "Fahrenheit"})\n}\nbtnGroup.select("metric")\n\nfun fetchWeather() {\n    if (validator.isValid()) {\n        ajaxGet&lt;WeatherData&gt;("http://api.openweathermap.org/data/2.5/weather?q=$\\{textInput.value}&units=$\\{btnGroup.value}") {\n            weatherData ->\n            if (weatherData != null && weatherData.main != null) {\n                temperatureSpan.setChild(\n                        Panel(panelStyle = PanelStyle.SUCCESS) with {\n                            heading { +"Temperature in $\\{weatherData.name}" }\n                            content { emph { +"$\\{weatherData.main!!.temp}"} }\n                        }, Fade())\n            } else {\n                temperatureSpan.setChild("Location not found", Fade())\n            }\n        }\n    }\n}\n...\ndiv {\n    form(labelDef = "col-sm-4", inputDef = "col-sm-8") {\n        item(label = { +"Location"}, validator = validator) {\n            +textInput\n        }\n        item(label = { +"Units"}) {\n            +btnGroup\n        }\n        item(label = { }) {\n            btsButton(type = ButtonType.SUBMIT, label = { +"Get Weather"}, look = ButtonLook.PRIMARY) {\n                fetchWeather()\n            }\n        }\n    }\n}\n');
       },
       f_32: function () {
         this.col_zcukl0$([new _.net.yested.bootstrap.Medium(12)], _.ajax.f_31);
@@ -5054,6 +5175,45 @@
       },
       createTypographySection: function (id) {
         return _.net.yested.div_5rsex9$(void 0, void 0, _.bootstrap.createTypographySection$f(id));
+      },
+      f_309: function () {
+        this.plus_pdl1w0$('Effects');
+      },
+      f_310: function () {
+        this.h3_kv1miw$(_.bootstrap.f_309);
+      },
+      f_311: function () {
+        _.net.yested.bootstrap.pageHeader_kzm4yj$(this, _.bootstrap.f_310);
+        this.plus_pdl1w0$('Effects are applied to components. They must implement the Effect interface:');
+        this.code_puj7f4$('kotlin', 'public trait Effect {\n    fun apply(component:Component)\n}');
+        this.plus_pdl1w0$('Effects are based on JQuery effects.');
+        this.br();
+        this.plus_pdl1w0$('Some effects can applied bidirectionaly - to hide and to show an element for example.');
+        this.br();
+        this.plus_pdl1w0$('These effects must implement BiDirectionalEffect interface:');
+        this.code_puj7f4$('kotlin', 'public trait BiDirectionEffect {\n    fun applyIn(component:Component, callback:Function0<Unit>? = null)\n    fun applyOut(component:Component, callback:Function0<Unit>? = null)\n}');
+      },
+      f_312: function () {
+        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(8)], _.bootstrap.f_311);
+      },
+      f_313: function () {
+        this.plus_pv6laa$(_.effects.createEffectsSection());
+        this.plus_pv6laa$(_.effects.createBidirectionalEffectsSection());
+      },
+      f_314: function () {
+        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(12)], _.bootstrap.f_313);
+      },
+      f_315: function (this$) {
+        return function () {
+          _.net.yested.bootstrap.row_xnql8t$(this$, _.bootstrap.f_312);
+          _.net.yested.bootstrap.row_xnql8t$(this$, _.bootstrap.f_314);
+        };
+      },
+      effectsPage$f: function () {
+        _.net.yested.bootstrap.row_xnql8t$(this, _.bootstrap.f_315(this));
+      },
+      effectsPage: function () {
+        return _.net.yested.div_5rsex9$(void 0, void 0, _.bootstrap.effectsPage$f);
       }
     }),
     complex: Kotlin.definePackage(null, /** @lends _.complex */ {
@@ -5118,13 +5278,13 @@
             textInput.value = editedCity.name;
             select.selectedItems = Kotlin.modules['stdlib'].kotlin.listOf_9mqe4v$([editedCity.continent]);
           }
-          this.placeholder.setContentWithFadeEffect_suy7ya$(_.net.yested.with_owvm91$(new _.net.yested.bootstrap.Form('col-sm-4', 'col-sm-8'), _.complex.MasterDetail.edit$f_1(validator, textInput, select, save, close)));
+          this.placeholder.setChild_hu5ove$(_.net.yested.with_owvm91$(new _.net.yested.bootstrap.Form('col-sm-4', 'col-sm-8'), _.complex.MasterDetail.edit$f_1(validator, textInput, select, save, close)), new _.net.yested.Fade());
         },
         createMasterView: function () {
           return _.net.yested.div_5rsex9$(void 0, void 0, _.complex.MasterDetail.createMasterView$f(this));
         },
         createDiv: function () {
-          this.placeholder.setContentWithFadeEffect_suy7ya$(this.createMasterView());
+          this.placeholder.setChild_hu5ove$(this.createMasterView(), new _.net.yested.Fade());
           this.grid.list = this.list;
           return _.net.yested.div_5rsex9$(void 0, void 0, _.complex.MasterDetail.createDiv$f(this));
         }
@@ -5191,7 +5351,7 @@
         },
         edit$close: function (this$MasterDetail) {
           return function () {
-            this$MasterDetail.placeholder.setContentWithFadeEffect_suy7ya$(this$MasterDetail.createMasterView());
+            this$MasterDetail.placeholder.setChild_hu5ove$(this$MasterDetail.createMasterView(), new _.net.yested.Fade());
           };
         },
         edit$save: function (validator, editedCity, this$MasterDetail, textInput, select, close) {
@@ -5362,6 +5522,205 @@
       },
       createSpinner: function () {
         return _.net.yested.div_5rsex9$(void 0, void 0, _.complex.createSpinner$f);
+      }
+    }),
+    effects: Kotlin.definePackage(null, /** @lends _.effects */ {
+      f: function (n) {
+        return function () {
+          this.plus_pdl1w0$('Sample component ' + n);
+        };
+      },
+      f_0: function (n) {
+        return function () {
+          this.plus_pdl1w0$('Sample Text of component ' + n);
+        };
+      },
+      createPanel$f: function (n) {
+        return function () {
+          this.heading_kv1miw$(_.effects.f(n));
+          this.content_kv1miw$(_.effects.f_0(n));
+        };
+      },
+      createPanel: function (n) {
+        return _.net.yested.with_owvm91$(new _.net.yested.bootstrap.Panel(), _.effects.createPanel$f(n));
+      },
+      createBidirectionalEffectsSection$selectEffect: function (effect) {
+        return function (effectCode) {
+          var tmp$0;
+          if (effectCode === 'fade')
+            tmp$0 = new _.net.yested.Fade();
+          else if (effectCode === 'slide')
+            tmp$0 = new _.net.yested.Slide();
+          else
+            throw new Kotlin.Exception('Unknown effect.');
+          effect.v = tmp$0;
+        };
+      },
+      createBidirectionalEffectsSection$toogleContent: function (container, panels, index, effect) {
+        return function () {
+          container.setChild_hu5ove$(panels[index.v++ % panels.length], effect.v);
+        };
+      },
+      f_1: function () {
+        this.plus_pdl1w0$('BiDirectional Effects');
+      },
+      f_2: function () {
+        this.h3_kv1miw$(_.effects.f_1);
+      },
+      f_3: function () {
+        _.net.yested.bootstrap.pageHeader_kzm4yj$(this, _.effects.f_2);
+      },
+      f_4: function () {
+        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(12)], _.effects.f_3);
+      },
+      f_5: function () {
+        this.plus_pdl1w0$('Demo');
+      },
+      f_6: function () {
+        this.plus_pdl1w0$('Fade Effect');
+      },
+      f_7: function () {
+        this.plus_pdl1w0$('Slide Effect');
+      },
+      f_8: function () {
+        this.button_ubg574$('fade', void 0, _.effects.f_6);
+        this.button_ubg574$('slide', void 0, _.effects.f_7);
+        this.select_61zpoe$('fade');
+      },
+      f_9: function () {
+        this.plus_pdl1w0$('Toogle it');
+      },
+      f_10: function (selectEffect, toogleContent) {
+        return function () {
+          _.net.yested.bootstrap.buttonGroup_wnptsr$(this, void 0, selectEffect, _.effects.f_8);
+          this.br();
+          this.br();
+          _.net.yested.bootstrap.btsButton_adnmfr$(this, void 0, _.effects.f_9, _.net.yested.bootstrap.ButtonLook.object.PRIMARY, void 0, void 0, toogleContent);
+        };
+      },
+      f_11: function (selectEffect, toogleContent, container) {
+        return function () {
+          this.plus_pdl1w0$('BiDirectonalEffects can be used to swap content of parent component like Div or Span');
+          this.code_puj7f4$('kotlin', 'divOrSpan.setChild(anotherComponent, Fade())\n');
+          this.h4_kv1miw$(_.effects.f_5);
+          this.div_5rsex9$(void 0, void 0, _.effects.f_10(selectEffect, toogleContent));
+          this.br();
+          this.br();
+          this.plus_pv6laa$(container);
+        };
+      },
+      f_12: function () {
+        this.plus_pdl1w0$('Source code');
+      },
+      f_13: function () {
+        this.h4_kv1miw$(_.effects.f_12);
+        this.code_puj7f4$('kotlin', 'var index = 0\nval panels = array(createPanel(0), createPanel(1))\nval container = Div()\nvar effect: BiDirectionEffect = Fade()\n\nfun selectEffect(effectCode:String) {\n    effect =\n        when(effectCode) {\n            "fade" -> Fade()\n            "slide" -> Slide()\n            else -> throw Exception("Unknown effect.")\n        }\n}\n\nfun toogleContent() =\n    container.setChild(panels.get(index++ % panels.size()), effect)\n\ntoogleContent()\n\n...\n\ndiv {\n    buttonGroup(onSelect = ::selectEffect) {\n        button(value = "fade") { +"Fade Effect" }\n        button(value = "slide") { +"Slide Effect" }\n        select("fade")\n    }\n    br()\n    br()\n    btsButton(look = ButtonLook.PRIMARY, label = { +"Toogle it" }, onclick = ::toogleContent)\n}\nbr()\nbr()\n+container');
+      },
+      f_14: function (selectEffect, toogleContent, container) {
+        return function () {
+          this.col_zcukl0$([new _.net.yested.bootstrap.Medium(6)], _.effects.f_11(selectEffect, toogleContent, container));
+          this.col_zcukl0$([new _.net.yested.bootstrap.Medium(6)], _.effects.f_13);
+        };
+      },
+      createBidirectionalEffectsSection$f: function (selectEffect, toogleContent, container) {
+        return function () {
+          _.net.yested.bootstrap.row_xnql8t$(this, _.effects.f_4);
+          _.net.yested.bootstrap.row_xnql8t$(this, _.effects.f_14(selectEffect, toogleContent, container));
+        };
+      },
+      createBidirectionalEffectsSection: function () {
+        var index = {v: 0};
+        var panels = [_.effects.createPanel(0), _.effects.createPanel(1)];
+        var container = new _.net.yested.Div();
+        var effect = {v: new _.net.yested.Fade()};
+        var selectEffect = _.effects.createBidirectionalEffectsSection$selectEffect(effect);
+        var toogleContent = _.effects.createBidirectionalEffectsSection$toogleContent(container, panels, index, effect);
+        toogleContent();
+        return _.net.yested.div_5rsex9$(void 0, void 0, _.effects.createBidirectionalEffectsSection$f(selectEffect, toogleContent, container));
+      },
+      f_15: function () {
+        this.plus_pdl1w0$('Sample component');
+      },
+      f_16: function () {
+        this.plus_pdl1w0$('Some bolded text');
+      },
+      f_17: function () {
+        this.plus_pdl1w0$('Some link');
+      },
+      f_18: function () {
+        this.plus_pdl1w0$('Sample Text');
+        this.br();
+        this.emph_kv1miw$(_.effects.f_16);
+        this.br();
+        this.a_b4th6h$(void 0, void 0, void 0, _.effects.f_17);
+      },
+      createEffectsSection$f: function () {
+        this.heading_kv1miw$(_.effects.f_15);
+        this.content_kv1miw$(_.effects.f_18);
+      },
+      f_19: function () {
+        this.plus_pdl1w0$('Slide Up/Down');
+      },
+      f_20: function () {
+        this.h3_kv1miw$(_.effects.f_19);
+      },
+      f_21: function () {
+        _.net.yested.bootstrap.pageHeader_kzm4yj$(this, _.effects.f_20);
+      },
+      f_22: function () {
+        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(12)], _.effects.f_21);
+      },
+      f_23: function () {
+        this.plus_pdl1w0$('Demo');
+      },
+      f_24: function () {
+        this.plus_pdl1w0$('Toogle it');
+      },
+      f_25: function (visible, target) {
+        return function () {
+          if (visible.v) {
+            (new _.net.yested.SlideUp()).apply_suy7ya$(target);
+          }
+           else {
+            (new _.net.yested.SlideDown()).apply_suy7ya$(target);
+          }
+          visible.v = !visible.v;
+        };
+      },
+      f_26: function (visible, target) {
+        return function () {
+          this.plus_pdl1w0$('Effects are applied directly on components:');
+          this.code_puj7f4$('kotlin', 'SlideUp().apply(component)');
+          this.h4_kv1miw$(_.effects.f_23);
+          _.net.yested.bootstrap.btsButton_adnmfr$(this, void 0, _.effects.f_24, void 0, void 0, void 0, _.effects.f_25(visible, target));
+          this.br();
+          this.br();
+          this.plus_pv6laa$(target);
+        };
+      },
+      f_27: function () {
+        this.plus_pdl1w0$('Source code');
+      },
+      f_28: function () {
+        this.h4_kv1miw$(_.effects.f_27);
+        this.code_puj7f4$('kotlin', 'var visible: Boolean = true\n\nval target = Panel() with {\n    heading { +"Sample component" }\n    content {\n        +"Sample Text"\n        br()\n        emph { +"Some bolded text" }\n        br()\n        br()\n        a() { +"Some text" }\n    }\n}\n\n...\n\ndiv {\n    btsButton(label = { +"Toogle it" }) {\n        if (visible) {\n            SlideUp().apply(target)\n        } else {\n            SlideDown().apply(target)\n        }\n        visible = !visible\n    }\n    br()\n    +target\n}');
+      },
+      f_29: function (visible, target) {
+        return function () {
+          this.col_zcukl0$([new _.net.yested.bootstrap.Medium(6)], _.effects.f_26(visible, target));
+          this.col_zcukl0$([new _.net.yested.bootstrap.Medium(6)], _.effects.f_28);
+        };
+      },
+      createEffectsSection$f_0: function (visible, target) {
+        return function () {
+          _.net.yested.bootstrap.row_xnql8t$(this, _.effects.f_22);
+          _.net.yested.bootstrap.row_xnql8t$(this, _.effects.f_29(visible, target));
+        };
+      },
+      createEffectsSection: function () {
+        var visible = {v: true};
+        var target = _.net.yested.with_owvm91$(new _.net.yested.bootstrap.Panel(), _.effects.createEffectsSection$f);
+        return _.net.yested.div_5rsex9$(void 0, void 0, _.effects.createEffectsSection$f_0(visible, target));
       }
     }),
     gettingstarted: Kotlin.definePackage(null, /** @lends _.gettingstarted */ {
