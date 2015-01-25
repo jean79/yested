@@ -28,9 +28,12 @@ public class Row(): Component {
 
 }
 
-//TODO: http://stackoverflow.com/questions/14809313/twitter-bootstrap-float-div-right
-//Do in another branch
-public class Page(val element: HTMLElement) {
+public enum class ContainerLayout(val code:String) {
+    DEFAULT : ContainerLayout("container")
+    FLUID : ContainerLayout("container-fluid")
+}
+
+public class Page(val element: HTMLElement, val layout: ContainerLayout = ContainerLayout.DEFAULT) {
 
     public fun topMenu(navbar: Navbar) {
         element.appendComponent(navbar)
@@ -39,8 +42,7 @@ public class Page(val element: HTMLElement) {
     public fun content(init: HTMLComponent.() -> Unit): Unit {
         element.appendChild(
                 div {
-                    "class".."container theme-showcase"
-                    "role".."main"
+                    "class"..layout.code
                     init()
                 }.element)
     }
@@ -72,8 +74,8 @@ public fun HTMLComponent.row(init:Row.()->Unit) {
     +(Row() with  { init() })
 }
 
-public fun page(placeholderElementId:String, init:Page.() -> Unit):Unit {
-    Page(el(placeholderElementId) as HTMLElement) with {
+public fun page(placeholderElementId:String, layout: ContainerLayout = ContainerLayout.DEFAULT, init:Page.() -> Unit):Unit {
+    Page(el(placeholderElementId) as HTMLElement, layout) with {
         this.init()
     }
 }

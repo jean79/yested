@@ -19,6 +19,7 @@ import net.yested.BiDirectionEffect
 import net.yested.bootstrap.aligned
 import net.yested.bootstrap.TextAlign
 import net.yested.bootstrap.ButtonLook
+import net.yested.bootstrap.ExtraSmall
 
 fun createPanel(n:Int) =
         Panel() with {
@@ -57,23 +58,23 @@ fun createBidirectionalEffectsSection(): Div {
         }
         row {
             col(Medium(6)) {
-+"""BiDirectonalEffects can be used to swap content of parent component like Div or Span"""
-                code(lang="kotlin", content =
-"""divOrSpan.setChild(anotherComponent, Fade())
-""")
+                +"BiDirectonalEffects can be used to swap content of parent component like Div or Span"
+                code(lang="kotlin", content ="divOrSpan.setChild(anotherComponent, Fade())")
                 h4 { +"Demo" }
-                div {
-                    buttonGroup(onSelect = ::selectEffect) {
-                        button(value = "fade") { +"Fade Effect" }
-                        button(value = "slide") { +"Slide Effect" }
-                        select("fade")
+                row {
+                    col(ExtraSmall(4)) {
+                        btsButton(look = ButtonLook.PRIMARY, label = { +"Toogle it" }, onclick = ::toogleContent)
                     }
-                    br()
-                    br()
-                    btsButton(look = ButtonLook.PRIMARY, label = { +"Toogle it" }, onclick = ::toogleContent)
+                    col(ExtraSmall(8)) {
+                        aligned(align = TextAlign.RIGHT) {
+                            buttonGroup(onSelect = ::selectEffect) {
+                                button(value = "fade") { +"Fade Effect" }
+                                button(value = "slide") { +"Slide Effect" }
+                                select("fade")
+                            }
+                        }
+                    }
                 }
-                br()
-                br()
                 +container
             }
             col(Medium(6)) {
@@ -100,18 +101,20 @@ toogleContent()
 
 ...
 
-div {
-    buttonGroup(onSelect = ::selectEffect) {
-        button(value = "fade") { +"Fade Effect" }
-        button(value = "slide") { +"Slide Effect" }
-        select("fade")
+row {
+    col(ExtraSmall(4)) {
+        btsButton(look = ButtonLook.PRIMARY, label = { +"Toogle it" }, onclick = ::toogleContent)
     }
-    br()
-    br()
-    btsButton(look = ButtonLook.PRIMARY, label = { +"Toogle it" }, onclick = ::toogleContent)
+    col(ExtraSmall(8)) {
+        aligned(align = TextAlign.RIGHT) {
+            buttonGroup(onSelect = ::selectEffect) {
+                button(value = "fade") { +"Fade Effect" }
+                button(value = "slide") { +"Slide Effect" }
+                select("fade")
+            }
+        }
+    }
 }
-br()
-br()
 +container""")
             }
         }
