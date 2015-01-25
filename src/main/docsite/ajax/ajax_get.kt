@@ -19,6 +19,7 @@ import net.yested.bootstrap.ButtonGroup
 import net.yested.bootstrap.Alert
 import net.yested.bootstrap.AlertStyle
 import net.yested.bootstrap.Medium
+import net.yested.Fade
 
 /**
  * Created by jean on 24.12.2014.
@@ -92,13 +93,16 @@ fun createAjaxGetSection(): Div {
             ajaxGet<WeatherData>("http://api.openweathermap.org/data/2.5/weather?q=${textInput.value}&units=${btnGroup.value}") {
                 weatherData ->
                 if (weatherData != null && weatherData.main != null) {
-                    temperatureSpan.setContentWithFadeEffect(
+                    temperatureSpan.setChild(
                             Panel(style = PanelStyle.SUCCESS) with {
                                 heading { +"Temperature in ${weatherData.name}" }
                                 content { emph { +"${weatherData.main!!.temp}"} }
-                            })
+                            },
+                            Fade())
                 } else {
-                    temperatureSpan.setContentWithFadeEffect( Alert(style = AlertStyle.DANGER) with { +"Location not found" })
+                    temperatureSpan.setChild(
+                            Alert(style = AlertStyle.DANGER) with { +"Location not found" },
+                            Fade())
                 }
             }
         }
@@ -190,13 +194,13 @@ fun fetchWeather() {
         ajaxGet&lt;WeatherData&gt;("http://api.openweathermap.org/data/2.5/weather?q=$\{textInput.value}&units=$\{btnGroup.value}") {
             weatherData ->
             if (weatherData != null && weatherData.main != null) {
-                temperatureSpan.replace(
+                temperatureSpan.setChild(
                         Panel(panelStyle = PanelStyle.SUCCESS) with {
                             heading { +"Temperature in $\{weatherData.name}" }
                             content { emph { +"$\{weatherData.main!!.temp}"} }
-                        })
+                        }, Fade())
             } else {
-                temperatureSpan.replace("Location not found")
+                temperatureSpan.setChild("Location not found", Fade())
             }
         }
     }

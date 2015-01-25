@@ -17,6 +17,7 @@ import net.yested.bootstrap.ButtonLook
 import net.yested.bootstrap.row
 import net.yested.bootstrap.pageHeader
 import net.yested.bootstrap.Medium
+import net.yested.Fade
 
 enum class Continent(val label:String) {
     EUROPE : Continent("Europe");
@@ -63,7 +64,7 @@ class MasterDetail {
         select.data = Continent.values().toList()
 
         fun close() {
-            placeholder.setContentWithFadeEffect( createMasterView() )
+            placeholder.setChild( createMasterView(), Fade() )
         }
 
         fun save() {
@@ -82,7 +83,7 @@ class MasterDetail {
             select.selectedItems = listOf(editedCity.continent)
         }
 
-        placeholder.setContentWithFadeEffect(
+        placeholder.setChild(
             Form(labelDef = "col-sm-4", inputDef = "col-sm-8") with  {
                 item(label = { +"City name"}, validator = validator) {
                     +textInput
@@ -96,7 +97,7 @@ class MasterDetail {
                         btsButton(label = { +"Cancel" }, onclick = ::close)
                     }
                 }
-            })
+            }, Fade())
 
     }
 
@@ -108,7 +109,7 @@ class MasterDetail {
 
     fun createDiv(): Div {
 
-        placeholder.setContentWithFadeEffect(createMasterView())
+        placeholder.setChild(createMasterView(), Fade())
         grid.list = list
 
         return div {

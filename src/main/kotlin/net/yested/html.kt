@@ -35,9 +35,6 @@ public fun HTMLElement.removeChildByName(childElementName:String) {
     }
 }
 
-native fun JQuery.fadeOut(duration:Int, callback:()->Unit) :Unit = noImpl;
-native fun JQuery.fadeIn(duration:Int, callback:()->Unit) :Unit = noImpl;
-
 public open class HTMLComponent(tagName:String) : Component {
 
     override public var element = createElement(tagName)
@@ -70,11 +67,12 @@ public open class HTMLComponent(tagName:String) : Component {
         element.appendChild(component.element)
     }
 
-    public fun setContentWithFadeEffect(newContent:Component, callback: () -> Unit = {}) {
-        jq(element).fadeOut(200) {
-            element.innerHTML = ""
-            element.appendChild(newContent.element)
-            jq(element).fadeIn(200, callback)
+    public fun setChild(content:Component, effect:BiDirectionEffect, callback:Function0<Unit>? = null) {
+        effect.applyOut(this) {
+            setChild(content)
+            effect.applyIn(this) {
+                callback?.let { callback!!()}
+            }
         }
     }
 
