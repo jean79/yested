@@ -276,6 +276,36 @@
         call: function (function_0) {
           function_0 != null ? Kotlin.modules['stdlib'].kotlin.let_7hr6ff$(function_0, _.net.yested.call$f(function_0)) : null;
         },
+        Show: Kotlin.createClass(function () {
+          return [_.net.yested.Effect];
+        }, null, /** @lends _.net.yested.Show.prototype */ {
+          apply_suy7ya$: function (component, callback) {
+            if (callback === void 0)
+              callback = null;
+            $(component.element).show(_.net.yested.Show.apply_suy7ya$f(callback));
+          }
+        }, /** @lends _.net.yested.Show */ {
+          apply_suy7ya$f: function (callback) {
+            return function () {
+              _.net.yested.call(callback);
+            };
+          }
+        }),
+        Hide: Kotlin.createClass(function () {
+          return [_.net.yested.Effect];
+        }, null, /** @lends _.net.yested.Hide.prototype */ {
+          apply_suy7ya$: function (component, callback) {
+            if (callback === void 0)
+              callback = null;
+            $(component.element).hide(_.net.yested.Hide.apply_suy7ya$f(callback));
+          }
+        }, /** @lends _.net.yested.Hide */ {
+          apply_suy7ya$f: function (callback) {
+            return function () {
+              _.net.yested.call(callback);
+            };
+          }
+        }),
         SlideUp: Kotlin.createClass(function () {
           return [_.net.yested.Effect];
         }, null, /** @lends _.net.yested.SlideUp.prototype */ {
@@ -1766,15 +1796,18 @@
           }),
           Grid: Kotlin.createClass(function () {
             return [_.net.yested.Component];
-          }, function (columns) {
+          }, function (responsive, columns) {
             var tmp$0, tmp$1, tmp$2, tmp$3;
+            if (responsive === void 0)
+              responsive = false;
             this.columns = columns;
-            this.$element_88h9vf$ = _.net.yested.createElement_61zpoe$('table');
+            this.tableElement_xwsli3$ = _.net.yested.createElement_61zpoe$('table');
+            this.$element_88h9vf$ = responsive ? this.createResponsiveWrapper() : this.tableElement_xwsli3$;
             this.sortColumn_xix3o5$ = null;
             this.asc_s2pzui$ = true;
             this.arrowsPlaceholders_39i6vz$ = new Kotlin.ArrayList();
             this.columnHeaders_13ipnd$ = null;
-            this.element.className = 'table table-striped table-hover table-condensed';
+            this.tableElement_xwsli3$.className = 'table table-striped table-hover table-condensed';
             tmp$0 = Kotlin.modules['stdlib'].kotlin.map_rie7ol$(this.columns, _.net.yested.bootstrap.Grid.Grid$f(this));
             this.columnHeaders_13ipnd$ = tmp$0;
             this.renderHeader();
@@ -1788,6 +1821,12 @@
               get: function () {
                 return this.$element_88h9vf$;
               }
+            },
+            createResponsiveWrapper: function () {
+              var div = _.net.yested.createElement_61zpoe$('div');
+              div.setAttribute('class', 'table-responsive');
+              div.appendChild(this.tableElement_xwsli3$);
+              return div;
             },
             list: {
               get: function () {
@@ -1814,14 +1853,14 @@
               this.setSortingArrow();
             },
             renderHeader: function () {
-              _.net.yested.appendComponent_c36dq0$(this.element, _.net.yested.with_owvm91$(new _.net.yested.THead(), _.net.yested.bootstrap.Grid.renderHeader$f(this)));
+              _.net.yested.appendComponent_c36dq0$(this.tableElement_xwsli3$, _.net.yested.with_owvm91$(new _.net.yested.THead(), _.net.yested.bootstrap.Grid.renderHeader$f(this)));
             },
             sortData: function (toSort) {
               return Kotlin.modules['stdlib'].kotlin.sortBy_r48qxn$(toSort, _.net.yested.bootstrap.Grid.sortData$f(this));
             },
             displayData: function () {
               var tmp$0;
-              _.net.yested.removeChildByName_thdyg2$(this.element, 'tbody');
+              _.net.yested.removeChildByName_thdyg2$(this.tableElement_xwsli3$, 'tbody');
               (tmp$0 = this.dataList_chk18h$) != null ? Kotlin.modules['stdlib'].kotlin.let_7hr6ff$(tmp$0, _.net.yested.bootstrap.Grid.displayData$f(this)) : null;
             }
           }, /** @lends _.net.yested.bootstrap.Grid */ {
@@ -1905,7 +1944,7 @@
               return function (it) {
                 var tmp$0, tmp$1;
                 var values = this$Grid.sortColumn_xix3o5$ != null ? this$Grid.sortData((tmp$0 = this$Grid.dataList_chk18h$) != null ? tmp$0 : Kotlin.throwNPE()) : (tmp$1 = this$Grid.dataList_chk18h$) != null ? tmp$1 : Kotlin.throwNPE();
-                _.net.yested.appendComponent_c36dq0$(this$Grid.element, _.net.yested.with_owvm91$(new _.net.yested.TBody(), _.net.yested.bootstrap.Grid.f_7(values, this$Grid)));
+                _.net.yested.appendComponent_c36dq0$(this$Grid.tableElement_xwsli3$, _.net.yested.with_owvm91$(new _.net.yested.TBody(), _.net.yested.bootstrap.Grid.f_7(values, this$Grid)));
               };
             }
           }),
@@ -4369,7 +4408,7 @@
       },
       createGrid: function (id) {
         var data = Kotlin.modules['stdlib'].kotlin.listOf_9mqe4v$([new _.bootstrap.Person('Jan', 15), new _.bootstrap.Person('Peter', 30), new _.bootstrap.Person('Martin', 31)]);
-        var grid = new _.net.yested.bootstrap.Grid([new _.net.yested.bootstrap.Column(_.net.yested.text_61zpoe$('Name'), _.bootstrap.createGrid$f, _.bootstrap.createGrid$f_0), new _.net.yested.bootstrap.Column(_.net.yested.text_61zpoe$('Age '), _.bootstrap.createGrid$f_1, _.bootstrap.compareBy(_.bootstrap.createGrid$f_2), void 0, true, true)]);
+        var grid = new _.net.yested.bootstrap.Grid(void 0, [new _.net.yested.bootstrap.Column(_.net.yested.text_61zpoe$('Name'), _.bootstrap.createGrid$f, _.bootstrap.createGrid$f_0), new _.net.yested.bootstrap.Column(_.net.yested.text_61zpoe$('Age '), _.bootstrap.createGrid$f_1, _.bootstrap.compareBy(_.bootstrap.createGrid$f_2), void 0, true, true)]);
         grid.list = data;
         return _.net.yested.div_5rsex9$(void 0, void 0, _.bootstrap.createGrid$f_3(id, grid));
       },
@@ -5274,7 +5313,7 @@
       MasterDetail: Kotlin.createClass(null, function () {
         this.placeholder = new _.net.yested.Div();
         this.list = Kotlin.modules['stdlib'].kotlin.arrayListOf_9mqe4v$([new _.complex.City('Prague', _.complex.Continent.object.EUROPE), new _.complex.City('London', _.complex.Continent.object.EUROPE), new _.complex.City('New York', _.complex.Continent.object.AMERICA)]);
-        this.grid = new _.net.yested.bootstrap.Grid([new _.net.yested.bootstrap.Column(_.complex.MasterDetail.MasterDetail$f, _.complex.MasterDetail.MasterDetail$f_0, _.bootstrap.compareBy(_.complex.MasterDetail.MasterDetail$f_1), void 0, true), new _.net.yested.bootstrap.Column(_.complex.MasterDetail.MasterDetail$f_2, _.complex.MasterDetail.MasterDetail$f_3, _.bootstrap.compareBy(_.complex.MasterDetail.MasterDetail$f_4)), new _.net.yested.bootstrap.Column(_.complex.MasterDetail.MasterDetail$f_5, _.complex.MasterDetail.MasterDetail$f_6(this), _.bootstrap.compareBy(_.complex.MasterDetail.MasterDetail$f_7)), new _.net.yested.bootstrap.Column(_.complex.MasterDetail.MasterDetail$f_8, _.complex.MasterDetail.MasterDetail$f_9(this), _.bootstrap.compareBy(_.complex.MasterDetail.MasterDetail$f_10))]);
+        this.grid = new _.net.yested.bootstrap.Grid(void 0, [new _.net.yested.bootstrap.Column(_.complex.MasterDetail.MasterDetail$f, _.complex.MasterDetail.MasterDetail$f_0, _.bootstrap.compareBy(_.complex.MasterDetail.MasterDetail$f_1), void 0, true), new _.net.yested.bootstrap.Column(_.complex.MasterDetail.MasterDetail$f_2, _.complex.MasterDetail.MasterDetail$f_3, _.bootstrap.compareBy(_.complex.MasterDetail.MasterDetail$f_4)), new _.net.yested.bootstrap.Column(_.complex.MasterDetail.MasterDetail$f_5, _.complex.MasterDetail.MasterDetail$f_6(this), _.bootstrap.compareBy(_.complex.MasterDetail.MasterDetail$f_7)), new _.net.yested.bootstrap.Column(_.complex.MasterDetail.MasterDetail$f_8, _.complex.MasterDetail.MasterDetail$f_9(this), _.bootstrap.compareBy(_.complex.MasterDetail.MasterDetail$f_10))]);
       }, /** @lends _.complex.MasterDetail.prototype */ {
         delete: function (city) {
           this.list.remove_za3rmp$(city);

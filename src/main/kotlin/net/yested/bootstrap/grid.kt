@@ -13,6 +13,8 @@ import net.yested.appendComponent
 import net.yested.THead
 import net.yested.TBody
 import net.yested.removeChildByName
+import kotlin.js.dom.html.HTMLElement
+import net.yested.div
 
 public data class Column<T>(
         val label: HTMLComponent.() -> Unit,
@@ -48,17 +50,26 @@ public class ColumnHeader<T>(val column:Column<T>, sortFunction:(Column<T>) -> U
 
 }
 
-public class Grid<T>(val columns:Array<Column<T>>) : Component {
+public class Grid<T>(responsive: Boolean = false, val columns:Array<Column<T>>) : Component {
 
-    override val element = createElement("table")
+    private val tableElement = createElement("table")
+
+    override val element: HTMLElement = if (responsive) createResponsiveWrapper() else tableElement
 
     private var sortColumn:Column<T>? = null
     private var asc:Boolean = true;
     private val arrowsPlaceholders = ArrayList<Span>();
     private var columnHeaders:List<ColumnHeader<T>>? = null
 
+    private fun createResponsiveWrapper():HTMLElement {
+        val div = createElement("div")
+        div.setAttribute("class", "table-responsive")
+        div.appendChild(tableElement)
+        return div
+    }
+
     {
-        element.className = "table table-striped table-hover table-condensed"
+        tableElement.className = "table table-striped table-hover table-condensed"
         columnHeaders = columns.map { ColumnHeader(column = it, sortFunction = { sortByColumn(it)}) }
         renderHeader()
         sortColumn = (columns.filter { it.defaultSort } : Iterable<Column<T>>).firstOrNull()
@@ -91,7 +102,7 @@ public class Grid<T>(val columns:Array<Column<T>>) : Component {
     }
 
     private fun renderHeader() {
-        element.appendComponent(THead() with
+        tableElement.appendComponent(THead() with
              {
                 tr {
                     columnHeaders!!.forEach { columnHeader ->
@@ -113,12 +124,12 @@ public class Grid<T>(val columns:Array<Column<T>>) : Component {
     }
 
     private fun displayData() {
-        element.removeChildByName("tbody")
+        tableElement.removeChildByName("tbody")
         dataList?.let {
 
             val values = if (sortColumn != null) sortData(dataList!!) else dataList!!
 
-            element.appendComponent(TBody() with
+            tableElement.appendComponent(TBody() with
                  {
                     values.forEach { item ->
                         tr {
