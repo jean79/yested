@@ -11,6 +11,8 @@ native fun JQuery.fadeOut(duration:Int, callback:()->Unit) :Unit = noImpl;
 native fun JQuery.fadeIn(duration:Int, callback:()->Unit) :Unit = noImpl;
 native fun JQuery.slideUp(duration:Int, callback:()->Unit) :Unit = noImpl
 native fun JQuery.slideDown(duration:Int, callback:()->Unit) :Unit = noImpl
+native fun JQuery.show(callback:()->Unit) :Unit = noImpl;
+native fun JQuery.hide(callback:()->Unit) :Unit = noImpl;
 
 private val DURATION = 200
 private val SLIDE_DURATION = DURATION * 2
@@ -26,6 +28,18 @@ public trait BiDirectionEffect {
 
 private fun call(function:Function0<Unit>?) {
     function?.let { function!!() }
+}
+
+public class Show() : Effect {
+    override fun apply(component: Component, callback: (() -> Unit)?) {
+        jq(component.element).show { call(callback) }
+    }
+}
+
+public class Hide() : Effect {
+    override fun apply(component: Component, callback: (() -> Unit)?) {
+        jq(component.element).hide { call(callback) }
+    }
 }
 
 public class SlideUp() : Effect {
