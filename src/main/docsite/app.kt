@@ -22,6 +22,10 @@ import net.yested.bootstrap.textInput
 import net.yested.ButtonType
 import net.yested.bootstrap.NavbarLook
 import net.yested.bootstrap.NavbarPosition
+import bootstrap.effectsPage
+import net.yested.Fade
+import net.yested.Slide
+import net.yested.bootstrap.ContainerLayout
 
 fun main(args: Array<String>) {
 
@@ -34,6 +38,7 @@ fun main(args: Array<String>) {
 			item(href = "#ajax") { +"Ajax Call" }
 			item(href = "#masterdetail") { +"Master/Detail" }
 			item(href = "#spinner") { +"Spinner" }
+			item(href = "#effects") { +"Effects" }
 		}
 	}
 
@@ -41,21 +46,22 @@ fun main(args: Array<String>) {
 
 	registerHashChangeListener { hash ->
 		when (hash.get(0)) {
-			"#", "" -> divContainer.setContentWithFadeEffect(basicPage())
-			"#gettingstarted" -> divContainer.setContentWithFadeEffect(gettingStartedSection())
-			"#html" -> divContainer.setContentWithFadeEffect(htmlPage())
+			"#", "" -> divContainer.setChild(basicPage(), Fade())
+			"#gettingstarted" -> divContainer.setChild(gettingStartedSection(), Fade())
+			"#html" -> divContainer.setChild(htmlPage(), Fade())
 			"#bootstrapComponents" -> {
 				if (hash.size() == 1) {
-					divContainer.setContentWithFadeEffect(bootstrapPage())
+					divContainer.setChild(bootstrapPage(), Fade())
 				}
 			}
-			"#ajax" -> divContainer.setContentWithFadeEffect(ajaxPage())
-			"#masterdetail" -> divContainer.setContentWithFadeEffect(masterDetail())
-			"#spinner" -> divContainer.setContentWithFadeEffect(createSpinner())
+			"#ajax" -> divContainer.setChild(ajaxPage(), Fade())
+			"#masterdetail" -> divContainer.setChild(masterDetail(), Fade())
+			"#spinner" -> divContainer.setChild(createSpinner(), Fade())
+			"#effects" -> divContainer.setChild(effectsPage(), Fade())
 		}
 	}
 
-	page("page") {
+	page(placeholderElementId = "page") {
 		topMenu(navbar)
 		content {
 			div {

@@ -7,6 +7,7 @@ import net.yested.Component
 import kotlin.js.dom.html.HTMLElement
 import net.yested.createElement
 import net.yested.appendComponent
+import net.yested.with
 
 /**
  * Created by jean on 24.12.2014.
@@ -51,4 +52,8 @@ public class ButtonGroup(val size: ButtonSize = ButtonSize.DEFAULT, val onSelect
         buttons.put(value, button)
     }
 
+}
+
+public fun HTMLComponent.buttonGroup(size: ButtonSize = ButtonSize.DEFAULT, onSelect:Function1<String, Unit>? = null, init:ButtonGroup.() -> Unit) {
+    +(ButtonGroup(size = size, onSelect = onSelect) with init)
 }

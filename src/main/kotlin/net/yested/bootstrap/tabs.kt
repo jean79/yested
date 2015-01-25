@@ -13,6 +13,7 @@ import java.util.HashMap
 import net.yested.Component
 import net.yested.createElement
 import net.yested.appendComponent
+import net.yested.Fade
 
 /**
  * <div role="tabpanel">
@@ -69,7 +70,7 @@ public class Tabs : Component {
 
         anchorsLi.filter { it != li} .forEach { it.clazz = "" }
 
-        content.setContentWithFadeEffect(renderContent(tabId, init));
+        content.setChild(renderContent(tabId, init), Fade());
 
         if (onSelect != null) {
             onSelect()
