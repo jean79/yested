@@ -25,6 +25,7 @@ import net.yested.bootstrap.NavbarPosition
 import bootstrap.effectsPage
 import net.yested.Fade
 import net.yested.Slide
+import net.yested.bootstrap.ContainerLayout
 
 fun main(args: Array<String>) {
 
@@ -60,7 +61,7 @@ fun main(args: Array<String>) {
 		}
 	}
 
-	page("page") {
+	page(placeholderElementId = "page") {
 		topMenu(navbar)
 		content {
 			div {
