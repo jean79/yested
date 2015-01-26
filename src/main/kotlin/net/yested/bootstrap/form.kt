@@ -64,10 +64,16 @@ public class Validator<T>(val inputElement: InputElement<T>, override val errorT
 
 }
 
-public class Form(private val labelDef:String = "col-sm-2",private val inputDef:String = "col-sm-10") : HTMLComponent("form") {
+public enum class FormStyle(val code:String) {
+    DEFAULT: FormStyle("form-default")
+    INLINE: FormStyle("form-inline")
+    HORIZONTAL: FormStyle("form-horizontal")
+}
+
+public class Form(private val formStyle: FormStyle = FormStyle.DEFAULT, private val labelDef:DeviceSize = Small(4), private val inputDef:DeviceSize = Small(8)) : HTMLComponent("form") {
 
     {
-        element.setAttribute("class", "form-horizontal")
+        element.setAttribute("class", "${formStyle.code}")
         role = "form"
         element.setAttribute("onsubmit", "return false")
     }
@@ -75,10 +81,14 @@ public class Form(private val labelDef:String = "col-sm-2",private val inputDef:
     public fun item(forId:String = "", label: HTMLComponent.()->Unit, validator:ValidatorI? = null, content: HTMLComponent.()->Unit) {
 
         val spanErrMsg = Span() with { clazz = "help-block" }
-        val divInput = div(clazz = "$inputDef", init = content) with { +spanErrMsg }
+        println("form style: $formStyle")
+        val divInput = if (formStyle == FormStyle.HORIZONTAL) {
+            println("horizontal")
+            div(clazz = "$inputDef", init = content) with { +spanErrMsg }
+        } else span(init = content) with { +spanErrMsg }
 
         val divFormGroup = div(clazz = "form-group") {
-                label(forId = forId, clazz= "${labelDef} control-label", init = label)
+                label(forId = forId, clazz= if (formStyle == FormStyle.HORIZONTAL) "${labelDef} control-label" else "", init = label)
                 + divInput
             }
         validator?.onchange {
@@ -90,8 +100,8 @@ public class Form(private val labelDef:String = "col-sm-2",private val inputDef:
 
 }
 
-public fun HTMLComponent.btsForm(labelDef:String = "col-sm-2", inputDef:String = "col-sm-10", init:Form.() -> Unit):Unit {
-    val form = Form(labelDef = labelDef, inputDef = inputDef)
+public fun HTMLComponent.btsForm(formStyle: FormStyle = FormStyle.DEFAULT, labelDef:DeviceSize = Small(4), inputDef:DeviceSize = Small(8), init:Form.() -> Unit):Unit {
+    val form = Form(formStyle = formStyle, labelDef = labelDef, inputDef = inputDef)
     form.init()
     +form
 }

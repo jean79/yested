@@ -45,8 +45,7 @@ Please note that validator is also attached to form item.
                 }
                 br()
                 h4 { +"Demo" }
-
-                btsForm(labelDef = "col-sm-3", inputDef = "col-sm-9") {
+                btsForm {
                     item(label = { +"Name" }, validator = validator) {
                         +textInput
                     }
@@ -68,8 +67,8 @@ fun submit() {
 }
 
 val button = BtsButton(label = { +"Send"}, onclick = ::submit)
-
-form(labelDef = "col-sm-3", inputDef = "col-sm-9") {
+...
+btsForm {
     item(label = { +"Name"}, validator = validator) {
         +textInput
     }

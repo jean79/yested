@@ -18,6 +18,8 @@ import net.yested.bootstrap.row
 import net.yested.bootstrap.pageHeader
 import net.yested.bootstrap.Medium
 import net.yested.Fade
+import net.yested.bootstrap.FormStyle
+import net.yested.bootstrap.Small
 
 enum class Continent(val label:String) {
     EUROPE : Continent("Europe");
@@ -84,7 +86,7 @@ class MasterDetail {
         }
 
         placeholder.setChild(
-            Form(labelDef = "col-sm-4", inputDef = "col-sm-8") with  {
+            Form(formStyle = FormStyle.HORIZONTAL, labelDef = Small(4), inputDef = Small(8)) with  {
                 item(label = { +"City name"}, validator = validator) {
                     +textInput
                 }

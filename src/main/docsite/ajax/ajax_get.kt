@@ -138,7 +138,7 @@ fun createAjaxGetSection(): Div {
         }
         row {
             col(Medium(6)) {
-                btsForm(labelDef = "col-sm-4", inputDef = "col-sm-8") {
+                btsForm {
                     item(label = { +"Location"}, validator = validator) {
                         +textInput
                     }
@@ -207,7 +207,7 @@ fun fetchWeather() {
 }
 ...
 div {
-    form(labelDef = "col-sm-4", inputDef = "col-sm-8") {
+    btsForm {
         item(label = { +"Location"}, validator = validator) {
             +textInput
         }

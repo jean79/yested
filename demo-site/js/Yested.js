@@ -1645,29 +1645,52 @@
               };
             }
           }),
+          FormStyle: Kotlin.createEnumClass(function () {
+            return [Kotlin.Enum];
+          }, function $fun(code) {
+            $fun.baseInitializer.call(this);
+            this.code = code;
+          }, function () {
+            return {
+              DEFAULT: new _.net.yested.bootstrap.FormStyle('form-default'),
+              INLINE: new _.net.yested.bootstrap.FormStyle('form-inline'),
+              HORIZONTAL: new _.net.yested.bootstrap.FormStyle('form-horizontal')
+            };
+          }),
           Form: Kotlin.createClass(function () {
             return [_.net.yested.HTMLComponent];
-          }, function $fun(labelDef, inputDef) {
+          }, function $fun(formStyle, labelDef, inputDef) {
+            if (formStyle === void 0)
+              formStyle = _.net.yested.bootstrap.FormStyle.object.DEFAULT;
             if (labelDef === void 0)
-              labelDef = 'col-sm-2';
+              labelDef = new _.net.yested.bootstrap.Small(4);
             if (inputDef === void 0)
-              inputDef = 'col-sm-10';
+              inputDef = new _.net.yested.bootstrap.Small(8);
             $fun.baseInitializer.call(this, 'form');
+            this.formStyle_85hrfw$ = formStyle;
             this.labelDef_hl3t2u$ = labelDef;
             this.inputDef_mlmxkk$ = inputDef;
-            this.element.setAttribute('class', 'form-horizontal');
+            this.element.setAttribute('class', this.formStyle_85hrfw$.code);
             this.role = 'form';
             this.element.setAttribute('onsubmit', 'return false');
           }, /** @lends _.net.yested.bootstrap.Form.prototype */ {
             item_gthhqa$: function (forId, label, validator, content) {
+              var tmp$0;
               if (forId === void 0)
                 forId = '';
               if (validator === void 0)
                 validator = null;
               var spanErrMsg = _.net.yested.with_owvm91$(new _.net.yested.Span(), _.net.yested.bootstrap.Form.item_gthhqa$f);
-              var divInput = _.net.yested.with_owvm91$(this.div_5rsex9$(void 0, this.inputDef_mlmxkk$, content), _.net.yested.bootstrap.Form.item_gthhqa$f_0(spanErrMsg));
-              var divFormGroup = this.div_5rsex9$(void 0, 'form-group', _.net.yested.bootstrap.Form.item_gthhqa$f_1(forId, this, label, divInput));
-              validator != null ? validator.onchange_ra2fzg$(_.net.yested.bootstrap.Form.item_gthhqa$f_2(divFormGroup, spanErrMsg, validator)) : null;
+              Kotlin.println('form style: ' + this.formStyle_85hrfw$);
+              if (this.formStyle_85hrfw$.equals_za3rmp$(_.net.yested.bootstrap.FormStyle.object.HORIZONTAL)) {
+                Kotlin.println('horizontal');
+                tmp$0 = _.net.yested.with_owvm91$(this.div_5rsex9$(void 0, this.inputDef_mlmxkk$.toString(), content), _.net.yested.bootstrap.Form.item_gthhqa$f_0(spanErrMsg));
+              }
+               else
+                tmp$0 = _.net.yested.with_owvm91$(this.span_dkuwo$(void 0, content), _.net.yested.bootstrap.Form.item_gthhqa$f_1(spanErrMsg));
+              var divInput = tmp$0;
+              var divFormGroup = this.div_5rsex9$(void 0, 'form-group', _.net.yested.bootstrap.Form.item_gthhqa$f_2(forId, this, label, divInput));
+              validator != null ? validator.onchange_ra2fzg$(_.net.yested.bootstrap.Form.item_gthhqa$f_3(divFormGroup, spanErrMsg, validator)) : null;
             }
           }, /** @lends _.net.yested.bootstrap.Form */ {
             item_gthhqa$f: function () {
@@ -1678,25 +1701,32 @@
                 this.plus_pv6laa$(spanErrMsg);
               };
             },
-            item_gthhqa$f_1: function (forId, this$Form, label, divInput) {
+            item_gthhqa$f_1: function (spanErrMsg) {
               return function () {
-                this.label_aisbro$(forId, this$Form.labelDef_hl3t2u$ + ' control-label', label);
+                this.plus_pv6laa$(spanErrMsg);
+              };
+            },
+            item_gthhqa$f_2: function (forId, this$Form, label, divInput) {
+              return function () {
+                this.label_aisbro$(forId, this$Form.formStyle_85hrfw$.equals_za3rmp$(_.net.yested.bootstrap.FormStyle.object.HORIZONTAL) ? this$Form.labelDef_hl3t2u$ + ' control-label' : '', label);
                 this.plus_pv6laa$(divInput);
               };
             },
-            item_gthhqa$f_2: function (divFormGroup, spanErrMsg, validator) {
+            item_gthhqa$f_3: function (divFormGroup, spanErrMsg, validator) {
               return function (isValid) {
                 divFormGroup.clazz = isValid ? 'form-group' : 'form-group has-error';
                 spanErrMsg.setContent_61zpoe$(isValid ? '' : (validator != null ? validator : Kotlin.throwNPE()).errorText);
               };
             }
           }),
-          btsForm_iz33rd$: function ($receiver, labelDef, inputDef, init) {
+          btsForm_6zn8tn$: function ($receiver, formStyle, labelDef, inputDef, init) {
+            if (formStyle === void 0)
+              formStyle = _.net.yested.bootstrap.FormStyle.object.DEFAULT;
             if (labelDef === void 0)
-              labelDef = 'col-sm-2';
+              labelDef = new _.net.yested.bootstrap.Small(4);
             if (inputDef === void 0)
-              inputDef = 'col-sm-10';
-            var form = new _.net.yested.bootstrap.Form(labelDef, inputDef);
+              inputDef = new _.net.yested.bootstrap.Small(8);
+            var form = new _.net.yested.bootstrap.Form(formStyle, labelDef, inputDef);
             init.call(form);
             $receiver.plus_pv6laa$(form);
           },
@@ -3432,7 +3462,7 @@
       },
       f_25: function (validator, textInput, btnGroup, fetchWeather) {
         return function () {
-          _.net.yested.bootstrap.btsForm_iz33rd$(this, 'col-sm-4', 'col-sm-8', _.ajax.f_24(validator, textInput, btnGroup, fetchWeather));
+          _.net.yested.bootstrap.btsForm_6zn8tn$(this, void 0, void 0, void 0, _.ajax.f_24(validator, textInput, btnGroup, fetchWeather));
         };
       },
       f_26: function (temperatureSpan) {
@@ -3459,7 +3489,7 @@
       },
       f_31: function () {
         _.net.yested.bootstrap.pageHeader_kzm4yj$(this, _.ajax.f_30);
-        this.code_puj7f4$('kotlin', '//definition of response, just fragment\nnative trait Main {\n    val temp : Double\n    val pressure : Int\n    val humidity: Int\n    val temp_min : Double\n    val temp_max : Double\n}\n\nnative trait WeatherData {\n    ...\n    val base: String?\n    val main : Main?\n    val wind : Wind?\n    ...\n}\n\n...\nval textInput = TextInput(placeholder = "Type city name and press Enter")\nval validator = Validator(inputElement = textInput, errorText = "Enter at least 3 characters", validator = { it.length() > 2})\nval temperatureSpan = Div()\n\nval btnGroup = ButtonGroup() with {\n    button("metric", label = { + "Celcius"})\n    button("imperial", label = { + "Fahrenheit"})\n}\nbtnGroup.select("metric")\n\nfun fetchWeather() {\n    if (validator.isValid()) {\n        ajaxGet&lt;WeatherData&gt;("http://api.openweathermap.org/data/2.5/weather?q=$\\{textInput.value}&units=$\\{btnGroup.value}") {\n            weatherData ->\n            if (weatherData != null && weatherData.main != null) {\n                temperatureSpan.setChild(\n                        Panel(panelStyle = PanelStyle.SUCCESS) with {\n                            heading { +"Temperature in $\\{weatherData.name}" }\n                            content { emph { +"$\\{weatherData.main!!.temp}"} }\n                        }, Fade())\n            } else {\n                temperatureSpan.setChild("Location not found", Fade())\n            }\n        }\n    }\n}\n...\ndiv {\n    form(labelDef = "col-sm-4", inputDef = "col-sm-8") {\n        item(label = { +"Location"}, validator = validator) {\n            +textInput\n        }\n        item(label = { +"Units"}) {\n            +btnGroup\n        }\n        item(label = { }) {\n            btsButton(type = ButtonType.SUBMIT, label = { +"Get Weather"}, look = ButtonLook.PRIMARY) {\n                fetchWeather()\n            }\n        }\n    }\n}\n');
+        this.code_puj7f4$('kotlin', '//definition of response, just fragment\nnative trait Main {\n    val temp : Double\n    val pressure : Int\n    val humidity: Int\n    val temp_min : Double\n    val temp_max : Double\n}\n\nnative trait WeatherData {\n    ...\n    val base: String?\n    val main : Main?\n    val wind : Wind?\n    ...\n}\n\n...\nval textInput = TextInput(placeholder = "Type city name and press Enter")\nval validator = Validator(inputElement = textInput, errorText = "Enter at least 3 characters", validator = { it.length() > 2})\nval temperatureSpan = Div()\n\nval btnGroup = ButtonGroup() with {\n    button("metric", label = { + "Celcius"})\n    button("imperial", label = { + "Fahrenheit"})\n}\nbtnGroup.select("metric")\n\nfun fetchWeather() {\n    if (validator.isValid()) {\n        ajaxGet&lt;WeatherData&gt;("http://api.openweathermap.org/data/2.5/weather?q=$\\{textInput.value}&units=$\\{btnGroup.value}") {\n            weatherData ->\n            if (weatherData != null && weatherData.main != null) {\n                temperatureSpan.setChild(\n                        Panel(panelStyle = PanelStyle.SUCCESS) with {\n                            heading { +"Temperature in $\\{weatherData.name}" }\n                            content { emph { +"$\\{weatherData.main!!.temp}"} }\n                        }, Fade())\n            } else {\n                temperatureSpan.setChild("Location not found", Fade())\n            }\n        }\n    }\n}\n...\ndiv {\n    btsForm {\n        item(label = { +"Location"}, validator = validator) {\n            +textInput\n        }\n        item(label = { +"Units"}) {\n            +btnGroup\n        }\n        item(label = { }) {\n            btsButton(type = ButtonType.SUBMIT, label = { +"Get Weather"}, look = ButtonLook.PRIMARY) {\n                fetchWeather()\n            }\n        }\n    }\n}\n');
       },
       f_32: function () {
         this.col_zcukl0$([new _.net.yested.bootstrap.Medium(12)], _.ajax.f_31);
@@ -4166,7 +4196,7 @@
         this.item_gthhqa$('nameId', _.bootstrap.f_84, void 0, _.bootstrap.f_86);
       },
       f_88: function () {
-        _.net.yested.bootstrap.btsForm_iz33rd$(this, void 0, void 0, _.bootstrap.f_87);
+        _.net.yested.bootstrap.btsForm_6zn8tn$(this, void 0, void 0, void 0, _.bootstrap.f_87);
       },
       f_89: function () {
         this.plus_pdl1w0$('Submit');
@@ -4281,7 +4311,7 @@
         this.plus_pdl1w0$('Salary');
       },
       f_115: function () {
-        _.net.yested.bootstrap.inputAddOn_cc7g17$(this, '$', '.00', new _.net.yested.bootstrap.TextInput('Your expectation'));
+        _.net.yested.bootstrap.inputAddOn_cc7g17$(this, '$', '.00', new _.net.yested.bootstrap.TextInput('Salary'));
       },
       f_116: function () {
         this.item_gthhqa$(void 0, _.bootstrap.f_111, void 0, _.bootstrap.f_113);
@@ -4291,14 +4321,14 @@
         this.div_5rsex9$(void 0, void 0, _.bootstrap.f_109);
         this.br();
         this.h4_kv1miw$(_.bootstrap.f_110);
-        _.net.yested.bootstrap.btsForm_iz33rd$(this, 'col-sm-4', 'col-sm-8', _.bootstrap.f_116);
+        _.net.yested.bootstrap.btsForm_6zn8tn$(this, _.net.yested.bootstrap.FormStyle.object.DEFAULT, void 0, void 0, _.bootstrap.f_116);
       },
       f_118: function () {
         this.plus_pdl1w0$('Code');
       },
       f_119: function () {
         this.h4_kv1miw$(_.bootstrap.f_118);
-        this.code_puj7f4$('kotlin', 'btsForm(labelDef = "col-sm-4", inputDef = "col-sm-8") {\n    item(label = { +"Username"}) {\n        textInput(placeholder = "Enter your username") { }\n    }\n    item(label = { +"Salary" }) {\n        inputAddOn(prefix = "$", suffix = ".00", textInput = TextInput(placeholder = "Your expectation") )\n    }\n}');
+        this.code_puj7f4$('kotlin', 'btsForm(formStyle = FormStyle.DEFAULT) {\n    item(label = { +"Username" }) {\n        textInput(placeholder = "Enter your username") { }\n    }\n    item(label = { +"Salary" }) {\n        inputAddOn(prefix = "$", suffix = ".00", textInput = TextInput(placeholder = "Salary") )\n    }\n}');
       },
       f_120: function () {
         this.col_zcukl0$([new _.net.yested.bootstrap.Medium(4)], _.bootstrap.f_117);
@@ -4469,7 +4499,7 @@
           this.div_5rsex9$(void 0, void 0, _.bootstrap.f_135);
           this.br();
           this.h4_kv1miw$(_.bootstrap.f_136);
-          _.net.yested.bootstrap.btsForm_iz33rd$(this, 'col-sm-3', 'col-sm-9', _.bootstrap.f_141(validator, textInput, button));
+          _.net.yested.bootstrap.btsForm_6zn8tn$(this, void 0, void 0, void 0, _.bootstrap.f_141(validator, textInput, button));
         };
       },
       f_143: function () {
@@ -4477,7 +4507,7 @@
       },
       f_144: function () {
         this.h4_kv1miw$(_.bootstrap.f_143);
-        this.code_puj7f4$('kotlin', 'val textInput = TextInput(placeholder = "Mandatory field")\n\nval validator = Validator(textInput, errorText = "At least 3 chars!!") { value -> value.size > 2 }\n\nfun submit() {\n    if (validator.isValid()) {\n        println("submit")\n    }\n}\n\nval button = BtsButton(label = { +"Send"}, onclick = ::submit)\n\nform(labelDef = "col-sm-3", inputDef = "col-sm-9") {\n    item(label = { +"Name"}, validator = validator) {\n        +textInput\n    }\n    item(label = {}) {\n        +button\n    }\n}\n');
+        this.code_puj7f4$('kotlin', 'val textInput = TextInput(placeholder = "Mandatory field")\n\nval validator = Validator(textInput, errorText = "At least 3 chars!!") { value -> value.size > 2 }\n\nfun submit() {\n    if (validator.isValid()) {\n        println("submit")\n    }\n}\n\nval button = BtsButton(label = { +"Send"}, onclick = ::submit)\n...\nbtsForm {\n    item(label = { +"Name"}, validator = validator) {\n        +textInput\n    }\n    item(label = {}) {\n        +button\n    }\n}\n');
       },
       f_145: function (validator, textInput, button) {
         return function () {
@@ -5332,7 +5362,7 @@
             textInput.value = editedCity.name;
             select.selectedItems = Kotlin.modules['stdlib'].kotlin.listOf_9mqe4v$([editedCity.continent]);
           }
-          this.placeholder.setChild_hu5ove$(_.net.yested.with_owvm91$(new _.net.yested.bootstrap.Form('col-sm-4', 'col-sm-8'), _.complex.MasterDetail.edit$f_1(validator, textInput, select, save, close)), new _.net.yested.Fade());
+          this.placeholder.setChild_hu5ove$(_.net.yested.with_owvm91$(new _.net.yested.bootstrap.Form(_.net.yested.bootstrap.FormStyle.object.HORIZONTAL, new _.net.yested.bootstrap.Small(4), new _.net.yested.bootstrap.Small(8)), _.complex.MasterDetail.edit$f_1(validator, textInput, select, save, close)), new _.net.yested.Fade());
         },
         createMasterView: function () {
           return _.net.yested.div_5rsex9$(void 0, void 0, _.complex.MasterDetail.createMasterView$f(this));
