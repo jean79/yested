@@ -19,29 +19,41 @@ import net.yested.Component
 import kotlin.js.dom.html.HTMLElement
 import net.yested.createElement
 import net.yested.appendComponent
+import net.yested.BooleanAttribute
 
 native trait HTMLInputElementWithOnChange : HTMLInputElement {
     public native var onchange: () -> Unit
+}
+
+public enum class InputSize(val code:String) {
+    DEFAULT: InputSize("")
+    LARGE: InputSize("input-lg")
+    SMALL: InputSize("input-sm")
 }
 
 public trait InputElement<T> {
     fun addOnChangeListener(invoke:()->Unit)
     fun addOnChangeLiveListener(invoke:()->Unit)
     var value:T
+    var disabled:Boolean
+    var readonly:Boolean
     fun decorate(valid:Boolean)
 }
 
-public class TextInput(placeholder:String? = null) : Component, InputElement<String> {
+public class TextInput(val inputSize: InputSize = InputSize.DEFAULT, placeholder:String? = null) : Component, InputElement<String> {
 
     override val element: HTMLElement = createElement("input")
 
     public var id: String by Attribute()
 
+    override var disabled:Boolean by BooleanAttribute()
+    override var readonly:Boolean by BooleanAttribute()
+
     private val onChangeListeners: ArrayList<Function0<Unit>> = ArrayList();
     private val onChangeLiveListeners: ArrayList<Function0<Unit>> = ArrayList();
 
     {
-        element.setAttribute("class", "form-control")
+        element.setAttribute("class", "form-control ${inputSize.code}")
         (element as HTMLInputElementWithOnChange).onchange = {
             onChangeListeners.forEach { it() }
             onChangeLiveListeners.forEach { it() }
@@ -97,6 +109,9 @@ public class CheckBox(private val label:HTMLComponent.()->Unit) : Component, Inp
                 })
             }
 
+    override var disabled:Boolean by BooleanAttribute(element = inputCheckbox)
+    override var readonly:Boolean by BooleanAttribute(element = inputCheckbox)
+
     private val onChangeListeners: ArrayList<Function0<Unit>> = ArrayList();
     private val onChangeLiveListeners: ArrayList<Function0<Unit>> = ArrayList();
 
@@ -133,9 +148,12 @@ public fun HTMLComponent.btsCheckBox(label:HTMLComponent.()->Unit):Unit {
 
 private data class SelectOption<TT>(val tag:HTMLOptionElement, val value:TT)
 
-public class Select<T>(multiple:Boolean = false, size:Int = 1, val renderer:(T)->String) : Component {
+public class Select<T>(val inputSize: InputSize = InputSize.DEFAULT, multiple:Boolean = false, size:Int = 1, val renderer:(T)->String) : Component {
 
     override val element: HTMLElement = createElement("select")
+
+    public var disabled:Boolean by BooleanAttribute()
+    public var readonly:Boolean by BooleanAttribute()
 
     private val onChangeListeners: ArrayList<Function0<Unit>> = ArrayList();
 
@@ -161,7 +179,7 @@ public class Select<T>(multiple:Boolean = false, size:Int = 1, val renderer:(T)-
         }
 
     {
-        element.setAttribute("class", "form-control")
+        element.setAttribute("class", "form-control ${inputSize.code}")
         element.setAttribute("size", size.toString())
         if (multiple) {
             element.setAttribute("multiple", "multiple")

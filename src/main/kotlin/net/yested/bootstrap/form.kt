@@ -70,7 +70,13 @@ public enum class FormStyle(val code:String) {
     HORIZONTAL: FormStyle("form-horizontal")
 }
 
-public class Form(private val formStyle: FormStyle = FormStyle.DEFAULT, private val labelDef:DeviceSize = Small(4), private val inputDef:DeviceSize = Small(8)) : HTMLComponent("form") {
+public enum class FormInputSize(val code:String) {
+    DEFAULT: FormInputSize("")
+    LARGE: FormInputSize("form-group-lg")
+    SMALL: FormInputSize("form-group-sm")
+}
+
+public class Form(private val formStyle: FormStyle = FormStyle.DEFAULT, private val inputSize:FormInputSize = FormInputSize.DEFAULT, private val labelDef:DeviceSize = Small(4), private val inputDef:DeviceSize = Small(8)) : HTMLComponent("form") {
 
     {
         element.setAttribute("class", "${formStyle.code}")
@@ -81,13 +87,11 @@ public class Form(private val formStyle: FormStyle = FormStyle.DEFAULT, private 
     public fun item(forId:String = "", label: HTMLComponent.()->Unit, validator:ValidatorI? = null, content: HTMLComponent.()->Unit) {
 
         val spanErrMsg = Span() with { clazz = "help-block" }
-        println("form style: $formStyle")
         val divInput = if (formStyle == FormStyle.HORIZONTAL) {
-            println("horizontal")
             div(clazz = "$inputDef", init = content) with { +spanErrMsg }
         } else span(init = content) with { +spanErrMsg }
 
-        val divFormGroup = div(clazz = "form-group") {
+        val divFormGroup = div(clazz = "form-group ${inputSize.code}") {
                 label(forId = forId, clazz= if (formStyle == FormStyle.HORIZONTAL) "${labelDef} control-label" else "", init = label)
                 + divInput
             }

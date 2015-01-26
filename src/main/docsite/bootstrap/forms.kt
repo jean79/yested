@@ -25,8 +25,8 @@ fun createForm(id: String): Div {
         row {
             col(Medium(4)) {
                 div {
-                    +"""
-"""
+                    +"""Default, Inline and Horizontal layout are supported. It is possible to define widths
+of label and input for Horizontal layout."""
                 }
                 br()
                 h4 { +"Demo" }

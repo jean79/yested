@@ -8,13 +8,27 @@ import jquery.jq
 import jquery.JQuery
 import org.w3c.dom.Element
 
-public class Attribute(val attributeName:String? = null) {
+public class Attribute(val attributeName:String? = null, val element:HTMLElement? = null) {
+
+    private fun getElement(thisRef: Component?) = element ?: thisRef!!.element
 
     public fun get(thisRef: Component?, prop: PropertyMetadata):String =
-            thisRef!!.element.getAttribute(attributeName ?: prop.name)
+            getElement(thisRef).getAttribute(attributeName ?: prop.name)
 
     public fun set(thisRef: Component?, prop: PropertyMetadata, value: String):Unit =
-            thisRef!!.element.setAttribute(attributeName ?: prop.name, value)
+            getElement(thisRef).setAttribute(attributeName ?: prop.name, value)
+
+}
+
+public class BooleanAttribute(val attributeName:String? = null, val element:HTMLElement? = null) {
+
+    private fun getElement(thisRef: Component?) = element ?: thisRef!!.element
+
+    public fun get(thisRef: Component?, prop: PropertyMetadata):Boolean =
+            getElement(thisRef).getAttribute(attributeName ?: prop.name) == "true"
+
+    public fun set(thisRef: Component?, prop: PropertyMetadata, value: Boolean):Unit =
+            getElement(thisRef).setAttribute(attributeName ?: prop.name, if (value) "true" else "false")
 
 }
 
