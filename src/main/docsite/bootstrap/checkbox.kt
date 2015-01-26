@@ -9,7 +9,7 @@ import net.yested.bootstrap.Medium
 import net.yested.bootstrap.pageHeader
 import net.yested.bootstrap.btsForm
 import net.yested.Div
-import net.yested.bootstrap.CheckBox
+import net.yested.bootstrap.BtsCheckBox
 import net.yested.Span
 
 /**
@@ -19,7 +19,7 @@ fun createCheckboxSection(id:String): Div {
 
     val placeholder = Span()
 
-    val checkbox = CheckBox() { +"Select me" }
+    val checkbox = BtsCheckBox() { +"Select me" }
 
     fun checkboxClicked() {
         placeholder.setContent("Is checkbox checked: ${if (checkbox.value) "Yes" else "No"}")
@@ -49,7 +49,7 @@ fun createCheckboxSection(id:String): Div {
                 h4 { +"Code" }
                 code(lang = "kotlin", content="""val placeholder = Span()
 
-val checkbox = CheckBox() { +"Select me" }
+val checkbox = BtsCheckBox() { +"Select me" }
 
 fun checkboxClicked() {
     placeholder.setContent("Is checkbox checked: ${if (checkbox.value) "Yes" else "No"}")

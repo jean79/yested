@@ -7,6 +7,10 @@ import kotlin.dom.first
 import jquery.jq
 import jquery.JQuery
 import org.w3c.dom.Element
+import net.yested.bootstrap.InputElement
+import net.yested.bootstrap.HTMLInputElementWithOnChange
+import java.util.ArrayList
+import kotlin.js.dom.html.HTMLInputElement
 
 public class Attribute(val attributeName:String? = null, val element:HTMLElement? = null) {
 
@@ -304,6 +308,28 @@ public class DL : HTMLComponent("dl") {
         +( HTMLComponent("dt") with { dt() } )
         +( HTMLComponent("dd") with { dd() } )
     }
+
+}
+
+native trait HTMLInputElementWithOnChange : HTMLInputElement {
+    public native var onchange: () -> Unit
+}
+
+public class CheckBox() : Component {
+
+    override val element: HTMLInputElementWithOnChange =
+            (createElement("input") with {
+                setAttribute("type", "checkbox")
+            }) as HTMLInputElementWithOnChange
+
+    public var disabled:Boolean by BooleanAttribute()
+    public var readonly:Boolean by BooleanAttribute()
+    public var value:Boolean by BooleanAttribute()
+    public var onchange:Function0<Unit>
+        get():Function0<Unit> = element.onchange
+        set(value:Function0<Unit>) {
+            element.onchange = value
+        }
 
 }
 

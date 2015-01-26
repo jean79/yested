@@ -6,7 +6,7 @@
 
     <groupId>net.yested</groupId>
     <artifactId>Yested</artifactId>
-    <version>0.0.4</version>
+    <version>0.0.5</version>
     <properties>
         <kotlin.version>0.10.4</kotlin.version>
         <build.number>0.0.0.1</build.number>

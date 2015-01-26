@@ -94,7 +94,7 @@ public fun HTMLComponent.textInput(placeholder: String?, init: TextInput.() -> U
     +(TextInput(placeholder = placeholder) with  { init() })
 }
 
-public class CheckBox(private val label:HTMLComponent.()->Unit) : Component, InputElement<Boolean> {
+public class BtsCheckBox(private val label:HTMLComponent.()->Unit) : Component, InputElement<Boolean> {
 
     private val inputCheckbox : HTMLInputElementWithOnChange = (createElement("input") with {
                                                                     setAttribute("type", "checkbox")
@@ -143,7 +143,7 @@ public class CheckBox(private val label:HTMLComponent.()->Unit) : Component, Inp
 }
 
 public fun HTMLComponent.btsCheckBox(label:HTMLComponent.()->Unit):Unit {
-    +(CheckBox(label))
+    +(BtsCheckBox(label))
 }
 
 private data class SelectOption<TT>(val tag:HTMLOptionElement, val value:TT)
