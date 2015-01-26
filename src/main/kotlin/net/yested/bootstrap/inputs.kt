@@ -82,27 +82,35 @@ public fun HTMLComponent.textInput(placeholder: String?, init: TextInput.() -> U
     +(TextInput(placeholder = placeholder) with  { init() })
 }
 
-public class CheckBox() : Component, InputElement<Boolean> {
+public class CheckBox(private val label:HTMLComponent.()->Unit) : Component, InputElement<Boolean> {
 
-    override val element: HTMLElement = createElement("input")
+    private val inputCheckbox : HTMLInputElementWithOnChange = (createElement("input") with {
+                                                                    setAttribute("type", "checkbox")
+                                                                }) as HTMLInputElementWithOnChange
+
+    override val element: HTMLElement =
+            createElement("div") with {
+                setAttribute("class", "checkbox")
+                appendChild(createElement("label") with {
+                    appendChild(inputCheckbox)
+                    appendChild((Span() with label).element)
+                })
+            }
 
     private val onChangeListeners: ArrayList<Function0<Unit>> = ArrayList();
     private val onChangeLiveListeners: ArrayList<Function0<Unit>> = ArrayList();
 
-    private fun getElement(): HTMLInputElementWithOnChange = element as HTMLInputElementWithOnChange
-
     {
-        element.setAttribute("type", "checkbox")
-        getElement().onchange = {
+        inputCheckbox.onchange = {
             onChangeListeners.forEach { it() }
             onChangeLiveListeners.forEach { it() }
         }
     }
 
     override var value:Boolean
-        get():Boolean = getElement().checked
+        get():Boolean = inputCheckbox.checked
         set(value:Boolean) {
-            getElement().checked = value
+            inputCheckbox.checked = value
         }
 
     override fun decorate(valid: Boolean) {
@@ -117,6 +125,10 @@ public class CheckBox() : Component, InputElement<Boolean> {
         onChangeLiveListeners.add(invoke)
     }
 
+}
+
+public fun HTMLComponent.btsCheckBox(label:HTMLComponent.()->Unit):Unit {
+    +(CheckBox(label))
 }
 
 private data class SelectOption<TT>(val tag:HTMLOptionElement, val value:TT)
