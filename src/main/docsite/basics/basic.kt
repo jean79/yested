@@ -5,7 +5,7 @@ import net.yested.bootstrap.ButtonSize
 import net.yested.bootstrap.ButtonLook
 import net.yested.text
 import net.yested.div
-import net.yested.bootstrap.CheckBox
+import net.yested.bootstrap.BtsCheckBox
 import net.yested.Div
 
 /**

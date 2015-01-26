@@ -13,6 +13,7 @@ import net.yested.bootstrap.Validator
 import net.yested.bootstrap.btsForm
 import net.yested.bootstrap.BtsButton
 import net.yested.bootstrap.Medium
+import net.yested.with
 
 fun createInputs(id: String): Div {
 
@@ -45,13 +46,18 @@ Please note that validator is also attached to form item.
                 }
                 br()
                 h4 { +"Demo" }
-
-                btsForm(labelDef = "col-sm-3", inputDef = "col-sm-9") {
+                btsForm {
                     item(label = { +"Name" }, validator = validator) {
                         +textInput
                     }
                     item(label = {}) {
                         +button
+                    }
+                    item(label = { +"Disabled input" }) {
+                        +(TextInput() with { value = "Some value"; disabled = true })
+                    }
+                    item(label = { +"Readonly input" }) {
+                        +(TextInput() with { value = "Some value"; readonly = true })
                     }
                 }
             }
@@ -68,13 +74,16 @@ fun submit() {
 }
 
 val button = BtsButton(label = { +"Send"}, onclick = ::submit)
-
-form(labelDef = "col-sm-3", inputDef = "col-sm-9") {
+...
+btsForm {
     item(label = { +"Name"}, validator = validator) {
         +textInput
     }
     item(label = {}) {
         +button
+    }
+    item(label = { +"Disabled input" }) {
+        +(TextInput() with { value = "Some value"; disabled = true })
     }
 }
 """)

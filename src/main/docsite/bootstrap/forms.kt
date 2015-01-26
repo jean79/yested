@@ -11,6 +11,7 @@ import net.yested.bootstrap.btsForm
 import net.yested.bootstrap.inputAddOn
 import net.yested.bootstrap.TextInput
 import net.yested.bootstrap.Medium
+import net.yested.bootstrap.FormStyle
 
 fun createForm(id: String): Div {
 
@@ -24,28 +25,28 @@ fun createForm(id: String): Div {
         row {
             col(Medium(4)) {
                 div {
-                    +"""
-"""
+                    +"""Default, Inline and Horizontal layout are supported. It is possible to define widths
+of label and input for Horizontal layout."""
                 }
                 br()
                 h4 { +"Demo" }
-                btsForm(labelDef = "col-sm-4", inputDef = "col-sm-8") {
+                btsForm(formStyle = FormStyle.DEFAULT) {
                     item(label = { +"Username" }) {
                         textInput(placeholder = "Enter your username") { }
                     }
                     item(label = { +"Salary" }) {
-                        inputAddOn(prefix = "$", suffix = ".00", textInput = TextInput(placeholder = "Your expectation") )
+                        inputAddOn(prefix = "$", suffix = ".00", textInput = TextInput(placeholder = "Salary") )
                     }
                 }
             }
             col(Medium(8)) {
                 h4 { +"Code" }
-                code(lang = "kotlin", content="""btsForm(labelDef = "col-sm-4", inputDef = "col-sm-8") {
-    item(label = { +"Username"}) {
+                code(lang = "kotlin", content="""btsForm(formStyle = FormStyle.DEFAULT) {
+    item(label = { +"Username" }) {
         textInput(placeholder = "Enter your username") { }
     }
     item(label = { +"Salary" }) {
-        inputAddOn(prefix = "$", suffix = ".00", textInput = TextInput(placeholder = "Your expectation") )
+        inputAddOn(prefix = "$", suffix = ".00", textInput = TextInput(placeholder = "Salary") )
     }
 }""")
             }

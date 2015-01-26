@@ -19,29 +19,41 @@ import net.yested.Component
 import kotlin.js.dom.html.HTMLElement
 import net.yested.createElement
 import net.yested.appendComponent
+import net.yested.BooleanAttribute
 
 native trait HTMLInputElementWithOnChange : HTMLInputElement {
     public native var onchange: () -> Unit
+}
+
+public enum class InputSize(val code:String) {
+    DEFAULT: InputSize("")
+    LARGE: InputSize("input-lg")
+    SMALL: InputSize("input-sm")
 }
 
 public trait InputElement<T> {
     fun addOnChangeListener(invoke:()->Unit)
     fun addOnChangeLiveListener(invoke:()->Unit)
     var value:T
+    var disabled:Boolean
+    var readonly:Boolean
     fun decorate(valid:Boolean)
 }
 
-public class TextInput(placeholder:String? = null) : Component, InputElement<String> {
+public class TextInput(val inputSize: InputSize = InputSize.DEFAULT, placeholder:String? = null) : Component, InputElement<String> {
 
     override val element: HTMLElement = createElement("input")
 
     public var id: String by Attribute()
 
+    override var disabled:Boolean by BooleanAttribute()
+    override var readonly:Boolean by BooleanAttribute()
+
     private val onChangeListeners: ArrayList<Function0<Unit>> = ArrayList();
     private val onChangeLiveListeners: ArrayList<Function0<Unit>> = ArrayList();
 
     {
-        element.setAttribute("class", "form-control")
+        element.setAttribute("class", "form-control ${inputSize.code}")
         (element as HTMLInputElementWithOnChange).onchange = {
             onChangeListeners.forEach { it() }
             onChangeLiveListeners.forEach { it() }
@@ -82,27 +94,38 @@ public fun HTMLComponent.textInput(placeholder: String?, init: TextInput.() -> U
     +(TextInput(placeholder = placeholder) with  { init() })
 }
 
-public class CheckBox() : Component, InputElement<Boolean> {
+public class BtsCheckBox(private val label:HTMLComponent.()->Unit) : Component, InputElement<Boolean> {
 
-    override val element: HTMLElement = createElement("input")
+    private val inputCheckbox : HTMLInputElementWithOnChange = (createElement("input") with {
+                                                                    setAttribute("type", "checkbox")
+                                                                }) as HTMLInputElementWithOnChange
+
+    override val element: HTMLElement =
+            createElement("div") with {
+                setAttribute("class", "checkbox")
+                appendChild(createElement("label") with {
+                    appendChild(inputCheckbox)
+                    appendChild((Span() with label).element)
+                })
+            }
+
+    override var disabled:Boolean by BooleanAttribute(element = inputCheckbox)
+    override var readonly:Boolean by BooleanAttribute(element = inputCheckbox)
 
     private val onChangeListeners: ArrayList<Function0<Unit>> = ArrayList();
     private val onChangeLiveListeners: ArrayList<Function0<Unit>> = ArrayList();
 
-    private fun getElement(): HTMLInputElementWithOnChange = element as HTMLInputElementWithOnChange
-
     {
-        element.setAttribute("type", "checkbox")
-        getElement().onchange = {
+        inputCheckbox.onchange = {
             onChangeListeners.forEach { it() }
             onChangeLiveListeners.forEach { it() }
         }
     }
 
     override var value:Boolean
-        get():Boolean = getElement().checked
+        get():Boolean = inputCheckbox.checked
         set(value:Boolean) {
-            getElement().checked = value
+            inputCheckbox.checked = value
         }
 
     override fun decorate(valid: Boolean) {
@@ -119,11 +142,18 @@ public class CheckBox() : Component, InputElement<Boolean> {
 
 }
 
+public fun HTMLComponent.btsCheckBox(label:HTMLComponent.()->Unit):Unit {
+    +(BtsCheckBox(label))
+}
+
 private data class SelectOption<TT>(val tag:HTMLOptionElement, val value:TT)
 
-public class Select<T>(multiple:Boolean = false, size:Int = 1, val renderer:(T)->String) : Component {
+public class Select<T>(val inputSize: InputSize = InputSize.DEFAULT, multiple:Boolean = false, size:Int = 1, val renderer:(T)->String) : Component {
 
     override val element: HTMLElement = createElement("select")
+
+    public var disabled:Boolean by BooleanAttribute()
+    public var readonly:Boolean by BooleanAttribute()
 
     private val onChangeListeners: ArrayList<Function0<Unit>> = ArrayList();
 
@@ -149,7 +179,7 @@ public class Select<T>(multiple:Boolean = false, size:Int = 1, val renderer:(T)-
         }
 
     {
-        element.setAttribute("class", "form-control")
+        element.setAttribute("class", "form-control ${inputSize.code}")
         element.setAttribute("size", size.toString())
         if (multiple) {
             element.setAttribute("multiple", "multiple")

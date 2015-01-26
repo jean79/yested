@@ -31,6 +31,7 @@ fun bootstrapPage(): Div {
                     +createForm(id = "bootstrapComponents_Form")
                     +createSelectSection(id = "bootstrapComponents_Select")
                     +createInputs(id = "bootstrapComponents_Inputs")
+                    +createCheckboxSection(id = "bootstrapComponents_Checkbox")
                     +createGrid(id = "bootstrapComponents_Grid")
                     +createTabs(id = "bootstrapComponents_Tabs")
                     +createPanelSection(id = "bootstrapComponents_Panel")
@@ -51,6 +52,7 @@ fun bootstrapPage(): Div {
                             li { a(href = "#bootstrapComponents_Form") { +"Form" } }
                             li { a(href = "#bootstrapComponents_Select") { +"Select" } }
                             li { a(href = "#bootstrapComponents_Inputs") { +"Text Input with Validation" } }
+                            li { a(href = "#bootstrapComponents_Checkbox") { +"Checkbox" } }
                             li { a(href = "#bootstrapComponents_Grid") { +"Grid" } }
                             li { a(href = "#bootstrapComponents_Tabs") { +"Tabs" } }
                             li { a(href = "#bootstrapComponents_Panel") { +"Panels" } }
