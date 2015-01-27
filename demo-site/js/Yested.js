@@ -1053,7 +1053,7 @@
           this.$element_6gvlpa$ = _.net.yested.with_owvm91$(_.net.yested.createElement_61zpoe$('input'), _.net.yested.CheckBox.CheckBox$f);
           this.disabled$delegate = new _.net.yested.BooleanAttribute();
           this.readonly$delegate = new _.net.yested.BooleanAttribute();
-          this.value$delegate = new _.net.yested.BooleanAttribute();
+          this.checked$delegate = new _.net.yested.BooleanAttribute();
         }, /** @lends _.net.yested.CheckBox.prototype */ {
           element: {
             get: function () {
@@ -1076,12 +1076,12 @@
               this.readonly$delegate.set_f4kiei$(this, new Kotlin.PropertyMetadata('readonly'), readonly);
             }
           },
-          value: {
+          checked: {
             get: function () {
-              return this.value$delegate.get_262zbl$(this, new Kotlin.PropertyMetadata('value'));
+              return this.checked$delegate.get_262zbl$(this, new Kotlin.PropertyMetadata('checked'));
             },
-            set: function (value) {
-              this.value$delegate.set_f4kiei$(this, new Kotlin.PropertyMetadata('value'), value);
+            set: function (checked) {
+              this.checked$delegate.set_f4kiei$(this, new Kotlin.PropertyMetadata('checked'), checked);
             }
           },
           onchange: {
@@ -2289,13 +2289,14 @@
           }),
           Select: Kotlin.createClass(function () {
             return [_.net.yested.Component];
-          }, function (inputSize, multiple, size, renderer) {
+          }, function (data, inputSize, multiple, size, renderer) {
             if (inputSize === void 0)
               inputSize = _.net.yested.bootstrap.InputSize.object.DEFAULT;
             if (multiple === void 0)
               multiple = false;
             if (size === void 0)
               size = 1;
+            this.data = data;
             this.inputSize = inputSize;
             this.renderer = renderer;
             this.$element_cjfx6t$ = _.net.yested.createElement_61zpoe$('select');
@@ -2303,10 +2304,10 @@
             this.readonly$delegate = new _.net.yested.BooleanAttribute();
             this.onChangeListeners_ufju29$ = new Kotlin.ArrayList();
             this.selectedItemsInt_m31zmd$ = Kotlin.modules['stdlib'].kotlin.listOf();
-            this.dataInt_w7bdgc$ = null;
             this.optionTags_gajdrl$ = new Kotlin.ArrayList();
             this.element.setAttribute('class', 'form-control ' + this.inputSize.code);
             this.element.setAttribute('size', size.toString());
+            this.generateOptions();
             if (multiple) {
               this.element.setAttribute('multiple', 'multiple');
             }
@@ -2333,19 +2334,12 @@
                 this.readonly$delegate.set_f4kiei$(this, new Kotlin.PropertyMetadata('readonly'), readonly);
               }
             },
-            data: {
-              get: function () {
-                return this.dataInt_w7bdgc$;
-              },
-              set: function (newData) {
-                this.dataInt_w7bdgc$ = newData;
-                this.regenerate();
-                this.changeSelected();
-              }
-            },
             selectedItems: {
               get: function () {
-                return this.selectedItemsInt_m31zmd$;
+                var tmp$0, tmp$1;
+                tmp$0 = Kotlin.modules['stdlib'].kotlin.filter_azvtw4$(this.optionTags_gajdrl$, _.net.yested.bootstrap.Select.selectedItems$f);
+                tmp$1 = Kotlin.modules['stdlib'].kotlin.map_m3yiqg$(tmp$0, _.net.yested.bootstrap.Select.selectedItems$f_0);
+                return tmp$1;
               },
               set: function (newData) {
                 this.selectThese(newData);
@@ -2362,14 +2356,11 @@
             selectThese: function (selectedItems) {
               Kotlin.modules['stdlib'].kotlin.forEach_p7e0bo$(this.optionTags_gajdrl$, _.net.yested.bootstrap.Select.selectThese$f(selectedItems));
             },
-            regenerate: function () {
-              var tmp$0;
+            generateOptions: function () {
               this.element.innerHTML = '';
               this.optionTags_gajdrl$ = new Kotlin.ArrayList();
               this.selectedItemsInt_m31zmd$ = Kotlin.modules['stdlib'].kotlin.listOf();
-              if (this.dataInt_w7bdgc$ != null) {
-                (tmp$0 = this.dataInt_w7bdgc$) != null ? Kotlin.modules['stdlib'].kotlin.forEach_p7e0bo$(tmp$0, _.net.yested.bootstrap.Select.regenerate$f(this)) : null;
-              }
+              Kotlin.modules['stdlib'].kotlin.forEach_p7e0bo$(this.data, _.net.yested.bootstrap.Select.generateOptions$f(this));
             },
             addOnChangeListener_qshda6$: function (invoke) {
               this.onChangeListeners_ufju29$.add_za3rmp$(invoke);
@@ -2379,6 +2370,12 @@
               return function () {
                 this$Select.changeSelected();
               };
+            },
+            selectedItems$f: function (it) {
+              return it.tag.selected;
+            },
+            selectedItems$f_0: function (it) {
+              return it.value;
             },
             changeSelected$f: function (it) {
               return it.tag.selected;
@@ -2399,7 +2396,7 @@
                 this.plus_pdl1w0$(this$Select.renderer(it));
               };
             },
-            regenerate$f: function (this$Select) {
+            generateOptions$f: function (this$Select) {
               return function (it) {
                 var optionTag = _.net.yested.with_owvm91$(new _.net.yested.HTMLComponent('option'), _.net.yested.bootstrap.Select.f(this$Select, it));
                 var value = it;
@@ -5355,7 +5352,7 @@
       },
       f_286: function () {
         this.h4_kv1miw$(_.bootstrap.f_285);
-        this.code_puj7f4$('kotlin', 'val someData = listOf(\n        Car("Ford", "Black"),\n        Car("Skoda", "White"),\n        Car("Renault", "Red"),\n        Car("Citroen", "Purple"))\n\nval resultSingleSelect = Div()\nval singleSelect = Select<Car>(renderer = { "$\\{it.model} ($\\{it.color})" })\nsingleSelect.data = someData\nsingleSelect.addOnChangeListener {\n    resultSingleSelect.replace( "Selected: $\\{singleSelect.selectedItems.first().model}")\n}\n\nval resultMultiSelect = Div()\nval multiSelect = Select<Car>(multiple = true, size = 4, renderer = { "$\\{it.model} ($\\{it.color})" })\nmultiSelect.data = someData\nmultiSelect.addOnChangeListener {\n    resultMultiSelect.replace( "Selected: " + multiSelect.selectedItems.map { "$\\{it.model}" }.join(" and "))\n}\n\nval btn = BtsButton(label = { +"Select Skoda and Ford" }) {\n    multiSelect.selectedItems = someData.filter { it.model == "Skoda" || it.model == "Ford"}\n}\n\n...\ndiv {\n    + singleSelect\n    + resultSingleSelect\n    br()\n    br()\n    + multiSelect\n    + resultMultiSelect\n    br()\n    + btn\n}');
+        this.code_puj7f4$('kotlin', 'val someData = listOf(\n        Car("Ford", "Black"),\n        Car("Skoda", "White"),\n        Car("Renault", "Red"),\n        Car("Citroen", "Purple"))\n\nval resultSingleSelect = Div()\nval singleSelect = Select<Car>(data = someData, renderer = { "$\\{it.model} ($\\{it.color})" })\nsingleSelect.addOnChangeListener {\n    resultSingleSelect.replace( "Selected: $\\{singleSelect.selectedItems.first().model}")\n}\n\nval resultMultiSelect = Div()\nval multiSelect = Select<Car>(data = someData, multiple = true, size = 4, renderer = { "$\\{it.model} ($\\{it.color})" })\nmultiSelect.addOnChangeListener {\n    resultMultiSelect.replace( "Selected: " + multiSelect.selectedItems.map { "$\\{it.model}" }.join(" and "))\n}\n\nval btn = BtsButton(label = { +"Select Skoda and Ford" }) {\n    multiSelect.selectedItems = someData.filter { it.model == "Skoda" || it.model == "Ford"}\n}\n\n...\ndiv {\n    + singleSelect\n    + resultSingleSelect\n    br()\n    br()\n    + multiSelect\n    + resultMultiSelect\n    br()\n    + btn\n}');
       },
       f_287: function (singleSelect, resultSingleSelect, multiSelect, resultMultiSelect, btn) {
         return function () {
@@ -5373,12 +5370,10 @@
       createSelectSection: function (id) {
         var someData = Kotlin.modules['stdlib'].kotlin.listOf_9mqe4v$([new _.bootstrap.Car('Ford', 'Black'), new _.bootstrap.Car('Skoda', 'White'), new _.bootstrap.Car('Renault', 'Red'), new _.bootstrap.Car('Citroen', 'Purple')]);
         var resultSingleSelect = new _.net.yested.Div();
-        var singleSelect = new _.net.yested.bootstrap.Select(void 0, void 0, void 0, _.bootstrap.createSelectSection$f);
-        singleSelect.data = someData;
+        var singleSelect = new _.net.yested.bootstrap.Select(someData, void 0, void 0, void 0, _.bootstrap.createSelectSection$f);
         singleSelect.addOnChangeListener_qshda6$(_.bootstrap.createSelectSection$f_0(resultSingleSelect, singleSelect));
         var resultMultiSelect = new _.net.yested.Div();
-        var multiSelect = new _.net.yested.bootstrap.Select(void 0, true, 4, _.bootstrap.createSelectSection$f_1);
-        multiSelect.data = someData;
+        var multiSelect = new _.net.yested.bootstrap.Select(someData, void 0, true, 4, _.bootstrap.createSelectSection$f_1);
         multiSelect.addOnChangeListener_qshda6$(_.bootstrap.createSelectSection$f_2(resultMultiSelect, multiSelect));
         var btn = new _.net.yested.bootstrap.BtsButton(void 0, _.bootstrap.createSelectSection$f_3, void 0, void 0, void 0, _.bootstrap.createSelectSection$f_4(someData, multiSelect));
         return _.net.yested.div_5rsex9$(void 0, void 0, _.bootstrap.createSelectSection$f_5(id, singleSelect, resultSingleSelect, multiSelect, resultMultiSelect, btn));
@@ -5618,221 +5613,228 @@
           return this === other || (other !== null && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.name, other.name) && Kotlin.equals(this.continent, other.continent))));
         }
       }),
-      MasterDetail: Kotlin.createClass(null, function () {
-        this.placeholder = new _.net.yested.Div();
-        this.list = Kotlin.modules['stdlib'].kotlin.arrayListOf_9mqe4v$([new _.complex.City('Prague', _.complex.Continent.object.EUROPE), new _.complex.City('London', _.complex.Continent.object.EUROPE), new _.complex.City('New York', _.complex.Continent.object.AMERICA)]);
-        this.grid = new _.net.yested.bootstrap.Grid(void 0, [new _.net.yested.bootstrap.Column(_.complex.MasterDetail.MasterDetail$f, _.complex.MasterDetail.MasterDetail$f_0, _.bootstrap.compareBy(_.complex.MasterDetail.MasterDetail$f_1), void 0, true), new _.net.yested.bootstrap.Column(_.complex.MasterDetail.MasterDetail$f_2, _.complex.MasterDetail.MasterDetail$f_3, _.bootstrap.compareBy(_.complex.MasterDetail.MasterDetail$f_4)), new _.net.yested.bootstrap.Column(_.complex.MasterDetail.MasterDetail$f_5, _.complex.MasterDetail.MasterDetail$f_6(this), _.bootstrap.compareBy(_.complex.MasterDetail.MasterDetail$f_7)), new _.net.yested.bootstrap.Column(_.complex.MasterDetail.MasterDetail$f_8, _.complex.MasterDetail.MasterDetail$f_9(this), _.bootstrap.compareBy(_.complex.MasterDetail.MasterDetail$f_10))]);
-      }, /** @lends _.complex.MasterDetail.prototype */ {
-        delete: function (city) {
+      DetailScreen: Kotlin.createClass(function () {
+        return [_.net.yested.Component];
+      }, function (editedCity, saveHandler, cancelHandler) {
+        this.editedCity = editedCity;
+        this.saveHandler = saveHandler;
+        this.cancelHandler = cancelHandler;
+        this.textInput = new _.net.yested.bootstrap.TextInput(void 0, 'City name');
+        this.validator = new _.net.yested.bootstrap.Validator(this.textInput, 'Name is mandatory', _.complex.DetailScreen.DetailScreen$f);
+        this.select = new _.net.yested.bootstrap.Select(Kotlin.modules['stdlib'].kotlin.toList_eg9ybj$(_.complex.Continent.values()), void 0, void 0, void 0, _.complex.DetailScreen.DetailScreen$f_0);
+        if (this.editedCity != null) {
+          this.textInput.value = this.editedCity.name;
+          this.select.selectedItems = Kotlin.modules['stdlib'].kotlin.listOf_9mqe4v$([this.editedCity.continent]);
+        }
+      }, /** @lends _.complex.DetailScreen.prototype */ {
+        save: function () {
+          if (this.validator.isValid()) {
+            this.saveHandler(new _.complex.City(this.textInput.value, Kotlin.modules['stdlib'].kotlin.first_fvq2g0$(this.select.selectedItems)));
+          }
+        },
+        element: {
+          get: function () {
+            return _.net.yested.with_owvm91$(new _.net.yested.bootstrap.Form(_.net.yested.bootstrap.FormStyle.object.HORIZONTAL, void 0, new _.net.yested.bootstrap.Small(4), new _.net.yested.bootstrap.Small(8)), _.complex.DetailScreen.element$f(this)).element;
+          }
+        }
+      }, /** @lends _.complex.DetailScreen */ {
+        DetailScreen$f: function (it) {
+          return it.length > 3;
+        },
+        DetailScreen$f_0: function (it) {
+          return it.label;
+        },
+        f: function () {
+          this.plus_pdl1w0$('City name');
+        },
+        f_0: function (this$DetailScreen) {
+          return function () {
+            this.plus_pv6laa$(this$DetailScreen.textInput);
+          };
+        },
+        f_1: function () {
+          this.plus_pdl1w0$('Continent');
+        },
+        f_2: function (this$DetailScreen) {
+          return function () {
+            this.plus_pv6laa$(this$DetailScreen.select);
+          };
+        },
+        f_3: function () {
+        },
+        f_4: function () {
+          this.plus_pdl1w0$('Save');
+        },
+        f_5: function (this$DetailScreen) {
+          return function () {
+            this$DetailScreen.save();
+          };
+        },
+        f_6: function () {
+          this.plus_pdl1w0$('Cancel');
+        },
+        f_7: function (this$DetailScreen) {
+          return function () {
+            this$DetailScreen.cancelHandler();
+          };
+        },
+        f_8: function (this$DetailScreen) {
+          return function () {
+            _.net.yested.bootstrap.btsButton_adnmfr$(this, _.net.yested.ButtonType.object.SUBMIT, _.complex.DetailScreen.f_4, _.net.yested.bootstrap.ButtonLook.object.PRIMARY, void 0, void 0, _.complex.DetailScreen.f_5(this$DetailScreen));
+            _.net.yested.bootstrap.btsButton_adnmfr$(this, void 0, _.complex.DetailScreen.f_6, void 0, void 0, void 0, _.complex.DetailScreen.f_7(this$DetailScreen));
+          };
+        },
+        f_9: function (this$DetailScreen) {
+          return function () {
+            this.div_5rsex9$(void 0, void 0, _.complex.DetailScreen.f_8(this$DetailScreen));
+          };
+        },
+        element$f: function (this$DetailScreen) {
+          return function () {
+            this.item_gthhqa$(void 0, _.complex.DetailScreen.f, this$DetailScreen.validator, _.complex.DetailScreen.f_0(this$DetailScreen));
+            this.item_gthhqa$(void 0, _.complex.DetailScreen.f_1, void 0, _.complex.DetailScreen.f_2(this$DetailScreen));
+            this.item_gthhqa$(void 0, _.complex.DetailScreen.f_3, void 0, _.complex.DetailScreen.f_9(this$DetailScreen));
+          };
+        }
+      }),
+      MasterScreen: Kotlin.createClass(function () {
+        return [_.net.yested.Component];
+      }, function (list, editHandler) {
+        this.list = list;
+        this.editHandler = editHandler;
+        this.grid = new _.net.yested.bootstrap.Grid(void 0, [new _.net.yested.bootstrap.Column(_.complex.MasterScreen.MasterScreen$f, _.complex.MasterScreen.MasterScreen$f_0, _.bootstrap.compareBy(_.complex.MasterScreen.MasterScreen$f_1), void 0, true), new _.net.yested.bootstrap.Column(_.complex.MasterScreen.MasterScreen$f_2, _.complex.MasterScreen.MasterScreen$f_3, _.bootstrap.compareBy(_.complex.MasterScreen.MasterScreen$f_4)), new _.net.yested.bootstrap.Column(_.complex.MasterScreen.MasterScreen$f_5, _.complex.MasterScreen.MasterScreen$f_6(this), _.bootstrap.compareBy(_.complex.MasterScreen.MasterScreen$f_7)), new _.net.yested.bootstrap.Column(_.complex.MasterScreen.MasterScreen$f_8, _.complex.MasterScreen.MasterScreen$f_9(this), _.bootstrap.compareBy(_.complex.MasterScreen.MasterScreen$f_10))]);
+        this.grid.list = this.list;
+      }, /** @lends _.complex.MasterScreen.prototype */ {
+        deleteCity: function (city) {
           this.list.remove_za3rmp$(city);
           this.grid.list = this.list;
         },
-        edit: function (editedCity) {
-          if (editedCity === void 0)
-            editedCity = null;
-          var textInput = new _.net.yested.bootstrap.TextInput(void 0, 'City name');
-          var validator = new _.net.yested.bootstrap.Validator(textInput, 'Name is mandatory', _.complex.MasterDetail.edit$f);
-          var select = new _.net.yested.bootstrap.Select(void 0, void 0, void 0, _.complex.MasterDetail.edit$f_0);
-          select.data = Kotlin.modules['stdlib'].kotlin.toList_eg9ybj$(_.complex.Continent.values());
-          var close = _.complex.MasterDetail.edit$close(this);
-          var save = _.complex.MasterDetail.edit$save(validator, editedCity, this, textInput, select, close);
-          if (editedCity != null) {
-            textInput.value = editedCity.name;
-            select.selectedItems = Kotlin.modules['stdlib'].kotlin.listOf_9mqe4v$([editedCity.continent]);
+        element: {
+          get: function () {
+            return _.net.yested.with_owvm91$(new _.net.yested.Div(), _.complex.MasterScreen.element$f(this)).element;
           }
-          this.placeholder.setChild_hu5ove$(_.net.yested.with_owvm91$(new _.net.yested.bootstrap.Form(_.net.yested.bootstrap.FormStyle.object.HORIZONTAL, void 0, new _.net.yested.bootstrap.Small(4), new _.net.yested.bootstrap.Small(8)), _.complex.MasterDetail.edit$f_1(validator, textInput, select, save, close)), new _.net.yested.Fade());
-        },
-        createMasterView: function () {
-          return _.net.yested.div_5rsex9$(void 0, void 0, _.complex.MasterDetail.createMasterView$f(this));
-        },
-        createDiv: function () {
-          this.placeholder.setChild_hu5ove$(this.createMasterView(), new _.net.yested.Fade());
-          this.grid.list = this.list;
-          return _.net.yested.div_5rsex9$(void 0, void 0, _.complex.MasterDetail.createDiv$f(this));
         }
-      }, /** @lends _.complex.MasterDetail */ {
-        MasterDetail$f: function () {
+      }, /** @lends _.complex.MasterScreen */ {
+        MasterScreen$f: function () {
           this.plus_pdl1w0$('City name');
         },
-        MasterDetail$f_0: function (it) {
+        MasterScreen$f_0: function (it) {
           this.plus_pdl1w0$(it.name);
         },
-        MasterDetail$f_1: function (it) {
+        MasterScreen$f_1: function (it) {
           return it.name;
         },
-        MasterDetail$f_2: function () {
+        MasterScreen$f_2: function () {
           this.plus_pdl1w0$('Continent');
         },
-        MasterDetail$f_3: function (it) {
+        MasterScreen$f_3: function (it) {
           this.plus_pdl1w0$(it.continent.label);
         },
-        MasterDetail$f_4: function (it) {
+        MasterScreen$f_4: function (it) {
           return it.continent.label;
         },
-        MasterDetail$f_5: function () {
+        MasterScreen$f_5: function () {
         },
         f: function () {
           this.plus_pdl1w0$('Edit');
         },
-        f_0: function (it, this$MasterDetail) {
+        f_0: function (this$MasterScreen, it) {
           return function () {
-            this$MasterDetail.edit(it);
+            this$MasterScreen.editHandler(it);
           };
         },
-        MasterDetail$f_6: function (this$MasterDetail) {
+        MasterScreen$f_6: function (this$MasterScreen) {
           return function (it) {
-            _.net.yested.bootstrap.btsButton_adnmfr$(this, void 0, _.complex.MasterDetail.f, void 0, _.net.yested.bootstrap.ButtonSize.object.EXTRA_SMALL, void 0, _.complex.MasterDetail.f_0(it, this$MasterDetail));
+            _.net.yested.bootstrap.btsButton_adnmfr$(this, void 0, _.complex.MasterScreen.f, void 0, _.net.yested.bootstrap.ButtonSize.object.EXTRA_SMALL, void 0, _.complex.MasterScreen.f_0(this$MasterScreen, it));
           };
         },
-        MasterDetail$f_7: function (it) {
+        MasterScreen$f_7: function (it) {
           return it.name;
         },
-        MasterDetail$f_8: function () {
+        MasterScreen$f_8: function () {
         },
         f_1: function () {
           this.plus_pdl1w0$('Delete');
         },
-        f_2: function (it, this$MasterDetail) {
+        f_2: function (it, this$MasterScreen) {
           return function () {
-            this$MasterDetail.delete(it);
+            this$MasterScreen.deleteCity(it);
           };
         },
-        MasterDetail$f_9: function (this$MasterDetail) {
+        MasterScreen$f_9: function (this$MasterScreen) {
           return function (it) {
-            _.net.yested.bootstrap.btsButton_adnmfr$(this, void 0, _.complex.MasterDetail.f_1, _.net.yested.bootstrap.ButtonLook.object.DANGER, _.net.yested.bootstrap.ButtonSize.object.EXTRA_SMALL, void 0, _.complex.MasterDetail.f_2(it, this$MasterDetail));
+            _.net.yested.bootstrap.btsButton_adnmfr$(this, void 0, _.complex.MasterScreen.f_1, _.net.yested.bootstrap.ButtonLook.object.DANGER, _.net.yested.bootstrap.ButtonSize.object.EXTRA_SMALL, void 0, _.complex.MasterScreen.f_2(it, this$MasterScreen));
           };
         },
-        MasterDetail$f_10: function (it) {
+        MasterScreen$f_10: function (it) {
           return it.name;
         },
-        edit$f: function (it) {
-          return it.length > 3;
-        },
-        edit$f_0: function (it) {
-          return it.label;
-        },
-        edit$close: function (this$MasterDetail) {
-          return function () {
-            this$MasterDetail.placeholder.setChild_hu5ove$(this$MasterDetail.createMasterView(), new _.net.yested.Fade());
-          };
-        },
-        edit$save: function (validator, editedCity, this$MasterDetail, textInput, select, close) {
-          return function () {
-            if (validator.isValid()) {
-              if (editedCity != null) {
-                this$MasterDetail.list.remove_za3rmp$(editedCity);
-              }
-              this$MasterDetail.list.add_za3rmp$(new _.complex.City(textInput.value, Kotlin.modules['stdlib'].kotlin.first_fvq2g0$(select.selectedItems)));
-              this$MasterDetail.grid.list = this$MasterDetail.list;
-              close();
-            }
-          };
-        },
         f_3: function () {
-          this.plus_pdl1w0$('City name');
-        },
-        f_4: function (textInput) {
-          return function () {
-            this.plus_pv6laa$(textInput);
-          };
-        },
-        f_5: function () {
-          this.plus_pdl1w0$('Continent');
-        },
-        f_6: function (select) {
-          return function () {
-            this.plus_pv6laa$(select);
-          };
-        },
-        f_7: function () {
-        },
-        f_8: function () {
-          this.plus_pdl1w0$('Save');
-        },
-        f_9: function () {
-          this.plus_pdl1w0$('Cancel');
-        },
-        f_10: function (save, close) {
-          return function () {
-            _.net.yested.bootstrap.btsButton_adnmfr$(this, _.net.yested.ButtonType.object.SUBMIT, _.complex.MasterDetail.f_8, _.net.yested.bootstrap.ButtonLook.object.PRIMARY, void 0, void 0, save);
-            _.net.yested.bootstrap.btsButton_adnmfr$(this, void 0, _.complex.MasterDetail.f_9, void 0, void 0, void 0, close);
-          };
-        },
-        f_11: function (save, close) {
-          return function () {
-            this.div_5rsex9$(void 0, void 0, _.complex.MasterDetail.f_10(save, close));
-          };
-        },
-        edit$f_1: function (validator, textInput, select, save, close) {
-          return function () {
-            this.item_gthhqa$(void 0, _.complex.MasterDetail.f_3, validator, _.complex.MasterDetail.f_4(textInput));
-            this.item_gthhqa$(void 0, _.complex.MasterDetail.f_5, void 0, _.complex.MasterDetail.f_6(select));
-            this.item_gthhqa$(void 0, _.complex.MasterDetail.f_7, void 0, _.complex.MasterDetail.f_11(save, close));
-          };
-        },
-        f_12: function () {
           this.plus_pdl1w0$('Add');
         },
-        f_13: function (this$MasterDetail) {
+        f_4: function (this$MasterScreen) {
           return function () {
-            this$MasterDetail.edit();
+            this$MasterScreen.editHandler(null);
           };
         },
-        createMasterView$f: function (this$MasterDetail) {
+        element$f: function (this$MasterScreen) {
           return function () {
-            this.plus_pv6laa$(this$MasterDetail.grid);
-            _.net.yested.bootstrap.btsButton_adnmfr$(this, void 0, _.complex.MasterDetail.f_12, void 0, void 0, void 0, _.complex.MasterDetail.f_13(this$MasterDetail));
-          };
-        },
-        f_14: function () {
-          this.plus_pdl1w0$('Master / Detail');
-        },
-        f_15: function () {
-          this.h3_kv1miw$(_.complex.MasterDetail.f_14);
-        },
-        f_16: function () {
-          _.net.yested.bootstrap.pageHeader_kzm4yj$(this, _.complex.MasterDetail.f_15);
-        },
-        f_17: function () {
-          this.col_zcukl0$([new _.net.yested.bootstrap.Medium(12)], _.complex.MasterDetail.f_16);
-        },
-        f_18: function () {
-          this.plus_pdl1w0$('Demo');
-        },
-        f_19: function (this$MasterDetail) {
-          return function () {
-            this.h4_kv1miw$(_.complex.MasterDetail.f_18);
-            this.plus_pv6laa$(this$MasterDetail.placeholder);
-          };
-        },
-        f_20: function () {
-          this.plus_pdl1w0$('Source code');
-        },
-        f_21: function () {
-          this.plus_pdl1w0$('Source code is deployed on GitHub');
-        },
-        f_22: function () {
-          this.h4_kv1miw$(_.complex.MasterDetail.f_20);
-          this.a_b4th6h$(void 0, 'https://github.com/jean79/yested/blob/master/src/main/docsite/complex/masterdetails.kt', void 0, _.complex.MasterDetail.f_21);
-        },
-        f_23: function (this$MasterDetail) {
-          return function () {
-            this.col_zcukl0$([new _.net.yested.bootstrap.Medium(6)], _.complex.MasterDetail.f_19(this$MasterDetail));
-            this.col_zcukl0$([new _.net.yested.bootstrap.Medium(6)], _.complex.MasterDetail.f_22);
-          };
-        },
-        createDiv$f: function (this$MasterDetail) {
-          return function () {
-            _.net.yested.bootstrap.row_xnql8t$(this, _.complex.MasterDetail.f_17);
-            _.net.yested.bootstrap.row_xnql8t$(this, _.complex.MasterDetail.f_23(this$MasterDetail));
+            this.plus_pv6laa$(this$MasterScreen.grid);
+            _.net.yested.bootstrap.btsButton_adnmfr$(this, void 0, _.complex.MasterScreen.f_3, void 0, void 0, void 0, _.complex.MasterScreen.f_4(this$MasterScreen));
           };
         }
       }),
-      masterDetail: function () {
-        return (new _.complex.MasterDetail()).createDiv();
-      },
+      MasterDetailDemo: Kotlin.createClass(function () {
+        return [_.net.yested.Component];
+      }, function () {
+        this.placeholder = new _.net.yested.Div();
+        this.list = Kotlin.modules['stdlib'].kotlin.arrayListOf_9mqe4v$([new _.complex.City('Prague', _.complex.Continent.object.EUROPE), new _.complex.City('London', _.complex.Continent.object.EUROPE), new _.complex.City('New York', _.complex.Continent.object.AMERICA)]);
+        this.displayMasterScreen();
+      }, /** @lends _.complex.MasterDetailDemo.prototype */ {
+        saveCity: function (originalCity, newCity) {
+          if (originalCity != null) {
+            this.list.remove_za3rmp$(originalCity);
+          }
+          this.list.add_za3rmp$(newCity);
+          this.displayMasterScreen();
+        },
+        editCity: function (city) {
+          if (city === void 0)
+            city = null;
+          this.placeholder.setChild_hu5ove$(new _.complex.DetailScreen(city, _.complex.MasterDetailDemo.editCity$f(city, this), _.complex.MasterDetailDemo.editCity$f_0(this)), new _.net.yested.Fade());
+        },
+        displayMasterScreen: function () {
+          this.placeholder.setChild_hu5ove$(new _.complex.MasterScreen(this.list, _.complex.MasterDetailDemo.displayMasterScreen$f(this)), new _.net.yested.Fade());
+        },
+        element: {
+          get: function () {
+            return _.net.yested.with_owvm91$(new _.net.yested.Div(), _.complex.MasterDetailDemo.element$f(this)).element;
+          }
+        }
+      }, /** @lends _.complex.MasterDetailDemo */ {
+        editCity$f: function (city, this$MasterDetailDemo) {
+          return function (it) {
+            this$MasterDetailDemo.saveCity(city, it);
+          };
+        },
+        editCity$f_0: function (this$MasterDetailDemo) {
+          return function () {
+            this$MasterDetailDemo.displayMasterScreen();
+          };
+        },
+        displayMasterScreen$f: function (this$MasterDetailDemo) {
+          return function (it) {
+            this$MasterDetailDemo.editCity(it);
+          };
+        },
+        element$f: function (this$MasterDetailDemo) {
+          return function () {
+            this.plus_pv6laa$(this$MasterDetailDemo.placeholder);
+          };
+        }
+      }),
       f: function () {
-        this.plus_pdl1w0$('Spinner');
+        this.plus_pdl1w0$('Master / Detail');
       },
       f_0: function () {
         this.h3_kv1miw$(_.complex.f);
@@ -5844,43 +5846,83 @@
         this.col_zcukl0$([new _.net.yested.bootstrap.Medium(12)], _.complex.f_1);
       },
       f_3: function () {
-        this.plus_pdl1w0$('http://fgnass.github.io/spin.js/');
+        this.plus_pdl1w0$('Demo');
       },
       f_4: function () {
+        this.h4_kv1miw$(_.complex.f_3);
+        this.plus_pv6laa$(new _.complex.MasterDetailDemo());
+      },
+      f_5: function () {
+        this.plus_pdl1w0$('Source code');
+      },
+      f_6: function () {
+        this.plus_pdl1w0$('Source code is deployed on GitHub');
+      },
+      f_7: function () {
+        this.h4_kv1miw$(_.complex.f_5);
+        this.a_b4th6h$(void 0, 'https://github.com/jean79/yested/blob/master/src/main/docsite/complex/masterdetails.kt', void 0, _.complex.f_6);
+      },
+      f_8: function () {
+        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(6)], _.complex.f_4);
+        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(6)], _.complex.f_7);
+      },
+      masterDetail$f: function () {
+        _.net.yested.bootstrap.row_xnql8t$(this, _.complex.f_2);
+        _.net.yested.bootstrap.row_xnql8t$(this, _.complex.f_8);
+      },
+      masterDetail: function () {
+        return _.net.yested.div_5rsex9$(void 0, void 0, _.complex.masterDetail$f);
+      },
+      f_9: function () {
+        this.plus_pdl1w0$('Spinner');
+      },
+      f_10: function () {
+        this.h3_kv1miw$(_.complex.f_9);
+      },
+      f_11: function () {
+        _.net.yested.bootstrap.pageHeader_kzm4yj$(this, _.complex.f_10);
+      },
+      f_12: function () {
+        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(12)], _.complex.f_11);
+      },
+      f_13: function () {
+        this.plus_pdl1w0$('http://fgnass.github.io/spin.js/');
+      },
+      f_14: function () {
         this.plus_pdl1w0$('\nThis spinner is based on Spinner library:\n');
-        this.a_b4th6h$(void 0, 'http://fgnass.github.io/spin.js/', void 0, _.complex.f_3);
+        this.a_b4th6h$(void 0, 'http://fgnass.github.io/spin.js/', void 0, _.complex.f_13);
         this.br();
         this.plus_pdl1w0$('You need to include spin.js library in your html file.');
         this.br();
         this.plus_pdl1w0$('All spinner options are supported.');
       },
-      f_5: function () {
+      f_15: function () {
         this.plus_pdl1w0$('Demo');
       },
-      f_6: function () {
+      f_16: function () {
         this.style = 'height: 200px';
         _.net.yested.spin.spinner_4tyilv$(this, new _.net.yested.spin.SpinnerOptions(void 0, 7));
       },
-      f_7: function () {
-        this.div_5rsex9$(void 0, void 0, _.complex.f_4);
+      f_17: function () {
+        this.div_5rsex9$(void 0, void 0, _.complex.f_14);
         this.br();
-        this.h4_kv1miw$(_.complex.f_5);
-        this.div_5rsex9$(void 0, void 0, _.complex.f_6);
+        this.h4_kv1miw$(_.complex.f_15);
+        this.div_5rsex9$(void 0, void 0, _.complex.f_16);
       },
-      f_8: function () {
+      f_18: function () {
         this.plus_pdl1w0$('Code');
       },
-      f_9: function () {
-        this.h4_kv1miw$(_.complex.f_8);
+      f_19: function () {
+        this.h4_kv1miw$(_.complex.f_18);
         this.code_puj7f4$('kotlin', 'div {\n    style = "height: 200px"\n    spinner(SpinnerOptions(length = 7))\n}');
       },
-      f_10: function () {
-        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(4)], _.complex.f_7);
-        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(8)], _.complex.f_9);
+      f_20: function () {
+        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(4)], _.complex.f_17);
+        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(8)], _.complex.f_19);
       },
       createSpinner$f: function () {
-        _.net.yested.bootstrap.row_xnql8t$(this, _.complex.f_2);
-        _.net.yested.bootstrap.row_xnql8t$(this, _.complex.f_10);
+        _.net.yested.bootstrap.row_xnql8t$(this, _.complex.f_12);
+        _.net.yested.bootstrap.row_xnql8t$(this, _.complex.f_20);
       },
       createSpinner: function () {
         return _.net.yested.div_5rsex9$(void 0, void 0, _.complex.createSpinner$f);

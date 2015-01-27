@@ -148,7 +148,7 @@ public fun HTMLComponent.btsCheckBox(label:HTMLComponent.()->Unit):Unit {
 
 private data class SelectOption<TT>(val tag:HTMLOptionElement, val value:TT)
 
-public class Select<T>(val inputSize: InputSize = InputSize.DEFAULT, multiple:Boolean = false, size:Int = 1, val renderer:(T)->String) : Component {
+public class Select<T>(val data:List<T>, val inputSize: InputSize = InputSize.DEFAULT, multiple:Boolean = false, size:Int = 1, val renderer:(T)->String) : Component {
 
     override val element: HTMLElement = createElement("select")
 
@@ -159,20 +159,10 @@ public class Select<T>(val inputSize: InputSize = InputSize.DEFAULT, multiple:Bo
 
     private var selectedItemsInt:List<T> = listOf()
 
-    private var dataInt:List<T>? = null
-
     private var optionTags:ArrayList<SelectOption<T>> = ArrayList()
 
-    public var data:List<T>?
-        get() = dataInt
-        set(newData) {
-            dataInt = newData
-            regenerate()
-            changeSelected()
-        }
-
     public var selectedItems:List<T>
-        get() = selectedItemsInt
+        get() = optionTags.filter { it.tag.selected }.map { it.value }
         set(newData) {
             selectThese(newData)
             changeSelected()
@@ -181,6 +171,7 @@ public class Select<T>(val inputSize: InputSize = InputSize.DEFAULT, multiple:Bo
     {
         element.setAttribute("class", "form-control ${inputSize.code}")
         element.setAttribute("size", size.toString())
+        generateOptions()
         if (multiple) {
             element.setAttribute("multiple", "multiple")
         }
@@ -198,18 +189,16 @@ public class Select<T>(val inputSize: InputSize = InputSize.DEFAULT, multiple:Bo
         }
     }
 
-    private fun regenerate() {
+    private fun generateOptions() {
         element.innerHTML = ""
         optionTags =  ArrayList()
         selectedItemsInt = listOf()
-        if (dataInt != null) {
-            dataInt?.forEach {
-                val optionTag = HTMLComponent("option") with { +renderer(it) }
-                val value:T = it
-                val selectOption = SelectOption(tag = optionTag.element as HTMLOptionElement, value = value)
-                optionTags.add(selectOption)
-                element.appendComponent(optionTag)
-            }
+        data.forEach {
+            val optionTag = HTMLComponent("option") with { +renderer(it) }
+            val value:T = it
+            val selectOption = SelectOption(tag = optionTag.element as HTMLOptionElement, value = value)
+            optionTags.add(selectOption)
+            element.appendComponent(optionTag)
         }
     }
 

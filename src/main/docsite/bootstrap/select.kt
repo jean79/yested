@@ -27,15 +27,13 @@ fun createSelectSection(id: String): Div {
             Car("Citroen", "Purple"))
 
     val resultSingleSelect = Div()
-    val singleSelect = Select<Car>(renderer = { "${it.model} (${it.color})" })
-    singleSelect.data = someData
+    val singleSelect = Select(data = someData, renderer = { "${it.model} (${it.color})" })
     singleSelect.addOnChangeListener {
         resultSingleSelect.setContent( "Selected: ${singleSelect.selectedItems.first().model}")
     }
 
     val resultMultiSelect = Div()
-    val multiSelect = Select<Car>(multiple = true, size = 4, renderer = { "${it.model} (${it.color})" })
-    multiSelect.data = someData
+    val multiSelect = Select(data = someData, multiple = true, size = 4, renderer = { "${it.model} (${it.color})" })
     multiSelect.addOnChangeListener {
         resultMultiSelect.setContent( "Selected: " + multiSelect.selectedItems.map { "${it.model}" }.join(" and "))
     }
@@ -77,15 +75,13 @@ fun createSelectSection(id: String): Div {
         Car("Citroen", "Purple"))
 
 val resultSingleSelect = Div()
-val singleSelect = Select<Car>(renderer = { "$\{it.model} ($\{it.color})" })
-singleSelect.data = someData
+val singleSelect = Select<Car>(data = someData, renderer = { "$\{it.model} ($\{it.color})" })
 singleSelect.addOnChangeListener {
     resultSingleSelect.replace( "Selected: $\{singleSelect.selectedItems.first().model}")
 }
 
 val resultMultiSelect = Div()
-val multiSelect = Select<Car>(multiple = true, size = 4, renderer = { "$\{it.model} ($\{it.color})" })
-multiSelect.data = someData
+val multiSelect = Select<Car>(data = someData, multiple = true, size = 4, renderer = { "$\{it.model} ($\{it.color})" })
 multiSelect.addOnChangeListener {
     resultMultiSelect.replace( "Selected: " + multiSelect.selectedItems.map { "$\{it.model}" }.join(" and "))
 }
