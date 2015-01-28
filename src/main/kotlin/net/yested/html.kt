@@ -8,9 +8,9 @@ import jquery.jq
 import jquery.JQuery
 import org.w3c.dom.Element
 import net.yested.bootstrap.InputElement
-import net.yested.bootstrap.HTMLInputElementWithOnChange
 import java.util.ArrayList
 import kotlin.js.dom.html.HTMLInputElement
+import org.w3c.dom.Node
 
 public class Attribute(val attributeName:String? = null, val element:HTMLElement? = null) {
 
@@ -81,8 +81,14 @@ public open class HTMLComponent(tagName:String) : Component {
     }
 
     public fun setChild(component:Component) {
-        element.innerHTML = ""
+        removeAllChildren()
         element.appendChild(component.element)
+    }
+
+    public fun removeAllChildren() {
+        (0..(element.childNodes.length - 1)).forEach {
+            element.removeChild(element.childNodes.item(it))
+        }
     }
 
     public fun setChild(content:Component, effect:BiDirectionEffect, callback:Function0<Unit>? = null) {
@@ -324,7 +330,7 @@ public class CheckBox() : Component {
 
     public var disabled:Boolean by BooleanAttribute()
     public var readonly:Boolean by BooleanAttribute()
-    public var value:Boolean by BooleanAttribute()
+    public var checked:Boolean by BooleanAttribute()
     public var onchange:Function0<Unit>
         get():Function0<Unit> = element.onchange
         set(value:Function0<Unit>) {

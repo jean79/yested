@@ -57,7 +57,6 @@ public class Tabs : Component {
             tabsRendered.get(tabId)!!
         } else {
             val div = Div() with {
-                "class".."fade in"
                 init()
             }
             tabsRendered.put(tabId, div)

@@ -190,7 +190,6 @@ public class Select<T>(val data:List<T>, val inputSize: InputSize = InputSize.DE
     }
 
     private fun generateOptions() {
-        element.innerHTML = ""
         optionTags =  ArrayList()
         selectedItemsInt = listOf()
         data.forEach {
