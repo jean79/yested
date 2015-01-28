@@ -1,7 +1,6 @@
 package bootstrap
 
 import net.yested.Div
-import net.yested.bootstrap.TextInput
 import net.yested.bootstrap.Validator
 import net.yested.bootstrap.BtsButton
 import net.yested.div

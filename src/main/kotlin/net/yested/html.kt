@@ -177,7 +177,7 @@ public open class HTMLComponent(tagName:String) : Component, ElementEvents {
         return div
     }
 
-    public fun span(clazz:String? = null, init:Span.() -> Unit):Span {
+    public fun span(clazz:String? = null, init:Span.() -> Unit = {}):Span {
         val span = Span()
         span.init()
         clazz?.let { span.clazz = clazz!! }
