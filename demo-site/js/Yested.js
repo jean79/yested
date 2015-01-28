@@ -567,8 +567,11 @@
             this.element.innerHTML = text;
           },
           setChild_5f0h2k$: function (component) {
-            this.element.innerHTML = '';
+            this.removeAllChildren();
             this.element.appendChild(component.element);
+          },
+          removeAllChildren: function () {
+            Kotlin.modules['stdlib'].kotlin.forEach_p7e0bo$(new Kotlin.NumberRange(0, this.element.childNodes.length - 1), _.net.yested.HTMLComponent.removeAllChildren$f(this));
           },
           setChild_hu5ove$: function (content, effect, callback) {
             if (callback === void 0)
@@ -752,6 +755,11 @@
             return l;
           }
         }, /** @lends _.net.yested.HTMLComponent */ {
+          removeAllChildren$f: function (this$HTMLComponent) {
+            return function (it) {
+              this$HTMLComponent.element.removeChild(this$HTMLComponent.element.childNodes.item(it));
+            };
+          },
           f: function (callback) {
             return function (it) {
               (callback != null ? callback : Kotlin.throwNPE())();
@@ -3138,7 +3146,6 @@
             },
             renderContent$f: function (init) {
               return function () {
-                this.rangeTo_94jgcu$('class', 'fade in');
                 init.call(this);
               };
             },
