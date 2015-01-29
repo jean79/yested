@@ -26,6 +26,7 @@ fun bootstrapPage(): Div {
             row {
                 col(Medium(10)) {
                     +createButtons(id = "bootstrapComponents_Buttons")
+                    +createDropDownsSection(id = "bootstrapComponents_Dropdown")
                     +createTypographySection(id = "bootstrapComponents_Typography")
                     +buttonGroupsSection(id = "bootstrapComponents_ButtonGroups")
                     +createForm(id = "bootstrapComponents_Form")
@@ -48,6 +49,7 @@ fun bootstrapPage(): Div {
                         ul {
                             clazz = "nav nav-pills nav-stacked affix"
                             li { a(href = "#bootstrapComponents_Buttons") { +"Buttons" }; clazz = "active" }
+                            li { a(href = "#bootstrapComponents_Dropdown") { +"Dropdowns" }; clazz = "active" }
                             li { a(href = "#bootstrapComponents_Typography") { +"Typography" } }
                             li { a(href = "#bootstrapComponents_ButtonGroups") { +"Button Group" } }
                             li { a(href = "#bootstrapComponents_Form") { +"Form" } }
