@@ -20,6 +20,7 @@ import net.yested.bootstrap.Alert
 import net.yested.bootstrap.AlertStyle
 import net.yested.bootstrap.Medium
 import net.yested.Fade
+import net.yested.bootstrap.FormStyle
 
 /**
  * Created by jean on 24.12.2014.
@@ -138,7 +139,7 @@ fun createAjaxGetSection(): Div {
         }
         row {
             col(Medium(6)) {
-                btsForm {
+                btsForm(formStyle = FormStyle.HORIZONTAL) {
                     item(label = { +"Location"}, validator = validator) {
                         +textInput
                     }

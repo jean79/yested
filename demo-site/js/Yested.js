@@ -3950,7 +3950,7 @@
       },
       f_25: function (validator, textInput, btnGroup, fetchWeather) {
         return function () {
-          _.net.yested.bootstrap.btsForm_6zn8tn$(this, void 0, void 0, void 0, _.ajax.f_24(validator, textInput, btnGroup, fetchWeather));
+          _.net.yested.bootstrap.btsForm_6zn8tn$(this, _.net.yested.bootstrap.FormStyle.object.HORIZONTAL, void 0, void 0, _.ajax.f_24(validator, textInput, btnGroup, fetchWeather));
         };
       },
       f_26: function (temperatureSpan) {
