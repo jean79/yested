@@ -11,6 +11,7 @@ import net.yested.bootstrap.InputElement
 import java.util.ArrayList
 import kotlin.js.dom.html.HTMLInputElement
 import org.w3c.dom.Node
+import kotlin.js.dom.html.HTMLTextAreaElement
 
 public class Attribute(val attributeName:String? = null, val element:HTMLElement? = null) {
 
@@ -53,7 +54,61 @@ public fun HTMLElement.removeChildByName(childElementName:String) {
     }
 }
 
-public open class HTMLComponent(tagName:String) : Component {
+public trait ElementEvents {
+
+    val element : HTMLElement
+
+    public var onblur:Function0<Unit>
+        get() = element.onblur
+        set(value) { element.onblur = value}
+
+    public var onclick:Function0<Unit>
+        get() = element.onclick
+        set(value) { element.onclick = value}
+
+    public var ondblclick:Function0<Unit>
+        get() = element.ondblclick
+        set(value) { element.ondblclick = value}
+
+    public var onfocus:Function0<Unit>
+        get() = element.onfocus
+        set(value) { element.onfocus = value}
+
+    public var onkeydown:Function0<Unit>
+        get() = element.onkeydown
+        set(value) { element.onkeydown = value}
+
+    public var onkeyup:Function0<Unit>
+        get() = element.onkeyup
+        set(value) { element.onkeyup = value}
+
+    public var onmouseup:Function0<Unit>
+        get() = element.onmouseup
+        set(value) { element.onmouseup = value}
+
+    public var onmousedown:Function0<Unit>
+        get() = element.onmousedown
+        set(value) { element.onmousedown = value}
+
+    public var onmouseout:Function0<Unit>
+        get() = element.onmouseout
+        set(value) { element.onmouseout = value}
+
+    public var onmouseover:Function0<Unit>
+        get() = element.onmouseover
+        set(value) { element.onmouseover = value}
+
+    public var onmousemove:Function0<Unit>
+        get() = element.onmousemove
+        set(value) { element.onmousemove = value}
+
+    public var onresize:Function0<Unit>
+        get() = element.onresize
+        set(value) { element.onresize = value}
+
+}
+
+public open class HTMLComponent(tagName:String) : Component, ElementEvents {
 
     override public var element = createElement(tagName)
 
@@ -99,13 +154,6 @@ public open class HTMLComponent(tagName:String) : Component {
             }
         }
     }
-
-    public var onclick: Function0<Unit>
-        get() = element.onclick
-        set(f) {
-            element.onclick = f;
-        }
-
 
     open public fun a(clazz:String? = null, href:String?=null, onclick:Function0<Unit>? = null, init:Anchor.() -> Unit = {}) {
         val anchor = Anchor()
@@ -209,9 +257,8 @@ public open class HTMLComponent(tagName:String) : Component {
     public fun blockquote(init: HTMLComponent.() -> Unit): Unit = tag("blockquote", init)
     public fun form(init: HTMLComponent.() -> Unit): Unit = tag("form", init)
 
-    public fun textArea(rows:Int = 3, init: HTMLComponent.() ->Unit): Unit =
-        +(HTMLComponent("textarea") with {
-                element.setAttribute("rows", rows.toString())
+    public fun textArea(rows:Int = 3, init: TextArea.() ->Unit): Unit =
+        +(TextArea(rows = rows) with {
                 init()
             })
 
@@ -232,6 +279,32 @@ public open class HTMLComponent(tagName:String) : Component {
         }
         +l
         return l
+    }
+
+}
+
+public class TextArea(rows:Int) : Component, ElementEvents {
+
+    override val element = createElement("textarea") as HTMLTextAreaElement
+
+    public var style:String by Attribute()
+    public var id:String by Attribute()
+    public var clazz:String by Attribute("class")
+
+    public var value:String
+        get() = element.textContent
+        set(value) { element.textContent = value }
+
+    public var rows:Int
+        get() = parseInt(element.getAttribute("rows"))
+        set(value) { element.setAttribute("rows", value.toString()) }
+
+    {
+        this.rows = rows
+    }
+
+    public fun scrollDown() {
+        element.scrollTop = element.scrollHeight - element.clientHeight
     }
 
 }

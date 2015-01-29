@@ -502,8 +502,106 @@
             $receiver.removeChild(child);
           }
         },
+        ElementEvents: Kotlin.createTrait(null, /** @lends _.net.yested.ElementEvents.prototype */ {
+          onblur: {
+            get: function () {
+              return this.element.onblur;
+            },
+            set: function (value) {
+              this.element.onblur = value;
+            }
+          },
+          onclick: {
+            get: function () {
+              return this.element.onclick;
+            },
+            set: function (value) {
+              this.element.onclick = value;
+            }
+          },
+          ondblclick: {
+            get: function () {
+              return this.element.ondblclick;
+            },
+            set: function (value) {
+              this.element.ondblclick = value;
+            }
+          },
+          onfocus: {
+            get: function () {
+              return this.element.onfocus;
+            },
+            set: function (value) {
+              this.element.onfocus = value;
+            }
+          },
+          onkeydown: {
+            get: function () {
+              return this.element.onkeydown;
+            },
+            set: function (value) {
+              this.element.onkeydown = value;
+            }
+          },
+          onkeyup: {
+            get: function () {
+              return this.element.onkeyup;
+            },
+            set: function (value) {
+              this.element.onkeyup = value;
+            }
+          },
+          onmouseup: {
+            get: function () {
+              return this.element.onmouseup;
+            },
+            set: function (value) {
+              this.element.onmouseup = value;
+            }
+          },
+          onmousedown: {
+            get: function () {
+              return this.element.onmousedown;
+            },
+            set: function (value) {
+              this.element.onmousedown = value;
+            }
+          },
+          onmouseout: {
+            get: function () {
+              return this.element.onmouseout;
+            },
+            set: function (value) {
+              this.element.onmouseout = value;
+            }
+          },
+          onmouseover: {
+            get: function () {
+              return this.element.onmouseover;
+            },
+            set: function (value) {
+              this.element.onmouseover = value;
+            }
+          },
+          onmousemove: {
+            get: function () {
+              return this.element.onmousemove;
+            },
+            set: function (value) {
+              this.element.onmousemove = value;
+            }
+          },
+          onresize: {
+            get: function () {
+              return this.element.onresize;
+            },
+            set: function (value) {
+              this.element.onresize = value;
+            }
+          }
+        }),
         HTMLComponent: Kotlin.createClass(function () {
-          return [_.net.yested.Component];
+          return [_.net.yested.ElementEvents, _.net.yested.Component];
         }, function (tagName) {
           this.$element_7lm5ox$ = _.net.yested.createElement_61zpoe$(tagName);
           this.role$delegate = new _.net.yested.Attribute();
@@ -577,14 +675,6 @@
             if (callback === void 0)
               callback = null;
             effect.applyOut_suy7ya$(this, _.net.yested.HTMLComponent.setChild_hu5ove$f(content, this, effect, callback));
-          },
-          onclick: {
-            get: function () {
-              return this.element.onclick;
-            },
-            set: function (f) {
-              this.element.onclick = f;
-            }
           },
           a_b4th6h$: function (clazz, href, onclick, init) {
             if (clazz === void 0)
@@ -734,10 +824,10 @@
           form_kv1miw$: function (init) {
             this.tag_s8xvdm$('form', init);
           },
-          textArea_tt6the$: function (rows, init) {
+          textArea_7mftm4$: function (rows, init) {
             if (rows === void 0)
               rows = 3;
-            this.plus_pv6laa$(_.net.yested.with_owvm91$(new _.net.yested.HTMLComponent('textarea'), _.net.yested.HTMLComponent.textArea_tt6the$f(rows, init)));
+            this.plus_pv6laa$(_.net.yested.with_owvm91$(new _.net.yested.TextArea(rows), _.net.yested.HTMLComponent.textArea_7mftm4$f(init)));
           },
           abbr_s8xvdm$: function (title, init) {
             this.plus_pv6laa$(_.net.yested.with_owvm91$(new _.net.yested.HTMLComponent('abbr'), _.net.yested.HTMLComponent.abbr_s8xvdm$f(title, init)));
@@ -840,9 +930,8 @@
               this$HTMLComponent.plus_pdl1w0$('&nbsp;');
             };
           },
-          textArea_tt6the$f: function (rows, init) {
+          textArea_7mftm4$f: function (init) {
             return function () {
-              this.element.setAttribute('rows', rows.toString());
               init.call(this);
             };
           },
@@ -870,6 +959,64 @@
               clazz != null ? Kotlin.modules['stdlib'].kotlin.let_7hr6ff$(clazz, _.net.yested.HTMLComponent.f_3(clazz, this)) : null;
               init.call(this);
             };
+          }
+        }),
+        TextArea: Kotlin.createClass(function () {
+          return [_.net.yested.ElementEvents, _.net.yested.Component];
+        }, function (rows) {
+          this.$element_ga5ixl$ = _.net.yested.createElement_61zpoe$('textarea');
+          this.style$delegate = new _.net.yested.Attribute();
+          this.id$delegate = new _.net.yested.Attribute();
+          this.clazz$delegate = new _.net.yested.Attribute('class');
+          this.rows = rows;
+        }, /** @lends _.net.yested.TextArea.prototype */ {
+          element: {
+            get: function () {
+              return this.$element_ga5ixl$;
+            }
+          },
+          style: {
+            get: function () {
+              return this.style$delegate.get_262zbl$(this, new Kotlin.PropertyMetadata('style'));
+            },
+            set: function (style) {
+              this.style$delegate.set_ujvi5f$(this, new Kotlin.PropertyMetadata('style'), style);
+            }
+          },
+          id: {
+            get: function () {
+              return this.id$delegate.get_262zbl$(this, new Kotlin.PropertyMetadata('id'));
+            },
+            set: function (id) {
+              this.id$delegate.set_ujvi5f$(this, new Kotlin.PropertyMetadata('id'), id);
+            }
+          },
+          clazz: {
+            get: function () {
+              return this.clazz$delegate.get_262zbl$(this, new Kotlin.PropertyMetadata('clazz'));
+            },
+            set: function (clazz) {
+              this.clazz$delegate.set_ujvi5f$(this, new Kotlin.PropertyMetadata('clazz'), clazz);
+            }
+          },
+          value: {
+            get: function () {
+              return this.element.textContent;
+            },
+            set: function (value) {
+              this.element.textContent = value;
+            }
+          },
+          rows: {
+            get: function () {
+              return parseInt(this.element.getAttribute('rows'));
+            },
+            set: function (value) {
+              this.element.setAttribute('rows', value.toString());
+            }
+          },
+          scrollDown: function () {
+            this.element.scrollTop = this.element.scrollHeight - this.element.clientHeight;
           }
         }),
         Table: Kotlin.createClass(function () {
@@ -2365,7 +2512,6 @@
               Kotlin.modules['stdlib'].kotlin.forEach_p7e0bo$(this.optionTags_gajdrl$, _.net.yested.bootstrap.Select.selectThese$f(selectedItems));
             },
             generateOptions: function () {
-              this.element.innerHTML = '';
               this.optionTags_gajdrl$ = new Kotlin.ArrayList();
               this.selectedItemsInt_m31zmd$ = Kotlin.modules['stdlib'].kotlin.listOf();
               Kotlin.modules['stdlib'].kotlin.forEach_p7e0bo$(this.data, _.net.yested.bootstrap.Select.generateOptions$f(this));
@@ -6331,14 +6477,17 @@
       }
     }),
     html: Kotlin.definePackage(null, /** @lends _.html */ {
-      htmlPage$f: function () {
-        this.plus_pv6laa$(_.html.htmlSection());
+      elementEventsSection$f: function () {
+        this.clazz = 'form-control';
       },
-      htmlPage: function () {
-        return _.net.yested.div_5rsex9$(void 0, void 0, _.html.htmlPage$f);
+      elementEventsSection$addMessage: function (index, capturedEvents) {
+        return function (eventName) {
+          capturedEvents.value = capturedEvents.value + ((index.v++).toString() + ' - ' + eventName + '\n');
+          capturedEvents.scrollDown();
+        };
       },
       f: function () {
-        this.plus_pdl1w0$('HTML');
+        this.plus_pdl1w0$('HTML Events');
       },
       f_0: function () {
         this.h3_kv1miw$(_.html.f);
@@ -6350,7 +6499,7 @@
         this.col_zcukl0$([new _.net.yested.bootstrap.Medium(12)], _.html.f_1);
       },
       f_3: function () {
-        this.plus_pdl1w0$('Yested provides basic DSL for construction of HTML page from HTML basic elements.<br /><br />\n                    This DSL can be easily enhanced with your custom or built-in Bootstrap components via Kotlin Extension methods.');
+        this.plus_pdl1w0$('Yested components derived from HTMLComponents support all DOM Element events.\n                    Please note that onmousemove is ignored in this demo.');
       },
       f_4: function () {
         this.div_5rsex9$(void 0, void 0, _.html.f_3);
@@ -6361,223 +6510,365 @@
       f_6: function () {
         this.plus_pdl1w0$('Demo');
       },
-      f_7: function () {
-        this.plus_pdl1w0$('Yested');
+      f_7: function (addMessage) {
+        return function () {
+          addMessage('onmouseover');
+        };
       },
-      f_8: function () {
-        this.plus_pdl1w0$('Text in span which is in div');
+      f_8: function (addMessage) {
+        return function () {
+          addMessage('onmouseout');
+        };
       },
-      f_9: function () {
-        this.span_dkuwo$(void 0, _.html.f_8);
+      f_9: function (addMessage) {
+        return function () {
+          addMessage('onclick');
+        };
       },
-      f_10: function () {
-        this.plus_pdl1w0$('Text in Paragraph');
+      f_10: function (addMessage) {
+        return function () {
+          addMessage('onblur');
+        };
       },
-      f_11: function () {
-        this.plus_pdl1w0$('Strikethrough text');
+      f_11: function (addMessage) {
+        return function () {
+          addMessage('ondblclick');
+        };
       },
-      f_12: function () {
-        this.plus_pdl1w0$('Deleted text');
+      f_12: function (addMessage) {
+        return function () {
+          addMessage('onfocus');
+        };
       },
-      f_13: function () {
-        this.plus_pdl1w0$('Marked text');
+      f_13: function (addMessage) {
+        return function () {
+          addMessage('onkeydown');
+        };
       },
-      f_14: function () {
-        this.plus_pdl1w0$('Inserted text');
+      f_14: function (addMessage) {
+        return function () {
+          addMessage('onkeyup');
+        };
       },
-      f_15: function () {
-        this.plus_pdl1w0$('Underlined text');
+      f_15: function (addMessage) {
+        return function () {
+          addMessage('onmousedown');
+        };
       },
-      f_16: function () {
-        this.plus_pdl1w0$('Small text');
+      f_16: function (addMessage) {
+        return function () {
+          addMessage('onmouseup');
+        };
       },
-      f_17: function () {
-        this.plus_pdl1w0$('Strong text');
+      f_17: function (addMessage) {
+        return function () {
+          addMessage('onresize');
+        };
       },
-      f_18: function () {
-        this.plus_pdl1w0$('Italicized text.');
+      f_18: function (addMessage) {
+        return function () {
+          this.clazz = 'form-control';
+          this.value = 'Play with this TextArea to see all the events dispatched.';
+          this.onmouseover = _.html.f_7(addMessage);
+          this.onmouseout = _.html.f_8(addMessage);
+          this.onclick = _.html.f_9(addMessage);
+          this.onblur = _.html.f_10(addMessage);
+          this.ondblclick = _.html.f_11(addMessage);
+          this.onfocus = _.html.f_12(addMessage);
+          this.onkeydown = _.html.f_13(addMessage);
+          this.onkeyup = _.html.f_14(addMessage);
+          this.onmousedown = _.html.f_15(addMessage);
+          this.onmouseup = _.html.f_16(addMessage);
+          this.onresize = _.html.f_17(addMessage);
+        };
       },
-      f_19: function () {
-        this.plus_pdl1w0$('blockquote');
+      f_19: function (addMessage, capturedEvents) {
+        return function () {
+          this.textArea_7mftm4$(3, _.html.f_18(addMessage));
+          this.br();
+          this.plus_pv6laa$(capturedEvents);
+        };
       },
-      f_20: function () {
-        this.plus_pdl1w0$('First column');
+      f_20: function (addMessage, capturedEvents) {
+        return function () {
+          this.h4_kv1miw$(_.html.f_6);
+          this.div_5rsex9$(void 0, void 0, _.html.f_19(addMessage, capturedEvents));
+        };
       },
       f_21: function () {
-        this.plus_pdl1w0$('Second column');
-      },
-      f_22: function () {
-        this.th_kv1miw$(_.html.f_20);
-        this.th_kv1miw$(_.html.f_21);
-      },
-      f_23: function () {
-        this.tr_l9w0g6$(_.html.f_22);
-      },
-      f_24: function () {
-        this.plus_pdl1w0$('Cell 1');
-      },
-      f_25: function () {
-        this.plus_pdl1w0$('Cell 2');
-      },
-      f_26: function () {
-        this.td_kv1miw$(_.html.f_24);
-        this.td_kv1miw$(_.html.f_25);
-      },
-      f_27: function () {
-        this.plus_pdl1w0$('Cell 1');
-      },
-      f_28: function () {
-        this.plus_pdl1w0$('Cell 2');
-      },
-      f_29: function () {
-        this.td_kv1miw$(_.html.f_27);
-        this.td_kv1miw$(_.html.f_28);
-      },
-      f_30: function () {
-        this.tr_idqsqk$(_.html.f_26);
-        this.tr_idqsqk$(_.html.f_29);
-      },
-      f_31: function () {
-        this.border = '1';
-        this.thead_3ua0vu$(_.html.f_23);
-        this.tbody_rj77wk$(_.html.f_30);
-      },
-      f_32: function () {
-        this.plus_pdl1w0$('bold text');
-      },
-      f_33: function () {
-        this.plus_pdl1w0$('H1');
-      },
-      f_34: function () {
-        this.plus_pdl1w0$('H2');
-      },
-      f_35: function () {
-        this.plus_pdl1w0$('H3');
-      },
-      f_36: function () {
-        this.plus_pdl1w0$('H4');
-      },
-      f_37: function () {
-        this.plus_pdl1w0$('H5');
-      },
-      f_38: function () {
-        this.plus_pdl1w0$('Press me');
-      },
-      f_39: function () {
-        Kotlin.println('Check console!');
-      },
-      f_40: function () {
-        this.plus_pdl1w0$('List item 1');
-      },
-      f_41: function () {
-        this.plus_pdl1w0$('List item 2');
-      },
-      f_42: function () {
-        this.plus_pdl1w0$('List item 3');
-      },
-      f_43: function () {
-        this.plus_pdl1w0$('List item 4');
-      },
-      f_44: function () {
-        this.li_8y48wp$(_.html.f_40);
-        this.li_8y48wp$(_.html.f_41);
-        this.li_8y48wp$(_.html.f_42);
-        this.li_8y48wp$(_.html.f_43);
-      },
-      f_45: function () {
-        this.plus_pdl1w0$('List item 1');
-      },
-      f_46: function () {
-        this.plus_pdl1w0$('List item 2');
-      },
-      f_47: function () {
-        this.plus_pdl1w0$('List item 3');
-      },
-      f_48: function () {
-        this.plus_pdl1w0$('List item 4');
-      },
-      f_49: function () {
-        this.li_8y48wp$(_.html.f_45);
-        this.li_8y48wp$(_.html.f_46);
-        this.li_8y48wp$(_.html.f_47);
-        this.li_8y48wp$(_.html.f_48);
-      },
-      f_50: function () {
-        this.plus_pdl1w0$('Term 1');
-      },
-      f_51: function () {
-        this.plus_pdl1w0$('Definition');
-      },
-      f_52: function () {
-        this.plus_pdl1w0$('Term 2');
-      },
-      f_53: function () {
-        this.plus_pdl1w0$('Definition');
-      },
-      f_54: function () {
-        this.clazz = 'dl-horizontal';
-        this.item_z5xo0k$(_.html.f_50, _.html.f_51);
-        this.item_z5xo0k$(_.html.f_52, _.html.f_53);
-      },
-      f_55: function () {
-        this.plus_pdl1w0$('cd');
-      },
-      f_56: function () {
-        this.a_b4th6h$(void 0, 'http://www.yested.net', void 0, _.html.f_7);
-        this.br();
-        this.div_5rsex9$(void 0, void 0, _.html.f_9);
-        this.p_omdg96$(_.html.f_10);
-        this.s_kv1miw$(_.html.f_11);
-        this.nbsp_za3lpa$();
-        this.del_kv1miw$(_.html.f_12);
-        this.nbsp_za3lpa$();
-        this.mark_kv1miw$(_.html.f_13);
-        this.nbsp_za3lpa$();
-        this.ins_kv1miw$(_.html.f_14);
-        this.nbsp_za3lpa$();
-        this.u_kv1miw$(_.html.f_15);
-        this.nbsp_za3lpa$();
-        this.small_kv1miw$(_.html.f_16);
-        this.nbsp_za3lpa$();
-        this.strong_kv1miw$(_.html.f_17);
-        this.nbsp_za3lpa$();
-        this.em_kv1miw$(_.html.f_18);
-        this.br();
-        this.br();
-        this.blockquote_kv1miw$(_.html.f_19);
-        this.table_or8fdg$(_.html.f_31);
-        this.img_puj7f4$('demo-site/img/sample_img.jpg', 'bla');
-        this.emph_kv1miw$(_.html.f_32);
-        this.h1_kv1miw$(_.html.f_33);
-        this.h2_kv1miw$(_.html.f_34);
-        this.h3_kv1miw$(_.html.f_35);
-        this.h4_kv1miw$(_.html.f_36);
-        this.h5_kv1miw$(_.html.f_37);
-        this.button_fpm6mz$(_.html.f_38, _.net.yested.ButtonType.object.BUTTON, _.html.f_39);
-        this.ul_8qfrsd$(_.html.f_44);
-        this.ol_t3splz$(_.html.f_49);
-        this.dl_79d1z0$(_.html.f_54);
-        this.kbd_kv1miw$(_.html.f_55);
-      },
-      f_57: function () {
-        this.h4_kv1miw$(_.html.f_6);
-        this.div_5rsex9$(void 0, void 0, _.html.f_56);
-      },
-      f_58: function () {
         this.plus_pdl1w0$('Code');
       },
+      f_22: function () {
+        this.h4_kv1miw$(_.html.f_21);
+        this.code_puj7f4$('kotlin', 'var index = 0\nval capturedEvents = TextArea(rows = 8) with { clazz = "form-control" }\n\nfun addMessage(eventName:String) {\n    capturedEvents.value += "$\\{index++} - $\\{eventName}\\\\n"\n    capturedEvents.scrollDown()\n}\n...\ndiv {\n    textArea(rows = 3) {\n        clazz = "form-control"\n        value = "Play with this TextArea to see all the events dispatched."\n        onmouseover = { addMessage("onmouseover") }\n        onmouseout = { addMessage("onmouseout") }\n        onclick = { addMessage("onclick") }\n        onblur = { addMessage("onblur") }\n        ondblclick = { addMessage("ondblclick") }\n        onfocus = { addMessage("onfocus") }\n        onkeydown = { addMessage("onkeydown") }\n        onkeyup = { addMessage("onkeyup") }\n        onmousedown = { addMessage("onmousedown") }\n        onmouseup = { addMessage("onmouseup") }\n        onresize = { addMessage("onresize") }\n    }\n    br()\n    +capturedEvents\n}\n');
+      },
+      f_23: function (addMessage, capturedEvents) {
+        return function () {
+          this.col_zcukl0$([new _.net.yested.bootstrap.Medium(4)], _.html.f_20(addMessage, capturedEvents));
+          this.col_zcukl0$([new _.net.yested.bootstrap.Medium(8)], _.html.f_22);
+        };
+      },
+      elementEventsSection$f_0: function (addMessage, capturedEvents) {
+        return function () {
+          _.net.yested.bootstrap.row_xnql8t$(this, _.html.f_2);
+          _.net.yested.bootstrap.row_xnql8t$(this, _.html.f_5);
+          _.net.yested.bootstrap.row_xnql8t$(this, _.html.f_23(addMessage, capturedEvents));
+        };
+      },
+      elementEventsSection: function () {
+        var index = {v: 0};
+        var capturedEvents = _.net.yested.with_owvm91$(new _.net.yested.TextArea(8), _.html.elementEventsSection$f);
+        var addMessage = _.html.elementEventsSection$addMessage(index, capturedEvents);
+        return _.net.yested.div_5rsex9$(void 0, void 0, _.html.elementEventsSection$f_0(addMessage, capturedEvents));
+      },
+      htmlPage$f: function () {
+        this.plus_pv6laa$(_.html.htmlSection());
+        this.plus_pv6laa$(_.html.elementEventsSection());
+      },
+      htmlPage: function () {
+        return _.net.yested.div_5rsex9$(void 0, void 0, _.html.htmlPage$f);
+      },
+      f_24: function () {
+        this.plus_pdl1w0$('HTML');
+      },
+      f_25: function () {
+        this.h3_kv1miw$(_.html.f_24);
+      },
+      f_26: function () {
+        _.net.yested.bootstrap.pageHeader_kzm4yj$(this, _.html.f_25);
+      },
+      f_27: function () {
+        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(12)], _.html.f_26);
+      },
+      f_28: function () {
+        this.plus_pdl1w0$('Yested provides basic DSL for construction of HTML page from HTML basic elements.<br /><br />\n                    This DSL can be easily enhanced with your custom or built-in Bootstrap components via Kotlin Extension methods.');
+      },
+      f_29: function () {
+        this.div_5rsex9$(void 0, void 0, _.html.f_28);
+      },
+      f_30: function () {
+        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(4)], _.html.f_29);
+      },
+      f_31: function () {
+        this.plus_pdl1w0$('Demo');
+      },
+      f_32: function () {
+        this.plus_pdl1w0$('Yested');
+      },
+      f_33: function () {
+        this.plus_pdl1w0$('Text in span which is in div');
+      },
+      f_34: function () {
+        this.span_dkuwo$(void 0, _.html.f_33);
+      },
+      f_35: function () {
+        this.plus_pdl1w0$('Text in Paragraph');
+      },
+      f_36: function () {
+        this.plus_pdl1w0$('Strikethrough text');
+      },
+      f_37: function () {
+        this.plus_pdl1w0$('Deleted text');
+      },
+      f_38: function () {
+        this.plus_pdl1w0$('Marked text');
+      },
+      f_39: function () {
+        this.plus_pdl1w0$('Inserted text');
+      },
+      f_40: function () {
+        this.plus_pdl1w0$('Underlined text');
+      },
+      f_41: function () {
+        this.plus_pdl1w0$('Small text');
+      },
+      f_42: function () {
+        this.plus_pdl1w0$('Strong text');
+      },
+      f_43: function () {
+        this.plus_pdl1w0$('Italicized text.');
+      },
+      f_44: function () {
+        this.plus_pdl1w0$('blockquote');
+      },
+      f_45: function () {
+        this.plus_pdl1w0$('First column');
+      },
+      f_46: function () {
+        this.plus_pdl1w0$('Second column');
+      },
+      f_47: function () {
+        this.th_kv1miw$(_.html.f_45);
+        this.th_kv1miw$(_.html.f_46);
+      },
+      f_48: function () {
+        this.tr_l9w0g6$(_.html.f_47);
+      },
+      f_49: function () {
+        this.plus_pdl1w0$('Cell 1');
+      },
+      f_50: function () {
+        this.plus_pdl1w0$('Cell 2');
+      },
+      f_51: function () {
+        this.td_kv1miw$(_.html.f_49);
+        this.td_kv1miw$(_.html.f_50);
+      },
+      f_52: function () {
+        this.plus_pdl1w0$('Cell 1');
+      },
+      f_53: function () {
+        this.plus_pdl1w0$('Cell 2');
+      },
+      f_54: function () {
+        this.td_kv1miw$(_.html.f_52);
+        this.td_kv1miw$(_.html.f_53);
+      },
+      f_55: function () {
+        this.tr_idqsqk$(_.html.f_51);
+        this.tr_idqsqk$(_.html.f_54);
+      },
+      f_56: function () {
+        this.border = '1';
+        this.thead_3ua0vu$(_.html.f_48);
+        this.tbody_rj77wk$(_.html.f_55);
+      },
+      f_57: function () {
+        this.plus_pdl1w0$('bold text');
+      },
+      f_58: function () {
+        this.plus_pdl1w0$('H1');
+      },
       f_59: function () {
-        this.h4_kv1miw$(_.html.f_58);
-        this.code_puj7f4$('kotlin', '\na(href="http://www.yested.net") { +"Yested"}\nbr()\ndiv {\n    span { +"Text in span which is in div"}\n}\np { +"Text in Paragraph" }\ns { +"Strikethrough text" }\nnbsp()\ndel { +"Deleted text" }\nnbsp()\nmark { +"Marked text" }\nnbsp()\nins { +"Inserted text" }\nnbsp()\nu { +"Underlined text" }\nnbsp()\nsmall { +"Small text" }\nnbsp()\nstrong { +"Strong text" }\nnbsp()\nem { +"Italicized text." }\nbr()\nbr()\nblockquote { +"blockquote" }\ntable { border = "1"\n    thead {\n        tr {\n            th { +"First column" }\n            th { +"Second column"}\n        }\n    }\n    tbody {\n        tr {\n            td { +"Cell 1"}\n            td { +"Cell 2"}\n        }\n        tr {\n            td { +"Cell 1"}\n            td { +"Cell 2"}\n        }\n    }\n}\nimg(src = "demo-site/img/sample_img.jpg", alt = "bla") {}\nemph { +"bold text" }\nh1 { +"H1" }\nh2 { +"H2" }\nh3 { +"H3" }\nh4 { +"H4" }\nh5 { +"H5" }\nbutton(label = { +"Press me"},\n        type = ButtonType.BUTTON,\n        onclick = { println("Check console!")})\nul {\n    li { +"List item 1"}\n    li { +"List item 2"}\n    li { +"List item 3"}\n    li { +"List item 4"}\n}\n\nol {\n    li { +"List item 1" }\n    li { +"List item 2" }\n    li { +"List item 3" }\n    li { +"List item 4" }\n}\n\ndl {\n    clazz = "dl-horizontal"\n    item(dt = { +"Term 1"}) { +"Definition"}\n    item(dt = { +"Term 2"}) { +"Definition"}\n}\n\nkbd { +"cd" }\n\n');
+        this.plus_pdl1w0$('H2');
       },
       f_60: function () {
-        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(4)], _.html.f_57);
-        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(8)], _.html.f_59);
+        this.plus_pdl1w0$('H3');
+      },
+      f_61: function () {
+        this.plus_pdl1w0$('H4');
+      },
+      f_62: function () {
+        this.plus_pdl1w0$('H5');
+      },
+      f_63: function () {
+        this.plus_pdl1w0$('Press me');
+      },
+      f_64: function () {
+        Kotlin.println('Check console!');
+      },
+      f_65: function () {
+        this.plus_pdl1w0$('List item 1');
+      },
+      f_66: function () {
+        this.plus_pdl1w0$('List item 2');
+      },
+      f_67: function () {
+        this.plus_pdl1w0$('List item 3');
+      },
+      f_68: function () {
+        this.plus_pdl1w0$('List item 4');
+      },
+      f_69: function () {
+        this.li_8y48wp$(_.html.f_65);
+        this.li_8y48wp$(_.html.f_66);
+        this.li_8y48wp$(_.html.f_67);
+        this.li_8y48wp$(_.html.f_68);
+      },
+      f_70: function () {
+        this.plus_pdl1w0$('List item 1');
+      },
+      f_71: function () {
+        this.plus_pdl1w0$('List item 2');
+      },
+      f_72: function () {
+        this.plus_pdl1w0$('List item 3');
+      },
+      f_73: function () {
+        this.plus_pdl1w0$('List item 4');
+      },
+      f_74: function () {
+        this.li_8y48wp$(_.html.f_70);
+        this.li_8y48wp$(_.html.f_71);
+        this.li_8y48wp$(_.html.f_72);
+        this.li_8y48wp$(_.html.f_73);
+      },
+      f_75: function () {
+        this.plus_pdl1w0$('Term 1');
+      },
+      f_76: function () {
+        this.plus_pdl1w0$('Definition');
+      },
+      f_77: function () {
+        this.plus_pdl1w0$('Term 2');
+      },
+      f_78: function () {
+        this.plus_pdl1w0$('Definition');
+      },
+      f_79: function () {
+        this.clazz = 'dl-horizontal';
+        this.item_z5xo0k$(_.html.f_75, _.html.f_76);
+        this.item_z5xo0k$(_.html.f_77, _.html.f_78);
+      },
+      f_80: function () {
+        this.plus_pdl1w0$('cd');
+      },
+      f_81: function () {
+        this.a_b4th6h$(void 0, 'http://www.yested.net', void 0, _.html.f_32);
+        this.br();
+        this.div_5rsex9$(void 0, void 0, _.html.f_34);
+        this.p_omdg96$(_.html.f_35);
+        this.s_kv1miw$(_.html.f_36);
+        this.nbsp_za3lpa$();
+        this.del_kv1miw$(_.html.f_37);
+        this.nbsp_za3lpa$();
+        this.mark_kv1miw$(_.html.f_38);
+        this.nbsp_za3lpa$();
+        this.ins_kv1miw$(_.html.f_39);
+        this.nbsp_za3lpa$();
+        this.u_kv1miw$(_.html.f_40);
+        this.nbsp_za3lpa$();
+        this.small_kv1miw$(_.html.f_41);
+        this.nbsp_za3lpa$();
+        this.strong_kv1miw$(_.html.f_42);
+        this.nbsp_za3lpa$();
+        this.em_kv1miw$(_.html.f_43);
+        this.br();
+        this.br();
+        this.blockquote_kv1miw$(_.html.f_44);
+        this.table_or8fdg$(_.html.f_56);
+        this.img_puj7f4$('demo-site/img/sample_img.jpg', 'bla');
+        this.emph_kv1miw$(_.html.f_57);
+        this.h1_kv1miw$(_.html.f_58);
+        this.h2_kv1miw$(_.html.f_59);
+        this.h3_kv1miw$(_.html.f_60);
+        this.h4_kv1miw$(_.html.f_61);
+        this.h5_kv1miw$(_.html.f_62);
+        this.button_fpm6mz$(_.html.f_63, _.net.yested.ButtonType.object.BUTTON, _.html.f_64);
+        this.ul_8qfrsd$(_.html.f_69);
+        this.ol_t3splz$(_.html.f_74);
+        this.dl_79d1z0$(_.html.f_79);
+        this.kbd_kv1miw$(_.html.f_80);
+      },
+      f_82: function () {
+        this.h4_kv1miw$(_.html.f_31);
+        this.div_5rsex9$(void 0, void 0, _.html.f_81);
+      },
+      f_83: function () {
+        this.plus_pdl1w0$('Code');
+      },
+      f_84: function () {
+        this.h4_kv1miw$(_.html.f_83);
+        this.code_puj7f4$('kotlin', '\na(href="http://www.yested.net") { +"Yested"}\nbr()\ndiv {\n    span { +"Text in span which is in div"}\n}\np { +"Text in Paragraph" }\ns { +"Strikethrough text" }\nnbsp()\ndel { +"Deleted text" }\nnbsp()\nmark { +"Marked text" }\nnbsp()\nins { +"Inserted text" }\nnbsp()\nu { +"Underlined text" }\nnbsp()\nsmall { +"Small text" }\nnbsp()\nstrong { +"Strong text" }\nnbsp()\nem { +"Italicized text." }\nbr()\nbr()\nblockquote { +"blockquote" }\ntable { border = "1"\n    thead {\n        tr {\n            th { +"First column" }\n            th { +"Second column"}\n        }\n    }\n    tbody {\n        tr {\n            td { +"Cell 1"}\n            td { +"Cell 2"}\n        }\n        tr {\n            td { +"Cell 1"}\n            td { +"Cell 2"}\n        }\n    }\n}\nimg(src = "demo-site/img/sample_img.jpg", alt = "bla") {}\nemph { +"bold text" }\nh1 { +"H1" }\nh2 { +"H2" }\nh3 { +"H3" }\nh4 { +"H4" }\nh5 { +"H5" }\nbutton(label = { +"Press me"},\n        type = ButtonType.BUTTON,\n        onclick = { println("Check console!")})\nul {\n    li { +"List item 1"}\n    li { +"List item 2"}\n    li { +"List item 3"}\n    li { +"List item 4"}\n}\n\nol {\n    li { +"List item 1" }\n    li { +"List item 2" }\n    li { +"List item 3" }\n    li { +"List item 4" }\n}\n\ndl {\n    clazz = "dl-horizontal"\n    item(dt = { +"Term 1"}) { +"Definition"}\n    item(dt = { +"Term 2"}) { +"Definition"}\n}\n\nkbd { +"cd" }\n\n');
+      },
+      f_85: function () {
+        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(4)], _.html.f_82);
+        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(8)], _.html.f_84);
       },
       htmlSection$f: function () {
-        _.net.yested.bootstrap.row_xnql8t$(this, _.html.f_2);
-        _.net.yested.bootstrap.row_xnql8t$(this, _.html.f_5);
-        _.net.yested.bootstrap.row_xnql8t$(this, _.html.f_60);
+        _.net.yested.bootstrap.row_xnql8t$(this, _.html.f_27);
+        _.net.yested.bootstrap.row_xnql8t$(this, _.html.f_30);
+        _.net.yested.bootstrap.row_xnql8t$(this, _.html.f_85);
       },
       htmlSection: function () {
         return _.net.yested.div_5rsex9$(void 0, void 0, _.html.htmlSection$f);
