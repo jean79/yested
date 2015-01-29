@@ -204,6 +204,10 @@ public open class HTMLComponent(tagName:String) : Component, ElementEvents {
         +(Table() with { init() })
     }
 
+    public fun checkbox(init:CheckBox.() -> Unit) {
+        +(CheckBox() with { init() })
+    }
+
     public fun button(label: HTMLComponent.() -> Unit, type: ButtonType = ButtonType.BUTTON, onclick:() -> Unit) {
         +(Button(type = type) with {
             label()
@@ -394,16 +398,27 @@ native trait HTMLInputElementWithOnChange : HTMLInputElement {
     public native var onchange: () -> Unit
 }
 
-public class CheckBox() : Component {
+public abstract class InputComponent : Component {
+
+    abstract override val element: HTMLInputElement
+
+    public var checked:Boolean
+        get() = element.checked
+        set(value) { element.checked = value }
+
+    public var disabled:Boolean
+        get() = element.disabled
+        set(value) { element.disabled = value }
+
+}
+
+public class CheckBox() : InputComponent() {
 
     override val element: HTMLInputElementWithOnChange =
             (createElement("input") with {
                 setAttribute("type", "checkbox")
             }) as HTMLInputElementWithOnChange
 
-    public var disabled:Boolean by BooleanAttribute()
-    public var readonly:Boolean by BooleanAttribute()
-    public var checked:Boolean by BooleanAttribute()
     public var onchange:Function0<Unit>
         get():Function0<Unit> = element.onchange
         set(value:Function0<Unit>) {

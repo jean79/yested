@@ -735,6 +735,9 @@
           table_or8fdg$: function (init) {
             this.plus_pv6laa$(_.net.yested.with_owvm91$(new _.net.yested.Table(), _.net.yested.HTMLComponent.table_or8fdg$f(init)));
           },
+          checkbox_a00ghr$: function (init) {
+            this.plus_pv6laa$(_.net.yested.with_owvm91$(new _.net.yested.CheckBox(), _.net.yested.HTMLComponent.checkbox_a00ghr$f(init)));
+          },
           button_fpm6mz$: function (label, type, onclick) {
             if (type === void 0)
               type = _.net.yested.ButtonType.object.BUTTON;
@@ -890,6 +893,11 @@
             };
           },
           table_or8fdg$f: function (init) {
+            return function () {
+              init.call(this);
+            };
+          },
+          checkbox_a00ghr$f: function (init) {
             return function () {
               init.call(this);
             };
@@ -1202,41 +1210,35 @@
             };
           }
         }),
-        CheckBox: Kotlin.createClass(function () {
+        InputComponent: Kotlin.createClass(function () {
           return [_.net.yested.Component];
-        }, function () {
-          this.$element_6gvlpa$ = _.net.yested.with_owvm91$(_.net.yested.createElement_61zpoe$('input'), _.net.yested.CheckBox.CheckBox$f);
-          this.disabled$delegate = new _.net.yested.BooleanAttribute();
-          this.readonly$delegate = new _.net.yested.BooleanAttribute();
-          this.checked$delegate = new _.net.yested.BooleanAttribute();
-        }, /** @lends _.net.yested.CheckBox.prototype */ {
-          element: {
+        }, null, /** @lends _.net.yested.InputComponent.prototype */ {
+          checked: {
             get: function () {
-              return this.$element_6gvlpa$;
+              return this.element.checked;
+            },
+            set: function (value) {
+              this.element.checked = value;
             }
           },
           disabled: {
             get: function () {
-              return this.disabled$delegate.get_262zbl$(this, new Kotlin.PropertyMetadata('disabled'));
+              return this.element.disabled;
             },
-            set: function (disabled) {
-              this.disabled$delegate.set_f4kiei$(this, new Kotlin.PropertyMetadata('disabled'), disabled);
+            set: function (value) {
+              this.element.disabled = value;
             }
-          },
-          readonly: {
+          }
+        }),
+        CheckBox: Kotlin.createClass(function () {
+          return [_.net.yested.InputComponent];
+        }, function $fun() {
+          $fun.baseInitializer.call(this);
+          this.$element_6gvlpa$ = _.net.yested.with_owvm91$(_.net.yested.createElement_61zpoe$('input'), _.net.yested.CheckBox.CheckBox$f);
+        }, /** @lends _.net.yested.CheckBox.prototype */ {
+          element: {
             get: function () {
-              return this.readonly$delegate.get_262zbl$(this, new Kotlin.PropertyMetadata('readonly'));
-            },
-            set: function (readonly) {
-              this.readonly$delegate.set_f4kiei$(this, new Kotlin.PropertyMetadata('readonly'), readonly);
-            }
-          },
-          checked: {
-            get: function () {
-              return this.checked$delegate.get_262zbl$(this, new Kotlin.PropertyMetadata('checked'));
-            },
-            set: function (checked) {
-              this.checked$delegate.set_f4kiei$(this, new Kotlin.PropertyMetadata('checked'), checked);
+              return this.$element_6gvlpa$;
             }
           },
           onchange: {
@@ -7094,69 +7096,77 @@
       f_62: function () {
         this.plus_pdl1w0$('H5');
       },
-      f_63: function () {
-        this.plus_pdl1w0$('Press me');
+      f_63: function (this$) {
+        return function () {
+          Kotlin.println('changed to: ' + this$.checked);
+        };
       },
       f_64: function () {
-        Kotlin.println('Check console!');
+        this.onchange = _.html.f_63(this);
       },
       f_65: function () {
-        this.plus_pdl1w0$('List item 1');
+        this.plus_pdl1w0$('Press me');
       },
       f_66: function () {
-        this.plus_pdl1w0$('List item 2');
+        Kotlin.println('Check console!');
       },
       f_67: function () {
-        this.plus_pdl1w0$('List item 3');
-      },
-      f_68: function () {
-        this.plus_pdl1w0$('List item 4');
-      },
-      f_69: function () {
-        this.li_8y48wp$(_.html.f_65);
-        this.li_8y48wp$(_.html.f_66);
-        this.li_8y48wp$(_.html.f_67);
-        this.li_8y48wp$(_.html.f_68);
-      },
-      f_70: function () {
         this.plus_pdl1w0$('List item 1');
       },
-      f_71: function () {
+      f_68: function () {
         this.plus_pdl1w0$('List item 2');
       },
-      f_72: function () {
+      f_69: function () {
         this.plus_pdl1w0$('List item 3');
       },
-      f_73: function () {
+      f_70: function () {
         this.plus_pdl1w0$('List item 4');
       },
-      f_74: function () {
+      f_71: function () {
+        this.li_8y48wp$(_.html.f_67);
+        this.li_8y48wp$(_.html.f_68);
+        this.li_8y48wp$(_.html.f_69);
         this.li_8y48wp$(_.html.f_70);
-        this.li_8y48wp$(_.html.f_71);
-        this.li_8y48wp$(_.html.f_72);
-        this.li_8y48wp$(_.html.f_73);
+      },
+      f_72: function () {
+        this.plus_pdl1w0$('List item 1');
+      },
+      f_73: function () {
+        this.plus_pdl1w0$('List item 2');
+      },
+      f_74: function () {
+        this.plus_pdl1w0$('List item 3');
       },
       f_75: function () {
-        this.plus_pdl1w0$('Term 1');
+        this.plus_pdl1w0$('List item 4');
       },
       f_76: function () {
-        this.plus_pdl1w0$('Definition');
+        this.li_8y48wp$(_.html.f_72);
+        this.li_8y48wp$(_.html.f_73);
+        this.li_8y48wp$(_.html.f_74);
+        this.li_8y48wp$(_.html.f_75);
       },
       f_77: function () {
-        this.plus_pdl1w0$('Term 2');
+        this.plus_pdl1w0$('Term 1');
       },
       f_78: function () {
         this.plus_pdl1w0$('Definition');
       },
       f_79: function () {
-        this.clazz = 'dl-horizontal';
-        this.item_z5xo0k$(_.html.f_75, _.html.f_76);
-        this.item_z5xo0k$(_.html.f_77, _.html.f_78);
+        this.plus_pdl1w0$('Term 2');
       },
       f_80: function () {
-        this.plus_pdl1w0$('cd');
+        this.plus_pdl1w0$('Definition');
       },
       f_81: function () {
+        this.clazz = 'dl-horizontal';
+        this.item_z5xo0k$(_.html.f_77, _.html.f_78);
+        this.item_z5xo0k$(_.html.f_79, _.html.f_80);
+      },
+      f_82: function () {
+        this.plus_pdl1w0$('cd');
+      },
+      f_83: function () {
         this.a_b4th6h$(void 0, 'http://www.yested.net', void 0, _.html.f_32);
         this.br();
         this.div_5rsex9$(void 0, void 0, _.html.f_34);
@@ -7187,31 +7197,33 @@
         this.h3_kv1miw$(_.html.f_60);
         this.h4_kv1miw$(_.html.f_61);
         this.h5_kv1miw$(_.html.f_62);
-        this.button_fpm6mz$(_.html.f_63, _.net.yested.ButtonType.object.BUTTON, _.html.f_64);
-        this.ul_8qfrsd$(_.html.f_69);
-        this.ol_t3splz$(_.html.f_74);
-        this.dl_79d1z0$(_.html.f_79);
-        this.kbd_kv1miw$(_.html.f_80);
-      },
-      f_82: function () {
-        this.h4_kv1miw$(_.html.f_31);
-        this.div_5rsex9$(void 0, void 0, _.html.f_81);
-      },
-      f_83: function () {
-        this.plus_pdl1w0$('Code');
+        this.checkbox_a00ghr$(_.html.f_64);
+        this.br();
+        this.button_fpm6mz$(_.html.f_65, _.net.yested.ButtonType.object.BUTTON, _.html.f_66);
+        this.ul_8qfrsd$(_.html.f_71);
+        this.ol_t3splz$(_.html.f_76);
+        this.dl_79d1z0$(_.html.f_81);
+        this.kbd_kv1miw$(_.html.f_82);
       },
       f_84: function () {
-        this.h4_kv1miw$(_.html.f_83);
-        this.code_puj7f4$('kotlin', '\na(href="http://www.yested.net") { +"Yested"}\nbr()\ndiv {\n    span { +"Text in span which is in div"}\n}\np { +"Text in Paragraph" }\ns { +"Strikethrough text" }\nnbsp()\ndel { +"Deleted text" }\nnbsp()\nmark { +"Marked text" }\nnbsp()\nins { +"Inserted text" }\nnbsp()\nu { +"Underlined text" }\nnbsp()\nsmall { +"Small text" }\nnbsp()\nstrong { +"Strong text" }\nnbsp()\nem { +"Italicized text." }\nbr()\nbr()\nblockquote { +"blockquote" }\ntable { border = "1"\n    thead {\n        tr {\n            th { +"First column" }\n            th { +"Second column"}\n        }\n    }\n    tbody {\n        tr {\n            td { +"Cell 1"}\n            td { +"Cell 2"}\n        }\n        tr {\n            td { +"Cell 1"}\n            td { +"Cell 2"}\n        }\n    }\n}\nimg(src = "demo-site/img/sample_img.jpg", alt = "bla") {}\nemph { +"bold text" }\nh1 { +"H1" }\nh2 { +"H2" }\nh3 { +"H3" }\nh4 { +"H4" }\nh5 { +"H5" }\nbutton(label = { +"Press me"},\n        type = ButtonType.BUTTON,\n        onclick = { println("Check console!")})\nul {\n    li { +"List item 1"}\n    li { +"List item 2"}\n    li { +"List item 3"}\n    li { +"List item 4"}\n}\n\nol {\n    li { +"List item 1" }\n    li { +"List item 2" }\n    li { +"List item 3" }\n    li { +"List item 4" }\n}\n\ndl {\n    clazz = "dl-horizontal"\n    item(dt = { +"Term 1"}) { +"Definition"}\n    item(dt = { +"Term 2"}) { +"Definition"}\n}\n\nkbd { +"cd" }\n\n');
+        this.h4_kv1miw$(_.html.f_31);
+        this.div_5rsex9$(void 0, void 0, _.html.f_83);
       },
       f_85: function () {
-        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(4)], _.html.f_82);
-        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(8)], _.html.f_84);
+        this.plus_pdl1w0$('Code');
+      },
+      f_86: function () {
+        this.h4_kv1miw$(_.html.f_85);
+        this.code_puj7f4$('kotlin', '\na(href="http://www.yested.net") { +"Yested"}\nbr()\ndiv {\n    span { +"Text in span which is in div"}\n}\np { +"Text in Paragraph" }\ns { +"Strikethrough text" }\nnbsp()\ndel { +"Deleted text" }\nnbsp()\nmark { +"Marked text" }\nnbsp()\nins { +"Inserted text" }\nnbsp()\nu { +"Underlined text" }\nnbsp()\nsmall { +"Small text" }\nnbsp()\nstrong { +"Strong text" }\nnbsp()\nem { +"Italicized text." }\nbr()\nbr()\nblockquote { +"blockquote" }\ntable { border = "1"\n    thead {\n        tr {\n            th { +"First column" }\n            th { +"Second column"}\n        }\n    }\n    tbody {\n        tr {\n            td { +"Cell 1"}\n            td { +"Cell 2"}\n        }\n        tr {\n            td { +"Cell 1"}\n            td { +"Cell 2"}\n        }\n    }\n}\nimg(src = "demo-site/img/sample_img.jpg", alt = "bla") {}\nemph { +"bold text" }\nh1 { +"H1" }\nh2 { +"H2" }\nh3 { +"H3" }\nh4 { +"H4" }\nh5 { +"H5" }\nbutton(label = { +"Press me"},\n        type = ButtonType.BUTTON,\n        onclick = { println("Check console!")})\nul {\n    li { +"List item 1"}\n    li { +"List item 2"}\n    li { +"List item 3"}\n    li { +"List item 4"}\n}\n\nol {\n    li { +"List item 1" }\n    li { +"List item 2" }\n    li { +"List item 3" }\n    li { +"List item 4" }\n}\n\ndl {\n    clazz = "dl-horizontal"\n    item(dt = { +"Term 1"}) { +"Definition"}\n    item(dt = { +"Term 2"}) { +"Definition"}\n}\n\nkbd { +"cd" }\n\n');
+      },
+      f_87: function () {
+        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(4)], _.html.f_84);
+        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(8)], _.html.f_86);
       },
       htmlSection$f: function () {
         _.net.yested.bootstrap.row_xnql8t$(this, _.html.f_27);
         _.net.yested.bootstrap.row_xnql8t$(this, _.html.f_30);
-        _.net.yested.bootstrap.row_xnql8t$(this, _.html.f_85);
+        _.net.yested.bootstrap.row_xnql8t$(this, _.html.f_87);
       },
       htmlSection: function () {
         return _.net.yested.div_5rsex9$(void 0, void 0, _.html.htmlSection$f);
