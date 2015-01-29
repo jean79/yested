@@ -17,3 +17,6 @@ fun el(elementId:String):Element {
 
 fun printMarkup(content:String):String =
     content.replaceAll("<", "&lt;").replaceAll(">", "&gt;")
+
+fun <T> Boolean.isTrue(value:T, default:T):T =
+        if (this) value else default

@@ -16,10 +16,11 @@ import net.yested.bootstrap.btsForm
 import net.yested.bootstrap.btsButton
 import net.yested.bootstrap.textInput
 import net.yested.bootstrap.Medium
+import net.yested.bootstrap.DialogSize
 
 fun createDialogs(id: String): Div {
 
-    val dialog = Dialog()
+    val dialog = Dialog(size = DialogSize.SMALL)
 
     dialog with {
         header { + "This is dialog with text input" }
@@ -59,7 +60,7 @@ fun createDialogs(id: String): Div {
             }
             col(Medium(8)) {
                 h4 { +"Code" }
-                code(lang = "kotlin", content="""val dialog = Dialog()
+                code(lang = "kotlin", content="""val dialog = Dialog(size = DialogSize.SMALL)
 
 dialog with {
     header { + "This is dialog with text input" }
