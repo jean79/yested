@@ -3770,6 +3770,9 @@
           divContainer.setChild_hu5ove$(_.complex.createSpinner(), new _.net.yested.Fade());
         else if (tmp$0 === '#effects')
           divContainer.setChild_hu5ove$(_.bootstrap.effectsPage(), new _.net.yested.Fade());
+        if (!Kotlin.equals(hash[0], previousHash.v)) {
+          window.scrollTo(0, 0);
+        }
         previousHash.v = hash[0];
       };
     },
