@@ -6,6 +6,7 @@ import net.yested.div
 import net.yested.Div
 import net.yested.with
 import jquery.jq
+import net.yested.isTrue
 
 public native fun JQuery.modal(options: String):Unit = noImpl;
 
@@ -29,7 +30,13 @@ public native fun JQuery.modal(options: String):Unit = noImpl;
     </div>
  */
 
-public class Dialog {
+public enum class DialogSize(val code:String) {
+    DEFAULT: DialogSize("")
+    SMALL: DialogSize("modal-sm")
+    LARGE: DialogSize("modal-lg")
+}
+
+public class Dialog(val size: DialogSize = DialogSize.DEFAULT) {
 
     var dialog:Div? = null
     var header: Div? = null
@@ -61,9 +68,9 @@ public class Dialog {
         footer = div(clazz = "modal-footer", init = init)
     }
 
-    fun open() {
-        dialog = div(clazz = "modal fade") { "aria-hidden".."true"; role = "dialog"
-            div(clazz = "modal-dialog") {
+    fun open(fade:Boolean = true) {
+        dialog = div(clazz = "modal ${fade.isTrue("fade", "")}") { "aria-hidden".."true"; role = "dialog"
+            div(clazz = "modal-dialog ${size.code}") {
                 div(clazz = "modal-content") {
                     + header!!
                     + body!!

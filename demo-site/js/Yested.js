@@ -1779,7 +1779,22 @@
               RIGHT: new _.net.yested.bootstrap.Align('right')
             };
           }),
-          Dialog: Kotlin.createClass(null, function () {
+          DialogSize: Kotlin.createEnumClass(function () {
+            return [Kotlin.Enum];
+          }, function $fun(code) {
+            $fun.baseInitializer.call(this);
+            this.code = code;
+          }, function () {
+            return {
+              DEFAULT: new _.net.yested.bootstrap.DialogSize(''),
+              SMALL: new _.net.yested.bootstrap.DialogSize('modal-sm'),
+              LARGE: new _.net.yested.bootstrap.DialogSize('modal-lg')
+            };
+          }),
+          Dialog: Kotlin.createClass(null, function (size) {
+            if (size === void 0)
+              size = _.net.yested.bootstrap.DialogSize.object.DEFAULT;
+            this.size = size;
             this.dialog = null;
             this.header = null;
             this.body = null;
@@ -1794,9 +1809,11 @@
             footer_1: function (init) {
               this.footer = _.net.yested.div_5rsex9$(void 0, 'modal-footer', init);
             },
-            open: function () {
+            open: function (fade) {
               var tmp$0;
-              this.dialog = _.net.yested.div_5rsex9$(void 0, 'modal fade', _.net.yested.bootstrap.Dialog.open$f(this));
+              if (fade === void 0)
+                fade = true;
+              this.dialog = _.net.yested.div_5rsex9$(void 0, 'modal ' + _.net.yested.isTrue(fade, 'fade', ''), _.net.yested.bootstrap.Dialog.open$f(this));
               $(((tmp$0 = this.dialog) != null ? tmp$0 : Kotlin.throwNPE()).element).modal('show');
             },
             close: function () {
@@ -1855,7 +1872,7 @@
               return function () {
                 this.rangeTo_94jgcu$('aria-hidden', 'true');
                 this.role = 'dialog';
-                this.div_5rsex9$(void 0, 'modal-dialog', _.net.yested.bootstrap.Dialog.f_6(this$Dialog));
+                this.div_5rsex9$(void 0, 'modal-dialog ' + this$Dialog.size.code, _.net.yested.bootstrap.Dialog.f_6(this$Dialog));
               };
             },
             close$f: function (this$Dialog) {
@@ -4787,7 +4804,7 @@
       },
       f_135: function () {
         this.h4_kv1miw$(_.bootstrap.f_134);
-        this.code_puj7f4$('kotlin', 'val dialog = Dialog()\n\ndialog with {\n    header { + "This is dialog with text input" }\n    body {\n        btsForm {\n            item(forId = "nameId", label = { + "Name" }) {\n                textInput(placeholder = "Name") { id = "nameId"}\n            }\n        }\n    }\n    footer {\n        btsButton(\n                type = ButtonType.SUBMIT,\n                look = ButtonLook.PRIMARY,\n                label = { +"Submit"},\n                onclick = { dialog.close() })\n\n    }\n}\n\n//somewhere in a dom tree:\ndiv {\n    btsButton(label = { +"Open dialog" }, onclick = { dialog.open() })\n}');
+        this.code_puj7f4$('kotlin', 'val dialog = Dialog(size = DialogSize.SMALL)\n\ndialog with {\n    header { + "This is dialog with text input" }\n    body {\n        btsForm {\n            item(forId = "nameId", label = { + "Name" }) {\n                textInput(placeholder = "Name") { id = "nameId"}\n            }\n        }\n    }\n    footer {\n        btsButton(\n                type = ButtonType.SUBMIT,\n                look = ButtonLook.PRIMARY,\n                label = { +"Submit"},\n                onclick = { dialog.close() })\n\n    }\n}\n\n//somewhere in a dom tree:\ndiv {\n    btsButton(label = { +"Open dialog" }, onclick = { dialog.open() })\n}');
       },
       f_136: function (dialog) {
         return function () {
@@ -4803,7 +4820,7 @@
         };
       },
       createDialogs: function (id) {
-        var dialog = new _.net.yested.bootstrap.Dialog();
+        var dialog = new _.net.yested.bootstrap.Dialog(_.net.yested.bootstrap.DialogSize.object.SMALL);
         _.net.yested.with_owvm91$(dialog, _.bootstrap.createDialogs$f(dialog));
         return _.net.yested.div_5rsex9$(void 0, void 0, _.bootstrap.createDialogs$f_0(id, dialog));
       },
