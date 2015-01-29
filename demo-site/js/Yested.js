@@ -653,7 +653,7 @@
             this.element.setAttribute($receiver, value);
           },
           plus_pdl1w0$: function ($receiver) {
-            this.element.innerHTML = this.element.innerHTML + $receiver;
+            $(this.element).append($receiver);
           },
           plus_pv6laa$: function ($receiver) {
             this.appendChild_5f0h2k$($receiver);
@@ -662,7 +662,7 @@
             _.net.yested.appendComponent_c36dq0$(this.element, component);
           },
           setContent_61zpoe$: function (text) {
-            this.element.innerHTML = text;
+            $(this.element).text(text);
           },
           setChild_5f0h2k$: function (component) {
             this.removeAllChildren();

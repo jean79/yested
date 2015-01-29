@@ -120,7 +120,7 @@ public open class HTMLComponent(tagName:String) : Component, ElementEvents {
     public fun String.rangeTo(value:String):Unit = element.setAttribute(this, value)
 
     public fun String.plus(): Unit {
-        element.innerHTML += this
+        jq(element).append(this)
     }
 
     public fun Component.plus() {
@@ -132,7 +132,7 @@ public open class HTMLComponent(tagName:String) : Component, ElementEvents {
     }
 
     public fun setContent(text:String) {
-        element.innerHTML = text
+        jq(element).text(text)
     }
 
     public fun setChild(component:Component) {
