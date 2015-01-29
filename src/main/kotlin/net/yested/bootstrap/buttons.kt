@@ -29,6 +29,7 @@ public class BtsButton(type: ButtonType = ButtonType.BUTTON,
              val look:ButtonLook = ButtonLook.DEFAULT,
              val size:ButtonSize = ButtonSize.DEFAULT,
              val block:Boolean = false,
+             badge:String? = null,
              onclick:() -> Unit ) :  HTMLComponent("button") {
 
     private var buttonActive:Boolean = false
@@ -50,6 +51,10 @@ public class BtsButton(type: ButtonType = ButtonType.BUTTON,
         setClass()
         element.setAttribute("type", type.code)
         this.label()
+        badge?.let {
+            nbsp()
+            span(clazz = "badge") { +badge!! }
+        }
         this.onclick = onclick
     }
 
@@ -78,8 +83,9 @@ public fun HTMLComponent.btsButton(type: ButtonType = ButtonType.BUTTON,
                                    look:ButtonLook = ButtonLook.DEFAULT,
                                    size:ButtonSize = ButtonSize.DEFAULT,
                                    block:Boolean = false,
+                                   badge:String? = null,
                                    onclick:() -> Unit):Unit {
-    +BtsButton(type = type, label = label, look = look, size = size, block = block, onclick = onclick)
+    +BtsButton(type = type, label = label, look = look, size = size, block = block, badge = badge, onclick = onclick)
 }
 
 public fun HTMLComponent.btsAnchor(href:String,

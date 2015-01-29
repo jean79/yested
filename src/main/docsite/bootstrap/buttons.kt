@@ -44,6 +44,7 @@ Refer to Bootstrap buttons.
                             label = { +"Success" },
                             look = ButtonLook.SUCCESS,
                             size = ButtonSize.LARGE,
+                            badge = "42",
                             onclick = { println("Second Button pressed.") })
                 }
             }
@@ -62,6 +63,7 @@ Refer to Bootstrap buttons.
             label = { +"Success" },
             look = ButtonLook.SUCCESS,
             size = ButtonSize.LARGE,
+            badge = "42",
             onclick = { println("Second Button pressed.") })
 }""")
             }

@@ -1553,7 +1553,7 @@
             button_ubg574$: function (value, look, label) {
               if (look === void 0)
                 look = _.net.yested.bootstrap.ButtonLook.object.DEFAULT;
-              var button = new _.net.yested.bootstrap.BtsButton(void 0, label, look, this.size, void 0, _.net.yested.bootstrap.ButtonGroup.button_ubg574$f(value, this));
+              var button = new _.net.yested.bootstrap.BtsButton(void 0, label, look, this.size, void 0, void 0, _.net.yested.bootstrap.ButtonGroup.button_ubg574$f(value, this));
               _.net.yested.appendComponent_c36dq0$(this.element, button);
               this.buttons_2b2nvz$.put_wn2jw4$(value, button);
             }
@@ -1602,7 +1602,7 @@
           }),
           BtsButton: Kotlin.createClass(function () {
             return [_.net.yested.HTMLComponent];
-          }, function $fun(type, label, look, size, block, onclick) {
+          }, function $fun(type, label, look, size, block, badge, onclick) {
             if (type === void 0)
               type = _.net.yested.ButtonType.object.BUTTON;
             if (look === void 0)
@@ -1611,6 +1611,8 @@
               size = _.net.yested.bootstrap.ButtonSize.object.DEFAULT;
             if (block === void 0)
               block = false;
+            if (badge === void 0)
+              badge = null;
             $fun.baseInitializer.call(this, 'button');
             this.look = look;
             this.size = size;
@@ -1619,6 +1621,7 @@
             this.setClass();
             this.element.setAttribute('type', type.code);
             label.call(this);
+            badge != null ? Kotlin.modules['stdlib'].kotlin.let_7hr6ff$(badge, _.net.yested.bootstrap.BtsButton.BtsButton$f(this, badge)) : null;
             this.onclick = onclick;
           }, /** @lends _.net.yested.bootstrap.BtsButton.prototype */ {
             active: {
@@ -1640,6 +1643,18 @@
             },
             setClass: function () {
               this.element.setAttribute('class', 'btn btn-' + this.look.code + ' btn-' + this.size.code + ' ' + (this.block ? 'btn-block' : '') + ' ' + (this.buttonActive_nol8t8$ ? 'active' : ''));
+            }
+          }, /** @lends _.net.yested.bootstrap.BtsButton */ {
+            f: function (badge) {
+              return function () {
+                this.plus_pdl1w0$(badge != null ? badge : Kotlin.throwNPE());
+              };
+            },
+            BtsButton$f: function (this$BtsButton, badge) {
+              return function (it) {
+                this$BtsButton.nbsp_za3lpa$();
+                return this$BtsButton.span_dkuwo$('badge', _.net.yested.bootstrap.BtsButton.f(badge));
+              };
             }
           }),
           BtsAnchor: Kotlin.createClass(function () {
@@ -1665,7 +1680,7 @@
               }
             }
           }),
-          btsButton_adnmfr$: function ($receiver, type, label, look, size, block, onclick) {
+          btsButton_bol907$: function ($receiver, type, label, look, size, block, badge, onclick) {
             if (type === void 0)
               type = _.net.yested.ButtonType.object.BUTTON;
             if (look === void 0)
@@ -1674,7 +1689,9 @@
               size = _.net.yested.bootstrap.ButtonSize.object.DEFAULT;
             if (block === void 0)
               block = false;
-            $receiver.plus_pv6laa$(new _.net.yested.bootstrap.BtsButton(type, label, look, size, block, onclick));
+            if (badge === void 0)
+              badge = null;
+            $receiver.plus_pv6laa$(new _.net.yested.bootstrap.BtsButton(type, label, look, size, block, badge, onclick));
           },
           btsAnchor_2ak3uo$f: function (init) {
             return function () {
@@ -3802,7 +3819,7 @@
       },
       f_23: function (fetchWeather) {
         return function () {
-          _.net.yested.bootstrap.btsButton_adnmfr$(this, _.net.yested.ButtonType.object.SUBMIT, _.ajax.f_21, _.net.yested.bootstrap.ButtonLook.object.PRIMARY, void 0, void 0, _.ajax.f_22(fetchWeather));
+          _.net.yested.bootstrap.btsButton_bol907$(this, _.net.yested.ButtonType.object.SUBMIT, _.ajax.f_21, _.net.yested.bootstrap.ButtonLook.object.PRIMARY, void 0, void 0, void 0, _.ajax.f_22(fetchWeather));
         };
       },
       f_24: function (validator, textInput, btnGroup, fetchWeather) {
@@ -4589,9 +4606,9 @@
         Kotlin.println('Second Button pressed.');
       },
       f_100: function () {
-        _.net.yested.bootstrap.btsButton_adnmfr$(this, _.net.yested.ButtonType.object.BUTTON, _.bootstrap.f_96, _.net.yested.bootstrap.ButtonLook.object.PRIMARY, _.net.yested.bootstrap.ButtonSize.object.LARGE, void 0, _.bootstrap.f_97);
+        _.net.yested.bootstrap.btsButton_bol907$(this, _.net.yested.ButtonType.object.BUTTON, _.bootstrap.f_96, _.net.yested.bootstrap.ButtonLook.object.PRIMARY, _.net.yested.bootstrap.ButtonSize.object.LARGE, void 0, void 0, _.bootstrap.f_97);
         this.nbsp_za3lpa$();
-        _.net.yested.bootstrap.btsButton_adnmfr$(this, _.net.yested.ButtonType.object.BUTTON, _.bootstrap.f_98, _.net.yested.bootstrap.ButtonLook.object.SUCCESS, _.net.yested.bootstrap.ButtonSize.object.LARGE, void 0, _.bootstrap.f_99);
+        _.net.yested.bootstrap.btsButton_bol907$(this, _.net.yested.ButtonType.object.BUTTON, _.bootstrap.f_98, _.net.yested.bootstrap.ButtonLook.object.SUCCESS, _.net.yested.bootstrap.ButtonSize.object.LARGE, void 0, '42', _.bootstrap.f_99);
       },
       f_101: function () {
         this.div_5rsex9$(void 0, void 0, _.bootstrap.f_94);
@@ -4604,7 +4621,7 @@
       },
       f_103: function () {
         this.h4_kv1miw$(_.bootstrap.f_102);
-        this.code_puj7f4$('kotlin', 'div {\n    btsButton(\n            type = ButtonType.BUTTON,\n            label = { +"Primary" },\n            look = ButtonLook.PRIMARY,\n            size = ButtonSize.LARGE,\n            onclick = { println("First Button pressed.") })\n    nbsp()\n    btsButton(\n            type = ButtonType.BUTTON,\n            label = { +"Success" },\n            look = ButtonLook.SUCCESS,\n            size = ButtonSize.LARGE,\n            onclick = { println("Second Button pressed.") })\n}');
+        this.code_puj7f4$('kotlin', 'div {\n    btsButton(\n            type = ButtonType.BUTTON,\n            label = { +"Primary" },\n            look = ButtonLook.PRIMARY,\n            size = ButtonSize.LARGE,\n            onclick = { println("First Button pressed.") })\n    nbsp()\n    btsButton(\n            type = ButtonType.BUTTON,\n            label = { +"Success" },\n            look = ButtonLook.SUCCESS,\n            size = ButtonSize.LARGE,\n            badge = "42",\n            onclick = { println("Second Button pressed.") })\n}');
       },
       f_104: function () {
         this.col_zcukl0$([new _.net.yested.bootstrap.Medium(4)], _.bootstrap.f_101);
@@ -4717,7 +4734,7 @@
       },
       f_123: function (dialog) {
         return function () {
-          _.net.yested.bootstrap.btsButton_adnmfr$(this, _.net.yested.ButtonType.object.SUBMIT, _.bootstrap.f_121, _.net.yested.bootstrap.ButtonLook.object.PRIMARY, void 0, void 0, _.bootstrap.f_122(dialog));
+          _.net.yested.bootstrap.btsButton_bol907$(this, _.net.yested.ButtonType.object.SUBMIT, _.bootstrap.f_121, _.net.yested.bootstrap.ButtonLook.object.PRIMARY, void 0, void 0, void 0, _.bootstrap.f_122(dialog));
         };
       },
       createDialogs$f: function (dialog) {
@@ -4755,7 +4772,7 @@
       },
       f_132: function (dialog) {
         return function () {
-          _.net.yested.bootstrap.btsButton_adnmfr$(this, void 0, _.bootstrap.f_130, void 0, void 0, void 0, _.bootstrap.f_131(dialog));
+          _.net.yested.bootstrap.btsButton_bol907$(this, void 0, _.bootstrap.f_130, void 0, void 0, void 0, void 0, _.bootstrap.f_131(dialog));
         };
       },
       f_133: function (dialog) {
@@ -5057,7 +5074,7 @@
         var textInput = new _.net.yested.bootstrap.TextInput(void 0, 'Mandatory field');
         var validator = new _.net.yested.bootstrap.Validator(textInput, 'At least 3 chars!!', _.bootstrap.createInputs$f);
         var submit = _.bootstrap.createInputs$submit(validator);
-        var button = new _.net.yested.bootstrap.BtsButton(void 0, _.bootstrap.createInputs$f_0, void 0, void 0, void 0, submit);
+        var button = new _.net.yested.bootstrap.BtsButton(void 0, _.bootstrap.createInputs$f_0, void 0, void 0, void 0, void 0, submit);
         return _.net.yested.div_5rsex9$(void 0, void 0, _.bootstrap.createInputs$f_1(id, validator, textInput, button));
       },
       f_184: function () {
@@ -5343,7 +5360,7 @@
       f_260: function () {
         this.rangeTo_94jgcu$('class', 'navbar-form');
         this.div_5rsex9$(void 0, 'form-group', _.bootstrap.f_257);
-        _.net.yested.bootstrap.btsButton_adnmfr$(this, _.net.yested.ButtonType.object.SUBMIT, _.bootstrap.f_258, void 0, void 0, void 0, _.bootstrap.f_259);
+        _.net.yested.bootstrap.btsButton_bol907$(this, _.net.yested.ButtonType.object.SUBMIT, _.bootstrap.f_258, void 0, void 0, void 0, void 0, _.bootstrap.f_259);
       },
       f_261: function () {
         this.form_kv1miw$(_.bootstrap.f_260);
@@ -5631,7 +5648,7 @@
         var resultMultiSelect = new _.net.yested.Div();
         var multiSelect = new _.net.yested.bootstrap.Select(someData, void 0, true, 4, _.bootstrap.createSelectSection$f_1);
         multiSelect.addOnChangeListener_qshda6$(_.bootstrap.createSelectSection$f_2(resultMultiSelect, multiSelect));
-        var btn = new _.net.yested.bootstrap.BtsButton(void 0, _.bootstrap.createSelectSection$f_3, void 0, void 0, void 0, _.bootstrap.createSelectSection$f_4(someData, multiSelect));
+        var btn = new _.net.yested.bootstrap.BtsButton(void 0, _.bootstrap.createSelectSection$f_3, void 0, void 0, void 0, void 0, _.bootstrap.createSelectSection$f_4(someData, multiSelect));
         return _.net.yested.div_5rsex9$(void 0, void 0, _.bootstrap.createSelectSection$f_5(id, singleSelect, resultSingleSelect, multiSelect, resultMultiSelect, btn));
       },
       f_308: function () {
@@ -5936,8 +5953,8 @@
         },
         f_8: function (this$DetailScreen) {
           return function () {
-            _.net.yested.bootstrap.btsButton_adnmfr$(this, _.net.yested.ButtonType.object.SUBMIT, _.complex.DetailScreen.f_4, _.net.yested.bootstrap.ButtonLook.object.PRIMARY, void 0, void 0, _.complex.DetailScreen.f_5(this$DetailScreen));
-            _.net.yested.bootstrap.btsButton_adnmfr$(this, void 0, _.complex.DetailScreen.f_6, void 0, void 0, void 0, _.complex.DetailScreen.f_7(this$DetailScreen));
+            _.net.yested.bootstrap.btsButton_bol907$(this, _.net.yested.ButtonType.object.SUBMIT, _.complex.DetailScreen.f_4, _.net.yested.bootstrap.ButtonLook.object.PRIMARY, void 0, void 0, void 0, _.complex.DetailScreen.f_5(this$DetailScreen));
+            _.net.yested.bootstrap.btsButton_bol907$(this, void 0, _.complex.DetailScreen.f_6, void 0, void 0, void 0, void 0, _.complex.DetailScreen.f_7(this$DetailScreen));
           };
         },
         f_9: function (this$DetailScreen) {
@@ -6001,7 +6018,7 @@
         },
         MasterScreen$f_6: function (this$MasterScreen) {
           return function (it) {
-            _.net.yested.bootstrap.btsButton_adnmfr$(this, void 0, _.complex.MasterScreen.f, void 0, _.net.yested.bootstrap.ButtonSize.object.EXTRA_SMALL, void 0, _.complex.MasterScreen.f_0(this$MasterScreen, it));
+            _.net.yested.bootstrap.btsButton_bol907$(this, void 0, _.complex.MasterScreen.f, void 0, _.net.yested.bootstrap.ButtonSize.object.EXTRA_SMALL, void 0, void 0, _.complex.MasterScreen.f_0(this$MasterScreen, it));
           };
         },
         MasterScreen$f_7: function (it) {
@@ -6019,7 +6036,7 @@
         },
         MasterScreen$f_9: function (this$MasterScreen) {
           return function (it) {
-            _.net.yested.bootstrap.btsButton_adnmfr$(this, void 0, _.complex.MasterScreen.f_1, _.net.yested.bootstrap.ButtonLook.object.DANGER, _.net.yested.bootstrap.ButtonSize.object.EXTRA_SMALL, void 0, _.complex.MasterScreen.f_2(it, this$MasterScreen));
+            _.net.yested.bootstrap.btsButton_bol907$(this, void 0, _.complex.MasterScreen.f_1, _.net.yested.bootstrap.ButtonLook.object.DANGER, _.net.yested.bootstrap.ButtonSize.object.EXTRA_SMALL, void 0, void 0, _.complex.MasterScreen.f_2(it, this$MasterScreen));
           };
         },
         MasterScreen$f_10: function (it) {
@@ -6036,7 +6053,7 @@
         element$f: function (this$MasterScreen) {
           return function () {
             this.plus_pv6laa$(this$MasterScreen.grid);
-            _.net.yested.bootstrap.btsButton_adnmfr$(this, void 0, _.complex.MasterScreen.f_3, void 0, void 0, void 0, _.complex.MasterScreen.f_4(this$MasterScreen));
+            _.net.yested.bootstrap.btsButton_bol907$(this, void 0, _.complex.MasterScreen.f_3, void 0, void 0, void 0, void 0, _.complex.MasterScreen.f_4(this$MasterScreen));
           };
         }
       }),
@@ -6241,7 +6258,7 @@
       },
       f_7: function (toogleContent) {
         return function () {
-          _.net.yested.bootstrap.btsButton_adnmfr$(this, void 0, _.effects.f_6, _.net.yested.bootstrap.ButtonLook.object.PRIMARY, void 0, void 0, toogleContent);
+          _.net.yested.bootstrap.btsButton_bol907$(this, void 0, _.effects.f_6, _.net.yested.bootstrap.ButtonLook.object.PRIMARY, void 0, void 0, void 0, toogleContent);
         };
       },
       f_8: function () {
@@ -6363,7 +6380,7 @@
           this.plus_pdl1w0$('Effects are applied directly on components:');
           this.code_puj7f4$('kotlin', 'SlideUp().apply(component)');
           this.h4_kv1miw$(_.effects.f_26);
-          _.net.yested.bootstrap.btsButton_adnmfr$(this, void 0, _.effects.f_27, void 0, void 0, void 0, _.effects.f_28(visible, target));
+          _.net.yested.bootstrap.btsButton_bol907$(this, void 0, _.effects.f_27, void 0, void 0, void 0, void 0, _.effects.f_28(visible, target));
           this.br();
           this.br();
           this.plus_pv6laa$(target);
