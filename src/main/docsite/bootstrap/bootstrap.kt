@@ -36,6 +36,7 @@ fun bootstrapPage(): Div {
                     +createTabs(id = "bootstrapComponents_Tabs")
                     +createPanelSection(id = "bootstrapComponents_Panel")
                     +createDialogs(id = "bootstrapComponents_Dialogs")
+                    +createAlertsSection(id = "bootstrapComponents_Alerts")
                     +createMediaObjectSection(id = "bootstrapComponents_MediaObject")
                     +createPaginationSection(id = "bootstrapComponents_Pagination")
                     +createNavbarSection(id = "bootstrapComponents_Navbar")
@@ -57,9 +58,11 @@ fun bootstrapPage(): Div {
                             li { a(href = "#bootstrapComponents_Tabs") { +"Tabs" } }
                             li { a(href = "#bootstrapComponents_Panel") { +"Panels" } }
                             li { a(href = "#bootstrapComponents_Dialogs") { +"Dialogs" } }
+                            li { a(href = "#bootstrapComponents_Alerts") { +"Alerts" } }
                             li { a(href = "#bootstrapComponents_MediaObject") { +"Media Object" } }
                             li { a(href = "#bootstrapComponents_Pagination") { +"Pagination" } }
                             li { a(href = "#bootstrapComponents_Navbar") { +"Navbar" } }
+                            li { a(href = "#bootstrapComponents_Breadcrumbs") { +"Breadcrumbs" } }
                         }
                     }
                 }

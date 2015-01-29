@@ -44,13 +44,15 @@ fun main(args: Array<String>) {
 
 	val divContainer = div {}
 
+    var previousHash = ""
+
 	registerHashChangeListener { hash ->
-		when (hash.get(0)) {
+        when (hash.get(0)) {
 			"#", "" -> divContainer.setChild(basicPage(), Fade())
 			"#gettingstarted" -> divContainer.setChild(gettingStartedSection(), Fade())
 			"#html" -> divContainer.setChild(htmlPage(), Fade())
 			"#bootstrapComponents" -> {
-				if (hash.size() == 1) {
+				if (hash.get(0) != previousHash) {
 					divContainer.setChild(bootstrapPage(), Fade())
 				}
 			}
@@ -59,6 +61,7 @@ fun main(args: Array<String>) {
 			"#spinner" -> divContainer.setChild(createSpinner(), Fade())
 			"#effects" -> divContainer.setChild(effectsPage(), Fade())
 		}
+        previousHash = hash.get(0)
 	}
 
 	page(placeholderElementId = "page") {
