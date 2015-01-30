@@ -64,208 +64,6 @@
         ajaxPost_sd5w5e$: function (ajaxRequest) {
           $.ajax(ajaxRequest);
         },
-        ChartItem: Kotlin.createClass(null, function (value, color, highlight, label) {
-          this.$value_692zr7$ = value;
-          this.$color_5yvu5x$ = color;
-          this.$highlight_wsl8oq$ = highlight;
-          this.$label_63ku12$ = label;
-        }, /** @lends _.net.yested.ChartItem.prototype */ {
-          value: {
-            get: function () {
-              return this.$value_692zr7$;
-            }
-          },
-          color: {
-            get: function () {
-              return this.$color_5yvu5x$;
-            }
-          },
-          highlight: {
-            get: function () {
-              return this.$highlight_wsl8oq$;
-            }
-          },
-          label: {
-            get: function () {
-              return this.$label_63ku12$;
-            }
-          },
-          component1: function () {
-            return this.value;
-          },
-          component2: function () {
-            return this.color;
-          },
-          component3: function () {
-            return this.highlight;
-          },
-          component4: function () {
-            return this.label;
-          },
-          copy_1qdp2k$: function (value, color, highlight, label) {
-            return new _.net.yested.ChartItem(value === void 0 ? this.value : value, color === void 0 ? this.color : color, highlight === void 0 ? this.highlight : highlight, label === void 0 ? this.label : label);
-          },
-          toString: function () {
-            return 'ChartItem(value=' + Kotlin.toString(this.value) + (', color=' + Kotlin.toString(this.color)) + (', highlight=' + Kotlin.toString(this.highlight)) + (', label=' + Kotlin.toString(this.label)) + ')';
-          },
-          hashCode: function () {
-            var result = 0;
-            result = result * 31 + Kotlin.hashCode(this.value) | 0;
-            result = result * 31 + Kotlin.hashCode(this.color) | 0;
-            result = result * 31 + Kotlin.hashCode(this.highlight) | 0;
-            result = result * 31 + Kotlin.hashCode(this.label) | 0;
-            return result;
-          },
-          equals_za3rmp$: function (other) {
-            return this === other || (other !== null && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.value, other.value) && Kotlin.equals(this.color, other.color) && Kotlin.equals(this.highlight, other.highlight) && Kotlin.equals(this.label, other.label))));
-          }
-        }),
-        SingleLineData: Kotlin.createClass(null, function (label, fillColor, strokeColor, pointColor, pointStrokeColor, pointHighlightFill, pointHighlightStroke, data) {
-          this.$label_afr525$ = label;
-          this.$fillColor_llb3wp$ = fillColor;
-          this.$strokeColor_4jgoms$ = strokeColor;
-          this.$pointColor_39s846$ = pointColor;
-          this.$pointStrokeColor_839w7m$ = pointStrokeColor;
-          this.$pointHighlightFill_sqw4im$ = pointHighlightFill;
-          this.$pointHighlightStroke_16i0ur$ = pointHighlightStroke;
-          this.$data_6jhdy7$ = data;
-        }, /** @lends _.net.yested.SingleLineData.prototype */ {
-          label: {
-            get: function () {
-              return this.$label_afr525$;
-            }
-          },
-          fillColor: {
-            get: function () {
-              return this.$fillColor_llb3wp$;
-            }
-          },
-          strokeColor: {
-            get: function () {
-              return this.$strokeColor_4jgoms$;
-            }
-          },
-          pointColor: {
-            get: function () {
-              return this.$pointColor_39s846$;
-            }
-          },
-          pointStrokeColor: {
-            get: function () {
-              return this.$pointStrokeColor_839w7m$;
-            }
-          },
-          pointHighlightFill: {
-            get: function () {
-              return this.$pointHighlightFill_sqw4im$;
-            }
-          },
-          pointHighlightStroke: {
-            get: function () {
-              return this.$pointHighlightStroke_16i0ur$;
-            }
-          },
-          data: {
-            get: function () {
-              return this.$data_6jhdy7$;
-            }
-          },
-          component1: function () {
-            return this.label;
-          },
-          component2: function () {
-            return this.fillColor;
-          },
-          component3: function () {
-            return this.strokeColor;
-          },
-          component4: function () {
-            return this.pointColor;
-          },
-          component5: function () {
-            return this.pointStrokeColor;
-          },
-          component6: function () {
-            return this.pointHighlightFill;
-          },
-          component7: function () {
-            return this.pointHighlightStroke;
-          },
-          component8: function () {
-            return this.data;
-          },
-          copy_6k1o7m$: function (label, fillColor, strokeColor, pointColor, pointStrokeColor, pointHighlightFill, pointHighlightStroke, data) {
-            return new _.net.yested.SingleLineData(label === void 0 ? this.label : label, fillColor === void 0 ? this.fillColor : fillColor, strokeColor === void 0 ? this.strokeColor : strokeColor, pointColor === void 0 ? this.pointColor : pointColor, pointStrokeColor === void 0 ? this.pointStrokeColor : pointStrokeColor, pointHighlightFill === void 0 ? this.pointHighlightFill : pointHighlightFill, pointHighlightStroke === void 0 ? this.pointHighlightStroke : pointHighlightStroke, data === void 0 ? this.data : data);
-          },
-          toString: function () {
-            return 'SingleLineData(label=' + Kotlin.toString(this.label) + (', fillColor=' + Kotlin.toString(this.fillColor)) + (', strokeColor=' + Kotlin.toString(this.strokeColor)) + (', pointColor=' + Kotlin.toString(this.pointColor)) + (', pointStrokeColor=' + Kotlin.toString(this.pointStrokeColor)) + (', pointHighlightFill=' + Kotlin.toString(this.pointHighlightFill)) + (', pointHighlightStroke=' + Kotlin.toString(this.pointHighlightStroke)) + (', data=' + Kotlin.toString(this.data)) + ')';
-          },
-          hashCode: function () {
-            var result = 0;
-            result = result * 31 + Kotlin.hashCode(this.label) | 0;
-            result = result * 31 + Kotlin.hashCode(this.fillColor) | 0;
-            result = result * 31 + Kotlin.hashCode(this.strokeColor) | 0;
-            result = result * 31 + Kotlin.hashCode(this.pointColor) | 0;
-            result = result * 31 + Kotlin.hashCode(this.pointStrokeColor) | 0;
-            result = result * 31 + Kotlin.hashCode(this.pointHighlightFill) | 0;
-            result = result * 31 + Kotlin.hashCode(this.pointHighlightStroke) | 0;
-            result = result * 31 + Kotlin.hashCode(this.data) | 0;
-            return result;
-          },
-          equals_za3rmp$: function (other) {
-            return this === other || (other !== null && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.label, other.label) && Kotlin.equals(this.fillColor, other.fillColor) && Kotlin.equals(this.strokeColor, other.strokeColor) && Kotlin.equals(this.pointColor, other.pointColor) && Kotlin.equals(this.pointStrokeColor, other.pointStrokeColor) && Kotlin.equals(this.pointHighlightFill, other.pointHighlightFill) && Kotlin.equals(this.pointHighlightStroke, other.pointHighlightStroke) && Kotlin.equals(this.data, other.data))));
-          }
-        }),
-        LineData: Kotlin.createClass(null, function (labels, datasets) {
-          this.$labels_s8o8f6$ = labels;
-          this.$datasets_eqt6qu$ = datasets;
-        }, /** @lends _.net.yested.LineData.prototype */ {
-          labels: {
-            get: function () {
-              return this.$labels_s8o8f6$;
-            }
-          },
-          datasets: {
-            get: function () {
-              return this.$datasets_eqt6qu$;
-            }
-          },
-          component1: function () {
-            return this.labels;
-          },
-          component2: function () {
-            return this.datasets;
-          },
-          copy_5rvrpk$: function (labels, datasets) {
-            return new _.net.yested.LineData(labels === void 0 ? this.labels : labels, datasets === void 0 ? this.datasets : datasets);
-          },
-          toString: function () {
-            return 'LineData(labels=' + Kotlin.toString(this.labels) + (', datasets=' + Kotlin.toString(this.datasets)) + ')';
-          },
-          hashCode: function () {
-            var result = 0;
-            result = result * 31 + Kotlin.hashCode(this.labels) | 0;
-            result = result * 31 + Kotlin.hashCode(this.datasets) | 0;
-            return result;
-          },
-          equals_za3rmp$: function (other) {
-            return this === other || (other !== null && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.labels, other.labels) && Kotlin.equals(this.datasets, other.datasets))));
-          }
-        }),
-        Chart: Kotlin.createClass(function () {
-          return [_.net.yested.Canvas];
-        }, function $fun(width, height) {
-          $fun.baseInitializer.call(this, width, height);
-        }, /** @lends _.net.yested.Chart.prototype */ {
-          Pie: function (data) {
-            return new Chart(this.getContext_61zpoe$('2d')).Pie(data);
-          },
-          Line: function (data, options) {
-            if (options === void 0)
-              options = null;
-            return new Chart(this.getContext_61zpoe$('2d')).Line(data, options);
-          }
-        }),
         Effect: Kotlin.createTrait(null),
         BiDirectionEffect: Kotlin.createTrait(null),
         call$f: function (function_0) {
@@ -435,6 +233,30 @@
         }),
         toHTMLColor_p73cws$: function ($receiver) {
           return 'rgba(' + $receiver.red + ',' + $receiver.green + ',' + $receiver.blue + ',' + $receiver.alpha + ')';
+        },
+        Colors: Kotlin.createEnumClass(function () {
+          return [Kotlin.Enum];
+        }, function $fun(color) {
+          $fun.baseInitializer.call(this);
+          this.color = color;
+        }, function () {
+          return {
+            WHITE: new _.net.yested.Colors(new _.net.yested.Color(256, 256, 256, 1.0))
+          };
+        }),
+        randomColorPart: function () {
+          return Math.random() * 256 | 0;
+        },
+        randomColor_14dthe$: function (alpha) {
+          return new _.net.yested.Color(_.net.yested.randomColorPart(), _.net.yested.randomColorPart(), _.net.yested.randomColorPart(), alpha);
+        },
+        lighten: function (color, percent) {
+          return color * (1.0 + percent / 100.0) | 0;
+        },
+        lighten_7ca9a6$: function ($receiver, percent) {
+          if (percent === void 0)
+            percent = 20;
+          return new _.net.yested.Color(_.net.yested.lighten($receiver.red, percent), _.net.yested.lighten($receiver.green, percent), _.net.yested.lighten($receiver.blue, percent), $receiver.alpha);
         },
         Colorized: Kotlin.createClass(function () {
           return [_.net.yested.HTMLComponent];
@@ -1403,6 +1225,430 @@
         isTrue: function ($receiver, value, default_0) {
           return $receiver ? value : default_0;
         },
+        repeatWithDelayUntil_h8wu9e$f: function (check, millisecondInterval, run) {
+          return function () {
+            _.net.yested.repeatWithDelayUntil_h8wu9e$(check, millisecondInterval, run);
+          };
+        },
+        repeatWithDelayUntil_h8wu9e$: function (check, millisecondInterval, run) {
+          if (check()) {
+            run();
+          }
+           else {
+            window.setTimeout(_.net.yested.repeatWithDelayUntil_h8wu9e$f(check, millisecondInterval, run), millisecondInterval);
+          }
+        },
+        PieChartSeries: Kotlin.createClass(null, function (value, color, highlight, label) {
+          this.value = value;
+          this.color = color;
+          this.highlight = highlight;
+          this.label = label;
+        }, /** @lends _.net.yested.PieChartSeries.prototype */ {
+          component1: function () {
+            return this.value;
+          },
+          component2: function () {
+            return this.color;
+          },
+          component3: function () {
+            return this.highlight;
+          },
+          component4: function () {
+            return this.label;
+          },
+          copy_1qdp2k$: function (value, color, highlight, label) {
+            return new _.net.yested.PieChartSeries(value === void 0 ? this.value : value, color === void 0 ? this.color : color, highlight === void 0 ? this.highlight : highlight, label === void 0 ? this.label : label);
+          },
+          toString: function () {
+            return 'PieChartSeries(value=' + Kotlin.toString(this.value) + (', color=' + Kotlin.toString(this.color)) + (', highlight=' + Kotlin.toString(this.highlight)) + (', label=' + Kotlin.toString(this.label)) + ')';
+          },
+          hashCode: function () {
+            var result = 0;
+            result = result * 31 + Kotlin.hashCode(this.value) | 0;
+            result = result * 31 + Kotlin.hashCode(this.color) | 0;
+            result = result * 31 + Kotlin.hashCode(this.highlight) | 0;
+            result = result * 31 + Kotlin.hashCode(this.label) | 0;
+            return result;
+          },
+          equals_za3rmp$: function (other) {
+            return this === other || (other !== null && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.value, other.value) && Kotlin.equals(this.color, other.color) && Kotlin.equals(this.highlight, other.highlight) && Kotlin.equals(this.label, other.label))));
+          }
+        }),
+        LineChartSeries: Kotlin.createClass(null, function (label, fillColor, strokeColor, pointColor, pointStrokeColor, pointHighlightFill, pointHighlightStroke, data) {
+          this.label = label;
+          this.fillColor = fillColor;
+          this.strokeColor = strokeColor;
+          this.pointColor = pointColor;
+          this.pointStrokeColor = pointStrokeColor;
+          this.pointHighlightFill = pointHighlightFill;
+          this.pointHighlightStroke = pointHighlightStroke;
+          this.data = data;
+        }, /** @lends _.net.yested.LineChartSeries.prototype */ {
+          component1: function () {
+            return this.label;
+          },
+          component2: function () {
+            return this.fillColor;
+          },
+          component3: function () {
+            return this.strokeColor;
+          },
+          component4: function () {
+            return this.pointColor;
+          },
+          component5: function () {
+            return this.pointStrokeColor;
+          },
+          component6: function () {
+            return this.pointHighlightFill;
+          },
+          component7: function () {
+            return this.pointHighlightStroke;
+          },
+          component8: function () {
+            return this.data;
+          },
+          copy_6k1o7m$: function (label, fillColor, strokeColor, pointColor, pointStrokeColor, pointHighlightFill, pointHighlightStroke, data) {
+            return new _.net.yested.LineChartSeries(label === void 0 ? this.label : label, fillColor === void 0 ? this.fillColor : fillColor, strokeColor === void 0 ? this.strokeColor : strokeColor, pointColor === void 0 ? this.pointColor : pointColor, pointStrokeColor === void 0 ? this.pointStrokeColor : pointStrokeColor, pointHighlightFill === void 0 ? this.pointHighlightFill : pointHighlightFill, pointHighlightStroke === void 0 ? this.pointHighlightStroke : pointHighlightStroke, data === void 0 ? this.data : data);
+          },
+          toString: function () {
+            return 'LineChartSeries(label=' + Kotlin.toString(this.label) + (', fillColor=' + Kotlin.toString(this.fillColor)) + (', strokeColor=' + Kotlin.toString(this.strokeColor)) + (', pointColor=' + Kotlin.toString(this.pointColor)) + (', pointStrokeColor=' + Kotlin.toString(this.pointStrokeColor)) + (', pointHighlightFill=' + Kotlin.toString(this.pointHighlightFill)) + (', pointHighlightStroke=' + Kotlin.toString(this.pointHighlightStroke)) + (', data=' + Kotlin.toString(this.data)) + ')';
+          },
+          hashCode: function () {
+            var result = 0;
+            result = result * 31 + Kotlin.hashCode(this.label) | 0;
+            result = result * 31 + Kotlin.hashCode(this.fillColor) | 0;
+            result = result * 31 + Kotlin.hashCode(this.strokeColor) | 0;
+            result = result * 31 + Kotlin.hashCode(this.pointColor) | 0;
+            result = result * 31 + Kotlin.hashCode(this.pointStrokeColor) | 0;
+            result = result * 31 + Kotlin.hashCode(this.pointHighlightFill) | 0;
+            result = result * 31 + Kotlin.hashCode(this.pointHighlightStroke) | 0;
+            result = result * 31 + Kotlin.hashCode(this.data) | 0;
+            return result;
+          },
+          equals_za3rmp$: function (other) {
+            return this === other || (other !== null && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.label, other.label) && Kotlin.equals(this.fillColor, other.fillColor) && Kotlin.equals(this.strokeColor, other.strokeColor) && Kotlin.equals(this.pointColor, other.pointColor) && Kotlin.equals(this.pointStrokeColor, other.pointStrokeColor) && Kotlin.equals(this.pointHighlightFill, other.pointHighlightFill) && Kotlin.equals(this.pointHighlightStroke, other.pointHighlightStroke) && Kotlin.equals(this.data, other.data))));
+          }
+        }),
+        LineChartData: Kotlin.createClass(null, function (labels, datasets) {
+          this.labels = labels;
+          this.datasets = datasets;
+        }, /** @lends _.net.yested.LineChartData.prototype */ {
+          component1: function () {
+            return this.labels;
+          },
+          component2: function () {
+            return this.datasets;
+          },
+          copy_t3a4sm$: function (labels, datasets) {
+            return new _.net.yested.LineChartData(labels === void 0 ? this.labels : labels, datasets === void 0 ? this.datasets : datasets);
+          },
+          toString: function () {
+            return 'LineChartData(labels=' + Kotlin.toString(this.labels) + (', datasets=' + Kotlin.toString(this.datasets)) + ')';
+          },
+          hashCode: function () {
+            var result = 0;
+            result = result * 31 + Kotlin.hashCode(this.labels) | 0;
+            result = result * 31 + Kotlin.hashCode(this.datasets) | 0;
+            return result;
+          },
+          equals_za3rmp$: function (other) {
+            return this === other || (other !== null && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.labels, other.labels) && Kotlin.equals(this.datasets, other.datasets))));
+          }
+        }),
+        BarChartSeries: Kotlin.createClass(null, function (label, fillColor, strokeColor, highlightFill, highlightStroke, data) {
+          this.label = label;
+          this.fillColor = fillColor;
+          this.strokeColor = strokeColor;
+          this.highlightFill = highlightFill;
+          this.highlightStroke = highlightStroke;
+          this.data = data;
+        }, /** @lends _.net.yested.BarChartSeries.prototype */ {
+          component1: function () {
+            return this.label;
+          },
+          component2: function () {
+            return this.fillColor;
+          },
+          component3: function () {
+            return this.strokeColor;
+          },
+          component4: function () {
+            return this.highlightFill;
+          },
+          component5: function () {
+            return this.highlightStroke;
+          },
+          component6: function () {
+            return this.data;
+          },
+          copy_3c80hi$: function (label, fillColor, strokeColor, highlightFill, highlightStroke, data) {
+            return new _.net.yested.BarChartSeries(label === void 0 ? this.label : label, fillColor === void 0 ? this.fillColor : fillColor, strokeColor === void 0 ? this.strokeColor : strokeColor, highlightFill === void 0 ? this.highlightFill : highlightFill, highlightStroke === void 0 ? this.highlightStroke : highlightStroke, data === void 0 ? this.data : data);
+          },
+          toString: function () {
+            return 'BarChartSeries(label=' + Kotlin.toString(this.label) + (', fillColor=' + Kotlin.toString(this.fillColor)) + (', strokeColor=' + Kotlin.toString(this.strokeColor)) + (', highlightFill=' + Kotlin.toString(this.highlightFill)) + (', highlightStroke=' + Kotlin.toString(this.highlightStroke)) + (', data=' + Kotlin.toString(this.data)) + ')';
+          },
+          hashCode: function () {
+            var result = 0;
+            result = result * 31 + Kotlin.hashCode(this.label) | 0;
+            result = result * 31 + Kotlin.hashCode(this.fillColor) | 0;
+            result = result * 31 + Kotlin.hashCode(this.strokeColor) | 0;
+            result = result * 31 + Kotlin.hashCode(this.highlightFill) | 0;
+            result = result * 31 + Kotlin.hashCode(this.highlightStroke) | 0;
+            result = result * 31 + Kotlin.hashCode(this.data) | 0;
+            return result;
+          },
+          equals_za3rmp$: function (other) {
+            return this === other || (other !== null && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.label, other.label) && Kotlin.equals(this.fillColor, other.fillColor) && Kotlin.equals(this.strokeColor, other.strokeColor) && Kotlin.equals(this.highlightFill, other.highlightFill) && Kotlin.equals(this.highlightStroke, other.highlightStroke) && Kotlin.equals(this.data, other.data))));
+          }
+        }),
+        BarChartData: Kotlin.createClass(null, function (labels, datasets) {
+          this.labels = labels;
+          this.datasets = datasets;
+        }, /** @lends _.net.yested.BarChartData.prototype */ {
+          component1: function () {
+            return this.labels;
+          },
+          component2: function () {
+            return this.datasets;
+          },
+          copy_637t1b$: function (labels, datasets) {
+            return new _.net.yested.BarChartData(labels === void 0 ? this.labels : labels, datasets === void 0 ? this.datasets : datasets);
+          },
+          toString: function () {
+            return 'BarChartData(labels=' + Kotlin.toString(this.labels) + (', datasets=' + Kotlin.toString(this.datasets)) + ')';
+          },
+          hashCode: function () {
+            var result = 0;
+            result = result * 31 + Kotlin.hashCode(this.labels) | 0;
+            result = result * 31 + Kotlin.hashCode(this.datasets) | 0;
+            return result;
+          },
+          equals_za3rmp$: function (other) {
+            return this === other || (other !== null && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.labels, other.labels) && Kotlin.equals(this.datasets, other.datasets))));
+          }
+        }),
+        RadarChartSeries: Kotlin.createClass(null, function (label, fillColor, strokeColor, pointColor, pointStrokeColor, pointHighlightFill, pointHighlightStroke, data) {
+          this.label = label;
+          this.fillColor = fillColor;
+          this.strokeColor = strokeColor;
+          this.pointColor = pointColor;
+          this.pointStrokeColor = pointStrokeColor;
+          this.pointHighlightFill = pointHighlightFill;
+          this.pointHighlightStroke = pointHighlightStroke;
+          this.data = data;
+        }, /** @lends _.net.yested.RadarChartSeries.prototype */ {
+          component1: function () {
+            return this.label;
+          },
+          component2: function () {
+            return this.fillColor;
+          },
+          component3: function () {
+            return this.strokeColor;
+          },
+          component4: function () {
+            return this.pointColor;
+          },
+          component5: function () {
+            return this.pointStrokeColor;
+          },
+          component6: function () {
+            return this.pointHighlightFill;
+          },
+          component7: function () {
+            return this.pointHighlightStroke;
+          },
+          component8: function () {
+            return this.data;
+          },
+          copy_6k1o7m$: function (label, fillColor, strokeColor, pointColor, pointStrokeColor, pointHighlightFill, pointHighlightStroke, data) {
+            return new _.net.yested.RadarChartSeries(label === void 0 ? this.label : label, fillColor === void 0 ? this.fillColor : fillColor, strokeColor === void 0 ? this.strokeColor : strokeColor, pointColor === void 0 ? this.pointColor : pointColor, pointStrokeColor === void 0 ? this.pointStrokeColor : pointStrokeColor, pointHighlightFill === void 0 ? this.pointHighlightFill : pointHighlightFill, pointHighlightStroke === void 0 ? this.pointHighlightStroke : pointHighlightStroke, data === void 0 ? this.data : data);
+          },
+          toString: function () {
+            return 'RadarChartSeries(label=' + Kotlin.toString(this.label) + (', fillColor=' + Kotlin.toString(this.fillColor)) + (', strokeColor=' + Kotlin.toString(this.strokeColor)) + (', pointColor=' + Kotlin.toString(this.pointColor)) + (', pointStrokeColor=' + Kotlin.toString(this.pointStrokeColor)) + (', pointHighlightFill=' + Kotlin.toString(this.pointHighlightFill)) + (', pointHighlightStroke=' + Kotlin.toString(this.pointHighlightStroke)) + (', data=' + Kotlin.toString(this.data)) + ')';
+          },
+          hashCode: function () {
+            var result = 0;
+            result = result * 31 + Kotlin.hashCode(this.label) | 0;
+            result = result * 31 + Kotlin.hashCode(this.fillColor) | 0;
+            result = result * 31 + Kotlin.hashCode(this.strokeColor) | 0;
+            result = result * 31 + Kotlin.hashCode(this.pointColor) | 0;
+            result = result * 31 + Kotlin.hashCode(this.pointStrokeColor) | 0;
+            result = result * 31 + Kotlin.hashCode(this.pointHighlightFill) | 0;
+            result = result * 31 + Kotlin.hashCode(this.pointHighlightStroke) | 0;
+            result = result * 31 + Kotlin.hashCode(this.data) | 0;
+            return result;
+          },
+          equals_za3rmp$: function (other) {
+            return this === other || (other !== null && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.label, other.label) && Kotlin.equals(this.fillColor, other.fillColor) && Kotlin.equals(this.strokeColor, other.strokeColor) && Kotlin.equals(this.pointColor, other.pointColor) && Kotlin.equals(this.pointStrokeColor, other.pointStrokeColor) && Kotlin.equals(this.pointHighlightFill, other.pointHighlightFill) && Kotlin.equals(this.pointHighlightStroke, other.pointHighlightStroke) && Kotlin.equals(this.data, other.data))));
+          }
+        }),
+        RadarChartData: Kotlin.createClass(null, function (labels, datasets) {
+          this.labels = labels;
+          this.datasets = datasets;
+        }, /** @lends _.net.yested.RadarChartData.prototype */ {
+          component1: function () {
+            return this.labels;
+          },
+          component2: function () {
+            return this.datasets;
+          },
+          copy_4b39te$: function (labels, datasets) {
+            return new _.net.yested.RadarChartData(labels === void 0 ? this.labels : labels, datasets === void 0 ? this.datasets : datasets);
+          },
+          toString: function () {
+            return 'RadarChartData(labels=' + Kotlin.toString(this.labels) + (', datasets=' + Kotlin.toString(this.datasets)) + ')';
+          },
+          hashCode: function () {
+            var result = 0;
+            result = result * 31 + Kotlin.hashCode(this.labels) | 0;
+            result = result * 31 + Kotlin.hashCode(this.datasets) | 0;
+            return result;
+          },
+          equals_za3rmp$: function (other) {
+            return this === other || (other !== null && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.labels, other.labels) && Kotlin.equals(this.datasets, other.datasets))));
+          }
+        }),
+        PolarAreaChartSeries: Kotlin.createClass(null, function (value, color, highlight, label) {
+          this.value = value;
+          this.color = color;
+          this.highlight = highlight;
+          this.label = label;
+        }, /** @lends _.net.yested.PolarAreaChartSeries.prototype */ {
+          component1: function () {
+            return this.value;
+          },
+          component2: function () {
+            return this.color;
+          },
+          component3: function () {
+            return this.highlight;
+          },
+          component4: function () {
+            return this.label;
+          },
+          copy_1qdp2k$: function (value, color, highlight, label) {
+            return new _.net.yested.PolarAreaChartSeries(value === void 0 ? this.value : value, color === void 0 ? this.color : color, highlight === void 0 ? this.highlight : highlight, label === void 0 ? this.label : label);
+          },
+          toString: function () {
+            return 'PolarAreaChartSeries(value=' + Kotlin.toString(this.value) + (', color=' + Kotlin.toString(this.color)) + (', highlight=' + Kotlin.toString(this.highlight)) + (', label=' + Kotlin.toString(this.label)) + ')';
+          },
+          hashCode: function () {
+            var result = 0;
+            result = result * 31 + Kotlin.hashCode(this.value) | 0;
+            result = result * 31 + Kotlin.hashCode(this.color) | 0;
+            result = result * 31 + Kotlin.hashCode(this.highlight) | 0;
+            result = result * 31 + Kotlin.hashCode(this.label) | 0;
+            return result;
+          },
+          equals_za3rmp$: function (other) {
+            return this === other || (other !== null && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.value, other.value) && Kotlin.equals(this.color, other.color) && Kotlin.equals(this.highlight, other.highlight) && Kotlin.equals(this.label, other.label))));
+          }
+        }),
+        Chart: Kotlin.createClass(function () {
+          return [_.net.yested.Canvas];
+        }, function $fun(width, height) {
+          $fun.baseInitializer.call(this, width, height);
+        }, /** @lends _.net.yested.Chart.prototype */ {
+          drawChart: function (draw, chartHandler) {
+            var generatedChart = draw(new Chart(this.getContext_61zpoe$('2d')));
+            if (chartHandler != null) {
+              chartHandler(generatedChart);
+            }
+          },
+          drawChartWhenPossible: function (options, chartHandler, draw) {
+            if (options != null && options.responsive) {
+              _.net.yested.repeatWithDelayUntil_h8wu9e$(_.net.yested.Chart.drawChartWhenPossible$f(this), 100, _.net.yested.Chart.drawChartWhenPossible$f_0(draw, chartHandler, this));
+            }
+             else {
+              return this.drawChart(draw, chartHandler);
+            }
+          },
+          drawPieChart_rn3u1n$: function (data, options, chartHandler) {
+            if (options === void 0)
+              options = null;
+            if (chartHandler === void 0)
+              chartHandler = null;
+            this.drawChartWhenPossible(options, chartHandler, _.net.yested.Chart.drawPieChart_rn3u1n$f(data, options));
+          },
+          drawDoughnutChart_rn3u1n$: function (data, options, chartHandler) {
+            if (options === void 0)
+              options = null;
+            if (chartHandler === void 0)
+              chartHandler = null;
+            this.drawChartWhenPossible(options, chartHandler, _.net.yested.Chart.drawDoughnutChart_rn3u1n$f(data, options));
+          },
+          drawLineChart_cvpyuk$: function (data, options, chartHandler) {
+            if (options === void 0)
+              options = null;
+            if (chartHandler === void 0)
+              chartHandler = null;
+            this.drawChartWhenPossible(options, chartHandler, _.net.yested.Chart.drawLineChart_cvpyuk$f(data, options));
+          },
+          drawBarChart_oo8l1l$: function (data, options, chartHandler) {
+            if (options === void 0)
+              options = null;
+            if (chartHandler === void 0)
+              chartHandler = null;
+            this.drawChartWhenPossible(options, chartHandler, _.net.yested.Chart.drawBarChart_oo8l1l$f(data, options));
+          },
+          drawRadarChart_qxdcw4$: function (data, options, chartHandler) {
+            if (options === void 0)
+              options = null;
+            if (chartHandler === void 0)
+              chartHandler = null;
+            this.drawChartWhenPossible(options, chartHandler, _.net.yested.Chart.drawRadarChart_qxdcw4$f(data, options));
+          },
+          drawPolarAreaChart_v7v0yk$: function (data, options, chartHandler) {
+            if (options === void 0)
+              options = null;
+            if (chartHandler === void 0)
+              chartHandler = null;
+            this.drawChartWhenPossible(options, chartHandler, _.net.yested.Chart.drawPolarAreaChart_v7v0yk$f(data, options));
+          }
+        }, /** @lends _.net.yested.Chart */ {
+          drawChartWhenPossible$f: function (this$Chart) {
+            return function () {
+              return _.net.yested.utils.isIncludedInDOM_b3w3xb$(this$Chart.element);
+            };
+          },
+          drawChartWhenPossible$f_0: function (draw, chartHandler, this$Chart) {
+            return function () {
+              this$Chart.drawChart(draw, chartHandler);
+            };
+          },
+          drawPieChart_rn3u1n$f: function (data, options) {
+            return function (it) {
+              return it.Pie(data, options);
+            };
+          },
+          drawDoughnutChart_rn3u1n$f: function (data, options) {
+            return function (it) {
+              return it.Doughnut(data, options);
+            };
+          },
+          drawLineChart_cvpyuk$f: function (data, options) {
+            return function (it) {
+              return it.Line(data, options);
+            };
+          },
+          drawBarChart_oo8l1l$f: function (data, options) {
+            return function (it) {
+              return it.Bar(data, options);
+            };
+          },
+          drawRadarChart_qxdcw4$f: function (data, options) {
+            return function (it) {
+              return it.Radar(data, options);
+            };
+          },
+          drawPolarAreaChart_v7v0yk$f: function (data, options) {
+            return function (it) {
+              return it.PolarArea(data, options);
+            };
+          }
+        }),
         bootstrap: Kotlin.definePackage(null, /** @lends _.net.yested.bootstrap */ {
           enableScrollSpy_61zpoe$: function (id) {
             $('body').scrollspy(Kotlin.createObject(null, function () {
@@ -3704,6 +3950,19 @@
               options = new _.net.yested.spin.SpinnerOptions();
             $receiver.plus_pv6laa$(new _.net.yested.spin.Spinner(options));
           }
+        }),
+        utils: Kotlin.definePackage(null, /** @lends _.net.yested.utils */ {
+          getTopNode: function (node) {
+            var n = node.parentNode;
+            while (n != null && !Kotlin.equals((n != null ? n : Kotlin.throwNPE()).nodeName, '#document')) {
+              n = (n != null ? n : Kotlin.throwNPE()).parentNode;
+            }
+            return n;
+          },
+          isIncludedInDOM_b3w3xb$: function (node) {
+            var topNode = _.net.yested.utils.getTopNode(node);
+            return topNode != null && Kotlin.equals(topNode.nodeName, '#document');
+          }
         })
       })
     }),
@@ -3735,17 +3994,21 @@
       this.plus_pdl1w0$('Effects');
     },
     f_8: function () {
+      this.plus_pdl1w0$('ChartJS');
+    },
+    f_9: function () {
       this.item('#html', void 0, _.f_2);
       this.item('#bootstrapComponents', void 0, _.f_3);
       this.item('#ajax', void 0, _.f_4);
       this.item('#masterdetail', void 0, _.f_5);
       this.item('#spinner', void 0, _.f_6);
       this.item('#effects', void 0, _.f_7);
+      this.item('#chartjs', void 0, _.f_8);
     },
     main$f: function () {
       this.brand_s8xvdm$('#', _.f);
       this.item_b1t645$('#gettingstarted', void 0, _.f_0);
-      this.dropdown_vvlqvy$(_.f_1, _.f_8);
+      this.dropdown_vvlqvy$(_.f_1, _.f_9);
     },
     main$f_0: function () {
     },
@@ -3772,44 +4035,46 @@
           divContainer.setChild_hu5ove$(_.complex.createSpinner(), new _.net.yested.Fade());
         else if (tmp$0 === '#effects')
           divContainer.setChild_hu5ove$(_.bootstrap.effectsPage(), new _.net.yested.Fade());
+        else if (tmp$0 === '#chartjs')
+          divContainer.setChild_hu5ove$(_.demo.chartjs.chartJsPage(), new _.net.yested.Fade());
         if (!Kotlin.equals(hash[0], previousHash.v)) {
           window.scrollTo(0, 0);
         }
         previousHash.v = hash[0];
       };
     },
-    f_9: function (divContainer) {
+    f_10: function (divContainer) {
       return function () {
         this.br();
         this.br();
         this.plus_pv6laa$(divContainer);
       };
     },
-    f_10: function (divContainer) {
+    f_11: function (divContainer) {
       return function () {
-        this.div_5rsex9$(void 0, void 0, _.f_9(divContainer));
+        this.div_5rsex9$(void 0, void 0, _.f_10(divContainer));
       };
     },
-    f_11: function () {
+    f_12: function () {
       this.plus_pdl1w0$('Contact: ');
     },
-    f_12: function () {
+    f_13: function () {
       this.plus_pdl1w0$('jan.kovar79@gmail.com');
     },
-    f_13: function () {
-      this.emph_kv1miw$(_.f_11);
-      this.a_b4th6h$(void 0, 'mailto:jan.kovar79@gmail.com', void 0, _.f_12);
-    },
     f_14: function () {
-      this.small_kv1miw$(_.f_13);
+      this.emph_kv1miw$(_.f_12);
+      this.a_b4th6h$(void 0, 'mailto:jan.kovar79@gmail.com', void 0, _.f_13);
+    },
+    f_15: function () {
+      this.small_kv1miw$(_.f_14);
       this.br();
       this.br();
     },
     main$f_2: function (navbar, divContainer) {
       return function () {
         this.topMenu_tx5hdt$(navbar);
-        this.content_kv1miw$(_.f_10(divContainer));
-        this.footer_kv1miw$(_.f_14);
+        this.content_kv1miw$(_.f_11(divContainer));
+        this.footer_kv1miw$(_.f_15);
       };
     },
     main: function (args) {
@@ -7214,7 +7479,7 @@
       },
       f_86: function () {
         this.h4_kv1miw$(_.html.f_85);
-        this.code_puj7f4$('kotlin', '\na(href="http://www.yested.net") { +"Yested"}\nbr()\ndiv {\n    span { +"Text in span which is in div"}\n}\np { +"Text in Paragraph" }\ns { +"Strikethrough text" }\nnbsp()\ndel { +"Deleted text" }\nnbsp()\nmark { +"Marked text" }\nnbsp()\nins { +"Inserted text" }\nnbsp()\nu { +"Underlined text" }\nnbsp()\nsmall { +"Small text" }\nnbsp()\nstrong { +"Strong text" }\nnbsp()\nem { +"Italicized text." }\nbr()\nbr()\nblockquote { +"blockquote" }\ntable { border = "1"\n    thead {\n        tr {\n            th { +"First column" }\n            th { +"Second column"}\n        }\n    }\n    tbody {\n        tr {\n            td { +"Cell 1"}\n            td { +"Cell 2"}\n        }\n        tr {\n            td { +"Cell 1"}\n            td { +"Cell 2"}\n        }\n    }\n}\nimg(src = "demo-site/img/sample_img.jpg", alt = "bla") {}\nemph { +"bold text" }\nh1 { +"H1" }\nh2 { +"H2" }\nh3 { +"H3" }\nh4 { +"H4" }\nh5 { +"H5" }\nbutton(label = { +"Press me"},\n        type = ButtonType.BUTTON,\n        onclick = { println("Check console!")})\nul {\n    li { +"List item 1"}\n    li { +"List item 2"}\n    li { +"List item 3"}\n    li { +"List item 4"}\n}\n\nol {\n    li { +"List item 1" }\n    li { +"List item 2" }\n    li { +"List item 3" }\n    li { +"List item 4" }\n}\n\ndl {\n    clazz = "dl-horizontal"\n    item(dt = { +"Term 1"}) { +"Definition"}\n    item(dt = { +"Term 2"}) { +"Definition"}\n}\n\nkbd { +"cd" }\n\n');
+        this.code_puj7f4$('kotlin', '\na(href="http://www.yested.net") { +"Yested"}\nbr()\ndiv {\n    span { +"Text in span which is in div"}\n}\np { +"Text in Paragraph" }\ns { +"Strikethrough text" }\nnbsp()\ndel { +"Deleted text" }\nnbsp()\nmark { +"Marked text" }\nnbsp()\nins { +"Inserted text" }\nnbsp()\nu { +"Underlined text" }\nnbsp()\nsmall { +"Small text" }\nnbsp()\nstrong { +"Strong text" }\nnbsp()\nem { +"Italicized text." }\nbr()\nbr()\nblockquote { +"blockquote" }\ntable { border = "1"\n    thead {\n        tr {\n            th { +"First column" }\n            th { +"Second column"}\n        }\n    }\n    tbody {\n        tr {\n            td { +"Cell 1"}\n            td { +"Cell 2"}\n        }\n        tr {\n            td { +"Cell 1"}\n            td { +"Cell 2"}\n        }\n    }\n}\nimg(src = "demo-site/img/sample_img.jpg", alt = "bla") {}\nemph { +"bold text" }\nh1 { +"H1" }\nh2 { +"H2" }\nh3 { +"H3" }\nh4 { +"H4" }\nh5 { +"H5" }\ncheckbox { onchange = { println("changed to: $\\{this.checked}")} }\nbr()\nbutton(label = { +"Press me"},\n        type = ButtonType.BUTTON,\n        onclick = { println("Check console!")})\nul {\n    li { +"List item 1"}\n    li { +"List item 2"}\n    li { +"List item 3"}\n    li { +"List item 4"}\n}\n\nol {\n    li { +"List item 1" }\n    li { +"List item 2" }\n    li { +"List item 3" }\n    li { +"List item 4" }\n}\n\ndl {\n    clazz = "dl-horizontal"\n    item(dt = { +"Term 1"}) { +"Definition"}\n    item(dt = { +"Term 2"}) { +"Definition"}\n}\n\nkbd { +"cd" }\n\n');
       },
       f_87: function () {
         this.col_zcukl0$([new _.net.yested.bootstrap.Medium(4)], _.html.f_84);
@@ -7228,6 +7493,246 @@
       htmlSection: function () {
         return _.net.yested.div_5rsex9$(void 0, void 0, _.html.htmlSection$f);
       }
+    }),
+    demo: Kotlin.definePackage(null, /** @lends _.demo */ {
+      chartjs: Kotlin.definePackage(null, /** @lends _.demo.chartjs */ {
+        f: function () {
+          this.plus_pdl1w0$('ChartJS');
+        },
+        f_0: function () {
+          this.h3_kv1miw$(_.demo.chartjs.f);
+        },
+        f_1: function () {
+          this.plus_pdl1w0$('http://www.chartjs.org/');
+        },
+        f_2: function () {
+          this.plus_pdl1w0$('Yested provides wrappers for ChartJS library.');
+          this.a_b4th6h$(void 0, 'http://www.chartjs.org/', void 0, _.demo.chartjs.f_1);
+        },
+        f_3: function () {
+          this.plus_pdl1w0$('First initialize Chart class, then create any of supported charts.');
+          this.br();
+          this.plus_pdl1w0$('Yested provides strongly-typed wrappers for ChartJS data but not for options.');
+        },
+        f_4: function () {
+          _.net.yested.bootstrap.pageHeader_kzm4yj$(this, _.demo.chartjs.f_0);
+          this.p_omdg96$(_.demo.chartjs.f_2);
+          this.p_omdg96$(_.demo.chartjs.f_3);
+          this.code_puj7f4$('kotlin', '//Chart extends Component and can be added anywhere in DOM\nval chart = Chart(width = 300, height = 250)\n\n//create array of chart data\nval data = array(\n        PieChartSeries(\n                value = 15.1,\n                color = "#F7464A",\n                highlight = "#F7464A",\n                label = "Red"\n        ),\n        PieChartSeries(\n                value = 5.1,\n                color = "#F7464A",\n                highlight = "#F7464A",\n                label = "Blue"\n        ))\n\n//Yested does not provide strongly-typed API for options as this may change quickly with another version of ChartJS.\nval options = object {\n    val responsive = true\n}\n\n//this value is set by handler in next method\nvar pieChart:dynamic\n\nchart.drawPieChart(data, options, { pieChart = it })\n\n//you can manipulate with chart once it is created - check ChartJS page\npieChart.addData(PieChartSeries(..)\n');
+        },
+        f_5: function () {
+          this.col_zcukl0$([new _.net.yested.bootstrap.Medium(8)], _.demo.chartjs.f_4);
+        },
+        f_6: function () {
+          this.plus_pv6laa$(_.demo.chartjs.createChartJSLineSection());
+        },
+        f_7: function () {
+          this.plus_pv6laa$(_.demo.chartjs.createPieChartSection());
+        },
+        f_8: function () {
+          this.plus_pv6laa$(_.demo.chartjs.createChartJSBarSection());
+        },
+        f_9: function () {
+          this.col_zcukl0$([new _.net.yested.bootstrap.Medium(4)], _.demo.chartjs.f_6);
+          this.col_zcukl0$([new _.net.yested.bootstrap.Medium(4)], _.demo.chartjs.f_7);
+          this.col_zcukl0$([new _.net.yested.bootstrap.Medium(4)], _.demo.chartjs.f_8);
+        },
+        f_10: function () {
+          this.plus_pv6laa$(_.demo.chartjs.createChartJSRadarSection());
+        },
+        f_11: function () {
+          this.plus_pv6laa$(_.demo.chartjs.createPolarChartSection());
+        },
+        f_12: function () {
+          this.plus_pv6laa$(_.demo.chartjs.createDoughnutChartSection());
+        },
+        f_13: function () {
+          this.col_zcukl0$([new _.net.yested.bootstrap.Medium(4)], _.demo.chartjs.f_10);
+          this.col_zcukl0$([new _.net.yested.bootstrap.Medium(4)], _.demo.chartjs.f_11);
+          this.col_zcukl0$([new _.net.yested.bootstrap.Medium(4)], _.demo.chartjs.f_12);
+        },
+        chartJsPage$f: function () {
+          _.net.yested.bootstrap.row_xnql8t$(this, _.demo.chartjs.f_5);
+          this.br();
+          _.net.yested.bootstrap.row_xnql8t$(this, _.demo.chartjs.f_9);
+          this.br();
+          _.net.yested.bootstrap.row_xnql8t$(this, _.demo.chartjs.f_13);
+        },
+        chartJsPage: function () {
+          return _.net.yested.div_5rsex9$(void 0, void 0, _.demo.chartjs.chartJsPage$f);
+        },
+        f_14: function () {
+          this.plus_pdl1w0$('Bar Chart');
+        },
+        createChartJSBarSection$f: function (chart) {
+          return function () {
+            this.h4_kv1miw$(_.demo.chartjs.f_14);
+            this.plus_pv6laa$(chart);
+          };
+        },
+        createChartJSBarSection: function () {
+          var chart = new _.net.yested.Chart(300, 250);
+          var temperatureCZE = [-2.81, -1.06, 2.8, 7.49, 12.3, 15.41, 17.11, 16.9, 13.49, 8.59, 2.82, -1.06];
+          var temperatureSVK = [-2.03, 0.85, 5.44, 10.72, 15.49, 18.52, 20.11, 19.7, 16.13, 10.81, 4.89, 0.11];
+          var colorCZE = _.net.yested.randomColor_14dthe$(1.0);
+          var colorSVK = _.net.yested.randomColor_14dthe$(1.0);
+          var chartData = new _.net.yested.BarChartData(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'], [new _.net.yested.BarChartSeries('Czech Republic', _.net.yested.toHTMLColor_p73cws$(colorCZE.copy_gb4hak$(void 0, void 0, void 0, 0.5)), _.net.yested.toHTMLColor_p73cws$(colorCZE.copy_gb4hak$(void 0, void 0, void 0, 0.8)), _.net.yested.toHTMLColor_p73cws$(colorCZE.copy_gb4hak$(void 0, void 0, void 0, 0.75)), _.net.yested.toHTMLColor_p73cws$(colorCZE.copy_gb4hak$(void 0, void 0, void 0, 1.0)), temperatureCZE), new _.net.yested.BarChartSeries('Slovakia', _.net.yested.toHTMLColor_p73cws$(colorSVK.copy_gb4hak$(void 0, void 0, void 0, 0.5)), _.net.yested.toHTMLColor_p73cws$(colorSVK.copy_gb4hak$(void 0, void 0, void 0, 0.8)), _.net.yested.toHTMLColor_p73cws$(colorSVK.copy_gb4hak$(void 0, void 0, void 0, 0.75)), _.net.yested.toHTMLColor_p73cws$(colorSVK.copy_gb4hak$(void 0, void 0, void 0, 1.0)), temperatureSVK)]);
+          var options = Kotlin.createObject(null, function () {
+            this.responsive = true;
+          });
+          chart.drawBarChart_oo8l1l$(chartData, options);
+          return _.net.yested.div_5rsex9$(void 0, void 0, _.demo.chartjs.createChartJSBarSection$f(chart));
+        },
+        Data3: Kotlin.createClass(null, function (countryCode, temperature) {
+          this.countryCode = countryCode;
+          this.temperature = temperature;
+        }),
+        createDoughnutChartSection$f: function (it) {
+          var color = _.net.yested.randomColor_14dthe$(1.0);
+          return new _.net.yested.PieChartSeries(it.temperature, _.net.yested.toHTMLColor_p73cws$(color), _.net.yested.toHTMLColor_p73cws$(_.net.yested.lighten_7ca9a6$(color, 30)), it.countryCode);
+        },
+        f_15: function () {
+          this.plus_pdl1w0$('Doughnut Chart');
+        },
+        createDoughnutChartSection$f_0: function (chart) {
+          return function () {
+            this.h4_kv1miw$(_.demo.chartjs.f_15);
+            this.plus_pv6laa$(chart);
+          };
+        },
+        createDoughnutChartSection: function () {
+          var tmp$0;
+          var chart = new _.net.yested.Chart(300, 250);
+          var temperaturesData = [new _.demo.chartjs.Data3('BEL', 9.51), new _.demo.chartjs.Data3('BEN', 27.46), new _.demo.chartjs.Data3('BFA', 28.18), new _.demo.chartjs.Data3('BGD', 25.47), new _.demo.chartjs.Data3('BGR', 10.4), new _.demo.chartjs.Data3('BHS', 25.06), new _.demo.chartjs.Data3('BIH', 9.02), new _.demo.chartjs.Data3('BLR', 6.29), new _.demo.chartjs.Data3('BLZ', 25.06), new _.demo.chartjs.Data3('BOL', 20.98), new _.demo.chartjs.Data3('BRA', 24.92), new _.demo.chartjs.Data3('BRN', 25.93), new _.demo.chartjs.Data3('BTN', 8.58), new _.demo.chartjs.Data3('BWA', 21.48), new _.demo.chartjs.Data3('CAF', 24.84)];
+          tmp$0 = Kotlin.modules['stdlib'].kotlin.map_rie7ol$(temperaturesData, _.demo.chartjs.createDoughnutChartSection$f);
+          var chartData = Kotlin.copyToArray(tmp$0);
+          var options = Kotlin.createObject(null, function () {
+            this.responsive = true;
+          });
+          chart.drawDoughnutChart_rn3u1n$(chartData, options);
+          return _.net.yested.div_5rsex9$(void 0, void 0, _.demo.chartjs.createDoughnutChartSection$f_0(chart));
+        },
+        createChartJSLineSection$f: function (jsChart) {
+          return function (it) {
+            jsChart.v = it;
+          };
+        },
+        createChartJSLineSection$updateChart: function (jsChart) {
+          return function () {
+            jsChart.v.addData([Math.random() * 15, Math.random() * 18], 'Added');
+          };
+        },
+        f_16: function () {
+          this.plus_pdl1w0$('Line Chart');
+        },
+        f_17: function () {
+          this.plus_pdl1w0$('Add Data');
+        },
+        createChartJSLineSection$f_0: function (chart, updateChart) {
+          return function () {
+            this.h4_kv1miw$(_.demo.chartjs.f_16);
+            this.plus_pv6laa$(chart);
+            _.net.yested.bootstrap.btsButton_bol907$(this, void 0, _.demo.chartjs.f_17, _.net.yested.bootstrap.ButtonLook.object.PRIMARY, _.net.yested.bootstrap.ButtonSize.object.SMALL, void 0, void 0, updateChart);
+          };
+        },
+        createChartJSLineSection: function () {
+          var chart = new _.net.yested.Chart(300, 250);
+          var temperatureCZE = [-2.81, -1.06, 2.8, 7.49, 12.3, 15.41, 17.11, 16.9, 13.49, 8.59, 2.82, -1.06];
+          var temperatureSVK = [-2.03, 0.85, 5.44, 10.72, 15.49, 18.52, 20.11, 19.7, 16.13, 10.81, 4.89, 0.11];
+          var chartColorCZE = 'rgba(151,187,205,1)';
+          var chartColorSVK = 'rgba(220,220,220,1)';
+          var chartData = new _.net.yested.LineChartData(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'], [new _.net.yested.LineChartSeries('Czech Republic', chartColorCZE, chartColorCZE, chartColorCZE, chartColorCZE, _.net.yested.toHTMLColor_p73cws$(_.net.yested.Colors.object.WHITE.color), chartColorCZE, temperatureCZE), new _.net.yested.LineChartSeries('Slovakia', chartColorSVK, chartColorSVK, chartColorSVK, chartColorSVK, _.net.yested.toHTMLColor_p73cws$(_.net.yested.Colors.object.WHITE.color), chartColorSVK, temperatureSVK)]);
+          var jsChart = {v: null};
+          var options = Kotlin.createObject(null, function () {
+            this.datasetFill = false;
+            this.multiTooltipTemplate = '<%=datasetLabel%> : <%= value %>';
+            this.responsive = true;
+          });
+          chart.drawLineChart_cvpyuk$(chartData, options, _.demo.chartjs.createChartJSLineSection$f(jsChart));
+          var updateChart = _.demo.chartjs.createChartJSLineSection$updateChart(jsChart);
+          return _.net.yested.div_5rsex9$(void 0, void 0, _.demo.chartjs.createChartJSLineSection$f_0(chart, updateChart));
+        },
+        Data: Kotlin.createClass(null, function (countryCode, temperature) {
+          this.countryCode = countryCode;
+          this.temperature = temperature;
+        }),
+        createPieChartSection$f: function (it) {
+          var color = _.net.yested.randomColor_14dthe$(1.0);
+          return new _.net.yested.PieChartSeries(it.temperature, _.net.yested.toHTMLColor_p73cws$(color), _.net.yested.toHTMLColor_p73cws$(_.net.yested.lighten_7ca9a6$(color, 30)), it.countryCode);
+        },
+        f_18: function () {
+          this.plus_pdl1w0$('Pie Chart');
+        },
+        createPieChartSection$f_0: function (chart) {
+          return function () {
+            this.h4_kv1miw$(_.demo.chartjs.f_18);
+            this.plus_pv6laa$(chart);
+          };
+        },
+        createPieChartSection: function () {
+          var tmp$0;
+          var chart = new _.net.yested.Chart(300, 250);
+          var temperaturesData = [new _.demo.chartjs.Data('BEL', 9.51), new _.demo.chartjs.Data('BEN', 27.46), new _.demo.chartjs.Data('BFA', 28.18), new _.demo.chartjs.Data('BGD', 25.47), new _.demo.chartjs.Data('BGR', 10.4), new _.demo.chartjs.Data('BHS', 25.06), new _.demo.chartjs.Data('BIH', 9.02), new _.demo.chartjs.Data('BLR', 6.29), new _.demo.chartjs.Data('BLZ', 25.06), new _.demo.chartjs.Data('BOL', 20.98), new _.demo.chartjs.Data('BRA', 24.92), new _.demo.chartjs.Data('BRN', 25.93), new _.demo.chartjs.Data('BTN', 8.58), new _.demo.chartjs.Data('BWA', 21.48), new _.demo.chartjs.Data('CAF', 24.84)];
+          tmp$0 = Kotlin.modules['stdlib'].kotlin.map_rie7ol$(temperaturesData, _.demo.chartjs.createPieChartSection$f);
+          var chartData = Kotlin.copyToArray(tmp$0);
+          var options = Kotlin.createObject(null, function () {
+            this.responsive = true;
+          });
+          chart.drawPieChart_rn3u1n$(chartData, options);
+          return _.net.yested.div_5rsex9$(void 0, void 0, _.demo.chartjs.createPieChartSection$f_0(chart));
+        },
+        Data2: Kotlin.createClass(null, function (countryCode, temperature) {
+          this.countryCode = countryCode;
+          this.temperature = temperature;
+        }),
+        createPolarChartSection$f: function (it) {
+          var color = _.net.yested.randomColor_14dthe$(1.0);
+          return new _.net.yested.PolarAreaChartSeries(it.temperature, _.net.yested.toHTMLColor_p73cws$(color), _.net.yested.toHTMLColor_p73cws$(_.net.yested.lighten_7ca9a6$(color, 30)), it.countryCode);
+        },
+        f_19: function () {
+          this.plus_pdl1w0$('Polar Area Chart');
+        },
+        createPolarChartSection$f_0: function (chart) {
+          return function () {
+            this.h4_kv1miw$(_.demo.chartjs.f_19);
+            this.plus_pv6laa$(chart);
+          };
+        },
+        createPolarChartSection: function () {
+          var tmp$0;
+          var chart = new _.net.yested.Chart(300, 250);
+          var temperaturesData = [new _.demo.chartjs.Data2('BEL', 9.51), new _.demo.chartjs.Data2('BEN', 15.46), new _.demo.chartjs.Data2('BFA', 28.18), new _.demo.chartjs.Data2('BGD', 66.47)];
+          tmp$0 = Kotlin.modules['stdlib'].kotlin.map_rie7ol$(temperaturesData, _.demo.chartjs.createPolarChartSection$f);
+          var chartData = Kotlin.copyToArray(tmp$0);
+          var options = Kotlin.createObject(null, function () {
+            this.responsive = true;
+          });
+          chart.drawPolarAreaChart_v7v0yk$(chartData, options);
+          return _.net.yested.div_5rsex9$(void 0, void 0, _.demo.chartjs.createPolarChartSection$f_0(chart));
+        },
+        f_20: function () {
+          this.plus_pdl1w0$('Radar Chart');
+        },
+        createChartJSRadarSection$f: function (chart) {
+          return function () {
+            this.h4_kv1miw$(_.demo.chartjs.f_20);
+            this.plus_pv6laa$(chart);
+          };
+        },
+        createChartJSRadarSection: function () {
+          var chart = new _.net.yested.Chart(300, 250);
+          var dataSet1 = [65.0, 59.0, 90.0, 81.0, 56.0, 55.0, 40.0];
+          var dataSet2 = [28.0, 48.0, 40.0, 19.0, 96.0, 27.0, 100.0];
+          var colorDataSet1 = _.net.yested.randomColor_14dthe$(1.0);
+          var colorDataSet2 = _.net.yested.randomColor_14dthe$(1.0);
+          var chartData = new _.net.yested.RadarChartData(['Eating', 'Drinking', 'Sleeping', 'Designing', 'Coding', 'Cycling', 'Running'], [new _.net.yested.RadarChartSeries('Data Set 1', _.net.yested.toHTMLColor_p73cws$(colorDataSet1.copy_gb4hak$(void 0, void 0, void 0, 0.2)), _.net.yested.toHTMLColor_p73cws$(colorDataSet1), _.net.yested.toHTMLColor_p73cws$(colorDataSet1), _.net.yested.toHTMLColor_p73cws$(_.net.yested.Colors.object.WHITE.color), _.net.yested.toHTMLColor_p73cws$(_.net.yested.Colors.object.WHITE.color), _.net.yested.toHTMLColor_p73cws$(colorDataSet1), dataSet1), new _.net.yested.RadarChartSeries('Data Set 2', _.net.yested.toHTMLColor_p73cws$(colorDataSet2.copy_gb4hak$(void 0, void 0, void 0, 0.2)), _.net.yested.toHTMLColor_p73cws$(colorDataSet2), _.net.yested.toHTMLColor_p73cws$(colorDataSet2), _.net.yested.toHTMLColor_p73cws$(_.net.yested.Colors.object.WHITE.color), _.net.yested.toHTMLColor_p73cws$(_.net.yested.Colors.object.WHITE.color), _.net.yested.toHTMLColor_p73cws$(colorDataSet2), dataSet2)]);
+          var options = Kotlin.createObject(null, function () {
+            this.responsive = true;
+          });
+          chart.drawRadarChart_qxdcw4$(chartData, options);
+          return _.net.yested.div_5rsex9$(void 0, void 0, _.demo.chartjs.createChartJSRadarSection$f(chart));
+        }
+      })
     })
   });
   Kotlin.defineModule('Yested', _);
