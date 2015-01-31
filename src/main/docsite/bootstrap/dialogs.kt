@@ -6,7 +6,6 @@ import net.yested.div
 import net.yested.Div
 import net.yested.ButtonType
 import net.yested.bootstrap.Dialog
-import net.yested.bootstrap.TextInput
 import net.yested.bootstrap.Validator
 import net.yested.bootstrap.BtsButton
 import net.yested.bootstrap.ButtonLook

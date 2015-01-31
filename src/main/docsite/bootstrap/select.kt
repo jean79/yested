@@ -8,7 +8,6 @@ import net.yested.bootstrap.btsButton
 import net.yested.ButtonType
 import net.yested.bootstrap.ButtonLook
 import net.yested.bootstrap.ButtonSize
-import net.yested.bootstrap.TextInput
 import net.yested.bootstrap.Validator
 import net.yested.bootstrap.btsForm
 import net.yested.bootstrap.BtsButton

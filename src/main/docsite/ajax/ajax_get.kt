@@ -1,6 +1,5 @@
 package ajax
 
-import net.yested.bootstrap.TextInput
 import net.yested.bootstrap.Validator
 import net.yested.ajaxGet
 import net.yested.Span
@@ -20,6 +19,7 @@ import net.yested.bootstrap.Alert
 import net.yested.bootstrap.AlertStyle
 import net.yested.bootstrap.Medium
 import net.yested.Fade
+import net.yested.bootstrap.InputField
 import net.yested.bootstrap.FormStyle
 
 /**
@@ -79,7 +79,7 @@ native trait WeatherData {
 
 fun createAjaxGetSection(): Div {
 
-    val textInput = TextInput(placeholder = "Type city name and press Enter")
+    val textInput = InputField(placeholder = "Type city name and press Enter")
     val validator = Validator(inputElement = textInput, errorText = "Enter at least 3 characters", validator = { it.length() > 2})
     val temperatureSpan = Div()
 
