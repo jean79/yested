@@ -53,6 +53,7 @@ fun createDoughnutChartSection(): Div {
     return div {
         h4 { +"Doughnut Chart"}
         +chart
+        a(href = "https://github.com/jean79/yested/blob/master/src/main/docsite/demo/chartjs/chartjs_doughnut.kt", target = "_blank") { +"Source code"}
     }
 
 }

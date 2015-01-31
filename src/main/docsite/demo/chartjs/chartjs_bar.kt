@@ -49,6 +49,7 @@ fun createChartJSBarSection(): Div {
     return div {
         h4 { +"Bar Chart" }
         +chart
+        a(href = "https://github.com/jean79/yested/blob/master/src/main/docsite/demo/chartjs/chartjs_bar.kt", target = "_blank") { +"Source code"}
     }
 
 }

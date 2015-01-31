@@ -53,6 +53,7 @@ fun createPieChartSection(): Div {
     return div {
         h4 { +"Pie Chart"}
         +chart
+        a(href = "https://github.com/jean79/yested/blob/master/src/main/docsite/demo/chartjs/chartjs_pie.kt", target = "_blank") { +"Source code"}
     }
 
 }

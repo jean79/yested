@@ -65,6 +65,8 @@ fun createChartJSLineSection(): Div {
             h4 { +"Line Chart" }
             +chart
             btsButton(look = ButtonLook.PRIMARY, size = ButtonSize.SMALL, label = { +"Add Data" }, onclick = ::updateChart)
+            nbsp()
+            a(href = "https://github.com/jean79/yested/blob/master/src/main/docsite/demo/chartjs/chartjs_line.kt", target = "_blank") { +"Source code"}
         }
 
 }

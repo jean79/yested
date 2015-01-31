@@ -43,6 +43,7 @@ fun createPolarChartSection(): Div {
     return div {
         h4 { +"Polar Area Chart"}
         +chart
+        a(href = "https://github.com/jean79/yested/blob/master/src/main/docsite/demo/chartjs/chartjs_polararea.kt", target = "_blank") { +"Source code"}
     }
 
 }
