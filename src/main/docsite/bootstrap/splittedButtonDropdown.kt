@@ -21,7 +21,7 @@ fun createSplitButtonDropdown(id: String): Div {
 		this.id = id
 		row {
 			col(Medium(12)) {
-				pageHeader { h3 { +"Buttons" } }
+				pageHeader { h3 { +"Split Dropdowns" } }
 			}
 		}
 		row {
