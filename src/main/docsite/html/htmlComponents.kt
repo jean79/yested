@@ -80,6 +80,8 @@ fun htmlSection(): Div {
                     h3 { +"H3" }
                     h4 { +"H4" }
                     h5 { +"H5" }
+                    checkbox { onchange = { println("changed to: ${this.checked}")} }
+                    br()
                     button(label = { +"Press me" },
                             type = ButtonType.BUTTON,
                             onclick = { println("Check console!") })
@@ -159,6 +161,8 @@ h2 { +"H2" }
 h3 { +"H3" }
 h4 { +"H4" }
 h5 { +"H5" }
+checkbox { onchange = { println("changed to: $\{this.checked}")} }
+br()
 button(label = { +"Press me"},
         type = ButtonType.BUTTON,
         onclick = { println("Check console!")})

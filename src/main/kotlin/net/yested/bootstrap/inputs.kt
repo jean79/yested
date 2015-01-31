@@ -40,7 +40,7 @@ public trait InputElement<T> {
     fun decorate(valid:Boolean)
 }
 
-public class TextInput(val inputSize: InputSize = InputSize.DEFAULT, placeholder:String? = null) : Component, InputElement<String> {
+public class InputField(val inputSize: InputSize = InputSize.DEFAULT, placeholder:String? = null, type: String = "text") : Component, InputElement<String> {
 
     override val element: HTMLElement = createElement("input")
 
@@ -74,7 +74,7 @@ public class TextInput(val inputSize: InputSize = InputSize.DEFAULT, placeholder
     }
 
     {
-        element.setAttribute("type", "text")
+        element.setAttribute("type", type)
         if (placeholder != null) {
             element.setAttribute("placeholder", placeholder)
         }
@@ -90,8 +90,8 @@ public class TextInput(val inputSize: InputSize = InputSize.DEFAULT, placeholder
 
 }
 
-public fun HTMLComponent.textInput(placeholder: String?, init: TextInput.() -> Unit):Unit {
-    +(TextInput(placeholder = placeholder) with  { init() })
+public fun HTMLComponent.textInput(placeholder: String?, init: InputField.() -> Unit):Unit {
+    +(InputField(placeholder = placeholder) with  { init() })
 }
 
 public class BtsCheckBox(private val label:HTMLComponent.()->Unit) : Component, InputElement<Boolean> {
@@ -214,7 +214,7 @@ public class Select<T>(val data:List<T>, val inputSize: InputSize = InputSize.DE
 <div class="input-group-addon">.00</div>
 </div>
  */
-public fun HTMLComponent.inputAddOn(prefix:String? = null, suffix:String? = null, textInput : TextInput):Unit =
+public fun HTMLComponent.inputAddOn(prefix:String? = null, suffix:String? = null, textInput : InputField):Unit =
     +(
         div(clazz = "input-group") {
             prefix?.let {

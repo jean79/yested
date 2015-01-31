@@ -155,13 +155,16 @@ public open class HTMLComponent(tagName:String) : Component, ElementEvents {
         }
     }
 
-    open public fun a(clazz:String? = null, href:String?=null, onclick:Function0<Unit>? = null, init:Anchor.() -> Unit = {}) {
+    open public fun a(clazz:String? = null, target:String? = null, href:String?=null, onclick:Function0<Unit>? = null, init:Anchor.() -> Unit = {}) {
         val anchor = Anchor()
         if (href != null) {
             anchor.href = href
         }
         if (onclick != null) {
             anchor.onclick = onclick
+        }
+        if (target != null) {
+            anchor.target = target
         }
         if (clazz != null) { anchor.clazz = clazz }
         anchor.init()
@@ -177,7 +180,7 @@ public open class HTMLComponent(tagName:String) : Component, ElementEvents {
         return div
     }
 
-    public fun span(clazz:String? = null, init:Span.() -> Unit):Span {
+    public fun span(clazz:String? = null, init:Span.() -> Unit = {}):Span {
         val span = Span()
         span.init()
         clazz?.let { span.clazz = clazz!! }
@@ -202,6 +205,10 @@ public open class HTMLComponent(tagName:String) : Component, ElementEvents {
 
     public fun table(init:Table.() -> Unit) {
         +(Table() with { init() })
+    }
+
+    public fun checkbox(init:CheckBox.() -> Unit) {
+        +(CheckBox() with { init() })
     }
 
     public fun button(label: HTMLComponent.() -> Unit, type: ButtonType = ButtonType.BUTTON, onclick:() -> Unit) {
@@ -394,16 +401,27 @@ native trait HTMLInputElementWithOnChange : HTMLInputElement {
     public native var onchange: () -> Unit
 }
 
-public class CheckBox() : Component {
+public abstract class InputComponent : Component {
+
+    abstract override val element: HTMLInputElement
+
+    public var checked:Boolean
+        get() = element.checked
+        set(value) { element.checked = value }
+
+    public var disabled:Boolean
+        get() = element.disabled
+        set(value) { element.disabled = value }
+
+}
+
+public class CheckBox() : InputComponent() {
 
     override val element: HTMLInputElementWithOnChange =
             (createElement("input") with {
                 setAttribute("type", "checkbox")
             }) as HTMLInputElementWithOnChange
 
-    public var disabled:Boolean by BooleanAttribute()
-    public var readonly:Boolean by BooleanAttribute()
-    public var checked:Boolean by BooleanAttribute()
     public var onchange:Function0<Unit>
         get():Function0<Unit> = element.onchange
         set(value:Function0<Unit>) {
@@ -457,6 +475,7 @@ public class Li : HTMLComponent("li") { }
 public class Anchor() : HTMLComponent("a") {
 
     public var href : String by Attribute()
+    public var target: String by Attribute()
 
 }
 

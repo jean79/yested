@@ -27,6 +27,7 @@ import net.yested.Fade
 import net.yested.Slide
 import net.yested.bootstrap.ContainerLayout
 import kotlin.js.dom.html.window
+import demo.chartjs.chartJsPage
 
 fun main(args: Array<String>) {
 
@@ -40,6 +41,7 @@ fun main(args: Array<String>) {
 			item(href = "#masterdetail") { +"Master/Detail" }
 			item(href = "#spinner") { +"Spinner" }
 			item(href = "#effects") { +"Effects" }
+            item(href = "#chartjs") { +"ChartJS" }
 		}
 	}
 
@@ -61,6 +63,7 @@ fun main(args: Array<String>) {
 			"#masterdetail" -> divContainer.setChild(masterDetail(), Fade())
 			"#spinner" -> divContainer.setChild(createSpinner(), Fade())
 			"#effects" -> divContainer.setChild(effectsPage(), Fade())
+            "#chartjs" -> divContainer.setChild(chartJsPage(), Fade())
 		}
         if (hash.get(0) != previousHash) {
             window.scrollTo(0, 0)

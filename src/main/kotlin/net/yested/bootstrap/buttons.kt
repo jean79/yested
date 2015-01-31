@@ -6,11 +6,12 @@ import net.yested.Button
 import net.yested.Anchor
 import net.yested.with
 import net.yested.Attribute
+import net.yested.Li
+import net.yested.UL
 import net.yested.Component
 import kotlin.js.dom.html.HTMLElement
 import net.yested.div
 import net.yested.Div
-import net.yested.UL
 import net.yested.Span
 
 public enum class ButtonLook(val code:String) {
@@ -70,6 +71,7 @@ public class BtsButton(type: ButtonType = ButtonType.BUTTON,
 
 }
 
+
 public class BtsAnchor(href:String,
                 look:ButtonLook = ButtonLook.DEFAULT,
                 size:ButtonSize = ButtonSize.DEFAULT,
@@ -84,10 +86,12 @@ public class BtsAnchor(href:String,
 
 }
 
-public class Dropdown(id:String,
+public open class Dropdown(id:String,
                       label: HTMLComponent.()->Unit,
+					  val splitted: Boolean = false,
                       val look:ButtonLook = ButtonLook.DEFAULT,
-                      val size:ButtonSize = ButtonSize.DEFAULT) : Component {
+                      val size:ButtonSize = ButtonSize.DEFAULT,
+					  val onClick: ()->Unit = {}) : Component {
 
     private val list = UL() with {
         "class".."dropdown-menu"
@@ -96,6 +100,7 @@ public class Dropdown(id:String,
     }
 
     override val element: HTMLElement = (div(clazz = "dropdown") {
+		if (!splitted) {
             +(Button(type = ButtonType.BUTTON) with {
                 "class".."btn btn-${look.code} btn-${size.code} dropdown-toggle"
                 "data-toggle".."dropdown"
@@ -103,10 +108,25 @@ public class Dropdown(id:String,
                 this.id = id
                 label()
                 nbsp()
-                span(clazz = "caret") {}
+                span(clazz = "caret")
             })
-            +list
-        }).element
+		} else {
+			+(Button(type = ButtonType.BUTTON) with {
+				"class".."btn btn-${look.code} btn-${size.code}"
+				this.id = id
+				label()
+				onclick = onClick
+			})
+			+(Button(type = ButtonType.BUTTON) with {
+				"class".."btn btn-${look.code} btn-${size.code} dropdown-toggle"
+				"data-toggle".."dropdown"
+				"aria-expanded".."true"
+				span(clazz = "caret")
+			})
+		}
+		+list
+	}).element
+
 
     public fun link(href:String = "#", onclick: Function0<Unit>? = null, init: Anchor.() -> Unit) {
         list.li {
@@ -150,6 +170,15 @@ public fun HTMLComponent.btsAnchor(href:String,
                                   block:Boolean = false,
                                   init:BtsAnchor.() -> Unit):Unit {
     +(BtsAnchor(href = href, look = look, size = size, block = block) with  { init() })
+}
+
+public fun HTMLComponent.splitButtonDropdown(id: String,
+								  label: HTMLComponent.()->Unit,
+								  look: ButtonLook = ButtonLook.DEFAULT,
+								  size: ButtonSize = ButtonSize.DEFAULT,
+								  onClick: ()->Unit,
+								  init: Dropdown.()->Unit) {
+	+(Dropdown(id = id, label = label, look = look, size = size, splitted = true, onClick = onClick) with { init() })
 }
 
 public fun HTMLComponent.dropdown(id: String,

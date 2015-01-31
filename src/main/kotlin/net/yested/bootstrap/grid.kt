@@ -19,7 +19,7 @@ import net.yested.div
 public data class Column<T>(
         val label: HTMLComponent.() -> Unit,
         val render: HTMLComponent.(T) -> Unit,
-        val sortFunction:(T, T) -> Int,
+        val sortFunction:((T, T) -> Int)? = null,
         val align:Align = Align.LEFT,
         val defaultSort:Boolean = false,
         val defaultSortOrderAsc:Boolean = true)
@@ -116,14 +116,17 @@ public class Grid<T>(responsive: Boolean = false, val columns:Array<Column<T>>) 
     }
 
     private fun sortData(toSort:List<T>):List<T> {
+        if (sortColumn?.sortFunction == null) {
+            return toSort
+        }
         return toSort.sortBy(object: java.util.Comparator<T> {
             override fun compare(obj1: T, obj2: T): Int {
-                return (sortColumn!!.sortFunction(obj1, obj2)) * (if (asc) 1 else -1)
+                return (sortColumn!!.sortFunction!!(obj1, obj2)) * (if (asc) 1 else -1)
             }
         })
     }
 
-    private fun displayData() {
+    public fun displayData() {
         tableElement.removeChildByName("tbody")
         dataList?.let {
 
