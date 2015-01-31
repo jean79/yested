@@ -250,6 +250,9 @@
                         <goals>
                             <goal>sign</goal>
                         </goals>
+                        <configuration>
+                            <executable>/usr/bin/gpg</executable>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
