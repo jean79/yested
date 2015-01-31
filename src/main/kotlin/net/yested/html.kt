@@ -155,13 +155,16 @@ public open class HTMLComponent(tagName:String) : Component, ElementEvents {
         }
     }
 
-    open public fun a(clazz:String? = null, href:String?=null, onclick:Function0<Unit>? = null, init:Anchor.() -> Unit = {}) {
+    open public fun a(clazz:String? = null, target:String? = null, href:String?=null, onclick:Function0<Unit>? = null, init:Anchor.() -> Unit = {}) {
         val anchor = Anchor()
         if (href != null) {
             anchor.href = href
         }
         if (onclick != null) {
             anchor.onclick = onclick
+        }
+        if (target != null) {
+            anchor.target = target
         }
         if (clazz != null) { anchor.clazz = clazz }
         anchor.init()
@@ -472,6 +475,7 @@ public class Li : HTMLComponent("li") { }
 public class Anchor() : HTMLComponent("a") {
 
     public var href : String by Attribute()
+    public var target: String by Attribute()
 
 }
 

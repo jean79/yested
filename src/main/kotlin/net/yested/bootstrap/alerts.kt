@@ -34,8 +34,8 @@ public class Alert(style: AlertStyle, dismissible: Boolean = false) : HTMLCompon
         }
     }
 
-    override fun a(clazz: String?, href: String?, onclick: (() -> Unit)?, init: Anchor.() -> Unit) {
-        super<HTMLComponent>.a(clazz?:"alert-link", href, onclick, init)
+    override fun a(clazz: String?, target: String?, href: String?, onclick: (() -> Unit)?, init: Anchor.() -> Unit) {
+        super<HTMLComponent>.a(clazz = clazz?:"alert-link", target = target, href = href, onclick = onclick, init = init)
     }
 
 }
