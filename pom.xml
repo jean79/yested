@@ -59,12 +59,12 @@
         </repository>-->
 
         <snapshotRepository>
-            <id>wedos</id>
-            <url>http://31.31.78.177:8081/nexus/content/repositories/snapshots</url>
+            <id>yested_nexus</id>
+            <url>http://31.31.73.220:8081/nexus/content/repositories/snapshots</url>
         </snapshotRepository>
         <repository>
-            <id>wedos</id>
-            <url>http://31.31.78.177:8081/nexus/content/repositories/releases/</url>
+            <id>yested_nexus</id>
+            <url>http://31.31.73.220:8081/nexus/content/repositories/releases/</url>
         </repository>
     </distributionManagement>
 
@@ -250,6 +250,9 @@
                         <goals>
                             <goal>sign</goal>
                         </goals>
+                        <configuration>
+                            <executable>/usr/bin/gpg</executable>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>

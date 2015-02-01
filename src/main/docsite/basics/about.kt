@@ -12,8 +12,6 @@ import net.yested.bootstrap.alert
 import net.yested.bootstrap.AlertStyle
 import net.yested.bootstrap.Medium
 
-val latestVersion = "0.0.5"
-
 fun aboutSection(): Div {
 
     return div {
@@ -68,27 +66,7 @@ fun aboutSection(): Div {
                 p {
                     btsAnchor(size = ButtonSize.LARGE, look = ButtonLook.PRIMARY, href = "https://github.com/jean79/yested") { +"Get on GitHub"}
                 }
-                p {
-                    emph  { +"Binaries: "}
-                    a(href = "http://jankovar.net:8081/nexus/content/repositories/releases/net/yested/Yested/${latestVersion}/Yested-${latestVersion}.jar") {
-                        + "Yested-${latestVersion}.jar"
-                    }
-                }
-                p {
-                    h4 { +"Maven Repository" }
-                    code(lang="xml", content =
-"""<repository>
-  <id>Yested</id>
-  <url>http://jankovar.net:8081/nexus/content/repositories/releases/</url>
-</repository>
-
-<dependency>
-    <groupId>net.yested</groupId>
-    <artifactId>Yested</artifactId>
-    <version>${latestVersion}</version>
-</dependency>
-""")
-                }
+                +createDownloadSection()
             }
         }
     }
