@@ -4339,9 +4339,7 @@
         return _.net.yested.div_5rsex9$(void 0, void 0, _.ajax.createAjaxGetSection$f_1(validator, textInput, btnGroup, fetchWeather, temperatureSpan));
       }
     }),
-    basics: Kotlin.definePackage(function () {
-      this.latestVersion = '0.0.5';
-    }, /** @lends _.basics */ {
+    basics: Kotlin.definePackage(null, /** @lends _.basics */ {
       f: function () {
         this.plus_pdl1w0$('What is Yested');
       },
@@ -4448,34 +4446,16 @@
         _.net.yested.bootstrap.btsAnchor_2ak3uo$(this, 'https://github.com/jean79/yested', _.net.yested.bootstrap.ButtonLook.object.PRIMARY, _.net.yested.bootstrap.ButtonSize.object.LARGE, void 0, _.basics.f_26);
       },
       f_28: function () {
-        this.plus_pdl1w0$('Binaries: ');
+        this.p_omdg96$(_.basics.f_27);
+        this.plus_pv6laa$(_.basics.createDownloadSection());
       },
       f_29: function () {
-        this.plus_pdl1w0$('Yested-0.0.5.jar');
-      },
-      f_30: function () {
-        this.emph_kv1miw$(_.basics.f_28);
-        this.a_xjhihl$(void 0, void 0, 'http://jankovar.net:8081/nexus/content/repositories/releases/net/yested/Yested/0.0.5/Yested-0.0.5.jar', void 0, _.basics.f_29);
-      },
-      f_31: function () {
-        this.plus_pdl1w0$('Maven Repository');
-      },
-      f_32: function () {
-        this.h4_kv1miw$(_.basics.f_31);
-        this.code_puj7f4$('xml', '<repository>\n  <id>Yested<\/id>\n  <url>http://jankovar.net:8081/nexus/content/repositories/releases/<\/url>\n<\/repository>\n\n<dependency>\n    <groupId>net.yested<\/groupId>\n    <artifactId>Yested<\/artifactId>\n    <version>0.0.5<\/version>\n<\/dependency>\n');
-      },
-      f_33: function () {
-        this.p_omdg96$(_.basics.f_27);
-        this.p_omdg96$(_.basics.f_30);
-        this.p_omdg96$(_.basics.f_32);
-      },
-      f_34: function () {
         this.col_zcukl0$([new _.net.yested.bootstrap.Medium(6)], _.basics.f_25);
-        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(6)], _.basics.f_33);
+        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(6)], _.basics.f_28);
       },
       aboutSection$f: function () {
         _.net.yested.bootstrap.row_xnql8t$(this, _.basics.f_2);
-        _.net.yested.bootstrap.row_xnql8t$(this, _.basics.f_34);
+        _.net.yested.bootstrap.row_xnql8t$(this, _.basics.f_29);
       },
       aboutSection: function () {
         return _.net.yested.div_5rsex9$(void 0, void 0, _.basics.aboutSection$f);
@@ -4488,161 +4468,220 @@
       basicPage: function () {
         return _.net.yested.div_5rsex9$(void 0, void 0, _.basics.basicPage$f);
       },
+      f_30: function () {
+        this.plus_pdl1w0$('Binaries: ');
+      },
+      f_31: function (version) {
+        return function () {
+          this.plus_pdl1w0$('Yested-' + version + '.jar');
+        };
+      },
+      f_32: function (version) {
+        return function () {
+          this.emph_kv1miw$(_.basics.f_30);
+          this.a_xjhihl$(void 0, void 0, 'http://nexus.yested.net/nexus/content/repositories/releases/net/yested/Yested/' + version + '/Yested-' + version + '.jar', void 0, _.basics.f_31(version));
+        };
+      },
+      f_33: function () {
+        this.plus_pdl1w0$('Maven Repository');
+      },
+      f_34: function (version) {
+        return function () {
+          this.h4_kv1miw$(_.basics.f_33);
+          this.code_puj7f4$('xml', '<repository>' + '\n' + '  <id>Yested<\/id>' + '\n' + '  <url>http://nexus.yested.net/nexus/content/repositories/releases/<\/url>' + '\n' + '<\/repository>' + '\n' + '\n' + '<dependency>' + '\n' + '    <groupId>net.yested<\/groupId>' + '\n' + '    <artifactId>Yested<\/artifactId>' + '\n' + '    <version>' + version + '<\/version>' + '\n' + '<\/dependency>' + '\n');
+        };
+      },
+      generateDownloadSection$f: function (version) {
+        return function () {
+          this.p_omdg96$(_.basics.f_32(version));
+          this.p_omdg96$(_.basics.f_34(version));
+        };
+      },
+      generateDownloadSection: function (version) {
+        return _.net.yested.div_5rsex9$(void 0, void 0, _.basics.generateDownloadSection$f(version));
+      },
       f_35: function () {
-        this.plus_pdl1w0$('Fundamentals of Framework');
+        this.plus_pdl1w0$('Fetching latest release version, please wait...');
       },
       f_36: function () {
-        this.h3_kv1miw$(_.basics.f_35);
+        this.br();
+        this.br();
+        this.br();
+        this.br();
+        this.br();
+        this.br();
+        this.br();
+        _.net.yested.spin.spinner_4tyilv$(this);
+        _.net.yested.bootstrap.aligned_xlk53m$(this, _.net.yested.bootstrap.TextAlign.object.CENTER, _.basics.f_35);
+      },
+      createDownloadSection$f: function () {
+        this.div_5rsex9$(void 0, void 0, _.basics.f_36);
+      },
+      createDownloadSection$f_0: function (placeholder) {
+        return function (it) {
+          placeholder.setChild_5f0h2k$(_.basics.generateDownloadSection((it != null ? it : Kotlin.throwNPE()).trim()));
+        };
+      },
+      createDownloadSection: function () {
+        var placeholder = _.net.yested.with_owvm91$(new _.net.yested.Div(), _.basics.createDownloadSection$f);
+        _.net.yested.ajaxGet_435vpa$('http://nexus.yested.net/latest', _.basics.createDownloadSection$f_0(placeholder));
+        return placeholder;
       },
       f_37: function () {
-        _.net.yested.bootstrap.pageHeader_kzm4yj$(this, _.basics.f_36);
+        this.plus_pdl1w0$('Fundamentals of Framework');
       },
       f_38: function () {
-        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(12)], _.basics.f_37);
+        this.h3_kv1miw$(_.basics.f_37);
       },
       f_39: function () {
-        this.plus_pdl1w0$('Just a single interface');
+        _.net.yested.bootstrap.pageHeader_kzm4yj$(this, _.basics.f_38);
       },
       f_40: function () {
-        this.plus_pdl1w0$('All framework components are just simple wrappers around HTMLElement.<br />\n                        Then they provide usefull methods for manipulation with HTML. I.e. attribute settings or DOM subtree manipulatio.<br />\n                        All components have to implement trait (interface) Component.');
+        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(12)], _.basics.f_39);
       },
       f_41: function () {
-        this.h4_kv1miw$(_.basics.f_39);
-        this.div_5rsex9$(void 0, void 0, _.basics.f_40);
+        this.plus_pdl1w0$('Just a single interface');
       },
       f_42: function () {
-        this.nbsp_za3lpa$();
+        this.plus_pdl1w0$('All framework components are just simple wrappers around HTMLElement.<br />\n                        Then they provide usefull methods for manipulation with HTML. I.e. attribute settings or DOM subtree manipulatio.<br />\n                        All components have to implement trait (interface) Component.');
       },
       f_43: function () {
-        this.h4_kv1miw$(_.basics.f_42);
-        this.code_puj7f4$('kotlin', 'trait Component {\n    val element : HTMLElement\n}');
+        this.h4_kv1miw$(_.basics.f_41);
+        this.div_5rsex9$(void 0, void 0, _.basics.f_42);
       },
       f_44: function () {
-        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(4)], _.basics.f_41);
-        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(8)], _.basics.f_43);
+        this.nbsp_za3lpa$();
       },
       f_45: function () {
-        this.plus_pdl1w0$('Component creation');
+        this.h4_kv1miw$(_.basics.f_44);
+        this.code_puj7f4$('kotlin', 'trait Component {\n    val element : HTMLElement\n}');
       },
       f_46: function () {
-        this.plus_pdl1w0$('Typicaly components extend HTMLParentComponent');
+        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(4)], _.basics.f_43);
+        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(8)], _.basics.f_45);
       },
       f_47: function () {
-        this.h4_kv1miw$(_.basics.f_45);
-        this.div_5rsex9$(void 0, void 0, _.basics.f_46);
+        this.plus_pdl1w0$('Component creation');
       },
       f_48: function () {
-        this.nbsp_za3lpa$();
+        this.plus_pdl1w0$('Typicaly components extend HTMLParentComponent');
       },
       f_49: function () {
-        this.h4_kv1miw$(_.basics.f_48);
-        this.code_puj7f4$('kotlin', 'class Anchor() : HTMLParentComponent("a") {\n\n    public var href : String by Attribute()\n\n}');
+        this.h4_kv1miw$(_.basics.f_47);
+        this.div_5rsex9$(void 0, void 0, _.basics.f_48);
       },
       f_50: function () {
-        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(4)], _.basics.f_47);
-        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(8)], _.basics.f_49);
+        this.nbsp_za3lpa$();
       },
       f_51: function () {
-        this.plus_pdl1w0$('Yested application initialization');
+        this.h4_kv1miw$(_.basics.f_50);
+        this.code_puj7f4$('kotlin', 'class Anchor() : HTMLParentComponent("a") {\n\n    public var href : String by Attribute()\n\n}');
       },
       f_52: function () {
-        this.plus_pdl1w0$('You need to have a DIV in your html page with id "page". Then Yested app will be renderred into this div using command on the right.');
+        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(4)], _.basics.f_49);
+        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(8)], _.basics.f_51);
       },
       f_53: function () {
-        this.h4_kv1miw$(_.basics.f_51);
-        this.div_5rsex9$(void 0, void 0, _.basics.f_52);
+        this.plus_pdl1w0$('Yested application initialization');
       },
       f_54: function () {
-        this.nbsp_za3lpa$();
+        this.plus_pdl1w0$('You need to have a DIV in your html page with id "page". Then Yested app will be renderred into this div using command on the right.');
       },
       f_55: function () {
-        this.h4_kv1miw$(_.basics.f_54);
-        this.code_puj7f4$('kotlin', 'page("page") {\n    topMenu(navbar)\n    content {\n        div {\n            a(href="http://www.yested.net") { +"Yested homepage" }\n        }\n    }\n }');
+        this.h4_kv1miw$(_.basics.f_53);
+        this.div_5rsex9$(void 0, void 0, _.basics.f_54);
       },
       f_56: function () {
-        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(4)], _.basics.f_53);
-        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(8)], _.basics.f_55);
-      },
-      f_57: function () {
-        this.plus_pdl1w0$('DSL for layout construction');
-      },
-      f_58: function () {
-        this.plus_pdl1w0$('To understand the DSL please take look at <a href="http://kotlinlang.org/docs/reference/type-safe-builders.html">Kotlin HTML builder<\/a>.\n                    Have you got it? Then Yested is written in the same DSL way but each object wraps a single HTML element and manipulates with it in a runtime.\n                    ');
-      },
-      f_59: function () {
-        this.h4_kv1miw$(_.basics.f_57);
-        this.div_5rsex9$(void 0, void 0, _.basics.f_58);
-      },
-      f_60: function () {
         this.nbsp_za3lpa$();
       },
+      f_57: function () {
+        this.h4_kv1miw$(_.basics.f_56);
+        this.code_puj7f4$('kotlin', 'page("page") {\n    topMenu(navbar)\n    content {\n        div {\n            a(href="http://www.yested.net") { +"Yested homepage" }\n        }\n    }\n }');
+      },
+      f_58: function () {
+        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(4)], _.basics.f_55);
+        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(8)], _.basics.f_57);
+      },
+      f_59: function () {
+        this.plus_pdl1w0$('DSL for layout construction');
+      },
+      f_60: function () {
+        this.plus_pdl1w0$('To understand the DSL please take look at <a href="http://kotlinlang.org/docs/reference/type-safe-builders.html">Kotlin HTML builder<\/a>.\n                    Have you got it? Then Yested is written in the same DSL way but each object wraps a single HTML element and manipulates with it in a runtime.\n                    ');
+      },
       f_61: function () {
-        this.h4_kv1miw$(_.basics.f_60);
-        this.code_puj7f4$('kotlin', 'div {\n    p {\n        h5 { +"Demo list" }\n        ul {\n            li { a(href="http://www.yested.net") { +"Yested" } }\n            li { emph { +"Bold text" }\n            li { colorized(color="#778822") { +"Colorized text" } }\n        }\n    }\n}');
+        this.h4_kv1miw$(_.basics.f_59);
+        this.div_5rsex9$(void 0, void 0, _.basics.f_60);
       },
       f_62: function () {
-        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(4)], _.basics.f_59);
-        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(8)], _.basics.f_61);
+        this.nbsp_za3lpa$();
+      },
+      f_63: function () {
+        this.h4_kv1miw$(_.basics.f_62);
+        this.code_puj7f4$('kotlin', 'div {\n    p {\n        h5 { +"Demo list" }\n        ul {\n            li { a(href="http://www.yested.net") { +"Yested" } }\n            li { emph { +"Bold text" }\n            li { colorized(color="#778822") { +"Colorized text" } }\n        }\n    }\n}');
+      },
+      f_64: function () {
+        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(4)], _.basics.f_61);
+        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(8)], _.basics.f_63);
       },
       howItWorksSection$f: function () {
-        _.net.yested.bootstrap.row_xnql8t$(this, _.basics.f_38);
-        _.net.yested.bootstrap.row_xnql8t$(this, _.basics.f_44);
+        _.net.yested.bootstrap.row_xnql8t$(this, _.basics.f_40);
+        _.net.yested.bootstrap.row_xnql8t$(this, _.basics.f_46);
         this.br();
-        _.net.yested.bootstrap.row_xnql8t$(this, _.basics.f_50);
+        _.net.yested.bootstrap.row_xnql8t$(this, _.basics.f_52);
         this.br();
-        _.net.yested.bootstrap.row_xnql8t$(this, _.basics.f_56);
-        _.net.yested.bootstrap.row_xnql8t$(this, _.basics.f_62);
+        _.net.yested.bootstrap.row_xnql8t$(this, _.basics.f_58);
+        _.net.yested.bootstrap.row_xnql8t$(this, _.basics.f_64);
       },
       howItWorksSection: function () {
         return _.net.yested.div_5rsex9$(void 0, void 0, _.basics.howItWorksSection$f);
       },
-      f_63: function () {
+      f_65: function () {
         this.plus_pdl1w0$('Kotlin to Javascript Compiler');
       },
-      f_64: function () {
-        this.h3_kv1miw$(_.basics.f_63);
-      },
-      f_65: function () {
-        _.net.yested.bootstrap.pageHeader_kzm4yj$(this, _.basics.f_64);
-      },
       f_66: function () {
-        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(12)], _.basics.f_65);
+        this.h3_kv1miw$(_.basics.f_65);
       },
       f_67: function () {
-        this.plus_pdl1w0$('Kotlin');
+        _.net.yested.bootstrap.pageHeader_kzm4yj$(this, _.basics.f_66);
       },
       f_68: function () {
-        this.a_xjhihl$(void 0, void 0, 'http://kotlinlang.org', void 0, _.basics.f_67);
-        this.plus_pdl1w0$(' is a language created by JetBrains company. It compiles to JVM or to Javascript.');
+        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(12)], _.basics.f_67);
       },
       f_69: function () {
-        this.plus_pdl1w0$('Main method (see example on the right) will be executed when HTML page is loaded.\n                    ');
+        this.plus_pdl1w0$('Kotlin');
       },
       f_70: function () {
-        this.plus_pdl1w0$('Kotlin to Javascript compiler allows you to simply call Javascript functions, allowing\n                        us to create a simple strongly typed wrappers.\n                        ');
+        this.a_xjhihl$(void 0, void 0, 'http://kotlinlang.org', void 0, _.basics.f_69);
+        this.plus_pdl1w0$(' is a language created by JetBrains company. It compiles to JVM or to Javascript.');
       },
       f_71: function () {
-        this.p_omdg96$(_.basics.f_68);
-        this.p_omdg96$(_.basics.f_69);
-        this.p_omdg96$(_.basics.f_70);
+        this.plus_pdl1w0$('Main method (see example on the right) will be executed when HTML page is loaded.\n                    ');
       },
       f_72: function () {
-        this.div_5rsex9$(void 0, void 0, _.basics.f_71);
+        this.plus_pdl1w0$('Kotlin to Javascript compiler allows you to simply call Javascript functions, allowing\n                        us to create a simple strongly typed wrappers.\n                        ');
       },
       f_73: function () {
-        this.plus_pdl1w0$('Simplest Kotlin Code');
+        this.p_omdg96$(_.basics.f_70);
+        this.p_omdg96$(_.basics.f_71);
+        this.p_omdg96$(_.basics.f_72);
       },
       f_74: function () {
-        this.h4_kv1miw$(_.basics.f_73);
-        this.code_puj7f4$('kotlin', 'fun main(args: Array<String>) {\n    println("This will be printed into a Javascript console.")\n}');
+        this.div_5rsex9$(void 0, void 0, _.basics.f_73);
       },
       f_75: function () {
-        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(4)], _.basics.f_72);
-        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(8)], _.basics.f_74);
+        this.plus_pdl1w0$('Simplest Kotlin Code');
+      },
+      f_76: function () {
+        this.h4_kv1miw$(_.basics.f_75);
+        this.code_puj7f4$('kotlin', 'fun main(args: Array<String>) {\n    println("This will be printed into a Javascript console.")\n}');
+      },
+      f_77: function () {
+        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(4)], _.basics.f_74);
+        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(8)], _.basics.f_76);
       },
       kotlinSection$f: function () {
-        _.net.yested.bootstrap.row_xnql8t$(this, _.basics.f_66);
-        _.net.yested.bootstrap.row_xnql8t$(this, _.basics.f_75);
+        _.net.yested.bootstrap.row_xnql8t$(this, _.basics.f_68);
+        _.net.yested.bootstrap.row_xnql8t$(this, _.basics.f_77);
       },
       kotlinSection: function () {
         return _.net.yested.div_5rsex9$(void 0, void 0, _.basics.kotlinSection$f);
