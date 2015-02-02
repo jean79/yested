@@ -1,13 +1,11 @@
 package bootstrap
 
 import net.yested.div
-import net.yested.bootstrap.btsForm
 import net.yested.Div
-import net.yested.bootstrap.textInput
+import net.yested.bootstrap.inputField
 import net.yested.bootstrap.tabs
 import net.yested.text
 import net.yested.bootstrap.row
-import org.w3c.dom.Element
 import net.yested.bootstrap.pageHeader
 import net.yested.bootstrap.Medium
 
@@ -36,7 +34,7 @@ Content of tab is rendedered upon click on a tab link. When clicking on anoother
                 tabs {
                     tab(header = text("First")) {
                         div {
-                            textInput(placeholder = "Placeholder 1") { }
+                            inputField(placeholder = "Placeholder 1") { }
                         }
                     }
                     tab(active = true, header = text("Second")) {

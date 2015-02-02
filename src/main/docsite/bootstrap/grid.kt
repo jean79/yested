@@ -5,8 +5,6 @@ import net.yested.bootstrap.Column
 import net.yested.text
 import net.yested.bootstrap.row
 import net.yested.bootstrap.pageHeader
-import net.yested.bootstrap.tabs
-import net.yested.bootstrap.textInput
 import net.yested.div
 import net.yested.Div
 import net.yested.bootstrap.Medium

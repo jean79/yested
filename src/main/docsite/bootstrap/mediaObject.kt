@@ -4,18 +4,9 @@ import net.yested.Div
 import net.yested.div
 import net.yested.bootstrap.row
 import net.yested.bootstrap.pageHeader
-import net.yested.bootstrap.tabs
-import net.yested.text
-import net.yested.bootstrap.textInput
-import net.yested.bootstrap.aligned
-import net.yested.bootstrap.TextAlign
-import net.yested.bootstrap.uppercase
-import net.yested.bootstrap.lowercase
-import net.yested.bootstrap.capitalize
 import net.yested.bootstrap.Medium
 import net.yested.bootstrap.mediaObject
 import net.yested.bootstrap.MediaAlign
-import net.yested.replace
 
 fun createMediaObjectSection(id: String): Div {
 

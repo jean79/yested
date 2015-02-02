@@ -2808,13 +2808,15 @@
               };
             }
           }),
-          textInput_nt9vrj$f: function (init) {
+          inputField_nt9vrj$f: function (init) {
             return function () {
               init.call(this);
             };
           },
-          textInput_nt9vrj$: function ($receiver, placeholder, init) {
-            $receiver.plus_pv6laa$(_.net.yested.with_owvm91$(new _.net.yested.bootstrap.InputField(void 0, placeholder), _.net.yested.bootstrap.textInput_nt9vrj$f(init)));
+          inputField_nt9vrj$: function ($receiver, placeholder, init) {
+            if (placeholder === void 0)
+              placeholder = null;
+            $receiver.plus_pv6laa$(_.net.yested.with_owvm91$(new _.net.yested.bootstrap.InputField(void 0, placeholder), _.net.yested.bootstrap.inputField_nt9vrj$f(init)));
           },
           BtsCheckBox: Kotlin.createClass(function () {
             return [_.net.yested.bootstrap.InputElement, _.net.yested.Component];
@@ -5363,7 +5365,7 @@
         this.id = 'nameId';
       },
       f_124: function () {
-        _.net.yested.bootstrap.textInput_nt9vrj$(this, 'Name', _.bootstrap.f_123);
+        _.net.yested.bootstrap.inputField_nt9vrj$(this, 'Name', _.bootstrap.f_123);
       },
       f_125: function () {
         this.item_gthhqa$('nameId', _.bootstrap.f_122, void 0, _.bootstrap.f_124);
@@ -5570,7 +5572,7 @@
       f_175: function () {
       },
       f_176: function () {
-        _.net.yested.bootstrap.textInput_nt9vrj$(this, 'Enter your username', _.bootstrap.f_175);
+        _.net.yested.bootstrap.inputField_nt9vrj$(this, 'Enter your username', _.bootstrap.f_175);
       },
       f_177: function () {
         this.plus_pdl1w0$('Salary');
@@ -6081,7 +6083,7 @@
       f_287: function () {
       },
       f_288: function () {
-        _.net.yested.bootstrap.textInput_nt9vrj$(this, 'username', _.bootstrap.f_287);
+        _.net.yested.bootstrap.inputField_nt9vrj$(this, 'username', _.bootstrap.f_287);
       },
       f_289: function () {
         this.plus_pdl1w0$('Login');
@@ -6638,7 +6640,7 @@
       f_388: function () {
       },
       f_389: function () {
-        _.net.yested.bootstrap.textInput_nt9vrj$(this, 'Placeholder 1', _.bootstrap.f_388);
+        _.net.yested.bootstrap.inputField_nt9vrj$(this, 'Placeholder 1', _.bootstrap.f_388);
       },
       f_390: function () {
         this.div_5rsex9$(void 0, void 0, _.bootstrap.f_389);
