@@ -10,6 +10,7 @@ import net.yested.bootstrap.textInput
 import net.yested.div
 import net.yested.Div
 import net.yested.bootstrap.Medium
+import net.yested.compareByValue
 
 /**
  * Created by jean on 17.12.2014.
@@ -17,17 +18,13 @@ import net.yested.bootstrap.Medium
 
 data class Person(val name: String, val age: Int)
 
-fun <T, V : Comparable<V>> compareBy(get: (T) -> V?): (T, T) -> Int {
-    return {(l, r) -> compareValues(get(l), get(r)) }
-}
-
 fun createGrid(id: String): Div {
 
     val data = listOf(Person("Jan", 15), Person("Peter", 30), Person("Martin", 31))
 
     val grid = Grid(columns = array(
             Column(label = text("Name"), render = { +it.name }, sortFunction = {(l, r) -> compareValues(l.name, r.name) }),
-            Column(label = text("Age "), render = { +"${it.age}" }, sortFunction = compareBy<Person, Int> { it.age },
+            Column(label = text("Age "), render = { +"${it.age}" }, sortFunction = compareByValue<Person, Int> { it.age },
                     defaultSort = true, defaultSortOrderAsc = true)
     ))
 

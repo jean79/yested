@@ -23,6 +23,7 @@ import net.yested.Component
 import kotlin.js.dom.html.HTMLElement
 import java.util.ArrayList
 import net.yested.bootstrap.InputField
+import net.yested.compareByValue
 
 enum class Continent(val label:String) {
     EUROPE : Continent("Europe");
@@ -66,6 +67,7 @@ class DetailScreen(
             item(label = {}) {
                 div {
                     btsButton(label = { +"Save" }, look = ButtonLook.PRIMARY, type = ButtonType.SUBMIT, onclick = { save() })
+                    nbsp()
                     btsButton(label = { +"Cancel" }, onclick = { cancelHandler() })
                 }
             }
@@ -78,17 +80,17 @@ class MasterScreen(val list:ArrayList<City>, val editHandler:Function1<City?, Un
     val grid =
             Grid(columns = array(
                     Column(label = { +"City name"},
-                            render = { +it.name }, sortFunction = bootstrap.compareBy<City, String> { it.name },
+                            render = { +it.name }, sortFunction = compareByValue<City, String> { it.name },
                             defaultSort = true),
                     Column(label = { +"Continent"},
                             render = { +it.continent.label},
-                            sortFunction = bootstrap.compareBy<City, String> { it.continent.label }),
+                            sortFunction = compareByValue<City, String> { it.continent.label }),
                     Column(label = { },
                             render = { btsButton(size = ButtonSize.EXTRA_SMALL, label = { +"Edit" }, onclick = { editHandler(it) })},
-                            sortFunction = bootstrap.compareBy<City, String> { it.name }),
+                            sortFunction = compareByValue<City, String> { it.name }),
                     Column(label = { },
                             render = { btsButton(size = ButtonSize.EXTRA_SMALL, look = ButtonLook.DANGER, label = { +"Delete" }, onclick = { deleteCity(it) })},
-                            sortFunction = bootstrap.compareBy<City, String> { it.name })));
+                            sortFunction = compareByValue<City, String> { it.name })));
 
     fun deleteCity(city: City) {
         list.remove(city)

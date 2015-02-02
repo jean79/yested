@@ -1256,6 +1256,14 @@
             window.setTimeout(_.net.yested.repeatWithDelayUntil_h8wu9e$f(check, millisecondInterval, run), millisecondInterval);
           }
         },
+        compareByValue_lw40be$f: function (get) {
+          return function (l, r) {
+            return Kotlin.modules['stdlib'].kotlin.compareValues_cj5vqg$(get(l), get(r));
+          };
+        },
+        compareByValue_lw40be$: function (get) {
+          return _.net.yested.compareByValue_lw40be$f(get);
+        },
         PieChartSeries: Kotlin.createClass(null, function (value, color, highlight, label) {
           this.value = value;
           this.color = color;
@@ -5627,14 +5635,6 @@
           return this === other || (other !== null && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.name, other.name) && Kotlin.equals(this.age, other.age))));
         }
       }),
-      compareBy$f: function (get) {
-        return function (l, r) {
-          return Kotlin.modules['stdlib'].kotlin.compareValues_cj5vqg$(get(l), get(r));
-        };
-      },
-      compareBy: function (get) {
-        return _.bootstrap.compareBy$f(get);
-      },
       createGrid$f: function (it) {
         this.plus_pdl1w0$(it.name);
       },
@@ -5695,7 +5695,7 @@
       },
       createGrid: function (id) {
         var data = Kotlin.modules['stdlib'].kotlin.listOf_9mqe4v$([new _.bootstrap.Person('Jan', 15), new _.bootstrap.Person('Peter', 30), new _.bootstrap.Person('Martin', 31)]);
-        var grid = new _.net.yested.bootstrap.Grid(void 0, [new _.net.yested.bootstrap.Column(_.net.yested.text_61zpoe$('Name'), _.bootstrap.createGrid$f, _.bootstrap.createGrid$f_0), new _.net.yested.bootstrap.Column(_.net.yested.text_61zpoe$('Age '), _.bootstrap.createGrid$f_1, _.bootstrap.compareBy(_.bootstrap.createGrid$f_2), void 0, true, true)]);
+        var grid = new _.net.yested.bootstrap.Grid(void 0, [new _.net.yested.bootstrap.Column(_.net.yested.text_61zpoe$('Name'), _.bootstrap.createGrid$f, _.bootstrap.createGrid$f_0), new _.net.yested.bootstrap.Column(_.net.yested.text_61zpoe$('Age '), _.bootstrap.createGrid$f_1, _.net.yested.compareByValue_lw40be$(_.bootstrap.createGrid$f_2), void 0, true, true)]);
         grid.list = data;
         return _.net.yested.div_5rsex9$(void 0, void 0, _.bootstrap.createGrid$f_3(id, grid));
       },
@@ -6920,6 +6920,7 @@
         f_8: function (this$DetailScreen) {
           return function () {
             _.net.yested.bootstrap.btsButton_bol907$(this, _.net.yested.ButtonType.object.SUBMIT, _.complex.DetailScreen.f_4, _.net.yested.bootstrap.ButtonLook.object.PRIMARY, void 0, void 0, void 0, _.complex.DetailScreen.f_5(this$DetailScreen));
+            this.nbsp_za3lpa$();
             _.net.yested.bootstrap.btsButton_bol907$(this, void 0, _.complex.DetailScreen.f_6, void 0, void 0, void 0, void 0, _.complex.DetailScreen.f_7(this$DetailScreen));
           };
         },
@@ -6941,7 +6942,7 @@
       }, function (list, editHandler) {
         this.list = list;
         this.editHandler = editHandler;
-        this.grid = new _.net.yested.bootstrap.Grid(void 0, [new _.net.yested.bootstrap.Column(_.complex.MasterScreen.MasterScreen$f, _.complex.MasterScreen.MasterScreen$f_0, _.bootstrap.compareBy(_.complex.MasterScreen.MasterScreen$f_1), void 0, true), new _.net.yested.bootstrap.Column(_.complex.MasterScreen.MasterScreen$f_2, _.complex.MasterScreen.MasterScreen$f_3, _.bootstrap.compareBy(_.complex.MasterScreen.MasterScreen$f_4)), new _.net.yested.bootstrap.Column(_.complex.MasterScreen.MasterScreen$f_5, _.complex.MasterScreen.MasterScreen$f_6(this), _.bootstrap.compareBy(_.complex.MasterScreen.MasterScreen$f_7)), new _.net.yested.bootstrap.Column(_.complex.MasterScreen.MasterScreen$f_8, _.complex.MasterScreen.MasterScreen$f_9(this), _.bootstrap.compareBy(_.complex.MasterScreen.MasterScreen$f_10))]);
+        this.grid = new _.net.yested.bootstrap.Grid(void 0, [new _.net.yested.bootstrap.Column(_.complex.MasterScreen.MasterScreen$f, _.complex.MasterScreen.MasterScreen$f_0, _.net.yested.compareByValue_lw40be$(_.complex.MasterScreen.MasterScreen$f_1), void 0, true), new _.net.yested.bootstrap.Column(_.complex.MasterScreen.MasterScreen$f_2, _.complex.MasterScreen.MasterScreen$f_3, _.net.yested.compareByValue_lw40be$(_.complex.MasterScreen.MasterScreen$f_4)), new _.net.yested.bootstrap.Column(_.complex.MasterScreen.MasterScreen$f_5, _.complex.MasterScreen.MasterScreen$f_6(this), _.net.yested.compareByValue_lw40be$(_.complex.MasterScreen.MasterScreen$f_7)), new _.net.yested.bootstrap.Column(_.complex.MasterScreen.MasterScreen$f_8, _.complex.MasterScreen.MasterScreen$f_9(this), _.net.yested.compareByValue_lw40be$(_.complex.MasterScreen.MasterScreen$f_10))]);
         this.grid.list = this.list;
       }, /** @lends _.complex.MasterScreen.prototype */ {
         deleteCity: function (city) {
