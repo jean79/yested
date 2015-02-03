@@ -86,7 +86,7 @@ public class Form(private val formStyle: FormStyle = FormStyle.DEFAULT, private 
 
     public fun item(forId:String = "", label: HTMLComponent.()->Unit, validator:ValidatorI? = null, content: HTMLComponent.()->Unit) {
 
-        val spanErrMsg = Span() with { clazz = "help-block" }
+        val spanErrMsg = Span() with { clazz = "help-block"; "style".."display:inline;" }
         val divInput = if (formStyle == FormStyle.HORIZONTAL) {
             div(clazz = "$inputDef", init = content) with { +spanErrMsg }
         } else span(init = content) with { +spanErrMsg }

@@ -2428,6 +2428,7 @@
           }, /** @lends _.net.yested.bootstrap.Form */ {
             item_gthhqa$f: function () {
               this.clazz = 'help-block';
+              this.rangeTo_94jgcu$('style', 'display:inline;');
             },
             item_gthhqa$f_0: function (spanErrMsg) {
               return function () {
