@@ -96,10 +96,10 @@ public class FloatingPanelContainer(layoutChangeHandler:Function0<Unit>? = null,
 }
 
 
-public fun HTMLComponent.rowPanelContainer(init:PanelContainer.()->Unit) {
+public fun HTMLComponent.rowPanelContainer(init:RowPanelContainer.()->Unit) {
     +(RowPanelContainer() with { init() })
 }
 
-public fun HTMLComponent.floatingPanelContainer(init:PanelContainer.()->Unit) {
-    +(RowPanelContainer() with { init() })
+public fun HTMLComponent.floatingPanelContainer(init:FloatingPanelContainer.()->Unit) {
+    +(FloatingPanelContainer() with { init() })
 }

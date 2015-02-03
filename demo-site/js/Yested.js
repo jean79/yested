@@ -3758,21 +3758,21 @@
               };
             }
           }),
-          rowPanelContainer_3eiu3w$f: function (init) {
+          rowPanelContainer_gg97wq$f: function (init) {
             return function () {
               init.call(this);
             };
           },
-          rowPanelContainer_3eiu3w$: function ($receiver, init) {
-            $receiver.plus_pv6laa$(_.net.yested.with_owvm91$(new _.net.yested.bootstrap.RowPanelContainer(), _.net.yested.bootstrap.rowPanelContainer_3eiu3w$f(init)));
+          rowPanelContainer_gg97wq$: function ($receiver, init) {
+            $receiver.plus_pv6laa$(_.net.yested.with_owvm91$(new _.net.yested.bootstrap.RowPanelContainer(), _.net.yested.bootstrap.rowPanelContainer_gg97wq$f(init)));
           },
-          floatingPanelContainer_3eiu3w$f: function (init) {
+          floatingPanelContainer_2xblsi$f: function (init) {
             return function () {
               init.call(this);
             };
           },
-          floatingPanelContainer_3eiu3w$: function ($receiver, init) {
-            $receiver.plus_pv6laa$(_.net.yested.with_owvm91$(new _.net.yested.bootstrap.RowPanelContainer(), _.net.yested.bootstrap.floatingPanelContainer_3eiu3w$f(init)));
+          floatingPanelContainer_2xblsi$: function ($receiver, init) {
+            $receiver.plus_pv6laa$(_.net.yested.with_owvm91$(new _.net.yested.bootstrap.FloatingPanelContainer(), _.net.yested.bootstrap.floatingPanelContainer_2xblsi$f(init)));
           },
           PanelStyle: Kotlin.createEnumClass(function () {
             return [Kotlin.Enum];
@@ -6844,7 +6844,7 @@
         this.div_5rsex9$(void 0, void 0, _.bootstrap.f_413);
       },
       f_415: function () {
-        this.plus_pdl1w0$('This tab is selected by default.');
+        this.plus_pdl1w0$('Second tab.');
       },
       f_416: function () {
         this.div_5rsex9$(void 0, void 0, _.bootstrap.f_415);
@@ -6871,7 +6871,7 @@
       },
       f_422: function () {
         this.h4_kv1miw$(_.bootstrap.f_421);
-        this.code_puj7f4$('kotlin', 'tabs {\n    tab(header = text("First")) {\n        div {\n            textInput(placeholder = "Placeholder 1") { }\n        }\n    }\n    tab(header = text("Second")) {\n        div {\n            +"This tab is selected by default."\n        }\n    }\n    tab(header = text("Third")) {\n        a(href = "http://www.wikipedia.org") { +"Wikipedia"}\n    }\n}');
+        this.code_puj7f4$('kotlin', 'tabs {\n    tab(header = text("First")) {\n        div {\n            textInput(placeholder = "Placeholder 1") { }\n        }\n    }\n    tab(header = text("Second")) {\n        div {\n            +"Second tab."\n        }\n    }\n    tab(header = text("Third")) {\n        a(href = "http://www.wikipedia.org") { +"Wikipedia"}\n    }\n}');
       },
       f_423: function () {
         this.col_zcukl0$([new _.net.yested.bootstrap.Medium(4)], _.bootstrap.f_420);
