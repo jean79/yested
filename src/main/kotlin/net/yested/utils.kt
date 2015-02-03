@@ -30,3 +30,7 @@ public fun repeatWithDelayUntil(check:()->Boolean, millisecondInterval:Int, run:
         window.setTimeout({repeatWithDelayUntil(check, millisecondInterval, run)}, millisecondInterval)
     }
 }
+
+public fun <T, V : Comparable<V>> compareByValue(get: (T) -> V?): (T, T) -> Int {
+    return {(l, r) -> compareValues(get(l), get(r)) }
+}

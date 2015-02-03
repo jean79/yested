@@ -24,19 +24,20 @@ public data class Column<T>(
         val defaultSort:Boolean = false,
         val defaultSortOrderAsc:Boolean = true)
 
-public class ColumnHeader<T>(val column:Column<T>, sortFunction:(Column<T>) -> Unit) : HTMLComponent("span") {
+public class ColumnHeader<T>(val column:Column<T>, sortingSupported:Boolean, sortFunction:((Column<T>) -> Unit)?) : HTMLComponent("span") {
 
     var sortOrderAsc:Boolean = column.defaultSortOrderAsc
     var arrowPlaceholder = Span();
 
     {
-        element.setAttribute("style", "cursor: pointer;")
-
-        column.label()
-        +arrowPlaceholder
-
-        onclick = {
-            sortFunction(column)
+        if (sortingSupported) {
+            a(href = null, onclick = { sortFunction!!(column)} ) {
+                "style".."cursor: pointer;"
+                column.label()
+            }
+            +arrowPlaceholder
+        } else {
+            column.label()
         }
     }
 
@@ -70,7 +71,12 @@ public class Grid<T>(responsive: Boolean = false, val columns:Array<Column<T>>) 
 
     {
         tableElement.className = "table table-striped table-hover table-condensed"
-        columnHeaders = columns.map { ColumnHeader(column = it, sortFunction = { sortByColumn(it)}) }
+        columnHeaders = columns.map {
+            ColumnHeader(
+                    column = it,
+                    sortingSupported = it.sortFunction != null,
+                    sortFunction = { sortByColumn(it) } )}
+
         renderHeader()
         sortColumn = (columns.filter { it.defaultSort } : Iterable<Column<T>>).firstOrNull()
         asc = sortColumn?.defaultSortOrderAsc ?: true

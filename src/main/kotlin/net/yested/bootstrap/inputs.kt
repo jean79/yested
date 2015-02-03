@@ -90,7 +90,7 @@ public class InputField(val inputSize: InputSize = InputSize.DEFAULT, placeholde
 
 }
 
-public fun HTMLComponent.textInput(placeholder: String?, init: InputField.() -> Unit):Unit {
+public fun HTMLComponent.inputField(placeholder: String? = null, init: InputField.() -> Unit):Unit {
     +(InputField(placeholder = placeholder) with  { init() })
 }
 

@@ -4,19 +4,13 @@ import net.yested.div
 import net.yested.bootstrap.row
 import net.yested.bootstrap.Medium
 import net.yested.bootstrap.pageHeader
-import net.yested.bootstrap.mediaObject
-import net.yested.bootstrap.MediaAlign
 import net.yested.Div
 import net.yested.bootstrap.navbar
 import net.yested.bootstrap.glyphicon
-import net.yested.bootstrap.btsForm
-import net.yested.bootstrap.textInput
+import net.yested.bootstrap.inputField
 import net.yested.bootstrap.btsButton
 import net.yested.ButtonType
-import net.yested.bootstrap.Navbar
 import net.yested.bootstrap.NavbarLook
-import net.yested.bootstrap.NavbarPosition
-import net.yested.with
 
 fun createNavbarSection(id: String): Div {
 
@@ -93,7 +87,7 @@ fun createNavbarSection(id: String): Div {
                     left {
                         form { "class".."navbar-form"
                             div(clazz = "form-group") {
-                                textInput(placeholder = "username") {}
+                                inputField(placeholder = "username") {}
                             }
                             btsButton(type = ButtonType.SUBMIT, label = { +"Login"}) {}
                         }

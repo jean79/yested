@@ -6,14 +6,11 @@ import net.yested.div
 import net.yested.Div
 import net.yested.ButtonType
 import net.yested.bootstrap.Dialog
-import net.yested.bootstrap.Validator
-import net.yested.bootstrap.BtsButton
 import net.yested.bootstrap.ButtonLook
 import net.yested.with
-import net.yested.bootstrap.Form
 import net.yested.bootstrap.btsForm
 import net.yested.bootstrap.btsButton
-import net.yested.bootstrap.textInput
+import net.yested.bootstrap.inputField
 import net.yested.bootstrap.Medium
 import net.yested.bootstrap.DialogSize
 
@@ -26,7 +23,7 @@ fun createDialogs(id: String): Div {
         body {
             btsForm {
                 item(forId = "nameId", label = { + "Name" }) {
-                    textInput(placeholder = "Name") { this.id = "nameId"}
+                    inputField(placeholder = "Name") { this.id = "nameId"}
                 }
             }
         }

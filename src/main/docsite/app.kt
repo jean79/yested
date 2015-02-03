@@ -1,12 +1,5 @@
 import net.yested.bootstrap.page
-import net.yested.bootstrap.BtsCheckBox
-import net.yested.bootstrap.btsButton
-import net.yested.bootstrap.ButtonLook
-import net.yested.bootstrap.ButtonSize
-import net.yested.text
-import net.yested.bootstrap.row
 import net.yested.bootstrap.Navbar
-import net.yested.bootstrap.navbar
 import net.yested.registerHashChangeListener
 import net.yested.div
 import bootstrap.bootstrapPage
@@ -17,15 +10,10 @@ import complex.masterDetail
 import gettingstarted.gettingStartedSection
 import complex.createSpinner
 import net.yested.with
-import net.yested.bootstrap.glyphicon
-import net.yested.bootstrap.textInput
-import net.yested.ButtonType
 import net.yested.bootstrap.NavbarLook
 import net.yested.bootstrap.NavbarPosition
 import bootstrap.effectsPage
 import net.yested.Fade
-import net.yested.Slide
-import net.yested.bootstrap.ContainerLayout
 import kotlin.js.dom.html.window
 import demo.chartjs.chartJsPage
 

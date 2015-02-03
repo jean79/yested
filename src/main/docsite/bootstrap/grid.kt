@@ -5,30 +5,34 @@ import net.yested.bootstrap.Column
 import net.yested.text
 import net.yested.bootstrap.row
 import net.yested.bootstrap.pageHeader
-import net.yested.bootstrap.tabs
-import net.yested.bootstrap.textInput
 import net.yested.div
 import net.yested.Div
 import net.yested.bootstrap.Medium
+import net.yested.compareByValue
+import net.yested.colorized
+import net.yested.Color
+import net.yested.Colors
 
 /**
  * Created by jean on 17.12.2014.
  */
 
-data class Person(val name: String, val age: Int)
-
-fun <T, V : Comparable<V>> compareBy(get: (T) -> V?): (T, T) -> Int {
-    return {(l, r) -> compareValues(get(l), get(r)) }
-}
+data class Person(val name: String, val age: Int, val hair: Color)
 
 fun createGrid(id: String): Div {
 
-    val data = listOf(Person("Jan", 15), Person("Peter", 30), Person("Martin", 31))
+    val data = listOf(
+            Person("Jan", 15, Colors.GREEN.color),
+            Person("Peter", 30, Colors.RED.color),
+            Person("Martin", 31, Colors.BLUE.color))
 
     val grid = Grid(columns = array(
-            Column(label = text("Name"), render = { +it.name }, sortFunction = {(l, r) -> compareValues(l.name, r.name) }),
-            Column(label = text("Age "), render = { +"${it.age}" }, sortFunction = compareBy<Person, Int> { it.age },
-                    defaultSort = true, defaultSortOrderAsc = true)
+            Column(label = text("Name"), render = { +it.name },
+                    sortFunction = {(l, r) -> compareValues(l.name, r.name) }),
+            Column(label = text("Age"), render = { +"${it.age}" },
+                    sortFunction = compareByValue<Person, Int> { it.age },
+                    defaultSort = true, defaultSortOrderAsc = true),
+            Column(label = text("Hair"), render = { colorized(backgroundColor = it.hair) { nbsp(4) } })
     ))
 
     grid.list = data;
@@ -43,9 +47,11 @@ fun createGrid(id: String): Div {
         row {
             col(Medium(4)) {
                 div {
-                    +"""
-Grid is simply a renderred HTML Table element. It is not suitable for too many rows.
-"""
+                    +"Grid is simply a renderred HTML Table element. It is not suitable for too many rows."
+                    br()
+                    +"Columns can optionally support sorting vi provided sort function."
+                    br()
+                    +"Each cell is renderred vi provided DSL function."
                 }
                 br()
                 h4 { +"Demo" }
@@ -53,20 +59,19 @@ Grid is simply a renderred HTML Table element. It is not suitable for too many r
             }
             col(Medium(8)) {
                 h4 { +"Code" }
-                code(lang = "kotlin", content="""data class Person(val name:String, val age:Int)
-val data = listOf(Person("Jan", 15), Person("Peter", 30), Person("Martin", 31))
+                code(lang = "kotlin", content="""data class Person(val name: String, val age: Int, val hair: Color)
+val data = listOf(
+            Person("Jan", 15, Colors.GREEN.color),
+            Person("Peter", 30, Colors.RED.color),
+            Person("Martin", 31, Colors.BLUE.color))
 
 val grid = Grid(columns = array(
-    Column(
-            label = text("Name"),
-            render = { +it.name },
-            sortFunction = {(l,r) -> compareValues(l.name, r.name)}),
-    Column(
-            label = text("Age "),
-            render = { +"\$\{it.age}" },
-            sortFunction = compareBy<Person,Int> { it.age },
-            defaultSort = true,
-            defaultSortOrderAsc = true)
+        Column(label = text("Name"), render = { +it.name },
+                sortFunction = {(l, r) -> compareValues(l.name, r.name) }),
+        Column(label = text("Age"), render = { +"$\{it.age}" },
+                sortFunction = compareByValue<Person, Int> { it.age },
+                defaultSort = true, defaultSortOrderAsc = true),
+        Column(label = text("Hair"), render = { colorized(backgroundColor = it.hair) { nbsp(4) } })
 ))
 
 grid.list = data;
