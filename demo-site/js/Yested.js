@@ -3922,18 +3922,16 @@
                 onSelect();
               }
             },
-            tab_l25lo7$: function (active, header, onSelect, init) {
-              if (active === void 0)
-                active = false;
+            tab_2b4h2$: function (header, onSelect, init) {
               if (onSelect === void 0)
                 onSelect = null;
               var tabId = this.index_nuub59$++;
-              var a = _.net.yested.with_owvm91$(new _.net.yested.Anchor(), _.net.yested.bootstrap.Tabs.tab_l25lo7$f(header));
-              var li = _.net.yested.with_owvm91$(new _.net.yested.Li(), _.net.yested.bootstrap.Tabs.tab_l25lo7$f_0(a));
+              var a = _.net.yested.with_owvm91$(new _.net.yested.Anchor(), _.net.yested.bootstrap.Tabs.tab_2b4h2$f(header));
+              var li = _.net.yested.with_owvm91$(new _.net.yested.Li(), _.net.yested.bootstrap.Tabs.tab_2b4h2$f_0(a));
               this.bar_83ssd0$.appendChild_5f0h2k$(li);
-              a.onclick = _.net.yested.bootstrap.Tabs.tab_l25lo7$f_1(li, tabId, onSelect, init, this);
+              a.onclick = _.net.yested.bootstrap.Tabs.tab_2b4h2$f_1(li, tabId, onSelect, init, this);
               this.anchorsLi_g1z45g$.add_za3rmp$(li);
-              if (active) {
+              if (this.index_nuub59$ === 1) {
                 this.activateTab(li, tabId, onSelect, init);
               }
             }
@@ -3958,20 +3956,20 @@
             activateTab$f_0: function (it) {
               it.clazz = '';
             },
-            tab_l25lo7$f: function (header) {
+            tab_2b4h2$f: function (header) {
               return function () {
                 this.rangeTo_94jgcu$('role', 'tab');
                 this.rangeTo_94jgcu$('style', 'cursor: pointer;');
                 header.call(this);
               };
             },
-            tab_l25lo7$f_0: function (a) {
+            tab_2b4h2$f_0: function (a) {
               return function () {
                 this.plus_pv6laa$(a);
                 this.role = 'presentation';
               };
             },
-            tab_l25lo7$f_1: function (li, tabId, onSelect, init, this$Tabs) {
+            tab_2b4h2$f_1: function (li, tabId, onSelect, init, this$Tabs) {
               return function () {
                 this$Tabs.activateTab(li, tabId, onSelect, init);
               };
@@ -6858,9 +6856,9 @@
         this.a_xjhihl$(void 0, void 0, 'http://www.wikipedia.org', void 0, _.bootstrap.f_417);
       },
       f_419: function () {
-        this.tab_l25lo7$(void 0, _.net.yested.text_61zpoe$('First'), void 0, _.bootstrap.f_414);
-        this.tab_l25lo7$(false, _.net.yested.text_61zpoe$('Second'), void 0, _.bootstrap.f_416);
-        this.tab_l25lo7$(void 0, _.net.yested.text_61zpoe$('Third'), void 0, _.bootstrap.f_418);
+        this.tab_2b4h2$(_.net.yested.text_61zpoe$('First'), void 0, _.bootstrap.f_414);
+        this.tab_2b4h2$(_.net.yested.text_61zpoe$('Second'), void 0, _.bootstrap.f_416);
+        this.tab_2b4h2$(_.net.yested.text_61zpoe$('Third'), void 0, _.bootstrap.f_418);
       },
       f_420: function () {
         this.div_5rsex9$(void 0, void 0, _.bootstrap.f_410);
@@ -6873,7 +6871,7 @@
       },
       f_422: function () {
         this.h4_kv1miw$(_.bootstrap.f_421);
-        this.code_puj7f4$('kotlin', 'tabs {\n    tab(header = text("First")) {\n        div {\n            textInput(placeholder = "Placeholder 1") { }\n        }\n    }\n    tab(active = true, header = text("Second")) {\n        div {\n            +"This tab is selected by default."\n        }\n    }\n    tab(header = text("Third")) {\n        a(href = "http://www.wikipedia.org") { +"Wikipedia"}\n    }\n}');
+        this.code_puj7f4$('kotlin', 'tabs {\n    tab(header = text("First")) {\n        div {\n            textInput(placeholder = "Placeholder 1") { }\n        }\n    }\n    tab(header = text("Second")) {\n        div {\n            +"This tab is selected by default."\n        }\n    }\n    tab(header = text("Third")) {\n        a(href = "http://www.wikipedia.org") { +"Wikipedia"}\n    }\n}');
       },
       f_423: function () {
         this.col_zcukl0$([new _.net.yested.bootstrap.Medium(4)], _.bootstrap.f_420);

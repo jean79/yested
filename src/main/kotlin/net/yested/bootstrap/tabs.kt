@@ -76,7 +76,7 @@ public class Tabs : Component {
         }
     }
 
-    public fun tab(active:Boolean = false, header: HTMLComponent.()->Unit, onSelect:Function0<Unit>? = null, init: HTMLComponent.()->Unit) {
+    public fun tab(header: HTMLComponent.()->Unit, onSelect:Function0<Unit>? = null, init: HTMLComponent.()->Unit) {
 
         val tabId = index++;
 
@@ -96,7 +96,7 @@ public class Tabs : Component {
         //bar.add(li)
         anchorsLi.add(li)
 
-        if (active) {
+        if (index == 1) {
             activateTab(li, tabId, onSelect, init)
         }
 
