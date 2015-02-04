@@ -3790,13 +3790,15 @@
           rowPanelContainer_gg97wq$: function ($receiver, init) {
             $receiver.plus_pv6laa$(_.net.yested.with_owvm91$(new _.net.yested.bootstrap.RowPanelContainer(), _.net.yested.bootstrap.rowPanelContainer_gg97wq$f(init)));
           },
-          floatingPanelContainer_2xblsi$f: function (init) {
+          floatingPanelContainer_m4nl0c$f: function (init) {
             return function () {
               init.call(this);
             };
           },
-          floatingPanelContainer_2xblsi$: function ($receiver, init) {
-            $receiver.plus_pv6laa$(_.net.yested.with_owvm91$(new _.net.yested.bootstrap.FloatingPanelContainer(), _.net.yested.bootstrap.floatingPanelContainer_2xblsi$f(init)));
+          floatingPanelContainer_m4nl0c$: function ($receiver, margin, init) {
+            if (margin === void 0)
+              margin = '10px';
+            $receiver.plus_pv6laa$(_.net.yested.with_owvm91$(new _.net.yested.bootstrap.FloatingPanelContainer(void 0, margin), _.net.yested.bootstrap.floatingPanelContainer_m4nl0c$f(init)));
           },
           PanelStyle: Kotlin.createEnumClass(function () {
             return [Kotlin.Enum];
