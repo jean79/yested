@@ -62,7 +62,7 @@ public enum class NavbarLook(val code:String) {
     INVERSE : NavbarLook("inverse")
 }
 
-public class Navbar(id:String, position: NavbarPosition? = null, look:NavbarLook = NavbarLook.DEFAULT) : Component {
+public class Navbar(id:String, position: NavbarPosition? = null, look:NavbarLook = NavbarLook.DEFAULT, val layout: ContainerLayout = ContainerLayout.DEFAULT) : Component {
 
     override public var element = createElement("nav")
 
@@ -78,7 +78,7 @@ public class Navbar(id:String, position: NavbarPosition? = null, look:NavbarLook
         element.setAttribute("role", "navigation")
 
         element.appendComponent(
-            div(clazz = "container") {
+            div(clazz = layout.code) {
                 div(clazz = "navbar-header") {
                     +(HTMLComponent("button") with {
                         "type".."button"; "class".."navbar-toggle collapsed";
@@ -187,6 +187,7 @@ class NavBarDropdown(private val deselectFun:() -> Unit, label: Anchor.()->Unit)
 
 }
 
-public fun HTMLComponent.navbar(id:String, position: NavbarPosition? = null, look:NavbarLook = NavbarLook.DEFAULT, init: Navbar.() -> Unit):Unit {
-    +(Navbar(id = id, position = position, look = look) with { init() })
+public fun HTMLComponent.navbar(id:String, position: NavbarPosition? = null, look:NavbarLook = NavbarLook.DEFAULT,
+                                layout: ContainerLayout = ContainerLayout.DEFAULT, init: Navbar.() -> Unit):Unit {
+    +(Navbar(id = id, position = position, look = look, layout = layout) with { init() })
 }

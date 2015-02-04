@@ -3298,11 +3298,14 @@
           }),
           Navbar: Kotlin.createClass(function () {
             return [_.net.yested.Component];
-          }, function (id, position, look) {
+          }, function (id, position, look, layout) {
             if (position === void 0)
               position = null;
             if (look === void 0)
               look = _.net.yested.bootstrap.NavbarLook.object.DEFAULT;
+            if (layout === void 0)
+              layout = _.net.yested.bootstrap.ContainerLayout.object.DEFAULT;
+            this.layout = layout;
             this.$element_cd9gsv$ = _.net.yested.createElement_61zpoe$('nav');
             this.ul_6lssbo$ = _.net.yested.with_owvm91$(new _.net.yested.UL(), _.net.yested.bootstrap.Navbar.Navbar$f);
             this.collapsible_lhbokj$ = _.net.yested.div_5rsex9$(id, 'navbar-collapse collapse', _.net.yested.bootstrap.Navbar.Navbar$f_0(this));
@@ -3310,7 +3313,7 @@
             this.brandLink_f4xx9w$ = new _.net.yested.Anchor();
             this.element.setAttribute('class', 'navbar navbar-' + look.code + ' ' + (position != null ? 'navbar-' + position.code : ''));
             this.element.setAttribute('role', 'navigation');
-            _.net.yested.appendComponent_c36dq0$(this.element, _.net.yested.div_5rsex9$(void 0, 'container', _.net.yested.bootstrap.Navbar.Navbar$f_1(id, this)));
+            _.net.yested.appendComponent_c36dq0$(this.element, _.net.yested.div_5rsex9$(void 0, this.layout.code, _.net.yested.bootstrap.Navbar.Navbar$f_1(id, this)));
           }, /** @lends _.net.yested.bootstrap.Navbar.prototype */ {
             element: {
               get: function () {
@@ -3511,17 +3514,19 @@
               this.rangeTo_94jgcu$('class', 'divider');
             }
           }),
-          navbar_x6lhct$f: function (init) {
+          navbar_nohvx9$f: function (init) {
             return function () {
               init.call(this);
             };
           },
-          navbar_x6lhct$: function ($receiver, id, position, look, init) {
+          navbar_nohvx9$: function ($receiver, id, position, look, layout, init) {
             if (position === void 0)
               position = null;
             if (look === void 0)
               look = _.net.yested.bootstrap.NavbarLook.object.DEFAULT;
-            $receiver.plus_pv6laa$(_.net.yested.with_owvm91$(new _.net.yested.bootstrap.Navbar(id, position, look), _.net.yested.bootstrap.navbar_x6lhct$f(init)));
+            if (layout === void 0)
+              layout = _.net.yested.bootstrap.ContainerLayout.object.DEFAULT;
+            $receiver.plus_pv6laa$(_.net.yested.with_owvm91$(new _.net.yested.bootstrap.Navbar(id, position, look, layout), _.net.yested.bootstrap.navbar_nohvx9$f(init)));
           },
           Pagination: Kotlin.createClass(function () {
             return [_.net.yested.Component];
@@ -4352,7 +4357,7 @@
       };
     },
     main: function (args) {
-      var navbar = _.net.yested.with_owvm91$(new _.net.yested.bootstrap.Navbar('appMenuBar', _.net.yested.bootstrap.NavbarPosition.object.FIXED_TOP, _.net.yested.bootstrap.NavbarLook.object.INVERSE), _.main$f);
+      var navbar = _.net.yested.with_owvm91$(new _.net.yested.bootstrap.Navbar('appMenuBar', _.net.yested.bootstrap.NavbarPosition.object.FIXED_TOP, _.net.yested.bootstrap.NavbarLook.object.INVERSE, _.net.yested.bootstrap.ContainerLayout.object.FLUID), _.main$f);
       var divContainer = _.net.yested.div_5rsex9$(void 0, void 0, _.main$f_0);
       var previousHash = {v: ''};
       _.net.yested.registerHashChangeListener_owl47g$(void 0, _.main$f_1(divContainer, previousHash));
@@ -6353,7 +6358,7 @@
       },
       f_321: function () {
         this.h4_kv1miw$(_.bootstrap.f_299);
-        _.net.yested.bootstrap.navbar_x6lhct$(this, 'navbarDemo', void 0, _.net.yested.bootstrap.NavbarLook.object.INVERSE, _.bootstrap.f_320);
+        _.net.yested.bootstrap.navbar_nohvx9$(this, 'navbarDemo', void 0, _.net.yested.bootstrap.NavbarLook.object.INVERSE, void 0, _.bootstrap.f_320);
       },
       f_322: function () {
         this.col_zcukl0$([new _.net.yested.bootstrap.Medium(12)], _.bootstrap.f_321);
