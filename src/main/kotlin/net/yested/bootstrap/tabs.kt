@@ -14,6 +14,7 @@ import net.yested.Component
 import net.yested.createElement
 import net.yested.appendComponent
 import net.yested.Fade
+import jquery.jq
 
 /**
  * <div role="tabpanel">
@@ -35,7 +36,7 @@ private data class TabDefinition(
         val init: HTMLComponent.()->Unit,
         val onSelect:Function0<Unit>?)
 
-public class Tabs : Component {
+public class Tabs(canChangeOrder:Boolean = false) : Component {
 
     public override val element = createElement("div")
 
@@ -59,6 +60,10 @@ public class Tabs : Component {
 
         element.appendComponent(bar)
         element.appendComponent(content)
+
+        if (canChangeOrder) {
+            jq(bar.element).sortable(object {})
+        }
 
     }
 
@@ -190,6 +195,6 @@ public class Tabs : Component {
 
 }
 
-public fun HTMLComponent.tabs(init:Tabs.() -> Unit): Unit {
-    +(Tabs() with  { init() })
+public fun HTMLComponent.tabs(canChangeOrder:Boolean = false, init:Tabs.() -> Unit): Unit {
+    +(Tabs(canChangeOrder = canChangeOrder) with  { init() })
 }
