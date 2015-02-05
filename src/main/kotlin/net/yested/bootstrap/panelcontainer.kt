@@ -100,6 +100,6 @@ public fun HTMLComponent.rowPanelContainer(init:RowPanelContainer.()->Unit) {
     +(RowPanelContainer() with { init() })
 }
 
-public fun HTMLComponent.floatingPanelContainer(init:FloatingPanelContainer.()->Unit) {
-    +(FloatingPanelContainer() with { init() })
+public fun HTMLComponent.floatingPanelContainer(margin: String = "10px", init:FloatingPanelContainer.()->Unit) {
+    +(FloatingPanelContainer(margin = margin) with { init() })
 }

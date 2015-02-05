@@ -30,6 +30,11 @@ import net.yested.Fade
     </div>
 </div>
  */
+private data class TabDefinition(
+        val tabId:Int,
+        val init: HTMLComponent.()->Unit,
+        val onSelect:Function0<Unit>?)
+
 public class Tabs : Component {
 
     public override val element = createElement("div")
@@ -38,11 +43,16 @@ public class Tabs : Component {
 
     private val content = Div() with { clazz = "tab-content"}
 
-    private val anchorsLi = java.util.ArrayList<HTMLComponent>();
+    private val tabDefinitions = arrayListOf<TabDefinition>()
 
-    private val tabsRendered = HashMap<Int, Div>()
+    private val headersRendered = hashMapOf<Int, Li>()
+    private val tabsRendered = hashMapOf<Int, Div>()
 
     private var index = 0;
+
+    private var tabIndexDisplayed = 0
+
+    private var leftMostIndex = 0
 
     {
         element.setAttribute("role", "tabpanel")
@@ -63,42 +73,118 @@ public class Tabs : Component {
             div
         }
 
-    private fun activateTab(li:Li, tabId:Int, onSelect:Function0<Unit>?, init: HTMLComponent.()->Unit) {
+    private fun getTabDefinition(tabId:Int) = tabDefinitions.filter { it.tabId == tabId }.firstOrNull()
 
-        li.clazz = "active"
+    public fun activateTab(tabId:Int) {
 
-        anchorsLi.filter { it != li} .forEach { it.clazz = "" }
+        val tabDefinition:TabDefinition? = getTabDefinition(tabId)
+        if (tabDefinition == null) {
+            throw Exception("Tab does not exists.")
+        } else {
+            tabIndexDisplayed = tabId
 
-        content.setChild(renderContent(tabId, init), Fade());
+            val link: Li = headersRendered.get(tabId)!!
+            link.clazz = "active"
 
-        if (onSelect != null) {
-            onSelect()
+            headersRendered.values().filter { it != link }.forEach { it.clazz = "" }
+
+            content.setChild(renderContent(tabId, tabDefinition.init), Fade());
+
+            if (tabDefinition.onSelect != null) {
+                tabDefinition.onSelect!!()
+            }
         }
     }
 
-    public fun tab(header: HTMLComponent.()->Unit, onSelect:Function0<Unit>? = null, init: HTMLComponent.()->Unit) {
+    public fun removeTab(tabId:Int) {
 
-        val tabId = index++;
+        val tabDefinition = getTabDefinition(tabId)
+
+        if (tabDefinition == null) {
+            throw Exception("Tab does not exists.")
+        } else {
+
+            val link: Li = headersRendered.get(tabId)!!
+            bar.element.removeChild(link.element)
+
+            headersRendered.remove(link)
+            tabsRendered.remove(tabId)
+
+            if (tabIndexDisplayed == tabId) {
+
+                if (tabDefinitions.indexOf(tabDefinition) == 0) {
+                    //if it is leftmost tab
+                    if (tabDefinitions.size() == 1) {
+                        //this was the last tab available
+                        content.removeAllChildren()
+                    } else {
+                        //otherwise display second tab
+                        activateTab(tabDefinitions.get(1).tabId)
+                    }
+                } else {
+                    //else display now a tab on the left
+                    val leftTab = tabDefinitions.get(tabDefinitions.indexOf(tabDefinition) - 1)
+                    activateTab(leftTab.tabId)
+                }
+            }
+
+            tabDefinitions.remove(tabDefinition)
+
+        }
+
+    }
+
+    private fun createTabLink(dismissible: Boolean, tabId:Int, header: HTMLComponent.()->Unit):Li {
+
+        var removingTab = false
 
         val a = Anchor() with {
             "role" .. "tab"
-            "style" .. "cursor: pointer;"
+            "style" .. "cursor: pointer; display: inline-block"
             header()
+            if (dismissible) {
+                nbsp()
+                tag("button") {
+                    clazz = "close"; "type".."button";
+                    onclick = { removingTab = true; removeTab(tabId) }
+                    +"&times;"
+                }
+            }
+            onclick = {
+                if (!removingTab) {
+                    activateTab(tabId)
+                }
+            }
         }
 
-        val li = Li() with { +a; role = "presentation" }
-        bar.appendChild(li)
-
-        a.onclick = {
-            activateTab(li, tabId, onSelect, init)
+        return Li() with {
+            +a;
+            role = "presentation"
         }
 
-        //bar.add(li)
-        anchorsLi.add(li)
+    }
+
+    /**
+     * @returns tabId
+     */
+    public fun tab(dismissible: Boolean = false, header: HTMLComponent.()->Unit, onSelect:Function0<Unit>? = null, init: HTMLComponent.()->Unit):Int {
+
+        val tabId = index++;
+        val tabDefinition = TabDefinition(tabId, init, onSelect)
+
+        tabDefinitions.add(tabDefinition)
+
+        val link = createTabLink(dismissible, tabId, header)
+
+        bar.appendChild(link)
+
+        headersRendered.put(tabId, link)
 
         if (index == 1) {
-            activateTab(li, tabId, onSelect, init)
+            activateTab(tabId)
         }
+
+        return tabId
 
     }
 
