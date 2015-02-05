@@ -23,9 +23,9 @@ fun createTabs(id: String): Div {
 
     var tabIndex = 3
 
-    val dismissibleCheckbox = BtsCheckBox(label = {+"Dismissible" })
+    val dismissibleCheckbox = BtsCheckBox(label = {+"Dismissible" }) with { value = true }
 
-    val tabs = Tabs() with {
+    val tabs = Tabs(canChangeOrder = true) with {
         tab(dismissible = true, header = text("First")) {
             div {
                 inputField(placeholder = "Placeholder 1") { }
@@ -60,11 +60,17 @@ fun createTabs(id: String): Div {
         row {
             col(Medium(6)) {
                 div {
-                    +"""
-Tabs are based on Bootstrap Tabs.
-Content of tab is rendedered upon click on a tab link. When clicking on anoother link, content is preserved.
-Tabs can optionally be dismissible. Tabs can be also removed and added programatically.
-"""
+                    +"Tabs are based on Bootstrap Tabs."
+                    br()
+                    emph { +"Features" }
+                    ul {
+                        li { +"Lazy render of tab content" }
+                        li { +"Rendered content is preserved" }
+                        li { +"Optionaly dismissible tabs" }
+                        li { +"Programmatic activation of tabs" }
+                        li { +"Programmatic tab removal" }
+                        li { +"Tab order can be changed via Drag&amp;Drop" }
+                    }
                 }
                 br()
                 h4 { +"Demo" }
@@ -84,9 +90,9 @@ Tabs can optionally be dismissible. Tabs can be also removed and added programat
                 code(lang = "kotlin", content=
 """var tabIndex = 3
 
-    val dismissibleCheckbox = BtsCheckBox(label = {+"Dismissible" })
+    val dismissibleCheckbox = BtsCheckBox(label = {+"Dismissible" }) with { value = true }
 
-    val tabs = Tabs() with {
+    val tabs = Tabs(canChangeOrder = true) with {
         tab(dismissible = true, header = text("First")) {
             div {
                 inputField(placeholder = "Placeholder 1") { }

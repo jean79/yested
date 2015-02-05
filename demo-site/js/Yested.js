@@ -3947,7 +3947,9 @@
           }),
           Tabs: Kotlin.createClass(function () {
             return [_.net.yested.Component];
-          }, function () {
+          }, function (canChangeOrder) {
+            if (canChangeOrder === void 0)
+              canChangeOrder = false;
             this.$element_s2egal$ = _.net.yested.createElement_61zpoe$('div');
             this.bar_83ssd0$ = _.net.yested.with_owvm91$(new _.net.yested.UL(), _.net.yested.bootstrap.Tabs.Tabs$f);
             this.content_9tda2$ = _.net.yested.with_owvm91$(new _.net.yested.Div(), _.net.yested.bootstrap.Tabs.Tabs$f_0);
@@ -3960,6 +3962,9 @@
             this.element.setAttribute('role', 'tabpanel');
             _.net.yested.appendComponent_c36dq0$(this.element, this.bar_83ssd0$);
             _.net.yested.appendComponent_c36dq0$(this.element, this.content_9tda2$);
+            if (canChangeOrder) {
+              $(this.bar_83ssd0$.element).sortable(_.net.yested.bootstrap.Tabs.Tabs$f_1());
+            }
           }, /** @lends _.net.yested.bootstrap.Tabs.prototype */ {
             element: {
               get: function () {
@@ -4057,6 +4062,9 @@
             Tabs$f_0: function () {
               this.clazz = 'tab-content';
             },
+            Tabs$f_1: function () {
+              return Kotlin.createObject(null, null);
+            },
             renderContent$f: function (init) {
               return function () {
                 init.call(this);
@@ -4115,13 +4123,15 @@
               };
             }
           }),
-          tabs_fe4fv1$f: function (init) {
+          tabs_cpy8ui$f: function (init) {
             return function () {
               init.call(this);
             };
           },
-          tabs_fe4fv1$: function ($receiver, init) {
-            $receiver.plus_pv6laa$(_.net.yested.with_owvm91$(new _.net.yested.bootstrap.Tabs(), _.net.yested.bootstrap.tabs_fe4fv1$f(init)));
+          tabs_cpy8ui$: function ($receiver, canChangeOrder, init) {
+            if (canChangeOrder === void 0)
+              canChangeOrder = false;
+            $receiver.plus_pv6laa$(_.net.yested.with_owvm91$(new _.net.yested.bootstrap.Tabs(canChangeOrder), _.net.yested.bootstrap.tabs_cpy8ui$f(init)));
           },
           TextAlign: Kotlin.createEnumClass(function () {
             return [Kotlin.Enum];
@@ -6975,6 +6985,9 @@
       createTabs$f: function () {
         this.plus_pdl1w0$('Dismissible');
       },
+      createTabs$f_0: function () {
+        this.value = true;
+      },
       f_407: function () {
       },
       f_408: function () {
@@ -6995,7 +7008,7 @@
       f_413: function () {
         this.a_xjhihl$(void 0, void 0, 'http://www.wikipedia.org', void 0, _.bootstrap.f_412);
       },
-      createTabs$f_0: function () {
+      createTabs$f_1: function () {
         this.tab_l25lo7$(true, _.net.yested.text_61zpoe$('First'), void 0, _.bootstrap.f_409);
         this.tab_l25lo7$(true, _.net.yested.text_61zpoe$('Second'), void 0, _.bootstrap.f_411);
         this.tab_l25lo7$(true, _.net.yested.text_61zpoe$('Third'), void 0, _.bootstrap.f_413);
@@ -7034,170 +7047,202 @@
         this.col_zcukl0$([new _.net.yested.bootstrap.Medium(12)], _.bootstrap.f_417);
       },
       f_419: function () {
-        this.plus_pdl1w0$('\nTabs are based on Bootstrap Tabs.\nContent of tab is rendedered upon click on a tab link. When clicking on anoother link, content is preserved.\nTabs can optionally be dismissible. Tabs can be also removed and added programatically.\n');
+        this.plus_pdl1w0$('Features');
       },
       f_420: function () {
-        this.plus_pdl1w0$('Demo');
+        this.plus_pdl1w0$('Lazy render of tab content');
       },
       f_421: function () {
+        this.plus_pdl1w0$('Rendered content is preserved');
       },
-      f_422: function (dismissibleCheckbox) {
+      f_422: function () {
+        this.plus_pdl1w0$('Optionaly dismissible tabs');
+      },
+      f_423: function () {
+        this.plus_pdl1w0$('Programmatic activation of tabs');
+      },
+      f_424: function () {
+        this.plus_pdl1w0$('Programmatic tab removal');
+      },
+      f_425: function () {
+        this.plus_pdl1w0$('Tab order can be changed via Drag&amp;Drop');
+      },
+      f_426: function () {
+        this.li_8y48wp$(_.bootstrap.f_420);
+        this.li_8y48wp$(_.bootstrap.f_421);
+        this.li_8y48wp$(_.bootstrap.f_422);
+        this.li_8y48wp$(_.bootstrap.f_423);
+        this.li_8y48wp$(_.bootstrap.f_424);
+        this.li_8y48wp$(_.bootstrap.f_425);
+      },
+      f_427: function () {
+        this.plus_pdl1w0$('Tabs are based on Bootstrap Tabs.');
+        this.br();
+        this.emph_kv1miw$(_.bootstrap.f_419);
+        this.ul_8qfrsd$(_.bootstrap.f_426);
+      },
+      f_428: function () {
+        this.plus_pdl1w0$('Demo');
+      },
+      f_429: function () {
+      },
+      f_430: function (dismissibleCheckbox) {
         return function () {
           this.plus_pv6laa$(dismissibleCheckbox);
         };
       },
-      f_423: function () {
+      f_431: function () {
         this.nbsp_za3lpa$(2);
       },
-      f_424: function () {
+      f_432: function () {
         this.plus_pdl1w0$('Add Tab');
       },
-      f_425: function (tabIndex, addTab) {
+      f_433: function (tabIndex, addTab) {
         return function () {
           addTab(++tabIndex.v);
         };
       },
-      f_426: function (tabIndex, addTab) {
+      f_434: function (tabIndex, addTab) {
         return function () {
-          _.net.yested.bootstrap.btsButton_bol907$(this, void 0, _.bootstrap.f_424, void 0, _.net.yested.bootstrap.ButtonSize.object.SMALL, void 0, void 0, _.bootstrap.f_425(tabIndex, addTab));
+          _.net.yested.bootstrap.btsButton_bol907$(this, void 0, _.bootstrap.f_432, void 0, _.net.yested.bootstrap.ButtonSize.object.SMALL, void 0, void 0, _.bootstrap.f_433(tabIndex, addTab));
         };
       },
-      f_427: function (dismissibleCheckbox, tabIndex, addTab) {
+      f_435: function (dismissibleCheckbox, tabIndex, addTab) {
         return function () {
-          this.item_gthhqa$(void 0, _.bootstrap.f_421, void 0, _.bootstrap.f_422(dismissibleCheckbox));
-          this.item_gthhqa$(void 0, _.bootstrap.f_423, void 0, _.bootstrap.f_426(tabIndex, addTab));
+          this.item_gthhqa$(void 0, _.bootstrap.f_429, void 0, _.bootstrap.f_430(dismissibleCheckbox));
+          this.item_gthhqa$(void 0, _.bootstrap.f_431, void 0, _.bootstrap.f_434(tabIndex, addTab));
         };
       },
-      f_428: function (dismissibleCheckbox, tabIndex, addTab, tabs) {
+      f_436: function (dismissibleCheckbox, tabIndex, addTab, tabs) {
         return function () {
-          this.div_5rsex9$(void 0, void 0, _.bootstrap.f_419);
+          this.div_5rsex9$(void 0, void 0, _.bootstrap.f_427);
           this.br();
-          this.h4_kv1miw$(_.bootstrap.f_420);
-          _.net.yested.bootstrap.btsForm_6zn8tn$(this, _.net.yested.bootstrap.FormStyle.object.INLINE, void 0, void 0, _.bootstrap.f_427(dismissibleCheckbox, tabIndex, addTab));
+          this.h4_kv1miw$(_.bootstrap.f_428);
+          _.net.yested.bootstrap.btsForm_6zn8tn$(this, _.net.yested.bootstrap.FormStyle.object.INLINE, void 0, void 0, _.bootstrap.f_435(dismissibleCheckbox, tabIndex, addTab));
           this.br();
           this.plus_pv6laa$(tabs);
         };
       },
-      f_429: function () {
+      f_437: function () {
         this.plus_pdl1w0$('Code');
       },
-      f_430: function () {
-        this.h4_kv1miw$(_.bootstrap.f_429);
-        this.code_puj7f4$('kotlin', 'var tabIndex = 3\n\n    val dismissibleCheckbox = BtsCheckBox(label = {+"Dismissible" })\n\n    val tabs = Tabs() with {\n        tab(dismissible = true, header = text("First")) {\n            div {\n                inputField(placeholder = "Placeholder 1") { }\n            }\n        }\n        tab(dismissible = true, header = text("Second")) {\n            div {\n                +"Second tab."\n            }\n        }\n        tab(dismissible = true, header = text("Third")) {\n            a(href = "http://www.wikipedia.org") { +"Wikipedia" }\n        }\n    }\n\n    fun addTab(tabIndex:Int) {\n        val tabId = tabs.tab(dismissible = dismissibleCheckbox.value, header = { +"Tab$\\{tabIndex}" }) {\n            div {\n                +"Content of tab: $\\{tabIndex}"\n            }\n        }\n        tabs.activateTab(tabId)\n    }\n...\ndiv {\n    btsForm(formStyle = FormStyle.INLINE) {\n        item(label = { } ) {\n            +dismissibleCheckbox\n        }\n        item(label = {nbsp(2)}) {\n            btsButton(label = { +"Add Tab"}, onclick = { addTab(++tabIndex) }, size = ButtonSize.SMALL)\n        }\n    }\n    br()\n    +tabs\n}');
+      f_438: function () {
+        this.h4_kv1miw$(_.bootstrap.f_437);
+        this.code_puj7f4$('kotlin', 'var tabIndex = 3\n\n    val dismissibleCheckbox = BtsCheckBox(label = {+"Dismissible" }) with { value = true }\n\n    val tabs = Tabs(canChangeOrder = true) with {\n        tab(dismissible = true, header = text("First")) {\n            div {\n                inputField(placeholder = "Placeholder 1") { }\n            }\n        }\n        tab(dismissible = true, header = text("Second")) {\n            div {\n                +"Second tab."\n            }\n        }\n        tab(dismissible = true, header = text("Third")) {\n            a(href = "http://www.wikipedia.org") { +"Wikipedia" }\n        }\n    }\n\n    fun addTab(tabIndex:Int) {\n        val tabId = tabs.tab(dismissible = dismissibleCheckbox.value, header = { +"Tab$\\{tabIndex}" }) {\n            div {\n                +"Content of tab: $\\{tabIndex}"\n            }\n        }\n        tabs.activateTab(tabId)\n    }\n...\ndiv {\n    btsForm(formStyle = FormStyle.INLINE) {\n        item(label = { } ) {\n            +dismissibleCheckbox\n        }\n        item(label = {nbsp(2)}) {\n            btsButton(label = { +"Add Tab"}, onclick = { addTab(++tabIndex) }, size = ButtonSize.SMALL)\n        }\n    }\n    br()\n    +tabs\n}');
       },
-      f_431: function (dismissibleCheckbox, tabIndex, addTab, tabs) {
+      f_439: function (dismissibleCheckbox, tabIndex, addTab, tabs) {
         return function () {
-          this.col_zcukl0$([new _.net.yested.bootstrap.Medium(6)], _.bootstrap.f_428(dismissibleCheckbox, tabIndex, addTab, tabs));
-          this.col_zcukl0$([new _.net.yested.bootstrap.Medium(6)], _.bootstrap.f_430);
+          this.col_zcukl0$([new _.net.yested.bootstrap.Medium(6)], _.bootstrap.f_436(dismissibleCheckbox, tabIndex, addTab, tabs));
+          this.col_zcukl0$([new _.net.yested.bootstrap.Medium(6)], _.bootstrap.f_438);
         };
       },
-      createTabs$f_1: function (id, dismissibleCheckbox, tabIndex, addTab, tabs) {
+      createTabs$f_2: function (id, dismissibleCheckbox, tabIndex, addTab, tabs) {
         return function () {
           this.id = id;
           _.net.yested.bootstrap.row_xnql8t$(this, _.bootstrap.f_418);
-          _.net.yested.bootstrap.row_xnql8t$(this, _.bootstrap.f_431(dismissibleCheckbox, tabIndex, addTab, tabs));
+          _.net.yested.bootstrap.row_xnql8t$(this, _.bootstrap.f_439(dismissibleCheckbox, tabIndex, addTab, tabs));
         };
       },
       createTabs: function (id) {
         var tabIndex = {v: 3};
-        var dismissibleCheckbox = new _.net.yested.bootstrap.BtsCheckBox(_.bootstrap.createTabs$f);
-        var tabs = _.net.yested.with_owvm91$(new _.net.yested.bootstrap.Tabs(), _.bootstrap.createTabs$f_0);
+        var dismissibleCheckbox = _.net.yested.with_owvm91$(new _.net.yested.bootstrap.BtsCheckBox(_.bootstrap.createTabs$f), _.bootstrap.createTabs$f_0);
+        var tabs = _.net.yested.with_owvm91$(new _.net.yested.bootstrap.Tabs(true), _.bootstrap.createTabs$f_1);
         var addTab = _.bootstrap.createTabs$addTab(tabs, dismissibleCheckbox);
-        return _.net.yested.div_5rsex9$(void 0, void 0, _.bootstrap.createTabs$f_1(id, dismissibleCheckbox, tabIndex, addTab, tabs));
-      },
-      f_432: function () {
-        this.plus_pdl1w0$('Typography');
-      },
-      f_433: function () {
-        this.h3_kv1miw$(_.bootstrap.f_432);
-      },
-      f_434: function () {
-        _.net.yested.bootstrap.pageHeader_kzm4yj$(this, _.bootstrap.f_433);
-      },
-      f_435: function () {
-        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(12)], _.bootstrap.f_434);
-      },
-      f_436: function () {
-        this.plus_pdl1w0$('\nSimple Typography support.\n');
-      },
-      f_437: function () {
-        this.plus_pdl1w0$('Demo');
-      },
-      f_438: function () {
-        this.plus_pdl1w0$('Right Align');
-      },
-      f_439: function () {
-        this.plus_pdl1w0$('Left Align');
+        return _.net.yested.div_5rsex9$(void 0, void 0, _.bootstrap.createTabs$f_2(id, dismissibleCheckbox, tabIndex, addTab, tabs));
       },
       f_440: function () {
-        this.plus_pdl1w0$('Center');
+        this.plus_pdl1w0$('Typography');
       },
       f_441: function () {
-        this.plus_pdl1w0$('Justify');
+        this.h3_kv1miw$(_.bootstrap.f_440);
       },
       f_442: function () {
-        this.plus_pdl1w0$('No wrap');
+        _.net.yested.bootstrap.pageHeader_kzm4yj$(this, _.bootstrap.f_441);
       },
       f_443: function () {
-        this.plus_pdl1w0$('all is upercase');
+        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(12)], _.bootstrap.f_442);
       },
       f_444: function () {
-        _.net.yested.bootstrap.uppercase_71h449$(this, _.bootstrap.f_443);
+        this.plus_pdl1w0$('\nSimple Typography support.\n');
       },
       f_445: function () {
-        this.plus_pdl1w0$('ALL IS lowerCase');
+        this.plus_pdl1w0$('Demo');
       },
       f_446: function () {
-        _.net.yested.bootstrap.lowercase_71h449$(this, _.bootstrap.f_445);
+        this.plus_pdl1w0$('Right Align');
       },
       f_447: function () {
-        this.plus_pdl1w0$('capitalized');
+        this.plus_pdl1w0$('Left Align');
       },
       f_448: function () {
-        _.net.yested.bootstrap.capitalize_71h449$(this, _.bootstrap.f_447);
+        this.plus_pdl1w0$('Center');
       },
       f_449: function () {
-        this.div_5rsex9$(void 0, void 0, _.bootstrap.f_436);
-        this.br();
-        this.h4_kv1miw$(_.bootstrap.f_437);
-        _.net.yested.bootstrap.aligned_xlk53m$(this, _.net.yested.bootstrap.TextAlign.object.RIGHT, _.bootstrap.f_438);
-        _.net.yested.bootstrap.aligned_xlk53m$(this, _.net.yested.bootstrap.TextAlign.object.LEFT, _.bootstrap.f_439);
-        _.net.yested.bootstrap.aligned_xlk53m$(this, _.net.yested.bootstrap.TextAlign.object.CENTER, _.bootstrap.f_440);
-        _.net.yested.bootstrap.aligned_xlk53m$(this, _.net.yested.bootstrap.TextAlign.object.JUSTIFY, _.bootstrap.f_441);
-        _.net.yested.bootstrap.aligned_xlk53m$(this, _.net.yested.bootstrap.TextAlign.object.NOWRAP, _.bootstrap.f_442);
-        this.p_omdg96$(_.bootstrap.f_444);
-        this.p_omdg96$(_.bootstrap.f_446);
-        this.p_omdg96$(_.bootstrap.f_448);
+        this.plus_pdl1w0$('Justify');
       },
       f_450: function () {
-        this.plus_pdl1w0$('Code');
+        this.plus_pdl1w0$('No wrap');
       },
       f_451: function () {
-        this.h4_kv1miw$(_.bootstrap.f_450);
-        this.code_puj7f4$('kotlin', 'aligned(TextAlign.RIGHT) { +"Right Align"}\naligned(TextAlign.LEFT) { +"Left Align"}\naligned(TextAlign.CENTER) { +"Center"}\naligned(TextAlign.JUSTIFY) { +"Justify"}\naligned(TextAlign.NOWRAP) { +"No wrap"}\np { uppercase { +"all is upercase" }}\np { lowercase { +"ALL IS lowerCase" }}\np { capitalize { +"capitalized" }}');
+        this.plus_pdl1w0$('all is upercase');
       },
       f_452: function () {
-        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(4)], _.bootstrap.f_449);
-        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(8)], _.bootstrap.f_451);
+        _.net.yested.bootstrap.uppercase_71h449$(this, _.bootstrap.f_451);
+      },
+      f_453: function () {
+        this.plus_pdl1w0$('ALL IS lowerCase');
+      },
+      f_454: function () {
+        _.net.yested.bootstrap.lowercase_71h449$(this, _.bootstrap.f_453);
+      },
+      f_455: function () {
+        this.plus_pdl1w0$('capitalized');
+      },
+      f_456: function () {
+        _.net.yested.bootstrap.capitalize_71h449$(this, _.bootstrap.f_455);
+      },
+      f_457: function () {
+        this.div_5rsex9$(void 0, void 0, _.bootstrap.f_444);
+        this.br();
+        this.h4_kv1miw$(_.bootstrap.f_445);
+        _.net.yested.bootstrap.aligned_xlk53m$(this, _.net.yested.bootstrap.TextAlign.object.RIGHT, _.bootstrap.f_446);
+        _.net.yested.bootstrap.aligned_xlk53m$(this, _.net.yested.bootstrap.TextAlign.object.LEFT, _.bootstrap.f_447);
+        _.net.yested.bootstrap.aligned_xlk53m$(this, _.net.yested.bootstrap.TextAlign.object.CENTER, _.bootstrap.f_448);
+        _.net.yested.bootstrap.aligned_xlk53m$(this, _.net.yested.bootstrap.TextAlign.object.JUSTIFY, _.bootstrap.f_449);
+        _.net.yested.bootstrap.aligned_xlk53m$(this, _.net.yested.bootstrap.TextAlign.object.NOWRAP, _.bootstrap.f_450);
+        this.p_omdg96$(_.bootstrap.f_452);
+        this.p_omdg96$(_.bootstrap.f_454);
+        this.p_omdg96$(_.bootstrap.f_456);
+      },
+      f_458: function () {
+        this.plus_pdl1w0$('Code');
+      },
+      f_459: function () {
+        this.h4_kv1miw$(_.bootstrap.f_458);
+        this.code_puj7f4$('kotlin', 'aligned(TextAlign.RIGHT) { +"Right Align"}\naligned(TextAlign.LEFT) { +"Left Align"}\naligned(TextAlign.CENTER) { +"Center"}\naligned(TextAlign.JUSTIFY) { +"Justify"}\naligned(TextAlign.NOWRAP) { +"No wrap"}\np { uppercase { +"all is upercase" }}\np { lowercase { +"ALL IS lowerCase" }}\np { capitalize { +"capitalized" }}');
+      },
+      f_460: function () {
+        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(4)], _.bootstrap.f_457);
+        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(8)], _.bootstrap.f_459);
       },
       createTypographySection$f: function (id) {
         return function () {
           this.id = id;
-          _.net.yested.bootstrap.row_xnql8t$(this, _.bootstrap.f_435);
-          _.net.yested.bootstrap.row_xnql8t$(this, _.bootstrap.f_452);
+          _.net.yested.bootstrap.row_xnql8t$(this, _.bootstrap.f_443);
+          _.net.yested.bootstrap.row_xnql8t$(this, _.bootstrap.f_460);
         };
       },
       createTypographySection: function (id) {
         return _.net.yested.div_5rsex9$(void 0, void 0, _.bootstrap.createTypographySection$f(id));
       },
-      f_453: function () {
+      f_461: function () {
         this.plus_pdl1w0$('Effects');
       },
-      f_454: function () {
-        this.h3_kv1miw$(_.bootstrap.f_453);
+      f_462: function () {
+        this.h3_kv1miw$(_.bootstrap.f_461);
       },
-      f_455: function () {
-        _.net.yested.bootstrap.pageHeader_kzm4yj$(this, _.bootstrap.f_454);
+      f_463: function () {
+        _.net.yested.bootstrap.pageHeader_kzm4yj$(this, _.bootstrap.f_462);
         this.plus_pdl1w0$('Effects are applied to components. They must implement the Effect interface:');
         this.code_puj7f4$('kotlin', 'public trait Effect {\n    fun apply(component:Component)\n}');
         this.plus_pdl1w0$('Effects are based on JQuery effects.');
@@ -7207,24 +7252,24 @@
         this.plus_pdl1w0$('These effects must implement BiDirectionalEffect interface:');
         this.code_puj7f4$('kotlin', 'public trait BiDirectionEffect {\n    fun applyIn(component:Component, callback:Function0<Unit>? = null)\n    fun applyOut(component:Component, callback:Function0<Unit>? = null)\n}');
       },
-      f_456: function () {
-        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(8)], _.bootstrap.f_455);
+      f_464: function () {
+        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(8)], _.bootstrap.f_463);
       },
-      f_457: function () {
+      f_465: function () {
         this.plus_pv6laa$(_.effects.createEffectsSection());
         this.plus_pv6laa$(_.effects.createBidirectionalEffectsSection());
       },
-      f_458: function () {
-        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(12)], _.bootstrap.f_457);
+      f_466: function () {
+        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(12)], _.bootstrap.f_465);
       },
-      f_459: function (this$) {
+      f_467: function (this$) {
         return function () {
-          _.net.yested.bootstrap.row_xnql8t$(this$, _.bootstrap.f_456);
-          _.net.yested.bootstrap.row_xnql8t$(this$, _.bootstrap.f_458);
+          _.net.yested.bootstrap.row_xnql8t$(this$, _.bootstrap.f_464);
+          _.net.yested.bootstrap.row_xnql8t$(this$, _.bootstrap.f_466);
         };
       },
       effectsPage$f: function () {
-        _.net.yested.bootstrap.row_xnql8t$(this, _.bootstrap.f_459(this));
+        _.net.yested.bootstrap.row_xnql8t$(this, _.bootstrap.f_467(this));
       },
       effectsPage: function () {
         return _.net.yested.div_5rsex9$(void 0, void 0, _.bootstrap.effectsPage$f);
