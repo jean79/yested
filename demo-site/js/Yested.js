@@ -3914,15 +3914,49 @@
               dismissible = false;
             $receiver.plus_pv6laa$(_.net.yested.with_owvm91$(new _.net.yested.bootstrap.Panel(style, dismissible), _.net.yested.bootstrap.panel_gqyrgg$f(init)));
           },
+          TabDefinition: Kotlin.createClass(null, function (tabId, init, onSelect) {
+            this.tabId = tabId;
+            this.init = init;
+            this.onSelect = onSelect;
+          }, /** @lends _.net.yested.bootstrap.TabDefinition.prototype */ {
+            component1: function () {
+              return this.tabId;
+            },
+            component2: function () {
+              return this.init;
+            },
+            component3: function () {
+              return this.onSelect;
+            },
+            copy: function (tabId, init, onSelect) {
+              return new _.net.yested.bootstrap.TabDefinition(tabId === void 0 ? this.tabId : tabId, init === void 0 ? this.init : init, onSelect === void 0 ? this.onSelect : onSelect);
+            },
+            toString: function () {
+              return 'TabDefinition(tabId=' + Kotlin.toString(this.tabId) + (', init=' + Kotlin.toString(this.init)) + (', onSelect=' + Kotlin.toString(this.onSelect)) + ')';
+            },
+            hashCode: function () {
+              var result = 0;
+              result = result * 31 + Kotlin.hashCode(this.tabId) | 0;
+              result = result * 31 + Kotlin.hashCode(this.init) | 0;
+              result = result * 31 + Kotlin.hashCode(this.onSelect) | 0;
+              return result;
+            },
+            equals_za3rmp$: function (other) {
+              return this === other || (other !== null && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.tabId, other.tabId) && Kotlin.equals(this.init, other.init) && Kotlin.equals(this.onSelect, other.onSelect))));
+            }
+          }),
           Tabs: Kotlin.createClass(function () {
             return [_.net.yested.Component];
           }, function () {
             this.$element_s2egal$ = _.net.yested.createElement_61zpoe$('div');
             this.bar_83ssd0$ = _.net.yested.with_owvm91$(new _.net.yested.UL(), _.net.yested.bootstrap.Tabs.Tabs$f);
             this.content_9tda2$ = _.net.yested.with_owvm91$(new _.net.yested.Div(), _.net.yested.bootstrap.Tabs.Tabs$f_0);
-            this.anchorsLi_g1z45g$ = new Kotlin.ArrayList();
-            this.tabsRendered_rgvx82$ = new Kotlin.PrimitiveNumberHashMap();
+            this.tabDefinitions_5fozuy$ = Kotlin.modules['stdlib'].kotlin.arrayListOf_9mqe4v$([]);
+            this.headersRendered_izixlw$ = Kotlin.modules['stdlib'].kotlin.hashMapOf_eoa9s7$([]);
+            this.tabsRendered_rgvx82$ = Kotlin.modules['stdlib'].kotlin.hashMapOf_eoa9s7$([]);
             this.index_nuub59$ = 0;
+            this.tabIndexDisplayed_1f7wf9$ = 0;
+            this.leftMostIndex_gfydc9$ = 0;
             this.element.setAttribute('role', 'tabpanel');
             _.net.yested.appendComponent_c36dq0$(this.element, this.bar_83ssd0$);
             _.net.yested.appendComponent_c36dq0$(this.element, this.content_9tda2$);
@@ -3943,28 +3977,77 @@
                 return div;
               }
             },
-            activateTab: function (li, tabId, onSelect, init) {
+            getTabDefinition: function (tabId) {
               var tmp$0;
-              li.clazz = 'active';
-              tmp$0 = Kotlin.modules['stdlib'].kotlin.filter_azvtw4$(this.anchorsLi_g1z45g$, _.net.yested.bootstrap.Tabs.activateTab$f(li));
-              Kotlin.modules['stdlib'].kotlin.forEach_p7e0bo$(tmp$0, _.net.yested.bootstrap.Tabs.activateTab$f_0);
-              this.content_9tda2$.setChild_hu5ove$(this.renderContent(tabId, init), new _.net.yested.Fade());
-              if (onSelect != null) {
-                onSelect();
+              tmp$0 = Kotlin.modules['stdlib'].kotlin.filter_azvtw4$(this.tabDefinitions_5fozuy$, _.net.yested.bootstrap.Tabs.getTabDefinition$f(tabId));
+              return Kotlin.modules['stdlib'].kotlin.firstOrNull_fvq2g0$(tmp$0);
+            },
+            activateTab_za3lpa$: function (tabId) {
+              var tmp$0, tmp$1, tmp$2;
+              var tabDefinition = this.getTabDefinition(tabId);
+              if (tabDefinition == null) {
+                throw new Kotlin.Exception('Tab does not exists.');
+              }
+               else {
+                this.tabIndexDisplayed_1f7wf9$ = tabId;
+                var link = (tmp$0 = this.headersRendered_izixlw$.get_za3rmp$(tabId)) != null ? tmp$0 : Kotlin.throwNPE();
+                link.clazz = 'active';
+                tmp$1 = Kotlin.modules['stdlib'].kotlin.filter_azvtw4$(this.headersRendered_izixlw$.values(), _.net.yested.bootstrap.Tabs.activateTab_za3lpa$f(link));
+                Kotlin.modules['stdlib'].kotlin.forEach_p7e0bo$(tmp$1, _.net.yested.bootstrap.Tabs.activateTab_za3lpa$f_0);
+                this.content_9tda2$.setChild_hu5ove$(this.renderContent(tabId, tabDefinition.init), new _.net.yested.Fade());
+                if (tabDefinition.onSelect != null) {
+                  ((tmp$2 = tabDefinition.onSelect) != null ? tmp$2 : Kotlin.throwNPE())();
+                }
               }
             },
-            tab_2b4h2$: function (header, onSelect, init) {
+            removeTab_za3lpa$: function (tabId) {
+              var tmp$0;
+              var tabDefinition = this.getTabDefinition(tabId);
+              if (tabDefinition == null) {
+                throw new Kotlin.Exception('Tab does not exists.');
+              }
+               else {
+                var link = (tmp$0 = this.headersRendered_izixlw$.get_za3rmp$(tabId)) != null ? tmp$0 : Kotlin.throwNPE();
+                this.bar_83ssd0$.element.removeChild(link.element);
+                this.headersRendered_izixlw$.remove_za3rmp$(link);
+                this.tabsRendered_rgvx82$.remove_za3rmp$(tabId);
+                if (this.tabIndexDisplayed_1f7wf9$ === tabId) {
+                  if (this.tabDefinitions_5fozuy$.indexOf_za3rmp$(tabDefinition) === 0) {
+                    if (this.tabDefinitions_5fozuy$.size() === 1) {
+                      this.content_9tda2$.removeAllChildren();
+                    }
+                     else {
+                      this.activateTab_za3lpa$(this.tabDefinitions_5fozuy$.get_za3lpa$(1).tabId);
+                    }
+                  }
+                   else {
+                    var leftTab = this.tabDefinitions_5fozuy$.get_za3lpa$(this.tabDefinitions_5fozuy$.indexOf_za3rmp$(tabDefinition) - 1);
+                    this.activateTab_za3lpa$(leftTab.tabId);
+                  }
+                }
+                this.tabDefinitions_5fozuy$.remove_za3rmp$(tabDefinition);
+              }
+            },
+            createTabLink: function (dismissible, tabId, header) {
+              var removingTab = {v: false};
+              var a = _.net.yested.with_owvm91$(new _.net.yested.Anchor(), _.net.yested.bootstrap.Tabs.createTabLink$f(header, dismissible, removingTab, tabId, this));
+              return _.net.yested.with_owvm91$(new _.net.yested.Li(), _.net.yested.bootstrap.Tabs.createTabLink$f_0(a));
+            },
+            tab_l25lo7$: function (dismissible, header, onSelect, init) {
+              if (dismissible === void 0)
+                dismissible = false;
               if (onSelect === void 0)
                 onSelect = null;
               var tabId = this.index_nuub59$++;
-              var a = _.net.yested.with_owvm91$(new _.net.yested.Anchor(), _.net.yested.bootstrap.Tabs.tab_2b4h2$f(header));
-              var li = _.net.yested.with_owvm91$(new _.net.yested.Li(), _.net.yested.bootstrap.Tabs.tab_2b4h2$f_0(a));
-              this.bar_83ssd0$.appendChild_5f0h2k$(li);
-              a.onclick = _.net.yested.bootstrap.Tabs.tab_2b4h2$f_1(li, tabId, onSelect, init, this);
-              this.anchorsLi_g1z45g$.add_za3rmp$(li);
+              var tabDefinition = new _.net.yested.bootstrap.TabDefinition(tabId, init, onSelect);
+              this.tabDefinitions_5fozuy$.add_za3rmp$(tabDefinition);
+              var link = this.createTabLink(dismissible, tabId, header);
+              this.bar_83ssd0$.appendChild_5f0h2k$(link);
+              this.headersRendered_izixlw$.put_wn2jw4$(tabId, link);
               if (this.index_nuub59$ === 1) {
-                this.activateTab(li, tabId, onSelect, init);
+                this.activateTab_za3lpa$(tabId);
               }
+              return tabId;
             }
           }, /** @lends _.net.yested.bootstrap.Tabs */ {
             Tabs$f: function () {
@@ -3979,30 +4062,56 @@
                 init.call(this);
               };
             },
-            activateTab$f: function (li) {
+            getTabDefinition$f: function (tabId) {
               return function (it) {
-                return !Kotlin.equals(it, li);
+                return it.tabId === tabId;
               };
             },
-            activateTab$f_0: function (it) {
+            activateTab_za3lpa$f: function (link) {
+              return function (it) {
+                return !Kotlin.equals(it, link);
+              };
+            },
+            activateTab_za3lpa$f_0: function (it) {
               it.clazz = '';
             },
-            tab_2b4h2$f: function (header) {
+            f: function (removingTab, tabId, this$Tabs) {
               return function () {
-                this.rangeTo_94jgcu$('role', 'tab');
-                this.rangeTo_94jgcu$('style', 'cursor: pointer;');
-                header.call(this);
+                removingTab.v = true;
+                this$Tabs.removeTab_za3lpa$(tabId);
               };
             },
-            tab_2b4h2$f_0: function (a) {
+            f_0: function (removingTab, tabId, this$Tabs) {
+              return function () {
+                this.clazz = 'close';
+                this.rangeTo_94jgcu$('type', 'button');
+                this.onclick = _.net.yested.bootstrap.Tabs.f(removingTab, tabId, this$Tabs);
+                this.plus_pdl1w0$('&times;');
+              };
+            },
+            f_1: function (removingTab, tabId, this$Tabs) {
+              return function () {
+                if (!removingTab.v) {
+                  this$Tabs.activateTab_za3lpa$(tabId);
+                }
+              };
+            },
+            createTabLink$f: function (header, dismissible, removingTab, tabId, this$Tabs) {
+              return function () {
+                this.rangeTo_94jgcu$('role', 'tab');
+                this.rangeTo_94jgcu$('style', 'cursor: pointer; display: inline-block');
+                header.call(this);
+                if (dismissible) {
+                  this.nbsp_za3lpa$();
+                  this.tag_s8xvdm$('button', _.net.yested.bootstrap.Tabs.f_0(removingTab, tabId, this$Tabs));
+                }
+                this.onclick = _.net.yested.bootstrap.Tabs.f_1(removingTab, tabId, this$Tabs);
+              };
+            },
+            createTabLink$f_0: function (a) {
               return function () {
                 this.plus_pv6laa$(a);
                 this.role = 'presentation';
-              };
-            },
-            tab_2b4h2$f_1: function (li, tabId, onSelect, init, this$Tabs) {
-              return function () {
-                this$Tabs.activateTab(li, tabId, onSelect, init);
               };
             }
           }),
@@ -4357,7 +4466,7 @@
       };
     },
     main: function (args) {
-      var navbar = _.net.yested.with_owvm91$(new _.net.yested.bootstrap.Navbar('appMenuBar', _.net.yested.bootstrap.NavbarPosition.object.FIXED_TOP, _.net.yested.bootstrap.NavbarLook.object.INVERSE, _.net.yested.bootstrap.ContainerLayout.object.FLUID), _.main$f);
+      var navbar = _.net.yested.with_owvm91$(new _.net.yested.bootstrap.Navbar('appMenuBar', _.net.yested.bootstrap.NavbarPosition.object.FIXED_TOP, _.net.yested.bootstrap.NavbarLook.object.INVERSE), _.main$f);
       var divContainer = _.net.yested.div_5rsex9$(void 0, void 0, _.main$f_0);
       var previousHash = {v: ''};
       _.net.yested.registerHashChangeListener_owl47g$(void 0, _.main$f_1(divContainer, previousHash));
@@ -6863,169 +6972,232 @@
       createSplitButtonDropdown: function (id) {
         return _.net.yested.div_5rsex9$(void 0, void 0, _.bootstrap.createSplitButtonDropdown$f(id));
       },
+      createTabs$f: function () {
+        this.plus_pdl1w0$('Dismissible');
+      },
       f_407: function () {
-        this.plus_pdl1w0$('Tabs');
       },
       f_408: function () {
-        this.h3_kv1miw$(_.bootstrap.f_407);
+        _.net.yested.bootstrap.inputField_nt9vrj$(this, 'Placeholder 1', _.bootstrap.f_407);
       },
       f_409: function () {
-        _.net.yested.bootstrap.pageHeader_kzm4yj$(this, _.bootstrap.f_408);
+        this.div_5rsex9$(void 0, void 0, _.bootstrap.f_408);
       },
       f_410: function () {
-        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(12)], _.bootstrap.f_409);
-      },
-      f_411: function () {
-        this.plus_pdl1w0$('\nTabs are based on Bootstrap Tabs.\nContent of tab is rendedered upon click on a tab link. When clicking on anoother link, content is preserved.\n');
-      },
-      f_412: function () {
-        this.plus_pdl1w0$('Demo');
-      },
-      f_413: function () {
-      },
-      f_414: function () {
-        _.net.yested.bootstrap.inputField_nt9vrj$(this, 'Placeholder 1', _.bootstrap.f_413);
-      },
-      f_415: function () {
-        this.div_5rsex9$(void 0, void 0, _.bootstrap.f_414);
-      },
-      f_416: function () {
         this.plus_pdl1w0$('Second tab.');
       },
-      f_417: function () {
-        this.div_5rsex9$(void 0, void 0, _.bootstrap.f_416);
+      f_411: function () {
+        this.div_5rsex9$(void 0, void 0, _.bootstrap.f_410);
       },
-      f_418: function () {
+      f_412: function () {
         this.plus_pdl1w0$('Wikipedia');
       },
+      f_413: function () {
+        this.a_xjhihl$(void 0, void 0, 'http://www.wikipedia.org', void 0, _.bootstrap.f_412);
+      },
+      createTabs$f_0: function () {
+        this.tab_l25lo7$(true, _.net.yested.text_61zpoe$('First'), void 0, _.bootstrap.f_409);
+        this.tab_l25lo7$(true, _.net.yested.text_61zpoe$('Second'), void 0, _.bootstrap.f_411);
+        this.tab_l25lo7$(true, _.net.yested.text_61zpoe$('Third'), void 0, _.bootstrap.f_413);
+      },
+      addTab$f: function (tabIndex) {
+        return function () {
+          this.plus_pdl1w0$('Tab' + tabIndex);
+        };
+      },
+      f_414: function (tabIndex) {
+        return function () {
+          this.plus_pdl1w0$('Content of tab: ' + tabIndex);
+        };
+      },
+      addTab$f_0: function (tabIndex) {
+        return function () {
+          this.div_5rsex9$(void 0, void 0, _.bootstrap.f_414(tabIndex));
+        };
+      },
+      createTabs$addTab: function (tabs, dismissibleCheckbox) {
+        return function (tabIndex) {
+          var tabId = tabs.tab_l25lo7$(dismissibleCheckbox.value, _.bootstrap.addTab$f(tabIndex), void 0, _.bootstrap.addTab$f_0(tabIndex));
+          tabs.activateTab_za3lpa$(tabId);
+        };
+      },
+      f_415: function () {
+        this.plus_pdl1w0$('Tabs');
+      },
+      f_416: function () {
+        this.h3_kv1miw$(_.bootstrap.f_415);
+      },
+      f_417: function () {
+        _.net.yested.bootstrap.pageHeader_kzm4yj$(this, _.bootstrap.f_416);
+      },
+      f_418: function () {
+        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(12)], _.bootstrap.f_417);
+      },
       f_419: function () {
-        this.a_xjhihl$(void 0, void 0, 'http://www.wikipedia.org', void 0, _.bootstrap.f_418);
+        this.plus_pdl1w0$('\nTabs are based on Bootstrap Tabs.\nContent of tab is rendedered upon click on a tab link. When clicking on anoother link, content is preserved.\nTabs can optionally be dismissible. Tabs can be also removed and added programatically.\n');
       },
       f_420: function () {
-        this.tab_2b4h2$(_.net.yested.text_61zpoe$('First'), void 0, _.bootstrap.f_415);
-        this.tab_2b4h2$(_.net.yested.text_61zpoe$('Second'), void 0, _.bootstrap.f_417);
-        this.tab_2b4h2$(_.net.yested.text_61zpoe$('Third'), void 0, _.bootstrap.f_419);
+        this.plus_pdl1w0$('Demo');
       },
       f_421: function () {
-        this.div_5rsex9$(void 0, void 0, _.bootstrap.f_411);
-        this.br();
-        this.h4_kv1miw$(_.bootstrap.f_412);
-        _.net.yested.bootstrap.tabs_fe4fv1$(this, _.bootstrap.f_420);
       },
-      f_422: function () {
-        this.plus_pdl1w0$('Code');
+      f_422: function (dismissibleCheckbox) {
+        return function () {
+          this.plus_pv6laa$(dismissibleCheckbox);
+        };
       },
       f_423: function () {
-        this.h4_kv1miw$(_.bootstrap.f_422);
-        this.code_puj7f4$('kotlin', 'tabs {\n    tab(header = text("First")) {\n        div {\n            textInput(placeholder = "Placeholder 1") { }\n        }\n    }\n    tab(header = text("Second")) {\n        div {\n            +"Second tab."\n        }\n    }\n    tab(header = text("Third")) {\n        a(href = "http://www.wikipedia.org") { +"Wikipedia"}\n    }\n}');
+        this.nbsp_za3lpa$(2);
       },
       f_424: function () {
-        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(4)], _.bootstrap.f_421);
-        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(8)], _.bootstrap.f_423);
+        this.plus_pdl1w0$('Add Tab');
       },
-      createTabs$f: function (id) {
+      f_425: function (tabIndex, addTab) {
+        return function () {
+          addTab(++tabIndex.v);
+        };
+      },
+      f_426: function (tabIndex, addTab) {
+        return function () {
+          _.net.yested.bootstrap.btsButton_bol907$(this, void 0, _.bootstrap.f_424, void 0, _.net.yested.bootstrap.ButtonSize.object.SMALL, void 0, void 0, _.bootstrap.f_425(tabIndex, addTab));
+        };
+      },
+      f_427: function (dismissibleCheckbox, tabIndex, addTab) {
+        return function () {
+          this.item_gthhqa$(void 0, _.bootstrap.f_421, void 0, _.bootstrap.f_422(dismissibleCheckbox));
+          this.item_gthhqa$(void 0, _.bootstrap.f_423, void 0, _.bootstrap.f_426(tabIndex, addTab));
+        };
+      },
+      f_428: function (dismissibleCheckbox, tabIndex, addTab, tabs) {
+        return function () {
+          this.div_5rsex9$(void 0, void 0, _.bootstrap.f_419);
+          this.br();
+          this.h4_kv1miw$(_.bootstrap.f_420);
+          _.net.yested.bootstrap.btsForm_6zn8tn$(this, _.net.yested.bootstrap.FormStyle.object.INLINE, void 0, void 0, _.bootstrap.f_427(dismissibleCheckbox, tabIndex, addTab));
+          this.br();
+          this.plus_pv6laa$(tabs);
+        };
+      },
+      f_429: function () {
+        this.plus_pdl1w0$('Code');
+      },
+      f_430: function () {
+        this.h4_kv1miw$(_.bootstrap.f_429);
+        this.code_puj7f4$('kotlin', 'var tabIndex = 3\n\n    val dismissibleCheckbox = BtsCheckBox(label = {+"Dismissible" })\n\n    val tabs = Tabs() with {\n        tab(dismissible = true, header = text("First")) {\n            div {\n                inputField(placeholder = "Placeholder 1") { }\n            }\n        }\n        tab(dismissible = true, header = text("Second")) {\n            div {\n                +"Second tab."\n            }\n        }\n        tab(dismissible = true, header = text("Third")) {\n            a(href = "http://www.wikipedia.org") { +"Wikipedia" }\n        }\n    }\n\n    fun addTab(tabIndex:Int) {\n        val tabId = tabs.tab(dismissible = dismissibleCheckbox.value, header = { +"Tab$\\{tabIndex}" }) {\n            div {\n                +"Content of tab: $\\{tabIndex}"\n            }\n        }\n        tabs.activateTab(tabId)\n    }\n...\ndiv {\n    btsForm(formStyle = FormStyle.INLINE) {\n        item(label = { } ) {\n            +dismissibleCheckbox\n        }\n        item(label = {nbsp(2)}) {\n            btsButton(label = { +"Add Tab"}, onclick = { addTab(++tabIndex) }, size = ButtonSize.SMALL)\n        }\n    }\n    br()\n    +tabs\n}');
+      },
+      f_431: function (dismissibleCheckbox, tabIndex, addTab, tabs) {
+        return function () {
+          this.col_zcukl0$([new _.net.yested.bootstrap.Medium(6)], _.bootstrap.f_428(dismissibleCheckbox, tabIndex, addTab, tabs));
+          this.col_zcukl0$([new _.net.yested.bootstrap.Medium(6)], _.bootstrap.f_430);
+        };
+      },
+      createTabs$f_1: function (id, dismissibleCheckbox, tabIndex, addTab, tabs) {
         return function () {
           this.id = id;
-          _.net.yested.bootstrap.row_xnql8t$(this, _.bootstrap.f_410);
-          _.net.yested.bootstrap.row_xnql8t$(this, _.bootstrap.f_424);
+          _.net.yested.bootstrap.row_xnql8t$(this, _.bootstrap.f_418);
+          _.net.yested.bootstrap.row_xnql8t$(this, _.bootstrap.f_431(dismissibleCheckbox, tabIndex, addTab, tabs));
         };
       },
       createTabs: function (id) {
-        return _.net.yested.div_5rsex9$(void 0, void 0, _.bootstrap.createTabs$f(id));
-      },
-      f_425: function () {
-        this.plus_pdl1w0$('Typography');
-      },
-      f_426: function () {
-        this.h3_kv1miw$(_.bootstrap.f_425);
-      },
-      f_427: function () {
-        _.net.yested.bootstrap.pageHeader_kzm4yj$(this, _.bootstrap.f_426);
-      },
-      f_428: function () {
-        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(12)], _.bootstrap.f_427);
-      },
-      f_429: function () {
-        this.plus_pdl1w0$('\nSimple Typography support.\n');
-      },
-      f_430: function () {
-        this.plus_pdl1w0$('Demo');
-      },
-      f_431: function () {
-        this.plus_pdl1w0$('Right Align');
+        var tabIndex = {v: 3};
+        var dismissibleCheckbox = new _.net.yested.bootstrap.BtsCheckBox(_.bootstrap.createTabs$f);
+        var tabs = _.net.yested.with_owvm91$(new _.net.yested.bootstrap.Tabs(), _.bootstrap.createTabs$f_0);
+        var addTab = _.bootstrap.createTabs$addTab(tabs, dismissibleCheckbox);
+        return _.net.yested.div_5rsex9$(void 0, void 0, _.bootstrap.createTabs$f_1(id, dismissibleCheckbox, tabIndex, addTab, tabs));
       },
       f_432: function () {
-        this.plus_pdl1w0$('Left Align');
+        this.plus_pdl1w0$('Typography');
       },
       f_433: function () {
-        this.plus_pdl1w0$('Center');
+        this.h3_kv1miw$(_.bootstrap.f_432);
       },
       f_434: function () {
-        this.plus_pdl1w0$('Justify');
+        _.net.yested.bootstrap.pageHeader_kzm4yj$(this, _.bootstrap.f_433);
       },
       f_435: function () {
-        this.plus_pdl1w0$('No wrap');
+        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(12)], _.bootstrap.f_434);
       },
       f_436: function () {
-        this.plus_pdl1w0$('all is upercase');
+        this.plus_pdl1w0$('\nSimple Typography support.\n');
       },
       f_437: function () {
-        _.net.yested.bootstrap.uppercase_71h449$(this, _.bootstrap.f_436);
+        this.plus_pdl1w0$('Demo');
       },
       f_438: function () {
-        this.plus_pdl1w0$('ALL IS lowerCase');
+        this.plus_pdl1w0$('Right Align');
       },
       f_439: function () {
-        _.net.yested.bootstrap.lowercase_71h449$(this, _.bootstrap.f_438);
+        this.plus_pdl1w0$('Left Align');
       },
       f_440: function () {
-        this.plus_pdl1w0$('capitalized');
+        this.plus_pdl1w0$('Center');
       },
       f_441: function () {
-        _.net.yested.bootstrap.capitalize_71h449$(this, _.bootstrap.f_440);
+        this.plus_pdl1w0$('Justify');
       },
       f_442: function () {
-        this.div_5rsex9$(void 0, void 0, _.bootstrap.f_429);
-        this.br();
-        this.h4_kv1miw$(_.bootstrap.f_430);
-        _.net.yested.bootstrap.aligned_xlk53m$(this, _.net.yested.bootstrap.TextAlign.object.RIGHT, _.bootstrap.f_431);
-        _.net.yested.bootstrap.aligned_xlk53m$(this, _.net.yested.bootstrap.TextAlign.object.LEFT, _.bootstrap.f_432);
-        _.net.yested.bootstrap.aligned_xlk53m$(this, _.net.yested.bootstrap.TextAlign.object.CENTER, _.bootstrap.f_433);
-        _.net.yested.bootstrap.aligned_xlk53m$(this, _.net.yested.bootstrap.TextAlign.object.JUSTIFY, _.bootstrap.f_434);
-        _.net.yested.bootstrap.aligned_xlk53m$(this, _.net.yested.bootstrap.TextAlign.object.NOWRAP, _.bootstrap.f_435);
-        this.p_omdg96$(_.bootstrap.f_437);
-        this.p_omdg96$(_.bootstrap.f_439);
-        this.p_omdg96$(_.bootstrap.f_441);
+        this.plus_pdl1w0$('No wrap');
       },
       f_443: function () {
-        this.plus_pdl1w0$('Code');
+        this.plus_pdl1w0$('all is upercase');
       },
       f_444: function () {
-        this.h4_kv1miw$(_.bootstrap.f_443);
-        this.code_puj7f4$('kotlin', 'aligned(TextAlign.RIGHT) { +"Right Align"}\naligned(TextAlign.LEFT) { +"Left Align"}\naligned(TextAlign.CENTER) { +"Center"}\naligned(TextAlign.JUSTIFY) { +"Justify"}\naligned(TextAlign.NOWRAP) { +"No wrap"}\np { uppercase { +"all is upercase" }}\np { lowercase { +"ALL IS lowerCase" }}\np { capitalize { +"capitalized" }}');
+        _.net.yested.bootstrap.uppercase_71h449$(this, _.bootstrap.f_443);
       },
       f_445: function () {
-        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(4)], _.bootstrap.f_442);
-        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(8)], _.bootstrap.f_444);
+        this.plus_pdl1w0$('ALL IS lowerCase');
+      },
+      f_446: function () {
+        _.net.yested.bootstrap.lowercase_71h449$(this, _.bootstrap.f_445);
+      },
+      f_447: function () {
+        this.plus_pdl1w0$('capitalized');
+      },
+      f_448: function () {
+        _.net.yested.bootstrap.capitalize_71h449$(this, _.bootstrap.f_447);
+      },
+      f_449: function () {
+        this.div_5rsex9$(void 0, void 0, _.bootstrap.f_436);
+        this.br();
+        this.h4_kv1miw$(_.bootstrap.f_437);
+        _.net.yested.bootstrap.aligned_xlk53m$(this, _.net.yested.bootstrap.TextAlign.object.RIGHT, _.bootstrap.f_438);
+        _.net.yested.bootstrap.aligned_xlk53m$(this, _.net.yested.bootstrap.TextAlign.object.LEFT, _.bootstrap.f_439);
+        _.net.yested.bootstrap.aligned_xlk53m$(this, _.net.yested.bootstrap.TextAlign.object.CENTER, _.bootstrap.f_440);
+        _.net.yested.bootstrap.aligned_xlk53m$(this, _.net.yested.bootstrap.TextAlign.object.JUSTIFY, _.bootstrap.f_441);
+        _.net.yested.bootstrap.aligned_xlk53m$(this, _.net.yested.bootstrap.TextAlign.object.NOWRAP, _.bootstrap.f_442);
+        this.p_omdg96$(_.bootstrap.f_444);
+        this.p_omdg96$(_.bootstrap.f_446);
+        this.p_omdg96$(_.bootstrap.f_448);
+      },
+      f_450: function () {
+        this.plus_pdl1w0$('Code');
+      },
+      f_451: function () {
+        this.h4_kv1miw$(_.bootstrap.f_450);
+        this.code_puj7f4$('kotlin', 'aligned(TextAlign.RIGHT) { +"Right Align"}\naligned(TextAlign.LEFT) { +"Left Align"}\naligned(TextAlign.CENTER) { +"Center"}\naligned(TextAlign.JUSTIFY) { +"Justify"}\naligned(TextAlign.NOWRAP) { +"No wrap"}\np { uppercase { +"all is upercase" }}\np { lowercase { +"ALL IS lowerCase" }}\np { capitalize { +"capitalized" }}');
+      },
+      f_452: function () {
+        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(4)], _.bootstrap.f_449);
+        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(8)], _.bootstrap.f_451);
       },
       createTypographySection$f: function (id) {
         return function () {
           this.id = id;
-          _.net.yested.bootstrap.row_xnql8t$(this, _.bootstrap.f_428);
-          _.net.yested.bootstrap.row_xnql8t$(this, _.bootstrap.f_445);
+          _.net.yested.bootstrap.row_xnql8t$(this, _.bootstrap.f_435);
+          _.net.yested.bootstrap.row_xnql8t$(this, _.bootstrap.f_452);
         };
       },
       createTypographySection: function (id) {
         return _.net.yested.div_5rsex9$(void 0, void 0, _.bootstrap.createTypographySection$f(id));
       },
-      f_446: function () {
+      f_453: function () {
         this.plus_pdl1w0$('Effects');
       },
-      f_447: function () {
-        this.h3_kv1miw$(_.bootstrap.f_446);
+      f_454: function () {
+        this.h3_kv1miw$(_.bootstrap.f_453);
       },
-      f_448: function () {
-        _.net.yested.bootstrap.pageHeader_kzm4yj$(this, _.bootstrap.f_447);
+      f_455: function () {
+        _.net.yested.bootstrap.pageHeader_kzm4yj$(this, _.bootstrap.f_454);
         this.plus_pdl1w0$('Effects are applied to components. They must implement the Effect interface:');
         this.code_puj7f4$('kotlin', 'public trait Effect {\n    fun apply(component:Component)\n}');
         this.plus_pdl1w0$('Effects are based on JQuery effects.');
@@ -7035,24 +7207,24 @@
         this.plus_pdl1w0$('These effects must implement BiDirectionalEffect interface:');
         this.code_puj7f4$('kotlin', 'public trait BiDirectionEffect {\n    fun applyIn(component:Component, callback:Function0<Unit>? = null)\n    fun applyOut(component:Component, callback:Function0<Unit>? = null)\n}');
       },
-      f_449: function () {
-        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(8)], _.bootstrap.f_448);
+      f_456: function () {
+        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(8)], _.bootstrap.f_455);
       },
-      f_450: function () {
+      f_457: function () {
         this.plus_pv6laa$(_.effects.createEffectsSection());
         this.plus_pv6laa$(_.effects.createBidirectionalEffectsSection());
       },
-      f_451: function () {
-        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(12)], _.bootstrap.f_450);
+      f_458: function () {
+        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(12)], _.bootstrap.f_457);
       },
-      f_452: function (this$) {
+      f_459: function (this$) {
         return function () {
-          _.net.yested.bootstrap.row_xnql8t$(this$, _.bootstrap.f_449);
-          _.net.yested.bootstrap.row_xnql8t$(this$, _.bootstrap.f_451);
+          _.net.yested.bootstrap.row_xnql8t$(this$, _.bootstrap.f_456);
+          _.net.yested.bootstrap.row_xnql8t$(this$, _.bootstrap.f_458);
         };
       },
       effectsPage$f: function () {
-        _.net.yested.bootstrap.row_xnql8t$(this, _.bootstrap.f_452(this));
+        _.net.yested.bootstrap.row_xnql8t$(this, _.bootstrap.f_459(this));
       },
       effectsPage: function () {
         return _.net.yested.div_5rsex9$(void 0, void 0, _.bootstrap.effectsPage$f);
