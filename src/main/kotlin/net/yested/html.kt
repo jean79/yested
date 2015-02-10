@@ -12,6 +12,8 @@ import java.util.ArrayList
 import kotlin.js.dom.html.HTMLInputElement
 import org.w3c.dom.Node
 import kotlin.js.dom.html.HTMLTextAreaElement
+import kotlin.js.dom.html.CSSStyleDeclaration
+import kotlin.js.dom.html.Stylesheet
 
 public class Attribute(val attributeName:String? = null, val element:HTMLElement? = null) {
 
@@ -52,6 +54,10 @@ public fun HTMLElement.removeChildByName(childElementName:String) {
     if (child != null) {
         this.removeChild(child)
     }
+}
+
+private native trait HTMLElementOnScroll : HTMLElement {
+    public native var onscroll: () -> Unit
 }
 
 public trait ElementEvents {
@@ -106,11 +112,21 @@ public trait ElementEvents {
         get() = element.onresize
         set(value) { element.onresize = value}
 
+    public var onscroll:Function0<Unit>
+        get() = (element as HTMLElementOnScroll).onscroll
+        set(value) { (element as HTMLElementOnScroll).onscroll = value}
+
 }
 
-public open class HTMLComponent(tagName:String) : Component, ElementEvents {
+public fun HTMLElement.removeAllContent() {
+    while (lastChild != null) {
+        removeChild(lastChild);
+    }
+}
 
-    override public var element = createElement(tagName)
+public open class HTMLComponent(tagName:String, htmlElement:HTMLElement? = null) : Component, ElementEvents {
+
+    override public var element = htmlElement?:createElement(tagName)
 
     public var role:String by Attribute()
     public var style:String by Attribute()
@@ -141,16 +157,14 @@ public open class HTMLComponent(tagName:String) : Component, ElementEvents {
     }
 
     public fun removeAllChildren() {
-        (0..(element.childNodes.length - 1)).forEach {
-            element.removeChild(element.childNodes.item(it))
-        }
+        element.removeAllContent()
     }
 
     public fun setChild(content:Component, effect:BiDirectionEffect, callback:Function0<Unit>? = null) {
         effect.applyOut(this) {
             setChild(content)
             effect.applyIn(this) {
-                callback?.let { callback!!()}
+                callback?.invoke()
             }
         }
     }
@@ -227,19 +241,19 @@ public open class HTMLComponent(tagName:String) : Component, ElementEvents {
     }
 
     public fun ul(init:UL.() -> Unit): Unit =
-        +( UL() with { init() })
+            +( UL() with { init() })
 
 
     public fun ol(init:OL.() -> Unit):Unit =
-        +( OL() with { init() })
+            +( OL() with { init() })
 
     public fun dl(init:DL.() -> Unit):Unit =
             +( DL() with { init() })
 
     public fun nbsp(times:Int = 1):Unit =
-        (1..times).forEach {
-            +("&nbsp;")
-        }
+            (1..times).forEach {
+                +("&nbsp;")
+            }
 
     public fun h1(init: HTMLComponent.() -> Unit): Unit = tag("h1", init)
     public fun h2(init: HTMLComponent.() -> Unit): Unit = tag("h2", init)
@@ -265,7 +279,7 @@ public open class HTMLComponent(tagName:String) : Component, ElementEvents {
     public fun form(init: HTMLComponent.() -> Unit): Unit = tag("form", init)
 
     public fun textArea(rows:Int = 3, init: TextArea.() ->Unit): Unit =
-        +(TextArea(rows = rows) with {
+            +(TextArea(rows = rows) with {
                 init()
             })
 
@@ -413,6 +427,29 @@ public abstract class InputComponent : Component {
         get() = element.disabled
         set(value) { element.disabled = value }
 
+    public var readOnly:Boolean
+        get() = element.readOnly
+        set(value) { element.readOnly = value }
+
+
+    public var value:String
+        get() = element.value
+        set(value) { element.value = value }
+
+}
+
+public class TextInput() : InputComponent() {
+
+    override val element: HTMLInputElementWithOnChange =
+            (createElement("input") with {
+                setAttribute("type", "text")
+            }) as HTMLInputElementWithOnChange
+
+    public var onchange:Function0<Unit>
+        get():Function0<Unit> = element.onchange
+        set(value:Function0<Unit>) {
+            element.onchange = value
+        }
 }
 
 public class CheckBox() : InputComponent() {

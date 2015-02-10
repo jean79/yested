@@ -52,6 +52,10 @@ fun createGrid(id: String): Div {
                     +"Columns can optionally support sorting vi provided sort function."
                     br()
                     +"Each cell is renderred vi provided DSL function."
+                    br()
+                    +"Check our "
+                    a(href="#grid") { +"SmartGrid" }
+                    +" for much powerful grid component."
                 }
                 br()
                 h4 { +"Demo" }

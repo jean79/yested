@@ -15,6 +15,7 @@ import net.yested.createElement
 import net.yested.appendComponent
 import net.yested.Fade
 import jquery.jq
+import net.yested.utils.sortable
 
 /**
  * <div role="tabpanel">
