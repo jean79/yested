@@ -9,10 +9,8 @@ import jquery.JQuery
 import org.w3c.dom.Element
 import net.yested.HTMLComponent
 import net.yested.Div
-
-public native fun JQuery.sortable(options: dynamic):Unit = noImpl;
-public native fun JQuery.each(func:(index:Int, element:HTMLElement)->Unit):Unit = noImpl;
-public native fun JQuery.disableSelection():Unit = noImpl;
+import net.yested.utils.disableSelection
+import net.yested.utils.sortable
 
 /**
  * Created by jean on 1.2.2015.
@@ -36,7 +34,6 @@ public abstract class PanelContainer(layoutChangeHandler:Function0<Unit>? = null
                         }
                     }
                 })
-        jq(element).disableSelection()
 
     }
 

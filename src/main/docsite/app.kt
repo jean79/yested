@@ -16,6 +16,7 @@ import bootstrap.effectsPage
 import net.yested.Fade
 import kotlin.js.dom.html.window
 import demo.chartjs.chartJsPage
+import complex.CustomizableGridSection
 
 fun main(args: Array<String>) {
 
@@ -30,6 +31,7 @@ fun main(args: Array<String>) {
 			item(href = "#spinner") { +"Spinner" }
 			item(href = "#effects") { +"Effects" }
             item(href = "#chartjs") { +"ChartJS" }
+            item(href = "#grid") { +"Smart Grid"}
 		}
 	}
 
@@ -52,6 +54,7 @@ fun main(args: Array<String>) {
 			"#spinner" -> divContainer.setChild(createSpinner(), Fade())
 			"#effects" -> divContainer.setChild(effectsPage(), Fade())
             "#chartjs" -> divContainer.setChild(chartJsPage(), Fade())
+            "#grid" -> divContainer.setChild(CustomizableGridSection(), Fade())
 		}
         if (hash.get(0) != previousHash) {
             window.scrollTo(0, 0)
