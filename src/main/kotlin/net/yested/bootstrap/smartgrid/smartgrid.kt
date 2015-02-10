@@ -20,7 +20,6 @@ import net.yested.bootstrap.Align
 import net.yested.bootstrap.glyphicon
 import net.yested.bootstrap.InputField
 import net.yested.utils.on
-import complex.MarketData
 
 public trait CellEditorFactory<TYPE> {
     fun createEditor(width:String, item:TYPE, closeHandler: ()->Unit):HTMLElement
