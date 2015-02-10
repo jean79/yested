@@ -161,6 +161,8 @@ public class Select<T>(val data:List<T>, val inputSize: InputSize = InputSize.DE
 
     private var optionTags:ArrayList<SelectOption<T>> = ArrayList()
 
+    private var callbackIsInvoked = false
+
     public var selectedItems:List<T>
         get() = optionTags.filter { it.tag.selected }.map { it.value }
         set(newData) {
@@ -180,7 +182,11 @@ public class Select<T>(val data:List<T>, val inputSize: InputSize = InputSize.DE
 
     private fun changeSelected() {
         selectedItemsInt = optionTags.filter { it.tag.selected }.map { it.value }
-        onChangeListeners.forEach { it() }
+        if (!callbackIsInvoked) {
+            callbackIsInvoked = true
+            onChangeListeners.forEach { it() }
+            callbackIsInvoked = false
+        }
     }
 
     private fun selectThese(selectedItems:List<T>) {

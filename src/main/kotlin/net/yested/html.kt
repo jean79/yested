@@ -150,7 +150,7 @@ public open class HTMLComponent(tagName:String) : Component, ElementEvents {
         effect.applyOut(this) {
             setChild(content)
             effect.applyIn(this) {
-                callback?.let { callback!!()}
+                callback?.invoke()
             }
         }
     }
