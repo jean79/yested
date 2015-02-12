@@ -105,7 +105,7 @@ public class SmartGrid<TYPE, KEY>(
 
         val cont = Div() with {
             if (maxHeight != null) {
-                "style".."overflow: scroll;  height: ${maxHeight};"
+                "style".."overflow: scroll; overflow-x:auto; overflow-y:auto; height: ${maxHeight};"
             }
         }
         cont.onscroll = {
