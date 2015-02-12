@@ -40,7 +40,9 @@ public trait InputElement<T> {
     fun decorate(valid:Boolean)
 }
 
-public class InputField(val inputSize: InputSize = InputSize.DEFAULT, placeholder:String? = null, type: String = "text") : Component, InputElement<String> {
+public trait InputComponent<T> : InputElement<T>, Component
+
+public class InputField(val inputSize: InputSize = InputSize.DEFAULT, placeholder:String? = null, type: String = "text") : InputComponent<String> {
 
     override val element: HTMLElement = createElement("input")
 
@@ -49,7 +51,7 @@ public class InputField(val inputSize: InputSize = InputSize.DEFAULT, placeholde
     override var disabled:Boolean by BooleanAttribute()
     override var readonly:Boolean by BooleanAttribute()
 
-    private val onChangeListeners: ArrayList<Function0<Unit>> = ArrayList();
+    protected val onChangeListeners: ArrayList<Function0<Unit>> = ArrayList();
     private val onChangeLiveListeners: ArrayList<Function0<Unit>> = ArrayList();
 
     {
@@ -148,12 +150,12 @@ public fun HTMLComponent.btsCheckBox(label:HTMLComponent.()->Unit):Unit {
 
 private data class SelectOption<TT>(val tag:HTMLOptionElement, val value:TT)
 
-public class Select<T>(val data:List<T>, val inputSize: InputSize = InputSize.DEFAULT, multiple:Boolean = false, size:Int = 1, val renderer:(T)->String) : Component {
+public class Select<T>(val data:List<T>, val inputSize: InputSize = InputSize.DEFAULT, multiple:Boolean = false, size:Int = 1, val renderer:(T)->String) : InputComponent<T> {
 
     override val element: HTMLElement = createElement("select")
 
-    public var disabled:Boolean by BooleanAttribute()
-    public var readonly:Boolean by BooleanAttribute()
+    override public var disabled:Boolean by BooleanAttribute()
+    override public var readonly:Boolean by BooleanAttribute()
 
     private val onChangeListeners: ArrayList<Function0<Unit>> = ArrayList();
 
@@ -207,10 +209,23 @@ public class Select<T>(val data:List<T>, val inputSize: InputSize = InputSize.DE
         }
     }
 
-    public fun addOnChangeListener(invoke: () -> Unit) {
+    override public fun addOnChangeListener(invoke: () -> Unit) {
         onChangeListeners.add(invoke)
     }
 
+    override fun addOnChangeLiveListener(invoke: () -> Unit) {
+        throw UnsupportedOperationException()
+    }
+
+    override var value: T
+        get() = selectedItems.first()
+        set(value) {
+            selectedItems = listOf(value)
+        }
+
+    override fun decorate(valid: Boolean) {
+        element.setAttribute("class", if (valid) "form-control" else "form-control has-error")
+    }
 }
 
 /**
