@@ -7,13 +7,19 @@ import net.yested.bootstrap.pageHeader
 import net.yested.bootstrap.Medium
 
 import net.yested.bootstrap.enableScrollSpy
+import net.yested.HTMLComponent
+import net.yested.Component
+import kotlin.js.dom.html.HTMLElement
+import net.yested.with
 
-fun bootstrapPage(): Div {
 
-    enableScrollSpy(id = "bootstrapNavbar")
 
-    return div {
+class BootstrapPage : Component {
 
+    val onAddedToDomListeners: MutableList<() -> Unit> = arrayListOf()
+
+    override val element: HTMLElement = (Div() with {
+        enableScrollSpy(id = "bootstrapNavbar")
         row {
             row {
                 col(Medium(12)) {
@@ -26,12 +32,17 @@ fun bootstrapPage(): Div {
             row {
                 col(Medium(10)) {
                     +createButtons(id = "bootstrapComponents_Buttons")
-					+createSplitButtonDropdown(id = "bootstrapComponents_SplitButtonDropdown")
+                    +createSplitButtonDropdown(id = "bootstrapComponents_SplitButtonDropdown")
                     +createDropDownsSection(id = "bootstrapComponents_Dropdown")
                     +createTypographySection(id = "bootstrapComponents_Typography")
                     +buttonGroupsSection(id = "bootstrapComponents_ButtonGroups")
                     +createForm(id = "bootstrapComponents_Form")
                     +createSelectSection(id = "bootstrapComponents_Select")
+                    + (TagsSection(id = "bootstrapComponents_Tags") with {
+                        onAddedToDomListeners add {
+                            init()
+                        }
+                    })
                     +createInputs(id = "bootstrapComponents_Inputs")
                     +createCheckboxSection(id = "bootstrapComponents_Checkbox")
                     +createGrid(id = "bootstrapComponents_Grid")
@@ -53,12 +64,13 @@ fun bootstrapPage(): Div {
                             clazz = "nav nav-pills nav-stacked affix"
 
                             li { a(href = "#bootstrapComponents_Buttons") { +"Buttons" }; clazz = "active" }
-							li { a(href = "#bootstrapComponents_SplitButtonDropdown") { +"Split button dropdowns " }; clazz = "active" }
+                            li { a(href = "#bootstrapComponents_SplitButtonDropdown") { +"Split button dropdowns " }; clazz = "active" }
                             li { a(href = "#bootstrapComponents_Dropdown") { +"Dropdowns" }; clazz = "active" }
                             li { a(href = "#bootstrapComponents_Typography") { +"Typography" } }
                             li { a(href = "#bootstrapComponents_ButtonGroups") { +"Button Group" } }
                             li { a(href = "#bootstrapComponents_Form") { +"Form" } }
                             li { a(href = "#bootstrapComponents_Select") { +"Select" } }
+                            li { a(href = "#bootstrapComponents_Tags") { +"Tags" } }
                             li { a(href = "#bootstrapComponents_Inputs") { +"Text Input with Validation" } }
                             li { a(href = "#bootstrapComponents_Checkbox") { +"Checkbox" } }
                             li { a(href = "#bootstrapComponents_Grid") { +"Grid" } }
@@ -77,5 +89,5 @@ fun bootstrapPage(): Div {
                 }
             }
         }
-    }
+    }).element
 }
