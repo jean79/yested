@@ -42,7 +42,7 @@ public trait InputElement<T> {
 
 public trait InputComponent<T> : InputElement<T>, Component
 
-public class InputField(val inputSize: InputSize = InputSize.DEFAULT, placeholder:String? = null, type: String = "text") : InputComponent<String> {
+public open class InputField(val inputSize: InputSize = InputSize.DEFAULT, placeholder:String? = null, type: String = "text") : InputComponent<String> {
 
     override val element: HTMLElement = createElement("input")
 

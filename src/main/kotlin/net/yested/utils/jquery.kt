@@ -11,4 +11,5 @@ public native fun JQuery.sortable(options: dynamic):Unit = noImpl;
 public native fun JQuery.each(func:(index:Int, element:HTMLElement)->Unit):Unit = noImpl;
 public native fun JQuery.disableSelection():Unit = noImpl;
 public native fun JQuery.on(event:String, handler:(dynamic)->Unit): Unit = noImpl
+public native fun JQuery.off(event:String): Unit = noImpl
 public native fun JQuery.keypress(handler: (event:dynamic) -> Unit): Unit = noImpl

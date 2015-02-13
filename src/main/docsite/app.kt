@@ -2,7 +2,6 @@ import net.yested.bootstrap.page
 import net.yested.bootstrap.Navbar
 import net.yested.registerHashChangeListener
 import net.yested.div
-import bootstrap.bootstrapPage
 import basics.basicPage
 import html.htmlPage
 import ajax.ajaxPage
@@ -17,6 +16,7 @@ import net.yested.Fade
 import kotlin.js.dom.html.window
 import demo.chartjs.chartJsPage
 import complex.CustomizableGridSection
+import bootstrap.BootstrapPage
 
 fun main(args: Array<String>) {
 
@@ -46,7 +46,10 @@ fun main(args: Array<String>) {
 			"#html" -> divContainer.setChild(htmlPage(), Fade())
 			"#bootstrapComponents" -> {
 				if (hash.get(0) != previousHash) {
-					divContainer.setChild(bootstrapPage(), Fade())
+                    val bootstrapPage = BootstrapPage()
+                    divContainer.setChild(bootstrapPage, Fade()) {
+                        bootstrapPage.onAddedToDomListeners.forEach { it.invoke() }
+                    }
 				}
 			}
 			"#ajax" -> divContainer.setChild(ajaxPage(), Fade())
