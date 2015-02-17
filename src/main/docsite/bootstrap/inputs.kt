@@ -14,10 +14,11 @@ import net.yested.bootstrap.BtsButton
 import net.yested.bootstrap.Medium
 import net.yested.with
 import net.yested.bootstrap.InputField
+import net.yested.bootstrap.StringInputField
 
 fun createInputs(id: String): Div {
 
-    val textInput = InputField(placeholder = "Mandatory field")
+    val textInput = StringInputField(placeholder = "Mandatory field")
 
     val validator = Validator(textInput, errorText = "At least 3 chars!!") { value -> value.size > 2 }
 
@@ -54,10 +55,10 @@ Please note that validator is also attached to form item.
                         +button
                     }
                     item(label = { +"Disabled input" }) {
-                        +(InputField() with { value = "Some value"; disabled = true })
+                        +(StringInputField() with { data = "Some value"; disabled = true })
                     }
                     item(label = { +"Readonly input" }) {
-                        +(InputField() with { value = "Some value"; readonly = true })
+                        +(StringInputField() with { data = "Some value"; readOnly = true })
                     }
                 }
             }

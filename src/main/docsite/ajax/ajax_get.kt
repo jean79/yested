@@ -21,6 +21,7 @@ import net.yested.bootstrap.Medium
 import net.yested.Fade
 import net.yested.bootstrap.InputField
 import net.yested.bootstrap.FormStyle
+import net.yested.bootstrap.StringInputField
 
 /**
  * Created by jean on 24.12.2014.
@@ -79,7 +80,7 @@ native trait WeatherData {
 
 fun createAjaxGetSection(): Div {
 
-    val textInput = InputField(placeholder = "Type city name and press Enter")
+    val textInput = StringInputField(placeholder = "Type city name and press Enter")
     val validator = Validator(inputElement = textInput, errorText = "Enter at least 3 characters", validator = { it.length() > 2})
     val temperatureSpan = Div()
 

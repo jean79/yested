@@ -7,13 +7,14 @@ import kotlin.dom.first
 import jquery.jq
 import jquery.JQuery
 import org.w3c.dom.Element
-import net.yested.bootstrap.InputElement
 import java.util.ArrayList
 import kotlin.js.dom.html.HTMLInputElement
 import org.w3c.dom.Node
 import kotlin.js.dom.html.HTMLTextAreaElement
 import kotlin.js.dom.html.CSSStyleDeclaration
 import kotlin.js.dom.html.Stylesheet
+import kotlin.properties.Delegates
+
 
 public class Attribute(val attributeName:String? = null, val element:HTMLElement? = null) {
 
@@ -304,17 +305,17 @@ public open class HTMLComponent(tagName:String, htmlElement:HTMLElement? = null)
 
 }
 
-public class TextArea(rows:Int) : Component, ElementEvents {
+public class TextArea(rows:Int) : ObservableInput<String>(), ElementEvents {
+
+    public var textContent: String
+        get() = element.textContent
+        set(value) { element.textContent = value }
 
     override val element = createElement("textarea") as HTMLTextAreaElement
 
     public var style:String by Attribute()
     public var id:String by Attribute()
     public var clazz:String by Attribute("class")
-
-    public var value:String
-        get() = element.textContent
-        set(value) { element.textContent = value }
 
     public var rows:Int
         get() = parseInt(element.getAttribute("rows"))
@@ -324,9 +325,17 @@ public class TextArea(rows:Int) : Component, ElementEvents {
         this.rows = rows
     }
 
+    override fun clear() {
+        data = ""
+    }
+
     public fun scrollDown() {
         element.scrollTop = element.scrollHeight - element.clientHeight
     }
+
+    override var data: String
+        get() = textContent
+        set(value) {this.textContent = value}
 
 }
 
@@ -411,60 +420,95 @@ public class DL : HTMLComponent("dl") {
 
 }
 
-native trait HTMLInputElementWithOnChange : HTMLInputElement {
-    public native var onchange: () -> Unit
+public native var HTMLElement.onchange: (() -> Unit)?
+    get() = noImpl
+    set(value) = noImpl
+
+
+public trait InputComponent<T> : Component {
+    var data: T
+    fun addOnChangeListener(invoke:()->Unit)
+    fun addOnChangeLiveListener(invoke:()->Unit)
+    fun decorate(valid:Boolean)
+
+    fun clear()
 }
 
-public abstract class InputComponent : Component {
-
+public abstract class InputElementComponent<T>(): ObservableInput<T>() {
     abstract override val element: HTMLInputElement
 
-    public var checked:Boolean
-        get() = element.checked
-        set(value) { element.checked = value }
-
-    public var disabled:Boolean
-        get() = element.disabled
-        set(value) { element.disabled = value }
-
-    public var readOnly:Boolean
-        get() = element.readOnly
-        set(value) { element.readOnly = value }
-
-
-    public var value:String
+    public open var value: String
         get() = element.value
         set(value) { element.value = value }
 
+    public open var disabled: Boolean
+        get() = element.disabled
+        set(value) { element.disabled = value }
+
+    public open var readOnly: Boolean
+        get() = element.readOnly
+        set(value) { element.readOnly = value }
 }
 
-public class TextInput() : InputComponent() {
+public abstract class ObservableInput<T>(): InputComponent<T> {
+    protected val onChangeListeners: ArrayList<Function0<Unit>> = ArrayList();
+    protected val onChangeLiveListeners: ArrayList<Function0<Unit>> = ArrayList();
+    override fun addOnChangeListener(invoke: () -> Unit) {
+        onChangeListeners.add(invoke)
+        // HACK: If the following code is placed into the constructor, it throws NPE because element is NULL there.
+        if (element.onchange == null) {
+            element.onchange = {
+                onChangeListeners.forEach { it() }
+                onChangeLiveListeners.forEach { it() }
+            }
+            element.onkeyup = {
+                onChangeLiveListeners.forEach { it() }
+            }
+        }
+    }
 
-    override val element: HTMLInputElementWithOnChange =
+    override fun addOnChangeLiveListener(invoke: () -> Unit) {
+        onChangeLiveListeners.add(invoke)
+    }
+
+    override fun decorate(valid: Boolean) {
+    }
+}
+
+public class TextInput() : InputElementComponent<String>() {
+
+    override fun clear() {
+        data = ""
+    }
+
+    override var data: String
+        get() = value
+        set(value) {this.value = value}
+
+    override val element: HTMLInputElement =
             (createElement("input") with {
                 setAttribute("type", "text")
-            }) as HTMLInputElementWithOnChange
-
-    public var onchange:Function0<Unit>
-        get():Function0<Unit> = element.onchange
-        set(value:Function0<Unit>) {
-            element.onchange = value
-        }
+            }) as HTMLInputElement
 }
 
-public class CheckBox() : InputComponent() {
+open public class CheckBox() : InputElementComponent<Boolean>() {
 
-    override val element: HTMLInputElementWithOnChange =
+    override fun clear() {
+        data = false
+    }
+
+    override val element: HTMLInputElement =
             (createElement("input") with {
                 setAttribute("type", "checkbox")
-            }) as HTMLInputElementWithOnChange
+            }) as HTMLInputElement
 
-    public var onchange:Function0<Unit>
-        get():Function0<Unit> = element.onchange
-        set(value:Function0<Unit>) {
-            element.onchange = value
-        }
+    public open var checked: Boolean
+        get() = element.checked
+        set(value) { element.checked = value }
 
+    override var data: Boolean
+        get() = checked
+        set(value) {this.checked = value}
 }
 
 native trait Context { }

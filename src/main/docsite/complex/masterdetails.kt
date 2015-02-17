@@ -24,6 +24,7 @@ import kotlin.js.dom.html.HTMLElement
 import java.util.ArrayList
 import net.yested.bootstrap.InputField
 import net.yested.compareByValue
+import net.yested.bootstrap.StringInputField
 
 enum class Continent(val label:String) {
     EUROPE : Continent("Europe");
@@ -39,9 +40,9 @@ class DetailScreen(
         val saveHandler:(City)->Unit,
         val cancelHandler:()->Unit) : Component {
 
-    val textInput = InputField(placeholder = "City name")
+    val textInput = StringInputField(placeholder = "City name")
     val validator = Validator(inputElement = textInput, errorText = "Name is mandatory", validator = { it.size > 3})
-    val select = Select(data = Continent.values().toList(), renderer = { it.label })
+    val select = Select(options = Continent.values().toList(), renderer = { it.label })
 
     fun save() {
         if (validator.isValid()) {
