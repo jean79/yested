@@ -31,7 +31,7 @@ fun createRowPanelContainerSection(id: String): Div {
 
     fun addPanel(size:DeviceSize, panelStyle: PanelStyle) {
 
-        val textArea = TextArea(2) with  { value = "Resize me!" }
+        val textArea = TextArea(2) with  { data = "Resize me!" }
         val panel = Panel(style = panelStyle, dismissible = true) with {
             heading { +"A panel ${counter++} (${size})" }
             content { +textArea }
@@ -46,10 +46,10 @@ fun createRowPanelContainerSection(id: String): Div {
     addPanel(Medium(4), PanelStyle.INFO)
 
     val sizes = arrayListOf(Medium(4), Medium(6), Medium(8))
-    val selectSize = Select<DeviceSize>(data = sizes) { "${it.size}" }
+    val selectSize = Select<DeviceSize>(options = sizes) { "${it.size}" }
 
     val looks = PanelStyle.values().toList()
-    val selectLook = Select(data = looks) { it.name() }
+    val selectLook = Select(options = looks) { it.name() }
 
     return div(id = id) {
         row {

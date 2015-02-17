@@ -20,7 +20,6 @@ import net.yested.bootstrap.Align
 import net.yested.bootstrap.glyphicon
 import net.yested.bootstrap.InputField
 import net.yested.utils.on
-import complex.MarketData
 
 public trait CellEditorFactory<TYPE> {
     fun createEditor(width:String, item:TYPE, closeHandler: ()->Unit):HTMLElement
@@ -106,7 +105,7 @@ public class SmartGrid<TYPE, KEY>(
 
         val cont = Div() with {
             if (maxHeight != null) {
-                "style".."overflow: scroll;  height: ${maxHeight};"
+                "style".."overflow: scroll; overflow-x:auto; overflow-y:auto; height: ${maxHeight};"
             }
         }
         cont.onscroll = {

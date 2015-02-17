@@ -20,10 +20,11 @@ import kotlin.js.dom.html.HTMLElement
 import net.yested.createElement
 import net.yested.appendComponent
 import net.yested.BooleanAttribute
-
-native trait HTMLInputElementWithOnChange : HTMLInputElement {
-    public native var onchange: () -> Unit
-}
+import net.yested.InputComponent
+import net.yested.CheckBox
+import net.yested.ObservableInput
+import net.yested.onchange
+import net.yested.InputElementComponent
 
 public enum class InputSize(val code:String) {
     DEFAULT: InputSize("")
@@ -31,43 +32,16 @@ public enum class InputSize(val code:String) {
     SMALL: InputSize("input-sm")
 }
 
-public trait InputElement<T> {
-    fun addOnChangeListener(invoke:()->Unit)
-    fun addOnChangeLiveListener(invoke:()->Unit)
-    var value:T
-    var disabled:Boolean
-    var readonly:Boolean
-    fun decorate(valid:Boolean)
-}
+public abstract class InputField<T>(val inputSize: InputSize = InputSize.DEFAULT, placeholder:String? = null, type: String) : InputElementComponent<T>() {
 
-public class InputField(val inputSize: InputSize = InputSize.DEFAULT, placeholder:String? = null, type: String = "text") : Component, InputElement<String> {
+    override val element: HTMLInputElement = createElement("input") as HTMLInputElement
 
-    override val element: HTMLElement = createElement("input")
+    public var id: String by Attribute();
 
-    public var id: String by Attribute()
-
-    override var disabled:Boolean by BooleanAttribute()
-    override var readonly:Boolean by BooleanAttribute()
-
-    private val onChangeListeners: ArrayList<Function0<Unit>> = ArrayList();
-    private val onChangeLiveListeners: ArrayList<Function0<Unit>> = ArrayList();
 
     {
         element.setAttribute("class", "form-control ${inputSize.code}")
-        (element as HTMLInputElementWithOnChange).onchange = {
-            onChangeListeners.forEach { it() }
-            onChangeLiveListeners.forEach { it() }
-        }
-        element.onkeyup = {
-            onChangeLiveListeners.forEach { it() }
-        }
     }
-
-    override var value:String
-        get():String = (element as HTMLInputElement).value
-        set(value:String) {
-            (element as HTMLInputElement).value = value
-        }
 
     override fun decorate(valid: Boolean) {
         element.setAttribute("class", if (valid) "form-control" else "form-control has-error")
@@ -79,67 +53,83 @@ public class InputField(val inputSize: InputSize = InputSize.DEFAULT, placeholde
             element.setAttribute("placeholder", placeholder)
         }
     }
-
-    override fun addOnChangeListener(invoke: () -> Unit) {
-        onChangeListeners.add(invoke)
-    }
-
-    override fun addOnChangeLiveListener(invoke: () -> Unit) {
-        onChangeLiveListeners.add(invoke)
-    }
-
 }
 
-public fun HTMLComponent.inputField(placeholder: String? = null, init: InputField.() -> Unit):Unit {
+public class StringInputField(inputSize: InputSize = InputSize.DEFAULT, placeholder:String? = null) :
+        InputField<String>(inputSize, placeholder, type = "text") {
+
+    override fun clear() {
+        data = ""
+    }
+
+    override var data: String
+        get() = value
+        set(value) {this.value = value}
+}
+
+public class IntInputField(inputSize: InputSize = InputSize.DEFAULT, placeholder:String? = null) :
+        InputField<Int?>(inputSize, placeholder, type = "number") {
+
+    override fun clear() {
+        data = null
+    }
+
+    override var data: Int?
+        get() = if (value.isEmpty()) null else parseInt(value)
+        set(value) {this.value = if (value == null) "" else value.toString()}
+}
+
+public class FloatInputField(inputSize: InputSize = InputSize.DEFAULT, placeholder:String? = null) :
+        InputField<Float?>(inputSize, placeholder, type = "number") {
+    override fun clear() {
+        data = null
+    }
+
+    override var data: Float?
+        get() = if (value.isEmpty()) null else safeParseDouble(value)?.toFloat() ?: error("cannot convert $value to Float")
+        set(value) {this.value = if (value == null) "" else value.toString()}
+}
+
+public class ColorInputField(inputSize: InputSize = InputSize.DEFAULT, placeholder:String? = null) :
+        InputField<String?>(inputSize, placeholder, type = "color") {
+    override fun clear() {
+        data = null
+    }
+
+    override var data: String?
+        get() = value
+        set(value) {this.value = value ?: ""
+        }
+}
+
+/*public fun HTMLComponent.inputField(placeholder: String? = null, init: InputField.() -> Unit):Unit {
     +(InputField(placeholder = placeholder) with  { init() })
-}
+}*/
 
-public class BtsCheckBox(private val label:HTMLComponent.()->Unit) : Component, InputElement<Boolean> {
+public class BtsCheckBox(private val label:HTMLComponent.()->Unit) : CheckBox() {
 
-    private val inputCheckbox : HTMLInputElementWithOnChange = (createElement("input") with {
+    private val inputCheckbox = (createElement("input") with {
                                                                     setAttribute("type", "checkbox")
-                                                                }) as HTMLInputElementWithOnChange
+                                                                }) as HTMLInputElement
 
-    override val element: HTMLElement =
-            createElement("div") with {
+    override val element =
+            (createElement("div") with {
                 setAttribute("class", "checkbox")
                 appendChild(createElement("label") with {
                     appendChild(inputCheckbox)
                     appendChild((Span() with label).element)
                 })
-            }
+            }) as HTMLInputElement
 
-    override var disabled:Boolean by BooleanAttribute(element = inputCheckbox)
-    override var readonly:Boolean by BooleanAttribute(element = inputCheckbox)
+    public override var disabled:Boolean
+        get() = inputCheckbox.disabled
+        set(value) { inputCheckbox.disabled = value }
 
-    private val onChangeListeners: ArrayList<Function0<Unit>> = ArrayList();
-    private val onChangeLiveListeners: ArrayList<Function0<Unit>> = ArrayList();
-
-    {
-        inputCheckbox.onchange = {
-            onChangeListeners.forEach { it() }
-            onChangeLiveListeners.forEach { it() }
-        }
-    }
-
-    override var value:Boolean
+    override var checked: Boolean
         get():Boolean = inputCheckbox.checked
         set(value:Boolean) {
             inputCheckbox.checked = value
         }
-
-    override fun decorate(valid: Boolean) {
-        //element.setAttribute("class", if (valid) "form-control" else "form-control has-error")
-    }
-
-    override fun addOnChangeListener(invoke: () -> Unit) {
-        onChangeListeners.add(invoke)
-    }
-
-    override fun addOnChangeLiveListener(invoke: () -> Unit) {
-        onChangeLiveListeners.add(invoke)
-    }
-
 }
 
 public fun HTMLComponent.btsCheckBox(label:HTMLComponent.()->Unit):Unit {
@@ -148,27 +138,26 @@ public fun HTMLComponent.btsCheckBox(label:HTMLComponent.()->Unit):Unit {
 
 private data class SelectOption<TT>(val tag:HTMLOptionElement, val value:TT)
 
-public class Select<T>(val data:List<T>, val inputSize: InputSize = InputSize.DEFAULT, multiple:Boolean = false, size:Int = 1, val renderer:(T)->String) : Component {
+public class Select<T>(val options: List<T>, val inputSize: InputSize = InputSize.DEFAULT, multiple:Boolean = false, size:Int = 1, val renderer:(T)->String) : ObservableInput<T>() {
 
-    override val element: HTMLElement = createElement("select")
+    override val element: HTMLSelectElement = createElement("select") as HTMLSelectElement
 
-    public var disabled:Boolean by BooleanAttribute()
-    public var readonly:Boolean by BooleanAttribute()
-
-    private val onChangeListeners: ArrayList<Function0<Unit>> = ArrayList();
-
-    private var selectedItemsInt:List<T> = listOf()
+    private var selectedItemsInt:List<T> = emptyList()
 
     private var optionTags:ArrayList<SelectOption<T>> = ArrayList()
 
     private var callbackIsInvoked = false
 
-    public var selectedItems:List<T>
+    public var selectedItems: List<T>
         get() = optionTags.filter { it.tag.selected }.map { it.value }
         set(newData) {
             selectThese(newData)
             changeSelected()
         }
+
+    override fun clear() {
+        selectedItems = emptyList()
+    }
 
     {
         element.setAttribute("class", "form-control ${inputSize.code}")
@@ -177,7 +166,7 @@ public class Select<T>(val data:List<T>, val inputSize: InputSize = InputSize.DE
         if (multiple) {
             element.setAttribute("multiple", "multiple")
         }
-        (element as HTMLInputElementWithOnChange).onchange = { changeSelected() }
+        (element).onchange = { changeSelected() }
     }
 
     private fun changeSelected() {
@@ -197,8 +186,8 @@ public class Select<T>(val data:List<T>, val inputSize: InputSize = InputSize.DE
 
     private fun generateOptions() {
         optionTags =  ArrayList()
-        selectedItemsInt = listOf()
-        data.forEach {
+        selectedItemsInt = emptyList()
+        options.forEach {
             val optionTag = HTMLComponent("option") with { +renderer(it) }
             val value:T = it
             val selectOption = SelectOption(tag = optionTag.element as HTMLOptionElement, value = value)
@@ -207,10 +196,15 @@ public class Select<T>(val data:List<T>, val inputSize: InputSize = InputSize.DE
         }
     }
 
-    public fun addOnChangeListener(invoke: () -> Unit) {
-        onChangeListeners.add(invoke)
-    }
+    override public var data: T
+        get() = selectedItems.first()
+        set(value) {
+            selectedItems = listOf(value)
+        }
 
+    override fun decorate(valid: Boolean) {
+        element.setAttribute("class", if (valid) "form-control" else "form-control has-error")
+    }
 }
 
 /**
@@ -220,7 +214,7 @@ public class Select<T>(val data:List<T>, val inputSize: InputSize = InputSize.DE
 <div class="input-group-addon">.00</div>
 </div>
  */
-public fun HTMLComponent.inputAddOn(prefix:String? = null, suffix:String? = null, textInput : InputField):Unit =
+public fun HTMLComponent.inputAddOn<T>(prefix:String? = null, suffix:String? = null, textInput : InputField<T>):Unit =
     +(
         div(clazz = "input-group") {
             prefix?.let {

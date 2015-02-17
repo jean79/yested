@@ -18,7 +18,7 @@ fun elementEventsSection(): Div {
     val capturedEvents = TextArea(rows = 8) with { clazz = "form-control" }
 
     fun addMessage(eventName:String) {
-        capturedEvents.value += "${index++} - ${eventName}\n"
+        capturedEvents.data += "${index++} - ${eventName}\n"
         capturedEvents.scrollDown()
     }
 
@@ -42,7 +42,7 @@ fun elementEventsSection(): Div {
                 div {
                     textArea(rows = 3) {
                         clazz = "form-control"
-                        value = "Play with this TextArea to see all the events dispatched."
+                        data = "Play with this TextArea to see all the events dispatched."
                         onmouseover = { addMessage("onmouseover") }
                         onmouseout = { addMessage("onmouseout") }
                         onclick = { addMessage("onclick") }

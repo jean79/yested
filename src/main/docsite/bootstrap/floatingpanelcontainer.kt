@@ -18,7 +18,7 @@ import net.yested.bootstrap.alert
 import net.yested.bootstrap.AlertStyle
 import net.yested.TextArea
 import net.yested.bootstrap.FloatingPanelContainer
-import net.yested.bootstrap.InputField
+import net.yested.bootstrap.StringInputField
 
 /**
  * Created by jean on 1.2.2015.
@@ -31,7 +31,7 @@ fun createFloatingPanelContainerSection(id: String): Div {
 
     fun addPanel(size:String, panelStyle: PanelStyle) {
 
-        val textArea = TextArea(2) with  { value = "Resize me!" }
+        val textArea = TextArea(2) with  { data = "Resize me!" }
         val panel = Panel(style = panelStyle, dismissible = true) with {
             heading { +"Some panel ${counter++} (${size})" }
             content { +textArea }
@@ -46,8 +46,8 @@ fun createFloatingPanelContainerSection(id: String): Div {
     addPanel("400px", PanelStyle.INFO)
 
     val looks = PanelStyle.values().toList()
-    val inputField = InputField(placeholder = "Size in Px") with { value = "150px" }
-    val selectLook = Select(data = looks) { it.name() }
+    val inputField = StringInputField(placeholder = "Size in Px") with { data = "150px" }
+    val selectLook = Select(options = looks) { it.name() }
 
     return div(id = id) {
         row {

@@ -80,7 +80,7 @@ fun htmlSection(): Div {
                     h3 { +"H3" }
                     h4 { +"H4" }
                     h5 { +"H5" }
-                    checkbox { onchange = { println("changed to: ${this.checked}")} }
+                    checkbox { addOnChangeListener { println("changed to: ${this.checked}")} }
                     br()
                     button(label = { +"Press me" },
                             type = ButtonType.BUTTON,
