@@ -2,7 +2,6 @@ package bootstrap
 
 import net.yested.div
 import net.yested.Div
-import net.yested.bootstrap.inputField
 import net.yested.bootstrap.tabs
 import net.yested.text
 import net.yested.bootstrap.row
@@ -15,6 +14,7 @@ import net.yested.bootstrap.ButtonSize
 import net.yested.bootstrap.BtsCheckBox
 import net.yested.bootstrap.btsForm
 import net.yested.bootstrap.FormStyle
+import net.yested.bootstrap.StringInputField
 
 /**
  * Created by jean on 20.12.2014.
@@ -23,12 +23,12 @@ fun createTabs(id: String): Div {
 
     var tabIndex = 3
 
-    val dismissibleCheckbox = BtsCheckBox(label = {+"Dismissible" }) with { value = true }
+    val dismissibleCheckbox = BtsCheckBox(label = {+"Dismissible" }) with { data = true }
 
     val tabs = Tabs(canChangeOrder = true) with {
         tab(dismissible = true, header = text("First")) {
             div {
-                inputField(placeholder = "Placeholder 1") { }
+                +StringInputField(placeholder = "Placeholder 1")
             }
         }
         tab(dismissible = true, header = text("Second")) {
@@ -42,7 +42,7 @@ fun createTabs(id: String): Div {
     }
 
     fun addTab(tabIndex:Int) {
-        val tabId = tabs.tab(dismissible = dismissibleCheckbox.value, header = { +"Tab${tabIndex}" }) {
+        val tabId = tabs.tab(dismissible = dismissibleCheckbox.data, header = { +"Tab${tabIndex}" }) {
             div {
                 +"Content of tab: ${tabIndex}"
             }

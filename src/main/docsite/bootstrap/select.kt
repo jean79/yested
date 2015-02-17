@@ -26,13 +26,13 @@ fun createSelectSection(id: String): Div {
             Car("Citroen", "Purple"))
 
     val resultSingleSelect = Div()
-    val singleSelect = Select(data = someData, renderer = { "${it.model} (${it.color})" })
+    val singleSelect = Select(options = someData, renderer = { "${it.model} (${it.color})" })
     singleSelect.addOnChangeListener {
         resultSingleSelect.setContent( "Selected: ${singleSelect.selectedItems.first().model}")
     }
 
     val resultMultiSelect = Div()
-    val multiSelect = Select(data = someData, multiple = true, size = 4, renderer = { "${it.model} (${it.color})" })
+    val multiSelect = Select(options = someData, multiple = true, size = 4, renderer = { "${it.model} (${it.color})" })
     multiSelect.addOnChangeListener {
         resultMultiSelect.setContent( "Selected: " + multiSelect.selectedItems.map { "${it.model}" }.join(" and "))
     }

@@ -7,10 +7,10 @@ import net.yested.bootstrap.pageHeader
 import net.yested.Div
 import net.yested.bootstrap.navbar
 import net.yested.bootstrap.glyphicon
-import net.yested.bootstrap.inputField
 import net.yested.bootstrap.btsButton
 import net.yested.ButtonType
 import net.yested.bootstrap.NavbarLook
+import net.yested.bootstrap.StringInputField
 
 fun createNavbarSection(id: String): Div {
 
@@ -87,7 +87,7 @@ fun createNavbarSection(id: String): Div {
                     left {
                         form { "class".."navbar-form"
                             div(clazz = "form-group") {
-                                inputField(placeholder = "username") {}
+                                +StringInputField(placeholder = "username")
                             }
                             btsButton(type = ButtonType.SUBMIT, label = { +"Login"}) {}
                         }

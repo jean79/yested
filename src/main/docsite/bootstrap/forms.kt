@@ -2,7 +2,6 @@ package bootstrap
 
 import net.yested.div
 import net.yested.Div
-import net.yested.bootstrap.inputField
 import net.yested.bootstrap.row
 import net.yested.bootstrap.pageHeader
 import net.yested.bootstrap.btsForm
@@ -10,6 +9,7 @@ import net.yested.bootstrap.inputAddOn
 import net.yested.bootstrap.Medium
 import net.yested.bootstrap.FormStyle
 import net.yested.bootstrap.InputField
+import net.yested.bootstrap.StringInputField
 
 fun createForm(id: String): Div {
 
@@ -30,10 +30,10 @@ of label and input for Horizontal layout."""
                 h4 { +"Demo" }
                 btsForm(formStyle = FormStyle.DEFAULT) {
                     item(label = { +"Username" }) {
-                        inputField(placeholder = "Enter your username") { }
+                        +StringInputField(placeholder = "Enter your username")
                     }
                     item(label = { +"Salary" }) {
-                        inputAddOn(prefix = "$", suffix = ".00", textInput = InputField(placeholder = "Salary") )
+                        inputAddOn(prefix = "$", suffix = ".00", textInput = StringInputField(placeholder = "Salary") )
                     }
                 }
             }

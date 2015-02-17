@@ -2,7 +2,6 @@ package complex
 
 import net.yested.div
 import net.yested.Div
-import net.yested.bootstrap.inputField
 import net.yested.bootstrap.tabs
 import net.yested.text
 import net.yested.bootstrap.row

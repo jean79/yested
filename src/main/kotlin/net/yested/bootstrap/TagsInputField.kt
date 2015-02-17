@@ -39,7 +39,10 @@ private fun tagsInputBeforeEventHandler<T>(event: TagsInputBeforeEvent<T>, func:
 public class TagsInputField<T>(val textFactory: (T) -> String = {it.toString()},
                                val typeFactory: (T) -> TagsInputFieldType = {TagsInputFieldType.DEFAULT},
                                val idFactory: (T) -> Any = {it},
-                               inputSize: InputSize = InputSize.DEFAULT) : InputField(inputSize, placeholder = null, type = "text"){
+                               inputSize: InputSize = InputSize.DEFAULT) : InputField<Array<T>>(inputSize, placeholder = null, type = "text"){
+    override var data: Array<T>
+        get() = tags
+        set(value) {tags = value}
 
     public var maxTagCount: Int? = null
     public var onAddExistingTag: (T, JQuery) -> Unit = {item, jqTag -> jqTag.hide {jqTag.fadeIn(400, {})}}
@@ -68,6 +71,10 @@ public class TagsInputField<T>(val textFactory: (T) -> String = {it.toString()},
 
     public fun removeAll() {
         jq(this.element).tagsinput("removeAll")
+    }
+
+    override fun clear() {
+        removeAll()
     }
 
     public fun focus() {

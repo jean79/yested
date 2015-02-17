@@ -31,6 +31,8 @@ package net.yested.bootstrap
 import net.yested.HTMLComponent
 import net.yested.Span
 import net.yested.with
+import net.yested.ObservableInput
+import net.yested.InputComponent
 
 public trait ValidatorI {
     fun onchange(invoke:(valid:Boolean)->Unit)
@@ -38,7 +40,7 @@ public trait ValidatorI {
     val errorText:String
 }
 
-public class Validator<T>(val inputElement: InputElement<T>, override val errorText:String, val validator:(value:T)->Boolean) : ValidatorI {
+public class Validator<T>(val inputElement: InputComponent<T>, override val errorText:String, val validator:(value:T)->Boolean) : ValidatorI {
 
     private val onChangeListeners: java.util.ArrayList<Function1<Boolean, Unit>> = java.util.ArrayList();
 
@@ -54,7 +56,7 @@ public class Validator<T>(val inputElement: InputElement<T>, override val errorT
     }
 
     private fun revalidate():Boolean =
-        validator(inputElement.value) with {
+        validator(inputElement.data) with {
             for (listener in onChangeListeners) {
                 listener(this)
             }

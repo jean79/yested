@@ -10,6 +10,8 @@ import net.yested.bootstrap.btsButton
 import net.yested.ButtonType
 import net.yested.bootstrap.ButtonLook
 import net.yested.bootstrap.ButtonSize
+import net.yested.TextInput
+import net.yested.bootstrap.StringInputField
 
 /**
  * Opens configuration dialog for SmartGrid
@@ -41,7 +43,7 @@ fun <T> openConfigurationDialog(
         onclick = { checkbox.checked = !checkbox.checked }
     }
 
-    val inputField = InputField()
+    val inputField = StringInputField()
 
     fun setColumnsData() {
         val text = inputField.value.toLowerCase()

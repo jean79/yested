@@ -21,7 +21,7 @@ fun createCheckboxSection(id:String): Div {
     val checkbox = BtsCheckBox() { +"Select me" }
 
     fun checkboxClicked() {
-        placeholder.setContent("Is checkbox checked: ${if (checkbox.value) "Yes" else "No"}")
+        placeholder.setContent("Is checkbox checked: ${if (checkbox.checked) "Yes" else "No"}")
     }
 
     checkbox.addOnChangeListener { checkboxClicked() }
@@ -51,7 +51,7 @@ fun createCheckboxSection(id:String): Div {
 val checkbox = BtsCheckBox() { +"Select me" }
 
 fun checkboxClicked() {
-    placeholder.setContent("Is checkbox checked: ${if (checkbox.value) "Yes" else "No"}")
+    placeholder.setContent("Is checkbox checked: ${if (checkbox.checked) "Yes" else "No"}")
 }
 
 checkbox.addOnChangeListener { checkboxClicked() }

@@ -10,9 +10,9 @@ import net.yested.bootstrap.ButtonLook
 import net.yested.with
 import net.yested.bootstrap.btsForm
 import net.yested.bootstrap.btsButton
-import net.yested.bootstrap.inputField
 import net.yested.bootstrap.Medium
 import net.yested.bootstrap.DialogSize
+import net.yested.bootstrap.StringInputField
 
 fun createDialogs(id: String): Div {
 
@@ -23,7 +23,9 @@ fun createDialogs(id: String): Div {
         body {
             btsForm {
                 item(forId = "nameId", label = { + "Name" }) {
-                    inputField(placeholder = "Name") { this.id = "nameId"}
+                    +(StringInputField(placeholder = "Name") with {
+                        this.id = "nameId"
+                    })
                 }
             }
         }
