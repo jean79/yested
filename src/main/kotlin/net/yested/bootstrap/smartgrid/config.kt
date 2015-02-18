@@ -46,7 +46,7 @@ fun <T> openConfigurationDialog(
     val inputField = StringInputField()
 
     fun setColumnsData() {
-        val text = inputField.value.toLowerCase()
+        val text = inputField.data.toLowerCase()
         if (text.length() > 0) {
             listGroup.setData( sortedColumns.filter { it.label.toLowerCase().contains(text) })
         } else {
