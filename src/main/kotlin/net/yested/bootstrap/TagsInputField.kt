@@ -8,6 +8,7 @@ import net.yested.hide
 import net.yested.fadeIn
 import net.yested.utils.on
 import net.yested.utils.off
+import kotlin.js.dom.html.HTMLInputElement
 
 public enum class TagsInputFieldType(val className: String) {
     INFO: TagsInputFieldType("info")
@@ -62,14 +63,23 @@ public class TagsInputField<T>(val textFactory: (T) -> String = {it.toString()},
     }
 
     public fun add(newElem: T) {
+        if (!initialized) {
+            return
+        }
         jq(this.element).tagsinput("add", newElem)
     }
 
     public fun remove(newElem: T) {
+        if (!initialized) {
+            return
+        }
         jq(this.element).tagsinput("remove", newElem)
     }
 
     public fun removeAll() {
+        if (!initialized) {
+            return
+        }
         jq(this.element).tagsinput("removeAll")
     }
 
@@ -78,16 +88,30 @@ public class TagsInputField<T>(val textFactory: (T) -> String = {it.toString()},
     }
 
     public fun focus() {
+        if (!initialized) {
+            return
+        }
         jq(this.element).tagsinput("focus")
     }
 
-    public fun input(): JQuery = jq(this.element).tagsinput("input")
+    public fun input(): JQuery =
+            if (!initialized) {
+                jq(this.element)
+            } else {
+                jq(this.element).tagsinput("input")
+            }
 
     public fun refresh() {
+        if (!initialized) {
+            return
+        }
         jq(this.element).tagsinput("refresh")
     }
 
     public fun destroy() {
+        if (!initialized) {
+            return
+        }
         val jqElement = jq(this.element);
         jqElement.tagsinput("destroy")
         jqElement.off("beforeItemAdd")
@@ -98,6 +122,9 @@ public class TagsInputField<T>(val textFactory: (T) -> String = {it.toString()},
     }
 
     public fun init() {
+        if (initialized) {
+            return
+        }
         val jqElement = jq(this.element)
         this.element.removeAttribute("placeholder")
         jqElement.tagsinput(object {
@@ -118,7 +145,11 @@ public class TagsInputField<T>(val textFactory: (T) -> String = {it.toString()},
 
     public var tags: Array<T>
         get() {
-            return jq(this.element).tagsinput("items")
+            return if (initialized) {
+                jq(this.element).tagsinput("items")
+            } else {
+                array<T>()
+            }
         }
         set(value) {
             value.forEach {
