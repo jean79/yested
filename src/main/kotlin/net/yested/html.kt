@@ -148,6 +148,10 @@ public open class HTMLComponent(tagName:String, htmlElement:HTMLElement? = null)
         element.appendComponent(component)
     }
 
+    public fun appendChild(childElement: HTMLElement) {
+        this.element.appendChild(childElement)
+    }
+
     public fun setContent(text:String) {
         jq(element).text(text)
     }
@@ -437,7 +441,7 @@ public trait InputComponent<T> : Component {
 public abstract class InputElementComponent<T>(): ObservableInput<T>() {
     abstract override val element: HTMLInputElement
 
-    public open var value: String
+    protected open var value: String
         get() = element.value
         set(value) { element.value = value }
 
@@ -509,6 +513,10 @@ open public class CheckBox() : InputElementComponent<Boolean>() {
     override var data: Boolean
         get() = checked
         set(value) {this.checked = value}
+
+    override public var value: String
+        get() = element.value
+        set(value) { element.value = value }
 }
 
 native trait Context { }
