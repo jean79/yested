@@ -1113,15 +1113,19 @@
         }, /** @lends _.net.yested.ObservableInput.prototype */ {
           addOnChangeListener_qshda6$: function (invoke) {
             this.onChangeListeners.add_za3rmp$(invoke);
-            if (this.element.onchange == null) {
-              this.element.onchange = _.net.yested.ObservableInput.addOnChangeListener_qshda6$f(this);
-              this.element.onkeyup = _.net.yested.ObservableInput.addOnChangeListener_qshda6$f_0(this);
-            }
+            this.registerOnChangeListener();
           },
           addOnChangeLiveListener_qshda6$: function (invoke) {
             this.onChangeLiveListeners.add_za3rmp$(invoke);
+            this.registerOnChangeListener();
           },
           decorate_6taknv$: function (valid) {
+          },
+          registerOnChangeListener: function () {
+            if (this.element.onchange == null) {
+              this.element.onchange = _.net.yested.ObservableInput.registerOnChangeListener$f(this);
+              this.element.onkeyup = _.net.yested.ObservableInput.registerOnChangeListener$f_0(this);
+            }
           }
         }, /** @lends _.net.yested.ObservableInput */ {
           f: function (it) {
@@ -1130,7 +1134,7 @@
           f_0: function (it) {
             it();
           },
-          addOnChangeListener_qshda6$f: function (this$ObservableInput) {
+          registerOnChangeListener$f: function (this$ObservableInput) {
             return function () {
               Kotlin.modules['stdlib'].kotlin.forEach_p7e0bo$(this$ObservableInput.onChangeListeners, _.net.yested.ObservableInput.f);
               Kotlin.modules['stdlib'].kotlin.forEach_p7e0bo$(this$ObservableInput.onChangeLiveListeners, _.net.yested.ObservableInput.f_0);
@@ -1139,7 +1143,7 @@
           f_1: function (it) {
             it();
           },
-          addOnChangeListener_qshda6$f_0: function (this$ObservableInput) {
+          registerOnChangeListener$f_0: function (this$ObservableInput) {
             return function () {
               Kotlin.modules['stdlib'].kotlin.forEach_p7e0bo$(this$ObservableInput.onChangeLiveListeners, _.net.yested.ObservableInput.f_1);
             };
