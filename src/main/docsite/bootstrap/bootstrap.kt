@@ -12,8 +12,6 @@ import net.yested.Component
 import kotlin.js.dom.html.HTMLElement
 import net.yested.with
 
-
-
 class BootstrapPage : Component {
 
     val onAddedToDomListeners: MutableList<() -> Unit> = arrayListOf()
@@ -47,6 +45,7 @@ class BootstrapPage : Component {
                     +createCheckboxSection(id = "bootstrapComponents_Checkbox")
                     +createGrid(id = "bootstrapComponents_Grid")
                     +createTabs(id = "bootstrapComponents_Tabs")
+                    +createCollapsibleSection(id = "bootstrapComponents_Collapsible")
                     +createPanelSection(id = "bootstrapComponents_Panel")
                     +createRowPanelContainerSection(id = "bootstrapComponents_PanelContainer")
                     +createFloatingPanelContainerSection(id = "bootstrapComponents_FloatingPanelContainer")
@@ -75,6 +74,7 @@ class BootstrapPage : Component {
                             li { a(href = "#bootstrapComponents_Checkbox") { +"Checkbox" } }
                             li { a(href = "#bootstrapComponents_Grid") { +"Grid" } }
                             li { a(href = "#bootstrapComponents_Tabs") { +"Tabs" } }
+                            li { a(href = "#bootstrapComponents_Collapsible") { +"Collapsible" } }
                             li { a(href = "#bootstrapComponents_Panel") { +"Panels" } }
                             li { a(href = "#bootstrapComponents_PanelContainer") { +"Row Panel Container" } }
                             li { a(href = "#bootstrapComponents_FloatingPanelContainer") { +"Float Panel Container" } }

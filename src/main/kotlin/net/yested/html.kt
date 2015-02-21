@@ -453,9 +453,23 @@ public abstract class InputElementComponent<T>(): ObservableInput<T>() {
 public abstract class ObservableInput<T>(): InputComponent<T> {
     protected val onChangeListeners: ArrayList<Function0<Unit>> = ArrayList();
     protected val onChangeLiveListeners: ArrayList<Function0<Unit>> = ArrayList();
+
     override fun addOnChangeListener(invoke: () -> Unit) {
         onChangeListeners.add(invoke)
-        // HACK: If the following code is placed into the constructor, it throws NPE because element is NULL there.
+        registerOnChangeListener();
+    }
+
+    override fun addOnChangeLiveListener(invoke: () -> Unit) {
+        onChangeLiveListeners.add(invoke)
+        registerOnChangeListener();
+    }
+    override fun decorate(valid: Boolean) {
+    }
+
+    /**
+     * HACK: If the following code is placed into the constructor, it throws NPE because element is NULL there.
+     */
+    private fun registerOnChangeListener() {
         if (element.onchange == null) {
             element.onchange = {
                 onChangeListeners.forEach { it() }
@@ -465,13 +479,6 @@ public abstract class ObservableInput<T>(): InputComponent<T> {
                 onChangeLiveListeners.forEach { it() }
             }
         }
-    }
-
-    override fun addOnChangeLiveListener(invoke: () -> Unit) {
-        onChangeLiveListeners.add(invoke)
-    }
-
-    override fun decorate(valid: Boolean) {
     }
 }
 
