@@ -76,7 +76,10 @@ public class Moment(private val moment: MomentJs) {
 
         public fun parse(input: String, format: String): Moment = Moment(moment_js(input, format))
 
-        public fun parseMillisecondsSinceUnixEpoch(millisecondsSinceUnixEpoch: Long): Moment = Moment(moment_js(millisecondsSinceUnixEpoch))
+        public fun parseMillisecondsSinceUnixEpoch(millisecondsSinceUnixEpoch: Long): Moment{
+			requireNotNull(millisecondsSinceUnixEpoch)
+			return Moment(moment_js(millisecondsSinceUnixEpoch))
+		}
     }
 }
 
@@ -106,25 +109,24 @@ public class FormatString(private val elements: MutableList<FormatElement> = arr
     override fun toString(): String = elements.map { it.str }.join(separator = "")
 }
 
+class Digit(private val oneDigitFactory: ()->FormatElement, private val twoDigitsFactory: ()->FormatElement, private val fourDigitsFactory: ()->FormatElement) {
+	val oneDigit: FormatElement
+		get() = oneDigitFactory()
+	val twoDigits: FormatElement
+		get() = twoDigitsFactory()
+	val fourDigits: FormatElement
+		get() = fourDigitsFactory()
+}
+
 public class FormatStringBuilder() {
 
-    class object {
-        // TODO full list: http://momentjs.com/docs/#/parsing/
-        private val fourDigitYear: FormatElement = FormatElement("YYYY")
-        private val monthNumber: FormatElement = FormatElement("M")
-        private val dayOfMonth: FormatElement = FormatElement("D")
-        private val hour24: FormatElement = FormatElement("H")
-        private val hour12: FormatElement = FormatElement("h")
-        private val minutes: FormatElement = FormatElement("m")
-        private val seconds: FormatElement = FormatElement("s")
-    }
-    public val fourDigitYear: FormatElement = FormatStringBuilder.fourDigitYear
-    public val monthNumber: FormatElement = FormatStringBuilder.monthNumber
-    public val dayOfMonth: FormatElement = FormatStringBuilder.dayOfMonth
-    public val hour24: FormatElement = FormatStringBuilder.hour24
-    public val hour12: FormatElement = FormatStringBuilder.hour12
-    public val minutes: FormatElement = FormatStringBuilder.minutes
-    public val seconds: FormatElement = FormatStringBuilder.seconds
+	public val year: Digit = Digit({throw UnsupportedOperationException()}, {FormatElement("YY")}, {FormatElement("YYYY")})
+	public val month: Digit = Digit({FormatElement("M")}, {FormatElement("MM")}, {throw UnsupportedOperationException()})
+	public val dayOfMonth: Digit = Digit({FormatElement("D")}, {FormatElement("DD")}, {throw UnsupportedOperationException()})
+	public val hour24: Digit = Digit({FormatElement("H")}, {FormatElement("HH")}, {throw UnsupportedOperationException()})
+	public val hour12: Digit = Digit({FormatElement("h")}, {FormatElement("hh")}, {throw UnsupportedOperationException()})
+	public val minutes: Digit = Digit({FormatElement("m")}, {FormatElement("mm")}, {throw UnsupportedOperationException()})
+	public val seconds: Digit = Digit({FormatElement("s")}, {FormatElement("ss")}, {throw UnsupportedOperationException()})
 }
 
 public fun format(init: FormatStringBuilder.() -> FormatString): FormatString {

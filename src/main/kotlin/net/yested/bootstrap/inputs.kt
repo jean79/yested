@@ -136,20 +136,23 @@ public fun HTMLComponent.btsCheckBox(label:HTMLComponent.()->Unit):Unit {
     +(BtsCheckBox(label))
 }
 
-private data class SelectOption<TT>(val tag:HTMLOptionElement, val value:TT)
+private data class SelectOption<T>(val tag:HTMLOptionElement, val value:T)
 
-public class Select<T>(val options: List<T>, val inputSize: InputSize = InputSize.DEFAULT, multiple:Boolean = false, size:Int = 1, val renderer:(T)->String) : ObservableInput<T>() {
+public class Select<T>(val options: List<T>,
+					   val inputSize: InputSize = InputSize.DEFAULT,
+					   multiple:Boolean = false,
+					   size:Int = 1,
+					   val renderer:(T)->String,
+					   val emptyOptionText: String? = null) : ObservableInput<T>() {
 
     override val element: HTMLSelectElement = createElement("select") as HTMLSelectElement
 
-    private var selectedItemsInt:List<T> = emptyList()
-
-    private var optionTags:ArrayList<SelectOption<T>> = ArrayList()
+    private var optionTags:ArrayList<SelectOption<T?>> = ArrayList()
 
     private var callbackIsInvoked = false
 
     public var selectedItems: List<T>
-        get() = optionTags.filter { it.tag.selected }.map { it.value }
+        get() = optionTags.filter { it.tag.selected && it.value != null}.map { it.value as T }
         set(newData) {
             selectThese(newData)
             changeSelected()
@@ -170,7 +173,6 @@ public class Select<T>(val options: List<T>, val inputSize: InputSize = InputSiz
     }
 
     private fun changeSelected() {
-        selectedItemsInt = optionTags.filter { it.tag.selected }.map { it.value }
         if (!callbackIsInvoked) {
             callbackIsInvoked = true
             onChangeListeners.forEach { it() }
@@ -186,11 +188,16 @@ public class Select<T>(val options: List<T>, val inputSize: InputSize = InputSiz
 
     private fun generateOptions() {
         optionTags =  ArrayList()
-        selectedItemsInt = emptyList()
+		if (emptyOptionText != null) {
+			val optionTag = HTMLComponent("option") with { +emptyOptionText }
+			val selectOption = SelectOption<T?>(tag = optionTag.element as HTMLOptionElement, value = null)
+			optionTags.add(selectOption)
+			element.appendComponent(optionTag)
+		}
         options.forEach {
             val optionTag = HTMLComponent("option") with { +renderer(it) }
             val value:T = it
-            val selectOption = SelectOption(tag = optionTag.element as HTMLOptionElement, value = value)
+            val selectOption = SelectOption<T?>(tag = optionTag.element as HTMLOptionElement, value = value)
             optionTags.add(selectOption)
             element.appendComponent(optionTag)
         }
