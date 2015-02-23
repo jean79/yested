@@ -83,9 +83,9 @@ public class Grid<T>(responsive: Boolean = false, val columns:Array<Column<T>>) 
         setSortingArrow()
     }
 
-    private var dataList: List<T>? = null
+    private var dataList: MutableList<T>? = null
 
-    public var list: List<T>?
+    public var list: MutableList<T>?
         get() = dataList
         set(value) {
             dataList = value
@@ -138,17 +138,18 @@ public class Grid<T>(responsive: Boolean = false, val columns:Array<Column<T>>) 
 
             val values = if (sortColumn != null) sortData(dataList!!) else dataList!!
 
-            tableElement.appendComponent(TBody() with
-                 {
+            tableElement.appendComponent(TBody() with {
                     values.forEach { item ->
                         tr {
                             columns.forEach { column ->
                                 td {
                                     "class" .. "text-${column.align.code}";
-                                    column.render(item) } }
+                                    column.render(item)
+								}
+							}
                         }
                     }
-                })
+            })
 
         }
     }
