@@ -41,9 +41,6 @@ public class TagsInputField<T>(val textFactory: (T) -> String = {it.toString()},
                                val typeFactory: (T) -> TagsInputFieldType = {TagsInputFieldType.DEFAULT},
                                val idFactory: (T) -> Any = {it},
                                inputSize: InputSize = InputSize.DEFAULT) : InputField<Array<T>>(inputSize, placeholder = null, type = "text"){
-    override var data: Array<T>
-        get() = tags
-        set(value) {tags = value}
 
     public var maxTagCount: Int? = null
     public var onAddExistingTag: (T, JQuery) -> Unit = {item, jqTag -> jqTag.hide {jqTag.fadeIn(400, {})}}
@@ -57,6 +54,16 @@ public class TagsInputField<T>(val textFactory: (T) -> String = {it.toString()},
 
     // TODO freeInput, typeahead
     public var initialized: Boolean = false
+
+	override var data: Array<T>
+		get() = tags
+		set(value) {
+			if (initialized) {
+				tags = value
+			} else {
+				this.value = value.joinToString(",")
+			}
+		}
 
     {
         element.setAttribute("data-role", "tagsinput")
