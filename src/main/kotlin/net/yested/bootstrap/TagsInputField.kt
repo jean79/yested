@@ -39,7 +39,7 @@ private fun tagsInputBeforeEventHandler<T>(event: TagsInputBeforeEvent<T>, func:
 
 public class TagsInputField<T>(val textFactory: (T) -> String = {it.toString()},
                                val typeFactory: (T) -> TagsInputFieldType = {TagsInputFieldType.DEFAULT},
-                               val idFactory: (T) -> Any = {it},
+                               //val idFactory: (T) -> Any = {it},
                                inputSize: InputSize = InputSize.DEFAULT) : InputField<Array<T>>(inputSize, placeholder = null, type = "text"){
 
     public var maxTagCount: Int? = null
@@ -135,18 +135,18 @@ public class TagsInputField<T>(val textFactory: (T) -> String = {it.toString()},
         val jqElement = jq(this.element)
         this.element.removeAttribute("placeholder")
         jqElement.tagsinput(object {
-            val tagClass = {(item: T) -> "label label-${typeFactory(item).className}"}
-            val itemValue = idFactory
-            val maxTags = maxTagCount
-            val maxChars = maxLengthOfSingleTag
-            val trimValue = removeWhiteSpacesAroundTagsAutomatically
-            val allowDuplicates = this@TagsInputField.allowDuplicates
-            val onTagExists = onAddExistingTag
+			val tagClass = {(item: T) -> "label label-${typeFactory(item).className}"}
+			//val itemValue = idFactory
+			val maxTags = maxTagCount
+			val maxChars = maxLengthOfSingleTag
+			val trimValue = removeWhiteSpacesAroundTagsAutomatically
+			val allowDuplicates = this@TagsInputField.allowDuplicates
+			val onTagExists = onAddExistingTag
         })
         jqElement.on("beforeItemAdd", {event -> tagsInputBeforeEventHandler(event, onBeforeItemAdd)})
-        jqElement.on("itemAdded", {event -> onAfterItemAdded?.invoke(event.item)})
-        jqElement.on("beforeItemRemove", {event -> tagsInputBeforeEventHandler(event, onBeforeItemRemove)})
-        jqElement.on("itemRemoved", {event -> onAfterItemRemoved?.invoke(event.item)})
+		jqElement.on("itemAdded", {event -> onAfterItemAdded?.invoke(event.item)})
+		jqElement.on("beforeItemRemove", {event -> tagsInputBeforeEventHandler(event, onBeforeItemRemove)})
+		jqElement.on("itemRemoved", {event -> onAfterItemRemoved?.invoke(event.item)})
         initialized = true
     }
 
