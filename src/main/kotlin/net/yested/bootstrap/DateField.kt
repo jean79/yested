@@ -51,7 +51,6 @@ public class DateField(formatter: FormatStringBuilder.()->FormatString) : InputE
 
     public fun init() {
         val param = object {
-            //val locale = "hu"
             val format = formatString
         }
         // Hack: datetimepicker cannot handle unknown parameters, and Kotlin add a $metadata$ property to every object
