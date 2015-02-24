@@ -142,8 +142,8 @@ public class Select<T>(val options: List<T>,
 					   val inputSize: InputSize = InputSize.DEFAULT,
 					   multiple:Boolean = false,
 					   size:Int = 1,
-					   val renderer:(T)->String,
-					   val emptyOptionText: String? = null) : ObservableInput<T>() {
+                       val emptyOptionText: String? = null,
+					   val renderer:(T)->String) : ObservableInput<T>() {
 
     override val element: HTMLSelectElement = createElement("select") as HTMLSelectElement
 

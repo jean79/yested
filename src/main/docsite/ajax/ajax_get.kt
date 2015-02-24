@@ -92,7 +92,7 @@ fun createAjaxGetSection(): Div {
 
     fun fetchWeather() {
         if (validator.isValid()) {
-            ajaxGet<WeatherData>("http://api.openweathermap.org/data/2.5/weather?q=${textInput.value}&units=${btnGroup.value}") {
+            ajaxGet<WeatherData>("http://api.openweathermap.org/data/2.5/weather?q=${textInput.data}&units=${btnGroup.value}") {
                 weatherData ->
                 if (weatherData != null && weatherData.main != null) {
                     temperatureSpan.setChild(

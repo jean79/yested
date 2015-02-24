@@ -76,7 +76,7 @@ fun createFloatingPanelContainerSection(id: String): Div {
                 }
                 item(label = { nbsp() }) {
                     btsButton(label = {+"Add Panel"}, size = ButtonSize.SMALL, look = ButtonLook.PRIMARY) {
-                        addPanel(inputField.value, selectLook.selectedItems.first())
+                        addPanel(inputField.data, selectLook.selectedItems.first())
                     }
                 }
             }

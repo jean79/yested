@@ -83,9 +83,9 @@ public class Grid<T>(responsive: Boolean = false, val columns:Array<Column<T>>) 
         setSortingArrow()
     }
 
-    private var dataList: MutableList<T>? = null
+    private var dataList: List<T>? = null
 
-    public var list: MutableList<T>?
+    public var list: List<T>?
         get() = dataList
         set(value) {
             dataList = value

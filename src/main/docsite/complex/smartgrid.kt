@@ -66,14 +66,14 @@ public class DoubleEditor<TYPE>(
         })
 
         jq(inputField.element).keypress( { event ->
-            val d = safeParseDouble(inputField.value)
+            val d = safeParseDouble(inputField.data)
             if (event.which == 13 && d != null) {
                 saveValue(item, d)
                 closeHandler()
             }
         })
 
-        inputField.value = "${getValue(item)?.toFixed(2)}"
+        inputField.data = "${getValue(item)?.toFixed(2)}"
 
         return inputField.element
     }

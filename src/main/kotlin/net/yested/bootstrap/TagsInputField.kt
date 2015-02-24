@@ -39,7 +39,7 @@ private fun tagsInputBeforeEventHandler<T>(event: TagsInputBeforeEvent<T>, func:
 
 public class TagsInputField<T>(val textFactory: (T) -> String = {it.toString()},
                                val typeFactory: (T) -> TagsInputFieldType = {TagsInputFieldType.DEFAULT},
-                               //val idFactory: (T) -> Any = {it},
+                               val idFactory: ((T) -> Any)? = null,
                                inputSize: InputSize = InputSize.DEFAULT) : InputField<Array<T>>(inputSize, placeholder = null, type = "text"){
 
     public var maxTagCount: Int? = null
@@ -136,7 +136,7 @@ public class TagsInputField<T>(val textFactory: (T) -> String = {it.toString()},
         this.element.removeAttribute("placeholder")
         jqElement.tagsinput(object {
 			val tagClass = {(item: T) -> "label label-${typeFactory(item).className}"}
-			//val itemValue = idFactory
+			val itemValue = idFactory
 			val maxTags = maxTagCount
 			val maxChars = maxLengthOfSingleTag
 			val trimValue = removeWhiteSpacesAroundTagsAutomatically
