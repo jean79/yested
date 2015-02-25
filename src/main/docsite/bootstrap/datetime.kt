@@ -8,15 +8,12 @@ import net.yested.bootstrap.pageHeader
 import net.yested.bootstrap.DateField
 import net.yested.Component
 import kotlin.js.dom.html.HTMLElement
+import net.yested.whenAddedToDom
 
 
 class DateFieldSection(id: String): Component {
 
     private val dateField = DateField { year.fourDigits + "." + month.twoDigits + "." + dayOfMonth.twoDigits + " " + hour24.twoDigits + ":" + minutes.twoDigits }
-
-    fun initDateField() {
-        dateField.init()
-    }
 
     override val element: HTMLElement = (div(id = id) {
         row {

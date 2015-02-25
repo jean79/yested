@@ -9,6 +9,7 @@ import net.yested.fadeIn
 import net.yested.utils.on
 import net.yested.utils.off
 import kotlin.js.dom.html.HTMLInputElement
+import net.yested.whenAddedToDom
 
 public enum class TagsInputFieldType(val className: String) {
     INFO: TagsInputFieldType("info")
@@ -58,11 +59,7 @@ public class TagsInputField<T>(val textFactory: (T) -> String = {it.toString()},
 	override var data: Array<T>
 		get() = tags
 		set(value) {
-			if (initialized) {
-				tags = value
-			} else {
-				this.value = value.joinToString(",")
-			}
+			tags = value
 		}
 
     {
@@ -159,8 +156,16 @@ public class TagsInputField<T>(val textFactory: (T) -> String = {it.toString()},
             }
         }
         set(value) {
-            value.forEach {
-                add(it)
+            if (initialized) {
+                value.forEach {add(it)}
+            } else {
+                this.value = value.joinToString(",")
             }
         }
+
+    {
+        element.whenAddedToDom {
+            init()
+        }
+    }
 }

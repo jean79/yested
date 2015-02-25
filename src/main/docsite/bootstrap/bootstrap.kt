@@ -14,8 +14,6 @@ import net.yested.with
 
 class BootstrapPage : Component {
 
-    val onAddedToDomListeners: MutableList<() -> Unit> = arrayListOf()
-
     override val element: HTMLElement = (Div() with {
         enableScrollSpy(id = "bootstrapNavbar")
         row {
@@ -36,17 +34,9 @@ class BootstrapPage : Component {
                     +buttonGroupsSection(id = "bootstrapComponents_ButtonGroups")
                     +createForm(id = "bootstrapComponents_Form")
                     +createSelectSection(id = "bootstrapComponents_Select")
-                    + (TagsSection(id = "bootstrapComponents_Tags") with {
-                        onAddedToDomListeners add {
-                            init()
-                        }
-                    })
+                    +TagsSection(id = "bootstrapComponents_Tags")
                     +createInputs(id = "bootstrapComponents_Inputs")
-                    +(DateFieldSection(id = "bootstrapComponents_DateField") with {
-                        onAddedToDomListeners add {
-                            initDateField()
-                        }
-                    })
+                    +DateFieldSection(id = "bootstrapComponents_DateField")
                     +createCheckboxSection(id = "bootstrapComponents_Checkbox")
                     +createGrid(id = "bootstrapComponents_Grid")
                     +createTabs(id = "bootstrapComponents_Tabs")

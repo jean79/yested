@@ -11,6 +11,7 @@ import jquery.JQuery
 import net.yested.utils.FormatString
 import net.yested.utils.Moment
 import net.yested.utils.FormatStringBuilder
+import net.yested.whenAddedToDom
 
 
 // TODO: support Locales: http://momentjs.com/docs/#/i18n/
@@ -49,13 +50,19 @@ public class DateField(formatter: FormatStringBuilder.()->FormatString) : InputE
             this.value = if (value == null) "" else value.format(formatString)
         }
 
-    public fun init() {
+    fun init() {
         val param = object {
             val format = formatString
         }
         // Hack: datetimepicker cannot handle unknown parameters, and Kotlin add a $metadata$ property to every object
         js("delete param.\$metadata$")
         jq(element).datetimepicker(param)
+    }
+
+    {
+        this.element.whenAddedToDom {
+            init()
+        }
     }
 }
 

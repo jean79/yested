@@ -41,8 +41,8 @@ public class ColumnHeader<T>(val column:Column<T>, sortingSupported:Boolean, sor
         }
     }
 
-    fun updateSorting(sorteByColumn:Column<T>?, sortAscending:Boolean) {
-        if (sorteByColumn != column) {
+    fun updateSorting(sortedByColumn:Column<T>?, sortAscending:Boolean) {
+        if (sortedByColumn != column) {
             arrowPlaceholder.setContent("")
         } else {
             arrowPlaceholder.setChild(Glyphicon("arrow-${if (sortAscending) "up" else "down"}"))
@@ -83,9 +83,9 @@ public class Grid<T>(responsive: Boolean = false, val columns:Array<Column<T>>) 
         setSortingArrow()
     }
 
-    private var dataList: MutableList<T>? = null
+    private var dataList: List<T>? = null
 
-    public var list: MutableList<T>?
+    public var list: List<T>?
         get() = dataList
         set(value) {
             dataList = value
