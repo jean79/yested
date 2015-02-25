@@ -41,8 +41,8 @@ public class ColumnHeader<T>(val column:Column<T>, sortingSupported:Boolean, sor
         }
     }
 
-    fun updateSorting(sorteByColumn:Column<T>?, sortAscending:Boolean) {
-        if (sorteByColumn != column) {
+    fun updateSorting(sortedByColumn:Column<T>?, sortAscending:Boolean) {
+        if (sortedByColumn != column) {
             arrowPlaceholder.setContent("")
         } else {
             arrowPlaceholder.setChild(Glyphicon("arrow-${if (sortAscending) "up" else "down"}"))
@@ -138,17 +138,18 @@ public class Grid<T>(responsive: Boolean = false, val columns:Array<Column<T>>) 
 
             val values = if (sortColumn != null) sortData(dataList!!) else dataList!!
 
-            tableElement.appendComponent(TBody() with
-                 {
+            tableElement.appendComponent(TBody() with {
                     values.forEach { item ->
                         tr {
                             columns.forEach { column ->
                                 td {
                                     "class" .. "text-${column.align.code}";
-                                    column.render(item) } }
+                                    column.render(item)
+								}
+							}
                         }
                     }
-                })
+            })
 
         }
     }

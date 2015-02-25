@@ -14,8 +14,6 @@ import net.yested.with
 
 class BootstrapPage : Component {
 
-    val onAddedToDomListeners: MutableList<() -> Unit> = arrayListOf()
-
     override val element: HTMLElement = (Div() with {
         enableScrollSpy(id = "bootstrapNavbar")
         row {
@@ -36,12 +34,9 @@ class BootstrapPage : Component {
                     +buttonGroupsSection(id = "bootstrapComponents_ButtonGroups")
                     +createForm(id = "bootstrapComponents_Form")
                     +createSelectSection(id = "bootstrapComponents_Select")
-                    + (TagsSection(id = "bootstrapComponents_Tags") with {
-                        onAddedToDomListeners add {
-                            init()
-                        }
-                    })
+                    +TagsSection(id = "bootstrapComponents_Tags")
                     +createInputs(id = "bootstrapComponents_Inputs")
+                    +DateFieldSection(id = "bootstrapComponents_DateField")
                     +createCheckboxSection(id = "bootstrapComponents_Checkbox")
                     +createGrid(id = "bootstrapComponents_Grid")
                     +createTabs(id = "bootstrapComponents_Tabs")
@@ -71,6 +66,7 @@ class BootstrapPage : Component {
                             li { a(href = "#bootstrapComponents_Select") { +"Select" } }
                             li { a(href = "#bootstrapComponents_Tags") { +"Tags" } }
                             li { a(href = "#bootstrapComponents_Inputs") { +"Text Input with Validation" } }
+                            li { a(href = "#bootstrapComponents_DateField") { +"DateField" } }
                             li { a(href = "#bootstrapComponents_Checkbox") { +"Checkbox" } }
                             li { a(href = "#bootstrapComponents_Grid") { +"Grid" } }
                             li { a(href = "#bootstrapComponents_Tabs") { +"Tabs" } }

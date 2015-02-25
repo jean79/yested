@@ -46,13 +46,13 @@ class DetailScreen(
 
     fun save() {
         if (validator.isValid()) {
-            saveHandler(City(textInput.value, select.selectedItems.first()))
+            saveHandler(City(textInput.data, select.selectedItems.first()))
         }
     }
 
     {
         if (editedCity != null) {
-            textInput.value = editedCity.name
+            textInput.data = editedCity.name
             select.selectedItems = listOf(editedCity.continent)
         }
     }
