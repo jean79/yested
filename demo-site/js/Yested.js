@@ -512,6 +512,9 @@
           appendChild_5f0h2k$: function (component) {
             _.net.yested.appendComponent_c36dq0$(this.element, component);
           },
+          appendChild_suuxpq$: function (childElement) {
+            this.element.appendChild(childElement);
+          },
           setContent_61zpoe$: function (text) {
             $(this.element).text(text);
           },
@@ -1205,6 +1208,14 @@
             set: function (value) {
               this.checked = value;
             }
+          },
+          value: {
+            get: function () {
+              return this.element.value;
+            },
+            set: function (value) {
+              this.element.value = value;
+            }
           }
         }, /** @lends _.net.yested.CheckBox */ {
           CheckBox$f: function () {
@@ -1368,6 +1379,14 @@
         },
         isTrue: function ($receiver, value, default_0) {
           return $receiver ? value : default_0;
+        },
+        whenAddedToDom_v3j3j2$f: function (this$whenAddedToDom) {
+          return function () {
+            return _.net.yested.utils.isIncludedInDOM_b3w3xb$(this$whenAddedToDom);
+          };
+        },
+        whenAddedToDom_v3j3j2$: function ($receiver, run) {
+          _.net.yested.repeatWithDelayUntil_h8wu9e$(_.net.yested.whenAddedToDom_v3j3j2$f($receiver), 100, run);
         },
         repeatWithDelayUntil_h8wu9e$f: function (check, millisecondInterval, run) {
           return function () {
@@ -2015,6 +2034,8 @@
               block = false;
             if (badge === void 0)
               badge = null;
+            if (onclick === void 0)
+              onclick = _.net.yested.bootstrap.BtsButton.BtsButton$f_0;
             $fun.baseInitializer.call(this, 'button');
             this.look = look;
             this.size = size;
@@ -2026,6 +2047,10 @@
             badge != null ? Kotlin.modules['stdlib'].kotlin.let_7hr6ff$(badge, _.net.yested.bootstrap.BtsButton.BtsButton$f(this, badge)) : null;
             this.onclick = onclick;
           }, /** @lends _.net.yested.bootstrap.BtsButton.prototype */ {
+            setLabel: function (label) {
+              this.removeAllChildren();
+              label.call(this);
+            },
             active: {
               get: function () {
                 return this.buttonActive_nol8t8$;
@@ -2057,6 +2082,8 @@
                 this$BtsButton.nbsp_za3lpa$();
                 return this$BtsButton.span_dkuwo$('badge', _.net.yested.bootstrap.BtsButton.f(badge));
               };
+            },
+            BtsButton$f_0: function () {
             }
           }),
           BtsAnchor: Kotlin.createClass(function () {
@@ -2434,6 +2461,74 @@
               RIGHT: new _.net.yested.bootstrap.Align('right')
             };
           }),
+          DateField: Kotlin.createClass(function () {
+            return [_.net.yested.InputElementComponent];
+          }, function $fun(formatter) {
+            $fun.baseInitializer.call(this);
+            this.formatString = formatter.call(new _.net.yested.utils.FormatStringBuilder()).toString();
+            this.inputElement_6whum3$ = _.net.yested.with_owvm91$(_.net.yested.createElement_61zpoe$('input'), _.net.yested.bootstrap.DateField.DateField$f);
+            this.$element_705rrr$ = _.net.yested.with_owvm91$(new _.net.yested.Div(), _.net.yested.bootstrap.DateField.DateField$f_0(this)).element;
+            _.net.yested.whenAddedToDom_v3j3j2$(this.element, _.net.yested.bootstrap.DateField.DateField$f_1(this));
+          }, /** @lends _.net.yested.bootstrap.DateField.prototype */ {
+            element: {
+              get: function () {
+                return this.$element_705rrr$;
+              }
+            },
+            clear: function () {
+              this.data = null;
+            },
+            value: {
+              get: function () {
+                return this.inputElement_6whum3$.value;
+              },
+              set: function (value) {
+                this.inputElement_6whum3$.value = value;
+              }
+            },
+            data: {
+              get: function () {
+                return this.value.length === 0 ? null : _.net.yested.utils.Moment.object.parse_puj7f4$(this.value, this.formatString);
+              },
+              set: function (value) {
+                this.value = value == null ? '' : value.format_61zpoe$(this.formatString);
+              }
+            },
+            init: function () {
+              var param = _.net.yested.bootstrap.DateField.init$f(this);
+              delete param.$metadata$;
+              $(this.element).datetimepicker(param);
+            }
+          }, /** @lends _.net.yested.bootstrap.DateField */ {
+            DateField$f: function () {
+              this.setAttribute('type', 'text');
+              this.className = 'form-control';
+            },
+            f: function () {
+              this.clazz = 'glyphicon glyphicon-calendar';
+            },
+            f_0: function () {
+              this.clazz = 'input-group-addon';
+              this.appendChild_5f0h2k$(_.net.yested.with_owvm91$(new _.net.yested.Span(), _.net.yested.bootstrap.DateField.f));
+            },
+            DateField$f_0: function (this$DateField) {
+              return function () {
+                this.clazz = 'input-group date';
+                this.appendChild_suuxpq$(this$DateField.inputElement_6whum3$);
+                this.appendChild_5f0h2k$(_.net.yested.with_owvm91$(new _.net.yested.Span(), _.net.yested.bootstrap.DateField.f_0));
+              };
+            },
+            DateField$f_1: function (this$DateField) {
+              return function () {
+                this$DateField.init();
+              };
+            },
+            init$f: function (this$DateField) {
+              return Kotlin.createObject(null, function () {
+                this.format = this$DateField.formatString;
+              });
+            }
+          }),
           DialogSize: Kotlin.createEnumClass(function () {
             return [Kotlin.Enum];
           }, function $fun(code) {
@@ -2771,8 +2866,8 @@
               this.column.label.call(this);
             }
           }, /** @lends _.net.yested.bootstrap.ColumnHeader.prototype */ {
-            updateSorting: function (sorteByColumn, sortAscending) {
-              if (!Kotlin.equals(sorteByColumn, this.column)) {
+            updateSorting: function (sortedByColumn, sortAscending) {
+              if (!Kotlin.equals(sortedByColumn, this.column)) {
                 this.arrowPlaceholder.setContent_61zpoe$('');
               }
                else {
@@ -3158,19 +3253,21 @@
           }),
           Select: Kotlin.createClass(function () {
             return [_.net.yested.ObservableInput];
-          }, function $fun(options, inputSize, multiple, size, renderer) {
+          }, function $fun(options, inputSize, multiple, size, emptyOptionText, renderer) {
             if (inputSize === void 0)
               inputSize = _.net.yested.bootstrap.InputSize.object.DEFAULT;
             if (multiple === void 0)
               multiple = false;
             if (size === void 0)
               size = 1;
+            if (emptyOptionText === void 0)
+              emptyOptionText = null;
             $fun.baseInitializer.call(this);
             this.options = options;
             this.inputSize = inputSize;
+            this.emptyOptionText = emptyOptionText;
             this.renderer = renderer;
             this.$element_cjfx6t$ = _.net.yested.createElement_61zpoe$('select');
-            this.selectedItemsInt_m31zmd$ = Kotlin.modules['stdlib'].kotlin.emptyList();
             this.optionTags_gajdrl$ = new Kotlin.ArrayList();
             this.callbackIsInvoked_e497ms$ = false;
             this.element.setAttribute('class', 'form-control ' + this.inputSize.code);
@@ -3202,13 +3299,9 @@
               this.selectedItems = Kotlin.modules['stdlib'].kotlin.emptyList();
             },
             changeSelected: function () {
-              var tmp$0, tmp$1;
-              tmp$0 = Kotlin.modules['stdlib'].kotlin.filter_azvtw4$(this.optionTags_gajdrl$, _.net.yested.bootstrap.Select.changeSelected$f);
-              tmp$1 = Kotlin.modules['stdlib'].kotlin.map_m3yiqg$(tmp$0, _.net.yested.bootstrap.Select.changeSelected$f_0);
-              this.selectedItemsInt_m31zmd$ = tmp$1;
               if (!this.callbackIsInvoked_e497ms$) {
                 this.callbackIsInvoked_e497ms$ = true;
-                Kotlin.modules['stdlib'].kotlin.forEach_p7e0bo$(this.onChangeListeners, _.net.yested.bootstrap.Select.changeSelected$f_1);
+                Kotlin.modules['stdlib'].kotlin.forEach_p7e0bo$(this.onChangeListeners, _.net.yested.bootstrap.Select.changeSelected$f);
                 this.callbackIsInvoked_e497ms$ = false;
               }
             },
@@ -3217,8 +3310,13 @@
             },
             generateOptions: function () {
               this.optionTags_gajdrl$ = new Kotlin.ArrayList();
-              this.selectedItemsInt_m31zmd$ = Kotlin.modules['stdlib'].kotlin.emptyList();
-              Kotlin.modules['stdlib'].kotlin.forEach_p7e0bo$(this.options, _.net.yested.bootstrap.Select.generateOptions$f(this));
+              if (this.emptyOptionText != null) {
+                var optionTag = _.net.yested.with_owvm91$(new _.net.yested.HTMLComponent('option'), _.net.yested.bootstrap.Select.generateOptions$f(this));
+                var selectOption = new _.net.yested.bootstrap.SelectOption(optionTag.element, null);
+                this.optionTags_gajdrl$.add_za3rmp$(selectOption);
+                _.net.yested.appendComponent_c36dq0$(this.element, optionTag);
+              }
+              Kotlin.modules['stdlib'].kotlin.forEach_p7e0bo$(this.options, _.net.yested.bootstrap.Select.generateOptions$f_0(this));
             },
             data: {
               get: function () {
@@ -3238,18 +3336,12 @@
               };
             },
             selectedItems$f: function (it) {
-              return it.tag.selected;
+              return it.tag.selected && it.value != null;
             },
             selectedItems$f_0: function (it) {
               return it.value;
             },
             changeSelected$f: function (it) {
-              return it.tag.selected;
-            },
-            changeSelected$f_0: function (it) {
-              return it.value;
-            },
-            changeSelected$f_1: function (it) {
               it();
             },
             selectThese$f: function (selectedItems) {
@@ -3257,12 +3349,17 @@
                 it.tag.selected = selectedItems.contains_za3rmp$(it.value);
               };
             },
+            generateOptions$f: function (this$Select) {
+              return function () {
+                this.plus_pdl1w0$(this$Select.emptyOptionText);
+              };
+            },
             f: function (this$Select, it) {
               return function () {
                 this.plus_pdl1w0$(this$Select.renderer(it));
               };
             },
-            generateOptions$f: function (this$Select) {
+            generateOptions$f_0: function (this$Select) {
               return function (it) {
                 var optionTag = _.net.yested.with_owvm91$(new _.net.yested.HTMLComponent('option'), _.net.yested.bootstrap.Select.f(this$Select, it));
                 var value = it;
@@ -4453,19 +4550,16 @@
           },
           TagsInputField: Kotlin.createClass(function () {
             return [_.net.yested.bootstrap.InputField];
-          }, function $fun(textFactory, typeFactory, idFactory, inputSize) {
+          }, function $fun(textFactory, typeFactory, inputSize) {
             if (textFactory === void 0)
-              textFactory = _.net.yested.bootstrap.TagsInputField.TagsInputField$f_0;
+              textFactory = _.net.yested.bootstrap.TagsInputField.TagsInputField$f_1;
             if (typeFactory === void 0)
-              typeFactory = _.net.yested.bootstrap.TagsInputField.TagsInputField$f_1;
-            if (idFactory === void 0)
-              idFactory = _.net.yested.bootstrap.TagsInputField.TagsInputField$f_2;
+              typeFactory = _.net.yested.bootstrap.TagsInputField.TagsInputField$f_2;
             if (inputSize === void 0)
               inputSize = _.net.yested.bootstrap.InputSize.object.DEFAULT;
             $fun.baseInitializer.call(this, inputSize, null, 'text');
             this.textFactory = textFactory;
             this.typeFactory = typeFactory;
-            this.idFactory = idFactory;
             this.maxTagCount = null;
             this.onAddExistingTag = _.net.yested.bootstrap.TagsInputField.TagsInputField$f;
             this.onBeforeItemAdd = null;
@@ -4477,6 +4571,7 @@
             this.allowDuplicates = false;
             this.initialized = false;
             this.element.setAttribute('data-role', 'tagsinput');
+            _.net.yested.whenAddedToDom_v3j3j2$(this.element, _.net.yested.bootstrap.TagsInputField.TagsInputField$f_0(this));
           }, /** @lends _.net.yested.bootstrap.TagsInputField.prototype */ {
             data: {
               get: function () {
@@ -4487,27 +4582,50 @@
               }
             },
             add_za3rmp$: function (newElem) {
+              if (!this.initialized) {
+                return;
+              }
               $(this.element).tagsinput('add', newElem);
             },
             remove_za3rmp$: function (newElem) {
+              if (!this.initialized) {
+                return;
+              }
               $(this.element).tagsinput('remove', newElem);
             },
             removeAll: function () {
+              if (!this.initialized) {
+                return;
+              }
               $(this.element).tagsinput('removeAll');
             },
             clear: function () {
               this.removeAll();
             },
             focus: function () {
+              if (!this.initialized) {
+                return;
+              }
               $(this.element).tagsinput('focus');
             },
             input: function () {
-              return $(this.element).tagsinput('input');
+              if (!this.initialized) {
+                return $(this.element);
+              }
+               else {
+                return $(this.element).tagsinput('input');
+              }
             },
             refresh: function () {
+              if (!this.initialized) {
+                return;
+              }
               $(this.element).tagsinput('refresh');
             },
             destroy: function () {
+              if (!this.initialized) {
+                return;
+              }
               var jqElement = $(this.element);
               jqElement.tagsinput('destroy');
               jqElement.off('beforeItemAdd');
@@ -4517,6 +4635,9 @@
               this.initialized = false;
             },
             init: function () {
+              if (this.initialized) {
+                return;
+              }
               var jqElement = $(this.element);
               this.element.removeAttribute('placeholder');
               jqElement.tagsinput(_.net.yested.bootstrap.TagsInputField.init$f(this));
@@ -4528,10 +4649,22 @@
             },
             tags: {
               get: function () {
-                return $(this.element).tagsinput('items');
+                var tmp$0;
+                if (this.initialized) {
+                  tmp$0 = $(this.element).tagsinput('items');
+                }
+                 else {
+                  tmp$0 = [];
+                }
+                return tmp$0;
               },
               set: function (value) {
-                Kotlin.modules['stdlib'].kotlin.forEach_5wd4f$(value, _.net.yested.bootstrap.TagsInputField.tags$f(this));
+                if (this.initialized) {
+                  Kotlin.modules['stdlib'].kotlin.forEach_5wd4f$(value, _.net.yested.bootstrap.TagsInputField.tags$f(this));
+                }
+                 else {
+                  this.value = Kotlin.modules['stdlib'].kotlin.joinToString_5h7xs3$(value, ',');
+                }
               }
             }
           }, /** @lends _.net.yested.bootstrap.TagsInputField */ {
@@ -4545,14 +4678,16 @@
             TagsInputField$f: function (item, jqTag) {
               jqTag.hide(_.net.yested.bootstrap.TagsInputField.f_0(jqTag));
             },
-            TagsInputField$f_0: function (it) {
-              return it.toString();
+            TagsInputField$f_0: function (this$TagsInputField) {
+              return function () {
+                this$TagsInputField.init();
+              };
             },
             TagsInputField$f_1: function (it) {
-              return _.net.yested.bootstrap.TagsInputFieldType.object.DEFAULT;
+              return it.toString();
             },
             TagsInputField$f_2: function (it) {
-              return it;
+              return _.net.yested.bootstrap.TagsInputFieldType.object.DEFAULT;
             },
             f_1: function (this$TagsInputField) {
               return function (item) {
@@ -4562,7 +4697,6 @@
             init$f: function (this$TagsInputField) {
               return Kotlin.createObject(null, function () {
                 this.tagClass = _.net.yested.bootstrap.TagsInputField.f_1(this$TagsInputField);
-                this.itemValue = this$TagsInputField.idFactory;
                 this.maxTags = this$TagsInputField.maxTagCount;
                 this.maxChars = this$TagsInputField.maxLengthOfSingleTag;
                 this.trimValue = this$TagsInputField.removeWhiteSpacesAroundTagsAutomatically;
@@ -4682,7 +4816,7 @@
             openConfigurationDialog$setColumnsData: function (inputField, listGroup, sortedColumns) {
               return function () {
                 var tmp$0;
-                var text = inputField.value.toLowerCase();
+                var text = inputField.data.toLowerCase();
                 if (text.length > 0) {
                   tmp$0 = Kotlin.modules['stdlib'].kotlin.filter_azvtw4$(sortedColumns, _.net.yested.bootstrap.smartgrid.setColumnsData$f(text));
                   listGroup.setData_4fm7v2$(tmp$0);
@@ -5433,6 +5567,218 @@
             var topNode = _.net.yested.utils.getTopNode(node);
             return topNode != null && Kotlin.equals(topNode.nodeName, '#document');
           },
+          Moment: Kotlin.createClass(null, function (moment) {
+            this.moment_qmho9s$ = moment;
+            this.millisecondsSinceUnixEpoch = this.moment_qmho9s$.valueOf();
+          }, /** @lends _.net.yested.utils.Moment.prototype */ {
+            format_61zpoe$: function (format) {
+              return this.moment_qmho9s$.format(format);
+            },
+            format_k6n0qe$: function (format) {
+              return this.moment_qmho9s$.format(format.toString());
+            },
+            millisecond: {
+              get: function () {
+                return this.moment_qmho9s$.millisecond();
+              },
+              set: function (value) {
+                this.moment_qmho9s$.millisecond(value);
+              }
+            },
+            second: {
+              get: function () {
+                return this.moment_qmho9s$.second();
+              },
+              set: function (value) {
+                this.moment_qmho9s$.second(value);
+              }
+            },
+            minute: {
+              get: function () {
+                return this.moment_qmho9s$.minute();
+              },
+              set: function (value) {
+                this.moment_qmho9s$.minute(value);
+              }
+            },
+            hour: {
+              get: function () {
+                return this.moment_qmho9s$.hour();
+              },
+              set: function (value) {
+                this.moment_qmho9s$.hour(value);
+              }
+            },
+            dayOfMonth: {
+              get: function () {
+                return this.moment_qmho9s$.date();
+              },
+              set: function (value) {
+                this.moment_qmho9s$.date(value);
+              }
+            },
+            dayOfYear: {
+              get: function () {
+                return this.moment_qmho9s$.dayOfYear();
+              },
+              set: function (value) {
+                this.moment_qmho9s$.dayOfYear(value);
+              }
+            },
+            month: {
+              get: function () {
+                return this.moment_qmho9s$.month();
+              },
+              set: function (value) {
+                this.moment_qmho9s$.month(value);
+              }
+            }
+          }, /** @lends _.net.yested.utils.Moment */ {
+            object_initializer$: function () {
+              return Kotlin.createObject(null, null, {
+                now: function () {
+                  return new _.net.yested.utils.Moment(moment());
+                },
+                parse_puj7f4$: function (input, format) {
+                  return new _.net.yested.utils.Moment(moment(input, format));
+                },
+                parseMillisecondsSinceUnixEpoch_s8cxhz$: function (millisecondsSinceUnixEpoch) {
+                  Kotlin.modules['stdlib'].kotlin.requireNotNull_wn2jw4$(millisecondsSinceUnixEpoch);
+                  return new _.net.yested.utils.Moment(moment(millisecondsSinceUnixEpoch));
+                }
+              });
+            }
+          }),
+          FormatElement: Kotlin.createClass(null, function (str) {
+            this.str = str;
+          }, /** @lends _.net.yested.utils.FormatElement.prototype */ {
+            plus_9xull5$: function (b) {
+              return new _.net.yested.utils.FormatString(Kotlin.modules['stdlib'].kotlin.arrayListOf_9mqe4v$([this, b]));
+            },
+            plus: function (b) {
+              return new _.net.yested.utils.FormatString(Kotlin.modules['stdlib'].kotlin.arrayListOf_9mqe4v$([this, new _.net.yested.utils.FormatElement(b)]));
+            }
+          }),
+          FormatString: Kotlin.createClass(null, function (elements) {
+            if (elements === void 0)
+              elements = Kotlin.modules['stdlib'].kotlin.arrayListOf_9mqe4v$([]);
+            this.elements_ovv2pb$ = elements;
+          }, /** @lends _.net.yested.utils.FormatString.prototype */ {
+            plus_9xull5$: function (b) {
+              this.elements_ovv2pb$.add_za3rmp$(b);
+              return new _.net.yested.utils.FormatString(this.elements_ovv2pb$);
+            },
+            plus_61zpoe$: function (b) {
+              this.elements_ovv2pb$.add_za3rmp$(new _.net.yested.utils.FormatElement(b));
+              return new _.net.yested.utils.FormatString(this.elements_ovv2pb$);
+            },
+            toString: function () {
+              var tmp$0;
+              tmp$0 = Kotlin.modules['stdlib'].kotlin.map_m3yiqg$(this.elements_ovv2pb$, _.net.yested.utils.FormatString.toString$f);
+              return Kotlin.modules['stdlib'].kotlin.join_raq5lb$(tmp$0, '');
+            }
+          }, /** @lends _.net.yested.utils.FormatString */ {
+            toString$f: function (it) {
+              return it.str;
+            }
+          }),
+          Digit: Kotlin.createClass(null, function (oneDigitFactory, twoDigitsFactory, fourDigitsFactory) {
+            this.oneDigitFactory_2nv2s$ = oneDigitFactory;
+            this.twoDigitsFactory_5y9a87$ = twoDigitsFactory;
+            this.fourDigitsFactory_1omc1$ = fourDigitsFactory;
+          }, /** @lends _.net.yested.utils.Digit.prototype */ {
+            oneDigit: {
+              get: function () {
+                return this.oneDigitFactory_2nv2s$();
+              }
+            },
+            twoDigits: {
+              get: function () {
+                return this.twoDigitsFactory_5y9a87$();
+              }
+            },
+            fourDigits: {
+              get: function () {
+                return this.fourDigitsFactory_1omc1$();
+              }
+            }
+          }),
+          FormatStringBuilder: Kotlin.createClass(null, function () {
+            this.year = new _.net.yested.utils.Digit(_.net.yested.utils.FormatStringBuilder.FormatStringBuilder$f, _.net.yested.utils.FormatStringBuilder.FormatStringBuilder$f_0, _.net.yested.utils.FormatStringBuilder.FormatStringBuilder$f_1);
+            this.month = new _.net.yested.utils.Digit(_.net.yested.utils.FormatStringBuilder.FormatStringBuilder$f_2, _.net.yested.utils.FormatStringBuilder.FormatStringBuilder$f_3, _.net.yested.utils.FormatStringBuilder.FormatStringBuilder$f_4);
+            this.dayOfMonth = new _.net.yested.utils.Digit(_.net.yested.utils.FormatStringBuilder.FormatStringBuilder$f_5, _.net.yested.utils.FormatStringBuilder.FormatStringBuilder$f_6, _.net.yested.utils.FormatStringBuilder.FormatStringBuilder$f_7);
+            this.hour24 = new _.net.yested.utils.Digit(_.net.yested.utils.FormatStringBuilder.FormatStringBuilder$f_8, _.net.yested.utils.FormatStringBuilder.FormatStringBuilder$f_9, _.net.yested.utils.FormatStringBuilder.FormatStringBuilder$f_10);
+            this.hour12 = new _.net.yested.utils.Digit(_.net.yested.utils.FormatStringBuilder.FormatStringBuilder$f_11, _.net.yested.utils.FormatStringBuilder.FormatStringBuilder$f_12, _.net.yested.utils.FormatStringBuilder.FormatStringBuilder$f_13);
+            this.minutes = new _.net.yested.utils.Digit(_.net.yested.utils.FormatStringBuilder.FormatStringBuilder$f_14, _.net.yested.utils.FormatStringBuilder.FormatStringBuilder$f_15, _.net.yested.utils.FormatStringBuilder.FormatStringBuilder$f_16);
+            this.seconds = new _.net.yested.utils.Digit(_.net.yested.utils.FormatStringBuilder.FormatStringBuilder$f_17, _.net.yested.utils.FormatStringBuilder.FormatStringBuilder$f_18, _.net.yested.utils.FormatStringBuilder.FormatStringBuilder$f_19);
+          }, null, /** @lends _.net.yested.utils.FormatStringBuilder */ {
+            FormatStringBuilder$f: function () {
+              throw new Kotlin.UnsupportedOperationException();
+            },
+            FormatStringBuilder$f_0: function () {
+              return new _.net.yested.utils.FormatElement('YY');
+            },
+            FormatStringBuilder$f_1: function () {
+              return new _.net.yested.utils.FormatElement('YYYY');
+            },
+            FormatStringBuilder$f_2: function () {
+              return new _.net.yested.utils.FormatElement('M');
+            },
+            FormatStringBuilder$f_3: function () {
+              return new _.net.yested.utils.FormatElement('MM');
+            },
+            FormatStringBuilder$f_4: function () {
+              throw new Kotlin.UnsupportedOperationException();
+            },
+            FormatStringBuilder$f_5: function () {
+              return new _.net.yested.utils.FormatElement('D');
+            },
+            FormatStringBuilder$f_6: function () {
+              return new _.net.yested.utils.FormatElement('DD');
+            },
+            FormatStringBuilder$f_7: function () {
+              throw new Kotlin.UnsupportedOperationException();
+            },
+            FormatStringBuilder$f_8: function () {
+              return new _.net.yested.utils.FormatElement('H');
+            },
+            FormatStringBuilder$f_9: function () {
+              return new _.net.yested.utils.FormatElement('HH');
+            },
+            FormatStringBuilder$f_10: function () {
+              throw new Kotlin.UnsupportedOperationException();
+            },
+            FormatStringBuilder$f_11: function () {
+              return new _.net.yested.utils.FormatElement('h');
+            },
+            FormatStringBuilder$f_12: function () {
+              return new _.net.yested.utils.FormatElement('hh');
+            },
+            FormatStringBuilder$f_13: function () {
+              throw new Kotlin.UnsupportedOperationException();
+            },
+            FormatStringBuilder$f_14: function () {
+              return new _.net.yested.utils.FormatElement('m');
+            },
+            FormatStringBuilder$f_15: function () {
+              return new _.net.yested.utils.FormatElement('mm');
+            },
+            FormatStringBuilder$f_16: function () {
+              throw new Kotlin.UnsupportedOperationException();
+            },
+            FormatStringBuilder$f_17: function () {
+              return new _.net.yested.utils.FormatElement('s');
+            },
+            FormatStringBuilder$f_18: function () {
+              return new _.net.yested.utils.FormatElement('ss');
+            },
+            FormatStringBuilder$f_19: function () {
+              throw new Kotlin.UnsupportedOperationException();
+            }
+          }),
+          format_hliocp$: function (init) {
+            return init.call(new _.net.yested.utils.FormatStringBuilder());
+          },
           measure: function (title, code) {
             if (title === void 0)
               title = 'Execution';
@@ -5497,14 +5843,6 @@
     },
     main$f_0: function () {
     },
-    f_11: function (it) {
-      it();
-    },
-    f_12: function (bootstrapPage) {
-      return function () {
-        Kotlin.modules['stdlib'].kotlin.forEach_p7e0bo$(bootstrapPage.onAddedToDomListeners, _.f_11);
-      };
-    },
     main$f_1: function (divContainer, previousHash) {
       return function (hash) {
         var tmp$0;
@@ -5517,8 +5855,7 @@
           divContainer.setChild_hu5ove$(_.html.htmlPage(), new _.net.yested.Fade());
         else if (tmp$0 === '#bootstrapComponents') {
           if (!Kotlin.equals(hash[0], previousHash.v)) {
-            var bootstrapPage = new _.bootstrap.BootstrapPage();
-            divContainer.setChild_hu5ove$(bootstrapPage, new _.net.yested.Fade(), _.f_12(bootstrapPage));
+            divContainer.setChild_hu5ove$(new _.bootstrap.BootstrapPage(), new _.net.yested.Fade());
           }
         }
          else if (tmp$0 === '#ajax')
@@ -5539,38 +5876,38 @@
         previousHash.v = hash[0];
       };
     },
-    f_13: function (divContainer) {
+    f_11: function (divContainer) {
       return function () {
         this.br();
         this.br();
         this.plus_pv6laa$(divContainer);
       };
     },
-    f_14: function (divContainer) {
+    f_12: function (divContainer) {
       return function () {
-        this.div_5rsex9$(void 0, void 0, _.f_13(divContainer));
+        this.div_5rsex9$(void 0, void 0, _.f_11(divContainer));
       };
     },
-    f_15: function () {
+    f_13: function () {
       this.plus_pdl1w0$('Contact: ');
     },
-    f_16: function () {
+    f_14: function () {
       this.plus_pdl1w0$('jan.kovar79@gmail.com');
     },
-    f_17: function () {
-      this.emph_kv1miw$(_.f_15);
-      this.a_xjhihl$(void 0, void 0, 'mailto:jan.kovar79@gmail.com', void 0, _.f_16);
+    f_15: function () {
+      this.emph_kv1miw$(_.f_13);
+      this.a_xjhihl$(void 0, void 0, 'mailto:jan.kovar79@gmail.com', void 0, _.f_14);
     },
-    f_18: function () {
-      this.small_kv1miw$(_.f_17);
+    f_16: function () {
+      this.small_kv1miw$(_.f_15);
       this.br();
       this.br();
     },
     main$f_2: function (navbar, divContainer) {
       return function () {
         this.topMenu_tx5hdt$(navbar);
-        this.content_kv1miw$(_.f_14(divContainer));
-        this.footer_kv1miw$(_.f_18);
+        this.content_kv1miw$(_.f_12(divContainer));
+        this.footer_kv1miw$(_.f_16);
       };
     },
     main: function (args) {
@@ -5638,7 +5975,7 @@
       createAjaxGetSection$fetchWeather: function (validator, textInput, btnGroup, temperatureSpan) {
         return function () {
           if (validator.isValid()) {
-            _.net.yested.ajaxGet_435vpa$('http://api.openweathermap.org/data/2.5/weather?q=' + textInput.value + '&units=' + Kotlin.toString(btnGroup.value), _.ajax.fetchWeather$f(temperatureSpan));
+            _.net.yested.ajaxGet_435vpa$('http://api.openweathermap.org/data/2.5/weather?q=' + textInput.data + '&units=' + Kotlin.toString(btnGroup.value), _.ajax.fetchWeather$f(temperatureSpan));
           }
         };
       },
@@ -6184,8 +6521,7 @@
       BootstrapPage: Kotlin.createClass(function () {
         return [_.net.yested.Component];
       }, function () {
-        this.onAddedToDomListeners = Kotlin.modules['stdlib'].kotlin.arrayListOf_9mqe4v$([]);
-        this.$element_79irgr$ = _.net.yested.with_owvm91$(new _.net.yested.Div(), _.bootstrap.BootstrapPage.BootstrapPage$f(this)).element;
+        this.$element_79irgr$ = _.net.yested.with_owvm91$(new _.net.yested.Div(), _.bootstrap.BootstrapPage.BootstrapPage$f).element;
       }, /** @lends _.bootstrap.BootstrapPage.prototype */ {
         element: {
           get: function () {
@@ -6206,98 +6542,93 @@
         f_2: function () {
           this.col_zcukl0$([new _.net.yested.bootstrap.Medium(12)], _.bootstrap.BootstrapPage.f_1);
         },
-        f_3: function (this$) {
-          return function () {
-            this$.init();
-          };
+        f_3: function () {
+          this.plus_pv6laa$(_.bootstrap.createButtons('bootstrapComponents_Buttons'));
+          this.plus_pv6laa$(_.bootstrap.createSplitButtonDropdown('bootstrapComponents_SplitButtonDropdown'));
+          this.plus_pv6laa$(_.bootstrap.createDropDownsSection('bootstrapComponents_Dropdown'));
+          this.plus_pv6laa$(_.bootstrap.createTypographySection('bootstrapComponents_Typography'));
+          this.plus_pv6laa$(_.bootstrap.buttonGroupsSection('bootstrapComponents_ButtonGroups'));
+          this.plus_pv6laa$(_.bootstrap.createForm('bootstrapComponents_Form'));
+          this.plus_pv6laa$(_.bootstrap.createSelectSection('bootstrapComponents_Select'));
+          this.plus_pv6laa$(new _.bootstrap.TagsSection('bootstrapComponents_Tags'));
+          this.plus_pv6laa$(_.bootstrap.createInputs('bootstrapComponents_Inputs'));
+          this.plus_pv6laa$(new _.bootstrap.DateFieldSection('bootstrapComponents_DateField'));
+          this.plus_pv6laa$(_.bootstrap.createCheckboxSection('bootstrapComponents_Checkbox'));
+          this.plus_pv6laa$(_.bootstrap.createGrid('bootstrapComponents_Grid'));
+          this.plus_pv6laa$(_.bootstrap.createTabs('bootstrapComponents_Tabs'));
+          this.plus_pv6laa$(_.bootstrap.createCollapsibleSection('bootstrapComponents_Collapsible'));
+          this.plus_pv6laa$(_.bootstrap.createPanelSection('bootstrapComponents_Panel'));
+          this.plus_pv6laa$(_.bootstrap.createRowPanelContainerSection('bootstrapComponents_PanelContainer'));
+          this.plus_pv6laa$(_.bootstrap.createFloatingPanelContainerSection('bootstrapComponents_FloatingPanelContainer'));
+          this.plus_pv6laa$(_.bootstrap.createDialogs('bootstrapComponents_Dialogs'));
+          this.plus_pv6laa$(_.bootstrap.createAlertsSection('bootstrapComponents_Alerts'));
+          this.plus_pv6laa$(_.bootstrap.createMediaObjectSection('bootstrapComponents_MediaObject'));
+          this.plus_pv6laa$(_.bootstrap.createPaginationSection('bootstrapComponents_Pagination'));
+          this.plus_pv6laa$(_.bootstrap.createNavbarSection('bootstrapComponents_Navbar'));
+          this.plus_pv6laa$(_.bootstrap.createBreadcrumbsSection('bootstrapComponents_Breadcrumbs'));
         },
-        f_4: function (this$BootstrapPage) {
-          return function () {
-            this$BootstrapPage.onAddedToDomListeners.add_za3rmp$(_.bootstrap.BootstrapPage.f_3(this));
-          };
-        },
-        f_5: function (this$BootstrapPage) {
-          return function () {
-            this.plus_pv6laa$(_.bootstrap.createButtons('bootstrapComponents_Buttons'));
-            this.plus_pv6laa$(_.bootstrap.createSplitButtonDropdown('bootstrapComponents_SplitButtonDropdown'));
-            this.plus_pv6laa$(_.bootstrap.createDropDownsSection('bootstrapComponents_Dropdown'));
-            this.plus_pv6laa$(_.bootstrap.createTypographySection('bootstrapComponents_Typography'));
-            this.plus_pv6laa$(_.bootstrap.buttonGroupsSection('bootstrapComponents_ButtonGroups'));
-            this.plus_pv6laa$(_.bootstrap.createForm('bootstrapComponents_Form'));
-            this.plus_pv6laa$(_.bootstrap.createSelectSection('bootstrapComponents_Select'));
-            this.plus_pv6laa$(_.net.yested.with_owvm91$(new _.bootstrap.TagsSection('bootstrapComponents_Tags'), _.bootstrap.BootstrapPage.f_4(this$BootstrapPage)));
-            this.plus_pv6laa$(_.bootstrap.createInputs('bootstrapComponents_Inputs'));
-            this.plus_pv6laa$(_.bootstrap.createCheckboxSection('bootstrapComponents_Checkbox'));
-            this.plus_pv6laa$(_.bootstrap.createGrid('bootstrapComponents_Grid'));
-            this.plus_pv6laa$(_.bootstrap.createTabs('bootstrapComponents_Tabs'));
-            this.plus_pv6laa$(_.bootstrap.createCollapsibleSection('bootstrapComponents_Collapsible'));
-            this.plus_pv6laa$(_.bootstrap.createPanelSection('bootstrapComponents_Panel'));
-            this.plus_pv6laa$(_.bootstrap.createRowPanelContainerSection('bootstrapComponents_PanelContainer'));
-            this.plus_pv6laa$(_.bootstrap.createFloatingPanelContainerSection('bootstrapComponents_FloatingPanelContainer'));
-            this.plus_pv6laa$(_.bootstrap.createDialogs('bootstrapComponents_Dialogs'));
-            this.plus_pv6laa$(_.bootstrap.createAlertsSection('bootstrapComponents_Alerts'));
-            this.plus_pv6laa$(_.bootstrap.createMediaObjectSection('bootstrapComponents_MediaObject'));
-            this.plus_pv6laa$(_.bootstrap.createPaginationSection('bootstrapComponents_Pagination'));
-            this.plus_pv6laa$(_.bootstrap.createNavbarSection('bootstrapComponents_Navbar'));
-            this.plus_pv6laa$(_.bootstrap.createBreadcrumbsSection('bootstrapComponents_Breadcrumbs'));
-          };
-        },
-        f_6: function () {
+        f_4: function () {
           this.plus_pdl1w0$('Buttons');
         },
+        f_5: function () {
+          this.a_xjhihl$(void 0, void 0, '#bootstrapComponents_Buttons', void 0, _.bootstrap.BootstrapPage.f_4);
+          this.clazz = 'active';
+        },
+        f_6: function () {
+          this.plus_pdl1w0$('Split button dropdowns ');
+        },
         f_7: function () {
-          this.a_xjhihl$(void 0, void 0, '#bootstrapComponents_Buttons', void 0, _.bootstrap.BootstrapPage.f_6);
+          this.a_xjhihl$(void 0, void 0, '#bootstrapComponents_SplitButtonDropdown', void 0, _.bootstrap.BootstrapPage.f_6);
           this.clazz = 'active';
         },
         f_8: function () {
-          this.plus_pdl1w0$('Split button dropdowns ');
+          this.plus_pdl1w0$('Dropdowns');
         },
         f_9: function () {
-          this.a_xjhihl$(void 0, void 0, '#bootstrapComponents_SplitButtonDropdown', void 0, _.bootstrap.BootstrapPage.f_8);
+          this.a_xjhihl$(void 0, void 0, '#bootstrapComponents_Dropdown', void 0, _.bootstrap.BootstrapPage.f_8);
           this.clazz = 'active';
         },
         f_10: function () {
-          this.plus_pdl1w0$('Dropdowns');
-        },
-        f_11: function () {
-          this.a_xjhihl$(void 0, void 0, '#bootstrapComponents_Dropdown', void 0, _.bootstrap.BootstrapPage.f_10);
-          this.clazz = 'active';
-        },
-        f_12: function () {
           this.plus_pdl1w0$('Typography');
         },
-        f_13: function () {
-          this.a_xjhihl$(void 0, void 0, '#bootstrapComponents_Typography', void 0, _.bootstrap.BootstrapPage.f_12);
+        f_11: function () {
+          this.a_xjhihl$(void 0, void 0, '#bootstrapComponents_Typography', void 0, _.bootstrap.BootstrapPage.f_10);
         },
-        f_14: function () {
+        f_12: function () {
           this.plus_pdl1w0$('Button Group');
         },
-        f_15: function () {
-          this.a_xjhihl$(void 0, void 0, '#bootstrapComponents_ButtonGroups', void 0, _.bootstrap.BootstrapPage.f_14);
+        f_13: function () {
+          this.a_xjhihl$(void 0, void 0, '#bootstrapComponents_ButtonGroups', void 0, _.bootstrap.BootstrapPage.f_12);
         },
-        f_16: function () {
+        f_14: function () {
           this.plus_pdl1w0$('Form');
         },
-        f_17: function () {
-          this.a_xjhihl$(void 0, void 0, '#bootstrapComponents_Form', void 0, _.bootstrap.BootstrapPage.f_16);
+        f_15: function () {
+          this.a_xjhihl$(void 0, void 0, '#bootstrapComponents_Form', void 0, _.bootstrap.BootstrapPage.f_14);
         },
-        f_18: function () {
+        f_16: function () {
           this.plus_pdl1w0$('Select');
         },
-        f_19: function () {
-          this.a_xjhihl$(void 0, void 0, '#bootstrapComponents_Select', void 0, _.bootstrap.BootstrapPage.f_18);
+        f_17: function () {
+          this.a_xjhihl$(void 0, void 0, '#bootstrapComponents_Select', void 0, _.bootstrap.BootstrapPage.f_16);
         },
-        f_20: function () {
+        f_18: function () {
           this.plus_pdl1w0$('Tags');
         },
-        f_21: function () {
-          this.a_xjhihl$(void 0, void 0, '#bootstrapComponents_Tags', void 0, _.bootstrap.BootstrapPage.f_20);
+        f_19: function () {
+          this.a_xjhihl$(void 0, void 0, '#bootstrapComponents_Tags', void 0, _.bootstrap.BootstrapPage.f_18);
         },
-        f_22: function () {
+        f_20: function () {
           this.plus_pdl1w0$('Text Input with Validation');
         },
+        f_21: function () {
+          this.a_xjhihl$(void 0, void 0, '#bootstrapComponents_Inputs', void 0, _.bootstrap.BootstrapPage.f_20);
+        },
+        f_22: function () {
+          this.plus_pdl1w0$('DateField');
+        },
         f_23: function () {
-          this.a_xjhihl$(void 0, void 0, '#bootstrapComponents_Inputs', void 0, _.bootstrap.BootstrapPage.f_22);
+          this.a_xjhihl$(void 0, void 0, '#bootstrapComponents_DateField', void 0, _.bootstrap.BootstrapPage.f_22);
         },
         f_24: function () {
           this.plus_pdl1w0$('Checkbox');
@@ -6379,6 +6710,7 @@
         },
         f_50: function () {
           this.clazz = 'nav nav-pills nav-stacked affix';
+          this.li_8y48wp$(_.bootstrap.BootstrapPage.f_5);
           this.li_8y48wp$(_.bootstrap.BootstrapPage.f_7);
           this.li_8y48wp$(_.bootstrap.BootstrapPage.f_9);
           this.li_8y48wp$(_.bootstrap.BootstrapPage.f_11);
@@ -6409,23 +6741,19 @@
         f_52: function () {
           this.div_5rsex9$(void 0, void 0, _.bootstrap.BootstrapPage.f_51);
         },
-        f_53: function (this$BootstrapPage) {
-          return function () {
-            this.col_zcukl0$([new _.net.yested.bootstrap.Medium(10)], _.bootstrap.BootstrapPage.f_5(this$BootstrapPage));
-            this.col_zcukl0$([new _.net.yested.bootstrap.Medium(2)], _.bootstrap.BootstrapPage.f_52);
-          };
+        f_53: function () {
+          this.col_zcukl0$([new _.net.yested.bootstrap.Medium(10)], _.bootstrap.BootstrapPage.f_3);
+          this.col_zcukl0$([new _.net.yested.bootstrap.Medium(2)], _.bootstrap.BootstrapPage.f_52);
         },
-        f_54: function (this$, this$BootstrapPage) {
+        f_54: function (this$) {
           return function () {
             _.net.yested.bootstrap.row_xnql8t$(this$, _.bootstrap.BootstrapPage.f_2);
-            _.net.yested.bootstrap.row_xnql8t$(this$, _.bootstrap.BootstrapPage.f_53(this$BootstrapPage));
+            _.net.yested.bootstrap.row_xnql8t$(this$, _.bootstrap.BootstrapPage.f_53);
           };
         },
-        BootstrapPage$f: function (this$BootstrapPage) {
-          return function () {
-            _.net.yested.bootstrap.enableScrollSpy_61zpoe$('bootstrapNavbar');
-            _.net.yested.bootstrap.row_xnql8t$(this, _.bootstrap.BootstrapPage.f_54(this, this$BootstrapPage));
-          };
+        BootstrapPage$f: function () {
+          _.net.yested.bootstrap.enableScrollSpy_61zpoe$('bootstrapNavbar');
+          _.net.yested.bootstrap.row_xnql8t$(this, _.bootstrap.BootstrapPage.f_54(this));
         }
       }),
       f_15: function () {
@@ -6814,6 +7142,67 @@
         var collapsible = _.net.yested.with_owvm91$(new _.net.yested.bootstrap.Collapsible(), _.bootstrap.createCollapsibleSection$f);
         return _.net.yested.div_5rsex9$(id, void 0, _.bootstrap.createCollapsibleSection$f_0(collapsible));
       },
+      DateFieldSection: Kotlin.createClass(function () {
+        return [_.net.yested.Component];
+      }, function (id) {
+        this.dateField_1rcvg7$ = new _.net.yested.bootstrap.DateField(_.bootstrap.DateFieldSection.DateFieldSection$f);
+        this.$element_o66n7r$ = _.net.yested.div_5rsex9$(id, void 0, _.bootstrap.DateFieldSection.DateFieldSection$f_0(this)).element;
+      }, /** @lends _.bootstrap.DateFieldSection.prototype */ {
+        element: {
+          get: function () {
+            return this.$element_o66n7r$;
+          }
+        }
+      }, /** @lends _.bootstrap.DateFieldSection */ {
+        DateFieldSection$f: function () {
+          return this.year.fourDigits.plus('.').plus_9xull5$(this.month.twoDigits).plus_61zpoe$('.').plus_9xull5$(this.dayOfMonth.twoDigits).plus_61zpoe$(' ').plus_9xull5$(this.hour24.twoDigits).plus_61zpoe$(':').plus_9xull5$(this.minutes.twoDigits);
+        },
+        f: function () {
+          this.plus_pdl1w0$('DateField');
+        },
+        f_0: function () {
+          this.h3_kv1miw$(_.bootstrap.DateFieldSection.f);
+        },
+        f_1: function () {
+          _.net.yested.bootstrap.pageHeader_kzm4yj$(this, _.bootstrap.DateFieldSection.f_0);
+        },
+        f_2: function () {
+          this.col_zcukl0$([new _.net.yested.bootstrap.Medium(12)], _.bootstrap.DateFieldSection.f_1);
+        },
+        f_3: function () {
+          this.plus_pdl1w0$('DateField');
+        },
+        f_4: function () {
+          this.plus_pdl1w0$('Demo');
+        },
+        f_5: function (this$DateFieldSection) {
+          return function () {
+            this.div_5rsex9$(void 0, void 0, _.bootstrap.DateFieldSection.f_3);
+            this.br();
+            this.h4_kv1miw$(_.bootstrap.DateFieldSection.f_4);
+            this.plus_pv6laa$(this$DateFieldSection.dateField_1rcvg7$);
+          };
+        },
+        f_6: function () {
+          this.plus_pdl1w0$('Code');
+        },
+        f_7: function () {
+          this.h4_kv1miw$(_.bootstrap.DateFieldSection.f_6);
+          this.code_puj7f4$('kotlin', '+DateField{year.fourDigits + "." + month.twoDigits + "." + dayOfMonth.twoDigits + " " + hour24.twoDigits + ":" + minutes.twoDigits}');
+        },
+        f_8: function (this$DateFieldSection) {
+          return function () {
+            this.col_zcukl0$([new _.net.yested.bootstrap.Medium(4)], _.bootstrap.DateFieldSection.f_5(this$DateFieldSection));
+            this.col_zcukl0$([new _.net.yested.bootstrap.Medium(8)], _.bootstrap.DateFieldSection.f_7);
+          };
+        },
+        DateFieldSection$f_0: function (this$DateFieldSection) {
+          return function () {
+            _.net.yested.bootstrap.row_xnql8t$(this, _.bootstrap.DateFieldSection.f_2);
+            _.net.yested.bootstrap.row_xnql8t$(this, _.bootstrap.DateFieldSection.f_8(this$DateFieldSection));
+          };
+        }
+      }),
       f_96: function () {
         this.plus_pdl1w0$('This is dialog with text input');
       },
@@ -7093,7 +7482,7 @@
       },
       f_159: function (inputField, selectLook, addPanel) {
         return function () {
-          addPanel(inputField.value, Kotlin.modules['stdlib'].kotlin.first_fvq2g0$(selectLook.selectedItems));
+          addPanel(inputField.data, Kotlin.modules['stdlib'].kotlin.first_fvq2g0$(selectLook.selectedItems));
         };
       },
       f_160: function (inputField, selectLook, addPanel) {
@@ -7141,7 +7530,7 @@
         addPanel('400px', _.net.yested.bootstrap.PanelStyle.object.INFO);
         var looks = Kotlin.modules['stdlib'].kotlin.toList_eg9ybj$(_.net.yested.bootstrap.PanelStyle.values());
         var inputField = _.net.yested.with_owvm91$(new _.net.yested.bootstrap.StringInputField(void 0, 'Size in Px'), _.bootstrap.createFloatingPanelContainerSection$f);
-        var selectLook = new _.net.yested.bootstrap.Select(looks, void 0, void 0, void 0, _.bootstrap.createFloatingPanelContainerSection$f_0);
+        var selectLook = new _.net.yested.bootstrap.Select(looks, void 0, void 0, void 0, void 0, _.bootstrap.createFloatingPanelContainerSection$f_0);
         return _.net.yested.div_5rsex9$(id, void 0, _.bootstrap.createFloatingPanelContainerSection$f_1(inputField, selectLook, addPanel, panelContainer));
       },
       f_165: function () {
@@ -8006,9 +8395,9 @@
         addPanel(new _.net.yested.bootstrap.Medium(6), _.net.yested.bootstrap.PanelStyle.object.SUCCESS);
         addPanel(new _.net.yested.bootstrap.Medium(4), _.net.yested.bootstrap.PanelStyle.object.INFO);
         var sizes = Kotlin.modules['stdlib'].kotlin.arrayListOf_9mqe4v$([new _.net.yested.bootstrap.Medium(4), new _.net.yested.bootstrap.Medium(6), new _.net.yested.bootstrap.Medium(8)]);
-        var selectSize = new _.net.yested.bootstrap.Select(sizes, void 0, void 0, void 0, _.bootstrap.createRowPanelContainerSection$f);
+        var selectSize = new _.net.yested.bootstrap.Select(sizes, void 0, void 0, void 0, void 0, _.bootstrap.createRowPanelContainerSection$f);
         var looks = Kotlin.modules['stdlib'].kotlin.toList_eg9ybj$(_.net.yested.bootstrap.PanelStyle.values());
-        var selectLook = new _.net.yested.bootstrap.Select(looks, void 0, void 0, void 0, _.bootstrap.createRowPanelContainerSection$f_0);
+        var selectLook = new _.net.yested.bootstrap.Select(looks, void 0, void 0, void 0, void 0, _.bootstrap.createRowPanelContainerSection$f_0);
         return _.net.yested.div_5rsex9$(id, void 0, _.bootstrap.createRowPanelContainerSection$f_1(selectSize, selectLook, addPanel, panelContainer));
       },
       Car: Kotlin.createClass(null, function (model, color) {
@@ -8128,10 +8517,10 @@
       createSelectSection: function (id) {
         var someData = Kotlin.modules['stdlib'].kotlin.listOf_9mqe4v$([new _.bootstrap.Car('Ford', 'Black'), new _.bootstrap.Car('Skoda', 'White'), new _.bootstrap.Car('Renault', 'Red'), new _.bootstrap.Car('Citroen', 'Purple')]);
         var resultSingleSelect = new _.net.yested.Div();
-        var singleSelect = new _.net.yested.bootstrap.Select(someData, void 0, void 0, void 0, _.bootstrap.createSelectSection$f);
+        var singleSelect = new _.net.yested.bootstrap.Select(someData, void 0, void 0, void 0, void 0, _.bootstrap.createSelectSection$f);
         singleSelect.addOnChangeListener_qshda6$(_.bootstrap.createSelectSection$f_0(resultSingleSelect, singleSelect));
         var resultMultiSelect = new _.net.yested.Div();
-        var multiSelect = new _.net.yested.bootstrap.Select(someData, void 0, true, 4, _.bootstrap.createSelectSection$f_1);
+        var multiSelect = new _.net.yested.bootstrap.Select(someData, void 0, true, 4, void 0, _.bootstrap.createSelectSection$f_1);
         multiSelect.addOnChangeListener_qshda6$(_.bootstrap.createSelectSection$f_2(resultMultiSelect, multiSelect));
         var btn = new _.net.yested.bootstrap.BtsButton(void 0, _.bootstrap.createSelectSection$f_3, void 0, void 0, void 0, void 0, _.bootstrap.createSelectSection$f_4(someData, multiSelect));
         return _.net.yested.div_5rsex9$(void 0, void 0, _.bootstrap.createSelectSection$f_5(id, singleSelect, resultSingleSelect, multiSelect, resultMultiSelect, btn));
@@ -8430,23 +8819,20 @@
       }, function (id) {
         this.someData = Kotlin.modules['stdlib'].kotlin.listOf_9mqe4v$([new _.bootstrap.People('Bal\xE1zs', 25), new _.bootstrap.People('Jan', 35), new _.bootstrap.People('Eliza', 31)]);
         this.eventDiv = new _.net.yested.Div();
-        this.tagsField = new _.net.yested.bootstrap.TagsInputField(_.bootstrap.TagsSection.TagsSection$f, _.bootstrap.TagsSection.TagsSection$f_0, _.bootstrap.TagsSection.TagsSection$f_1);
+        this.tagsField = new _.net.yested.bootstrap.TagsInputField(_.bootstrap.TagsSection.TagsSection$f, _.bootstrap.TagsSection.TagsSection$f_0);
         this.randomPeople = [new _.bootstrap.People('Luke Skywalker', 22), new _.bootstrap.People('Leia Organa', 22), new _.bootstrap.People('Yoda', 900), new _.bootstrap.People('Obi-Wan Kenobi', 57), new _.bootstrap.People('Darth Vader', 46)];
         this.iterator = Kotlin.arrayIterator(this.randomPeople);
-        this.btn = new _.net.yested.bootstrap.BtsButton(void 0, _.bootstrap.TagsSection.TagsSection$f_2, void 0, void 0, void 0, void 0, _.bootstrap.TagsSection.TagsSection$f_3(this));
-        this.$element_nnny7u$ = _.net.yested.div_5rsex9$(void 0, void 0, _.bootstrap.TagsSection.TagsSection$f_4(id, this)).element;
+        this.btn = new _.net.yested.bootstrap.BtsButton(void 0, _.bootstrap.TagsSection.TagsSection$f_1, void 0, void 0, void 0, void 0, _.bootstrap.TagsSection.TagsSection$f_2(this));
+        this.$element_nnny7u$ = _.net.yested.div_5rsex9$(void 0, void 0, _.bootstrap.TagsSection.TagsSection$f_3(id, this)).element;
+        _.net.yested.whenAddedToDom_v3j3j2$(this.element, _.bootstrap.TagsSection.TagsSection$f_4(this));
+        this.tagsField.onAddExistingTag = _.bootstrap.TagsSection.TagsSection$f_5(this);
+        this.tagsField.onAfterItemAdded = _.bootstrap.TagsSection.TagsSection$f_6(this);
+        this.tagsField.onAfterItemRemoved = _.bootstrap.TagsSection.TagsSection$f_7(this);
+        this.tagsField.onBeforeItemAdd = _.bootstrap.TagsSection.TagsSection$f_8(this);
+        this.tagsField.onBeforeItemRemove = _.bootstrap.TagsSection.TagsSection$f_9(this);
       }, /** @lends _.bootstrap.TagsSection.prototype */ {
         showMsg: function (msg) {
           _.net.yested.with_owvm91$(this.eventDiv, _.bootstrap.TagsSection.showMsg$f(msg));
-        },
-        init: function () {
-          this.tagsField.init();
-          this.tagsField.tags = Kotlin.copyToArray(this.someData);
-          this.tagsField.onAddExistingTag = _.bootstrap.TagsSection.init$f(this);
-          this.tagsField.onAfterItemAdded = _.bootstrap.TagsSection.init$f_0(this);
-          this.tagsField.onAfterItemRemoved = _.bootstrap.TagsSection.init$f_1(this);
-          this.tagsField.onBeforeItemAdd = _.bootstrap.TagsSection.init$f_2(this);
-          this.tagsField.onBeforeItemRemove = _.bootstrap.TagsSection.init$f_3(this);
         },
         element: {
           get: function () {
@@ -8471,13 +8857,10 @@
             return _.net.yested.bootstrap.TagsInputFieldType.object.DANGER;
           }
         },
-        TagsSection$f_1: function (it) {
-          return it.name;
-        },
-        TagsSection$f_2: function () {
+        TagsSection$f_1: function () {
           this.plus_pdl1w0$('Add People');
         },
-        TagsSection$f_3: function (this$TagsSection) {
+        TagsSection$f_2: function (this$TagsSection) {
           return function () {
             var tmp$0, tmp$1;
             tmp$1 = this$TagsSection.tagsField;
@@ -8532,16 +8915,16 @@
             this.col_zcukl0$([new _.net.yested.bootstrap.Medium(8)], _.bootstrap.TagsSection.f_7);
           };
         },
-        TagsSection$f_4: function (id, this$TagsSection) {
+        TagsSection$f_3: function (id, this$TagsSection) {
           return function () {
             this.id = id;
             _.net.yested.bootstrap.row_xnql8t$(this, _.bootstrap.TagsSection.f_2);
             _.net.yested.bootstrap.row_xnql8t$(this, _.bootstrap.TagsSection.f_8(this$TagsSection));
           };
         },
-        showMsg$f: function (msg) {
+        TagsSection$f_4: function (this$TagsSection) {
           return function () {
-            this.setContent_61zpoe$(msg);
+            this$TagsSection.tagsField.tags = Kotlin.copyToArray(this$TagsSection.someData);
           };
         },
         f_9: function () {
@@ -8551,26 +8934,26 @@
             jqTag.fadeIn(400, _.bootstrap.TagsSection.f_9);
           };
         },
-        init$f: function (this$TagsSection) {
+        TagsSection$f_5: function (this$TagsSection) {
           return function (addingPeople, jqTag) {
             jqTag.hide(_.bootstrap.TagsSection.f_10(jqTag));
             this$TagsSection.showMsg('onAddExistingTag: ' + addingPeople.name);
           };
         },
-        init$f_0: function (this$TagsSection) {
+        TagsSection$f_6: function (this$TagsSection) {
           return function (item) {
             this$TagsSection.showMsg('added: ' + item.name);
           };
         },
-        init$f_1: function (this$TagsSection) {
+        TagsSection$f_7: function (this$TagsSection) {
           return function (item) {
             this$TagsSection.showMsg('removed: ' + item.name);
           };
         },
-        init$f_2: function (this$TagsSection) {
+        TagsSection$f_8: function (this$TagsSection) {
           return function (item) {
             if (Kotlin.equals(item.name, 'Darth Vader')) {
-              this$TagsSection.showMsg('Vader is just too evil to show here: ' + item.name);
+              this$TagsSection.showMsg('Vader is just too evil to appear here: ' + item.name);
               return _.net.yested.bootstrap.BeforeEventPermission.object.PREVENT;
             }
              else {
@@ -8578,7 +8961,7 @@
             }
           };
         },
-        init$f_3: function (this$TagsSection) {
+        TagsSection$f_9: function (this$TagsSection) {
           return function (item) {
             if (Kotlin.equals(item.name, 'Leia Organa')) {
               this$TagsSection.showMsg('Leia stays here!');
@@ -8588,6 +8971,11 @@
               this$TagsSection.showMsg('removed: ' + item.name);
               return _.net.yested.bootstrap.BeforeEventPermission.object.ALLOW;
             }
+          };
+        },
+        showMsg$f: function (msg) {
+          return function () {
+            this.setContent_61zpoe$(msg);
           };
         }
       }),
@@ -8764,15 +9152,15 @@
         this.cancelHandler = cancelHandler;
         this.textInput = new _.net.yested.bootstrap.StringInputField(void 0, 'City name');
         this.validator = new _.net.yested.bootstrap.Validator(this.textInput, 'Name is mandatory', _.complex.DetailScreen.DetailScreen$f);
-        this.select = new _.net.yested.bootstrap.Select(Kotlin.modules['stdlib'].kotlin.toList_eg9ybj$(_.complex.Continent.values()), void 0, void 0, void 0, _.complex.DetailScreen.DetailScreen$f_0);
+        this.select = new _.net.yested.bootstrap.Select(Kotlin.modules['stdlib'].kotlin.toList_eg9ybj$(_.complex.Continent.values()), void 0, void 0, void 0, void 0, _.complex.DetailScreen.DetailScreen$f_0);
         if (this.editedCity != null) {
-          this.textInput.value = this.editedCity.name;
+          this.textInput.data = this.editedCity.name;
           this.select.selectedItems = Kotlin.modules['stdlib'].kotlin.listOf_9mqe4v$([this.editedCity.continent]);
         }
       }, /** @lends _.complex.DetailScreen.prototype */ {
         save: function () {
           if (this.validator.isValid()) {
-            this.saveHandler(new _.complex.City(this.textInput.value, Kotlin.modules['stdlib'].kotlin.first_fvq2g0$(this.select.selectedItems)));
+            this.saveHandler(new _.complex.City(this.textInput.data, Kotlin.modules['stdlib'].kotlin.first_fvq2g0$(this.select.selectedItems)));
           }
         },
         element: {
@@ -9174,7 +9562,7 @@
           _.net.yested.repeatWithDelayUntil_h8wu9e$(_.complex.DoubleEditor.createEditor_24w3xd$f_0(inputField), 100, _.complex.DoubleEditor.createEditor_24w3xd$f_1(inputField));
           $(inputField.element).on('focusout', _.complex.DoubleEditor.createEditor_24w3xd$f_2(closeHandler));
           $(inputField.element).keypress(_.complex.DoubleEditor.createEditor_24w3xd$f_3(inputField, this, item, closeHandler));
-          inputField.value = Kotlin.toString((tmp$0 = this.getValue(item)) != null ? tmp$0.toFixed(2) : null);
+          inputField.data = Kotlin.toString((tmp$0 = this.getValue(item)) != null ? tmp$0.toFixed(2) : null);
           return inputField.element;
         }
       }, /** @lends _.complex.DoubleEditor */ {
@@ -9200,7 +9588,7 @@
         },
         createEditor_24w3xd$f_3: function (inputField, this$DoubleEditor, item, closeHandler) {
           return function (event) {
-            var d = Kotlin.safeParseDouble(inputField.value);
+            var d = Kotlin.safeParseDouble(inputField.data);
             if (event.which == 13 && d != null) {
               this$DoubleEditor.saveValue(item, d);
               closeHandler();

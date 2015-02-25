@@ -41,7 +41,6 @@ class TagsSection(id: String) : Component {
     val eventDiv = Div()
     val tagsField = TagsInputField<People>(
             textFactory = { it.name },
-            idFactory = { it.name },
             typeFactory = {
                 if (it.name == "Jan") {
                     TagsInputFieldType.SUCCESS
