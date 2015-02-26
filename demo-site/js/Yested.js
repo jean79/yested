@@ -4550,16 +4550,19 @@
           },
           TagsInputField: Kotlin.createClass(function () {
             return [_.net.yested.bootstrap.InputField];
-          }, function $fun(textFactory, typeFactory, inputSize) {
+          }, function $fun(textFactory, typeFactory, idFactory, inputSize) {
             if (textFactory === void 0)
               textFactory = _.net.yested.bootstrap.TagsInputField.TagsInputField$f_1;
             if (typeFactory === void 0)
               typeFactory = _.net.yested.bootstrap.TagsInputField.TagsInputField$f_2;
+            if (idFactory === void 0)
+              idFactory = null;
             if (inputSize === void 0)
               inputSize = _.net.yested.bootstrap.InputSize.object.DEFAULT;
             $fun.baseInitializer.call(this, inputSize, null, 'text');
             this.textFactory = textFactory;
             this.typeFactory = typeFactory;
+            this.idFactory = idFactory;
             this.maxTagCount = null;
             this.onAddExistingTag = _.net.yested.bootstrap.TagsInputField.TagsInputField$f;
             this.onBeforeItemAdd = null;
@@ -4640,7 +4643,11 @@
               }
               var jqElement = $(this.element);
               this.element.removeAttribute('placeholder');
-              jqElement.tagsinput(_.net.yested.bootstrap.TagsInputField.init$f(this));
+              var options = _.net.yested.bootstrap.TagsInputField.init$f(this);
+              if (this.idFactory == null) {
+                delete options.itemValue;
+              }
+              jqElement.tagsinput(options);
               jqElement.on('beforeItemAdd', _.net.yested.bootstrap.TagsInputField.init$f_0(this));
               jqElement.on('itemAdded', _.net.yested.bootstrap.TagsInputField.init$f_1(this));
               jqElement.on('beforeItemRemove', _.net.yested.bootstrap.TagsInputField.init$f_2(this));
@@ -4697,6 +4704,7 @@
             init$f: function (this$TagsInputField) {
               return Kotlin.createObject(null, function () {
                 this.tagClass = _.net.yested.bootstrap.TagsInputField.f_1(this$TagsInputField);
+                this.itemValue = this$TagsInputField.idFactory;
                 this.maxTags = this$TagsInputField.maxTagCount;
                 this.maxChars = this$TagsInputField.maxLengthOfSingleTag;
                 this.trimValue = this$TagsInputField.removeWhiteSpacesAroundTagsAutomatically;
@@ -8819,17 +8827,17 @@
       }, function (id) {
         this.someData = Kotlin.modules['stdlib'].kotlin.listOf_9mqe4v$([new _.bootstrap.People('Bal\xE1zs', 25), new _.bootstrap.People('Jan', 35), new _.bootstrap.People('Eliza', 31)]);
         this.eventDiv = new _.net.yested.Div();
-        this.tagsField = new _.net.yested.bootstrap.TagsInputField(_.bootstrap.TagsSection.TagsSection$f, _.bootstrap.TagsSection.TagsSection$f_0);
+        this.tagsField = new _.net.yested.bootstrap.TagsInputField(_.bootstrap.TagsSection.TagsSection$f, _.bootstrap.TagsSection.TagsSection$f_0, _.bootstrap.TagsSection.TagsSection$f_1);
         this.randomPeople = [new _.bootstrap.People('Luke Skywalker', 22), new _.bootstrap.People('Leia Organa', 22), new _.bootstrap.People('Yoda', 900), new _.bootstrap.People('Obi-Wan Kenobi', 57), new _.bootstrap.People('Darth Vader', 46)];
         this.iterator = Kotlin.arrayIterator(this.randomPeople);
-        this.btn = new _.net.yested.bootstrap.BtsButton(void 0, _.bootstrap.TagsSection.TagsSection$f_1, void 0, void 0, void 0, void 0, _.bootstrap.TagsSection.TagsSection$f_2(this));
-        this.$element_nnny7u$ = _.net.yested.div_5rsex9$(void 0, void 0, _.bootstrap.TagsSection.TagsSection$f_3(id, this)).element;
-        _.net.yested.whenAddedToDom_v3j3j2$(this.element, _.bootstrap.TagsSection.TagsSection$f_4(this));
-        this.tagsField.onAddExistingTag = _.bootstrap.TagsSection.TagsSection$f_5(this);
-        this.tagsField.onAfterItemAdded = _.bootstrap.TagsSection.TagsSection$f_6(this);
-        this.tagsField.onAfterItemRemoved = _.bootstrap.TagsSection.TagsSection$f_7(this);
-        this.tagsField.onBeforeItemAdd = _.bootstrap.TagsSection.TagsSection$f_8(this);
-        this.tagsField.onBeforeItemRemove = _.bootstrap.TagsSection.TagsSection$f_9(this);
+        this.btn = new _.net.yested.bootstrap.BtsButton(void 0, _.bootstrap.TagsSection.TagsSection$f_2, void 0, void 0, void 0, void 0, _.bootstrap.TagsSection.TagsSection$f_3(this));
+        this.$element_nnny7u$ = _.net.yested.div_5rsex9$(void 0, void 0, _.bootstrap.TagsSection.TagsSection$f_4(id, this)).element;
+        _.net.yested.whenAddedToDom_v3j3j2$(this.element, _.bootstrap.TagsSection.TagsSection$f_5(this));
+        this.tagsField.onAddExistingTag = _.bootstrap.TagsSection.TagsSection$f_6(this);
+        this.tagsField.onAfterItemAdded = _.bootstrap.TagsSection.TagsSection$f_7(this);
+        this.tagsField.onAfterItemRemoved = _.bootstrap.TagsSection.TagsSection$f_8(this);
+        this.tagsField.onBeforeItemAdd = _.bootstrap.TagsSection.TagsSection$f_9(this);
+        this.tagsField.onBeforeItemRemove = _.bootstrap.TagsSection.TagsSection$f_10(this);
       }, /** @lends _.bootstrap.TagsSection.prototype */ {
         showMsg: function (msg) {
           _.net.yested.with_owvm91$(this.eventDiv, _.bootstrap.TagsSection.showMsg$f(msg));
@@ -8857,10 +8865,13 @@
             return _.net.yested.bootstrap.TagsInputFieldType.object.DANGER;
           }
         },
-        TagsSection$f_1: function () {
+        TagsSection$f_1: function (it) {
+          return it.name;
+        },
+        TagsSection$f_2: function () {
           this.plus_pdl1w0$('Add People');
         },
-        TagsSection$f_2: function (this$TagsSection) {
+        TagsSection$f_3: function (this$TagsSection) {
           return function () {
             var tmp$0, tmp$1;
             tmp$1 = this$TagsSection.tagsField;
@@ -8915,14 +8926,14 @@
             this.col_zcukl0$([new _.net.yested.bootstrap.Medium(8)], _.bootstrap.TagsSection.f_7);
           };
         },
-        TagsSection$f_3: function (id, this$TagsSection) {
+        TagsSection$f_4: function (id, this$TagsSection) {
           return function () {
             this.id = id;
             _.net.yested.bootstrap.row_xnql8t$(this, _.bootstrap.TagsSection.f_2);
             _.net.yested.bootstrap.row_xnql8t$(this, _.bootstrap.TagsSection.f_8(this$TagsSection));
           };
         },
-        TagsSection$f_4: function (this$TagsSection) {
+        TagsSection$f_5: function (this$TagsSection) {
           return function () {
             this$TagsSection.tagsField.tags = Kotlin.copyToArray(this$TagsSection.someData);
           };
@@ -8934,23 +8945,23 @@
             jqTag.fadeIn(400, _.bootstrap.TagsSection.f_9);
           };
         },
-        TagsSection$f_5: function (this$TagsSection) {
+        TagsSection$f_6: function (this$TagsSection) {
           return function (addingPeople, jqTag) {
             jqTag.hide(_.bootstrap.TagsSection.f_10(jqTag));
             this$TagsSection.showMsg('onAddExistingTag: ' + addingPeople.name);
           };
         },
-        TagsSection$f_6: function (this$TagsSection) {
+        TagsSection$f_7: function (this$TagsSection) {
           return function (item) {
             this$TagsSection.showMsg('added: ' + item.name);
           };
         },
-        TagsSection$f_7: function (this$TagsSection) {
+        TagsSection$f_8: function (this$TagsSection) {
           return function (item) {
             this$TagsSection.showMsg('removed: ' + item.name);
           };
         },
-        TagsSection$f_8: function (this$TagsSection) {
+        TagsSection$f_9: function (this$TagsSection) {
           return function (item) {
             if (Kotlin.equals(item.name, 'Darth Vader')) {
               this$TagsSection.showMsg('Vader is just too evil to appear here: ' + item.name);
@@ -8961,7 +8972,7 @@
             }
           };
         },
-        TagsSection$f_9: function (this$TagsSection) {
+        TagsSection$f_10: function (this$TagsSection) {
           return function (item) {
             if (Kotlin.equals(item.name, 'Leia Organa')) {
               this$TagsSection.showMsg('Leia stays here!');
