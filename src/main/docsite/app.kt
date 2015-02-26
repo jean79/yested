@@ -46,10 +46,7 @@ fun main(args: Array<String>) {
 			"#html" -> divContainer.setChild(htmlPage(), Fade())
 			"#bootstrapComponents" -> {
 				if (hash.get(0) != previousHash) {
-                    val bootstrapPage = BootstrapPage()
-                    divContainer.setChild(bootstrapPage, Fade()) {
-                        bootstrapPage.onAddedToDomListeners.forEach { it.invoke() }
-                    }
+                    divContainer.setChild(BootstrapPage(), Fade())
 				}
 			}
 			"#ajax" -> divContainer.setChild(ajaxPage(), Fade())

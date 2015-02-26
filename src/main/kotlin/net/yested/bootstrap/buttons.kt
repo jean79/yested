@@ -37,9 +37,14 @@ public class BtsButton(type: ButtonType = ButtonType.BUTTON,
              val size:ButtonSize = ButtonSize.DEFAULT,
              val block:Boolean = false,
              badge:String? = null,
-             onclick:() -> Unit ) :  HTMLComponent("button") {
+             onclick:() -> Unit = {} ) :  HTMLComponent("button") {
 
     private var buttonActive:Boolean = false
+
+	fun setLabel(label: HTMLComponent.()-> Unit) {
+		removeAllChildren()
+		this.label()
+	}
 
     var active:Boolean
         get() = buttonActive

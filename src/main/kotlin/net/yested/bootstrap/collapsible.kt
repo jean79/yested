@@ -38,6 +38,9 @@ public class Collapsible(opened:Boolean = false, private val effect:BiDirectionE
 
     private var opened:Boolean
 
+    public val isOpen:Boolean
+        get() = opened
+
     {
         this.opened = opened
         replaceArrow()
@@ -46,8 +49,22 @@ public class Collapsible(opened:Boolean = false, private val effect:BiDirectionE
         }
     }
 
-    private fun toggle() {
+    public fun open() {
+        opened = true
+        update()
+    }
+
+    public fun close() {
+        opened = false
+        update()
+    }
+
+    public fun toggle() {
         opened = !opened
+        update()
+    }
+
+    private fun update() {
         replaceArrow()
         if (opened) {
             effect.applyIn(contentPlaceholder)

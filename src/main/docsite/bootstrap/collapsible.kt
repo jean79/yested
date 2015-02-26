@@ -8,6 +8,10 @@ import net.yested.bootstrap.row
 import net.yested.bootstrap.Medium
 import net.yested.bootstrap.pageHeader
 import net.yested.bootstrap.collapsible
+import net.yested.bootstrap.Collapsible
+import net.yested.with
+import net.yested.bootstrap.btsButton
+import net.yested.bootstrap.ButtonSize
 
 /**
  * Created by jean on 21.2.2015.
@@ -15,7 +19,19 @@ import net.yested.bootstrap.collapsible
 /**
  * Created by jean on 26.1.2015.
  */
-fun createCollapsibleSection(id:String): Div {
+fun createCollapsibleSection(id: String): Div {
+
+    val collapsible = Collapsible() with {
+        header { +"Click me" }
+        content {
+            ul {
+                li { +"some content" }
+                li { +"some content" }
+                li { +"some content" }
+                li { +"some content" }
+            }
+        }
+    }
 
     return div(id = id) {
         row {
@@ -30,32 +46,36 @@ fun createCollapsibleSection(id:String): Div {
                 }
                 br()
                 h4 { +"Demo" }
-                collapsible {
-                    header { +"Click me" }
-                    content {
-                        ul {
-                            li { +"some content"}
-                            li { +"some content"}
-                            li { +"some content"}
-                            li { +"some content"}
-                        }
-                    }
-                }
+                btsButton(size = ButtonSize.EXTRA_SMALL, label = { +"Open" }, onclick = { collapsible.open()})
+                nbsp()
+                btsButton(size = ButtonSize.EXTRA_SMALL, label = { +"Close" }, onclick = { collapsible.close()})
+                nbsp()
+                btsButton(size = ButtonSize.EXTRA_SMALL, label = { +"Toggle" }, onclick = { collapsible.toggle()})
+                br(); br()
+                +collapsible
             }
             col(Medium(8)) {
                 h4 { +"Code" }
-                code(lang = "kotlin", content=
-"""collapsible {
+                code(lang = "kotlin", content =
+"""val collapsible = Collapsible() with {
     header { +"Click me" }
     content {
         ul {
-            li { +"some content"}
-            li { +"some content"}
-            li { +"some content"}
-            li { +"some content"}
+            li { +"some content" }
+            li { +"some content" }
+            li { +"some content" }
+            li { +"some content" }
         }
     }
-}""")
+}
+...
+btsButton(size = ButtonSize.EXTRA_SMALL, label = { +"Open" }, onclick = { collapsible.open()})
+nbsp()
+btsButton(size = ButtonSize.EXTRA_SMALL, label = { +"Close" }, onclick = { collapsible.close()})
+nbsp()
+btsButton(size = ButtonSize.EXTRA_SMALL, label = { +"Toggle" }, onclick = { collapsible.toggle()})
+br(); br()
++collapsible""")
             }
         }
     }

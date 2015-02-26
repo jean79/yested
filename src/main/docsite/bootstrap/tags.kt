@@ -22,6 +22,7 @@ import net.yested.hide
 import net.yested.fadeIn
 import net.yested.with
 import net.yested.bootstrap.BeforeEventPermission
+import net.yested.whenAddedToDom
 
 private data class People(val name: String, val age: Int)
 
@@ -29,38 +30,6 @@ class TagsSection(id: String) : Component {
 
     private fun showMsg(msg: String) {
         eventDiv with { setContent(msg) }
-    }
-
-    fun init() {
-        tagsField.init()
-        tagsField.tags = someData.copyToArray()
-        tagsField.onAddExistingTag = { addingPeople, jqTag ->
-            jqTag.hide { jqTag.fadeIn(400, {}) }
-            showMsg("onAddExistingTag: ${addingPeople.name}")
-        }
-        tagsField.onAfterItemAdded = { item ->
-            showMsg("added: ${item.name}")
-        }
-        tagsField.onAfterItemRemoved = { item ->
-            showMsg("removed: ${item.name}")
-        }
-        tagsField.onBeforeItemAdd = { item ->
-            if (item.name == "Darth Vader") {
-                showMsg("Vader is just too evil to show here: ${item.name}")
-                BeforeEventPermission.PREVENT
-            } else {
-                BeforeEventPermission.ALLOW
-            }
-        }
-        tagsField.onBeforeItemRemove = { item ->
-            if (item.name == "Leia Organa") {
-                showMsg("Leia stays here!")
-                BeforeEventPermission.PREVENT
-            } else {
-                showMsg("removed: ${item.name}")
-                BeforeEventPermission.ALLOW
-            }
-        }
     }
 
     val someData = listOf(
@@ -121,4 +90,36 @@ class TagsSection(id: String) : Component {
         }
     }).element
 
+    {
+        element.whenAddedToDom {
+            tagsField.tags = someData.copyToArray()
+        }
+        tagsField.onAddExistingTag = { addingPeople, jqTag ->
+            jqTag.hide { jqTag.fadeIn(400, {}) }
+            showMsg("onAddExistingTag: ${addingPeople.name}")
+        }
+        tagsField.onAfterItemAdded = { item ->
+            showMsg("added: ${item.name}")
+        }
+        tagsField.onAfterItemRemoved = { item ->
+            showMsg("removed: ${item.name}")
+        }
+        tagsField.onBeforeItemAdd = { item ->
+            if (item.name == "Darth Vader") {
+                showMsg("Vader is just too evil to appear here: ${item.name}")
+                BeforeEventPermission.PREVENT
+            } else {
+                BeforeEventPermission.ALLOW
+            }
+        }
+        tagsField.onBeforeItemRemove = { item ->
+            if (item.name == "Leia Organa") {
+                showMsg("Leia stays here!")
+                BeforeEventPermission.PREVENT
+            } else {
+                showMsg("removed: ${item.name}")
+                BeforeEventPermission.ALLOW
+            }
+        }
+    }
 }
