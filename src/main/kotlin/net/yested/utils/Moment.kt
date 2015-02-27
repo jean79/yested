@@ -26,6 +26,7 @@ private class MomentJs {
     fun weekYear(value: Int? = null): Int = noImpl
     fun isoWeekYear(value: Int? = null): Int = noImpl
     fun weeksInYear(): Int = noImpl
+    fun locale(localeName: String): Unit = noImpl
 }
 
 public class Moment(private val moment: MomentJs) {
@@ -80,6 +81,10 @@ public class Moment(private val moment: MomentJs) {
 			requireNotNull(millisecondsSinceUnixEpoch)
 			return Moment(moment_js(millisecondsSinceUnixEpoch))
 		}
+
+        fun setLocale(localeName: String) {
+            moment_js().locale(localeName)
+        }
     }
 }
 

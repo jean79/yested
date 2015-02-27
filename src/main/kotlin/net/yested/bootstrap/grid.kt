@@ -83,9 +83,9 @@ public class Grid<T>(responsive: Boolean = false, val columns:Array<Column<T>>) 
         setSortingArrow()
     }
 
-    private var dataList: List<T>? = null
+    private var dataList: Iterable<T>? = null
 
-    public var list: List<T>?
+    public var list: Iterable<T>?
         get() = dataList
         set(value) {
             dataList = value
@@ -121,7 +121,7 @@ public class Grid<T>(responsive: Boolean = false, val columns:Array<Column<T>>) 
             })
     }
 
-    private fun sortData(toSort:List<T>):List<T> {
+    private fun sortData(toSort:Iterable<T>):Iterable<T> {
         if (sortColumn?.sortFunction == null) {
             return toSort
         }
