@@ -134,6 +134,7 @@ public class TagsInputField<T>(val textFactory: (T) -> String = {it.toString()},
         val options = object {
             val tagClass = {(item: T) -> "label label-${typeFactory(item).className}" }
             val itemValue = idFactory
+            val itemText = textFactory
             val maxTags = maxTagCount
             val maxChars = maxLengthOfSingleTag
             val trimValue = removeWhiteSpacesAroundTagsAutomatically
@@ -143,6 +144,7 @@ public class TagsInputField<T>(val textFactory: (T) -> String = {it.toString()},
         // HACK: if itemValue is defined for non-object data, then it doesn't work
         if (idFactory == null) {
             js("delete options.itemValue")
+            js("delete options.itemText")
         }
         jqElement.tagsinput(options)
         jqElement.on("beforeItemAdd", {event -> tagsInputBeforeEventHandler(event, onBeforeItemAdd)})
@@ -162,6 +164,7 @@ public class TagsInputField<T>(val textFactory: (T) -> String = {it.toString()},
         }
         set(value) {
             if (initialized) {
+                removeAll()
                 value.forEach {add(it)}
             } else {
                 this.value = value.joinToString(",")

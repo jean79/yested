@@ -56,7 +56,11 @@ public class BtsButton(type: ButtonType = ButtonType.BUTTON,
     var disabled:Boolean
         get() = element.getAttribute("disabled") == "disabled"
         set(value) {
-            element.setAttribute("disabled", if (value) "disabled" else "")
+            if (value) {
+                element.setAttribute("disabled", "disabled")
+            } else {
+                element.removeAttribute("disabled")
+            }
         }
 
     {
