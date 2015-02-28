@@ -34,7 +34,8 @@ public class Moment(private val moment: MomentJs) {
     public fun format(format: String): String = moment.format(format)
     public fun format(format: FormatString): String = moment.format(format.toString())
 
-    public val millisecondsSinceUnixEpoch: Long = moment.valueOf()
+    public val millisecondsSinceUnixEpoch: Long
+		get() = moment.valueOf()
 
     public var millisecond: Int
         get() = moment.millisecond()
