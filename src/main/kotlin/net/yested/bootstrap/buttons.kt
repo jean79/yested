@@ -56,7 +56,11 @@ public class BtsButton(type: ButtonType = ButtonType.BUTTON,
     var disabled:Boolean
         get() = element.getAttribute("disabled") == "disabled"
         set(value) {
-            element.setAttribute("disabled", if (value) "disabled" else "")
+            if (value) {
+                element.setAttribute("disabled", "disabled")
+            } else {
+                element.removeAttribute("disabled")
+            }
         }
 
     {
@@ -165,7 +169,7 @@ public fun HTMLComponent.btsButton(type: ButtonType = ButtonType.BUTTON,
                                    size:ButtonSize = ButtonSize.DEFAULT,
                                    block:Boolean = false,
                                    badge:String? = null,
-                                   onclick:() -> Unit):Unit {
+                                   onclick:() -> Unit = {}):Unit {
     +BtsButton(type = type, label = label, look = look, size = size, block = block, badge = badge, onclick = onclick)
 }
 

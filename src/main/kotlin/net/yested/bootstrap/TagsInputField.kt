@@ -12,12 +12,12 @@ import kotlin.js.dom.html.HTMLInputElement
 import net.yested.whenAddedToDom
 
 public enum class TagsInputFieldType(val className: String) {
-    INFO: TagsInputFieldType("info")
+    INFO : TagsInputFieldType("info")
     PRIMARY : TagsInputFieldType("primary")
-    DANGER: TagsInputFieldType("danger")
-    SUCCESS: TagsInputFieldType("success")
-    DEFAULT: TagsInputFieldType("default")
-    WARNING: TagsInputFieldType("warning")
+    DANGER : TagsInputFieldType("danger")
+    SUCCESS : TagsInputFieldType("success")
+    DEFAULT : TagsInputFieldType("default")
+    WARNING : TagsInputFieldType("warning")
 }
 
 native
@@ -38,13 +38,13 @@ private fun tagsInputBeforeEventHandler<T>(event: TagsInputBeforeEvent<T>, func:
     }
 }
 
-public class TagsInputField<T>(val textFactory: (T) -> String = {it.toString()},
-                               val typeFactory: (T) -> TagsInputFieldType = {TagsInputFieldType.DEFAULT},
+public class TagsInputField<T>(val textFactory: (T) -> String = { it.toString() },
+                               val typeFactory: (T) -> TagsInputFieldType = { TagsInputFieldType.DEFAULT },
                                val idFactory: ((T) -> Any)? = null,
-                               inputSize: InputSize = InputSize.DEFAULT) : InputField<Array<T>>(inputSize, placeholder = null, type = "text"){
+                               inputSize: InputSize = InputSize.DEFAULT) : InputField<Array<T>>(inputSize, placeholder = null, type = "text") {
 
     public var maxTagCount: Int? = null
-    public var onAddExistingTag: (T, JQuery) -> Unit = {item, jqTag -> jqTag.hide {jqTag.fadeIn(400, {})}}
+    public var onAddExistingTag: (T, JQuery) -> Unit = { item, jqTag -> jqTag.hide { jqTag.fadeIn(400, {}) } }
     public var onBeforeItemAdd: ((T) -> BeforeEventPermission)? = null
     public var onAfterItemAdded: ((T) -> Unit)? = null
     public var onBeforeItemRemove: ((T) -> BeforeEventPermission)? = null
@@ -53,14 +53,16 @@ public class TagsInputField<T>(val textFactory: (T) -> String = {it.toString()},
     public var removeWhiteSpacesAroundTagsAutomatically: Boolean = false
     public var allowDuplicates: Boolean = false
 
+    public var dontInitializeAutomatically: Boolean = false
+
     // TODO freeInput, typeahead
     public var initialized: Boolean = false
 
-	override var data: Array<T>
-		get() = tags
-		set(value) {
-			tags = value
-		}
+    override var data: Array<T>
+        get() = tags
+        set(value) {
+            tags = value
+        }
 
     {
         element.setAttribute("data-role", "tagsinput")
@@ -125,8 +127,8 @@ public class TagsInputField<T>(val textFactory: (T) -> String = {it.toString()},
         initialized = false
     }
 
-    public fun init() {
-        if (initialized) {
+    public fun init(calledAutomatically: Boolean = false) {
+        if (initialized || (calledAutomatically && dontInitializeAutomatically)) {
             return
         }
         val jqElement = jq(this.element)
@@ -134,6 +136,7 @@ public class TagsInputField<T>(val textFactory: (T) -> String = {it.toString()},
         val options = object {
             val tagClass = {(item: T) -> "label label-${typeFactory(item).className}" }
             val itemValue = idFactory
+            val itemText = textFactory
             val maxTags = maxTagCount
             val maxChars = maxLengthOfSingleTag
             val trimValue = removeWhiteSpacesAroundTagsAutomatically
@@ -143,12 +146,13 @@ public class TagsInputField<T>(val textFactory: (T) -> String = {it.toString()},
         // HACK: if itemValue is defined for non-object data, then it doesn't work
         if (idFactory == null) {
             js("delete options.itemValue")
+            js("delete options.itemText")
         }
         jqElement.tagsinput(options)
-        jqElement.on("beforeItemAdd", {event -> tagsInputBeforeEventHandler(event, onBeforeItemAdd)})
-		jqElement.on("itemAdded", {event -> onAfterItemAdded?.invoke(event.item)})
-		jqElement.on("beforeItemRemove", {event -> tagsInputBeforeEventHandler(event, onBeforeItemRemove)})
-		jqElement.on("itemRemoved", {event -> onAfterItemRemoved?.invoke(event.item)})
+        jqElement.on("beforeItemAdd", { event -> tagsInputBeforeEventHandler(event, onBeforeItemAdd) })
+        jqElement.on("itemAdded", { event -> onAfterItemAdded?.invoke(event.item) })
+        jqElement.on("beforeItemRemove", { event -> tagsInputBeforeEventHandler(event, onBeforeItemRemove) })
+        jqElement.on("itemRemoved", { event -> onAfterItemRemoved?.invoke(event.item) })
         initialized = true
     }
 
@@ -162,7 +166,8 @@ public class TagsInputField<T>(val textFactory: (T) -> String = {it.toString()},
         }
         set(value) {
             if (initialized) {
-                value.forEach {add(it)}
+                removeAll()
+                value.forEach { add(it) }
             } else {
                 this.value = value.joinToString(",")
             }
@@ -170,7 +175,8 @@ public class TagsInputField<T>(val textFactory: (T) -> String = {it.toString()},
 
     {
         element.whenAddedToDom {
-            init()
+            init(calledAutomatically = true)
         }
+
     }
 }

@@ -28,6 +28,14 @@
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<script src="demo-site/lib/jquery-ui.min.js"></script>
+<script type="text/javascript">
+    // Change JQueryUI plugin names to fix name collision with Bootstrap.
+    $.widget.bridge('uitooltip', $.ui.tooltip);
+    $.widget.bridge('uibutton', $.ui.button);
+</script>
+
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 
@@ -35,7 +43,7 @@
 <script src="demo-site/js/lib/kotlin.js"></script>
 <script src="demo-site/lib/spin.min.js"></script>
 <script src="demo-site/lib/Chart.js"></script>
-<script src="demo-site/lib/jquery-ui.min.js"></script>
+
 <script src="demo-site/lib/bootstrap-tagsinput.min.js"></script>
 <script src="demo-site/lib/moment-with-locales.js"></script>
 <script src="demo-site/lib/bootstrap-datetimepicker.min.js"></script>
