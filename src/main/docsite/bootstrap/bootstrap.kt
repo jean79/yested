@@ -28,6 +28,7 @@ class BootstrapPage : Component {
             row {
                 col(Medium(10)) {
                     +createButtons(id = "bootstrapComponents_Buttons")
+                    +createTooltips(id = "bootstrapComponents_Tooltips")
                     +createSplitButtonDropdown(id = "bootstrapComponents_SplitButtonDropdown")
                     +createDropDownsSection(id = "bootstrapComponents_Dropdown")
                     +createTypographySection(id = "bootstrapComponents_Typography")
@@ -57,9 +58,10 @@ class BootstrapPage : Component {
                         ul {
                             clazz = "nav nav-pills nav-stacked affix"
 
-                            li { a(href = "#bootstrapComponents_Buttons") { +"Buttons" }; clazz = "active" }
-                            li { a(href = "#bootstrapComponents_SplitButtonDropdown") { +"Split button dropdowns " }; clazz = "active" }
-                            li { a(href = "#bootstrapComponents_Dropdown") { +"Dropdowns" }; clazz = "active" }
+                            li { a(href = "#bootstrapComponents_Buttons") { +"Buttons" }}
+                            li { a(href = "#bootstrapComponents_Tooltips") { +"Tooltip" }}
+                            li { a(href = "#bootstrapComponents_SplitButtonDropdown") { +"Split button dropdowns " }}
+                            li { a(href = "#bootstrapComponents_Dropdown") { +"Dropdowns" }}
                             li { a(href = "#bootstrapComponents_Typography") { +"Typography" } }
                             li { a(href = "#bootstrapComponents_ButtonGroups") { +"Button Group" } }
                             li { a(href = "#bootstrapComponents_Form") { +"Form" } }

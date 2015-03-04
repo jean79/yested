@@ -169,7 +169,7 @@ public fun HTMLComponent.btsButton(type: ButtonType = ButtonType.BUTTON,
                                    size:ButtonSize = ButtonSize.DEFAULT,
                                    block:Boolean = false,
                                    badge:String? = null,
-                                   onclick:() -> Unit):Unit {
+                                   onclick:() -> Unit = {}):Unit {
     +BtsButton(type = type, label = label, look = look, size = size, block = block, badge = badge, onclick = onclick)
 }
 
