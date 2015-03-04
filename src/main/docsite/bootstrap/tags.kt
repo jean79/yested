@@ -84,8 +84,51 @@ class TagsSection(id: String) : Component {
             }
             col(Medium(8)) {
                 h4 { +"Code" }
-                code(lang = "kotlin", content =
-                """// TODO""")
+                code(lang = "kotlin", content = """
+val tagsField = TagsInputField<People>(
+    textFactory = { it.name },
+    idFactory = { it.name },
+    typeFactory = {
+        if (it.name == "Jan") {
+            TagsInputFieldType.SUCCESS
+        } else if (it.age < 30) {
+            TagsInputFieldType.INFO
+        } else if (it.age < 40) {
+            TagsInputFieldType.WARNING
+        } else {
+            TagsInputFieldType.DANGER
+        }
+    }
+)
+...
+tagsField.onAddExistingTag = { addingPeople, jqTag ->
+    jqTag.hide { jqTag.fadeIn(400, {}) }
+    showMsg("onAddExistingTag: $\{addingPeople.name}")
+}
+tagsField.onAfterItemAdded = { item ->
+    showMsg("added: $\{item.name}")
+}
+tagsField.onAfterItemRemoved = { item ->
+    showMsg("removed: $\{item.name}")
+}
+tagsField.onBeforeItemAdd = { item ->
+    if (item.name == "Darth Vader") {
+        showMsg("Vader is just too evil to appear here: $\{item.name}")
+        BeforeEventPermission.PREVENT
+    } else {
+        BeforeEventPermission.ALLOW
+    }
+}
+tagsField.onBeforeItemRemove = { item ->
+    if (item.name == "Leia Organa") {
+        showMsg("Leia stays here!")
+        BeforeEventPermission.PREVENT
+    } else {
+        showMsg("removed: $\{item.name}")
+        BeforeEventPermission.ALLOW
+    }
+}
+""")
             }
         }
     }).element
