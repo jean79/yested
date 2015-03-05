@@ -13,8 +13,11 @@ import net.yested.utils.Moment
 import net.yested.utils.FormatStringBuilder
 import net.yested.whenAddedToDom
 
-
-// TODO: support Locales: http://momentjs.com/docs/#/i18n/
+//TODO: support Locales: http://momentjs.com/docs/#/i18n/
+/**
+ *
+ * uses library: http://tarruda.github.io/bootstrap-datetimepicker/
+ */
 public class DateField(formatter: FormatStringBuilder.()->FormatString) : InputElementComponent<Moment?>() {
 
     val formatString = FormatStringBuilder().formatter().toString()
@@ -30,7 +33,7 @@ public class DateField(formatter: FormatStringBuilder.()->FormatString) : InputE
                 appendChild(inputElement)
                 appendChild((Span() with {
                     clazz = "input-group-addon"
-                    appendChild((Span() with { clazz = "glyphicon glyphicon-calendar" }))
+                    appendChild((Span() with { clazz = "glyphicon glyphicon-calendar"; style = "cursor: pointer;" }))
                 }))
             }).element as HTMLInputElement
 

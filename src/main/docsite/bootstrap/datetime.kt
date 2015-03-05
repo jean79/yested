@@ -25,6 +25,7 @@ class DateFieldSection(id: String): Component {
             col(Medium(4)) {
                 div {
                     +"DateField"
+                    +"uses: http://tarruda.github.io/bootstrap-datetimepicker/"
                 }
                 br()
                 h4 { +"Demo" }
