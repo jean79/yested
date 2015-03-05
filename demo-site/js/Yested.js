@@ -2515,6 +2515,7 @@
             },
             f: function () {
               this.clazz = 'glyphicon glyphicon-calendar';
+              this.style = 'cursor: pointer;';
             },
             f_0: function () {
               this.clazz = 'input-group-addon';
@@ -7374,6 +7375,7 @@
         },
         f_3: function () {
           this.plus_pdl1w0$('DateField');
+          this.plus_pdl1w0$('uses: http://tarruda.github.io/bootstrap-datetimepicker/');
         },
         f_4: function () {
           this.plus_pdl1w0$('Demo');
