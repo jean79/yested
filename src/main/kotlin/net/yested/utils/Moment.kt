@@ -72,6 +72,11 @@ public class Moment(private val moment: MomentJs) {
         set(value) {
             moment.month(value)
         }
+    public var year: Int
+        get() = moment.year()
+        set(value) {
+            moment.year(value)
+        }
 
     class object {
         public fun now(): Moment = Moment(moment_js())
