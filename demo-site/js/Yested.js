@@ -834,10 +834,10 @@
         }, /** @lends _.net.yested.TextArea.prototype */ {
           textContent: {
             get: function () {
-              return this.element.textContent;
+              return this.element.value;
             },
             set: function (value) {
-              this.element.textContent = value;
+              this.element.value = value;
             }
           },
           element: {
@@ -2507,6 +2507,7 @@
               var param = _.net.yested.bootstrap.DateField.init$f(this);
               delete param.$metadata$;
               $(this.element).datetimepicker(param);
+              $(this.element).on('dp.change', _.net.yested.bootstrap.DateField.init$f_0(this));
             }
           }, /** @lends _.net.yested.bootstrap.DateField */ {
             DateField$f: function () {
@@ -2537,6 +2538,19 @@
               return Kotlin.createObject(null, function () {
                 this.format = this$DateField.formatString;
               });
+            },
+            f_1: function (it) {
+              it();
+            },
+            f_2: function (it) {
+              it();
+            },
+            init$f_0: function (this$DateField) {
+              return function (it) {
+                Kotlin.println('datum zmeneno2');
+                Kotlin.modules['stdlib'].kotlin.forEach_p7e0bo$(this$DateField.onChangeListeners, _.net.yested.bootstrap.DateField.f_1);
+                Kotlin.modules['stdlib'].kotlin.forEach_p7e0bo$(this$DateField.onChangeLiveListeners, _.net.yested.bootstrap.DateField.f_2);
+              };
             }
           }),
           DialogSize: Kotlin.createEnumClass(function () {
@@ -5828,6 +5842,14 @@
               set: function (value) {
                 this.moment_qmho9s$.month(value);
               }
+            },
+            year: {
+              get: function () {
+                return this.moment_qmho9s$.year();
+              },
+              set: function (value) {
+                this.moment_qmho9s$.year(value);
+              }
             }
           }, /** @lends _.net.yested.utils.Moment */ {
             object_initializer$: function () {
@@ -7350,7 +7372,9 @@
         return [_.net.yested.Component];
       }, function (id) {
         this.dateField_1rcvg7$ = new _.net.yested.bootstrap.DateField(_.bootstrap.DateFieldSection.DateFieldSection$f);
-        this.$element_o66n7r$ = _.net.yested.div_5rsex9$(id, void 0, _.bootstrap.DateFieldSection.DateFieldSection$f_0(this)).element;
+        this.placeholder = new _.net.yested.TextArea(10);
+        this.dateField_1rcvg7$.addOnChangeLiveListener_qshda6$(_.bootstrap.DateFieldSection.DateFieldSection$f_0(this));
+        this.$element_o66n7r$ = _.net.yested.div_5rsex9$(id, void 0, _.bootstrap.DateFieldSection.DateFieldSection$f_1(this)).element;
       }, /** @lends _.bootstrap.DateFieldSection.prototype */ {
         element: {
           get: function () {
@@ -7359,7 +7383,16 @@
         }
       }, /** @lends _.bootstrap.DateFieldSection */ {
         DateFieldSection$f: function () {
-          return this.year.fourDigits.plus('.').plus_9xull5$(this.month.twoDigits).plus_61zpoe$('.').plus_9xull5$(this.dayOfMonth.twoDigits).plus_61zpoe$(' ').plus_9xull5$(this.hour24.twoDigits).plus_61zpoe$(':').plus_9xull5$(this.minutes.twoDigits);
+          return this.dayOfMonth.twoDigits.plus('.').plus_9xull5$(this.month.twoDigits).plus_61zpoe$('.').plus_9xull5$(this.year.fourDigits);
+        },
+        DateFieldSection$f_0: function (this$DateFieldSection) {
+          return function () {
+            var tmp$0, tmp$1;
+            Kotlin.println(' ' + Kotlin.toString((tmp$0 = this$DateFieldSection.dateField_1rcvg7$.data) != null ? tmp$0.year : null));
+            var newText = this$DateFieldSection.placeholder.textContent + ('live change ' + Kotlin.toString((tmp$1 = this$DateFieldSection.dateField_1rcvg7$.data) != null ? tmp$1.year : null) + '\n');
+            this$DateFieldSection.placeholder.textContent = newText;
+            Kotlin.println('Setting new content:' + '\n' + newText);
+          };
         },
         f: function () {
           this.plus_pdl1w0$('DateField');
@@ -7386,6 +7419,7 @@
             this.br();
             this.h4_kv1miw$(_.bootstrap.DateFieldSection.f_4);
             this.plus_pv6laa$(this$DateFieldSection.dateField_1rcvg7$);
+            this.plus_pv6laa$(this$DateFieldSection.placeholder);
           };
         },
         f_6: function () {
@@ -7401,7 +7435,7 @@
             this.col_zcukl0$([new _.net.yested.bootstrap.Medium(8)], _.bootstrap.DateFieldSection.f_7);
           };
         },
-        DateFieldSection$f_0: function (this$DateFieldSection) {
+        DateFieldSection$f_1: function (this$DateFieldSection) {
           return function () {
             _.net.yested.bootstrap.row_xnql8t$(this, _.bootstrap.DateFieldSection.f_2);
             _.net.yested.bootstrap.row_xnql8t$(this, _.bootstrap.DateFieldSection.f_8(this$DateFieldSection));
