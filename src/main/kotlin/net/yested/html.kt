@@ -312,8 +312,8 @@ public open class HTMLComponent(tagName:String, htmlElement:HTMLElement? = null)
 public class TextArea(rows:Int) : ObservableInput<String>(), ElementEvents {
 
     public var textContent: String
-        get() = element.textContent
-        set(value) { element.textContent = value }
+        get() = element.value
+        set(value) { element.value = value }
 
     override val element = createElement("textarea") as HTMLTextAreaElement
 
