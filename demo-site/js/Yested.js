@@ -2547,7 +2547,6 @@
             },
             init$f_0: function (this$DateField) {
               return function (it) {
-                Kotlin.println('datum zmeneno2');
                 Kotlin.modules['stdlib'].kotlin.forEach_p7e0bo$(this$DateField.onChangeListeners, _.net.yested.bootstrap.DateField.f_1);
                 Kotlin.modules['stdlib'].kotlin.forEach_p7e0bo$(this$DateField.onChangeLiveListeners, _.net.yested.bootstrap.DateField.f_2);
               };
@@ -6011,6 +6010,115 @@
               Kotlin.println(title + ' took ' + (performance.now() - start) + ' ms.');
             }
           }
+        }),
+        ext: Kotlin.definePackage(null, /** @lends _.net.yested.ext */ {
+          sweetalert: Kotlin.definePackage(null, /** @lends _.net.yested.ext.sweetalert */ {
+            SwalOptions: Kotlin.createClass(null, function (title, text, type, allowOutsideClick, showCancelButton, confirmButtonText, confirmButtonColor, cancelButtonText, closeOnConfirm, closeOnCancel, imageUrl, imageSize, timer) {
+              if (text === void 0)
+                text = null;
+              if (type === void 0)
+                type = null;
+              if (allowOutsideClick === void 0)
+                allowOutsideClick = false;
+              if (showCancelButton === void 0)
+                showCancelButton = false;
+              if (confirmButtonText === void 0)
+                confirmButtonText = 'OK';
+              if (confirmButtonColor === void 0)
+                confirmButtonColor = '#AEDEF4';
+              if (cancelButtonText === void 0)
+                cancelButtonText = 'Cancel';
+              if (closeOnConfirm === void 0)
+                closeOnConfirm = true;
+              if (closeOnCancel === void 0)
+                closeOnCancel = true;
+              if (imageUrl === void 0)
+                imageUrl = null;
+              if (imageSize === void 0)
+                imageSize = '80x80';
+              if (timer === void 0)
+                timer = null;
+              this.title = title;
+              this.text = text;
+              this.type = type;
+              this.allowOutsideClick = allowOutsideClick;
+              this.showCancelButton = showCancelButton;
+              this.confirmButtonText = confirmButtonText;
+              this.confirmButtonColor = confirmButtonColor;
+              this.cancelButtonText = cancelButtonText;
+              this.closeOnConfirm = closeOnConfirm;
+              this.closeOnCancel = closeOnCancel;
+              this.imageUrl = imageUrl;
+              this.imageSize = imageSize;
+              this.timer = timer;
+            }, /** @lends _.net.yested.ext.sweetalert.SwalOptions.prototype */ {
+              component1: function () {
+                return this.title;
+              },
+              component2: function () {
+                return this.text;
+              },
+              component3: function () {
+                return this.type;
+              },
+              component4: function () {
+                return this.allowOutsideClick;
+              },
+              component5: function () {
+                return this.showCancelButton;
+              },
+              component6: function () {
+                return this.confirmButtonText;
+              },
+              component7: function () {
+                return this.confirmButtonColor;
+              },
+              component8: function () {
+                return this.cancelButtonText;
+              },
+              component9: function () {
+                return this.closeOnConfirm;
+              },
+              component10: function () {
+                return this.closeOnCancel;
+              },
+              component11: function () {
+                return this.imageUrl;
+              },
+              component12: function () {
+                return this.imageSize;
+              },
+              component13: function () {
+                return this.timer;
+              },
+              copy_ry7z5m$: function (title, text, type, allowOutsideClick, showCancelButton, confirmButtonText, confirmButtonColor, cancelButtonText, closeOnConfirm, closeOnCancel, imageUrl, imageSize, timer) {
+                return new _.net.yested.ext.sweetalert.SwalOptions(title === void 0 ? this.title : title, text === void 0 ? this.text : text, type === void 0 ? this.type : type, allowOutsideClick === void 0 ? this.allowOutsideClick : allowOutsideClick, showCancelButton === void 0 ? this.showCancelButton : showCancelButton, confirmButtonText === void 0 ? this.confirmButtonText : confirmButtonText, confirmButtonColor === void 0 ? this.confirmButtonColor : confirmButtonColor, cancelButtonText === void 0 ? this.cancelButtonText : cancelButtonText, closeOnConfirm === void 0 ? this.closeOnConfirm : closeOnConfirm, closeOnCancel === void 0 ? this.closeOnCancel : closeOnCancel, imageUrl === void 0 ? this.imageUrl : imageUrl, imageSize === void 0 ? this.imageSize : imageSize, timer === void 0 ? this.timer : timer);
+              },
+              toString: function () {
+                return 'SwalOptions(title=' + Kotlin.toString(this.title) + (', text=' + Kotlin.toString(this.text)) + (', type=' + Kotlin.toString(this.type)) + (', allowOutsideClick=' + Kotlin.toString(this.allowOutsideClick)) + (', showCancelButton=' + Kotlin.toString(this.showCancelButton)) + (', confirmButtonText=' + Kotlin.toString(this.confirmButtonText)) + (', confirmButtonColor=' + Kotlin.toString(this.confirmButtonColor)) + (', cancelButtonText=' + Kotlin.toString(this.cancelButtonText)) + (', closeOnConfirm=' + Kotlin.toString(this.closeOnConfirm)) + (', closeOnCancel=' + Kotlin.toString(this.closeOnCancel)) + (', imageUrl=' + Kotlin.toString(this.imageUrl)) + (', imageSize=' + Kotlin.toString(this.imageSize)) + (', timer=' + Kotlin.toString(this.timer)) + ')';
+              },
+              hashCode: function () {
+                var result = 0;
+                result = result * 31 + Kotlin.hashCode(this.title) | 0;
+                result = result * 31 + Kotlin.hashCode(this.text) | 0;
+                result = result * 31 + Kotlin.hashCode(this.type) | 0;
+                result = result * 31 + Kotlin.hashCode(this.allowOutsideClick) | 0;
+                result = result * 31 + Kotlin.hashCode(this.showCancelButton) | 0;
+                result = result * 31 + Kotlin.hashCode(this.confirmButtonText) | 0;
+                result = result * 31 + Kotlin.hashCode(this.confirmButtonColor) | 0;
+                result = result * 31 + Kotlin.hashCode(this.cancelButtonText) | 0;
+                result = result * 31 + Kotlin.hashCode(this.closeOnConfirm) | 0;
+                result = result * 31 + Kotlin.hashCode(this.closeOnCancel) | 0;
+                result = result * 31 + Kotlin.hashCode(this.imageUrl) | 0;
+                result = result * 31 + Kotlin.hashCode(this.imageSize) | 0;
+                result = result * 31 + Kotlin.hashCode(this.timer) | 0;
+                return result;
+              },
+              equals_za3rmp$: function (other) {
+                return this === other || (other !== null && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.title, other.title) && Kotlin.equals(this.text, other.text) && Kotlin.equals(this.type, other.type) && Kotlin.equals(this.allowOutsideClick, other.allowOutsideClick) && Kotlin.equals(this.showCancelButton, other.showCancelButton) && Kotlin.equals(this.confirmButtonText, other.confirmButtonText) && Kotlin.equals(this.confirmButtonColor, other.confirmButtonColor) && Kotlin.equals(this.cancelButtonText, other.cancelButtonText) && Kotlin.equals(this.closeOnConfirm, other.closeOnConfirm) && Kotlin.equals(this.closeOnCancel, other.closeOnCancel) && Kotlin.equals(this.imageUrl, other.imageUrl) && Kotlin.equals(this.imageSize, other.imageSize) && Kotlin.equals(this.timer, other.timer))));
+              }
+            })
+          })
         })
       })
     }),
@@ -6048,6 +6156,9 @@
       this.plus_pdl1w0$('Smart Grid');
     },
     f_10: function () {
+      this.plus_pdl1w0$('Sweet Alerts');
+    },
+    f_11: function () {
       this.item('#html', void 0, _.f_2);
       this.item('#bootstrapComponents', void 0, _.f_3);
       this.item('#ajax', void 0, _.f_4);
@@ -6056,11 +6167,12 @@
       this.item('#effects', void 0, _.f_7);
       this.item('#chartjs', void 0, _.f_8);
       this.item('#grid', void 0, _.f_9);
+      this.item('#sweetalert', void 0, _.f_10);
     },
     main$f: function () {
       this.brand_s8xvdm$('#', _.f);
       this.item_b1t645$('#gettingstarted', void 0, _.f_0);
-      this.dropdown_vvlqvy$(_.f_1, _.f_10);
+      this.dropdown_vvlqvy$(_.f_1, _.f_11);
     },
     main$f_0: function () {
     },
@@ -6091,44 +6203,46 @@
           divContainer.setChild_hu5ove$(_.demo.chartjs.chartJsPage(), new _.net.yested.Fade());
         else if (tmp$0 === '#grid')
           divContainer.setChild_hu5ove$(new _.complex.CustomizableGridSection(), new _.net.yested.Fade());
+        else if (tmp$0 === '#sweetalert')
+          divContainer.setChild_hu5ove$(_.sweetalert.sweetAlertDemo(), new _.net.yested.Fade());
         if (!Kotlin.equals(hash[0], previousHash.v)) {
           window.scrollTo(0, 0);
         }
         previousHash.v = hash[0];
       };
     },
-    f_11: function (divContainer) {
+    f_12: function (divContainer) {
       return function () {
         this.br();
         this.br();
         this.plus_pv6laa$(divContainer);
       };
     },
-    f_12: function (divContainer) {
+    f_13: function (divContainer) {
       return function () {
-        this.div_5rsex9$(void 0, void 0, _.f_11(divContainer));
+        this.div_5rsex9$(void 0, void 0, _.f_12(divContainer));
       };
     },
-    f_13: function () {
+    f_14: function () {
       this.plus_pdl1w0$('Contact: ');
     },
-    f_14: function () {
+    f_15: function () {
       this.plus_pdl1w0$('jan.kovar79@gmail.com');
     },
-    f_15: function () {
-      this.emph_kv1miw$(_.f_13);
-      this.a_xjhihl$(void 0, void 0, 'mailto:jan.kovar79@gmail.com', void 0, _.f_14);
-    },
     f_16: function () {
-      this.small_kv1miw$(_.f_15);
+      this.emph_kv1miw$(_.f_14);
+      this.a_xjhihl$(void 0, void 0, 'mailto:jan.kovar79@gmail.com', void 0, _.f_15);
+    },
+    f_17: function () {
+      this.small_kv1miw$(_.f_16);
       this.br();
       this.br();
     },
     main$f_2: function (navbar, divContainer) {
       return function () {
         this.topMenu_tx5hdt$(navbar);
-        this.content_kv1miw$(_.f_12(divContainer));
-        this.footer_kv1miw$(_.f_16);
+        this.content_kv1miw$(_.f_13(divContainer));
+        this.footer_kv1miw$(_.f_17);
       };
     },
     main: function (args) {
@@ -7372,9 +7486,7 @@
         return [_.net.yested.Component];
       }, function (id) {
         this.dateField_1rcvg7$ = new _.net.yested.bootstrap.DateField(_.bootstrap.DateFieldSection.DateFieldSection$f);
-        this.placeholder = new _.net.yested.TextArea(10);
-        this.dateField_1rcvg7$.addOnChangeLiveListener_qshda6$(_.bootstrap.DateFieldSection.DateFieldSection$f_0(this));
-        this.$element_o66n7r$ = _.net.yested.div_5rsex9$(id, void 0, _.bootstrap.DateFieldSection.DateFieldSection$f_1(this)).element;
+        this.$element_o66n7r$ = _.net.yested.div_5rsex9$(id, void 0, _.bootstrap.DateFieldSection.DateFieldSection$f_0(this)).element;
       }, /** @lends _.bootstrap.DateFieldSection.prototype */ {
         element: {
           get: function () {
@@ -7383,16 +7495,7 @@
         }
       }, /** @lends _.bootstrap.DateFieldSection */ {
         DateFieldSection$f: function () {
-          return this.dayOfMonth.twoDigits.plus('.').plus_9xull5$(this.month.twoDigits).plus_61zpoe$('.').plus_9xull5$(this.year.fourDigits);
-        },
-        DateFieldSection$f_0: function (this$DateFieldSection) {
-          return function () {
-            var tmp$0, tmp$1;
-            Kotlin.println(' ' + Kotlin.toString((tmp$0 = this$DateFieldSection.dateField_1rcvg7$.data) != null ? tmp$0.year : null));
-            var newText = this$DateFieldSection.placeholder.textContent + ('live change ' + Kotlin.toString((tmp$1 = this$DateFieldSection.dateField_1rcvg7$.data) != null ? tmp$1.year : null) + '\n');
-            this$DateFieldSection.placeholder.textContent = newText;
-            Kotlin.println('Setting new content:' + '\n' + newText);
-          };
+          return this.year.fourDigits.plus('.').plus_9xull5$(this.month.twoDigits).plus_61zpoe$('.').plus_9xull5$(this.dayOfMonth.twoDigits).plus_61zpoe$(' ').plus_9xull5$(this.hour24.twoDigits).plus_61zpoe$(':').plus_9xull5$(this.minutes.twoDigits);
         },
         f: function () {
           this.plus_pdl1w0$('DateField');
@@ -7419,7 +7522,6 @@
             this.br();
             this.h4_kv1miw$(_.bootstrap.DateFieldSection.f_4);
             this.plus_pv6laa$(this$DateFieldSection.dateField_1rcvg7$);
-            this.plus_pv6laa$(this$DateFieldSection.placeholder);
           };
         },
         f_6: function () {
@@ -7435,7 +7537,7 @@
             this.col_zcukl0$([new _.net.yested.bootstrap.Medium(8)], _.bootstrap.DateFieldSection.f_7);
           };
         },
-        DateFieldSection$f_1: function (this$DateFieldSection) {
+        DateFieldSection$f_0: function (this$DateFieldSection) {
           return function () {
             _.net.yested.bootstrap.row_xnql8t$(this, _.bootstrap.DateFieldSection.f_2);
             _.net.yested.bootstrap.row_xnql8t$(this, _.bootstrap.DateFieldSection.f_8(this$DateFieldSection));
@@ -11165,6 +11267,62 @@
       },
       htmlSection: function () {
         return _.net.yested.div_5rsex9$(void 0, void 0, _.html.htmlSection$f);
+      }
+    }),
+    sweetalert: Kotlin.definePackage(null, /** @lends _.sweetalert */ {
+      f: function () {
+        this.plus_pdl1w0$('Sweet Alerts');
+      },
+      f_0: function () {
+        this.h3_kv1miw$(_.sweetalert.f);
+      },
+      f_1: function () {
+        _.net.yested.bootstrap.pageHeader_kzm4yj$(this, _.sweetalert.f_0);
+      },
+      f_2: function () {
+        this.col_zcukl0$([], _.sweetalert.f_1);
+      },
+      f_3: function () {
+        this.plus_pdl1w0$('http://tristanedwards.me/sweetalert');
+      },
+      f_4: function () {
+        this.plus_pdl1w0$('Simple Alert');
+      },
+      f_5: function () {
+        swal(new _.net.yested.ext.sweetalert.SwalOptions('Hello', 'Some text', 'success'));
+      },
+      f_6: function () {
+        this.plus_pdl1w0$('Confirmation');
+      },
+      f_7: function (success) {
+        swal(new _.net.yested.ext.sweetalert.SwalOptions('Result', 'You answered: ' + Kotlin.toString(success), 'success', void 0, void 0, 'Ok'));
+      },
+      f_8: function () {
+        swal(new _.net.yested.ext.sweetalert.SwalOptions('Confirm', 'Are you sure you want to erase your Hard Drive?', 'warning', void 0, true, 'Erase It!', '#DD6B55', 'Please No!', false, false), _.sweetalert.f_7);
+      },
+      f_9: function () {
+        this.a_xjhihl$(void 0, void 0, 'http://tristanedwards.me/sweetalert', void 0, _.sweetalert.f_3);
+        this.br();
+        this.plus_pdl1w0$('Javascript and CSS file from given project must be included in your HTML page.');
+        this.br();
+        this.br();
+        _.net.yested.bootstrap.btsButton_bol907$(this, void 0, _.sweetalert.f_4, void 0, void 0, void 0, void 0, _.sweetalert.f_5);
+        this.nbsp_za3lpa$();
+        _.net.yested.bootstrap.btsButton_bol907$(this, void 0, _.sweetalert.f_6, void 0, void 0, void 0, void 0, _.sweetalert.f_8);
+      },
+      f_10: function () {
+        this.code_puj7f4$('kotlin', 'btsButton(label = { +"Simple Alert" }) {\n    swal(SwalOptions(\n            title = "Hello",\n            text = "Some text",\n            type = "success"))\n}\nnbsp()\nbtsButton(label = { +"Confirmation" }) {\n    swal(SwalOptions(\n            title = "Confirm",\n            text = "Are you sure you want to erase your Hard Drive?",\n            type = "warning",\n            showCancelButton = true,\n            confirmButtonText = "Erase It!",\n            cancelButtonText = "Please No!",\n            confirmButtonColor = "#DD6B55",\n            closeOnConfirm = false,\n            closeOnCancel = false)) { success ->\n                swal(SwalOptions(\n                        title = "Result",\n                        text = "You answered: $\\{success}",\n                        type = "success",\n                        confirmButtonText = "Ok"))\n    }\n}');
+      },
+      f_11: function () {
+        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(6)], _.sweetalert.f_9);
+        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(6)], _.sweetalert.f_10);
+      },
+      sweetAlertDemo$f: function () {
+        _.net.yested.bootstrap.row_xnql8t$(this, _.sweetalert.f_2);
+        _.net.yested.bootstrap.row_xnql8t$(this, _.sweetalert.f_11);
+      },
+      sweetAlertDemo: function () {
+        return _.net.yested.div_5rsex9$(void 0, void 0, _.sweetalert.sweetAlertDemo$f);
       }
     }),
     demo: Kotlin.definePackage(null, /** @lends _.demo */ {

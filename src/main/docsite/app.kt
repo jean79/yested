@@ -17,6 +17,7 @@ import kotlin.js.dom.html.window
 import demo.chartjs.chartJsPage
 import complex.CustomizableGridSection
 import bootstrap.BootstrapPage
+import sweetalert.sweetAlertDemo
 
 fun main(args: Array<String>) {
 
@@ -32,6 +33,7 @@ fun main(args: Array<String>) {
 			item(href = "#effects") { +"Effects" }
             item(href = "#chartjs") { +"ChartJS" }
             item(href = "#grid") { +"Smart Grid"}
+            item(href = "#sweetalert") { +"Sweet Alerts" }
 		}
 	}
 
@@ -55,6 +57,7 @@ fun main(args: Array<String>) {
 			"#effects" -> divContainer.setChild(effectsPage(), Fade())
             "#chartjs" -> divContainer.setChild(chartJsPage(), Fade())
             "#grid" -> divContainer.setChild(CustomizableGridSection(), Fade())
+            "#sweetalert" -> divContainer.setChild(sweetAlertDemo(), Fade())
 		}
         if (hash.get(0) != previousHash) {
             window.scrollTo(0, 0)
