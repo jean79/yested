@@ -12,11 +12,13 @@ import net.yested.utils.FormatString
 import net.yested.utils.Moment
 import net.yested.utils.FormatStringBuilder
 import net.yested.whenAddedToDom
+import net.yested.utils.on
+import kotlin.dom.on
 
 //TODO: support Locales: http://momentjs.com/docs/#/i18n/
 /**
  *
- * uses library: http://tarruda.github.io/bootstrap-datetimepicker/
+ * uses library: https://github.com/Eonasdan/bootstrap-datetimepicker/blob/master/build/js/bootstrap-datetimepicker.min.js
  */
 public class DateField(formatter: FormatStringBuilder.()->FormatString) : InputElementComponent<Moment?>() {
 
@@ -60,6 +62,12 @@ public class DateField(formatter: FormatStringBuilder.()->FormatString) : InputE
         // Hack: datetimepicker cannot handle unknown parameters, and Kotlin add a $metadata$ property to every object
         js("delete param.\$metadata$")
         jq(element).datetimepicker(param)
+
+        jq(element).on("dp.change", {
+            onChangeListeners.forEach { it() }
+            onChangeLiveListeners.forEach { it() }
+        })
+
     }
 
     {
