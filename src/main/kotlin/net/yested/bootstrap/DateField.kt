@@ -70,7 +70,7 @@ public class DateField(formatter: FormatStringBuilder.()->FormatString) : InputE
 
     }
 
-    {
+    init {
         this.element.whenAddedToDom {
             init()
         }

@@ -21,9 +21,9 @@ public class ButtonGroup(val size: ButtonSize = ButtonSize.DEFAULT, val onSelect
 
     override val element = createElement("div")
 
-    private val buttons = HashMap<String, BtsButton>();
+    private val buttons = HashMap<String, BtsButton>()
 
-    {
+    init {
         element.setAttribute("class", "btn-group")
         element.setAttribute("role", "group")
     }

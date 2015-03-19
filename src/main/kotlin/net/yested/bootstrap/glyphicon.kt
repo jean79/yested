@@ -8,9 +8,9 @@ import net.yested.Component
 
 public class Glyphicon(icon:String) : Component {
 
-    override public val element = createElement("span");
+    override public val element = createElement("span")
 
-    {
+    init {
         element.className = "glyphicon glyphicon-${icon}"
     }
 

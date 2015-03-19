@@ -133,7 +133,7 @@ tagsField.onBeforeItemRemove = { item ->
         }
     }).element
 
-    {
+    init {
         element.whenAddedToDom {
             tagsField.tags = someData.copyToArray()
         }

@@ -50,7 +50,7 @@ class DetailScreen(
         }
     }
 
-    {
+    init {
         if (editedCity != null) {
             textInput.data = editedCity.name
             select.selectedItems = listOf(editedCity.continent)
@@ -98,7 +98,7 @@ class MasterScreen(val list:ArrayList<City>, val editHandler:Function1<City?, Un
         grid.list = list
     }
 
-    {
+    init {
         grid.list = list
     }
 
@@ -135,7 +135,7 @@ class MasterDetailDemo(): Component {
         placeholder.setChild(MasterScreen(list, { editCity(it) }), Fade())
     }
 
-    {
+    init {
         displayMasterScreen()
     }
 

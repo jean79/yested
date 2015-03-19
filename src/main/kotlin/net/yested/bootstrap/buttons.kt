@@ -63,7 +63,7 @@ public class BtsButton(type: ButtonType = ButtonType.BUTTON,
             }
         }
 
-    {
+    init {
         setClass()
         element.setAttribute("type", type.code)
         this.label()
@@ -86,9 +86,9 @@ public class BtsAnchor(href:String,
                 size:ButtonSize = ButtonSize.DEFAULT,
                 block:Boolean = false) :  HTMLComponent("a") {
 
-    public var href:String by Attribute();
+    public var href:String by Attribute()
 
-    {
+    init {
         this.href = href
         element.setAttribute("class", "btn btn-${look.code} btn-${size.code} ${if (block) "btn-block" else ""}")
     }

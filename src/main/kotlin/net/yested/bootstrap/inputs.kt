@@ -36,10 +36,10 @@ public abstract class InputField<T>(val inputSize: InputSize = InputSize.DEFAULT
 
     override val element: HTMLInputElement = createElement("input") as HTMLInputElement
 
-    public var id: String by Attribute();
+    public var id: String by Attribute()
 
 
-    {
+    init {
         element.setAttribute("class", "form-control ${inputSize.code}")
     }
 
@@ -47,7 +47,7 @@ public abstract class InputField<T>(val inputSize: InputSize = InputSize.DEFAULT
         element.setAttribute("class", if (valid) "form-control" else "form-control has-error")
     }
 
-    {
+    init {
         element.setAttribute("type", type)
         if (placeholder != null) {
             element.setAttribute("placeholder", placeholder)
@@ -162,7 +162,7 @@ public class Select<T>(val options: List<T>,
         selectedItems = emptyList()
     }
 
-    {
+    init {
         element.setAttribute("class", "form-control ${inputSize.code}")
         element.setAttribute("size", size.toString())
         generateOptions()

@@ -16,6 +16,11 @@ import net.yested.appendComponent
 import net.yested.Fade
 import jquery.jq
 import net.yested.utils.sortable
+import net.yested.FadeOut
+import net.yested.FadeIn
+import net.yested.Hide
+import net.yested.hide
+import net.yested.show
 
 /**
  * <div role="tabpanel">
@@ -56,7 +61,9 @@ public class Tabs(canChangeOrder:Boolean = false) : Component {
 
     private var leftMostIndex = 0
 
-    {
+    private var currentContent:Div? = null
+
+    init {
         element.setAttribute("role", "tabpanel")
 
         element.appendComponent(bar)
@@ -94,7 +101,31 @@ public class Tabs(canChangeOrder:Boolean = false) : Component {
 
             headersRendered.values().filter { it != link }.forEach { it.clazz = "" }
 
-            content.setChild(renderContent(tabId, tabDefinition.init), Fade());
+            val previousContent = currentContent
+
+            val alreadyAdded = tabsRendered.containsKey(tabId)
+
+            currentContent = null
+            if (alreadyAdded) {
+                currentContent = tabsRendered.get(tabId)!!
+            } else {
+                currentContent = renderContent(tabId, tabDefinition.init)
+                tabsRendered.put(tabId, currentContent!!)
+            }
+
+            if (previousContent != null) {
+                FadeOut().apply(previousContent!!) {
+                    if (!alreadyAdded) {
+                        currentContent!!.style = "display: none;"
+                        content.appendChild(currentContent!!)
+                    }
+                    FadeIn().apply(currentContent!!)
+                }
+            } else {
+                if (!alreadyAdded) {
+                    content.appendChild(currentContent!!)
+                }
+            }
 
             if (tabDefinition.onSelect != null) {
                 tabDefinition.onSelect!!()

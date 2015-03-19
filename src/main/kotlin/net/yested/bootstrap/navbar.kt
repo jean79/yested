@@ -70,11 +70,11 @@ public class Navbar(id:String, position: NavbarPosition? = null, look:NavbarLook
     private val collapsible = div(id = id, clazz = "navbar-collapse collapse") { +ul }
 
     private val menuItems = ArrayList<HTMLComponent>();
-    private val brandLink = Anchor();
+    private val brandLink = Anchor()
 
-    {
+    init {
 
-        element.setAttribute("class", "navbar navbar-${look.code} ${if (position != null) "navbar-${position.code}" else ""}")
+        element.setAttribute("class", "navbar navbar-${look.code} navbar-${position?.code?:"NONE"}")
         element.setAttribute("role", "navigation")
 
         element.appendComponent(
@@ -154,7 +154,7 @@ class NavBarDropdown(private val deselectFun:() -> Unit, label: Anchor.()->Unit)
         "role".."menu"
     }
 
-    {
+    init {
         element.setAttribute("class", "dropdown")
         element.appendComponent(
                 Anchor() with {

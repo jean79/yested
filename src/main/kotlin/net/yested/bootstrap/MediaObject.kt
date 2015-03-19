@@ -14,7 +14,7 @@ public class MediaBody() : HTMLComponent("div") {
 
 	private val heading = HTMLComponent("h4") with { clazz = "media-heading" }
 
-	{
+	init {
 		element.setAttribute("class", "media-body")
 	}
 
@@ -34,7 +34,7 @@ public class MediaObject(align: MediaAlign) : HTMLComponent("div") {
 	private val media = Anchor() with { clazz = align.className; href = "#" }
 	private val body = MediaBody() with { }
 
-	{
+	init {
 		element.setAttribute("class", "media")
 		appendChild(media)
 		appendChild(body)

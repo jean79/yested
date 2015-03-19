@@ -35,7 +35,7 @@ public class Pagination(val count:Int, val defaultSelection:Int = 1, val listene
             redisplay(selectedItem)
         }
 
-    {
+    init {
         element.appendComponent(list)
         replaceItems()
         redisplay(selectedItem)

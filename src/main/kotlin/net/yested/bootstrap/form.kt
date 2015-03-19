@@ -44,9 +44,9 @@ public class Validator<T>(val inputElement: InputComponent<T>, override val erro
 
     private val onChangeListeners: java.util.ArrayList<Function1<Boolean, Unit>> = java.util.ArrayList();
 
-    private var listen = false;
+    private var listen = false
 
-    {
+    init {
         inputElement.addOnChangeListener { listen = true; revalidate() }
         inputElement.addOnChangeLiveListener { if (listen) { revalidate() } }
     }
@@ -80,7 +80,7 @@ public enum class FormInputSize(val code:String) {
 
 public class Form(private val formStyle: FormStyle = FormStyle.DEFAULT, private val inputSize:FormInputSize = FormInputSize.DEFAULT, private val labelDef:DeviceSize = Small(4), private val inputDef:DeviceSize = Small(8)) : HTMLComponent("form") {
 
-    {
+    init {
         element.setAttribute("class", "${formStyle.code}")
         role = "form"
         element.setAttribute("onsubmit", "return false")

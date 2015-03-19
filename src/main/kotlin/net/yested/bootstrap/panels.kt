@@ -31,7 +31,7 @@ public class Panel(style : PanelStyle = PanelStyle.DEFAULT, val dismissible: Boo
      */
     public var dismissibleHandler: Function1<Panel, Unit>? = null
 
-    {
+    init {
         element.setAttribute("class", "panel panel-${style.code}")
         element.appendComponent(heading)
         element.appendComponent(body)

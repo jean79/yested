@@ -64,7 +64,7 @@ public class TagsInputField<T>(val textFactory: (T) -> String = { it.toString() 
             tags = value
         }
 
-    {
+    init {
         element.setAttribute("data-role", "tagsinput")
     }
 
@@ -173,7 +173,7 @@ public class TagsInputField<T>(val textFactory: (T) -> String = { it.toString() 
             }
         }
 
-    {
+    init {
         element.whenAddedToDom {
             init(calledAutomatically = true)
         }

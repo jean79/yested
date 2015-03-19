@@ -13,9 +13,9 @@ class GridColumnHeader<T>(
         sortFunction:((GridColumn<T>) -> Unit)?) : HTMLComponent("span") {
 
     var sortOrderAsc:Boolean = true
-    var arrowPlaceholder = Span();
+    var arrowPlaceholder = Span()
 
-    {
+    init {
         if (sortingSupported) {
             a(href = null, onclick = { sortFunction!!(column)} ) {
                 "style".."cursor: pointer;"
