@@ -79,7 +79,7 @@ public class SmartGrid<TYPE, KEY>(
         })
     }
 
-    {
+    init {
         visibleColumns = columns.map { it.id }
 
         val headerCont = Div() with {

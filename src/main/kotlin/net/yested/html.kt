@@ -325,7 +325,7 @@ public class TextArea(rows:Int) : ObservableInput<String>(), ElementEvents {
         get() = parseInt(element.getAttribute("rows"))
         set(value) { element.setAttribute("rows", value.toString()) }
 
-    {
+    init {
         this.rows = rows
     }
 
@@ -533,7 +533,7 @@ native trait CanvasI {
 }
 
 open class Canvas(val width:Int, val height:Int) : HTMLComponent("canvas") {
-    {
+    init {
         element.setAttribute("width", "${width}")
         element.setAttribute("height", "${height}")
     }
@@ -551,7 +551,7 @@ public enum class ButtonType(val code:String) {
 }
 
 public class Button(type:ButtonType = ButtonType.BUTTON) : HTMLComponent("button") {
-    {
+    init {
         element.setAttribute("type", type.code)
     }
 }

@@ -41,7 +41,7 @@ public class Collapsible(opened:Boolean = false, private val effect:BiDirectionE
     public val isOpen:Boolean
         get() = opened
 
-    {
+    init {
         this.opened = opened
         replaceArrow()
         if (!opened) {

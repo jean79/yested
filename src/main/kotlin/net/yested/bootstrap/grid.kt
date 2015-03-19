@@ -27,9 +27,9 @@ public data class Column<T>(
 public class ColumnHeader<T>(val column:Column<T>, sortingSupported:Boolean, sortFunction:((Column<T>) -> Unit)?) : HTMLComponent("span") {
 
     var sortOrderAsc:Boolean = column.defaultSortOrderAsc
-    var arrowPlaceholder = Span();
+    var arrowPlaceholder = Span()
 
-    {
+    init {
         if (sortingSupported) {
             a(href = null, onclick = { sortFunction!!(column)} ) {
                 "style".."cursor: pointer;"
@@ -69,7 +69,7 @@ public class Grid<T>(responsive: Boolean = false, val columns:Array<Column<T>>) 
         return div
     }
 
-    {
+    init {
         tableElement.className = "table table-striped table-hover table-condensed"
         columnHeaders = columns.map {
             ColumnHeader(

@@ -203,9 +203,9 @@ class CustomizableGridSection: Component {
                 +grid
             }
         }
-    };
+    }
 
-    {
+    init {
         grid.list = data
     }
 

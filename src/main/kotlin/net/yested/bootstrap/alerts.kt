@@ -21,7 +21,7 @@ public enum class AlertStyle(val code:String) {
 
 public class Alert(style: AlertStyle, dismissible: Boolean = false) : HTMLComponent("div") {
 
-    {
+    init {
         clazz = "alert alert-${style.code} ${dismissible.isTrue("alert-dismissible", "")}"
         if (dismissible) {
             tag("button") {

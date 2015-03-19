@@ -19,9 +19,9 @@ public abstract class PanelContainer(layoutChangeHandler:Function0<Unit>? = null
 
     override val element:HTMLElement = createElement("ul");
 
-    private val panels = arrayListOf<Panel>();
+    private val panels = arrayListOf<Panel>()
 
-    {
+    init {
 
         element.setAttribute("class", "list-unstyled")
         jq(element).disableSelection()

@@ -37,7 +37,7 @@ public fun Color.lighten(percent: Int = 20): Color =
 
 public class Colorized(color: Color? = null, backgroundColor: Color? = null) : HTMLComponent("span") {
 
-    {
+    init {
         style = (if (color != null) "color: ${color.toHTMLColor()};" else "") +
                 (if (backgroundColor != null) "background-color: ${backgroundColor.toHTMLColor()};" else "");
     }

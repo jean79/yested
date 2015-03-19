@@ -12,9 +12,9 @@ import net.yested.appendComponent
  */
 public class Breadcrumbs : Component {
 
-    override val element = createElement("ol");
+    override val element = createElement("ol")
 
-    {
+    init {
         element.setAttribute("class", "breadcrumb")
     }
 

@@ -12,9 +12,9 @@ import net.yested.appendComponent
 
 public class Row(): Component {
 
-    override val element = createElement("div");
+    override val element = createElement("div")
 
-    {
+    init {
         element.setAttribute("class", "row")
     }
 
@@ -61,7 +61,7 @@ public class Page(val element: HTMLElement, val layout: ContainerLayout = Contai
 }
 
 public class PageHeader  : HTMLComponent("div") {
-    {
+    init {
         clazz = "page-header"
     }
 }
