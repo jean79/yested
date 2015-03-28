@@ -42,5 +42,16 @@ public fun repeatWithDelayUntil(check:()->Boolean, millisecondInterval:Int, run:
 }
 
 public fun <T, V : Comparable<V>> compareByValue(get: (T) -> V?): (T, T) -> Int {
-    return {(l, r) -> compareValues(get(l), get(r)) }
+    return { l, r -> compareValues(get(l), get(r)) }
+}
+
+public fun Node.getIndexOfChildNode(childElement:Node):Int {
+    var index = 0
+    while (index < this.childNodes.length) {
+        if (this.childNodes.item(index).isSameNode(childElement)) {
+            return index
+        }
+        index++;
+    }
+    return -1
 }
