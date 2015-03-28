@@ -225,6 +225,9 @@
       this.plus_pdl1w0$('Sweet Alerts');
     },
     f_11: function () {
+      this.plus_pdl1w0$('Layout');
+    },
+    f_12: function () {
       this.item('#html', void 0, _.f_2);
       this.item('#bootstrapComponents', void 0, _.f_3);
       this.item('#ajax', void 0, _.f_4);
@@ -234,11 +237,12 @@
       this.item('#chartjs', void 0, _.f_8);
       this.item('#grid', void 0, _.f_9);
       this.item('#sweetalert', void 0, _.f_10);
+      this.item('#layout', void 0, _.f_11);
     },
     main$f: function () {
       this.brand_s8xvdm$('#', _.f);
       this.item_b1t645$('#gettingstarted', void 0, _.f_0);
-      this.dropdown_vvlqvy$(_.f_1, _.f_11);
+      this.dropdown_vvlqvy$(_.f_1, _.f_12);
     },
     main$f_0: function () {
     },
@@ -271,44 +275,46 @@
           divContainer.setChild_hu5ove$(new _.complex.CustomizableGridSection(), new _.net.yested.Fade());
         else if (tmp$0 === '#sweetalert')
           divContainer.setChild_hu5ove$(_.sweetalert.sweetAlertDemo(), new _.net.yested.Fade());
+        else if (tmp$0 === '#layout')
+          divContainer.setChild_hu5ove$(new _.layout.LayoutPage(), new _.net.yested.Fade());
         if (!Kotlin.equals(hash[0], previousHash.v)) {
           window.scrollTo(0, 0);
         }
         previousHash.v = hash[0];
       };
     },
-    f_12: function (divContainer) {
+    f_13: function (divContainer) {
       return function () {
         this.br();
         this.br();
         this.plus_pv6laa$(divContainer);
       };
     },
-    f_13: function (divContainer) {
+    f_14: function (divContainer) {
       return function () {
-        this.div_5rsex9$(void 0, void 0, _.f_12(divContainer));
+        this.div_5rsex9$(void 0, void 0, _.f_13(divContainer));
       };
     },
-    f_14: function () {
+    f_15: function () {
       this.plus_pdl1w0$('Contact: ');
     },
-    f_15: function () {
+    f_16: function () {
       this.plus_pdl1w0$('jan.kovar79@gmail.com');
     },
-    f_16: function () {
-      this.emph_kv1miw$(_.f_14);
-      this.a_xjhihl$(void 0, void 0, 'mailto:jan.kovar79@gmail.com', void 0, _.f_15);
-    },
     f_17: function () {
-      this.small_kv1miw$(_.f_16);
+      this.emph_kv1miw$(_.f_15);
+      this.a_xjhihl$(void 0, void 0, 'mailto:jan.kovar79@gmail.com', void 0, _.f_16);
+    },
+    f_18: function () {
+      this.small_kv1miw$(_.f_17);
       this.br();
       this.br();
     },
     main$f_2: function (navbar, divContainer) {
       return function () {
         this.topMenu_tx5hdt$(navbar);
-        this.content_kv1miw$(_.f_13(divContainer));
-        this.footer_kv1miw$(_.f_17);
+        this.content_kv1miw$(_.f_14(divContainer));
+        this.footer_kv1miw$(_.f_18);
       };
     },
     main: function (args) {
@@ -3967,10 +3973,11 @@
       }, /** @lends _.complex.DoubleEditor.prototype */ {
         createEditor_24w3xd$: function (width, item, closeHandler) {
           var tmp$0;
+          var closeCalled = {v: false};
           var inputField = _.net.yested.with_owvm91$(new _.net.yested.TextInput(), _.complex.DoubleEditor.createEditor_24w3xd$f(width));
           _.net.yested.repeatWithDelayUntil_h8wu9e$(_.complex.DoubleEditor.createEditor_24w3xd$f_0(inputField), 100, _.complex.DoubleEditor.createEditor_24w3xd$f_1(inputField));
-          $(inputField.element).on('focusout', _.complex.DoubleEditor.createEditor_24w3xd$f_2(closeHandler));
-          $(inputField.element).keypress(_.complex.DoubleEditor.createEditor_24w3xd$f_3(inputField, this, item, closeHandler));
+          $(inputField.element).on('focusout', _.complex.DoubleEditor.createEditor_24w3xd$f_2(closeCalled, closeHandler));
+          $(inputField.element).keypress(_.complex.DoubleEditor.createEditor_24w3xd$f_3(inputField, closeCalled, closeHandler, this, item));
           inputField.data = Kotlin.toString((tmp$0 = this.getValue(item)) != null ? tmp$0.toFixed(2) : null);
           return inputField.element;
         }
@@ -3990,180 +3997,27 @@
             inputField.element.focus();
           };
         },
-        createEditor_24w3xd$f_2: function (closeHandler) {
+        createEditor_24w3xd$f_2: function (closeCalled, closeHandler) {
           return function (it) {
-            closeHandler();
+            if (!closeCalled.v) {
+              closeHandler();
+            }
           };
         },
-        createEditor_24w3xd$f_3: function (inputField, this$DoubleEditor, item, closeHandler) {
+        createEditor_24w3xd$f_3: function (inputField, closeCalled, closeHandler, this$DoubleEditor, item) {
           return function (event) {
             var d = Kotlin.safeParseDouble(inputField.data);
             if (event.which == 13 && d != null) {
-              this$DoubleEditor.saveValue(item, d);
+              closeCalled.v = true;
               closeHandler();
+              this$DoubleEditor.saveValue(item, d);
             }
           };
         }
       }),
-      createGrid$f: function (it) {
-        return it.ticker;
-      },
-      createGrid$f_0: function (it) {
-        this.plus_pdl1w0$(it.ticker);
-      },
-      createGrid$f_1: function (it) {
-        return it.ticker;
-      },
-      createGrid$f_2: function (it) {
-        this.plus_pdl1w0$(it.price.toFixed(2));
-      },
-      createGrid$f_3: function (it) {
-        return it.price;
-      },
-      createGrid$f_4: function (item, value) {
-        item.price = value;
-      },
-      createGrid$f_5: function (it) {
-        return it.price;
-      },
-      createGrid$f_6: function (it) {
-        _.complex.coloredNumber(this, it.move);
-      },
-      createGrid$f_7: function (it) {
-        return it.move;
-      },
-      createGrid$f_8: function (it) {
-        this.plus_pdl1w0$(it.min.toFixed(2));
-      },
-      createGrid$f_9: function (it) {
-        return it.min;
-      },
-      createGrid$f_10: function (it) {
-        this.plus_pdl1w0$(it.max.toFixed(2));
-      },
-      createGrid$f_11: function (it) {
-        return it.max;
-      },
-      createGrid$f_12: function (it) {
-        this.plus_pdl1w0$(it.avg.toFixed(2));
-      },
-      createGrid$f_13: function (it) {
-        return it.avg;
-      },
-      createGrid$f_14: function (it) {
-        this.plus_pdl1w0$(it.fair.toFixed(2));
-      },
-      createGrid$f_15: function (it) {
-        return it.fair;
-      },
-      createGrid$f_16: function (it) {
-        this.plus_pdl1w0$(it.ask.toFixed(2));
-      },
-      createGrid$f_17: function (it) {
-        return it.ask;
-      },
-      createGrid$f_18: function (it) {
-        this.plus_pdl1w0$(it.quantity.toFixed(0));
-      },
-      createGrid$f_19: function (it) {
-        return it.quantity;
-      },
-      createGrid$f_20: function (it) {
-        this.plus_pdl1w0$(it.col1.toFixed(2));
-      },
-      createGrid$f_21: function (it) {
-        return it.col1;
-      },
-      createGrid$f_22: function (it) {
-        this.plus_pdl1w0$(it.col2.toFixed(2));
-      },
-      createGrid$f_23: function (it) {
-        return it.col2;
-      },
-      createGrid$f_24: function (it) {
-        this.plus_pdl1w0$(it.col3.toFixed(2));
-      },
-      createGrid$f_25: function (it) {
-        return it.col3;
-      },
-      createGrid$f_26: function (it) {
-        this.plus_pdl1w0$(it.col4.toFixed(2));
-      },
-      createGrid$f_27: function (it) {
-        return it.col4;
-      },
-      createGrid$f_28: function (it) {
-        this.plus_pdl1w0$(it.col5.toFixed(2));
-      },
-      createGrid$f_29: function (it) {
-        return it.col5;
-      },
-      createGrid$f_30: function (it) {
-        this.plus_pdl1w0$(it.col6.toFixed(2));
-      },
-      createGrid$f_31: function (it) {
-        return it.col6;
-      },
-      createGrid$f_32: function (it) {
-        this.plus_pdl1w0$(it.col7.toFixed(2));
-      },
-      createGrid$f_33: function (it) {
-        return it.col7;
-      },
-      createGrid$f_34: function (it) {
-        this.plus_pdl1w0$(it.col8.toFixed(2));
-      },
-      createGrid$f_35: function (it) {
-        return it.col8;
-      },
-      createGrid$f_36: function (it) {
-        this.plus_pdl1w0$(it.col9.toFixed(2));
-      },
-      createGrid$f_37: function (it) {
-        return it.col9;
-      },
-      createGrid$f_38: function (it) {
-        this.plus_pdl1w0$(it.col10.toFixed(2));
-      },
-      createGrid$f_39: function (it) {
-        return it.col10;
-      },
-      createGrid$f_40: function (it) {
-        this.plus_pdl1w0$(it.col11.toFixed(2));
-      },
-      createGrid$f_41: function (it) {
-        return it.col11;
-      },
-      createGrid$f_42: function (it) {
-        this.plus_pdl1w0$(it.col12.toFixed(2));
-      },
-      createGrid$f_43: function (it) {
-        return it.col12;
-      },
-      createGrid$f_44: function (it) {
-        this.plus_pdl1w0$(it.col13.toFixed(2));
-      },
-      createGrid$f_45: function (it) {
-        return it.col13;
-      },
-      createGrid$f_46: function (it) {
-        this.plus_pdl1w0$(it.col14.toFixed(2));
-      },
-      createGrid$f_47: function (it) {
-        return it.col14;
-      },
-      createGrid$f_48: function (it) {
-        this.plus_pdl1w0$(it.col15.toFixed(2));
-      },
-      createGrid$f_49: function (it) {
-        return it.col15;
-      },
-      createGrid: function () {
-        return new _.net.yested.bootstrap.smartgrid.SmartGrid('300px', _.complex.createGrid$f, 'ticker', true, [new _.net.yested.bootstrap.smartgrid.GridColumn('ticker', '80px', 'Ticker', _.complex.createGrid$f_0, void 0, void 0, _.net.yested.compareByValue_lw40be$(_.complex.createGrid$f_1)), new _.net.yested.bootstrap.smartgrid.GridColumn('price', '80px', 'Price', _.complex.createGrid$f_2, new _.complex.DoubleEditor(_.complex.createGrid$f_3, _.complex.createGrid$f_4), void 0, _.net.yested.compareByValue_lw40be$(_.complex.createGrid$f_5)), new _.net.yested.bootstrap.smartgrid.GridColumn('move', '80px', 'Move', _.complex.createGrid$f_6, void 0, void 0, _.net.yested.compareByValue_lw40be$(_.complex.createGrid$f_7)), new _.net.yested.bootstrap.smartgrid.GridColumn('min', '80px', 'Min', _.complex.createGrid$f_8, void 0, void 0, _.net.yested.compareByValue_lw40be$(_.complex.createGrid$f_9)), new _.net.yested.bootstrap.smartgrid.GridColumn('max', '80px', 'Max', _.complex.createGrid$f_10, void 0, void 0, _.net.yested.compareByValue_lw40be$(_.complex.createGrid$f_11)), new _.net.yested.bootstrap.smartgrid.GridColumn('avg', '80px', 'Avg', _.complex.createGrid$f_12, void 0, void 0, _.net.yested.compareByValue_lw40be$(_.complex.createGrid$f_13)), new _.net.yested.bootstrap.smartgrid.GridColumn('fair', '80px', 'Fair', _.complex.createGrid$f_14, void 0, void 0, _.net.yested.compareByValue_lw40be$(_.complex.createGrid$f_15)), new _.net.yested.bootstrap.smartgrid.GridColumn('ask', '80px', 'Ask', _.complex.createGrid$f_16, void 0, void 0, _.net.yested.compareByValue_lw40be$(_.complex.createGrid$f_17)), new _.net.yested.bootstrap.smartgrid.GridColumn('quantity', '80px', 'Quantity', _.complex.createGrid$f_18, void 0, void 0, _.net.yested.compareByValue_lw40be$(_.complex.createGrid$f_19)), new _.net.yested.bootstrap.smartgrid.GridColumn('col1', '80px', 'Col 1', _.complex.createGrid$f_20, void 0, void 0, _.net.yested.compareByValue_lw40be$(_.complex.createGrid$f_21)), new _.net.yested.bootstrap.smartgrid.GridColumn('col2', '80px', 'Col 2', _.complex.createGrid$f_22, void 0, void 0, _.net.yested.compareByValue_lw40be$(_.complex.createGrid$f_23)), new _.net.yested.bootstrap.smartgrid.GridColumn('col3', '80px', 'Col 3', _.complex.createGrid$f_24, void 0, void 0, _.net.yested.compareByValue_lw40be$(_.complex.createGrid$f_25)), new _.net.yested.bootstrap.smartgrid.GridColumn('col4', '80px', 'Col 4', _.complex.createGrid$f_26, void 0, void 0, _.net.yested.compareByValue_lw40be$(_.complex.createGrid$f_27)), new _.net.yested.bootstrap.smartgrid.GridColumn('col5', '80px', 'Col 5', _.complex.createGrid$f_28, void 0, void 0, _.net.yested.compareByValue_lw40be$(_.complex.createGrid$f_29)), new _.net.yested.bootstrap.smartgrid.GridColumn('col6', '80px', 'Col 6', _.complex.createGrid$f_30, void 0, void 0, _.net.yested.compareByValue_lw40be$(_.complex.createGrid$f_31)), new _.net.yested.bootstrap.smartgrid.GridColumn('col7', '80px', 'Col 7', _.complex.createGrid$f_32, void 0, void 0, _.net.yested.compareByValue_lw40be$(_.complex.createGrid$f_33)), new _.net.yested.bootstrap.smartgrid.GridColumn('col8', '80px', 'Col 8', _.complex.createGrid$f_34, void 0, void 0, _.net.yested.compareByValue_lw40be$(_.complex.createGrid$f_35)), new _.net.yested.bootstrap.smartgrid.GridColumn('col9', '80px', 'Col 9', _.complex.createGrid$f_36, void 0, void 0, _.net.yested.compareByValue_lw40be$(_.complex.createGrid$f_37)), new _.net.yested.bootstrap.smartgrid.GridColumn('col10', '80px', 'Col 10', _.complex.createGrid$f_38, void 0, void 0, _.net.yested.compareByValue_lw40be$(_.complex.createGrid$f_39)), new _.net.yested.bootstrap.smartgrid.GridColumn('col11', '80px', 'Col 11', _.complex.createGrid$f_40, void 0, void 0, _.net.yested.compareByValue_lw40be$(_.complex.createGrid$f_41)), new _.net.yested.bootstrap.smartgrid.GridColumn('col12', '80px', 'Col 12', _.complex.createGrid$f_42, void 0, void 0, _.net.yested.compareByValue_lw40be$(_.complex.createGrid$f_43)), new _.net.yested.bootstrap.smartgrid.GridColumn('col13', '80px', 'Col 13', _.complex.createGrid$f_44, void 0, void 0, _.net.yested.compareByValue_lw40be$(_.complex.createGrid$f_45)), new _.net.yested.bootstrap.smartgrid.GridColumn('col14', '80px', 'Col 14', _.complex.createGrid$f_46, void 0, void 0, _.net.yested.compareByValue_lw40be$(_.complex.createGrid$f_47)), new _.net.yested.bootstrap.smartgrid.GridColumn('col15', '80px', 'Col 15', _.complex.createGrid$f_48, void 0, void 0, _.net.yested.compareByValue_lw40be$(_.complex.createGrid$f_49))]);
-      },
       generateData: function () {
         var tmp$0;
-        var $receiver = new Kotlin.NumberRange(0, 100);
+        var $receiver = new Kotlin.NumberRange(1, 500);
         var map_m3yiqg$result;
         var tmp$3;
         var destination = new Kotlin.ArrayList();
@@ -4184,10 +4038,11 @@
       CustomizableGridSection: Kotlin.createClass(function () {
         return [_.net.yested.Component];
       }, function () {
+        this.grid = new _.net.yested.bootstrap.smartgrid.SmartGrid(void 0, _.complex.CustomizableGridSection.grid$f, 'ticker', true, [new _.net.yested.bootstrap.smartgrid.GridColumn('ticker', '80px', 'Ticker', _.complex.CustomizableGridSection.grid$f_0, void 0, void 0, _.net.yested.compareByValue_lw40be$(_.complex.CustomizableGridSection.grid$f_1)), new _.net.yested.bootstrap.smartgrid.GridColumn('price', '80px', 'Price', _.complex.CustomizableGridSection.grid$f_2, new _.complex.DoubleEditor(_.complex.CustomizableGridSection.grid$f_3, _.complex.CustomizableGridSection.grid$f_4(this)), void 0, _.net.yested.compareByValue_lw40be$(_.complex.CustomizableGridSection.grid$f_5)), new _.net.yested.bootstrap.smartgrid.GridColumn('move', '80px', 'Move', _.complex.CustomizableGridSection.grid$f_6, void 0, void 0, _.net.yested.compareByValue_lw40be$(_.complex.CustomizableGridSection.grid$f_7)), new _.net.yested.bootstrap.smartgrid.GridColumn('min', '80px', 'Min', _.complex.CustomizableGridSection.grid$f_8, void 0, void 0, _.net.yested.compareByValue_lw40be$(_.complex.CustomizableGridSection.grid$f_9)), new _.net.yested.bootstrap.smartgrid.GridColumn('max', '80px', 'Max', _.complex.CustomizableGridSection.grid$f_10, void 0, void 0, _.net.yested.compareByValue_lw40be$(_.complex.CustomizableGridSection.grid$f_11)), new _.net.yested.bootstrap.smartgrid.GridColumn('avg', '80px', 'Avg', _.complex.CustomizableGridSection.grid$f_12, void 0, void 0, _.net.yested.compareByValue_lw40be$(_.complex.CustomizableGridSection.grid$f_13)), new _.net.yested.bootstrap.smartgrid.GridColumn('fair', '80px', 'Fair', _.complex.CustomizableGridSection.grid$f_14, void 0, void 0, _.net.yested.compareByValue_lw40be$(_.complex.CustomizableGridSection.grid$f_15)), new _.net.yested.bootstrap.smartgrid.GridColumn('ask', '80px', 'Ask', _.complex.CustomizableGridSection.grid$f_16, void 0, void 0, _.net.yested.compareByValue_lw40be$(_.complex.CustomizableGridSection.grid$f_17)), new _.net.yested.bootstrap.smartgrid.GridColumn('quantity', '80px', 'Quantity', _.complex.CustomizableGridSection.grid$f_18, void 0, void 0, _.net.yested.compareByValue_lw40be$(_.complex.CustomizableGridSection.grid$f_19)), new _.net.yested.bootstrap.smartgrid.GridColumn('col1', '80px', 'Col 1', _.complex.CustomizableGridSection.grid$f_20, void 0, void 0, _.net.yested.compareByValue_lw40be$(_.complex.CustomizableGridSection.grid$f_21)), new _.net.yested.bootstrap.smartgrid.GridColumn('col2', '80px', 'Col 2', _.complex.CustomizableGridSection.grid$f_22, void 0, void 0, _.net.yested.compareByValue_lw40be$(_.complex.CustomizableGridSection.grid$f_23)), new _.net.yested.bootstrap.smartgrid.GridColumn('col3', '80px', 'Col 3', _.complex.CustomizableGridSection.grid$f_24, void 0, void 0, _.net.yested.compareByValue_lw40be$(_.complex.CustomizableGridSection.grid$f_25)), new _.net.yested.bootstrap.smartgrid.GridColumn('col4', '80px', 'Col 4', _.complex.CustomizableGridSection.grid$f_26, void 0, void 0, _.net.yested.compareByValue_lw40be$(_.complex.CustomizableGridSection.grid$f_27)), new _.net.yested.bootstrap.smartgrid.GridColumn('col5', '80px', 'Col 5', _.complex.CustomizableGridSection.grid$f_28, void 0, void 0, _.net.yested.compareByValue_lw40be$(_.complex.CustomizableGridSection.grid$f_29)), new _.net.yested.bootstrap.smartgrid.GridColumn('col6', '80px', 'Col 6', _.complex.CustomizableGridSection.grid$f_30, void 0, void 0, _.net.yested.compareByValue_lw40be$(_.complex.CustomizableGridSection.grid$f_31)), new _.net.yested.bootstrap.smartgrid.GridColumn('col7', '80px', 'Col 7', _.complex.CustomizableGridSection.grid$f_32, void 0, void 0, _.net.yested.compareByValue_lw40be$(_.complex.CustomizableGridSection.grid$f_33)), new _.net.yested.bootstrap.smartgrid.GridColumn('col8', '80px', 'Col 8', _.complex.CustomizableGridSection.grid$f_34, void 0, void 0, _.net.yested.compareByValue_lw40be$(_.complex.CustomizableGridSection.grid$f_35)), new _.net.yested.bootstrap.smartgrid.GridColumn('col9', '80px', 'Col 9', _.complex.CustomizableGridSection.grid$f_36, void 0, void 0, _.net.yested.compareByValue_lw40be$(_.complex.CustomizableGridSection.grid$f_37)), new _.net.yested.bootstrap.smartgrid.GridColumn('col10', '80px', 'Col 10', _.complex.CustomizableGridSection.grid$f_38, void 0, void 0, _.net.yested.compareByValue_lw40be$(_.complex.CustomizableGridSection.grid$f_39)), new _.net.yested.bootstrap.smartgrid.GridColumn('col11', '80px', 'Col 11', _.complex.CustomizableGridSection.grid$f_40, void 0, void 0, _.net.yested.compareByValue_lw40be$(_.complex.CustomizableGridSection.grid$f_41)), new _.net.yested.bootstrap.smartgrid.GridColumn('col12', '80px', 'Col 12', _.complex.CustomizableGridSection.grid$f_42, void 0, void 0, _.net.yested.compareByValue_lw40be$(_.complex.CustomizableGridSection.grid$f_43)), new _.net.yested.bootstrap.smartgrid.GridColumn('col13', '80px', 'Col 13', _.complex.CustomizableGridSection.grid$f_44, void 0, void 0, _.net.yested.compareByValue_lw40be$(_.complex.CustomizableGridSection.grid$f_45)), new _.net.yested.bootstrap.smartgrid.GridColumn('col14', '80px', 'Col 14', _.complex.CustomizableGridSection.grid$f_46, void 0, void 0, _.net.yested.compareByValue_lw40be$(_.complex.CustomizableGridSection.grid$f_47)), new _.net.yested.bootstrap.smartgrid.GridColumn('col15', '80px', 'Col 15', _.complex.CustomizableGridSection.grid$f_48, void 0, void 0, _.net.yested.compareByValue_lw40be$(_.complex.CustomizableGridSection.grid$f_49))]);
         this.timerId = null;
         this.data = _.complex.generateData();
-        this.grid = _.complex.createGrid();
         this.tickingToggleButton = new _.net.yested.bootstrap.BtsButton(void 0, _.complex.CustomizableGridSection.tickingToggleButton$f, void 0, _.net.yested.bootstrap.ButtonSize.object.SMALL, void 0, void 0, _.complex.CustomizableGridSection.tickingToggleButton$f_0(this));
+        this.lastChangedRow = 0;
         this.content = _.net.yested.div_5rsex9$(void 0, void 0, _.complex.CustomizableGridSection.content$f(this));
         this.grid.list = this.data;
       }, /** @lends _.complex.CustomizableGridSection.prototype */ {
@@ -4196,8 +4051,11 @@
             return this.content.element;
           }
         },
+        updateItem: function (item, columnToUpdate) {
+          this.grid.updateItem_9w143m$(item, Kotlin.modules['stdlib'].kotlin.listOf_9mqe4v$([columnToUpdate]));
+        },
         updateRandomValues: function () {
-          var $receiver = new Kotlin.NumberRange(0, this.data.size() / 6 | 0);
+          var $receiver = new Kotlin.NumberRange(0, Math.min(100, this.data.size() / 5 | 0));
           var operation = _.complex.CustomizableGridSection.updateRandomValues$f(this);
           var tmp$0;
           tmp$0 = $receiver.iterator();
@@ -4227,6 +4085,161 @@
           }
         }
       }, /** @lends _.complex.CustomizableGridSection */ {
+        grid$f: function (it) {
+          return it.ticker;
+        },
+        grid$f_0: function (it) {
+          this.plus_pdl1w0$(it.ticker);
+        },
+        grid$f_1: function (it) {
+          return it.ticker;
+        },
+        grid$f_2: function (it) {
+          this.plus_pdl1w0$(it.price.toFixed(2));
+        },
+        grid$f_3: function (it) {
+          return it.price;
+        },
+        grid$f_4: function (this$CustomizableGridSection) {
+          return function (item, value) {
+            this$CustomizableGridSection.updateItem(item.copy(void 0, value), 'price');
+          };
+        },
+        grid$f_5: function (it) {
+          return it.price;
+        },
+        grid$f_6: function (it) {
+          _.complex.coloredNumber(this, it.move);
+        },
+        grid$f_7: function (it) {
+          return it.move;
+        },
+        grid$f_8: function (it) {
+          this.plus_pdl1w0$(it.min.toFixed(2));
+        },
+        grid$f_9: function (it) {
+          return it.min;
+        },
+        grid$f_10: function (it) {
+          this.plus_pdl1w0$(it.max.toFixed(2));
+        },
+        grid$f_11: function (it) {
+          return it.max;
+        },
+        grid$f_12: function (it) {
+          this.plus_pdl1w0$(it.avg.toFixed(2));
+        },
+        grid$f_13: function (it) {
+          return it.avg;
+        },
+        grid$f_14: function (it) {
+          this.plus_pdl1w0$(it.fair.toFixed(2));
+        },
+        grid$f_15: function (it) {
+          return it.fair;
+        },
+        grid$f_16: function (it) {
+          this.plus_pdl1w0$(it.ask.toFixed(2));
+        },
+        grid$f_17: function (it) {
+          return it.ask;
+        },
+        grid$f_18: function (it) {
+          this.plus_pdl1w0$(it.quantity.toFixed(0));
+        },
+        grid$f_19: function (it) {
+          return it.quantity;
+        },
+        grid$f_20: function (it) {
+          this.plus_pdl1w0$(it.col1.toFixed(2));
+        },
+        grid$f_21: function (it) {
+          return it.col1;
+        },
+        grid$f_22: function (it) {
+          this.plus_pdl1w0$(it.col2.toFixed(2));
+        },
+        grid$f_23: function (it) {
+          return it.col2;
+        },
+        grid$f_24: function (it) {
+          this.plus_pdl1w0$(it.col3.toFixed(2));
+        },
+        grid$f_25: function (it) {
+          return it.col3;
+        },
+        grid$f_26: function (it) {
+          this.plus_pdl1w0$(it.col4.toFixed(2));
+        },
+        grid$f_27: function (it) {
+          return it.col4;
+        },
+        grid$f_28: function (it) {
+          this.plus_pdl1w0$(it.col5.toFixed(2));
+        },
+        grid$f_29: function (it) {
+          return it.col5;
+        },
+        grid$f_30: function (it) {
+          this.plus_pdl1w0$(it.col6.toFixed(2));
+        },
+        grid$f_31: function (it) {
+          return it.col6;
+        },
+        grid$f_32: function (it) {
+          this.plus_pdl1w0$(it.col7.toFixed(2));
+        },
+        grid$f_33: function (it) {
+          return it.col7;
+        },
+        grid$f_34: function (it) {
+          this.plus_pdl1w0$(it.col8.toFixed(2));
+        },
+        grid$f_35: function (it) {
+          return it.col8;
+        },
+        grid$f_36: function (it) {
+          this.plus_pdl1w0$(it.col9.toFixed(2));
+        },
+        grid$f_37: function (it) {
+          return it.col9;
+        },
+        grid$f_38: function (it) {
+          this.plus_pdl1w0$(it.col10.toFixed(2));
+        },
+        grid$f_39: function (it) {
+          return it.col10;
+        },
+        grid$f_40: function (it) {
+          this.plus_pdl1w0$(it.col11.toFixed(2));
+        },
+        grid$f_41: function (it) {
+          return it.col11;
+        },
+        grid$f_42: function (it) {
+          this.plus_pdl1w0$(it.col12.toFixed(2));
+        },
+        grid$f_43: function (it) {
+          return it.col12;
+        },
+        grid$f_44: function (it) {
+          this.plus_pdl1w0$(it.col13.toFixed(2));
+        },
+        grid$f_45: function (it) {
+          return it.col13;
+        },
+        grid$f_46: function (it) {
+          this.plus_pdl1w0$(it.col14.toFixed(2));
+        },
+        grid$f_47: function (it) {
+          return it.col14;
+        },
+        grid$f_48: function (it) {
+          this.plus_pdl1w0$(it.col15.toFixed(2));
+        },
+        grid$f_49: function (it) {
+          return it.col15;
+        },
         tickingToggleButton$f: function () {
           this.plus_pdl1w0$('Toggle ticking');
         },
@@ -4257,24 +4270,27 @@
           this.plus_pdl1w0$('Support vertical and horizontal scrolling.');
         },
         f_6: function () {
-          this.plus_pdl1w0$('Supports fast, high performing updates.');
+          this.plus_pdl1w0$('Can handle 100k of rows as it implements Virtual Rendering.');
         },
         f_7: function () {
-          this.plus_pdl1w0$('Supports fully customizable inline cell editors.');
+          this.plus_pdl1w0$('Supports fast updates of items (live ticking).');
         },
         f_8: function () {
-          this.plus_pdl1w0$('Cell can contains any content, grid supports fully customizable cell renderers.');
+          this.plus_pdl1w0$('Supports fully customizable inline cell editors.');
         },
         f_9: function () {
-          this.plus_pdl1w0$('Sorting (optional per cell) is enabled via provided sorting functions.');
+          this.plus_pdl1w0$('Cell can contains any content, grid supports fully customizable cell renderers.');
         },
         f_10: function () {
-          this.plus_pdl1w0$('Columns can be re-sorted via Drag&amp;Drop.');
+          this.plus_pdl1w0$('Sorting (optional per cell) is enabled via provided sorting functions.');
         },
         f_11: function () {
-          this.plus_pdl1w0$('Columns visibility is set in a dedicated Configuration Dialog.');
+          this.plus_pdl1w0$('Columns can be re-sorted via Drag&amp;Drop.');
         },
         f_12: function () {
+          this.plus_pdl1w0$('Columns visibility is set in a dedicated Configuration Dialog.');
+        },
+        f_13: function () {
           this.li_8y48wp$(_.complex.CustomizableGridSection.f_4);
           this.li_8y48wp$(_.complex.CustomizableGridSection.f_5);
           this.li_8y48wp$(_.complex.CustomizableGridSection.f_6);
@@ -4283,34 +4299,31 @@
           this.li_8y48wp$(_.complex.CustomizableGridSection.f_9);
           this.li_8y48wp$(_.complex.CustomizableGridSection.f_10);
           this.li_8y48wp$(_.complex.CustomizableGridSection.f_11);
+          this.li_8y48wp$(_.complex.CustomizableGridSection.f_12);
         },
-        f_13: function () {
+        f_14: function () {
           this.plus_pdl1w0$('Smart Grid is a fully customizable grid with a lot of fancy features.');
           this.br();
           this.br();
           this.emph_kv1miw$(_.complex.CustomizableGridSection.f_3);
-          this.ul_8qfrsd$(_.complex.CustomizableGridSection.f_12);
-        },
-        f_14: function () {
-          this.plus_pdl1w0$('Please note!');
+          this.ul_8qfrsd$(_.complex.CustomizableGridSection.f_13);
         },
         f_15: function () {
-          this.plus_pdl1w0$('Grid does not supports Virtual Renderring (yet), therefore it only supports up-to a 1000 rows.');
+          this.plus_pdl1w0$('Please note!');
         },
         f_16: function () {
           this.plus_pdl1w0$('When update is delivered into a grid, it disables sorting due to performance reasons.');
         },
         f_17: function () {
-          this.li_8y48wp$(_.complex.CustomizableGridSection.f_15);
           this.li_8y48wp$(_.complex.CustomizableGridSection.f_16);
         },
         f_18: function () {
-          this.emph_kv1miw$(_.complex.CustomizableGridSection.f_14);
+          this.emph_kv1miw$(_.complex.CustomizableGridSection.f_15);
           this.ul_8qfrsd$(_.complex.CustomizableGridSection.f_17);
           this.br();
         },
         f_19: function () {
-          this.col_zcukl0$([new _.net.yested.bootstrap.Small(6)], _.complex.CustomizableGridSection.f_13);
+          this.col_zcukl0$([new _.net.yested.bootstrap.Small(6)], _.complex.CustomizableGridSection.f_14);
           this.col_zcukl0$([new _.net.yested.bootstrap.Small(6)], _.complex.CustomizableGridSection.f_18);
         },
         f_20: function () {
@@ -4321,6 +4334,12 @@
         },
         f_22: function (this$CustomizableGridSection) {
           return function () {
+            this.style = 'width: 100%; height: 300px; position: relative';
+            this.plus_pv6laa$(this$CustomizableGridSection.grid);
+          };
+        },
+        f_23: function (this$CustomizableGridSection) {
+          return function () {
             this.h4_kv1miw$(_.complex.CustomizableGridSection.f_20);
             this.a_xjhihl$(void 0, void 0, 'https://github.com/jean79/yested/blob/master/src/main/docsite/complex/smartgrid.kt', void 0, _.complex.CustomizableGridSection.f_21);
             this.br();
@@ -4329,26 +4348,26 @@
             this.plus_pdl1w0$(' Click the button to start ticking of Move column.');
             this.br();
             this.plus_pdl1w0$(' Click any cell in a Price column to edit it.');
-            this.plus_pv6laa$(this$CustomizableGridSection.grid);
+            this.div_5rsex9$(void 0, void 0, _.complex.CustomizableGridSection.f_22(this$CustomizableGridSection));
           };
         },
-        f_23: function (this$CustomizableGridSection) {
+        f_24: function (this$CustomizableGridSection) {
           return function () {
-            this.col_zcukl0$([new _.net.yested.bootstrap.Medium(12)], _.complex.CustomizableGridSection.f_22(this$CustomizableGridSection));
+            this.col_zcukl0$([new _.net.yested.bootstrap.Medium(12)], _.complex.CustomizableGridSection.f_23(this$CustomizableGridSection));
           };
         },
         content$f: function (this$CustomizableGridSection) {
           return function () {
             _.net.yested.bootstrap.row_xnql8t$(this, _.complex.CustomizableGridSection.f_2);
             _.net.yested.bootstrap.row_xnql8t$(this, _.complex.CustomizableGridSection.f_19);
-            _.net.yested.bootstrap.row_xnql8t$(this, _.complex.CustomizableGridSection.f_23(this$CustomizableGridSection));
+            _.net.yested.bootstrap.row_xnql8t$(this, _.complex.CustomizableGridSection.f_24(this$CustomizableGridSection));
           };
         },
         updateRandomValues$f: function (this$CustomizableGridSection) {
           return function (it) {
             var item = this$CustomizableGridSection.data.get_za3lpa$(Math.random() * this$CustomizableGridSection.data.size() | 0);
-            var modified = item.copy(void 0, void 0, Math.random() * 10 - 5);
-            this$CustomizableGridSection.grid.updateItem_9w143m$(modified, Kotlin.modules['stdlib'].kotlin.listOf_9mqe4v$(['move']));
+            item.move = Math.random() * 10 - 5;
+            this$CustomizableGridSection.grid.updateItem_9w143m$(item, Kotlin.modules['stdlib'].kotlin.listOf_9mqe4v$(['move']));
           };
         },
         startTicking$f: function (this$CustomizableGridSection) {
@@ -5519,6 +5538,190 @@
         return _.net.yested.div_5rsex9$(void 0, void 0, _.html.htmlSection$f);
       }
     }),
+    layout: Kotlin.definePackage(null, /** @lends _.layout */ {
+      LayoutPage: Kotlin.createClass(function () {
+        return [_.net.yested.Component];
+      }, function () {
+        this.$element_i11l7$ = _.net.yested.with_owvm91$(new _.net.yested.Div(), _.layout.LayoutPage.element$f).element;
+      }, /** @lends _.layout.LayoutPage.prototype */ {
+        element: {
+          get: function () {
+            return this.$element_i11l7$;
+          }
+        }
+      }, /** @lends _.layout.LayoutPage */ {
+        f: function () {
+          this.plus_pdl1w0$('Layout');
+        },
+        f_0: function () {
+          this.h3_kv1miw$(_.layout.LayoutPage.f);
+        },
+        f_1: function () {
+          _.net.yested.bootstrap.pageHeader_kzm4yj$(this, _.layout.LayoutPage.f_0);
+          this.plus_pdl1w0$('Useful Layout utilities');
+        },
+        f_2: function () {
+          this.col_zcukl0$([new _.net.yested.bootstrap.Medium(12)], _.layout.LayoutPage.f_1);
+        },
+        f_3: function () {
+          this.plus_pv6laa$(_.layout.createScrollBarSection());
+        },
+        f_4: function () {
+          this.col_zcukl0$([new _.net.yested.bootstrap.Medium(12)], _.layout.LayoutPage.f_3);
+        },
+        element$f: function () {
+          _.net.yested.bootstrap.row_xnql8t$(this, _.layout.LayoutPage.f_2);
+          _.net.yested.bootstrap.row_xnql8t$(this, _.layout.LayoutPage.f_4);
+        }
+      }),
+      createScrollBarSection$f: function (positionTextVertical) {
+        return function (it) {
+          positionTextVertical.setContent_61zpoe$('Vertical: ' + it);
+        };
+      },
+      createScrollBarSection$f_0: function (positionTextHorizontal) {
+        return function (it) {
+          positionTextHorizontal.setContent_61zpoe$('Horizontal: ' + it);
+        };
+      },
+      createScrollBarSection$f_1: function () {
+        this.data = 100;
+      },
+      createScrollBarSection$f_2: function () {
+        this.data = 20;
+      },
+      createScrollBarSection$f_3: function () {
+        this.data = 30;
+      },
+      f: function () {
+        this.plus_pdl1w0$('ScrollBar');
+      },
+      f_0: function () {
+        this.h3_kv1miw$(_.layout.f);
+      },
+      f_1: function () {
+        _.net.yested.bootstrap.pageHeader_kzm4yj$(this, _.layout.f_0);
+      },
+      f_2: function () {
+        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(12)], _.layout.f_1);
+      },
+      f_3: function () {
+        this.plus_pdl1w0$('Demo');
+      },
+      f_4: function () {
+        this.plus_pdl1w0$('Total number:');
+      },
+      f_5: function (fieldTotalNumber) {
+        return function () {
+          this.plus_pv6laa$(fieldTotalNumber);
+        };
+      },
+      f_6: function () {
+        this.plus_pdl1w0$('Viewport size:');
+      },
+      f_7: function (fieldViewportSize) {
+        return function () {
+          this.plus_pv6laa$(fieldViewportSize);
+        };
+      },
+      f_8: function () {
+      },
+      f_9: function () {
+        this.plus_pdl1w0$('Set scrollbar');
+      },
+      f_10: function (scrollBarVetical, fieldTotalNumber, fieldViewportSize) {
+        return function () {
+          var tmp$0, tmp$1;
+          scrollBarVetical.setup_vux9f0$((tmp$0 = fieldTotalNumber.data) != null ? tmp$0 : 100, (tmp$1 = fieldViewportSize.data) != null ? tmp$1 : 20);
+        };
+      },
+      f_11: function (scrollBarVetical, fieldTotalNumber, fieldViewportSize) {
+        return function () {
+          _.net.yested.bootstrap.btsButton_bol907$(this, void 0, _.layout.f_9, void 0, _.net.yested.bootstrap.ButtonSize.object.SMALL, void 0, void 0, _.layout.f_10(scrollBarVetical, fieldTotalNumber, fieldViewportSize));
+        };
+      },
+      f_12: function () {
+      },
+      f_13: function () {
+        this.br();
+      },
+      f_14: function () {
+        this.plus_pdl1w0$('Set position:');
+      },
+      f_15: function (fieldNewPosition) {
+        return function () {
+          this.plus_pv6laa$(fieldNewPosition);
+        };
+      },
+      f_16: function () {
+      },
+      f_17: function () {
+        this.plus_pdl1w0$('Set scrollbar');
+      },
+      f_18: function (fieldNewPosition, scrollBarVetical) {
+        return function () {
+          var tmp$0;
+          scrollBarVetical.position = (tmp$0 = fieldNewPosition.data) != null ? tmp$0 : 0;
+        };
+      },
+      f_19: function (fieldNewPosition, scrollBarVetical) {
+        return function () {
+          _.net.yested.bootstrap.btsButton_bol907$(this, void 0, _.layout.f_17, void 0, _.net.yested.bootstrap.ButtonSize.object.SMALL, void 0, void 0, _.layout.f_18(fieldNewPosition, scrollBarVetical));
+        };
+      },
+      f_20: function (fieldTotalNumber, fieldViewportSize, scrollBarVetical, fieldNewPosition) {
+        return function () {
+          this.item_gthhqa$(void 0, _.layout.f_4, void 0, _.layout.f_5(fieldTotalNumber));
+          this.item_gthhqa$(void 0, _.layout.f_6, void 0, _.layout.f_7(fieldViewportSize));
+          this.item_gthhqa$(void 0, _.layout.f_8, void 0, _.layout.f_11(scrollBarVetical, fieldTotalNumber, fieldViewportSize));
+          this.item_gthhqa$(void 0, _.layout.f_12, void 0, _.layout.f_13);
+          this.item_gthhqa$(void 0, _.layout.f_14, void 0, _.layout.f_15(fieldNewPosition));
+          this.item_gthhqa$(void 0, _.layout.f_16, void 0, _.layout.f_19(fieldNewPosition, scrollBarVetical));
+        };
+      },
+      f_21: function (fieldTotalNumber, fieldViewportSize, scrollBarVetical, fieldNewPosition, positionTextVertical, scrollBarHorizontal, positionTextHorizontal) {
+        return function () {
+          this.h4_kv1miw$(_.layout.f_3);
+          _.net.yested.bootstrap.btsForm_6zn8tn$(this, _.net.yested.bootstrap.FormStyle.object.HORIZONTAL, void 0, void 0, _.layout.f_20(fieldTotalNumber, fieldViewportSize, scrollBarVetical, fieldNewPosition));
+          this.plus_pv6laa$(positionTextVertical);
+          this.br();
+          this.plus_pv6laa$(scrollBarVetical);
+          this.br();
+          this.plus_pv6laa$(scrollBarHorizontal);
+          this.plus_pv6laa$(positionTextHorizontal);
+        };
+      },
+      f_22: function () {
+        this.plus_pdl1w0$('Code');
+      },
+      f_23: function () {
+        this.h4_kv1miw$(_.layout.f_22);
+        this.code_puj7f4$('kotlin', 'TODO:');
+      },
+      f_24: function (fieldTotalNumber, fieldViewportSize, scrollBarVetical, fieldNewPosition, positionTextVertical, scrollBarHorizontal, positionTextHorizontal) {
+        return function () {
+          this.col_zcukl0$([new _.net.yested.bootstrap.Medium(4)], _.layout.f_21(fieldTotalNumber, fieldViewportSize, scrollBarVetical, fieldNewPosition, positionTextVertical, scrollBarHorizontal, positionTextHorizontal));
+          this.col_zcukl0$([new _.net.yested.bootstrap.Medium(8)], _.layout.f_23);
+        };
+      },
+      createScrollBarSection$f_4: function (fieldTotalNumber, fieldViewportSize, scrollBarVetical, fieldNewPosition, positionTextVertical, scrollBarHorizontal, positionTextHorizontal) {
+        return function () {
+          this.id = this.id;
+          _.net.yested.bootstrap.row_xnql8t$(this, _.layout.f_2);
+          _.net.yested.bootstrap.row_xnql8t$(this, _.layout.f_24(fieldTotalNumber, fieldViewportSize, scrollBarVetical, fieldNewPosition, positionTextVertical, scrollBarHorizontal, positionTextHorizontal));
+        };
+      },
+      createScrollBarSection: function () {
+        var positionTextVertical = new _.net.yested.Span();
+        var positionTextHorizontal = new _.net.yested.Span();
+        var scrollBarVetical = new _.net.yested.layout.ScrollBar(_.net.yested.layout.ScrollBarOrientation.object.VERTICAL, '150px', 100, 20, void 0, _.layout.createScrollBarSection$f(positionTextVertical));
+        var scrollBarHorizontal = new _.net.yested.layout.ScrollBar(_.net.yested.layout.ScrollBarOrientation.object.HORIZONTAL, '150px', 100, 20, void 0, _.layout.createScrollBarSection$f_0(positionTextHorizontal));
+        var fieldTotalNumber = _.net.yested.with_owvm91$(new _.net.yested.bootstrap.IntInputField(), _.layout.createScrollBarSection$f_1);
+        var fieldViewportSize = _.net.yested.with_owvm91$(new _.net.yested.bootstrap.IntInputField(), _.layout.createScrollBarSection$f_2);
+        var fieldNewPosition = _.net.yested.with_owvm91$(new _.net.yested.bootstrap.IntInputField(), _.layout.createScrollBarSection$f_3);
+        return _.net.yested.div_5rsex9$(void 0, void 0, _.layout.createScrollBarSection$f_4(fieldTotalNumber, fieldViewportSize, scrollBarVetical, fieldNewPosition, positionTextVertical, scrollBarHorizontal, positionTextHorizontal));
+      }
+    }),
     sweetalert: Kotlin.definePackage(null, /** @lends _.sweetalert */ {
       f: function () {
         this.plus_pdl1w0$('Sweet Alerts');
@@ -6427,6 +6630,33 @@
             set: function (value) {
               this.element.onscroll = value;
             }
+          },
+          ondragstart: {
+            get: function () {
+              return this.el().ondragstart;
+            },
+            set: function (value) {
+              this.el().ondragstart = value;
+            }
+          },
+          ondrag: {
+            get: function () {
+              return this.el().ondrag;
+            },
+            set: function (value) {
+              this.el().ondrag = value;
+            }
+          },
+          ondragend: {
+            get: function () {
+              return this.el().ondragend;
+            },
+            set: function (value) {
+              this.el().ondragend = value;
+            }
+          },
+          el: function () {
+            return this.element;
           }
         }),
         removeAllContent_sttokc$: function ($receiver) {
@@ -6874,7 +7104,7 @@
             this.data = '';
           },
           scrollDown: function () {
-            this.element.scrollTop = this.element.scrollHeight - this.element.clientHeight;
+            this.element.scrollTop = this.element.scrollHeight - Kotlin.numberToInt($(this.element).height());
           },
           data: {
             get: function () {
@@ -7407,6 +7637,16 @@
         },
         compareByValue_lw40be$: function (get) {
           return _.net.yested.compareByValue_lw40be$f(get);
+        },
+        getIndexOfChildNode_6xfunm$: function ($receiver, childElement) {
+          var index = 0;
+          while (index < $receiver.childNodes.length) {
+            if ($receiver.childNodes.item(index).isSameNode(childElement)) {
+              return index;
+            }
+            index++;
+          }
+          return -1;
         },
         bootstrap: Kotlin.definePackage(null, /** @lends _.net.yested.bootstrap */ {
           enableScrollSpy_61zpoe$: function (id) {
@@ -9360,7 +9600,6 @@
             this.collapsible_lhbokj$ = _.net.yested.div_5rsex9$(id, 'navbar-collapse collapse', _.net.yested.bootstrap.Navbar.collapsible_lhbokj$f(this));
             this.menuItems_2kpyr8$ = new Kotlin.ArrayList();
             this.brandLink_f4xx9w$ = new _.net.yested.Anchor();
-            Kotlin.println('position = ' + Kotlin.toString(position));
             this.element.setAttribute('class', 'navbar navbar-' + look.code + ' navbar-' + ((tmp$0 = position != null ? position.code : null) != null ? tmp$0 : 'NONE'));
             this.element.setAttribute('role', 'navigation');
             _.net.yested.appendComponent_c36dq0$(this.element, _.net.yested.div_5rsex9$(void 0, this.layout.code, _.net.yested.bootstrap.Navbar.Navbar$f(id, this)));
@@ -10968,7 +11207,6 @@
             }, function $fun(column, sortingSupported, sortFunction) {
               $fun.baseInitializer.call(this, 'span');
               this.column = column;
-              this.sortOrderAsc = true;
               this.arrowPlaceholder = new _.net.yested.Span();
               if (sortingSupported) {
                 this.a_xjhihl$(void 0, void 0, null, _.net.yested.bootstrap.smartgrid.GridColumnHeader.GridColumnHeader$f(sortFunction, this), _.net.yested.bootstrap.smartgrid.GridColumnHeader.GridColumnHeader$f_0(this));
@@ -11059,7 +11297,7 @@
             }),
             SmartGrid: Kotlin.createClass(function () {
               return [_.net.yested.Component];
-            }, function (maxHeight, getKey, defaultSortColumn, defaultSortOrderAsc, columns) {
+            }, function (rowHeight, getKey, defaultSortColumn, defaultSortOrderAsc, columns) {
               var tmp$0, tmp$1;
               var toMap_rie7ol$result;
               var tmp$5, tmp$3, tmp$2, tmp$4;
@@ -11072,26 +11310,32 @@
               }
               toMap_rie7ol$result = result;
               tmp$0 = toMap_rie7ol$result;
-              if (maxHeight === void 0)
-                maxHeight = null;
+              if (rowHeight === void 0)
+                rowHeight = 30;
               if (defaultSortColumn === void 0)
                 defaultSortColumn = null;
               if (defaultSortOrderAsc === void 0)
                 defaultSortOrderAsc = true;
+              this.rowHeight = rowHeight;
               this.getKey = getKey;
               this.defaultSortColumn = defaultSortColumn;
               this.defaultSortOrderAsc = defaultSortOrderAsc;
-              this.$element_2bs0vn$ = _.net.yested.with_owvm91$(_.net.yested.createElement_61zpoe$('div'), _.net.yested.bootstrap.smartgrid.SmartGrid.element$f);
+              this.dataTable_ynouqd$ = _.net.yested.with_owvm91$(_.net.yested.createElement_61zpoe$('table'), _.net.yested.bootstrap.smartgrid.SmartGrid.dataTable_ynouqd$f);
+              this.header_ezfkrg$ = _.net.yested.with_owvm91$(_.net.yested.createElement_61zpoe$('tr'), _.net.yested.bootstrap.smartgrid.SmartGrid.header_ezfkrg$f);
+              this.cont_905dxb$ = _.net.yested.with_owvm91$(new _.net.yested.Div(), _.net.yested.bootstrap.smartgrid.SmartGrid.cont_905dxb$f(this));
+              this.scrollBarVertical_o0ibxp$ = new _.net.yested.layout.ScrollBar(_.net.yested.layout.ScrollBarOrientation.object.VERTICAL, '100%', 1, 1, void 0, _.net.yested.utils.throttle_ugd3q2$(35, _.net.yested.bootstrap.smartgrid.SmartGrid.scrollBarVertical_o0ibxp$f(this)));
+              this.scrollBarHorizontal_c3iy1n$ = new _.net.yested.layout.ScrollBar(_.net.yested.layout.ScrollBarOrientation.object.HORIZONTAL, '100%', 1, 1, void 0, _.net.yested.utils.throttle_ugd3q2$(35, _.net.yested.bootstrap.smartgrid.SmartGrid.scrollBarHorizontal_c3iy1n$f(this)));
+              this.columnHeaderContainer_euq4tt$ = _.net.yested.with_owvm91$(new _.net.yested.Div(), _.net.yested.bootstrap.smartgrid.SmartGrid.columnHeaderContainer_euq4tt$f(this));
+              this.$element_2bs0vn$ = _.net.yested.with_owvm91$(new _.net.yested.Table(), _.net.yested.bootstrap.smartgrid.SmartGrid.element$f(this)).element;
               this.sortColumn_vt3fdp$ = null;
               this.asc_u2smf2$ = true;
-              this.arrowsPlaceholders_pn0e93$ = new Kotlin.ArrayList();
               this.columnHeaders_k62yht$ = null;
-              this.tableElement_h98g4j$ = _.net.yested.with_owvm91$(_.net.yested.createElement_61zpoe$('table'), _.net.yested.bootstrap.smartgrid.SmartGrid.tableElement_h98g4j$f);
-              this.header_ezfkrg$ = _.net.yested.with_owvm91$(_.net.yested.createElement_61zpoe$('tr'), _.net.yested.bootstrap.smartgrid.SmartGrid.header_ezfkrg$f);
-              this.headerTableElement_73kywm$ = _.net.yested.with_owvm91$(_.net.yested.createElement_61zpoe$('table'), _.net.yested.bootstrap.smartgrid.SmartGrid.headerTableElement_73kywm$f);
               this.visibleColumns_rm3k9m$ = Kotlin.modules['stdlib'].kotlin.listOf();
               this.columns_u5fw5u$ = tmp$0;
               this.rowsReferences_yj25bk$ = Kotlin.modules['stdlib'].kotlin.hashMapOf_eoa9s7$([]);
+              this.visibleRows_psclms$ = 1;
+              this.currentRow_ud8t5c$ = 0;
+              this.gridIsCreated_q2bzpl$ = false;
               var map_rie7ol$result;
               var tmp$10;
               var destination = new Kotlin.ArrayList();
@@ -11108,19 +11352,16 @@
               map_rie7ol$result = tmp$10;
               tmp$1 = map_rie7ol$result;
               this.visibleColumns_rm3k9m$ = tmp$1;
-              var headerCont = _.net.yested.with_owvm91$(new _.net.yested.Div(), _.net.yested.bootstrap.smartgrid.SmartGrid.SmartGrid$f_0(maxHeight, this));
-              headerCont.element.appendChild(this.headerTableElement_73kywm$);
-              this.element.appendChild(headerCont.element);
-              var thead = _.net.yested.createElement_61zpoe$('thead');
-              thead.appendChild(this.header_ezfkrg$);
-              this.headerTableElement_73kywm$.appendChild(thead);
-              var cont = _.net.yested.with_owvm91$(new _.net.yested.Div(), _.net.yested.bootstrap.smartgrid.SmartGrid.SmartGrid$f_1(maxHeight));
-              cont.onscroll = _.net.yested.bootstrap.smartgrid.SmartGrid.SmartGrid$f_2(cont, headerCont);
-              cont.element.appendChild(this.tableElement_h98g4j$);
-              this.element.appendChild(cont.element);
-              this.renderHeaderInto(this.header_ezfkrg$);
-              this.makeHeaderSortable(this.header_ezfkrg$);
+              this.cont_905dxb$.onscroll = _.net.yested.bootstrap.smartgrid.SmartGrid.SmartGrid$f_0(this);
+              var touchStartY = {v: 0};
+              var touchStartX = {v: 0};
+              var touchStartRow = {v: 0};
+              var horizontalScrollStart = {v: 0};
+              $(this.dataTable_ynouqd$).on('touchstart', _.net.yested.bootstrap.smartgrid.SmartGrid.SmartGrid$f_1(touchStartY, touchStartX, this, touchStartRow, horizontalScrollStart));
+              $(this.dataTable_ynouqd$).on('touchmove', _.net.yested.bootstrap.smartgrid.SmartGrid.SmartGrid$f_2(touchStartY, touchStartX, touchStartRow, this, horizontalScrollStart));
+              _.net.yested.whenAddedToDom_v3j3j2$(this.cont_905dxb$.element, _.net.yested.bootstrap.smartgrid.SmartGrid.SmartGrid$f_3(this));
               this.dataList_slylmf$ = Kotlin.modules['stdlib'].kotlin.arrayListOf_9mqe4v$([]);
+              this.dataListAsKeyMap_deynhi$ = Kotlin.modules['stdlib'].kotlin.hashMapOf_eoa9s7$([]);
             }, /** @lends _.net.yested.bootstrap.smartgrid.SmartGrid.prototype */ {
               element: {
                 get: function () {
@@ -11135,9 +11376,32 @@
                   return this.dataList_slylmf$;
                 },
                 set: function (value) {
+                  var tmp$0;
                   this.dataList_slylmf$ = value != null ? value : Kotlin.modules['stdlib'].kotlin.arrayListOf_9mqe4v$([]);
-                  this.displayData();
+                  var $receiver = this.dataList_slylmf$;
+                  var selector = _.net.yested.bootstrap.smartgrid.SmartGrid.list$f(this);
+                  var toMap_m3yiqg$result;
+                  var tmp$2, tmp$1;
+                  var result = new Kotlin.LinkedHashMap();
+                  tmp$2 = $receiver.iterator();
+                  while (tmp$2.hasNext()) {
+                    var element = tmp$2.next();
+                    tmp$1 = selector(element);
+                    result.put_wn2jw4$(tmp$1, element);
+                  }
+                  toMap_m3yiqg$result = result;
+                  tmp$0 = toMap_m3yiqg$result;
+                  this.dataListAsKeyMap_deynhi$ = tmp$0;
+                  this.currentRow_ud8t5c$ = 0;
+                  _.net.yested.repeatWithDelayUntil_h8wu9e$(_.net.yested.bootstrap.smartgrid.SmartGrid.list$f_0(this), 100, _.net.yested.bootstrap.smartgrid.SmartGrid.list$f_1(this));
                 }
+              },
+              verticalScrollBarMoved: function (newPosition) {
+                this.currentRow_ud8t5c$ = newPosition;
+                this.redisplayTheReorderedDataSet();
+              },
+              horizontalScrollBarMoved: function (newPosition) {
+                this.cont_905dxb$.element.scrollLeft = newPosition;
               },
               getVisibleColumns: function () {
                 var tmp$0;
@@ -11234,6 +11498,17 @@
                   headerDiv.appendChild(element.element);
                 }
               },
+              updateHorizontalScrollbar: function () {
+                var range = Kotlin.numberToInt($(this.dataTable_ynouqd$).width()) - Kotlin.numberToInt($(this.cont_905dxb$.element).width());
+                if (range > 0) {
+                  var handlerSize = range * (Kotlin.numberToDouble($(this.cont_905dxb$.element).width()) / Kotlin.numberToDouble($(this.header_ezfkrg$).width()));
+                  this.scrollBarHorizontal_c3iy1n$.setup_vux9f0$(range, handlerSize | 0);
+                  this.scrollBarHorizontal_c3iy1n$.setTrackerVisible_6taknv$(true);
+                }
+                 else {
+                  this.scrollBarHorizontal_c3iy1n$.setTrackerVisible_6taknv$(false);
+                }
+              },
               createColumnHeader: function (columnHeader) {
                 return _.net.yested.with_owvm91$(new _.net.yested.HTMLComponent('th'), _.net.yested.bootstrap.smartgrid.SmartGrid.createColumnHeader$f(columnHeader));
               },
@@ -11262,146 +11537,297 @@
                 $(headerDiv).disableSelection();
                 $(headerDiv).sortable(_.net.yested.bootstrap.smartgrid.SmartGrid.makeHeaderSortable$f(this));
               },
-              setOnClick: function (td, column, item) {
+              setOnClick: function (td, column) {
                 if (column.editor != null) {
-                  td.onclick = _.net.yested.bootstrap.smartgrid.SmartGrid.setOnClick$f(td, column, item);
+                  td.onclick = _.net.yested.bootstrap.smartgrid.SmartGrid.setOnClick$f(td, this, column);
                 }
                  else {
                   td.onclick = _.net.yested.bootstrap.smartgrid.SmartGrid.setOnClick$f_0;
                 }
               },
-              displayData: function () {
-                var columns = this.getVisibleColumns();
-                this.rowsReferences_yj25bk$ = new Kotlin.ComplexHashMap();
+              createGrid: function () {
+                $(this.dataTable_ynouqd$).on('mousewheel', _.net.yested.bootstrap.smartgrid.SmartGrid.createGrid$f(this));
+                this.gridIsCreated_q2bzpl$ = true;
+              },
+              createRowsWithColumns: function () {
+                var visibleColumns = this.getVisibleColumns();
                 var tbody = {v: _.net.yested.createElement_61zpoe$('tbody')};
-                var firstRow = {v: true};
-                var $receiver = this.dataList_slylmf$;
-                var operation = _.net.yested.bootstrap.smartgrid.SmartGrid.displayData$f(columns, firstRow, this, tbody);
+                var $receiver = new Kotlin.NumberRange(1, this.visibleRows_psclms$);
+                var operation = _.net.yested.bootstrap.smartgrid.SmartGrid.createRowsWithColumns$f(this, visibleColumns, tbody);
                 var tmp$0;
                 tmp$0 = $receiver.iterator();
                 while (tmp$0.hasNext()) {
                   var element = tmp$0.next();
                   operation(element);
                 }
-                _.net.yested.removeChildByName_thdyg2$(this.tableElement_h98g4j$, 'tbody');
-                this.tableElement_h98g4j$.appendChild(tbody.v);
+                _.net.yested.removeChildByName_thdyg2$(this.dataTable_ynouqd$, 'tbody');
+                this.dataTable_ynouqd$.appendChild(tbody.v);
+                this.updateHorizontalScrollbar();
               },
-              redisplayTheReorderedDataSet: function () {
+              redisplayTheReorderedDataSet: function (previousRow) {
+                if (previousRow === void 0)
+                  previousRow = null;
                 var columns = this.getVisibleColumns();
-                var rows = this.tableElement_h98g4j$.getElementsByTagName('tbody').item(0).childNodes;
-                var $receiver = this.dataList_slylmf$;
-                var operation = _.net.yested.bootstrap.smartgrid.SmartGrid.redisplayTheReorderedDataSet$f(rows, columns, this);
-                var tmp$0;
-                var index = 0;
-                tmp$0 = $receiver.iterator();
-                while (tmp$0.hasNext()) {
-                  var item = tmp$0.next();
-                  operation(index++, item);
+                var tbody = this.getTBody();
+                var rows = tbody.childNodes;
+                this.rowsReferences_yj25bk$.clear();
+                var maxOptimizedMove = Math.min(1, this.visibleRows_psclms$ / 2 | 0);
+                if (previousRow != null && (new Kotlin.NumberRange(this.currentRow_ud8t5c$ - maxOptimizedMove, this.currentRow_ud8t5c$ - 1)).contains(previousRow)) {
+                  var movedRowsCount = this.currentRow_ud8t5c$ - previousRow;
+                  var $receiver = new Kotlin.NumberRange(1, movedRowsCount);
+                  var operation = _.net.yested.bootstrap.smartgrid.SmartGrid.redisplayTheReorderedDataSet$f(rows, tbody, this, movedRowsCount, columns);
+                  var tmp$0;
+                  tmp$0 = $receiver.iterator();
+                  while (tmp$0.hasNext()) {
+                    var element = tmp$0.next();
+                    operation(element);
+                  }
+                }
+                 else if (previousRow != null && (new Kotlin.NumberRange(this.currentRow_ud8t5c$ + 1, this.currentRow_ud8t5c$ + maxOptimizedMove)).contains(previousRow)) {
+                  var movedRowsCount_0 = previousRow - this.currentRow_ud8t5c$;
+                  var $receiver_0 = new Kotlin.NumberRange(1, movedRowsCount_0);
+                  var operation_0 = _.net.yested.bootstrap.smartgrid.SmartGrid.redisplayTheReorderedDataSet$f_0(rows, this, tbody, columns);
+                  var tmp$1;
+                  tmp$1 = $receiver_0.iterator();
+                  while (tmp$1.hasNext()) {
+                    var element_0 = tmp$1.next();
+                    operation_0(element_0);
+                  }
+                }
+                 else {
+                  var $receiver_1 = new Kotlin.NumberRange(1, Math.min(this.visibleRows_psclms$, this.dataList_slylmf$.size()));
+                  var operation_1 = _.net.yested.bootstrap.smartgrid.SmartGrid.redisplayTheReorderedDataSet$f_1(rows, this, columns);
+                  var tmp$2;
+                  tmp$2 = $receiver_1.iterator();
+                  while (tmp$2.hasNext()) {
+                    var element_1 = tmp$2.next();
+                    operation_1(element_1);
+                  }
                 }
               },
-              updateRow: function (columns, item, tr, updateWidths, columnsToUpdate) {
+              getTBody: function () {
+                return this.dataTable_ynouqd$.getElementsByTagName('tbody').item(0);
+              },
+              updateRow: function (columns, item, tr, columnsToUpdate) {
                 if (columnsToUpdate === void 0)
                   columnsToUpdate = null;
-                var operation = _.net.yested.bootstrap.smartgrid.SmartGrid.updateRow$f(columnsToUpdate, tr, updateWidths, item, this);
                 var tmp$0;
                 var index = 0;
                 tmp$0 = columns.iterator();
                 while (tmp$0.hasNext()) {
                   var item_0 = tmp$0.next();
-                  operation(index++, item_0);
-                }
-              },
-              findItemInTheList: function (key) {
-                var tmp$0;
-                var $receiver = this.dataList_slylmf$;
-                var predicate = _.net.yested.bootstrap.smartgrid.SmartGrid.findItemInTheList$f(this, key);
-                var filter_azvtw4$result;
-                var tmp$3;
-                var destination = new Kotlin.ArrayList();
-                var filterTo_5pn78a$result;
-                var tmp$2, tmp$1;
-                tmp$2 = $receiver.iterator();
-                while (tmp$2.hasNext()) {
-                  var element = tmp$2.next();
-                  tmp$1 = predicate(element);
-                  if (tmp$1) {
-                    destination.add_za3rmp$(element);
+                  var columnIndex = index++;
+                  if (columnsToUpdate == null || columnsToUpdate.contains_za3rmp$(item_0.id)) {
+                    var td = tr.childNodes.item(columnIndex);
+                    _.net.yested.with_owvm91$(new _.net.yested.HTMLComponent('', td), _.net.yested.bootstrap.smartgrid.SmartGrid.f_18(item_0, item));
                   }
                 }
-                filterTo_5pn78a$result = destination;
-                tmp$3 = filterTo_5pn78a$result;
-                filter_azvtw4$result = tmp$3;
-                tmp$0 = filter_azvtw4$result;
-                return Kotlin.modules['stdlib'].kotlin.firstOrNull_fvq2g0$(tmp$0);
               },
               updateItem_9w143m$: function (item, columnsToUpdate) {
                 if (columnsToUpdate === void 0)
                   columnsToUpdate = null;
-                var originalItem = this.findItemInTheList(this.getKey(item));
+                var originalItem = this.dataListAsKeyMap_deynhi$.get_za3rmp$(this.getKey(item));
                 if (originalItem == null) {
                   throw new Kotlin.Exception('Item ' + item + '} not found in the list');
                 }
+                var index = this.dataList_slylmf$.indexOf_za3rmp$(originalItem);
                 this.dataList_slylmf$.remove_za3rmp$(originalItem);
-                this.dataList_slylmf$.add_za3rmp$(item);
+                this.dataList_slylmf$.add_vux3hl$(index, item);
+                this.dataListAsKeyMap_deynhi$.put_wn2jw4$(this.getKey(item), item);
                 var tr = this.rowsReferences_yj25bk$.get_za3rmp$(this.getKey(item));
-                this.updateRow(this.getVisibleColumns(), item, tr != null ? tr : Kotlin.throwNPE(), false, columnsToUpdate);
+                if (tr != null) {
+                  this.updateRow(this.getVisibleColumns(), item, tr, columnsToUpdate);
+                }
                 this.sortColumn_vt3fdp$ = null;
                 this.setSortingArrow();
               }
             }, /** @lends _.net.yested.bootstrap.smartgrid.SmartGrid */ {
-              element$f: function () {
-                this.setAttribute('style', 'position: relative;');
-              },
-              tableElement_h98g4j$f: function () {
+              dataTable_ynouqd$f: function () {
                 this.setAttribute('class', 'table-striped table-hover table-condensed');
-                this.setAttribute('style', 'table-layout: fixed;');
+                this.setAttribute('style', 'table-layout: fixed; height: 100%;');
               },
               header_ezfkrg$f: function () {
               },
-              headerTableElement_73kywm$f: function () {
-                this.setAttribute('class', 'table-striped table-hover table-condensed');
-                this.setAttribute('style', 'margin-bottom: 0px;');
+              cont_905dxb$f: function (this$SmartGrid) {
+                return function () {
+                  this.rangeTo_94jgcu$('style', 'overflow-x:hidden; overflow-y:auto; height: 100%');
+                  this.element.appendChild(this$SmartGrid.dataTable_ynouqd$);
+                };
+              },
+              scrollBarVertical_o0ibxp$f: function (this$SmartGrid) {
+                return function (it) {
+                  this$SmartGrid.verticalScrollBarMoved(it);
+                };
+              },
+              scrollBarHorizontal_c3iy1n$f: function (this$SmartGrid) {
+                return function (it) {
+                  this$SmartGrid.horizontalScrollBarMoved(it);
+                };
               },
               f: function (this$SmartGrid) {
+                return function () {
+                  this.element.appendChild(this$SmartGrid.header_ezfkrg$);
+                };
+              },
+              f_0: function (this$SmartGrid) {
+                return function () {
+                  this.element.setAttribute('class', 'table-striped table-hover table-condensed');
+                  this.element.setAttribute('style', 'margin-bottom: 0px;');
+                  this.thead_3ua0vu$(_.net.yested.bootstrap.smartgrid.SmartGrid.f(this$SmartGrid));
+                };
+              },
+              columnHeaderContainer_euq4tt$f: function (this$SmartGrid) {
+                return function () {
+                  this.rangeTo_94jgcu$('style', 'overflow: scroll; overflow-x:hidden; overflow-y:hidden;');
+                  this.table_or8fdg$(_.net.yested.bootstrap.smartgrid.SmartGrid.f_0(this$SmartGrid));
+                };
+              },
+              f_1: function (this$SmartGrid) {
+                return function () {
+                  this.rangeTo_94jgcu$('style', 'width: 100%; height: ' + this$SmartGrid.rowHeight + 'px; vertical-align: middle;');
+                  this.plus_pv6laa$(this$SmartGrid.columnHeaderContainer_euq4tt$);
+                };
+              },
+              f_2: function (this$SmartGrid) {
                 return function () {
                   this$SmartGrid.showDialogCustom();
                 };
               },
-              f_0: function () {
+              f_3: function () {
                 this.rangeTo_94jgcu$('style', 'cursor: pointer;');
                 _.net.yested.bootstrap.glyphicon_8jxlbl$(this, 'cog');
               },
-              f_1: function (this$SmartGrid) {
+              f_4: function (this$SmartGrid) {
                 return function () {
-                  this.rangeTo_94jgcu$('style', 'position: absolute; right: 0; top: 4px; z-index: 5');
-                  this.a_xjhihl$(void 0, void 0, void 0, _.net.yested.bootstrap.smartgrid.SmartGrid.f(this$SmartGrid), _.net.yested.bootstrap.smartgrid.SmartGrid.f_0);
+                  this.a_xjhihl$(void 0, void 0, void 0, _.net.yested.bootstrap.smartgrid.SmartGrid.f_2(this$SmartGrid), _.net.yested.bootstrap.smartgrid.SmartGrid.f_3);
                 };
               },
-              SmartGrid$f_0: function (maxHeight, this$SmartGrid) {
+              f_5: function (this$SmartGrid) {
                 return function () {
-                  if (maxHeight != null) {
-                    this.rangeTo_94jgcu$('style', 'overflow: scroll; overflow-x:hidden; overflow-y:hidden;');
+                  this.td_kv1miw$(_.net.yested.bootstrap.smartgrid.SmartGrid.f_1(this$SmartGrid));
+                  this.td_kv1miw$(_.net.yested.bootstrap.smartgrid.SmartGrid.f_4(this$SmartGrid));
+                };
+              },
+              f_6: function (this$SmartGrid) {
+                return function () {
+                  this.rangeTo_94jgcu$('style', 'width: 100%; vertical-align: top;');
+                  this.plus_pv6laa$(this$SmartGrid.cont_905dxb$);
+                };
+              },
+              f_7: function (this$SmartGrid) {
+                return function () {
+                  this.rangeTo_94jgcu$('style', 'height: 100%;');
+                  this.plus_pv6laa$(this$SmartGrid.scrollBarVertical_o0ibxp$);
+                };
+              },
+              f_8: function (this$SmartGrid) {
+                return function () {
+                  this.element.setAttribute('style', 'height: 100%');
+                  this.td_kv1miw$(_.net.yested.bootstrap.smartgrid.SmartGrid.f_6(this$SmartGrid));
+                  this.td_kv1miw$(_.net.yested.bootstrap.smartgrid.SmartGrid.f_7(this$SmartGrid));
+                };
+              },
+              f_9: function (this$SmartGrid) {
+                return function () {
+                  this.rangeTo_94jgcu$('style', 'width: 100%; vertical-align: top;');
+                  this.plus_pv6laa$(this$SmartGrid.scrollBarHorizontal_c3iy1n$);
+                };
+              },
+              f_10: function () {
+              },
+              f_11: function (this$SmartGrid) {
+                return function () {
+                  this.td_kv1miw$(_.net.yested.bootstrap.smartgrid.SmartGrid.f_9(this$SmartGrid));
+                  this.td_kv1miw$(_.net.yested.bootstrap.smartgrid.SmartGrid.f_10);
+                };
+              },
+              f_12: function (this$SmartGrid) {
+                return function () {
+                  this.tr_idqsqk$(_.net.yested.bootstrap.smartgrid.SmartGrid.f_5(this$SmartGrid));
+                  this.tr_idqsqk$(_.net.yested.bootstrap.smartgrid.SmartGrid.f_8(this$SmartGrid));
+                  this.tr_idqsqk$(_.net.yested.bootstrap.smartgrid.SmartGrid.f_11(this$SmartGrid));
+                };
+              },
+              element$f: function (this$SmartGrid) {
+                return function () {
+                  this.element.setAttribute('style', 'width: 100%; height:100%; table-layout:fixed;');
+                  this.tbody_rj77wk$(_.net.yested.bootstrap.smartgrid.SmartGrid.f_12(this$SmartGrid));
+                };
+              },
+              SmartGrid$f_0: function (this$SmartGrid) {
+                return function () {
+                  this$SmartGrid.columnHeaderContainer_euq4tt$.element.scrollLeft = this$SmartGrid.cont_905dxb$.element.scrollLeft;
+                };
+              },
+              SmartGrid$f_1: function (touchStartY, touchStartX, this$SmartGrid, touchStartRow, horizontalScrollStart) {
+                return function (event) {
+                  touchStartY.v = event.originalEvent.touches[0].clientY;
+                  touchStartX.v = event.originalEvent.touches[0].clientX;
+                  event.preventDefault();
+                  touchStartRow.v = this$SmartGrid.currentRow_ud8t5c$;
+                  horizontalScrollStart.v = this$SmartGrid.scrollBarHorizontal_c3iy1n$.position;
+                };
+              },
+              SmartGrid$f_2: function (touchStartY, touchStartX, touchStartRow, this$SmartGrid, horizontalScrollStart) {
+                return function (event) {
+                  event.preventDefault();
+                  var yUp = event.originalEvent.touches[0].clientY;
+                  var xUp = event.originalEvent.touches[0].clientX;
+                  var diffY = yUp - touchStartY.v;
+                  var diffX = xUp - touchStartX.v;
+                  var newRow = touchStartRow.v - (diffY / this$SmartGrid.rowHeight | 0);
+                  var limitedNewRow = Math.max(0, Math.min(newRow, this$SmartGrid.dataList_slylmf$.size() - this$SmartGrid.visibleRows_psclms$));
+                  var newHorizontalScrollPosition = Math.max(0, Math.min(horizontalScrollStart.v - diffX, this$SmartGrid.scrollBarHorizontal_c3iy1n$.numberOfItems));
+                  if (this$SmartGrid.gridIsCreated_q2bzpl$) {
+                    if (limitedNewRow !== this$SmartGrid.currentRow_ud8t5c$) {
+                      var previousRow = this$SmartGrid.currentRow_ud8t5c$;
+                      this$SmartGrid.currentRow_ud8t5c$ = limitedNewRow;
+                      this$SmartGrid.redisplayTheReorderedDataSet(previousRow);
+                    }
+                    this$SmartGrid.scrollBarVertical_o0ibxp$.position = this$SmartGrid.currentRow_ud8t5c$;
+                    this$SmartGrid.scrollBarHorizontal_c3iy1n$.position = newHorizontalScrollPosition;
+                    this$SmartGrid.cont_905dxb$.element.scrollLeft = newHorizontalScrollPosition;
                   }
-                  this.div_5rsex9$(void 0, void 0, _.net.yested.bootstrap.smartgrid.SmartGrid.f_1(this$SmartGrid));
                 };
               },
-              SmartGrid$f_1: function (maxHeight) {
+              SmartGrid$f_3: function (this$SmartGrid) {
                 return function () {
-                  if (maxHeight != null) {
-                    this.rangeTo_94jgcu$('style', 'overflow: scroll; overflow-x:auto; overflow-y:auto; height: ' + Kotlin.toString(maxHeight) + ';');
-                  }
-                };
-              },
-              SmartGrid$f_2: function (cont, headerCont) {
-                return function () {
-                  headerCont.element.scrollLeft = cont.element.scrollLeft;
+                  this$SmartGrid.renderHeaderInto(this$SmartGrid.header_ezfkrg$);
+                  this$SmartGrid.makeHeaderSortable(this$SmartGrid.header_ezfkrg$);
+                  var viewPortHeight = Kotlin.numberToInt($(this$SmartGrid.cont_905dxb$.element).height());
+                  this$SmartGrid.visibleRows_psclms$ = Math.floor(viewPortHeight / this$SmartGrid.rowHeight | 0);
+                  this$SmartGrid.createGrid();
                 };
               },
               showDialogCustom$f: function (this$SmartGrid) {
                 return function (it) {
                   this$SmartGrid.visibleColumns_rm3k9m$ = it;
                   this$SmartGrid.renderHeaderInto(this$SmartGrid.header_ezfkrg$);
-                  this$SmartGrid.displayData();
+                  this$SmartGrid.createRowsWithColumns();
+                  this$SmartGrid.redisplayTheReorderedDataSet();
+                };
+              },
+              list$f: function (this$SmartGrid) {
+                return function (it) {
+                  return this$SmartGrid.getKey(it);
+                };
+              },
+              list$f_0: function (this$SmartGrid) {
+                return function () {
+                  return this$SmartGrid.gridIsCreated_q2bzpl$;
+                };
+              },
+              list$f_1: function (this$SmartGrid) {
+                return function () {
+                  this$SmartGrid.createRowsWithColumns();
+                  this$SmartGrid.redisplayTheReorderedDataSet();
+                  this$SmartGrid.scrollBarVertical_o0ibxp$.setup_vux9f0$(this$SmartGrid.dataList_slylmf$.size() - this$SmartGrid.visibleRows_psclms$, this$SmartGrid.visibleRows_psclms$);
+                  if (this$SmartGrid.dataList_slylmf$.size() <= this$SmartGrid.visibleRows_psclms$) {
+                    this$SmartGrid.scrollBarVertical_o0ibxp$.setTrackerVisible_6taknv$(false);
+                  }
+                   else {
+                    this$SmartGrid.scrollBarVertical_o0ibxp$.setTrackerVisible_6taknv$(true);
+                  }
                 };
               },
               getVisibleColumns$f: function (this$SmartGrid) {
@@ -11425,14 +11851,14 @@
                   }
                 });
               },
-              f_2: function (this$SmartGrid) {
+              f_13: function (this$SmartGrid) {
                 return function (it) {
                   this$SmartGrid.sortByColumn(it);
                 };
               },
               renderHeaderInto$f: function (this$SmartGrid) {
                 return function (it) {
-                  return new _.net.yested.bootstrap.smartgrid.GridColumnHeader(it, it.sortFunction != null, _.net.yested.bootstrap.smartgrid.SmartGrid.f_2(this$SmartGrid));
+                  return new _.net.yested.bootstrap.smartgrid.GridColumnHeader(it, it.sortFunction != null, _.net.yested.bootstrap.smartgrid.SmartGrid.f_13(this$SmartGrid));
                 };
               },
               renderHeaderInto$f_0: function (this$SmartGrid) {
@@ -11456,6 +11882,7 @@
               update$f: function (this$SmartGrid) {
                 return function (event, ui) {
                   this$SmartGrid.visibleColumns_rm3k9m$ = this$SmartGrid.readCurrentColumnLayout();
+                  this$SmartGrid.createRowsWithColumns();
                   this$SmartGrid.redisplayTheReorderedDataSet();
                 };
               },
@@ -11464,95 +11891,107 @@
                   this.update = _.net.yested.bootstrap.smartgrid.SmartGrid.update$f(this$SmartGrid);
                 });
               },
-              f_3: function (column, item) {
+              f_14: function (column, item) {
                 return function () {
                   column.render.call(this, item);
                 };
               },
-              f_4: function (td, column, item) {
+              f_15: function (td, column, item) {
                 return function () {
-                  td.element.removeAttribute('editing');
-                  _.net.yested.removeAllContent_sttokc$(td.element);
-                  _.net.yested.with_owvm91$(td, _.net.yested.bootstrap.smartgrid.SmartGrid.f_3(column, item));
+                  td.removeAttribute('editing');
+                  _.net.yested.removeAllContent_sttokc$(td);
+                  _.net.yested.with_owvm91$(new _.net.yested.HTMLComponent('', td), _.net.yested.bootstrap.smartgrid.SmartGrid.f_14(column, item));
                 };
               },
-              setOnClick$f: function (td, column, item) {
+              setOnClick$f: function (td, this$SmartGrid, column) {
                 return function () {
-                  if (!Kotlin.equals(td.element.getAttribute('editing'), 'true')) {
-                    td.element.setAttribute('editing', 'true');
-                    var editor = column.editor.createEditor_24w3xd$(column.width, item, _.net.yested.bootstrap.smartgrid.SmartGrid.f_4(td, column, item));
-                    _.net.yested.removeAllContent_sttokc$(td.element);
-                    td.element.appendChild(editor);
+                  if (!Kotlin.equals(td.getAttribute('editing'), 'true')) {
+                    td.setAttribute('editing', 'true');
+                    var rowIndex = _.net.yested.getIndexOfChildNode_6xfunm$(this$SmartGrid.getTBody(), td.parentNode);
+                    var item = this$SmartGrid.dataList_slylmf$.get_za3lpa$(this$SmartGrid.currentRow_ud8t5c$ + rowIndex);
+                    var editor = column.editor.createEditor_24w3xd$(column.width, item, _.net.yested.bootstrap.smartgrid.SmartGrid.f_15(td, column, item));
+                    _.net.yested.removeAllContent_sttokc$(td);
+                    td.appendChild(editor);
                   }
                 };
               },
               setOnClick$f_0: function () {
               },
-              f_5: function (column, item) {
-                return function () {
-                  var tmp$0;
-                  if (!((tmp$0 = column.align) != null ? tmp$0.equals_za3rmp$(_.net.yested.bootstrap.Align.object.LEFT) : null)) {
-                    this.clazz = 'text-' + column.align.code;
-                  }
-                  column.render.call(this, item);
-                };
-              },
-              displayData$f: function (columns, firstRow, this$SmartGrid, tbody) {
-                return function (item) {
-                  var tr = _.net.yested.createElement_61zpoe$('tr');
-                  var tmp$0;
-                  var index = 0;
-                  tmp$0 = columns.iterator();
-                  while (tmp$0.hasNext()) {
-                    var item_0 = tmp$0.next();
-                    var index_0 = index++;
-                    var td = _.net.yested.with_owvm91$(new _.net.yested.HTMLComponent('td'), _.net.yested.bootstrap.smartgrid.SmartGrid.f_5(item_0, item));
-                    if (firstRow.v) {
-                      td.element.setAttribute('style', 'min-width: ' + item_0.width + ';  max-width: ' + item_0.width + ';');
-                    }
-                    this$SmartGrid.setOnClick(td, item_0, item);
-                    tr.appendChild(td.element);
-                  }
-                  this$SmartGrid.rowsReferences_yj25bk$.put_wn2jw4$(this$SmartGrid.getKey(item), tr);
-                  tbody.v.appendChild(tr);
-                  firstRow.v = false;
-                };
-              },
-              redisplayTheReorderedDataSet$f: function (rows, columns, this$SmartGrid) {
-                return function (rowIndex, item) {
-                  var tr = rows.item(rowIndex);
-                  this$SmartGrid.updateRow(columns, item, tr, rowIndex === 0);
-                  this$SmartGrid.rowsReferences_yj25bk$.put_wn2jw4$(this$SmartGrid.getKey(item), tr);
-                };
-              },
-              f_7: function (column, td, updateWidths, item, this$SmartGrid) {
-                return function () {
-                  var tmp$0;
-                  this.removeAllChildren();
-                  if (!((tmp$0 = column.align) != null ? tmp$0.equals_za3rmp$(_.net.yested.bootstrap.Align.object.LEFT) : null)) {
-                    td.setAttribute('class', 'text-' + column.align.code);
+              createGrid$f: function (this$SmartGrid) {
+                return function (event) {
+                  var previousRow = this$SmartGrid.currentRow_ud8t5c$;
+                  var e = event.originalEvent;
+                  var delta = Math.max(-1, Math.min(1, e.wheelDelta || -e.detail));
+                  event.preventDefault();
+                  if (delta < 0) {
+                    this$SmartGrid.currentRow_ud8t5c$ = Math.min(this$SmartGrid.currentRow_ud8t5c$ + 1, this$SmartGrid.dataList_slylmf$.size() - this$SmartGrid.visibleRows_psclms$);
                   }
                    else {
-                    td.removeAttribute('class');
+                    this$SmartGrid.currentRow_ud8t5c$ = Math.max(0, this$SmartGrid.currentRow_ud8t5c$ - 1);
                   }
-                  if (updateWidths) {
-                    td.setAttribute('style', 'min-width: ' + column.width + ';  max-width: ' + column.width + ';');
-                  }
-                  this$SmartGrid.setOnClick(this, column, item);
-                  column.render.call(this, item);
-                };
-              },
-              updateRow$f: function (columnsToUpdate, tr, updateWidths, item, this$SmartGrid) {
-                return function (columnIndex, column) {
-                  if (columnsToUpdate == null || columnsToUpdate.contains_za3rmp$(column.id)) {
-                    var td = tr.childNodes.item(columnIndex);
-                    _.net.yested.with_owvm91$(new _.net.yested.HTMLComponent('', td), _.net.yested.bootstrap.smartgrid.SmartGrid.f_7(column, td, updateWidths, item, this$SmartGrid));
+                  if (previousRow !== this$SmartGrid.currentRow_ud8t5c$) {
+                    this$SmartGrid.redisplayTheReorderedDataSet(previousRow);
+                    this$SmartGrid.scrollBarVertical_o0ibxp$.position = this$SmartGrid.currentRow_ud8t5c$;
                   }
                 };
               },
-              findItemInTheList$f: function (this$SmartGrid, key) {
+              f_16: function (this$SmartGrid) {
+                return function () {
+                  this.setAttribute('style', 'height: ' + this$SmartGrid.rowHeight + 'px;');
+                };
+              },
+              createRowsWithColumns$f: function (this$SmartGrid, visibleColumns, tbody) {
+                return function (rowIndex) {
+                  var tr = _.net.yested.with_owvm91$(_.net.yested.createElement_61zpoe$('tr'), _.net.yested.bootstrap.smartgrid.SmartGrid.f_16(this$SmartGrid));
+                  var tmp$0;
+                  tmp$0 = visibleColumns.iterator();
+                  while (tmp$0.hasNext()) {
+                    var element = tmp$0.next();
+                    var tmp$1;
+                    var td = _.net.yested.createElement_61zpoe$('td');
+                    if (!((tmp$1 = element.align) != null ? tmp$1.equals_za3rmp$(_.net.yested.bootstrap.Align.object.LEFT) : null)) {
+                      td.setAttribute('class', 'text-' + element.align.code);
+                    }
+                    if (rowIndex === 1) {
+                      td.setAttribute('style', 'min-width: ' + element.width + ';  max-width: ' + element.width + ';');
+                    }
+                    this$SmartGrid.setOnClick(td, element);
+                    tr.appendChild(td);
+                  }
+                  tbody.v.appendChild(tr);
+                };
+              },
+              redisplayTheReorderedDataSet$f: function (rows, tbody, this$SmartGrid, movedRowsCount, columns) {
+                return function (index) {
+                  var movedRow = rows.item(0);
+                  tbody.appendChild(movedRow);
+                  var itemForLastRow = this$SmartGrid.dataList_slylmf$.get_za3lpa$(this$SmartGrid.visibleRows_psclms$ + this$SmartGrid.currentRow_ud8t5c$ - (movedRowsCount - index + 1));
+                  this$SmartGrid.updateRow(columns, itemForLastRow, movedRow);
+                  this$SmartGrid.rowsReferences_yj25bk$.put_wn2jw4$(this$SmartGrid.getKey(itemForLastRow), movedRow);
+                };
+              },
+              redisplayTheReorderedDataSet$f_0: function (rows, this$SmartGrid, tbody, columns) {
+                return function (index) {
+                  var movedRow = rows.item(this$SmartGrid.visibleRows_psclms$ - 1);
+                  var firstRow = rows.item(0);
+                  tbody.insertBefore(movedRow, firstRow);
+                  var itemForLastRow = this$SmartGrid.dataList_slylmf$.get_za3lpa$(this$SmartGrid.currentRow_ud8t5c$ - index + 1);
+                  this$SmartGrid.updateRow(columns, itemForLastRow, movedRow);
+                  this$SmartGrid.rowsReferences_yj25bk$.put_wn2jw4$(this$SmartGrid.getKey(itemForLastRow), movedRow);
+                };
+              },
+              redisplayTheReorderedDataSet$f_1: function (rows, this$SmartGrid, columns) {
                 return function (it) {
-                  return Kotlin.equals(this$SmartGrid.getKey(it), key);
+                  var tr = rows.item(it - 1);
+                  var item = this$SmartGrid.dataList_slylmf$.get_za3lpa$(it + this$SmartGrid.currentRow_ud8t5c$ - 1);
+                  this$SmartGrid.updateRow(columns, item, tr);
+                  this$SmartGrid.rowsReferences_yj25bk$.put_wn2jw4$(this$SmartGrid.getKey(item), tr);
+                };
+              },
+              f_18: function (column, item) {
+                return function () {
+                  this.removeAllChildren();
+                  column.render.call(this, item);
                 };
               }
             })
@@ -11665,6 +12104,183 @@
                 return this === other || (other !== null && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.title, other.title) && Kotlin.equals(this.text, other.text) && Kotlin.equals(this.type, other.type) && Kotlin.equals(this.allowOutsideClick, other.allowOutsideClick) && Kotlin.equals(this.showCancelButton, other.showCancelButton) && Kotlin.equals(this.confirmButtonText, other.confirmButtonText) && Kotlin.equals(this.confirmButtonColor, other.confirmButtonColor) && Kotlin.equals(this.cancelButtonText, other.cancelButtonText) && Kotlin.equals(this.closeOnConfirm, other.closeOnConfirm) && Kotlin.equals(this.closeOnCancel, other.closeOnCancel) && Kotlin.equals(this.imageUrl, other.imageUrl) && Kotlin.equals(this.imageSize, other.imageSize) && Kotlin.equals(this.timer, other.timer))));
               }
             })
+          })
+        }),
+        layout: Kotlin.definePackage(null, /** @lends _.net.yested.layout */ {
+          HorizontalContainer: Kotlin.createClass(function () {
+            return [_.net.yested.HTMLComponent];
+          }, function $fun(width, height) {
+            if (width === void 0)
+              width = null;
+            if (height === void 0)
+              height = null;
+            $fun.baseInitializer.call(this, 'div');
+            this.style = '';
+          }),
+          ScrollBarOrientation: Kotlin.createEnumClass(function () {
+            return [Kotlin.Enum];
+          }, function $fun(directionProperty, nonDirectionProperty, axis, cssPosProperty) {
+            $fun.baseInitializer.call(this);
+            this.directionProperty = directionProperty;
+            this.nonDirectionProperty = nonDirectionProperty;
+            this.axis = axis;
+            this.cssPosProperty = cssPosProperty;
+          }, function () {
+            return {
+              VERTICAL: new _.net.yested.layout.ScrollBarOrientation('height', 'width', 'y', 'top'),
+              HORIZONTAL: new _.net.yested.layout.ScrollBarOrientation('width', 'height', 'x', 'left')
+            };
+          }),
+          ScrollBar: Kotlin.createClass(function () {
+            return [_.net.yested.Component];
+          }, function (orientation, size, numberOfItems, visibleItems, className, positionHandler) {
+            if (className === void 0)
+              className = null;
+            this.orientation = orientation;
+            this.size = size;
+            this.numberOfItems = numberOfItems;
+            this.visibleItems = visibleItems;
+            this.className = className;
+            this.positionHandler = positionHandler;
+            this.$element_1dhdq9$ = _.net.yested.createElement_61zpoe$('div');
+            this.handle_shhzr1$ = new _.net.yested.Div();
+            this.currentPosition_8bkk93$ = 0;
+            this.trackerDimension_28bl07$ = 0;
+            this.handleDimension_sguy8z$ = 0;
+            this.element.appendChild(this.handle_shhzr1$.element);
+            this.element.setAttribute('style', this.orientation.directionProperty + ': ' + this.size + ';');
+            this.element.setAttribute('position', 'absolute');
+            if (this.className != null) {
+              this.handle_shhzr1$.clazz = this.className;
+            }
+             else {
+              this.handle_shhzr1$.style = this.orientation.nonDirectionProperty + ': 15px; background-color: #5c92e7; cursor: move; position: relative; ' + this.orientation.cssPosProperty + ': 0';
+            }
+            $(this.handle_shhzr1$.element).draggable(Kotlin.modules['stdlib'].kotlin.js.json_eoa9s7$([new Kotlin.modules['stdlib'].kotlin.Pair('axis', this.orientation.axis), new Kotlin.modules['stdlib'].kotlin.Pair('containment', 'parent'), new Kotlin.modules['stdlib'].kotlin.Pair('drag', _.net.yested.layout.ScrollBar.ScrollBar$f(this))]));
+            $(this.element).on('mousewheel', _.net.yested.layout.ScrollBar.ScrollBar$f_0(this));
+            var touchStartMouse = {v: 0};
+            var touchStartTop = {v: 0};
+            $(this.handle_shhzr1$.element).on('touchstart', _.net.yested.layout.ScrollBar.ScrollBar$f_1(this, touchStartTop, touchStartMouse));
+            $(this.handle_shhzr1$.element).on('touchmove', _.net.yested.layout.ScrollBar.ScrollBar$f_2(this, touchStartMouse, touchStartTop));
+            _.net.yested.whenAddedToDom_v3j3j2$(this.handle_shhzr1$.element, _.net.yested.layout.ScrollBar.ScrollBar$f_3(this));
+          }, /** @lends _.net.yested.layout.ScrollBar.prototype */ {
+            element: {
+              get: function () {
+                return this.$element_1dhdq9$;
+              }
+            },
+            setTrackerVisible_6taknv$: function (visibleTracker) {
+              if (visibleTracker) {
+                $(this.handle_shhzr1$.element).css('visibility', 'visible');
+              }
+               else {
+                $(this.handle_shhzr1$.element).css('visibility', 'hidden');
+              }
+            },
+            getMouseTouchPosition: function (event) {
+              var tmp$0;
+              if ((tmp$0 = this.orientation) != null ? tmp$0.equals_za3rmp$(_.net.yested.layout.ScrollBarOrientation.object.VERTICAL) : null) {
+                return event.originalEvent.touches[0].clientY;
+              }
+               else {
+                return event.originalEvent.touches[0].clientX;
+              }
+            },
+            updatePosition: function (top) {
+              this.currentPosition_8bkk93$ = this.numberOfItems * top / (this.trackerDimension_28bl07$ - this.handleDimension_sguy8z$) | 0;
+              this.positionHandler(this.currentPosition_8bkk93$);
+            },
+            position: {
+              get: function () {
+                return this.currentPosition_8bkk93$;
+              },
+              set: function (value) {
+                this.currentPosition_8bkk93$ = value;
+                this.changePositionOfHandler();
+              }
+            },
+            changePositionOfHandler: function () {
+              var position = this.currentPosition_8bkk93$ * (this.trackerDimension_28bl07$ - this.handleDimension_sguy8z$) / this.numberOfItems | 0;
+              $(this.handle_shhzr1$.element).css(this.orientation.cssPosProperty, position.toString() + 'px');
+            },
+            setup_vux9f0$: function (numberOfItems, visibleItems) {
+              this.numberOfItems = numberOfItems;
+              this.visibleItems = visibleItems;
+              this.position = 0;
+              _.net.yested.whenAddedToDom_v3j3j2$(this.element, _.net.yested.layout.ScrollBar.setup_vux9f0$f(this));
+            },
+            recalculate: function () {
+              this.trackerDimension_28bl07$ = this.trackerDimension_1();
+              this.handleDimension_sguy8z$ = this.handleDimension_1();
+              $(this.handle_shhzr1$.element).css(this.orientation.directionProperty, this.handleDimension_sguy8z$.toString());
+            },
+            trackerDimension_1: function () {
+              var tmp$0;
+              if ((tmp$0 = this.orientation) != null ? tmp$0.equals_za3rmp$(_.net.yested.layout.ScrollBarOrientation.object.VERTICAL) : null) {
+                return Kotlin.numberToInt($(this.element).height());
+              }
+               else {
+                return Kotlin.numberToInt($(this.element).width());
+              }
+            },
+            handleDimension_1: function () {
+              return Math.max(30, this.trackerDimension_28bl07$ * this.visibleItems / this.numberOfItems | 0);
+            }
+          }, /** @lends _.net.yested.layout.ScrollBar */ {
+            ScrollBar$f: function (this$ScrollBar) {
+              return function () {
+                var top = parseInt($(this$ScrollBar.handle_shhzr1$.element).css(this$ScrollBar.orientation.cssPosProperty));
+                this$ScrollBar.updatePosition(top);
+              };
+            },
+            ScrollBar$f_0: function (this$ScrollBar) {
+              return function (event) {
+                var e = event.originalEvent;
+                var delta = Math.max(-1, Math.min(1, e.wheelDelta || -e.detail));
+                event.preventDefault();
+                if (delta < 0) {
+                  if (this$ScrollBar.currentPosition_8bkk93$ < this$ScrollBar.numberOfItems) {
+                    this$ScrollBar.currentPosition_8bkk93$ += delta * -1;
+                    this$ScrollBar.changePositionOfHandler();
+                    this$ScrollBar.positionHandler(this$ScrollBar.currentPosition_8bkk93$);
+                  }
+                }
+                 else {
+                  if (this$ScrollBar.currentPosition_8bkk93$ > 0) {
+                    this$ScrollBar.currentPosition_8bkk93$ += delta * -1;
+                    this$ScrollBar.changePositionOfHandler();
+                    this$ScrollBar.positionHandler(this$ScrollBar.currentPosition_8bkk93$);
+                  }
+                }
+              };
+            },
+            ScrollBar$f_1: function (this$ScrollBar, touchStartTop, touchStartMouse) {
+              return function (event) {
+                touchStartTop.v = parseInt($(this$ScrollBar.handle_shhzr1$.element).css(this$ScrollBar.orientation.cssPosProperty));
+                touchStartMouse.v = this$ScrollBar.getMouseTouchPosition(event);
+                event.preventDefault();
+              };
+            },
+            ScrollBar$f_2: function (this$ScrollBar, touchStartMouse, touchStartTop) {
+              return function (event) {
+                event.preventDefault();
+                var newMousePos = this$ScrollBar.getMouseTouchPosition(event);
+                var diff = newMousePos - touchStartMouse.v;
+                var newPosition = Math.max(0, Math.min(touchStartTop.v + diff, this$ScrollBar.trackerDimension_28bl07$ - this$ScrollBar.handleDimension_sguy8z$));
+                $(this$ScrollBar.handle_shhzr1$.element).css(this$ScrollBar.orientation.cssPosProperty, newPosition.toString() + 'px');
+                this$ScrollBar.updatePosition(newPosition);
+              };
+            },
+            ScrollBar$f_3: function (this$ScrollBar) {
+              return function () {
+                this$ScrollBar.recalculate();
+              };
+            },
+            setup_vux9f0$f: function (this$ScrollBar) {
+              return function () {
+                this$ScrollBar.recalculate();
+              };
+            }
           })
         }),
         spin: Kotlin.definePackage(null, /** @lends _.net.yested.spin */ {
@@ -11842,16 +12458,11 @@
           }
         }),
         utils: Kotlin.definePackage(null, /** @lends _.net.yested.utils */ {
-          getTopNode: function (node) {
-            var n = node.parentNode;
-            while (n != null && !Kotlin.equals((n != null ? n : Kotlin.throwNPE()).nodeName, '#document')) {
-              n = (n != null ? n : Kotlin.throwNPE()).parentNode;
-            }
-            return n;
-          },
           isIncludedInDOM_b3w3xb$: function (node) {
-            var style = window.getComputedStyle(node);
-            return !Kotlin.equals(style.display, 'none') && !Kotlin.equals(style.display, '');
+            return node.offsetParent != null;
+          },
+          throttle_ugd3q2$: function (duration, handler) {
+            return $.throttle(duration, handler);
           },
           Moment: Kotlin.createClass(null, function (moment) {
             this.moment_qmho9s$ = moment;

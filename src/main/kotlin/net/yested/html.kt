@@ -10,6 +10,7 @@ import org.w3c.dom.Element
 import java.util.ArrayList
 import kotlin.js.dom.html.HTMLInputElement
 import org.w3c.dom.Node
+import org.w3c.dom.events.MouseEvent
 import kotlin.js.dom.html.HTMLTextAreaElement
 import kotlin.js.dom.html.CSSStyleDeclaration
 import kotlin.js.dom.html.Stylesheet
@@ -40,7 +41,16 @@ public class BooleanAttribute(val attributeName:String? = null, val element:HTML
 
 }
 
+/**
+ * Each UI component must implement this interface.
+ * There is only one requirement for the component: It must return an HTML element.
+ */
 public trait Component {
+
+    /**
+     * Each component must return an HTML element.
+     * Important: One instance of component must return always the same html element!
+     */
     val element : HTMLElement
 }
 
@@ -57,8 +67,11 @@ public fun HTMLElement.removeChildByName(childElementName:String) {
     }
 }
 
-private native trait HTMLElementOnScroll : HTMLElement {
+private native trait HTMLElementOtherEvents : HTMLElement {
     public native var onscroll: () -> Unit
+    public native var ondragstart: (MouseEvent) -> Unit
+    public native var ondrag: (MouseEvent) -> Unit
+    public native var ondragend: (MouseEvent) -> Unit
 }
 
 public trait ElementEvents {
@@ -114,9 +127,22 @@ public trait ElementEvents {
         set(value) { element.onresize = value}
 
     public var onscroll:Function0<Unit>
-        get() = (element as HTMLElementOnScroll).onscroll
-        set(value) { (element as HTMLElementOnScroll).onscroll = value}
+        get() = (element as HTMLElementOtherEvents).onscroll
+        set(value) { (element as HTMLElementOtherEvents).onscroll = value}
 
+    public var ondragstart:Function1<MouseEvent, Unit>
+        get() = el().ondragstart
+        set(value) { el().ondragstart = value}
+
+    public var ondrag:Function1<MouseEvent, Unit>
+        get() = el().ondrag
+        set(value) { el().ondrag = value}
+
+    public var ondragend:Function1<MouseEvent, Unit>
+        get() = el().ondragend
+        set(value) { el().ondragend = value}
+
+    private fun el() = element as HTMLElementOtherEvents
 }
 
 public fun HTMLElement.removeAllContent() {
@@ -334,7 +360,7 @@ public class TextArea(rows:Int) : ObservableInput<String>(), ElementEvents {
     }
 
     public fun scrollDown() {
-        element.scrollTop = element.scrollHeight - element.clientHeight
+        element.scrollTop = element.scrollHeight - jq(element).height().toInt()
     }
 
     override var data: String
@@ -434,7 +460,6 @@ public trait InputComponent<T> : Component {
     fun addOnChangeListener(invoke:()->Unit)
     fun addOnChangeLiveListener(invoke:()->Unit)
     fun decorate(valid:Boolean)
-
     fun clear()
 }
 

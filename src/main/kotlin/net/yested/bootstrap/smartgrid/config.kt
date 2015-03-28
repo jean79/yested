@@ -1,17 +1,9 @@
 package net.yested.bootstrap.smartgrid
 
-import net.yested.bootstrap.Dialog
-import net.yested.bootstrap.DialogSize
-import net.yested.CheckBox
-import net.yested.with
-import net.yested.bootstrap.ListGroup
-import net.yested.bootstrap.InputField
-import net.yested.bootstrap.btsButton
 import net.yested.ButtonType
-import net.yested.bootstrap.ButtonLook
-import net.yested.bootstrap.ButtonSize
-import net.yested.TextInput
-import net.yested.bootstrap.StringInputField
+import net.yested.CheckBox
+import net.yested.bootstrap.*
+import net.yested.with
 
 /**
  * Opens configuration dialog for SmartGrid

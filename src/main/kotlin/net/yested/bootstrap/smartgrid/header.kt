@@ -12,7 +12,6 @@ class GridColumnHeader<T>(
         sortingSupported:Boolean,
         sortFunction:((GridColumn<T>) -> Unit)?) : HTMLComponent("span") {
 
-    var sortOrderAsc:Boolean = true
     var arrowPlaceholder = Span()
 
     init {

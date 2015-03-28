@@ -21,6 +21,7 @@ native class CSSStyleDeclaration(
 native fun Window.getComputedStyle(node:Node):CSSStyleDeclaration = noImpl
 
 public fun isIncludedInDOM(node:Node):Boolean {
-    var style = window.getComputedStyle(node);
-    return style.display != "none" && style.display != ""
+    /*var style = window.getComputedStyle(node);
+    return style.display != "none" && style.display != ""*/
+    return (node as HTMLElement).offsetParent != null
 }
