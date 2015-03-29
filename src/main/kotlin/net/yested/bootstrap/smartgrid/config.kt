@@ -11,58 +11,23 @@ import net.yested.with
 fun <T> openConfigurationDialog(
         columns: Collection<GridColumn<T>>,
         selectedColumns: Collection<String>,
-        changeLayout:(newLayout:List<String>)->Unit) {
+        changeLayout:(columnIds:List<String>)->Unit) {
 
     val sortedColumns = columns.sortBy { it.label }
     val dialog = Dialog(size = DialogSize.SMALL)
 
-    val checkboxes = columns
-            .map { column ->
-                CheckBox() with {
-                    checked = selectedColumns.contains(column.id)
-                    value = column.id
-                    disabled = true
-                }
-            }
-            .toMap { it.value }
+    val listGroup = ListGroup<GridColumn<T>>() { +it.label }
 
-    val listGroup = ListGroup<GridColumn<T>>() { column->
-        val checkbox = checkboxes.get(column.id)!!
-        +checkbox
-        nbsp()
-        +column.label
-        "style".."cursor: pointer;"
-        onclick = { checkbox.checked = !checkbox.checked }
-    }
+    listGroup.dataProvider = sortedColumns
+    listGroup.data = columns.filter { selectedColumns.contains(it.id) }
 
-    val inputField = StringInputField()
+    fun getSelectedColumnIds() = listGroup.data.map { it.id }
 
-    fun setColumnsData() {
-        val text = inputField.data.toLowerCase()
-        if (text.length() > 0) {
-            listGroup.setData( sortedColumns.filter { it.label.toLowerCase().contains(text) })
-        } else {
-            listGroup.setData(sortedColumns)
-        }
-    }
-
-    fun getSelectedColumnIds() =
-            checkboxes
-                    .filter { it.getValue().checked }
-                    .map { it.getKey() }
-
-    fun getAllColumnIds(): List<String> =
-        checkboxes
-            .map { it.getKey() }
-
-    inputField.addOnChangeLiveListener { setColumnsData() }
-
-    setColumnsData()
+    fun getAllColumnIds(): List<String> = columns.map { it.id }
 
     dialog with {
         header { + "Grid configuration" }
         body {
-            +inputField
             div {
                 "style".."overflow: scroll;  height: 210px; overflow-x: hidden"
                 +listGroup

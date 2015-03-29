@@ -774,6 +774,7 @@
           this.plus_pv6laa$(new _.bootstrap.TagsSection('bootstrapComponents_Tags'));
           this.plus_pv6laa$(_.bootstrap.createInputs('bootstrapComponents_Inputs'));
           this.plus_pv6laa$(new _.bootstrap.DateFieldSection('bootstrapComponents_DateField'));
+          this.plus_pv6laa$(_.bootstrap.createListGroupSection('bootstrapComponents_ListGroup'));
           this.plus_pv6laa$(_.bootstrap.createCheckboxSection('bootstrapComponents_Checkbox'));
           this.plus_pv6laa$(_.bootstrap.createGrid('bootstrapComponents_Grid'));
           this.plus_pv6laa$(_.bootstrap.createTabs('bootstrapComponents_Tabs'));
@@ -855,84 +856,90 @@
           this.a_xjhihl$(void 0, void 0, '#bootstrapComponents_DateField', void 0, _.bootstrap.BootstrapPage.f_24);
         },
         f_26: function () {
-          this.plus_pdl1w0$('Checkbox');
+          this.plus_pdl1w0$('List Groups');
         },
         f_27: function () {
-          this.a_xjhihl$(void 0, void 0, '#bootstrapComponents_Checkbox', void 0, _.bootstrap.BootstrapPage.f_26);
+          this.a_xjhihl$(void 0, void 0, '#bootstrapComponents_ListGroup', void 0, _.bootstrap.BootstrapPage.f_26);
         },
         f_28: function () {
-          this.plus_pdl1w0$('Grid');
+          this.plus_pdl1w0$('Checkbox');
         },
         f_29: function () {
-          this.a_xjhihl$(void 0, void 0, '#bootstrapComponents_Grid', void 0, _.bootstrap.BootstrapPage.f_28);
+          this.a_xjhihl$(void 0, void 0, '#bootstrapComponents_Checkbox', void 0, _.bootstrap.BootstrapPage.f_28);
         },
         f_30: function () {
-          this.plus_pdl1w0$('Tabs');
+          this.plus_pdl1w0$('Grid');
         },
         f_31: function () {
-          this.a_xjhihl$(void 0, void 0, '#bootstrapComponents_Tabs', void 0, _.bootstrap.BootstrapPage.f_30);
+          this.a_xjhihl$(void 0, void 0, '#bootstrapComponents_Grid', void 0, _.bootstrap.BootstrapPage.f_30);
         },
         f_32: function () {
-          this.plus_pdl1w0$('Collapsible');
+          this.plus_pdl1w0$('Tabs');
         },
         f_33: function () {
-          this.a_xjhihl$(void 0, void 0, '#bootstrapComponents_Collapsible', void 0, _.bootstrap.BootstrapPage.f_32);
+          this.a_xjhihl$(void 0, void 0, '#bootstrapComponents_Tabs', void 0, _.bootstrap.BootstrapPage.f_32);
         },
         f_34: function () {
-          this.plus_pdl1w0$('Panels');
+          this.plus_pdl1w0$('Collapsible');
         },
         f_35: function () {
-          this.a_xjhihl$(void 0, void 0, '#bootstrapComponents_Panel', void 0, _.bootstrap.BootstrapPage.f_34);
+          this.a_xjhihl$(void 0, void 0, '#bootstrapComponents_Collapsible', void 0, _.bootstrap.BootstrapPage.f_34);
         },
         f_36: function () {
-          this.plus_pdl1w0$('Row Panel Container');
+          this.plus_pdl1w0$('Panels');
         },
         f_37: function () {
-          this.a_xjhihl$(void 0, void 0, '#bootstrapComponents_PanelContainer', void 0, _.bootstrap.BootstrapPage.f_36);
+          this.a_xjhihl$(void 0, void 0, '#bootstrapComponents_Panel', void 0, _.bootstrap.BootstrapPage.f_36);
         },
         f_38: function () {
-          this.plus_pdl1w0$('Float Panel Container');
+          this.plus_pdl1w0$('Row Panel Container');
         },
         f_39: function () {
-          this.a_xjhihl$(void 0, void 0, '#bootstrapComponents_FloatingPanelContainer', void 0, _.bootstrap.BootstrapPage.f_38);
+          this.a_xjhihl$(void 0, void 0, '#bootstrapComponents_PanelContainer', void 0, _.bootstrap.BootstrapPage.f_38);
         },
         f_40: function () {
-          this.plus_pdl1w0$('Dialogs');
+          this.plus_pdl1w0$('Float Panel Container');
         },
         f_41: function () {
-          this.a_xjhihl$(void 0, void 0, '#bootstrapComponents_Dialogs', void 0, _.bootstrap.BootstrapPage.f_40);
+          this.a_xjhihl$(void 0, void 0, '#bootstrapComponents_FloatingPanelContainer', void 0, _.bootstrap.BootstrapPage.f_40);
         },
         f_42: function () {
-          this.plus_pdl1w0$('Alerts');
+          this.plus_pdl1w0$('Dialogs');
         },
         f_43: function () {
-          this.a_xjhihl$(void 0, void 0, '#bootstrapComponents_Alerts', void 0, _.bootstrap.BootstrapPage.f_42);
+          this.a_xjhihl$(void 0, void 0, '#bootstrapComponents_Dialogs', void 0, _.bootstrap.BootstrapPage.f_42);
         },
         f_44: function () {
-          this.plus_pdl1w0$('Media Object');
+          this.plus_pdl1w0$('Alerts');
         },
         f_45: function () {
-          this.a_xjhihl$(void 0, void 0, '#bootstrapComponents_MediaObject', void 0, _.bootstrap.BootstrapPage.f_44);
+          this.a_xjhihl$(void 0, void 0, '#bootstrapComponents_Alerts', void 0, _.bootstrap.BootstrapPage.f_44);
         },
         f_46: function () {
-          this.plus_pdl1w0$('Pagination');
+          this.plus_pdl1w0$('Media Object');
         },
         f_47: function () {
-          this.a_xjhihl$(void 0, void 0, '#bootstrapComponents_Pagination', void 0, _.bootstrap.BootstrapPage.f_46);
+          this.a_xjhihl$(void 0, void 0, '#bootstrapComponents_MediaObject', void 0, _.bootstrap.BootstrapPage.f_46);
         },
         f_48: function () {
-          this.plus_pdl1w0$('Navbar');
+          this.plus_pdl1w0$('Pagination');
         },
         f_49: function () {
-          this.a_xjhihl$(void 0, void 0, '#bootstrapComponents_Navbar', void 0, _.bootstrap.BootstrapPage.f_48);
+          this.a_xjhihl$(void 0, void 0, '#bootstrapComponents_Pagination', void 0, _.bootstrap.BootstrapPage.f_48);
         },
         f_50: function () {
-          this.plus_pdl1w0$('Breadcrumbs');
+          this.plus_pdl1w0$('Navbar');
         },
         f_51: function () {
-          this.a_xjhihl$(void 0, void 0, '#bootstrapComponents_Breadcrumbs', void 0, _.bootstrap.BootstrapPage.f_50);
+          this.a_xjhihl$(void 0, void 0, '#bootstrapComponents_Navbar', void 0, _.bootstrap.BootstrapPage.f_50);
         },
         f_52: function () {
+          this.plus_pdl1w0$('Breadcrumbs');
+        },
+        f_53: function () {
+          this.a_xjhihl$(void 0, void 0, '#bootstrapComponents_Breadcrumbs', void 0, _.bootstrap.BootstrapPage.f_52);
+        },
+        f_54: function () {
           this.clazz = 'nav nav-pills nav-stacked affix';
           this.li_8y48wp$(_.bootstrap.BootstrapPage.f_5);
           this.li_8y48wp$(_.bootstrap.BootstrapPage.f_7);
@@ -958,27 +965,28 @@
           this.li_8y48wp$(_.bootstrap.BootstrapPage.f_47);
           this.li_8y48wp$(_.bootstrap.BootstrapPage.f_49);
           this.li_8y48wp$(_.bootstrap.BootstrapPage.f_51);
-        },
-        f_53: function () {
-          this.id = 'bootstrapNavbar';
-          this.ul_8qfrsd$(_.bootstrap.BootstrapPage.f_52);
-        },
-        f_54: function () {
-          this.div_5rsex9$(void 0, void 0, _.bootstrap.BootstrapPage.f_53);
+          this.li_8y48wp$(_.bootstrap.BootstrapPage.f_53);
         },
         f_55: function () {
-          this.col_zcukl0$([new _.net.yested.bootstrap.Medium(10)], _.bootstrap.BootstrapPage.f_3);
-          this.col_zcukl0$([new _.net.yested.bootstrap.Medium(2)], _.bootstrap.BootstrapPage.f_54);
+          this.id = 'bootstrapNavbar';
+          this.ul_8qfrsd$(_.bootstrap.BootstrapPage.f_54);
         },
-        f_56: function (this$) {
+        f_56: function () {
+          this.div_5rsex9$(void 0, void 0, _.bootstrap.BootstrapPage.f_55);
+        },
+        f_57: function () {
+          this.col_zcukl0$([new _.net.yested.bootstrap.Medium(10)], _.bootstrap.BootstrapPage.f_3);
+          this.col_zcukl0$([new _.net.yested.bootstrap.Medium(2)], _.bootstrap.BootstrapPage.f_56);
+        },
+        f_58: function (this$) {
           return function () {
             _.net.yested.bootstrap.row_xnql8t$(this$, _.bootstrap.BootstrapPage.f_2);
-            _.net.yested.bootstrap.row_xnql8t$(this$, _.bootstrap.BootstrapPage.f_55);
+            _.net.yested.bootstrap.row_xnql8t$(this$, _.bootstrap.BootstrapPage.f_57);
           };
         },
         element$f: function () {
           _.net.yested.bootstrap.enableScrollSpy_61zpoe$('bootstrapNavbar');
-          _.net.yested.bootstrap.row_xnql8t$(this, _.bootstrap.BootstrapPage.f_56(this));
+          _.net.yested.bootstrap.row_xnql8t$(this, _.bootstrap.BootstrapPage.f_58(this));
         }
       }),
       f_15: function () {
@@ -2041,448 +2049,624 @@
         var button = new _.net.yested.bootstrap.BtsButton(void 0, _.bootstrap.createInputs$f_0, void 0, void 0, void 0, void 0, submit);
         return _.net.yested.div_5rsex9$(void 0, void 0, _.bootstrap.createInputs$f_1(id, validator, textInput, button));
       },
-      f_213: function () {
-        this.plus_pdl1w0$('Media Object');
+      MailFolder: Kotlin.createClass(null, function (name, unread) {
+        this.name = name;
+        this.unread = unread;
+      }, /** @lends _.bootstrap.MailFolder.prototype */ {
+        component1: function () {
+          return this.name;
+        },
+        component2: function () {
+          return this.unread;
+        },
+        copy: function (name, unread) {
+          return new _.bootstrap.MailFolder(name === void 0 ? this.name : name, unread === void 0 ? this.unread : unread);
+        },
+        toString: function () {
+          return 'MailFolder(name=' + Kotlin.toString(this.name) + (', unread=' + Kotlin.toString(this.unread)) + ')';
+        },
+        hashCode: function () {
+          var result = 0;
+          result = result * 31 + Kotlin.hashCode(this.name) | 0;
+          result = result * 31 + Kotlin.hashCode(this.unread) | 0;
+          return result;
+        },
+        equals_za3rmp$: function (other) {
+          return this === other || (other !== null && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.name, other.name) && Kotlin.equals(this.unread, other.unread))));
+        }
+      }),
+      f_213: function (it) {
+        return function () {
+          this.plus_pdl1w0$(it.unread.toString());
+        };
       },
-      f_214: function () {
-        this.h3_kv1miw$(_.bootstrap.f_213);
+      createListGroupSection$f: function (it) {
+        _.net.yested.bootstrap.badge_kzm4yj$(this, _.bootstrap.f_213(it));
+        this.plus_pdl1w0$(it.name);
+      },
+      createListGroupSection$f_0: function (selectedItems, listGroup) {
+        return function () {
+          var tmp$0;
+          var map_m3yiqg$result;
+          var tmp$3;
+          var destination = new Kotlin.ArrayList();
+          var mapTo_e7zafy$result;
+          var tmp$2, tmp$1;
+          tmp$2 = listGroup.data.iterator();
+          while (tmp$2.hasNext()) {
+            var item = tmp$2.next();
+            tmp$1 = item.name;
+            destination.add_za3rmp$(tmp$1);
+          }
+          mapTo_e7zafy$result = destination;
+          tmp$3 = mapTo_e7zafy$result;
+          map_m3yiqg$result = tmp$3;
+          tmp$0 = map_m3yiqg$result;
+          selectedItems.setContent_61zpoe$(Kotlin.modules['stdlib'].kotlin.join_raq5lb$(tmp$0, ','));
+        };
       },
       f_215: function () {
-        _.net.yested.bootstrap.pageHeader_kzm4yj$(this, _.bootstrap.f_214);
+        this.plus_pdl1w0$('List Groups');
       },
       f_216: function () {
-        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(12)], _.bootstrap.f_215);
+        this.h3_kv1miw$(_.bootstrap.f_215);
       },
       f_217: function () {
-        this.plus_pdl1w0$('Media object is used for creating components that should contain left- or rightaligned\n\t\t\t\t\t\tmedia (image, video, or audio) alongside some textual content. It is best\n\t\t\t\t\t\tsuited for creating features such as a comments section, displaying tweets, or\n\t\t\t\t\t\tshowing product details where a product image is present.');
+        _.net.yested.bootstrap.pageHeader_kzm4yj$(this, _.bootstrap.f_216);
       },
       f_218: function () {
-        this.plus_pdl1w0$('Demo');
+        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(12)], _.bootstrap.f_217);
       },
       f_219: function () {
-        this.img_puj7f4$('demo-site/img/leaf.gif');
+        this.plus_pdl1w0$('Selections (none, single line or multiple lines)');
       },
       f_220: function () {
-        this.plus_pdl1w0$('Media Object');
+        this.plus_pdl1w0$('Ability to set selection programmatically');
       },
       f_221: function () {
-        this.plus_pdl1w0$('Media object is used for creating components that should contain left- or rightaligned\n\t\t\t\t\t\t\tmedia (image, video, or audio) alongside some textual content. It is best\n\t\t\t\t\t\t\tsuited for creating features such as a comments section, displaying tweets, or\n\t\t\t\t\t\t\tshowing product details where a product image is present.');
+        this.plus_pdl1w0$('Ability to set data provider, to add new items and to remove items');
       },
       f_222: function () {
-        this.img_puj7f4$('demo-site/img/leaf.gif');
+        this.plus_pdl1w0$('Sortable by mouse (optional feature)');
       },
       f_223: function () {
-        this.plus_pdl1w0$('Nested Media Object');
+        this.plus_pdl1w0$('Ability to get back data provider in proper order');
       },
       f_224: function () {
-        this.plus_pdl1w0$(' Nested Text');
+        this.plus_pdl1w0$('Ability to listen on changes to selections');
       },
       f_225: function () {
-        this.p_omdg96$(_.bootstrap.f_224);
+        this.li_8y48wp$(_.bootstrap.f_219);
+        this.li_8y48wp$(_.bootstrap.f_220);
+        this.li_8y48wp$(_.bootstrap.f_221);
+        this.li_8y48wp$(_.bootstrap.f_222);
+        this.li_8y48wp$(_.bootstrap.f_223);
+        this.li_8y48wp$(_.bootstrap.f_224);
       },
       f_226: function () {
-        this.heading_kv1miw$(_.bootstrap.f_223);
-        this.content_kv1miw$(_.bootstrap.f_225);
+        this.plus_pdl1w0$('Twitter Bootstrap List Groups with dynamic features:');
+        this.ul_8qfrsd$(_.bootstrap.f_225);
       },
       f_227: function () {
-        this.media_kv1miw$(_.bootstrap.f_222);
-        this.content_tq11g4$(_.bootstrap.f_226);
+        this.plus_pdl1w0$('Demo');
       },
       f_228: function () {
-        this.p_omdg96$(_.bootstrap.f_221);
-        _.net.yested.bootstrap.mediaObject_wda2nk$(this, _.net.yested.bootstrap.MediaAlign.object.Left, _.bootstrap.f_227);
+        this.plus_pdl1w0$('Selected items: ');
       },
       f_229: function () {
-        this.heading_kv1miw$(_.bootstrap.f_220);
-        this.content_kv1miw$(_.bootstrap.f_228);
+        this.plus_pdl1w0$('Clear selection');
       },
-      f_230: function () {
-        this.media_kv1miw$(_.bootstrap.f_219);
-        this.content_tq11g4$(_.bootstrap.f_229);
+      f_230: function (listGroup) {
+        return function () {
+          listGroup.clear();
+        };
       },
       f_231: function () {
-        this.div_5rsex9$(void 0, void 0, _.bootstrap.f_217);
-        this.br();
-        this.h4_kv1miw$(_.bootstrap.f_218);
-        _.net.yested.bootstrap.mediaObject_wda2nk$(this, _.net.yested.bootstrap.MediaAlign.object.Left, _.bootstrap.f_230);
+        this.plus_pdl1w0$('Add');
       },
-      f_232: function () {
-        this.plus_pdl1w0$('Code');
+      f_232: function (listGroup, someIndex) {
+        return function () {
+          listGroup.addItem_za3rmp$(new _.bootstrap.MailFolder('Other ' + someIndex.v++, Math.random() * 10 | 0));
+        };
       },
       f_233: function () {
-        this.h4_kv1miw$(_.bootstrap.f_232);
+        this.plus_pdl1w0$('Remove first');
+      },
+      f_234: function (listGroup) {
+        return function () {
+          if (listGroup.dataProvider.size() > 0) {
+            listGroup.removeItem_za3rmp$(Kotlin.modules['stdlib'].kotlin.first_ir3nkc$(listGroup.dataProvider));
+          }
+        };
+      },
+      f_235: function (listGroup, selectedItems, someIndex) {
+        return function () {
+          this.div_5rsex9$(void 0, void 0, _.bootstrap.f_226);
+          this.br();
+          this.h4_kv1miw$(_.bootstrap.f_227);
+          this.plus_pv6laa$(listGroup);
+          this.strong_kv1miw$(_.bootstrap.f_228);
+          this.plus_pv6laa$(selectedItems);
+          this.br();
+          this.br();
+          _.net.yested.bootstrap.btsButton_bol907$(this, void 0, _.bootstrap.f_229, _.net.yested.bootstrap.ButtonLook.object.DANGER, _.net.yested.bootstrap.ButtonSize.object.EXTRA_SMALL, void 0, void 0, _.bootstrap.f_230(listGroup));
+          this.nbsp_za3lpa$();
+          _.net.yested.bootstrap.btsButton_bol907$(this, void 0, _.bootstrap.f_231, _.net.yested.bootstrap.ButtonLook.object.PRIMARY, _.net.yested.bootstrap.ButtonSize.object.EXTRA_SMALL, void 0, void 0, _.bootstrap.f_232(listGroup, someIndex));
+          this.nbsp_za3lpa$();
+          _.net.yested.bootstrap.btsButton_bol907$(this, void 0, _.bootstrap.f_233, void 0, _.net.yested.bootstrap.ButtonSize.object.EXTRA_SMALL, void 0, void 0, _.bootstrap.f_234(listGroup));
+        };
+      },
+      f_236: function () {
+        this.plus_pdl1w0$('Code');
+      },
+      f_237: function () {
+        this.h4_kv1miw$(_.bootstrap.f_236);
+        this.code_puj7f4$('kotlin', 'val selectedItems = Span()\n\nval data = arrayListOf(MailFolder("Inbox", 15), MailFolder("Sent", 3), MailFolder("Work", 154))\n\nval listGroup = ListGroup<MailFolder>(selectionMode = SelectionMode.MULTI, sortable = true, renderer = { badge { +"$\\{it.unread}"; }; +it.name })\n\nlistGroup.dataProvider = data\nlistGroup.addOnChangeListener {\n    selectedItems.setContent(listGroup.data.map { it.name }.join(","))\n}\n\nvar someIndex = 1;\n...\n+listGroup\nstrong { +"Selected items: " }\n+selectedItems\nbr()\nbr()\nbtsButton(size = ButtonSize.EXTRA_SMALL, look = ButtonLook.DANGER, label = { +"Clear selection"}, onclick = { listGroup.clear() })\nnbsp()\nbtsButton(size = ButtonSize.EXTRA_SMALL, look = ButtonLook.PRIMARY, label = { +"Add"}, onclick = {\n    listGroup.addItem(\n            MailFolder("Other $\\{someIndex++}", (Math.random()*10).toInt()))\n})\nnbsp()\nbtsButton(size = ButtonSize.EXTRA_SMALL, label = { +"Remove first"}, onclick = {\n    if (listGroup.dataProvider.size() > 0) {\n        listGroup.removeItem(listGroup.dataProvider.first())\n    }\n})');
+      },
+      f_238: function (listGroup, selectedItems, someIndex) {
+        return function () {
+          this.col_zcukl0$([new _.net.yested.bootstrap.Medium(4)], _.bootstrap.f_235(listGroup, selectedItems, someIndex));
+          this.col_zcukl0$([new _.net.yested.bootstrap.Medium(8)], _.bootstrap.f_237);
+        };
+      },
+      createListGroupSection$f_1: function (id, listGroup, selectedItems, someIndex) {
+        return function () {
+          this.id = id;
+          _.net.yested.bootstrap.row_xnql8t$(this, _.bootstrap.f_218);
+          _.net.yested.bootstrap.row_xnql8t$(this, _.bootstrap.f_238(listGroup, selectedItems, someIndex));
+        };
+      },
+      createListGroupSection: function (id) {
+        var selectedItems = new _.net.yested.Span();
+        var data = Kotlin.modules['stdlib'].kotlin.arrayListOf_9mqe4v$([new _.bootstrap.MailFolder('Inbox', 15), new _.bootstrap.MailFolder('Sent', 3), new _.bootstrap.MailFolder('Work', 154)]);
+        var listGroup = new _.net.yested.bootstrap.ListGroup(_.net.yested.bootstrap.SelectionMode.object.MULTI, true, _.bootstrap.createListGroupSection$f);
+        listGroup.dataProvider = data;
+        listGroup.addOnChangeListener_qshda6$(_.bootstrap.createListGroupSection$f_0(selectedItems, listGroup));
+        var someIndex = {v: 1};
+        return _.net.yested.div_5rsex9$(void 0, void 0, _.bootstrap.createListGroupSection$f_1(id, listGroup, selectedItems, someIndex));
+      },
+      f_239: function () {
+        this.plus_pdl1w0$('Media Object');
+      },
+      f_240: function () {
+        this.h3_kv1miw$(_.bootstrap.f_239);
+      },
+      f_241: function () {
+        _.net.yested.bootstrap.pageHeader_kzm4yj$(this, _.bootstrap.f_240);
+      },
+      f_242: function () {
+        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(12)], _.bootstrap.f_241);
+      },
+      f_243: function () {
+        this.plus_pdl1w0$('Media object is used for creating components that should contain left- or rightaligned\n\t\t\t\t\t\tmedia (image, video, or audio) alongside some textual content. It is best\n\t\t\t\t\t\tsuited for creating features such as a comments section, displaying tweets, or\n\t\t\t\t\t\tshowing product details where a product image is present.');
+      },
+      f_244: function () {
+        this.plus_pdl1w0$('Demo');
+      },
+      f_245: function () {
+        this.img_puj7f4$('demo-site/img/leaf.gif');
+      },
+      f_246: function () {
+        this.plus_pdl1w0$('Media Object');
+      },
+      f_247: function () {
+        this.plus_pdl1w0$('Media object is used for creating components that should contain left- or rightaligned\n\t\t\t\t\t\t\tmedia (image, video, or audio) alongside some textual content. It is best\n\t\t\t\t\t\t\tsuited for creating features such as a comments section, displaying tweets, or\n\t\t\t\t\t\t\tshowing product details where a product image is present.');
+      },
+      f_248: function () {
+        this.img_puj7f4$('demo-site/img/leaf.gif');
+      },
+      f_249: function () {
+        this.plus_pdl1w0$('Nested Media Object');
+      },
+      f_250: function () {
+        this.plus_pdl1w0$(' Nested Text');
+      },
+      f_251: function () {
+        this.p_omdg96$(_.bootstrap.f_250);
+      },
+      f_252: function () {
+        this.heading_kv1miw$(_.bootstrap.f_249);
+        this.content_kv1miw$(_.bootstrap.f_251);
+      },
+      f_253: function () {
+        this.media_kv1miw$(_.bootstrap.f_248);
+        this.content_tq11g4$(_.bootstrap.f_252);
+      },
+      f_254: function () {
+        this.p_omdg96$(_.bootstrap.f_247);
+        _.net.yested.bootstrap.mediaObject_wda2nk$(this, _.net.yested.bootstrap.MediaAlign.object.Left, _.bootstrap.f_253);
+      },
+      f_255: function () {
+        this.heading_kv1miw$(_.bootstrap.f_246);
+        this.content_kv1miw$(_.bootstrap.f_254);
+      },
+      f_256: function () {
+        this.media_kv1miw$(_.bootstrap.f_245);
+        this.content_tq11g4$(_.bootstrap.f_255);
+      },
+      f_257: function () {
+        this.div_5rsex9$(void 0, void 0, _.bootstrap.f_243);
+        this.br();
+        this.h4_kv1miw$(_.bootstrap.f_244);
+        _.net.yested.bootstrap.mediaObject_wda2nk$(this, _.net.yested.bootstrap.MediaAlign.object.Left, _.bootstrap.f_256);
+      },
+      f_258: function () {
+        this.plus_pdl1w0$('Code');
+      },
+      f_259: function () {
+        this.h4_kv1miw$(_.bootstrap.f_258);
         this.code_puj7f4$('kotlin', '\nmediaObject(MediaAlign.Left) {\n\tmedia {\n\t\timg(src = "demo-site/img/leaf.gif")\n\t}\n\tcontent {\n\t\theading {\n\t\t\t+ "Media Object"\n\t\t}\n\t\tcontent {\n\t\t\t+ p { "Media object is used ..." }\n\t\t\tmediaObject(MediaAlign.Left) {\n\t\t\t\tmedia {\n\t\t\t\t\timg(src = "demo-site/img/leaf.gif")\n\t\t\t\t}\n\t\t\t\tcontent {\n\t\t\t\t\theading {\n\t\t\t\t\t\t+ "Nested Media Object"\n\t\t\t\t\t}\n\t\t\t\t\tcontent {\n\t\t\t\t\t\t+ p { "Nested Text" }\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n}\n\t\t\t\t');
       },
-      f_234: function () {
-        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(4)], _.bootstrap.f_231);
-        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(8)], _.bootstrap.f_233);
+      f_260: function () {
+        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(4)], _.bootstrap.f_257);
+        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(8)], _.bootstrap.f_259);
       },
       createMediaObjectSection$f: function (id) {
         return function () {
           this.id = id;
-          _.net.yested.bootstrap.row_xnql8t$(this, _.bootstrap.f_216);
-          _.net.yested.bootstrap.row_xnql8t$(this, _.bootstrap.f_234);
+          _.net.yested.bootstrap.row_xnql8t$(this, _.bootstrap.f_242);
+          _.net.yested.bootstrap.row_xnql8t$(this, _.bootstrap.f_260);
         };
       },
       createMediaObjectSection: function (id) {
         return _.net.yested.div_5rsex9$(void 0, void 0, _.bootstrap.createMediaObjectSection$f(id));
       },
-      f_235: function () {
+      f_261: function () {
         this.plus_pdl1w0$('Navbar');
       },
-      f_236: function () {
-        this.h3_kv1miw$(_.bootstrap.f_235);
-      },
-      f_237: function () {
-        _.net.yested.bootstrap.pageHeader_kzm4yj$(this, _.bootstrap.f_236);
-      },
-      f_238: function () {
-        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(12)], _.bootstrap.f_237);
-      },
-      f_239: function () {
-        this.plus_pdl1w0$('http://getbootstrap.com/components/#navbar');
-      },
-      f_240: function () {
-        this.plus_pdl1w0$('Features:');
-      },
-      f_241: function () {
-        this.plus_pdl1w0$('Navbar collapses on mobile screens.');
-      },
-      f_242: function () {
-        this.plus_pdl1w0$('Once clicked on menu item, it stays selected.');
-      },
-      f_243: function () {
-        this.plus_pdl1w0$('You can set hrefs of menu items or capture onclick events.');
-      },
-      f_244: function () {
-        this.li_8y48wp$(_.bootstrap.f_241);
-        this.li_8y48wp$(_.bootstrap.f_242);
-        this.li_8y48wp$(_.bootstrap.f_243);
-      },
-      f_245: function () {
-        this.plus_pdl1w0$('Please note!');
-      },
-      f_246: function () {
-        this.plus_pdl1w0$('Set correct Bootrsap classes to forms/text you use in header (see in the example below)');
-      },
-      f_247: function () {
-        this.plus_pdl1w0$('Keep the order of the elements as specified by Bootstrap');
-      },
-      f_248: function () {
-        this.plus_pdl1w0$('Set different IDs if you have multiple navbars in one application');
-      },
-      f_249: function () {
-        this.li_8y48wp$(_.bootstrap.f_246);
-        this.li_8y48wp$(_.bootstrap.f_247);
-        this.li_8y48wp$(_.bootstrap.f_248);
-      },
-      f_250: function () {
-        this.plus_pdl1w0$('Complete implementation of Twitter Bootstrap Navbar. Please see: ');
-        this.a_xjhihl$(void 0, void 0, 'http://getbootstrap.com/components/#navbar', void 0, _.bootstrap.f_239);
-        this.br();
-        this.br();
-        this.emph_kv1miw$(_.bootstrap.f_240);
-        this.ul_8qfrsd$(_.bootstrap.f_244);
-        this.br();
-        this.emph_kv1miw$(_.bootstrap.f_245);
-        this.ul_8qfrsd$(_.bootstrap.f_249);
-        this.br();
-      },
-      f_251: function () {
-        this.div_5rsex9$(void 0, void 0, _.bootstrap.f_250);
-      },
-      f_252: function () {
-        this.plus_pdl1w0$("Navbar Positions (parameter 'position'):");
-      },
-      f_253: function () {
-        this.plus_pdl1w0$('Empty - Navbar will render in the current element');
-      },
-      f_254: function () {
-        this.plus_pdl1w0$('FIXED_TOP - Navbar will be at the top and always visible');
-      },
-      f_255: function () {
-        this.plus_pdl1w0$('FIXED_BOTTOM - Navbar will be at the bottom and always visiblet');
-      },
-      f_256: function () {
-        this.plus_pdl1w0$('STATIC_TOP - Navbar will be at the top and will scroll out');
-      },
-      f_257: function () {
-        this.li_8y48wp$(_.bootstrap.f_253);
-        this.li_8y48wp$(_.bootstrap.f_254);
-        this.li_8y48wp$(_.bootstrap.f_255);
-        this.li_8y48wp$(_.bootstrap.f_256);
-      },
-      f_258: function () {
-        this.plus_pdl1w0$("Navbar Look (parameter 'look'):");
-      },
-      f_259: function () {
-        this.plus_pdl1w0$('DEFAULT - Default look (light)');
-      },
-      f_260: function () {
-        this.plus_pdl1w0$('INVERSE - Inversed colours (dark)');
-      },
-      f_261: function () {
-        this.li_8y48wp$(_.bootstrap.f_259);
-        this.li_8y48wp$(_.bootstrap.f_260);
-      },
       f_262: function () {
-        this.plus_pdl1w0$('Navbar features (DSL functions):');
+        this.h3_kv1miw$(_.bootstrap.f_261);
       },
       f_263: function () {
-        this.plus_pdl1w0$('brand - Page title/logo (Anchor) (optional, once)');
+        _.net.yested.bootstrap.pageHeader_kzm4yj$(this, _.bootstrap.f_262);
       },
       f_264: function () {
-        this.plus_pdl1w0$('item -  Top menu item (Anchor) (optional, many times)');
+        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(12)], _.bootstrap.f_263);
       },
       f_265: function () {
-        this.plus_pdl1w0$('dropdown -  Top menu item (Anchor) (optional, many times)');
+        this.plus_pdl1w0$('http://getbootstrap.com/components/#navbar');
       },
       f_266: function () {
-        this.plus_pdl1w0$('left -  Content will be position on the left (after last menu link)');
+        this.plus_pdl1w0$('Features:');
       },
       f_267: function () {
-        this.plus_pdl1w0$('right -  Content will be position on the right');
+        this.plus_pdl1w0$('Navbar collapses on mobile screens.');
       },
       f_268: function () {
-        this.li_8y48wp$(_.bootstrap.f_263);
-        this.li_8y48wp$(_.bootstrap.f_264);
-        this.li_8y48wp$(_.bootstrap.f_265);
-        this.li_8y48wp$(_.bootstrap.f_266);
-        this.li_8y48wp$(_.bootstrap.f_267);
+        this.plus_pdl1w0$('Once clicked on menu item, it stays selected.');
       },
       f_269: function () {
-        this.emph_kv1miw$(_.bootstrap.f_252);
-        this.ul_8qfrsd$(_.bootstrap.f_257);
-        this.br();
-        this.emph_kv1miw$(_.bootstrap.f_258);
-        this.ul_8qfrsd$(_.bootstrap.f_261);
-        this.br();
-        this.emph_kv1miw$(_.bootstrap.f_262);
-        this.ul_8qfrsd$(_.bootstrap.f_268);
+        this.plus_pdl1w0$('You can set hrefs of menu items or capture onclick events.');
       },
       f_270: function () {
-        this.div_5rsex9$(void 0, void 0, _.bootstrap.f_269);
+        this.li_8y48wp$(_.bootstrap.f_267);
+        this.li_8y48wp$(_.bootstrap.f_268);
+        this.li_8y48wp$(_.bootstrap.f_269);
       },
       f_271: function () {
-        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(6)], _.bootstrap.f_251);
-        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(6)], _.bootstrap.f_270);
+        this.plus_pdl1w0$('Please note!');
       },
       f_272: function () {
-        this.plus_pdl1w0$('Demo');
+        this.plus_pdl1w0$('Set correct Bootrsap classes to forms/text you use in header (see in the example below)');
       },
       f_273: function () {
+        this.plus_pdl1w0$('Keep the order of the elements as specified by Bootstrap');
+      },
+      f_274: function () {
+        this.plus_pdl1w0$('Set different IDs if you have multiple navbars in one application');
+      },
+      f_275: function () {
+        this.li_8y48wp$(_.bootstrap.f_272);
+        this.li_8y48wp$(_.bootstrap.f_273);
+        this.li_8y48wp$(_.bootstrap.f_274);
+      },
+      f_276: function () {
+        this.plus_pdl1w0$('Complete implementation of Twitter Bootstrap Navbar. Please see: ');
+        this.a_xjhihl$(void 0, void 0, 'http://getbootstrap.com/components/#navbar', void 0, _.bootstrap.f_265);
+        this.br();
+        this.br();
+        this.emph_kv1miw$(_.bootstrap.f_266);
+        this.ul_8qfrsd$(_.bootstrap.f_270);
+        this.br();
+        this.emph_kv1miw$(_.bootstrap.f_271);
+        this.ul_8qfrsd$(_.bootstrap.f_275);
+        this.br();
+      },
+      f_277: function () {
+        this.div_5rsex9$(void 0, void 0, _.bootstrap.f_276);
+      },
+      f_278: function () {
+        this.plus_pdl1w0$("Navbar Positions (parameter 'position'):");
+      },
+      f_279: function () {
+        this.plus_pdl1w0$('Empty - Navbar will render in the current element');
+      },
+      f_280: function () {
+        this.plus_pdl1w0$('FIXED_TOP - Navbar will be at the top and always visible');
+      },
+      f_281: function () {
+        this.plus_pdl1w0$('FIXED_BOTTOM - Navbar will be at the bottom and always visiblet');
+      },
+      f_282: function () {
+        this.plus_pdl1w0$('STATIC_TOP - Navbar will be at the top and will scroll out');
+      },
+      f_283: function () {
+        this.li_8y48wp$(_.bootstrap.f_279);
+        this.li_8y48wp$(_.bootstrap.f_280);
+        this.li_8y48wp$(_.bootstrap.f_281);
+        this.li_8y48wp$(_.bootstrap.f_282);
+      },
+      f_284: function () {
+        this.plus_pdl1w0$("Navbar Look (parameter 'look'):");
+      },
+      f_285: function () {
+        this.plus_pdl1w0$('DEFAULT - Default look (light)');
+      },
+      f_286: function () {
+        this.plus_pdl1w0$('INVERSE - Inversed colours (dark)');
+      },
+      f_287: function () {
+        this.li_8y48wp$(_.bootstrap.f_285);
+        this.li_8y48wp$(_.bootstrap.f_286);
+      },
+      f_288: function () {
+        this.plus_pdl1w0$('Navbar features (DSL functions):');
+      },
+      f_289: function () {
+        this.plus_pdl1w0$('brand - Page title/logo (Anchor) (optional, once)');
+      },
+      f_290: function () {
+        this.plus_pdl1w0$('item -  Top menu item (Anchor) (optional, many times)');
+      },
+      f_291: function () {
+        this.plus_pdl1w0$('dropdown -  Top menu item (Anchor) (optional, many times)');
+      },
+      f_292: function () {
+        this.plus_pdl1w0$('left -  Content will be position on the left (after last menu link)');
+      },
+      f_293: function () {
+        this.plus_pdl1w0$('right -  Content will be position on the right');
+      },
+      f_294: function () {
+        this.li_8y48wp$(_.bootstrap.f_289);
+        this.li_8y48wp$(_.bootstrap.f_290);
+        this.li_8y48wp$(_.bootstrap.f_291);
+        this.li_8y48wp$(_.bootstrap.f_292);
+        this.li_8y48wp$(_.bootstrap.f_293);
+      },
+      f_295: function () {
+        this.emph_kv1miw$(_.bootstrap.f_278);
+        this.ul_8qfrsd$(_.bootstrap.f_283);
+        this.br();
+        this.emph_kv1miw$(_.bootstrap.f_284);
+        this.ul_8qfrsd$(_.bootstrap.f_287);
+        this.br();
+        this.emph_kv1miw$(_.bootstrap.f_288);
+        this.ul_8qfrsd$(_.bootstrap.f_294);
+      },
+      f_296: function () {
+        this.div_5rsex9$(void 0, void 0, _.bootstrap.f_295);
+      },
+      f_297: function () {
+        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(6)], _.bootstrap.f_277);
+        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(6)], _.bootstrap.f_296);
+      },
+      f_298: function () {
+        this.plus_pdl1w0$('Demo');
+      },
+      f_299: function () {
         _.net.yested.bootstrap.glyphicon_8jxlbl$(this, 'home');
         this.nbsp_za3lpa$();
         this.plus_pdl1w0$('Home');
       },
-      f_274: function () {
+      f_300: function () {
         this.plus_pdl1w0$('Some Link 1');
       },
-      f_275: function () {
-        Kotlin.println('clicked');
-      },
-      f_276: function () {
-        this.plus_pdl1w0$('Some Link 2');
-      },
-      f_277: function () {
-        this.plus_pdl1w0$('Dropdown');
-      },
-      f_278: function () {
-        Kotlin.println('clicked');
-      },
-      f_279: function () {
-        this.plus_pdl1w0$('Link 1');
-      },
-      f_280: function () {
-        Kotlin.println('clicked');
-      },
-      f_281: function () {
-        this.plus_pdl1w0$('Link 2');
-      },
-      f_282: function () {
-        Kotlin.println('clicked');
-      },
-      f_283: function () {
-        this.plus_pdl1w0$('Link 3');
-      },
-      f_284: function () {
-        this.item('#bootstrapComponents', _.bootstrap.f_278, _.bootstrap.f_279);
-        this.item('#bootstrapComponents', _.bootstrap.f_280, _.bootstrap.f_281);
-        this.divider();
-        this.item('#bootstrapComponents', _.bootstrap.f_282, _.bootstrap.f_283);
-      },
-      f_285: function () {
-        this.plus_pv6laa$(new _.net.yested.bootstrap.StringInputField(void 0, 'username'));
-      },
-      f_286: function () {
-        this.plus_pdl1w0$('Login');
-      },
-      f_287: function () {
-      },
-      f_288: function () {
-        this.rangeTo_94jgcu$('class', 'navbar-form');
-        this.div_5rsex9$(void 0, 'form-group', _.bootstrap.f_285);
-        _.net.yested.bootstrap.btsButton_bol907$(this, _.net.yested.ButtonType.object.SUBMIT, _.bootstrap.f_286, void 0, void 0, void 0, void 0, _.bootstrap.f_287);
-      },
-      f_289: function () {
-        this.form_kv1miw$(_.bootstrap.f_288);
-      },
-      f_290: function () {
-        this.plus_pdl1w0$('On the right1');
-      },
-      f_291: function () {
-        this.span_dkuwo$('navbar-text', _.bootstrap.f_290);
-      },
-      f_292: function () {
-        this.brand_s8xvdm$('#bootstrapComponents', _.bootstrap.f_273);
-        this.item_b1t645$('#bootstrapComponents', void 0, _.bootstrap.f_274);
-        this.item_b1t645$('#bootstrapComponents', _.bootstrap.f_275, _.bootstrap.f_276);
-        this.dropdown_vvlqvy$(_.bootstrap.f_277, _.bootstrap.f_284);
-        this.left_oe5uhj$(_.bootstrap.f_289);
-        this.right_oe5uhj$(_.bootstrap.f_291);
-      },
-      f_293: function () {
-        this.h4_kv1miw$(_.bootstrap.f_272);
-        _.net.yested.bootstrap.navbar_nohvx9$(this, 'navbarDemo', void 0, _.net.yested.bootstrap.NavbarLook.object.INVERSE, void 0, _.bootstrap.f_292);
-      },
-      f_294: function () {
-        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(12)], _.bootstrap.f_293);
-      },
-      f_295: function () {
-        this.plus_pdl1w0$('Code');
-      },
-      f_296: function () {
-        this.h4_kv1miw$(_.bootstrap.f_295);
-        this.code_puj7f4$('kotlin', 'navbar(id = "navbarDemo", look = NavbarLook.INVERSE) {\n    brand(href = "#bootstrapComponents") {glyphicon(icon = "home"); nbsp(); +" Home" }\n    item(href = "#bootstrapComponents") { +"Some Link 1" }\n    item(href = "#bootstrapComponents", onclick = { println("clicked")}) { +"Some Link 2" }\n    dropdown(label = { +"Dropdown"}) {\n        item(href = "#bootstrapComponents", onclick = { println("clicked")}) { +"Link 1" }\n        item(href = "#bootstrapComponents", onclick = { println("clicked")}) { +"Link 2" }\n        divider()\n        item(href = "#bootstrapComponents", onclick = { println("clicked")}) { +"Link 3" }\n    }\n    left {\n        form { "class".."navbar-form"\n            div(clazz = "form-group") {\n                textInput(placeholder = "username") {}\n            }\n            btsButton(type = ButtonType.SUBMIT, label = { +"Login"}) {}\n        }\n    }\n    right {\n        span(clazz = "navbar-text") {\n            +"On the right1"\n        }\n    }\n}');
-      },
-      f_297: function () {
-        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(12)], _.bootstrap.f_296);
-      },
-      createNavbarSection$f: function (id) {
-        return function () {
-          this.id = id;
-          _.net.yested.bootstrap.row_xnql8t$(this, _.bootstrap.f_238);
-          _.net.yested.bootstrap.row_xnql8t$(this, _.bootstrap.f_271);
-          _.net.yested.bootstrap.row_xnql8t$(this, _.bootstrap.f_294);
-          _.net.yested.bootstrap.row_xnql8t$(this, _.bootstrap.f_297);
-        };
-      },
-      createNavbarSection: function (id) {
-        return _.net.yested.div_5rsex9$(void 0, void 0, _.bootstrap.createNavbarSection$f(id));
-      },
-      f_298: function () {
-        this.plus_pdl1w0$('Pagination');
-      },
-      f_299: function () {
-        this.h3_kv1miw$(_.bootstrap.f_298);
-      },
-      f_300: function () {
-        _.net.yested.bootstrap.pageHeader_kzm4yj$(this, _.bootstrap.f_299);
-      },
       f_301: function () {
-        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(12)], _.bootstrap.f_300);
+        Kotlin.println('clicked');
       },
       f_302: function () {
-        this.plus_pdl1w0$('\nPagination from Bootstrap.\n');
+        this.plus_pdl1w0$('Some Link 2');
       },
       f_303: function () {
-        this.plus_pdl1w0$('Demo');
+        this.plus_pdl1w0$('Dropdown');
       },
-      f_304: function (result) {
-        return function (it) {
-          result.setContent_61zpoe$('Selected: ' + it);
-        };
+      f_304: function () {
+        Kotlin.println('clicked');
       },
-      f_305: function (result) {
-        return function () {
-          this.div_5rsex9$(void 0, void 0, _.bootstrap.f_302);
-          this.br();
-          this.h4_kv1miw$(_.bootstrap.f_303);
-          _.net.yested.bootstrap.pagination_vs56l6$(this, 6, 2, _.bootstrap.f_304(result));
-          this.plus_pv6laa$(result);
-        };
+      f_305: function () {
+        this.plus_pdl1w0$('Link 1');
       },
       f_306: function () {
-        this.plus_pdl1w0$('Code');
+        Kotlin.println('clicked');
       },
       f_307: function () {
-        this.h4_kv1miw$(_.bootstrap.f_306);
-        this.code_puj7f4$('kotlin', 'val result = Span()\n...\ndiv {\n    pagination(count = 6, defaultSelection = 2) { result.replace("Selected: $\\{it}")}\n    +result\n}\n');
+        this.plus_pdl1w0$('Link 2');
       },
-      f_308: function (result) {
-        return function () {
-          this.col_zcukl0$([new _.net.yested.bootstrap.Medium(4)], _.bootstrap.f_305(result));
-          this.col_zcukl0$([new _.net.yested.bootstrap.Medium(8)], _.bootstrap.f_307);
-        };
-      },
-      createPaginationSection$f: function (id, result) {
-        return function () {
-          this.id = id;
-          _.net.yested.bootstrap.row_xnql8t$(this, _.bootstrap.f_301);
-          _.net.yested.bootstrap.row_xnql8t$(this, _.bootstrap.f_308(result));
-        };
-      },
-      createPaginationSection: function (id) {
-        var result = new _.net.yested.Span();
-        return _.net.yested.div_5rsex9$(void 0, void 0, _.bootstrap.createPaginationSection$f(id, result));
+      f_308: function () {
+        Kotlin.println('clicked');
       },
       f_309: function () {
-        this.plus_pdl1w0$('Panels');
+        this.plus_pdl1w0$('Link 3');
       },
       f_310: function () {
-        this.h3_kv1miw$(_.bootstrap.f_309);
+        this.item('#bootstrapComponents', _.bootstrap.f_304, _.bootstrap.f_305);
+        this.item('#bootstrapComponents', _.bootstrap.f_306, _.bootstrap.f_307);
+        this.divider();
+        this.item('#bootstrapComponents', _.bootstrap.f_308, _.bootstrap.f_309);
       },
       f_311: function () {
-        _.net.yested.bootstrap.pageHeader_kzm4yj$(this, _.bootstrap.f_310);
+        this.plus_pv6laa$(new _.net.yested.bootstrap.StringInputField(void 0, 'username'));
       },
       f_312: function () {
-        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(12)], _.bootstrap.f_311);
+        this.plus_pdl1w0$('Login');
       },
       f_313: function () {
-        this.plus_pdl1w0$('\nPlease refer to Bootstrap Panels\n');
       },
       f_314: function () {
-        this.plus_pdl1w0$('Demo');
+        this.rangeTo_94jgcu$('class', 'navbar-form');
+        this.div_5rsex9$(void 0, 'form-group', _.bootstrap.f_311);
+        _.net.yested.bootstrap.btsButton_bol907$(this, _.net.yested.ButtonType.object.SUBMIT, _.bootstrap.f_312, void 0, void 0, void 0, void 0, _.bootstrap.f_313);
       },
       f_315: function () {
-        this.plus_pdl1w0$('Panel Header');
+        this.form_kv1miw$(_.bootstrap.f_314);
       },
       f_316: function () {
-        this.plus_pdl1w0$('This site');
+        this.plus_pdl1w0$('On the right1');
       },
       f_317: function () {
-        this.a_xjhihl$(void 0, void 0, 'http://www.yested.net', void 0, _.bootstrap.f_316);
+        this.span_dkuwo$('navbar-text', _.bootstrap.f_316);
       },
       f_318: function () {
-        this.plus_pdl1w0$('Panel Footer');
+        this.brand_s8xvdm$('#bootstrapComponents', _.bootstrap.f_299);
+        this.item_b1t645$('#bootstrapComponents', void 0, _.bootstrap.f_300);
+        this.item_b1t645$('#bootstrapComponents', _.bootstrap.f_301, _.bootstrap.f_302);
+        this.dropdown_vvlqvy$(_.bootstrap.f_303, _.bootstrap.f_310);
+        this.left_oe5uhj$(_.bootstrap.f_315);
+        this.right_oe5uhj$(_.bootstrap.f_317);
       },
       f_319: function () {
-        this.heading_kv1miw$(_.bootstrap.f_315);
-        this.content_kv1miw$(_.bootstrap.f_317);
-        this.footer_kv1miw$(_.bootstrap.f_318);
+        this.h4_kv1miw$(_.bootstrap.f_298);
+        _.net.yested.bootstrap.navbar_nohvx9$(this, 'navbarDemo', void 0, _.net.yested.bootstrap.NavbarLook.object.INVERSE, void 0, _.bootstrap.f_318);
       },
       f_320: function () {
-        this.div_5rsex9$(void 0, void 0, _.bootstrap.f_313);
-        this.br();
-        this.h4_kv1miw$(_.bootstrap.f_314);
-        _.net.yested.bootstrap.panel_gqyrgg$(this, _.net.yested.bootstrap.PanelStyle.object.SUCCESS, void 0, _.bootstrap.f_319);
+        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(12)], _.bootstrap.f_319);
       },
       f_321: function () {
         this.plus_pdl1w0$('Code');
       },
       f_322: function () {
         this.h4_kv1miw$(_.bootstrap.f_321);
-        this.code_puj7f4$('kotlin', 'panel {\n    heading { +"Panel Header" }\n    content {\n        a(href="http://www.yested.net") { + "This site"}\n    }\n    footer { +"Panel Footer" }\n}');
+        this.code_puj7f4$('kotlin', 'navbar(id = "navbarDemo", look = NavbarLook.INVERSE) {\n    brand(href = "#bootstrapComponents") {glyphicon(icon = "home"); nbsp(); +" Home" }\n    item(href = "#bootstrapComponents") { +"Some Link 1" }\n    item(href = "#bootstrapComponents", onclick = { println("clicked")}) { +"Some Link 2" }\n    dropdown(label = { +"Dropdown"}) {\n        item(href = "#bootstrapComponents", onclick = { println("clicked")}) { +"Link 1" }\n        item(href = "#bootstrapComponents", onclick = { println("clicked")}) { +"Link 2" }\n        divider()\n        item(href = "#bootstrapComponents", onclick = { println("clicked")}) { +"Link 3" }\n    }\n    left {\n        form { "class".."navbar-form"\n            div(clazz = "form-group") {\n                textInput(placeholder = "username") {}\n            }\n            btsButton(type = ButtonType.SUBMIT, label = { +"Login"}) {}\n        }\n    }\n    right {\n        span(clazz = "navbar-text") {\n            +"On the right1"\n        }\n    }\n}');
       },
       f_323: function () {
-        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(4)], _.bootstrap.f_320);
-        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(8)], _.bootstrap.f_322);
+        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(12)], _.bootstrap.f_322);
+      },
+      createNavbarSection$f: function (id) {
+        return function () {
+          this.id = id;
+          _.net.yested.bootstrap.row_xnql8t$(this, _.bootstrap.f_264);
+          _.net.yested.bootstrap.row_xnql8t$(this, _.bootstrap.f_297);
+          _.net.yested.bootstrap.row_xnql8t$(this, _.bootstrap.f_320);
+          _.net.yested.bootstrap.row_xnql8t$(this, _.bootstrap.f_323);
+        };
+      },
+      createNavbarSection: function (id) {
+        return _.net.yested.div_5rsex9$(void 0, void 0, _.bootstrap.createNavbarSection$f(id));
+      },
+      f_324: function () {
+        this.plus_pdl1w0$('Pagination');
+      },
+      f_325: function () {
+        this.h3_kv1miw$(_.bootstrap.f_324);
+      },
+      f_326: function () {
+        _.net.yested.bootstrap.pageHeader_kzm4yj$(this, _.bootstrap.f_325);
+      },
+      f_327: function () {
+        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(12)], _.bootstrap.f_326);
+      },
+      f_328: function () {
+        this.plus_pdl1w0$('\nPagination from Bootstrap.\n');
+      },
+      f_329: function () {
+        this.plus_pdl1w0$('Demo');
+      },
+      f_330: function (result) {
+        return function (it) {
+          result.setContent_61zpoe$('Selected: ' + it);
+        };
+      },
+      f_331: function (result) {
+        return function () {
+          this.div_5rsex9$(void 0, void 0, _.bootstrap.f_328);
+          this.br();
+          this.h4_kv1miw$(_.bootstrap.f_329);
+          _.net.yested.bootstrap.pagination_vs56l6$(this, 6, 2, _.bootstrap.f_330(result));
+          this.plus_pv6laa$(result);
+        };
+      },
+      f_332: function () {
+        this.plus_pdl1w0$('Code');
+      },
+      f_333: function () {
+        this.h4_kv1miw$(_.bootstrap.f_332);
+        this.code_puj7f4$('kotlin', 'val result = Span()\n...\ndiv {\n    pagination(count = 6, defaultSelection = 2) { result.replace("Selected: $\\{it}")}\n    +result\n}\n');
+      },
+      f_334: function (result) {
+        return function () {
+          this.col_zcukl0$([new _.net.yested.bootstrap.Medium(4)], _.bootstrap.f_331(result));
+          this.col_zcukl0$([new _.net.yested.bootstrap.Medium(8)], _.bootstrap.f_333);
+        };
+      },
+      createPaginationSection$f: function (id, result) {
+        return function () {
+          this.id = id;
+          _.net.yested.bootstrap.row_xnql8t$(this, _.bootstrap.f_327);
+          _.net.yested.bootstrap.row_xnql8t$(this, _.bootstrap.f_334(result));
+        };
+      },
+      createPaginationSection: function (id) {
+        var result = new _.net.yested.Span();
+        return _.net.yested.div_5rsex9$(void 0, void 0, _.bootstrap.createPaginationSection$f(id, result));
+      },
+      f_335: function () {
+        this.plus_pdl1w0$('Panels');
+      },
+      f_336: function () {
+        this.h3_kv1miw$(_.bootstrap.f_335);
+      },
+      f_337: function () {
+        _.net.yested.bootstrap.pageHeader_kzm4yj$(this, _.bootstrap.f_336);
+      },
+      f_338: function () {
+        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(12)], _.bootstrap.f_337);
+      },
+      f_339: function () {
+        this.plus_pdl1w0$('\nPlease refer to Bootstrap Panels\n');
+      },
+      f_340: function () {
+        this.plus_pdl1w0$('Demo');
+      },
+      f_341: function () {
+        this.plus_pdl1w0$('Panel Header');
+      },
+      f_342: function () {
+        this.plus_pdl1w0$('This site');
+      },
+      f_343: function () {
+        this.a_xjhihl$(void 0, void 0, 'http://www.yested.net', void 0, _.bootstrap.f_342);
+      },
+      f_344: function () {
+        this.plus_pdl1w0$('Panel Footer');
+      },
+      f_345: function () {
+        this.heading_kv1miw$(_.bootstrap.f_341);
+        this.content_kv1miw$(_.bootstrap.f_343);
+        this.footer_kv1miw$(_.bootstrap.f_344);
+      },
+      f_346: function () {
+        this.div_5rsex9$(void 0, void 0, _.bootstrap.f_339);
+        this.br();
+        this.h4_kv1miw$(_.bootstrap.f_340);
+        _.net.yested.bootstrap.panel_gqyrgg$(this, _.net.yested.bootstrap.PanelStyle.object.SUCCESS, void 0, _.bootstrap.f_345);
+      },
+      f_347: function () {
+        this.plus_pdl1w0$('Code');
+      },
+      f_348: function () {
+        this.h4_kv1miw$(_.bootstrap.f_347);
+        this.code_puj7f4$('kotlin', 'panel {\n    heading { +"Panel Header" }\n    content {\n        a(href="http://www.yested.net") { + "This site"}\n    }\n    footer { +"Panel Footer" }\n}');
+      },
+      f_349: function () {
+        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(4)], _.bootstrap.f_346);
+        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(8)], _.bootstrap.f_348);
       },
       createPanelSection$f: function (id) {
         return function () {
           this.id = id;
-          _.net.yested.bootstrap.row_xnql8t$(this, _.bootstrap.f_312);
-          _.net.yested.bootstrap.row_xnql8t$(this, _.bootstrap.f_323);
+          _.net.yested.bootstrap.row_xnql8t$(this, _.bootstrap.f_338);
+          _.net.yested.bootstrap.row_xnql8t$(this, _.bootstrap.f_349);
         };
       },
       createPanelSection: function (id) {
@@ -2491,20 +2675,20 @@
       addPanel$f_1: function () {
         this.data = 'Resize me!';
       },
-      f_324: function (counter, size) {
+      f_350: function (counter, size) {
         return function () {
           this.plus_pdl1w0$('A panel ' + counter.v++ + ' (' + size + ')');
         };
       },
-      f_325: function (textArea) {
+      f_351: function (textArea) {
         return function () {
           this.plus_pv6laa$(textArea);
         };
       },
       addPanel$f_2: function (counter, size, textArea) {
         return function () {
-          this.heading_kv1miw$(_.bootstrap.f_324(counter, size));
-          this.content_kv1miw$(_.bootstrap.f_325(textArea));
+          this.heading_kv1miw$(_.bootstrap.f_350(counter, size));
+          this.content_kv1miw$(_.bootstrap.f_351(textArea));
         };
       },
       createRowPanelContainerSection$addPanel: function (counter, panelContainer) {
@@ -2520,96 +2704,96 @@
       createRowPanelContainerSection$f_0: function (it) {
         return it.name();
       },
-      f_326: function () {
+      f_352: function () {
         this.plus_pdl1w0$('Row Panel Container');
       },
-      f_327: function () {
-        this.h3_kv1miw$(_.bootstrap.f_326);
+      f_353: function () {
+        this.h3_kv1miw$(_.bootstrap.f_352);
       },
-      f_328: function () {
-        _.net.yested.bootstrap.pageHeader_kzm4yj$(this, _.bootstrap.f_327);
+      f_354: function () {
+        _.net.yested.bootstrap.pageHeader_kzm4yj$(this, _.bootstrap.f_353);
       },
-      f_329: function () {
+      f_355: function () {
         this.plus_pdl1w0$('Panel Container is based on JQuery.sortable function (from JQuery UI).\n                It allows user to change layout of panels or remove panels from the container.\n                This implementation allows you to specify width of panels via Bootstrap columns sizes.');
       },
-      f_330: function () {
+      f_356: function () {
         this.plus_pdl1w0$('Try Drag&amp;Drop the Panels below!');
       },
-      f_331: function () {
+      f_357: function () {
         this.plus_pdl1w0$('Source code');
       },
-      f_332: function () {
-        _.net.yested.bootstrap.alert(this, _.net.yested.bootstrap.AlertStyle.object.WARNING, true, _.bootstrap.f_330);
-        this.a_xjhihl$(void 0, void 0, 'https://github.com/jean79/yested/blob/master/src/main/docsite/bootstrap/rowpanelcontainer.kt', void 0, _.bootstrap.f_331);
+      f_358: function () {
+        _.net.yested.bootstrap.alert(this, _.net.yested.bootstrap.AlertStyle.object.WARNING, true, _.bootstrap.f_356);
+        this.a_xjhihl$(void 0, void 0, 'https://github.com/jean79/yested/blob/master/src/main/docsite/bootstrap/rowpanelcontainer.kt', void 0, _.bootstrap.f_357);
       },
-      f_333: function () {
-        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(12)], _.bootstrap.f_328);
-        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(6)], _.bootstrap.f_329);
-        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(6)], _.bootstrap.f_332);
+      f_359: function () {
+        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(12)], _.bootstrap.f_354);
+        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(6)], _.bootstrap.f_355);
+        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(6)], _.bootstrap.f_358);
       },
-      f_334: function () {
+      f_360: function () {
         this.plus_pdl1w0$('Size:');
         this.nbsp_za3lpa$();
       },
-      f_335: function (selectSize) {
+      f_361: function (selectSize) {
         return function () {
           this.plus_pv6laa$(selectSize);
         };
       },
-      f_336: function () {
+      f_362: function () {
         this.nbsp_za3lpa$();
         this.plus_pdl1w0$('Look:');
         this.nbsp_za3lpa$();
       },
-      f_337: function (selectLook) {
+      f_363: function (selectLook) {
         return function () {
           this.plus_pv6laa$(selectLook);
         };
       },
-      f_338: function () {
+      f_364: function () {
         this.nbsp_za3lpa$();
       },
-      f_339: function () {
+      f_365: function () {
         this.plus_pdl1w0$('Add Panel');
       },
-      f_340: function (selectSize, selectLook, addPanel) {
+      f_366: function (selectSize, selectLook, addPanel) {
         return function () {
           addPanel(Kotlin.modules['stdlib'].kotlin.first_fvq2g0$(selectSize.selectedItems), Kotlin.modules['stdlib'].kotlin.first_fvq2g0$(selectLook.selectedItems));
         };
       },
-      f_341: function (selectSize, selectLook, addPanel) {
+      f_367: function (selectSize, selectLook, addPanel) {
         return function () {
-          _.net.yested.bootstrap.btsButton_bol907$(this, void 0, _.bootstrap.f_339, _.net.yested.bootstrap.ButtonLook.object.PRIMARY, _.net.yested.bootstrap.ButtonSize.object.SMALL, void 0, void 0, _.bootstrap.f_340(selectSize, selectLook, addPanel));
+          _.net.yested.bootstrap.btsButton_bol907$(this, void 0, _.bootstrap.f_365, _.net.yested.bootstrap.ButtonLook.object.PRIMARY, _.net.yested.bootstrap.ButtonSize.object.SMALL, void 0, void 0, _.bootstrap.f_366(selectSize, selectLook, addPanel));
         };
       },
-      f_342: function (selectSize, selectLook, addPanel) {
+      f_368: function (selectSize, selectLook, addPanel) {
         return function () {
-          this.item_gthhqa$(void 0, _.bootstrap.f_334, void 0, _.bootstrap.f_335(selectSize));
-          this.item_gthhqa$(void 0, _.bootstrap.f_336, void 0, _.bootstrap.f_337(selectLook));
-          this.item_gthhqa$(void 0, _.bootstrap.f_338, void 0, _.bootstrap.f_341(selectSize, selectLook, addPanel));
+          this.item_gthhqa$(void 0, _.bootstrap.f_360, void 0, _.bootstrap.f_361(selectSize));
+          this.item_gthhqa$(void 0, _.bootstrap.f_362, void 0, _.bootstrap.f_363(selectLook));
+          this.item_gthhqa$(void 0, _.bootstrap.f_364, void 0, _.bootstrap.f_367(selectSize, selectLook, addPanel));
         };
       },
-      f_343: function (selectSize, selectLook, addPanel, this$) {
+      f_369: function (selectSize, selectLook, addPanel, this$) {
         return function () {
-          _.net.yested.bootstrap.btsForm_6zn8tn$(this$, _.net.yested.bootstrap.FormStyle.object.INLINE, void 0, void 0, _.bootstrap.f_342(selectSize, selectLook, addPanel));
+          _.net.yested.bootstrap.btsForm_6zn8tn$(this$, _.net.yested.bootstrap.FormStyle.object.INLINE, void 0, void 0, _.bootstrap.f_368(selectSize, selectLook, addPanel));
         };
       },
-      f_344: function (panelContainer) {
+      f_370: function (panelContainer) {
         return function () {
           this.plus_pv6laa$(panelContainer);
         };
       },
-      f_345: function (panelContainer) {
+      f_371: function (panelContainer) {
         return function () {
-          this.col_zcukl0$([new _.net.yested.bootstrap.Medium(12)], _.bootstrap.f_344(panelContainer));
+          this.col_zcukl0$([new _.net.yested.bootstrap.Medium(12)], _.bootstrap.f_370(panelContainer));
         };
       },
       createRowPanelContainerSection$f_1: function (selectSize, selectLook, addPanel, panelContainer) {
         return function () {
-          _.net.yested.bootstrap.row_xnql8t$(this, _.bootstrap.f_333);
-          _.net.yested.bootstrap.row_xnql8t$(this, _.bootstrap.f_343(selectSize, selectLook, addPanel, this));
+          _.net.yested.bootstrap.row_xnql8t$(this, _.bootstrap.f_359);
+          _.net.yested.bootstrap.row_xnql8t$(this, _.bootstrap.f_369(selectSize, selectLook, addPanel, this));
           this.br();
-          _.net.yested.bootstrap.row_xnql8t$(this, _.bootstrap.f_345(panelContainer));
+          _.net.yested.bootstrap.row_xnql8t$(this, _.bootstrap.f_371(panelContainer));
         };
       },
       createRowPanelContainerSection: function (id) {
@@ -2711,29 +2895,29 @@
           tmp$1.selectedItems = tmp$0;
         };
       },
-      f_348: function () {
+      f_374: function () {
         this.plus_pdl1w0$('Select');
       },
-      f_349: function () {
-        this.h3_kv1miw$(_.bootstrap.f_348);
+      f_375: function () {
+        this.h3_kv1miw$(_.bootstrap.f_374);
       },
-      f_350: function () {
-        _.net.yested.bootstrap.pageHeader_kzm4yj$(this, _.bootstrap.f_349);
+      f_376: function () {
+        _.net.yested.bootstrap.pageHeader_kzm4yj$(this, _.bootstrap.f_375);
       },
-      f_351: function () {
-        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(12)], _.bootstrap.f_350);
+      f_377: function () {
+        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(12)], _.bootstrap.f_376);
       },
-      f_352: function () {
+      f_378: function () {
         this.plus_pdl1w0$('HTML Select demo with listener.');
       },
-      f_353: function () {
+      f_379: function () {
         this.plus_pdl1w0$('Demo');
       },
-      f_354: function (singleSelect, resultSingleSelect, multiSelect, resultMultiSelect, btn) {
+      f_380: function (singleSelect, resultSingleSelect, multiSelect, resultMultiSelect, btn) {
         return function () {
-          this.div_5rsex9$(void 0, void 0, _.bootstrap.f_352);
+          this.div_5rsex9$(void 0, void 0, _.bootstrap.f_378);
           this.br();
-          this.h4_kv1miw$(_.bootstrap.f_353);
+          this.h4_kv1miw$(_.bootstrap.f_379);
           this.plus_pv6laa$(singleSelect);
           this.plus_pv6laa$(resultSingleSelect);
           this.br();
@@ -2744,24 +2928,24 @@
           this.plus_pv6laa$(btn);
         };
       },
-      f_355: function () {
+      f_381: function () {
         this.plus_pdl1w0$('Code');
       },
-      f_356: function () {
-        this.h4_kv1miw$(_.bootstrap.f_355);
+      f_382: function () {
+        this.h4_kv1miw$(_.bootstrap.f_381);
         this.code_puj7f4$('kotlin', 'val someData = listOf(\n        Car("Ford", "Black"),\n        Car("Skoda", "White"),\n        Car("Renault", "Red"),\n        Car("Citroen", "Purple"))\n\nval resultSingleSelect = Div()\nval singleSelect = Select<Car>(data = someData, renderer = { "$\\{it.model} ($\\{it.color})" })\nsingleSelect.addOnChangeListener {\n    resultSingleSelect.replace( "Selected: $\\{singleSelect.selectedItems.first().model}")\n}\n\nval resultMultiSelect = Div()\nval multiSelect = Select<Car>(data = someData, multiple = true, size = 4, renderer = { "$\\{it.model} ($\\{it.color})" })\nmultiSelect.addOnChangeListener {\n    resultMultiSelect.replace( "Selected: " + multiSelect.selectedItems.map { "$\\{it.model}" }.join(" and "))\n}\n\nval btn = BtsButton(label = { +"Select Skoda and Ford" }) {\n    multiSelect.selectedItems = someData.filter { it.model == "Skoda" || it.model == "Ford"}\n}\n\n...\ndiv {\n    + singleSelect\n    + resultSingleSelect\n    br()\n    br()\n    + multiSelect\n    + resultMultiSelect\n    br()\n    + btn\n}');
       },
-      f_357: function (singleSelect, resultSingleSelect, multiSelect, resultMultiSelect, btn) {
+      f_383: function (singleSelect, resultSingleSelect, multiSelect, resultMultiSelect, btn) {
         return function () {
-          this.col_zcukl0$([new _.net.yested.bootstrap.Medium(4)], _.bootstrap.f_354(singleSelect, resultSingleSelect, multiSelect, resultMultiSelect, btn));
-          this.col_zcukl0$([new _.net.yested.bootstrap.Medium(8)], _.bootstrap.f_356);
+          this.col_zcukl0$([new _.net.yested.bootstrap.Medium(4)], _.bootstrap.f_380(singleSelect, resultSingleSelect, multiSelect, resultMultiSelect, btn));
+          this.col_zcukl0$([new _.net.yested.bootstrap.Medium(8)], _.bootstrap.f_382);
         };
       },
       createSelectSection$f_5: function (id, singleSelect, resultSingleSelect, multiSelect, resultMultiSelect, btn) {
         return function () {
           this.id = id;
-          _.net.yested.bootstrap.row_xnql8t$(this, _.bootstrap.f_351);
-          _.net.yested.bootstrap.row_xnql8t$(this, _.bootstrap.f_357(singleSelect, resultSingleSelect, multiSelect, resultMultiSelect, btn));
+          _.net.yested.bootstrap.row_xnql8t$(this, _.bootstrap.f_377);
+          _.net.yested.bootstrap.row_xnql8t$(this, _.bootstrap.f_383(singleSelect, resultSingleSelect, multiSelect, resultMultiSelect, btn));
         };
       },
       createSelectSection: function (id) {
@@ -2775,98 +2959,98 @@
         var btn = new _.net.yested.bootstrap.BtsButton(void 0, _.bootstrap.createSelectSection$f_3, void 0, void 0, void 0, void 0, _.bootstrap.createSelectSection$f_4(someData, multiSelect));
         return _.net.yested.div_5rsex9$(void 0, void 0, _.bootstrap.createSelectSection$f_5(id, singleSelect, resultSingleSelect, multiSelect, resultMultiSelect, btn));
       },
-      f_358: function () {
+      f_384: function () {
         this.plus_pdl1w0$('Split Dropdowns');
       },
-      f_359: function () {
-        this.h3_kv1miw$(_.bootstrap.f_358);
+      f_385: function () {
+        this.h3_kv1miw$(_.bootstrap.f_384);
       },
-      f_360: function () {
-        _.net.yested.bootstrap.pageHeader_kzm4yj$(this, _.bootstrap.f_359);
+      f_386: function () {
+        _.net.yested.bootstrap.pageHeader_kzm4yj$(this, _.bootstrap.f_385);
       },
-      f_361: function () {
-        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(12)], _.bootstrap.f_360);
+      f_387: function () {
+        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(12)], _.bootstrap.f_386);
       },
-      f_362: function () {
+      f_388: function () {
         this.plus_pdl1w0$('\nRefer to Bootstrap Split button dropdowns.\n');
       },
-      f_363: function () {
+      f_389: function () {
         this.plus_pdl1w0$('Demo');
       },
-      f_364: function () {
+      f_390: function () {
         this.plus_pdl1w0$('Primary');
       },
-      f_365: function (div) {
+      f_391: function (div) {
         return function () {
           div.v.setContent_61zpoe$('Clicked: Primary');
         };
       },
-      f_366: function (div) {
+      f_392: function (div) {
         return function () {
           div.v.setContent_61zpoe$('Clicked: One');
         };
       },
-      f_367: function () {
+      f_393: function () {
         this.plus_pdl1w0$('One');
       },
-      f_368: function (div) {
+      f_394: function (div) {
         return function () {
           div.v.setContent_61zpoe$('Clicked: Two');
         };
       },
-      f_369: function () {
+      f_395: function () {
         this.plus_pdl1w0$('2');
       },
-      f_370: function () {
+      f_396: function () {
         this.plus_pdl1w0$('Two');
-        _.net.yested.bootstrap.badge_kzm4yj$(this, _.bootstrap.f_369);
+        _.net.yested.bootstrap.badge_kzm4yj$(this, _.bootstrap.f_395);
       },
-      f_371: function (div) {
+      f_397: function (div) {
         return function () {
           div.v.setContent_61zpoe$('Clicked: Three');
         };
       },
-      f_372: function () {
+      f_398: function () {
         this.plus_pdl1w0$('Three');
       },
-      f_373: function (div) {
+      f_399: function (div) {
         return function () {
-          this.link_b1t645$('#One', _.bootstrap.f_366(div), _.bootstrap.f_367);
-          this.link_b1t645$('#Two', _.bootstrap.f_368(div), _.bootstrap.f_370);
+          this.link_b1t645$('#One', _.bootstrap.f_392(div), _.bootstrap.f_393);
+          this.link_b1t645$('#Two', _.bootstrap.f_394(div), _.bootstrap.f_396);
           this.divider();
-          this.link_b1t645$('#Three', _.bootstrap.f_371(div), _.bootstrap.f_372);
+          this.link_b1t645$('#Three', _.bootstrap.f_397(div), _.bootstrap.f_398);
         };
       },
-      f_374: function (div) {
+      f_400: function (div) {
         return function () {
-          _.net.yested.bootstrap.splitButtonDropdown_oq4n78$(this, 'splitDropDownId', _.bootstrap.f_364, _.net.yested.bootstrap.ButtonLook.object.PRIMARY, _.net.yested.bootstrap.ButtonSize.object.DEFAULT, _.bootstrap.f_365(div), _.bootstrap.f_373(div));
+          _.net.yested.bootstrap.splitButtonDropdown_oq4n78$(this, 'splitDropDownId', _.bootstrap.f_390, _.net.yested.bootstrap.ButtonLook.object.PRIMARY, _.net.yested.bootstrap.ButtonSize.object.DEFAULT, _.bootstrap.f_391(div), _.bootstrap.f_399(div));
         };
       },
-      f_375: function () {
-        this.div_5rsex9$(void 0, void 0, _.bootstrap.f_362);
+      f_401: function () {
+        this.div_5rsex9$(void 0, void 0, _.bootstrap.f_388);
         this.br();
-        this.h4_kv1miw$(_.bootstrap.f_363);
+        this.h4_kv1miw$(_.bootstrap.f_389);
         var div = {v: new _.net.yested.Div()};
-        this.div_5rsex9$(void 0, void 0, _.bootstrap.f_374(div));
+        this.div_5rsex9$(void 0, void 0, _.bootstrap.f_400(div));
         this.plus_pv6laa$(div.v);
         div.v.setContent_61zpoe$('Click on the buttons');
       },
-      f_376: function () {
+      f_402: function () {
         this.plus_pdl1w0$('Code');
       },
-      f_377: function () {
-        this.h4_kv1miw$(_.bootstrap.f_376);
+      f_403: function () {
+        this.h4_kv1miw$(_.bootstrap.f_402);
         this.code_puj7f4$('kotlin', 'var div = Div()\ndiv {\n\tsplitButtonDropdown(id = "splitDropDownId", label = {+"Primary"},\n\t\t\tlook = ButtonLook.PRIMARY,\n\t\t\tsize = ButtonSize.DEFAULT,\n\t\t\tonClick = {div.setContent("Clicked: Primary")}) {\n\t\tonclick = {div.setContent("Clicked: Primary")}\n\t\tlink(href = "#One", onclick = {div.setContent("Clicked: One")} ) {\n\t\t\t+"One"\n\t\t}\n\t\tlink(href = "#Two", onclick = {div.setContent("Clicked: Two")} ) {\n\t\t\t+"Two"\n\t\t\tbadge { +"2"}\n\t\t}\n\t\tdivider()\n\t\tlink(href = "#Three", onclick = {div.setContent("Clicked: Three")} ) {\n\t\t\t+"Three"\n\t\t}\n\t}\n}\n+div\ndiv.setContent("Click on the buttons")');
       },
-      f_378: function () {
-        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(4)], _.bootstrap.f_375);
-        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(8)], _.bootstrap.f_377);
+      f_404: function () {
+        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(4)], _.bootstrap.f_401);
+        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(8)], _.bootstrap.f_403);
       },
       createSplitButtonDropdown$f: function (id) {
         return function () {
           this.id = id;
-          _.net.yested.bootstrap.row_xnql8t$(this, _.bootstrap.f_361);
-          _.net.yested.bootstrap.row_xnql8t$(this, _.bootstrap.f_378);
+          _.net.yested.bootstrap.row_xnql8t$(this, _.bootstrap.f_387);
+          _.net.yested.bootstrap.row_xnql8t$(this, _.bootstrap.f_404);
         };
       },
       createSplitButtonDropdown: function (id) {
@@ -2878,42 +3062,42 @@
       createTabs$f_0: function () {
         this.data = true;
       },
-      f_379: function () {
+      f_405: function () {
         this.plus_pv6laa$(new _.net.yested.bootstrap.StringInputField(void 0, 'Placeholder 1'));
       },
-      f_380: function () {
-        this.div_5rsex9$(void 0, void 0, _.bootstrap.f_379);
+      f_406: function () {
+        this.div_5rsex9$(void 0, void 0, _.bootstrap.f_405);
       },
-      f_381: function () {
+      f_407: function () {
         this.plus_pdl1w0$('Second tab.');
       },
-      f_382: function () {
-        this.div_5rsex9$(void 0, void 0, _.bootstrap.f_381);
+      f_408: function () {
+        this.div_5rsex9$(void 0, void 0, _.bootstrap.f_407);
       },
-      f_383: function () {
+      f_409: function () {
         this.plus_pdl1w0$('Wikipedia');
       },
-      f_384: function () {
-        this.a_xjhihl$(void 0, void 0, 'http://www.wikipedia.org', void 0, _.bootstrap.f_383);
+      f_410: function () {
+        this.a_xjhihl$(void 0, void 0, 'http://www.wikipedia.org', void 0, _.bootstrap.f_409);
       },
       createTabs$f_1: function () {
-        this.tab_l25lo7$(true, _.net.yested.text_61zpoe$('First'), void 0, _.bootstrap.f_380);
-        this.tab_l25lo7$(true, _.net.yested.text_61zpoe$('Second'), void 0, _.bootstrap.f_382);
-        this.tab_l25lo7$(true, _.net.yested.text_61zpoe$('Third'), void 0, _.bootstrap.f_384);
+        this.tab_l25lo7$(true, _.net.yested.text_61zpoe$('First'), void 0, _.bootstrap.f_406);
+        this.tab_l25lo7$(true, _.net.yested.text_61zpoe$('Second'), void 0, _.bootstrap.f_408);
+        this.tab_l25lo7$(true, _.net.yested.text_61zpoe$('Third'), void 0, _.bootstrap.f_410);
       },
       addTab$f: function (tabIndex) {
         return function () {
           this.plus_pdl1w0$('Tab' + tabIndex);
         };
       },
-      f_385: function (tabIndex) {
+      f_411: function (tabIndex) {
         return function () {
           this.plus_pdl1w0$('Content of tab: ' + tabIndex);
         };
       },
       addTab$f_0: function (tabIndex) {
         return function () {
-          this.div_5rsex9$(void 0, void 0, _.bootstrap.f_385(tabIndex));
+          this.div_5rsex9$(void 0, void 0, _.bootstrap.f_411(tabIndex));
         };
       },
       createTabs$addTab: function (tabs, dismissibleCheckbox) {
@@ -2922,113 +3106,113 @@
           tabs.activateTab_za3lpa$(tabId);
         };
       },
-      f_386: function () {
+      f_412: function () {
         this.plus_pdl1w0$('Tabs');
       },
-      f_387: function () {
-        this.h3_kv1miw$(_.bootstrap.f_386);
+      f_413: function () {
+        this.h3_kv1miw$(_.bootstrap.f_412);
       },
-      f_388: function () {
-        _.net.yested.bootstrap.pageHeader_kzm4yj$(this, _.bootstrap.f_387);
+      f_414: function () {
+        _.net.yested.bootstrap.pageHeader_kzm4yj$(this, _.bootstrap.f_413);
       },
-      f_389: function () {
-        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(12)], _.bootstrap.f_388);
+      f_415: function () {
+        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(12)], _.bootstrap.f_414);
       },
-      f_390: function () {
+      f_416: function () {
         this.plus_pdl1w0$('Features');
       },
-      f_391: function () {
+      f_417: function () {
         this.plus_pdl1w0$('Lazy render of tab content');
       },
-      f_392: function () {
+      f_418: function () {
         this.plus_pdl1w0$('Rendered content is preserved');
       },
-      f_393: function () {
+      f_419: function () {
         this.plus_pdl1w0$('Optionaly dismissible tabs');
       },
-      f_394: function () {
+      f_420: function () {
         this.plus_pdl1w0$('Programmatic activation of tabs');
       },
-      f_395: function () {
+      f_421: function () {
         this.plus_pdl1w0$('Programmatic tab removal');
       },
-      f_396: function () {
+      f_422: function () {
         this.plus_pdl1w0$('Tab order can be changed via Drag&amp;Drop');
       },
-      f_397: function () {
-        this.li_8y48wp$(_.bootstrap.f_391);
-        this.li_8y48wp$(_.bootstrap.f_392);
-        this.li_8y48wp$(_.bootstrap.f_393);
-        this.li_8y48wp$(_.bootstrap.f_394);
-        this.li_8y48wp$(_.bootstrap.f_395);
-        this.li_8y48wp$(_.bootstrap.f_396);
+      f_423: function () {
+        this.li_8y48wp$(_.bootstrap.f_417);
+        this.li_8y48wp$(_.bootstrap.f_418);
+        this.li_8y48wp$(_.bootstrap.f_419);
+        this.li_8y48wp$(_.bootstrap.f_420);
+        this.li_8y48wp$(_.bootstrap.f_421);
+        this.li_8y48wp$(_.bootstrap.f_422);
       },
-      f_398: function () {
+      f_424: function () {
         this.plus_pdl1w0$('Tabs are based on Bootstrap Tabs.');
         this.br();
-        this.emph_kv1miw$(_.bootstrap.f_390);
-        this.ul_8qfrsd$(_.bootstrap.f_397);
+        this.emph_kv1miw$(_.bootstrap.f_416);
+        this.ul_8qfrsd$(_.bootstrap.f_423);
       },
-      f_399: function () {
+      f_425: function () {
         this.plus_pdl1w0$('Demo');
       },
-      f_400: function () {
+      f_426: function () {
       },
-      f_401: function (dismissibleCheckbox) {
+      f_427: function (dismissibleCheckbox) {
         return function () {
           this.plus_pv6laa$(dismissibleCheckbox);
         };
       },
-      f_402: function () {
+      f_428: function () {
         this.nbsp_za3lpa$(2);
       },
-      f_403: function () {
+      f_429: function () {
         this.plus_pdl1w0$('Add Tab');
       },
-      f_404: function (tabIndex, addTab) {
+      f_430: function (tabIndex, addTab) {
         return function () {
           addTab(++tabIndex.v);
         };
       },
-      f_405: function (tabIndex, addTab) {
+      f_431: function (tabIndex, addTab) {
         return function () {
-          _.net.yested.bootstrap.btsButton_bol907$(this, void 0, _.bootstrap.f_403, void 0, _.net.yested.bootstrap.ButtonSize.object.SMALL, void 0, void 0, _.bootstrap.f_404(tabIndex, addTab));
+          _.net.yested.bootstrap.btsButton_bol907$(this, void 0, _.bootstrap.f_429, void 0, _.net.yested.bootstrap.ButtonSize.object.SMALL, void 0, void 0, _.bootstrap.f_430(tabIndex, addTab));
         };
       },
-      f_406: function (dismissibleCheckbox, tabIndex, addTab) {
+      f_432: function (dismissibleCheckbox, tabIndex, addTab) {
         return function () {
-          this.item_gthhqa$(void 0, _.bootstrap.f_400, void 0, _.bootstrap.f_401(dismissibleCheckbox));
-          this.item_gthhqa$(void 0, _.bootstrap.f_402, void 0, _.bootstrap.f_405(tabIndex, addTab));
+          this.item_gthhqa$(void 0, _.bootstrap.f_426, void 0, _.bootstrap.f_427(dismissibleCheckbox));
+          this.item_gthhqa$(void 0, _.bootstrap.f_428, void 0, _.bootstrap.f_431(tabIndex, addTab));
         };
       },
-      f_407: function (dismissibleCheckbox, tabIndex, addTab, tabs) {
+      f_433: function (dismissibleCheckbox, tabIndex, addTab, tabs) {
         return function () {
-          this.div_5rsex9$(void 0, void 0, _.bootstrap.f_398);
+          this.div_5rsex9$(void 0, void 0, _.bootstrap.f_424);
           this.br();
-          this.h4_kv1miw$(_.bootstrap.f_399);
-          _.net.yested.bootstrap.btsForm_6zn8tn$(this, _.net.yested.bootstrap.FormStyle.object.INLINE, void 0, void 0, _.bootstrap.f_406(dismissibleCheckbox, tabIndex, addTab));
+          this.h4_kv1miw$(_.bootstrap.f_425);
+          _.net.yested.bootstrap.btsForm_6zn8tn$(this, _.net.yested.bootstrap.FormStyle.object.INLINE, void 0, void 0, _.bootstrap.f_432(dismissibleCheckbox, tabIndex, addTab));
           this.br();
           this.plus_pv6laa$(tabs);
         };
       },
-      f_408: function () {
+      f_434: function () {
         this.plus_pdl1w0$('Code');
       },
-      f_409: function () {
-        this.h4_kv1miw$(_.bootstrap.f_408);
+      f_435: function () {
+        this.h4_kv1miw$(_.bootstrap.f_434);
         this.code_puj7f4$('kotlin', 'var tabIndex = 3\n\n    val dismissibleCheckbox = BtsCheckBox(label = {+"Dismissible" }) with { value = true }\n\n    val tabs = Tabs(canChangeOrder = true) with {\n        tab(dismissible = true, header = text("First")) {\n            div {\n                inputField(placeholder = "Placeholder 1") { }\n            }\n        }\n        tab(dismissible = true, header = text("Second")) {\n            div {\n                +"Second tab."\n            }\n        }\n        tab(dismissible = true, header = text("Third")) {\n            a(href = "http://www.wikipedia.org") { +"Wikipedia" }\n        }\n    }\n\n    fun addTab(tabIndex:Int) {\n        val tabId = tabs.tab(dismissible = dismissibleCheckbox.value, header = { +"Tab$\\{tabIndex}" }) {\n            div {\n                +"Content of tab: $\\{tabIndex}"\n            }\n        }\n        tabs.activateTab(tabId)\n    }\n...\ndiv {\n    btsForm(formStyle = FormStyle.INLINE) {\n        item(label = { } ) {\n            +dismissibleCheckbox\n        }\n        item(label = {nbsp(2)}) {\n            btsButton(label = { +"Add Tab"}, onclick = { addTab(++tabIndex) }, size = ButtonSize.SMALL)\n        }\n    }\n    br()\n    +tabs\n}');
       },
-      f_410: function (dismissibleCheckbox, tabIndex, addTab, tabs) {
+      f_436: function (dismissibleCheckbox, tabIndex, addTab, tabs) {
         return function () {
-          this.col_zcukl0$([new _.net.yested.bootstrap.Medium(6)], _.bootstrap.f_407(dismissibleCheckbox, tabIndex, addTab, tabs));
-          this.col_zcukl0$([new _.net.yested.bootstrap.Medium(6)], _.bootstrap.f_409);
+          this.col_zcukl0$([new _.net.yested.bootstrap.Medium(6)], _.bootstrap.f_433(dismissibleCheckbox, tabIndex, addTab, tabs));
+          this.col_zcukl0$([new _.net.yested.bootstrap.Medium(6)], _.bootstrap.f_435);
         };
       },
       createTabs$f_2: function (id, dismissibleCheckbox, tabIndex, addTab, tabs) {
         return function () {
           this.id = id;
-          _.net.yested.bootstrap.row_xnql8t$(this, _.bootstrap.f_389);
-          _.net.yested.bootstrap.row_xnql8t$(this, _.bootstrap.f_410(dismissibleCheckbox, tabIndex, addTab, tabs));
+          _.net.yested.bootstrap.row_xnql8t$(this, _.bootstrap.f_415);
+          _.net.yested.bootstrap.row_xnql8t$(this, _.bootstrap.f_436(dismissibleCheckbox, tabIndex, addTab, tabs));
         };
       },
       createTabs: function (id) {
@@ -3232,186 +3416,186 @@
           };
         }
       }),
-      f_411: function () {
+      f_437: function () {
         this.plus_pdl1w0$('Tooltips');
       },
-      f_412: function () {
-        this.h3_kv1miw$(_.bootstrap.f_411);
+      f_438: function () {
+        this.h3_kv1miw$(_.bootstrap.f_437);
       },
-      f_413: function () {
-        _.net.yested.bootstrap.pageHeader_kzm4yj$(this, _.bootstrap.f_412);
+      f_439: function () {
+        _.net.yested.bootstrap.pageHeader_kzm4yj$(this, _.bootstrap.f_438);
       },
-      f_414: function () {
-        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(12)], _.bootstrap.f_413);
+      f_440: function () {
+        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(12)], _.bootstrap.f_439);
       },
-      f_415: function () {
+      f_441: function () {
         this.plus_pdl1w0$('Refer to Bootstrap tooltips.');
       },
-      f_416: function () {
+      f_442: function () {
         this.plus_pdl1w0$('Demo');
       },
-      f_417: function () {
+      f_443: function () {
         this.plus_pdl1w0$('Tooltip on left');
       },
-      f_418: function () {
+      f_444: function () {
         return this.innerHTML;
       },
-      f_419: function () {
-        _.net.yested.bootstrap.addTooltip_ccaakq$(this.element, new _.net.yested.bootstrap.TooltipOptions(void 0, void 0, void 0, _.net.yested.bootstrap.TooltipPlacement.object.LEFT), _.bootstrap.f_418);
+      f_445: function () {
+        _.net.yested.bootstrap.addTooltip_ccaakq$(this.element, new _.net.yested.bootstrap.TooltipOptions(void 0, void 0, void 0, _.net.yested.bootstrap.TooltipPlacement.object.LEFT), _.bootstrap.f_444);
       },
-      f_420: function () {
+      f_446: function () {
         this.plus_pdl1w0$('Tooltip on top');
       },
-      f_421: function () {
+      f_447: function () {
         return this.innerHTML;
       },
-      f_422: function () {
-        _.net.yested.bootstrap.addTooltip_ccaakq$(this.element, new _.net.yested.bootstrap.TooltipOptions(void 0, void 0, void 0, _.net.yested.bootstrap.TooltipPlacement.object.TOP), _.bootstrap.f_421);
+      f_448: function () {
+        _.net.yested.bootstrap.addTooltip_ccaakq$(this.element, new _.net.yested.bootstrap.TooltipOptions(void 0, void 0, void 0, _.net.yested.bootstrap.TooltipPlacement.object.TOP), _.bootstrap.f_447);
       },
-      f_423: function () {
+      f_449: function () {
         this.plus_pdl1w0$('Tooltip on bottom');
       },
-      f_424: function () {
+      f_450: function () {
         return this.innerHTML;
       },
-      f_425: function () {
-        _.net.yested.bootstrap.addTooltip_ccaakq$(this.element, new _.net.yested.bootstrap.TooltipOptions(void 0, void 0, void 0, _.net.yested.bootstrap.TooltipPlacement.object.BOTTOM), _.bootstrap.f_424);
+      f_451: function () {
+        _.net.yested.bootstrap.addTooltip_ccaakq$(this.element, new _.net.yested.bootstrap.TooltipOptions(void 0, void 0, void 0, _.net.yested.bootstrap.TooltipPlacement.object.BOTTOM), _.bootstrap.f_450);
       },
-      f_426: function () {
+      f_452: function () {
         this.plus_pdl1w0$('Tooltip on right');
       },
-      f_427: function () {
+      f_453: function () {
         return this.innerHTML;
       },
-      f_428: function () {
-        _.net.yested.bootstrap.addTooltip_ccaakq$(this.element, new _.net.yested.bootstrap.TooltipOptions(void 0, void 0, void 0, _.net.yested.bootstrap.TooltipPlacement.object.RIGHT), _.bootstrap.f_427);
+      f_454: function () {
+        _.net.yested.bootstrap.addTooltip_ccaakq$(this.element, new _.net.yested.bootstrap.TooltipOptions(void 0, void 0, void 0, _.net.yested.bootstrap.TooltipPlacement.object.RIGHT), _.bootstrap.f_453);
       },
-      f_429: function () {
-        this.plus_pv6laa$(_.net.yested.with_owvm91$(new _.net.yested.bootstrap.BtsButton(void 0, _.bootstrap.f_417), _.bootstrap.f_419));
-        this.plus_pv6laa$(_.net.yested.with_owvm91$(new _.net.yested.bootstrap.BtsButton(void 0, _.bootstrap.f_420), _.bootstrap.f_422));
-        this.plus_pv6laa$(_.net.yested.with_owvm91$(new _.net.yested.bootstrap.BtsButton(void 0, _.bootstrap.f_423), _.bootstrap.f_425));
-        this.plus_pv6laa$(_.net.yested.with_owvm91$(new _.net.yested.bootstrap.BtsButton(void 0, _.bootstrap.f_426), _.bootstrap.f_428));
+      f_455: function () {
+        this.plus_pv6laa$(_.net.yested.with_owvm91$(new _.net.yested.bootstrap.BtsButton(void 0, _.bootstrap.f_443), _.bootstrap.f_445));
+        this.plus_pv6laa$(_.net.yested.with_owvm91$(new _.net.yested.bootstrap.BtsButton(void 0, _.bootstrap.f_446), _.bootstrap.f_448));
+        this.plus_pv6laa$(_.net.yested.with_owvm91$(new _.net.yested.bootstrap.BtsButton(void 0, _.bootstrap.f_449), _.bootstrap.f_451));
+        this.plus_pv6laa$(_.net.yested.with_owvm91$(new _.net.yested.bootstrap.BtsButton(void 0, _.bootstrap.f_452), _.bootstrap.f_454));
       },
-      f_430: function () {
-        this.div_5rsex9$(void 0, void 0, _.bootstrap.f_415);
+      f_456: function () {
+        this.div_5rsex9$(void 0, void 0, _.bootstrap.f_441);
         this.br();
-        this.h4_kv1miw$(_.bootstrap.f_416);
-        this.div_5rsex9$(void 0, void 0, _.bootstrap.f_429);
+        this.h4_kv1miw$(_.bootstrap.f_442);
+        this.div_5rsex9$(void 0, void 0, _.bootstrap.f_455);
       },
-      f_431: function () {
+      f_457: function () {
         this.plus_pdl1w0$('Code');
       },
-      f_432: function () {
-        this.h4_kv1miw$(_.bootstrap.f_431);
+      f_458: function () {
+        this.h4_kv1miw$(_.bootstrap.f_457);
         this.code_puj7f4$('kotlin', '\ndiv {\n    +(BtsButton(label = { +"Tooltip on left" }) with {\n        addTooltip(element, TooltipOptions(placement = TooltipPlacement.LEFT), title = {this.innerHTML})\n    })\n    +(BtsButton(label = { +"Tooltip on top" }) with {\n        addTooltip(element, TooltipOptions(placement = TooltipPlacement.TOP), title = {this.innerHTML})\n    })\n    +(BtsButton(label = { +"Tooltip on bottom" }) with {\n        addTooltip(element, TooltipOptions(placement = TooltipPlacement.BOTTOM), title = {this.innerHTML})\n    })\n    +(BtsButton(label = { +"Tooltip on right" }) with {\n        addTooltip(element, TooltipOptions(placement = TooltipPlacement.RIGHT), title = {this.innerHTML})\n    })\n}');
       },
-      f_433: function () {
-        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(4)], _.bootstrap.f_430);
-        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(8)], _.bootstrap.f_432);
+      f_459: function () {
+        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(4)], _.bootstrap.f_456);
+        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(8)], _.bootstrap.f_458);
       },
       createTooltips$f: function (id) {
         return function () {
           this.id = id;
-          _.net.yested.bootstrap.row_xnql8t$(this, _.bootstrap.f_414);
-          _.net.yested.bootstrap.row_xnql8t$(this, _.bootstrap.f_433);
+          _.net.yested.bootstrap.row_xnql8t$(this, _.bootstrap.f_440);
+          _.net.yested.bootstrap.row_xnql8t$(this, _.bootstrap.f_459);
         };
       },
       createTooltips: function (id) {
         return _.net.yested.div_5rsex9$(void 0, void 0, _.bootstrap.createTooltips$f(id));
       },
-      f_434: function () {
+      f_460: function () {
         this.plus_pdl1w0$('Typography');
       },
-      f_435: function () {
-        this.h3_kv1miw$(_.bootstrap.f_434);
+      f_461: function () {
+        this.h3_kv1miw$(_.bootstrap.f_460);
       },
-      f_436: function () {
-        _.net.yested.bootstrap.pageHeader_kzm4yj$(this, _.bootstrap.f_435);
+      f_462: function () {
+        _.net.yested.bootstrap.pageHeader_kzm4yj$(this, _.bootstrap.f_461);
       },
-      f_437: function () {
-        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(12)], _.bootstrap.f_436);
+      f_463: function () {
+        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(12)], _.bootstrap.f_462);
       },
-      f_438: function () {
+      f_464: function () {
         this.plus_pdl1w0$('\nSimple Typography support.\n');
       },
-      f_439: function () {
+      f_465: function () {
         this.plus_pdl1w0$('Demo');
       },
-      f_440: function () {
+      f_466: function () {
         this.plus_pdl1w0$('Right Align');
       },
-      f_441: function () {
+      f_467: function () {
         this.plus_pdl1w0$('Left Align');
       },
-      f_442: function () {
+      f_468: function () {
         this.plus_pdl1w0$('Center');
       },
-      f_443: function () {
+      f_469: function () {
         this.plus_pdl1w0$('Justify');
       },
-      f_444: function () {
+      f_470: function () {
         this.plus_pdl1w0$('No wrap');
       },
-      f_445: function () {
+      f_471: function () {
         this.plus_pdl1w0$('all is upercase');
       },
-      f_446: function () {
-        _.net.yested.bootstrap.uppercase_71h449$(this, _.bootstrap.f_445);
+      f_472: function () {
+        _.net.yested.bootstrap.uppercase_71h449$(this, _.bootstrap.f_471);
       },
-      f_447: function () {
+      f_473: function () {
         this.plus_pdl1w0$('ALL IS lowerCase');
       },
-      f_448: function () {
-        _.net.yested.bootstrap.lowercase_71h449$(this, _.bootstrap.f_447);
+      f_474: function () {
+        _.net.yested.bootstrap.lowercase_71h449$(this, _.bootstrap.f_473);
       },
-      f_449: function () {
+      f_475: function () {
         this.plus_pdl1w0$('capitalized');
       },
-      f_450: function () {
-        _.net.yested.bootstrap.capitalize_71h449$(this, _.bootstrap.f_449);
+      f_476: function () {
+        _.net.yested.bootstrap.capitalize_71h449$(this, _.bootstrap.f_475);
       },
-      f_451: function () {
-        this.div_5rsex9$(void 0, void 0, _.bootstrap.f_438);
+      f_477: function () {
+        this.div_5rsex9$(void 0, void 0, _.bootstrap.f_464);
         this.br();
-        this.h4_kv1miw$(_.bootstrap.f_439);
-        _.net.yested.bootstrap.aligned_xlk53m$(this, _.net.yested.bootstrap.TextAlign.object.RIGHT, _.bootstrap.f_440);
-        _.net.yested.bootstrap.aligned_xlk53m$(this, _.net.yested.bootstrap.TextAlign.object.LEFT, _.bootstrap.f_441);
-        _.net.yested.bootstrap.aligned_xlk53m$(this, _.net.yested.bootstrap.TextAlign.object.CENTER, _.bootstrap.f_442);
-        _.net.yested.bootstrap.aligned_xlk53m$(this, _.net.yested.bootstrap.TextAlign.object.JUSTIFY, _.bootstrap.f_443);
-        _.net.yested.bootstrap.aligned_xlk53m$(this, _.net.yested.bootstrap.TextAlign.object.NOWRAP, _.bootstrap.f_444);
-        this.p_omdg96$(_.bootstrap.f_446);
-        this.p_omdg96$(_.bootstrap.f_448);
-        this.p_omdg96$(_.bootstrap.f_450);
+        this.h4_kv1miw$(_.bootstrap.f_465);
+        _.net.yested.bootstrap.aligned_xlk53m$(this, _.net.yested.bootstrap.TextAlign.object.RIGHT, _.bootstrap.f_466);
+        _.net.yested.bootstrap.aligned_xlk53m$(this, _.net.yested.bootstrap.TextAlign.object.LEFT, _.bootstrap.f_467);
+        _.net.yested.bootstrap.aligned_xlk53m$(this, _.net.yested.bootstrap.TextAlign.object.CENTER, _.bootstrap.f_468);
+        _.net.yested.bootstrap.aligned_xlk53m$(this, _.net.yested.bootstrap.TextAlign.object.JUSTIFY, _.bootstrap.f_469);
+        _.net.yested.bootstrap.aligned_xlk53m$(this, _.net.yested.bootstrap.TextAlign.object.NOWRAP, _.bootstrap.f_470);
+        this.p_omdg96$(_.bootstrap.f_472);
+        this.p_omdg96$(_.bootstrap.f_474);
+        this.p_omdg96$(_.bootstrap.f_476);
       },
-      f_452: function () {
+      f_478: function () {
         this.plus_pdl1w0$('Code');
       },
-      f_453: function () {
-        this.h4_kv1miw$(_.bootstrap.f_452);
+      f_479: function () {
+        this.h4_kv1miw$(_.bootstrap.f_478);
         this.code_puj7f4$('kotlin', 'aligned(TextAlign.RIGHT) { +"Right Align"}\naligned(TextAlign.LEFT) { +"Left Align"}\naligned(TextAlign.CENTER) { +"Center"}\naligned(TextAlign.JUSTIFY) { +"Justify"}\naligned(TextAlign.NOWRAP) { +"No wrap"}\np { uppercase { +"all is upercase" }}\np { lowercase { +"ALL IS lowerCase" }}\np { capitalize { +"capitalized" }}');
       },
-      f_454: function () {
-        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(4)], _.bootstrap.f_451);
-        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(8)], _.bootstrap.f_453);
+      f_480: function () {
+        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(4)], _.bootstrap.f_477);
+        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(8)], _.bootstrap.f_479);
       },
       createTypographySection$f: function (id) {
         return function () {
           this.id = id;
-          _.net.yested.bootstrap.row_xnql8t$(this, _.bootstrap.f_437);
-          _.net.yested.bootstrap.row_xnql8t$(this, _.bootstrap.f_454);
+          _.net.yested.bootstrap.row_xnql8t$(this, _.bootstrap.f_463);
+          _.net.yested.bootstrap.row_xnql8t$(this, _.bootstrap.f_480);
         };
       },
       createTypographySection: function (id) {
         return _.net.yested.div_5rsex9$(void 0, void 0, _.bootstrap.createTypographySection$f(id));
       },
-      f_455: function () {
+      f_481: function () {
         this.plus_pdl1w0$('Effects');
       },
-      f_456: function () {
-        this.h3_kv1miw$(_.bootstrap.f_455);
+      f_482: function () {
+        this.h3_kv1miw$(_.bootstrap.f_481);
       },
-      f_457: function () {
-        _.net.yested.bootstrap.pageHeader_kzm4yj$(this, _.bootstrap.f_456);
+      f_483: function () {
+        _.net.yested.bootstrap.pageHeader_kzm4yj$(this, _.bootstrap.f_482);
         this.plus_pdl1w0$('Effects are applied to components. They must implement the Effect interface:');
         this.code_puj7f4$('kotlin', 'public trait Effect {\n    fun apply(component:Component)\n}');
         this.plus_pdl1w0$('Effects are based on JQuery effects.');
@@ -3421,24 +3605,24 @@
         this.plus_pdl1w0$('These effects must implement BiDirectionalEffect interface:');
         this.code_puj7f4$('kotlin', 'public trait BiDirectionEffect {\n    fun applyIn(component:Component, callback:Function0<Unit>? = null)\n    fun applyOut(component:Component, callback:Function0<Unit>? = null)\n}');
       },
-      f_458: function () {
-        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(8)], _.bootstrap.f_457);
+      f_484: function () {
+        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(8)], _.bootstrap.f_483);
       },
-      f_459: function () {
+      f_485: function () {
         this.plus_pv6laa$(_.effects.createEffectsSection());
         this.plus_pv6laa$(_.effects.createBidirectionalEffectsSection());
       },
-      f_460: function () {
-        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(12)], _.bootstrap.f_459);
+      f_486: function () {
+        this.col_zcukl0$([new _.net.yested.bootstrap.Medium(12)], _.bootstrap.f_485);
       },
-      f_461: function (this$) {
+      f_487: function (this$) {
         return function () {
-          _.net.yested.bootstrap.row_xnql8t$(this$, _.bootstrap.f_458);
-          _.net.yested.bootstrap.row_xnql8t$(this$, _.bootstrap.f_460);
+          _.net.yested.bootstrap.row_xnql8t$(this$, _.bootstrap.f_484);
+          _.net.yested.bootstrap.row_xnql8t$(this$, _.bootstrap.f_486);
         };
       },
       effectsPage$f: function () {
-        _.net.yested.bootstrap.row_xnql8t$(this, _.bootstrap.f_461(this));
+        _.net.yested.bootstrap.row_xnql8t$(this, _.bootstrap.f_487(this));
       },
       effectsPage: function () {
         return _.net.yested.div_5rsex9$(void 0, void 0, _.bootstrap.effectsPage$f);
@@ -9455,41 +9639,208 @@
               layout = _.net.yested.bootstrap.ContainerLayout.object.DEFAULT;
             _.net.yested.with_owvm91$(new _.net.yested.bootstrap.Page(_.net.yested.el(placeholderElementId), layout), _.net.yested.bootstrap.page_uplc13$f(init));
           },
+          SelectionMode: Kotlin.createEnumClass(function () {
+            return [Kotlin.Enum];
+          }, function $fun() {
+            $fun.baseInitializer.call(this);
+          }, function () {
+            return {
+              NONE: new _.net.yested.bootstrap.SelectionMode(),
+              SINGLE: new _.net.yested.bootstrap.SelectionMode(),
+              MULTI: new _.net.yested.bootstrap.SelectionMode()
+            };
+          }),
           ListGroup: Kotlin.createClass(function () {
-            return [_.net.yested.Component];
-          }, function (renderer) {
+            return [_.net.yested.InputComponent];
+          }, function (selectionMode, sortable, renderer) {
+            if (selectionMode === void 0)
+              selectionMode = _.net.yested.bootstrap.SelectionMode.object.MULTI;
+            if (sortable === void 0)
+              sortable = false;
+            this.selectionMode = selectionMode;
+            this.sortable = sortable;
             this.renderer = renderer;
-            this.$element_6bc0ua$ = _.net.yested.with_owvm91$(_.net.yested.createElement_61zpoe$('ul'), _.net.yested.bootstrap.ListGroup.element$f);
+            this.onChangeListeners_at0a8i$ = new Kotlin.ArrayList();
+            this.$element_6bc0ua$ = _.net.yested.with_owvm91$(_.net.yested.createElement_61zpoe$('div'), _.net.yested.bootstrap.ListGroup.element$f(this));
+            this.selectedItems_i98pbb$ = Kotlin.modules['stdlib'].kotlin.arrayListOf_9mqe4v$([]);
+            this.itemToAnchorMap_w1590b$ = Kotlin.modules['stdlib'].kotlin.hashMapOf_eoa9s7$([]);
           }, /** @lends _.net.yested.bootstrap.ListGroup.prototype */ {
             element: {
               get: function () {
                 return this.$element_6bc0ua$;
               }
             },
-            setData_4fm7v2$: function (data) {
-              _.net.yested.removeAllContent_sttokc$(this.element);
-              var operation = _.net.yested.bootstrap.ListGroup.setData_4fm7v2$f(this);
+            data: {
+              get: function () {
+                return this.selectedItems_i98pbb$;
+              },
+              set: function (newSelection) {
+                this.selectedItems_i98pbb$.clear();
+                this.selectedItems_i98pbb$.addAll_4fm7v2$(newSelection);
+                var $receiver = this.itemToAnchorMap_w1590b$;
+                var tmp$0;
+                tmp$0 = Kotlin.modules['stdlib'].kotlin.iterator_acfufl$($receiver);
+                while (tmp$0.hasNext()) {
+                  var element = tmp$0.next();
+                  if (newSelection.contains_za3rmp$(element.getKey())) {
+                    $(element.getValue().element).addClass('active');
+                  }
+                   else {
+                    $(element.getValue().element).removeClass('active');
+                  }
+                }
+                this.notifyListeners();
+              }
+            },
+            addOnChangeListener_qshda6$: function (invoke) {
+              this.onChangeListeners_at0a8i$.add_za3rmp$(invoke);
+            },
+            addOnChangeLiveListener_qshda6$: function (invoke) {
+              this.onChangeListeners_at0a8i$.add_za3rmp$(invoke);
+            },
+            decorate_6taknv$: function (valid) {
+            },
+            clear: function () {
+              this.deselectAll();
+              this.notifyListeners();
+            },
+            deselectAll: function () {
+              this.selectedItems_i98pbb$.clear();
+              var $receiver = this.itemToAnchorMap_w1590b$.values();
               var tmp$0;
-              tmp$0 = data.iterator();
+              tmp$0 = $receiver.iterator();
               while (tmp$0.hasNext()) {
                 var element = tmp$0.next();
-                operation(element);
+                $(element.element).removeClass('active');
+              }
+            },
+            clickedOnItem: function (item) {
+              var tmp$0, tmp$1;
+              var anchor = (tmp$0 = this.itemToAnchorMap_w1590b$.get_za3rmp$(item)) != null ? tmp$0 : Kotlin.throwNPE();
+              if (this.selectedItems_i98pbb$.contains_za3rmp$(item)) {
+                this.selectedItems_i98pbb$.remove_za3rmp$(item);
+                $(anchor.element).removeClass('active');
+              }
+               else {
+                if ((tmp$1 = this.selectionMode) != null ? tmp$1.equals_za3rmp$(_.net.yested.bootstrap.SelectionMode.object.SINGLE) : null) {
+                  this.deselectAll();
+                }
+                this.selectedItems_i98pbb$.add_za3rmp$(item);
+                $(anchor.element).addClass('active');
+              }
+              this.notifyListeners();
+            },
+            notifyListeners: function () {
+              var $receiver = this.onChangeListeners_at0a8i$;
+              var tmp$0;
+              tmp$0 = $receiver.iterator();
+              while (tmp$0.hasNext()) {
+                var element = tmp$0.next();
+                element();
+              }
+            },
+            dataProvider: {
+              get: function () {
+                var tmp$0, tmp$1;
+                var $receiver = this.itemToAnchorMap_w1590b$.entrySet();
+                var order = _.net.yested.bootstrap.ListGroup.dataProvider$f(this);
+                var sortBy_cvgzri$result;
+                sortBy_cvgzri$break: {
+                  var tmp$2;
+                  var sortedList = Kotlin.modules['stdlib'].kotlin.toArrayList_ir3nkc$($receiver);
+                  tmp$2 = Kotlin.createObject(function () {
+                    return [Kotlin.Comparator];
+                  }, null, {compare: function (a, b) {
+                    var tmp$0, tmp$1;
+                    tmp$0 = order(a);
+                    tmp$1 = order(b);
+                    return Kotlin.modules['stdlib'].kotlin.compareValues_cj5vqg$(tmp$0, tmp$1);
+                  }});
+                  var sortBy = tmp$2;
+                  Kotlin.collectionsSort(sortedList, sortBy);
+                  sortBy_cvgzri$result = sortedList;
+                  break sortBy_cvgzri$break;
+                }
+                tmp$0 = sortBy_cvgzri$result;
+                var map_m3yiqg$result;
+                var tmp$5;
+                var destination = new Kotlin.ArrayList();
+                var mapTo_e7zafy$result;
+                var tmp$3, tmp$4;
+                tmp$3 = tmp$0.iterator();
+                while (tmp$3.hasNext()) {
+                  var item = tmp$3.next();
+                  tmp$4 = item.getKey();
+                  destination.add_za3rmp$(tmp$4);
+                }
+                mapTo_e7zafy$result = destination;
+                tmp$5 = mapTo_e7zafy$result;
+                map_m3yiqg$result = tmp$5;
+                tmp$1 = map_m3yiqg$result;
+                return tmp$1;
+              },
+              set: function (newDataProvider) {
+                this.selectedItems_i98pbb$.clear();
+                this.itemToAnchorMap_w1590b$.clear();
+                _.net.yested.removeAllContent_sttokc$(this.element);
+                var operation = _.net.yested.bootstrap.ListGroup.dataProvider$f_1(this);
+                var tmp$0;
+                tmp$0 = newDataProvider.iterator();
+                while (tmp$0.hasNext()) {
+                  var element = tmp$0.next();
+                  operation(element);
+                }
+              }
+            },
+            addItem_za3rmp$: function (item) {
+              var anchor = _.net.yested.with_owvm91$(new _.net.yested.Anchor(), _.net.yested.bootstrap.ListGroup.addItem_za3rmp$f(this, item));
+              this.element.appendChild(anchor.element);
+              this.itemToAnchorMap_w1590b$.put_wn2jw4$(item, anchor);
+            },
+            removeItem_za3rmp$: function (item) {
+              var tmp$0;
+              var anchor = (tmp$0 = this.itemToAnchorMap_w1590b$.remove_za3rmp$(item)) != null ? tmp$0 : Kotlin.throwNPE();
+              this.element.removeChild(anchor.element);
+              if (this.selectedItems_i98pbb$.contains_za3rmp$(item)) {
+                this.selectedItems_i98pbb$.remove_za3rmp$(item);
+                this.notifyListeners();
               }
             }
           }, /** @lends _.net.yested.bootstrap.ListGroup */ {
-            element$f: function () {
-              this.setAttribute('class', 'list-group');
+            f: function () {
             },
-            f: function (this$ListGroup, it) {
+            element$f: function (this$ListGroup) {
               return function () {
-                this.rangeTo_94jgcu$('class', 'list-group-item');
-                this$ListGroup.renderer.call(this, it);
+                this.setAttribute('class', 'list-group');
+                if (this$ListGroup.sortable) {
+                  $(this).sortable(_.net.yested.bootstrap.ListGroup.f);
+                }
               };
             },
-            setData_4fm7v2$f: function (this$ListGroup) {
+            dataProvider$f: function (this$ListGroup) {
               return function (it) {
-                var li = _.net.yested.with_owvm91$(new _.net.yested.Li(), _.net.yested.bootstrap.ListGroup.f(this$ListGroup, it));
-                this$ListGroup.element.appendChild(li.element);
+                return _.net.yested.getIndexOfChildNode_6xfunm$(this$ListGroup.element, it.getValue().element);
+              };
+            },
+            dataProvider$f_1: function (this$ListGroup) {
+              return function (it) {
+                this$ListGroup.addItem_za3rmp$(it);
+              };
+            },
+            f_0: function (item, this$ListGroup) {
+              return function () {
+                this$ListGroup.clickedOnItem(item);
+              };
+            },
+            addItem_za3rmp$f: function (this$ListGroup, item) {
+              return function () {
+                var tmp$0;
+                this.rangeTo_94jgcu$('class', 'list-group-item');
+                this.rangeTo_94jgcu$('style', 'cursor:pointer');
+                if (!((tmp$0 = this$ListGroup.selectionMode) != null ? tmp$0.equals_za3rmp$(_.net.yested.bootstrap.SelectionMode.object.NONE) : null)) {
+                  this.onclick = _.net.yested.bootstrap.ListGroup.f_0(item, this$ListGroup);
+                }
+                this$ListGroup.renderer.call(this, item);
               };
             }
           }),
@@ -10981,166 +11332,94 @@
             _.net.yested.bootstrap.addSpan($receiver, 'text-capitalize', init);
           },
           smartgrid: Kotlin.definePackage(null, /** @lends _.net.yested.bootstrap.smartgrid */ {
-            f: function (selectedColumns, column) {
-              return function () {
-                this.checked = selectedColumns.contains_za3rmp$(column.id);
-                this.value = column.id;
-                this.disabled = true;
-              };
+            openConfigurationDialog$f_0: function (it) {
+              this.plus_pdl1w0$(it.label);
             },
-            f_0: function (checkbox) {
-              return function () {
-                checkbox.checked = !checkbox.checked;
-              };
-            },
-            openConfigurationDialog$f_2: function (checkboxes) {
-              return function (column) {
-                var tmp$0;
-                var checkbox = (tmp$0 = checkboxes.get_za3rmp$(column.id)) != null ? tmp$0 : Kotlin.throwNPE();
-                this.plus_pv6laa$(checkbox);
-                this.nbsp_za3lpa$();
-                this.plus_pdl1w0$(column.label);
-                this.rangeTo_94jgcu$('style', 'cursor: pointer;');
-                this.onclick = _.net.yested.bootstrap.smartgrid.f_0(checkbox);
-              };
-            },
-            openConfigurationDialog$setColumnsData: function (inputField, listGroup, sortedColumns) {
+            openConfigurationDialog$getSelectedColumnIds: function (listGroup) {
               return function () {
                 var tmp$0;
-                var text = inputField.data.toLowerCase();
-                if (text.length > 0) {
-                  var filter_azvtw4$result;
-                  var tmp$3;
-                  var destination = new Kotlin.ArrayList();
-                  var filterTo_5pn78a$result;
-                  var tmp$2, tmp$1;
-                  tmp$2 = sortedColumns.iterator();
-                  while (tmp$2.hasNext()) {
-                    var element = tmp$2.next();
-                    tmp$1 = element.label.toLowerCase().contains(text);
-                    if (tmp$1) {
-                      destination.add_za3rmp$(element);
-                    }
-                  }
-                  filterTo_5pn78a$result = destination;
-                  tmp$3 = filterTo_5pn78a$result;
-                  filter_azvtw4$result = tmp$3;
-                  tmp$0 = filter_azvtw4$result;
-                  listGroup.setData_4fm7v2$(tmp$0);
-                }
-                 else {
-                  listGroup.setData_4fm7v2$(sortedColumns);
-                }
-              };
-            },
-            openConfigurationDialog$getSelectedColumnIds: function (checkboxes) {
-              return function () {
-                var tmp$0, tmp$1;
-                var filter_meqh51$result;
-                var tmp$4;
-                var destination = new Kotlin.LinkedHashMap();
-                var filterTo_zbfrkc$result;
-                var tmp$2, tmp$3;
-                tmp$2 = Kotlin.modules['stdlib'].kotlin.iterator_acfufl$(checkboxes);
-                while (tmp$2.hasNext()) {
-                  var element = tmp$2.next();
-                  tmp$3 = element.getValue().checked;
-                  if (tmp$3) {
-                    destination.put_wn2jw4$(Kotlin.modules['stdlib'].kotlin.get_key_mxmdx1$(element), Kotlin.modules['stdlib'].kotlin.get_value_mxmdx1$(element));
-                  }
-                }
-                filterTo_zbfrkc$result = destination;
-                tmp$4 = filterTo_zbfrkc$result;
-                filter_meqh51$result = tmp$4;
-                tmp$0 = filter_meqh51$result;
-                var map_6spdrr$result;
-                var tmp$7;
-                var destination_0 = new Kotlin.ArrayList();
-                var mapTo_wh7ed$result;
-                var tmp$5, tmp$6;
-                tmp$5 = Kotlin.modules['stdlib'].kotlin.iterator_acfufl$(tmp$0);
-                while (tmp$5.hasNext()) {
-                  var item = tmp$5.next();
-                  tmp$6 = item.getKey();
-                  destination_0.add_za3rmp$(tmp$6);
-                }
-                mapTo_wh7ed$result = destination_0;
-                tmp$7 = mapTo_wh7ed$result;
-                map_6spdrr$result = tmp$7;
-                tmp$1 = map_6spdrr$result;
-                return tmp$1;
-              };
-            },
-            openConfigurationDialog$getAllColumnIds: function (checkboxes) {
-              return function () {
-                var tmp$0;
-                var map_6spdrr$result;
+                var map_m3yiqg$result;
                 var tmp$3;
                 var destination = new Kotlin.ArrayList();
-                var mapTo_wh7ed$result;
+                var mapTo_e7zafy$result;
                 var tmp$2, tmp$1;
-                tmp$2 = Kotlin.modules['stdlib'].kotlin.iterator_acfufl$(checkboxes);
+                tmp$2 = listGroup.data.iterator();
                 while (tmp$2.hasNext()) {
                   var item = tmp$2.next();
-                  tmp$1 = item.getKey();
+                  tmp$1 = item.id;
                   destination.add_za3rmp$(tmp$1);
                 }
-                mapTo_wh7ed$result = destination;
-                tmp$3 = mapTo_wh7ed$result;
-                map_6spdrr$result = tmp$3;
-                tmp$0 = map_6spdrr$result;
+                mapTo_e7zafy$result = destination;
+                tmp$3 = mapTo_e7zafy$result;
+                map_m3yiqg$result = tmp$3;
+                tmp$0 = map_m3yiqg$result;
                 return tmp$0;
               };
             },
-            openConfigurationDialog$f_3: function (setColumnsData) {
+            openConfigurationDialog$getAllColumnIds: function (columns) {
               return function () {
-                setColumnsData();
+                var tmp$0;
+                var map_m3yiqg$result;
+                var tmp$3;
+                var destination = new Kotlin.ArrayList();
+                var mapTo_e7zafy$result;
+                var tmp$2, tmp$1;
+                tmp$2 = columns.iterator();
+                while (tmp$2.hasNext()) {
+                  var item = tmp$2.next();
+                  tmp$1 = item.id;
+                  destination.add_za3rmp$(tmp$1);
+                }
+                mapTo_e7zafy$result = destination;
+                tmp$3 = mapTo_e7zafy$result;
+                map_m3yiqg$result = tmp$3;
+                tmp$0 = map_m3yiqg$result;
+                return tmp$0;
               };
             },
-            f_1: function () {
+            f: function () {
               this.plus_pdl1w0$('Grid configuration');
             },
-            f_2: function (listGroup) {
+            f_0: function (listGroup) {
               return function () {
                 this.rangeTo_94jgcu$('style', 'overflow: scroll;  height: 210px; overflow-x: hidden');
                 this.plus_pv6laa$(listGroup);
               };
             },
-            f_3: function (inputField, listGroup) {
+            f_1: function (listGroup) {
               return function () {
-                this.plus_pv6laa$(inputField);
-                this.div_5rsex9$(void 0, void 0, _.net.yested.bootstrap.smartgrid.f_2(listGroup));
+                this.div_5rsex9$(void 0, void 0, _.net.yested.bootstrap.smartgrid.f_0(listGroup));
               };
             },
-            f_4: function () {
+            f_2: function () {
               this.plus_pdl1w0$('Submit');
             },
-            f_5: function (changeLayout, getSelectedColumnIds, dialog) {
+            f_3: function (changeLayout, getSelectedColumnIds, dialog) {
               return function () {
                 changeLayout(getSelectedColumnIds());
                 dialog.close();
               };
             },
-            f_6: function () {
+            f_4: function () {
               this.plus_pdl1w0$('Show All');
             },
-            f_7: function (changeLayout, getAllColumnIds, dialog) {
+            f_5: function (changeLayout, getAllColumnIds, dialog) {
               return function () {
                 changeLayout(getAllColumnIds());
                 dialog.close();
               };
             },
-            f_8: function (changeLayout, getSelectedColumnIds, dialog, getAllColumnIds) {
+            f_6: function (changeLayout, getSelectedColumnIds, dialog, getAllColumnIds) {
               return function () {
-                _.net.yested.bootstrap.btsButton_bol907$(this, _.net.yested.ButtonType.object.SUBMIT, _.net.yested.bootstrap.smartgrid.f_4, _.net.yested.bootstrap.ButtonLook.object.PRIMARY, _.net.yested.bootstrap.ButtonSize.object.SMALL, void 0, void 0, _.net.yested.bootstrap.smartgrid.f_5(changeLayout, getSelectedColumnIds, dialog));
-                _.net.yested.bootstrap.btsButton_bol907$(this, _.net.yested.ButtonType.object.SUBMIT, _.net.yested.bootstrap.smartgrid.f_6, _.net.yested.bootstrap.ButtonLook.object.DEFAULT, _.net.yested.bootstrap.ButtonSize.object.SMALL, void 0, void 0, _.net.yested.bootstrap.smartgrid.f_7(changeLayout, getAllColumnIds, dialog));
+                _.net.yested.bootstrap.btsButton_bol907$(this, _.net.yested.ButtonType.object.SUBMIT, _.net.yested.bootstrap.smartgrid.f_2, _.net.yested.bootstrap.ButtonLook.object.PRIMARY, _.net.yested.bootstrap.ButtonSize.object.SMALL, void 0, void 0, _.net.yested.bootstrap.smartgrid.f_3(changeLayout, getSelectedColumnIds, dialog));
+                _.net.yested.bootstrap.btsButton_bol907$(this, _.net.yested.ButtonType.object.SUBMIT, _.net.yested.bootstrap.smartgrid.f_4, _.net.yested.bootstrap.ButtonLook.object.DEFAULT, _.net.yested.bootstrap.ButtonSize.object.SMALL, void 0, void 0, _.net.yested.bootstrap.smartgrid.f_5(changeLayout, getAllColumnIds, dialog));
               };
             },
-            openConfigurationDialog$f_4: function (inputField, listGroup, changeLayout, getSelectedColumnIds, dialog, getAllColumnIds) {
+            openConfigurationDialog$f_2: function (listGroup, changeLayout, getSelectedColumnIds, dialog, getAllColumnIds) {
               return function () {
-                this.header_1(_.net.yested.bootstrap.smartgrid.f_1);
-                this.body_1(_.net.yested.bootstrap.smartgrid.f_3(inputField, listGroup));
-                this.footer_1(_.net.yested.bootstrap.smartgrid.f_8(changeLayout, getSelectedColumnIds, dialog, getAllColumnIds));
+                this.header_1(_.net.yested.bootstrap.smartgrid.f);
+                this.body_1(_.net.yested.bootstrap.smartgrid.f_1(listGroup));
+                this.footer_1(_.net.yested.bootstrap.smartgrid.f_6(changeLayout, getSelectedColumnIds, dialog, getAllColumnIds));
               };
             },
             openConfigurationDialog: function (columns, selectedColumns, changeLayout) {
@@ -11165,41 +11444,30 @@
               tmp$0 = sortBy_cvgzri$result;
               var sortedColumns = tmp$0;
               var dialog = new _.net.yested.bootstrap.Dialog(_.net.yested.bootstrap.DialogSize.object.SMALL);
-              var map_m3yiqg$result;
+              var listGroup = new _.net.yested.bootstrap.ListGroup(void 0, void 0, _.net.yested.bootstrap.smartgrid.openConfigurationDialog$f_0);
+              listGroup.dataProvider = sortedColumns;
+              tmp$2 = listGroup;
+              var filter_azvtw4$result;
               var tmp$6;
               var destination = new Kotlin.ArrayList();
-              var mapTo_e7zafy$result;
+              var filterTo_5pn78a$result;
               var tmp$4, tmp$5;
               tmp$4 = columns.iterator();
               while (tmp$4.hasNext()) {
-                var item = tmp$4.next();
-                tmp$5 = _.net.yested.with_owvm91$(new _.net.yested.CheckBox(), _.net.yested.bootstrap.smartgrid.f(selectedColumns, item));
-                destination.add_za3rmp$(tmp$5);
+                var element = tmp$4.next();
+                tmp$5 = selectedColumns.contains_za3rmp$(element.id);
+                if (tmp$5) {
+                  destination.add_za3rmp$(element);
+                }
               }
-              mapTo_e7zafy$result = destination;
-              tmp$6 = mapTo_e7zafy$result;
-              map_m3yiqg$result = tmp$6;
-              tmp$1 = map_m3yiqg$result;
-              var toMap_m3yiqg$result;
-              var tmp$8, tmp$7;
-              var result = new Kotlin.LinkedHashMap();
-              tmp$8 = tmp$1.iterator();
-              while (tmp$8.hasNext()) {
-                var element = tmp$8.next();
-                tmp$7 = element.value;
-                result.put_wn2jw4$(tmp$7, element);
-              }
-              toMap_m3yiqg$result = result;
-              tmp$2 = toMap_m3yiqg$result;
-              var checkboxes = tmp$2;
-              var listGroup = new _.net.yested.bootstrap.ListGroup(_.net.yested.bootstrap.smartgrid.openConfigurationDialog$f_2(checkboxes));
-              var inputField = new _.net.yested.bootstrap.StringInputField();
-              var setColumnsData = _.net.yested.bootstrap.smartgrid.openConfigurationDialog$setColumnsData(inputField, listGroup, sortedColumns);
-              var getSelectedColumnIds = _.net.yested.bootstrap.smartgrid.openConfigurationDialog$getSelectedColumnIds(checkboxes);
-              var getAllColumnIds = _.net.yested.bootstrap.smartgrid.openConfigurationDialog$getAllColumnIds(checkboxes);
-              inputField.addOnChangeLiveListener_qshda6$(_.net.yested.bootstrap.smartgrid.openConfigurationDialog$f_3(setColumnsData));
-              setColumnsData();
-              _.net.yested.with_owvm91$(dialog, _.net.yested.bootstrap.smartgrid.openConfigurationDialog$f_4(inputField, listGroup, changeLayout, getSelectedColumnIds, dialog, getAllColumnIds));
+              filterTo_5pn78a$result = destination;
+              tmp$6 = filterTo_5pn78a$result;
+              filter_azvtw4$result = tmp$6;
+              tmp$1 = filter_azvtw4$result;
+              tmp$2.data = tmp$1;
+              var getSelectedColumnIds = _.net.yested.bootstrap.smartgrid.openConfigurationDialog$getSelectedColumnIds(listGroup);
+              var getAllColumnIds = _.net.yested.bootstrap.smartgrid.openConfigurationDialog$getAllColumnIds(columns);
+              _.net.yested.with_owvm91$(dialog, _.net.yested.bootstrap.smartgrid.openConfigurationDialog$f_2(listGroup, changeLayout, getSelectedColumnIds, dialog, getAllColumnIds));
               dialog.open(false);
             },
             GridColumnHeader: Kotlin.createClass(function () {

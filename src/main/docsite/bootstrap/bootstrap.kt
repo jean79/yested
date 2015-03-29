@@ -38,6 +38,7 @@ class BootstrapPage : Component {
                     +TagsSection(id = "bootstrapComponents_Tags")
                     +createInputs(id = "bootstrapComponents_Inputs")
                     +DateFieldSection(id = "bootstrapComponents_DateField")
+                    +createListGroupSection(id = "bootstrapComponents_ListGroup")
                     +createCheckboxSection(id = "bootstrapComponents_Checkbox")
                     +createGrid(id = "bootstrapComponents_Grid")
                     +createTabs(id = "bootstrapComponents_Tabs")
@@ -69,6 +70,7 @@ class BootstrapPage : Component {
                             li { a(href = "#bootstrapComponents_Tags") { +"Tags" } }
                             li { a(href = "#bootstrapComponents_Inputs") { +"Text Input with Validation" } }
                             li { a(href = "#bootstrapComponents_DateField") { +"DateField" } }
+                            li { a(href = "#bootstrapComponents_ListGroup") { +"List Groups" } }
                             li { a(href = "#bootstrapComponents_Checkbox") { +"Checkbox" } }
                             li { a(href = "#bootstrapComponents_Grid") { +"Grid" } }
                             li { a(href = "#bootstrapComponents_Tabs") { +"Tabs" } }
