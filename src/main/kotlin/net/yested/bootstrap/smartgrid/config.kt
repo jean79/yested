@@ -1,61 +1,159 @@
 package net.yested.bootstrap.smartgrid
 
-import net.yested.ButtonType
-import net.yested.CheckBox
+import net.yested.*
 import net.yested.bootstrap.*
-import net.yested.with
+import net.yested.layout.horizontalContainer
+import net.yested.layout.verticalContainer
+import net.yested.utils.throttle
+import java.util.ArrayList
+
+class ConfigurationDialog<T>(
+        private val columns: Collection<GridColumn<T>>,
+        private val selectedColumnIds: Collection<String>,
+        private val changeLayoutHandler:(columnIds:List<String>)->Unit) {
+
+    private val listGroupAvailableColumns = ListGroup<GridColumn<T>>(selectionMode = SelectionMode.MULTI) { +it.label }
+    private val listGroupSelectedColumns = ListGroup<GridColumn<T>>(selectionMode = SelectionMode.MULTI, sortable = true) { +it.label }
+
+    private val buttonToSelect = BtsButton(size = ButtonSize.SMALL, label = { glyphicon("arrow-right")}, onclick = { moveToSelected() } )
+    private val buttonToDeselect = BtsButton(size = ButtonSize.SMALL, label = { glyphicon("arrow-left")}, onclick = { moveToAvailable() })
+
+    private val fieldFilterAvailableColumns = StringInputField()
+
+    private val availableColumns = ArrayList<GridColumn<T>>()
+
+    private val dialog = Dialog(size = DialogSize.DEFAULT) with {
+        header  { + "Grid configuration" }
+        body {
+            horizontalContainer(width = 100.pct(), gap = 5.px()) {
+                column(width = 50.pct()) {
+                    +fieldFilterAvailableColumns
+                    div {
+                        "style".."overflow: scroll;  height: 210px; overflow-x: hidden"
+                        +listGroupAvailableColumns
+                    }
+                }
+                column {
+                    verticalContainer {
+                        row {
+                            +buttonToSelect
+                        }
+                        row {
+                            +buttonToDeselect
+                        }
+                    }
+                }
+                column(width = 50.pct(), height = 100.pct()) {
+                    div {
+                        "style".."overflow: scroll;  height: 100%; overflow-x: hidden"
+                        +listGroupSelectedColumns
+                    }
+                }
+            }
+        }
+        footer {
+            btsButton(
+                    type = ButtonType.SUBMIT, look = ButtonLook.DEFAULT, size = ButtonSize.SMALL,
+                    label = { +"Show All"},onclick = { showAll() })
+            btsButton(
+                    type = ButtonType.SUBMIT, look = ButtonLook.DEFAULT, size = ButtonSize.SMALL,
+                    label = { +"Hide All"}, onclick = { hideAll() })
+            btsButton(
+                    type = ButtonType.SUBMIT, look = ButtonLook.PRIMARY, size = ButtonSize.SMALL,
+                    label = { +"Submit"}, onclick = { applySelected() })
+        }
+    }
+
+    init {
+        initialDistribution()
+        dialog.open(fade = false)
+        buttonToSelect.disabled = true
+        buttonToDeselect.disabled = true
+
+        listGroupAvailableColumns.addOnChangeListener {
+            buttonToSelect.disabled = listGroupAvailableColumns.data.size() == 0
+        }
+
+        listGroupSelectedColumns.addOnChangeListener {
+            buttonToDeselect.disabled = listGroupSelectedColumns.data.size() == 0
+        }
+
+        fieldFilterAvailableColumns.addOnChangeLiveListener {
+            populateAvailableListGroup()
+        }
+
+    }
+
+    private fun getSelectedColumnIds() = listGroupSelectedColumns.dataProvider.map { it.id }
+
+    private fun getAllColumnIds(): List<String> = columns.map { it.id }
+
+    private fun applySelected() {
+        dialog.close()
+        changeLayoutHandler( getSelectedColumnIds() )
+    }
+
+    private fun showAll() {
+        listGroupSelectedColumns.dataProvider = columns
+        availableColumns.clear()
+        populateAvailableListGroup()
+    }
+
+    private fun hideAll() {
+        availableColumns.clear();
+        availableColumns.addAll(columns)
+        listGroupSelectedColumns.dataProvider = arrayListOf()
+        populateAvailableListGroup()
+    }
+
+    private fun moveToSelected() {
+        listGroupAvailableColumns.data.forEach {
+            listGroupAvailableColumns.removeItem(it)
+            listGroupSelectedColumns.addItem(it)
+        }
+    }
+
+    private fun moveToAvailable() {
+        listGroupSelectedColumns.data.forEach {
+            listGroupSelectedColumns.removeItem(it)
+            availableColumns.add(it)
+            populateAvailableListGroup()
+        }
+    }
+
+    private fun initialDistribution() {
+        availableColumns.addAll( columns.filter { !selectedColumnIds.contains(it.id) }.sortBy { it.label } )
+        val columnsById = columns.toMap { it.id }
+        val selectedColumns = selectedColumnIds.map { columnsById.get(it)!! }
+        listGroupSelectedColumns.dataProvider = selectedColumns
+        populateAvailableListGroup()
+    }
+
+    private fun populateAvailableListGroup() {
+        listGroupAvailableColumns.dataProvider = getVisibleAvailableColumns().sortBy { it.label }
+    }
+
+    private fun getVisibleAvailableColumns(): Collection<GridColumn<T>> {
+        val filterText = fieldFilterAvailableColumns.data.toLowerCase()
+        if (filterText.length() > 0) {
+            return availableColumns.filter { it.label.toLowerCase().contains(filterText) }
+        } else {
+            return availableColumns
+        }
+    }
+
+}
 
 /**
  * Opens configuration dialog for SmartGrid
  */
 fun <T> openConfigurationDialog(
         columns: Collection<GridColumn<T>>,
-        selectedColumns: Collection<String>,
-        changeLayout:(columnIds:List<String>)->Unit) {
+        selectedColumnIds: Collection<String>,
+        changeLayoutHandler:(columnIds:List<String>)->Unit) {
 
-    val sortedColumns = columns.sortBy { it.label }
-    val dialog = Dialog(size = DialogSize.SMALL)
+    ConfigurationDialog(columns = columns, selectedColumnIds = selectedColumnIds, changeLayoutHandler = changeLayoutHandler)
 
-    val listGroup = ListGroup<GridColumn<T>>() { +it.label }
-
-    listGroup.dataProvider = sortedColumns
-    listGroup.data = columns.filter { selectedColumns.contains(it.id) }
-
-    fun getSelectedColumnIds() = listGroup.data.map { it.id }
-
-    fun getAllColumnIds(): List<String> = columns.map { it.id }
-
-    dialog with {
-        header { + "Grid configuration" }
-        body {
-            div {
-                "style".."overflow: scroll;  height: 210px; overflow-x: hidden"
-                +listGroup
-            }
-        }
-        footer {
-            btsButton(
-                    type = ButtonType.SUBMIT,
-                    look = ButtonLook.PRIMARY,
-                    size = ButtonSize.SMALL,
-                    label = { +"Submit"},
-                    onclick = {
-                        changeLayout( getSelectedColumnIds() )
-                        dialog.close()
-                    })
-            btsButton(
-                    type = ButtonType.SUBMIT,
-                    look = ButtonLook.DEFAULT,
-                    size = ButtonSize.SMALL,
-                    label = { +"Show All"},
-                    onclick = {
-                        changeLayout( getAllColumnIds() )
-                        dialog.close()
-                    })
-        }
-    }
-
-    dialog.open(fade = false)
 }
 
 

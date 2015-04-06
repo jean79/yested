@@ -28,7 +28,7 @@ public class ListGroup<TYPE>(val selectionMode: SelectionMode = SelectionMode.MU
     private val itemToAnchorMap = hashMapOf<TYPE, Anchor>()
 
     override var data: List<TYPE>
-        get() = selectedItems
+        get() = ArrayList(selectedItems)
         set(newSelection) {
             selectedItems.clear()
             selectedItems.addAll(newSelection)
