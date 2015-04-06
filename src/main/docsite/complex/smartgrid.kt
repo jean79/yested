@@ -1,34 +1,17 @@
 package complex
 
-import net.yested.div
-import net.yested.bootstrap.row
-import net.yested.bootstrap.Medium
-import net.yested.bootstrap.pageHeader
-import net.yested.toFixed
-import net.yested.Div
 import kotlin.browser.document
 import kotlin.js.dom.html.window
-import net.yested.HTMLComponent
-import net.yested.Span
-import net.yested.with
-import net.yested.compareByValue
 import net.yested.bootstrap.smartgrid.SmartGrid
 import net.yested.bootstrap.smartgrid.GridColumn
-import net.yested.bootstrap.InputField
 import kotlin.js.dom.html.HTMLElement
 import jquery.jq
+import net.yested.*
 import net.yested.utils.on
-import net.yested.removeAllContent
-import net.yested.repeatWithDelayUntil
 import net.yested.utils.isIncludedInDOM
 import net.yested.utils.keypress
-import net.yested.TextInput
 import net.yested.bootstrap.smartgrid.CellEditorFactory
-import net.yested.bootstrap.BtsButton
-import net.yested.Component
-import net.yested.bootstrap.ButtonSize
-import net.yested.bootstrap.Small
-import net.yested.bootstrap.ExtraSmall
+import net.yested.bootstrap.*
 import net.yested.layout.ScrollBar
 import net.yested.layout.ScrollBarOrientation
 import kotlin.dom.addText
@@ -210,7 +193,8 @@ class CustomizableGridSection: Component {
                 +" Click the button to start ticking of Move column."
                 br()
                 +" Click any cell in a Price column to edit it."
-                div { style = "width: 100%; height: 300px; position: relative"
+                div {
+                    style = "width: 100%; height: 300px; position: relative"
                     +grid
                 }
             }

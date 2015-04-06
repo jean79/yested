@@ -1,12 +1,9 @@
 package layout
 
-import net.yested.Div
-import net.yested.Span
+import net.yested.*
 import net.yested.bootstrap.*
-import net.yested.div
 import net.yested.layout.ScrollBar
 import net.yested.layout.ScrollBarOrientation
-import net.yested.with
 
 
 fun createScrollBarSection(): Div {
@@ -16,14 +13,14 @@ fun createScrollBarSection(): Div {
 
     val scrollBarVetical = ScrollBar(
                         orientation = ScrollBarOrientation.VERTICAL,
-                        size = "150px",
+                        size = 150.px(),
                         numberOfItems = 100,
                         visibleItems = 20,
                         positionHandler = { positionTextVertical.setContent("Vertical: ${it}")} )
 
     val scrollBarHorizontal = ScrollBar(
             orientation = ScrollBarOrientation.HORIZONTAL,
-            size = "150px",
+            size = 150.px(),
             numberOfItems = 100,
             visibleItems = 20,
             positionHandler = { positionTextHorizontal.setContent("Horizontal: ${it}")} )

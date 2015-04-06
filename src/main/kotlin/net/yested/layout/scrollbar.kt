@@ -17,7 +17,7 @@ public enum class ScrollBarOrientation(val directionProperty:String, val nonDire
  */
 public class ScrollBar(
         val orientation: ScrollBarOrientation,
-        val size: String,
+        val size: Dimension,
         var numberOfItems: Int,
         var visibleItems: Int,
         val className:String? = null,
@@ -44,7 +44,7 @@ public class ScrollBar(
     init {
 
         element.appendChild(handle.element)
-        element.setAttribute("style", "${orientation.directionProperty}: ${size};")
+        element.setAttribute("style", "${orientation.directionProperty}: ${size.toHtml()};")
         element.setAttribute("position", "absolute")
 
         if (className != null) {

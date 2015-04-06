@@ -4,8 +4,7 @@ import jquery.jq
 import net.yested.*
 import net.yested.bootstrap.Align
 import net.yested.bootstrap.glyphicon
-import net.yested.layout.ScrollBar
-import net.yested.layout.ScrollBarOrientation
+import net.yested.layout.*
 import net.yested.utils.disableSelection
 import net.yested.utils.on
 import net.yested.utils.sortable
@@ -45,21 +44,16 @@ public class SmartGrid<TYPE, KEY>(
 
     private val header = createElement("tr") with { }
 
-    private var cont = Div() with {
-        "style".."overflow-x:hidden; overflow-y:auto; height: 100%"
-        element.appendChild(dataTable)
-    }
-
     private val scrollBarVertical = ScrollBar(
                                             orientation = ScrollBarOrientation.VERTICAL,
-                                            size = "100%",
+                                            size = 100.pct(),
                                             numberOfItems = 1,
                                             visibleItems = 1,
                                             positionHandler = throttle(35, { verticalScrollBarMoved(it) }))
 
     private val scrollBarHorizontal = ScrollBar(
                                             orientation = ScrollBarOrientation.HORIZONTAL,
-                                            size = "100%",
+                                            size = 100.pct(),
                                             numberOfItems = 1,
                                             visibleItems = 1,
                                             positionHandler = throttle(35, { horizontalScrollBarMoved(it) }))
@@ -74,36 +68,49 @@ public class SmartGrid<TYPE, KEY>(
         }
     }
 
+    private val cont = ScrollPane(horizontal = Overflow.HIDDEN, height = 100.pct()) {
+        element.appendChild(dataTable)
+    }
+
     override val element =
-            (Table() with { element.setAttribute("style", "width: 100%; height:100%; table-layout:fixed;")
-                tbody {
-                    tr {
-                        td { "style".."width: 100%; height: ${rowHeight}px; vertical-align: middle;"
-                            +columnHeaderContainer
+            (VerticalContainer(width = 100.pct(), height = 100.pct()) with {
+                row(width = 100.pct()) {
+                    horizontalContainer {
+                        column(width = 100.pct()) {
+                            scrollPane(horizontal = Overflow.HIDDEN) {
+                                +columnHeaderContainer
+                            }
                         }
-                        td {
+                        column(verticalAlign = VerticalAlign.MIDDLE) {
                             a(onclick = { showDialogCustom() }) {
                                 "style".."cursor: pointer;"
                                 glyphicon("cog")
                             }
                         }
                     }
-                    tr { element.setAttribute("style", "height: 100%")
-                        td { "style".."width: 100%; vertical-align: top;"
+                }
+                row(width = 100.pct(), height = 100.pct()) {
+                    horizontalContainer(height = 100.pct()) {
+                        column(width = 100.pct(), height = 100.pct()) {
                             +cont
                         }
-                        td { "style".."height: 100%;"
+                        column(height = 100.pct()) {
                             +scrollBarVertical
                         }
                     }
-                    tr {
-                        td { "style".."width: 100%; vertical-align: top;"
+                }
+                row(width = 100.pct()) {
+                    horizontalContainer {
+                        column(width = 100.pct()) {
                             +scrollBarHorizontal
                         }
-                        td { }
+                        column(width = 15.px()) {
+                            div { "style".."width:15px;" }
+                        }
                     }
                 }
             }).element
+
 
     private var sortColumn:GridColumn<TYPE>? = null
     private var asc:Boolean = true;
@@ -134,6 +141,7 @@ public class SmartGrid<TYPE, KEY>(
 
         visibleColumns = columns.map { it.id }
 
+        //register scrolling
         cont.onscroll = {
             columnHeaderContainer.element.scrollLeft = cont.element.scrollLeft
         }

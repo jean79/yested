@@ -22,6 +22,7 @@ class LayoutPage : Component {
         row {
             col(Medium(12)) {
                 +createScrollBarSection()
+                +createHorizontalLayoutSection()
             }
         }
 
