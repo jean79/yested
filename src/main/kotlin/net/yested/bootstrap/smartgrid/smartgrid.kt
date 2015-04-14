@@ -5,10 +5,9 @@ import net.yested.*
 import net.yested.bootstrap.Align
 import net.yested.bootstrap.glyphicon
 import net.yested.layout.*
-import net.yested.utils.disableSelection
-import net.yested.utils.on
-import net.yested.utils.sortable
-import net.yested.utils.throttle
+import net.yested.layout.containers.VerticalContainer
+import net.yested.layout.containers.horizontalContainer
+import net.yested.utils.*
 import org.w3c.dom.Node
 import java.util.ArrayList
 import java.util.HashMap
@@ -74,14 +73,14 @@ public class SmartGrid<TYPE, KEY>(
 
     override val element =
             (VerticalContainer(width = 100.pct(), height = 100.pct()) with {
-                row(width = 100.pct()) {
-                    horizontalContainer {
+                row(width = 100.pct(), height = 30.px()) {
+                    horizontalContainer(width = 100.pct()) {
                         column(width = 100.pct()) {
                             scrollPane(horizontal = Overflow.HIDDEN) {
                                 +columnHeaderContainer
                             }
                         }
-                        column(verticalAlign = VerticalAlign.MIDDLE) {
+                        column(width = 15.px()) {
                             a(onclick = { showDialogCustom() }) {
                                 "style".."cursor: pointer;"
                                 glyphicon("cog")
@@ -90,17 +89,17 @@ public class SmartGrid<TYPE, KEY>(
                     }
                 }
                 row(width = 100.pct(), height = 100.pct()) {
-                    horizontalContainer(height = 100.pct()) {
+                    horizontalContainer(width = 100.pct(), height = 100.pct()) {
                         column(width = 100.pct(), height = 100.pct()) {
                             +cont
                         }
-                        column(height = 100.pct()) {
+                        column(width = 15.px(), height = 100.pct()) {
                             +scrollBarVertical
                         }
                     }
                 }
-                row(width = 100.pct()) {
-                    horizontalContainer {
+                row(width = 100.pct(), height = 15.px()) {
+                    horizontalContainer(width = 100.pct()) {
                         column(width = 100.pct()) {
                             +scrollBarHorizontal
                         }
@@ -190,6 +189,9 @@ public class SmartGrid<TYPE, KEY>(
             val viewPortHeight = jq(cont.element).height().toInt()
             visibleRows = Math.floor(viewPortHeight / rowHeight)
             createGrid()
+            registerResizeHandler(cont.element) { x,y->
+                updateHorizontalScrollbar()
+            }
         }
 
     }

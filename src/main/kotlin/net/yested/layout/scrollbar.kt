@@ -3,9 +3,8 @@ package net.yested.layout
 import jquery.jq
 import jquery.ui.draggable
 import net.yested.*
-import net.yested.utils.css
-import net.yested.utils.jqStatic
-import net.yested.utils.on
+import net.yested.utils.*
+import kotlin.js.dom.html.HTMLElement
 
 public enum class ScrollBarOrientation(val directionProperty:String, val nonDirectionProperty:String, val axis:String, val cssPosProperty:String) {
     VERTICAL: ScrollBarOrientation(directionProperty = "height", nonDirectionProperty = "width", axis = "y", cssPosProperty = "top")
@@ -100,7 +99,12 @@ public class ScrollBar(
             updatePosition(newPosition)
         })
 
-        handle.element.whenAddedToDom { recalculate() }
+        handle.element.whenAddedToDom {
+            recalculate()
+            registerResizeHandler(element.parentNode as HTMLElement) { x, y ->
+                recalculate()
+            }
+        }
 
     }
 

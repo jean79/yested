@@ -2,8 +2,8 @@ package net.yested.bootstrap.smartgrid
 
 import net.yested.*
 import net.yested.bootstrap.*
-import net.yested.layout.horizontalContainer
-import net.yested.layout.verticalContainer
+import net.yested.layout.containers.horizontalContainer
+import net.yested.layout.containers.verticalContainer
 import net.yested.utils.throttle
 import java.util.ArrayList
 
@@ -25,7 +25,7 @@ class ConfigurationDialog<T>(
     private val dialog = Dialog(size = DialogSize.DEFAULT) with {
         header  { + "Grid configuration" }
         body {
-            horizontalContainer(width = 100.pct(), gap = 5.px()) {
+            horizontalContainer(width = 100.pct(), gap = 5) {
                 column(width = 50.pct()) {
                     +fieldFilterAvailableColumns
                     div {
@@ -33,8 +33,8 @@ class ConfigurationDialog<T>(
                         +listGroupAvailableColumns
                     }
                 }
-                column {
-                    verticalContainer {
+                column(width = 70.px()) {
+                    verticalContainer(height = 100.px()) {
                         row {
                             +buttonToSelect
                         }
