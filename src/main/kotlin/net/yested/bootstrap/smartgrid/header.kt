@@ -3,6 +3,8 @@ package net.yested.bootstrap.smartgrid
 import net.yested.HTMLComponent
 import net.yested.Span
 import net.yested.bootstrap.Glyphicon
+import net.yested.bootstrap.InputSize
+import net.yested.bootstrap.StringInputField
 
 /**
  * Internal class of SmartGrid
@@ -16,11 +18,13 @@ class GridColumnHeader<T>(
 
     init {
         if (sortingSupported) {
-            a(href = null, onclick = { sortFunction!!(column)} ) {
-                "style".."cursor: pointer;"
-                +column.label
+            div {
+                a(href = null, onclick = { sortFunction!!(column)} ) {
+                    "style".."cursor: pointer;"
+                    +column.label
+                }
+                +arrowPlaceholder
             }
-            +arrowPlaceholder
         } else {
             +column.label
         }

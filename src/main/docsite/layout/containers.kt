@@ -3,6 +3,8 @@ package layout
 import net.yested.*
 import net.yested.bootstrap.*
 import net.yested.layout.*
+import net.yested.layout.containers.horizontalContainer
+import net.yested.layout.containers.verticalContainer
 
 fun createHorizontalLayoutSection(): Div {
 
@@ -19,15 +21,17 @@ fun createHorizontalLayoutSection(): Div {
                 panel {
                     heading { +"Sample Panel" }
                     content {
-                        horizontalContainer {
+                        horizontalContainer(width = 100.pct()) {
                             column(width = 100.pct()) {
-                                scrollPane(horizontal = Overflow.AUTO) {
-                                    div {
-                                        +"BBBCCCDDDEEEFFFGGGHHHJJJKKKFFFSASAEEERTTYUUJDFHFHFHFHFHHF"
+                                div {
+                                    scrollPane(width = 100.pct(), horizontal = Overflow.AUTO) {
+                                        div {
+                                            +"BBBCCCDDDEEEFFFGGGHHHJJJKKKFFFSASAEEERTTYUUJDFHFHFHFHFHHF"
+                                        }
                                     }
                                 }
                             }
-                            column {
+                            column(width = 70.px()) {
                                 +"CCC"
                             }
                         }
@@ -71,8 +75,10 @@ fun createHorizontalLayoutSection(): Div {
                                     }
                                 }
                             }
-                            row {
-                                +"CCC"
+                            this.row(height = 20.px()) {
+                                div {
+                                    +"CCC"
+                                }
                             }
                         }
                     }
