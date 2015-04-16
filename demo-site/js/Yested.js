@@ -11772,7 +11772,7 @@
               },
               f_5: function (this$ConfigurationDialog) {
                 return function () {
-                  _.net.yested.layout.containers.verticalContainer_8jm87e$(this, void 0, _.net.yested.px_s8ev3o$(100), void 0, _.net.yested.bootstrap.smartgrid.ConfigurationDialog.f_4(this$ConfigurationDialog, this));
+                  _.net.yested.layout.containers.verticalContainer_8jm87e$(this, void 0, _.net.yested.pct_s8ev3o$(100), void 0, _.net.yested.bootstrap.smartgrid.ConfigurationDialog.f_4(this$ConfigurationDialog, this));
                 };
               },
               f_6: function (this$ConfigurationDialog) {
@@ -11789,7 +11789,7 @@
               f_8: function (this$ConfigurationDialog) {
                 return function () {
                   this.column(_.net.yested.pct_s8ev3o$(50), void 0, _.net.yested.bootstrap.smartgrid.ConfigurationDialog.f_1(this$ConfigurationDialog));
-                  this.column(_.net.yested.px_s8ev3o$(70), void 0, _.net.yested.bootstrap.smartgrid.ConfigurationDialog.f_5(this$ConfigurationDialog));
+                  this.column(_.net.yested.px_s8ev3o$(35), void 0, _.net.yested.bootstrap.smartgrid.ConfigurationDialog.f_5(this$ConfigurationDialog));
                   this.column(_.net.yested.pct_s8ev3o$(50), _.net.yested.pct_s8ev3o$(100), _.net.yested.bootstrap.smartgrid.ConfigurationDialog.f_7(this$ConfigurationDialog));
                 };
               },
@@ -12480,7 +12480,10 @@
               },
               f_17: function (this$SmartGrid) {
                 return function (x, y) {
-                  this$SmartGrid.updateHorizontalScrollbar();
+                  if (this$SmartGrid.dataList_slylmf$.size() > 0) {
+                    this$SmartGrid.createRowsWithColumns();
+                    this$SmartGrid.redisplayTheReorderedDataSet();
+                  }
                 };
               },
               SmartGrid$f_3: function (this$SmartGrid) {

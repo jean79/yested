@@ -33,8 +33,8 @@ class ConfigurationDialog<T>(
                         +listGroupAvailableColumns
                     }
                 }
-                column(width = 70.px()) {
-                    verticalContainer(height = 100.px()) {
+                column(width = 35.px()) {
+                    verticalContainer(height = 100.pct()) {
                         row {
                             +buttonToSelect
                         }

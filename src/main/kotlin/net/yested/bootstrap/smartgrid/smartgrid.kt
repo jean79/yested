@@ -190,7 +190,12 @@ public class SmartGrid<TYPE, KEY>(
             visibleRows = Math.floor(viewPortHeight / rowHeight)
             createGrid()
             registerResizeHandler(cont.element) { x,y->
-                updateHorizontalScrollbar()
+                if (dataList.size() > 0) {
+                    createRowsWithColumns()
+                    redisplayTheReorderedDataSet()
+                } else {
+                    updateHorizontalScrollbar()
+                }
             }
         }
 
