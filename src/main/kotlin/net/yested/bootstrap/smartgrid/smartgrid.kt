@@ -186,10 +186,10 @@ public class SmartGrid<TYPE, KEY>(
         cont.element.whenAddedToDom {
             renderHeaderInto(header)
             makeHeaderSortable(header)
-            val viewPortHeight = jq(cont.element).height().toInt()
-            visibleRows = Math.floor(viewPortHeight / rowHeight)
+            recalculateVisibleRows()
             createGrid()
             registerResizeHandler(cont.element) { x,y->
+                recalculateVisibleRows()
                 if (dataList.size() > 0) {
                     createRowsWithColumns()
                     redisplayTheReorderedDataSet()
@@ -199,6 +199,11 @@ public class SmartGrid<TYPE, KEY>(
             }
         }
 
+    }
+
+    private fun recalculateVisibleRows() {
+        val viewPortHeight = jq(cont.element).height().toInt()
+        visibleRows = Math.floor(viewPortHeight / rowHeight)
     }
 
     private var dataList: ArrayList<TYPE> = arrayListOf()
