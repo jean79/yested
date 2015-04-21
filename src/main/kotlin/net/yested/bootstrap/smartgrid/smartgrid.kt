@@ -73,7 +73,7 @@ public class SmartGrid<TYPE, KEY>(
 
     override val element =
             (VerticalContainer(width = 100.pct(), height = 100.pct()) with {
-                row(width = 100.pct(), height = 30.px()) {
+                row(width = 100.pct(), height = rowHeight.px()) {
                     horizontalContainer(width = 100.pct()) {
                         column(width = 100.pct()) {
                             scrollPane(horizontal = Overflow.HIDDEN) {
