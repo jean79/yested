@@ -11772,7 +11772,7 @@
               },
               f_5: function (this$ConfigurationDialog) {
                 return function () {
-                  _.net.yested.layout.containers.verticalContainer_8jm87e$(this, void 0, _.net.yested.px_s8ev3o$(100), void 0, _.net.yested.bootstrap.smartgrid.ConfigurationDialog.f_4(this$ConfigurationDialog, this));
+                  _.net.yested.layout.containers.verticalContainer_8jm87e$(this, void 0, _.net.yested.pct_s8ev3o$(100), void 0, _.net.yested.bootstrap.smartgrid.ConfigurationDialog.f_4(this$ConfigurationDialog, this));
                 };
               },
               f_6: function (this$ConfigurationDialog) {
@@ -11789,7 +11789,7 @@
               f_8: function (this$ConfigurationDialog) {
                 return function () {
                   this.column(_.net.yested.pct_s8ev3o$(50), void 0, _.net.yested.bootstrap.smartgrid.ConfigurationDialog.f_1(this$ConfigurationDialog));
-                  this.column(_.net.yested.px_s8ev3o$(70), void 0, _.net.yested.bootstrap.smartgrid.ConfigurationDialog.f_5(this$ConfigurationDialog));
+                  this.column(_.net.yested.px_s8ev3o$(35), void 0, _.net.yested.bootstrap.smartgrid.ConfigurationDialog.f_5(this$ConfigurationDialog));
                   this.column(_.net.yested.pct_s8ev3o$(50), _.net.yested.pct_s8ev3o$(100), _.net.yested.bootstrap.smartgrid.ConfigurationDialog.f_7(this$ConfigurationDialog));
                 };
               },
@@ -12046,6 +12046,10 @@
               },
               showDialogCustom: function () {
                 _.net.yested.bootstrap.smartgrid.openConfigurationDialog(this.columns_u5fw5u$.values(), this.visibleColumns_rm3k9m$, _.net.yested.bootstrap.smartgrid.SmartGrid.showDialogCustom$f(this));
+              },
+              recalculateVisibleRows: function () {
+                var viewPortHeight = Kotlin.numberToInt($(this.cont_905dxb$.element).height());
+                this.visibleRows_psclms$ = Math.floor(viewPortHeight / this.rowHeight | 0);
               },
               list: {
                 get: function () {
@@ -12480,15 +12484,21 @@
               },
               f_17: function (this$SmartGrid) {
                 return function (x, y) {
-                  this$SmartGrid.updateHorizontalScrollbar();
+                  this$SmartGrid.recalculateVisibleRows();
+                  if (this$SmartGrid.dataList_slylmf$.size() > 0) {
+                    this$SmartGrid.createRowsWithColumns();
+                    this$SmartGrid.redisplayTheReorderedDataSet();
+                  }
+                   else {
+                    this$SmartGrid.updateHorizontalScrollbar();
+                  }
                 };
               },
               SmartGrid$f_3: function (this$SmartGrid) {
                 return function () {
                   this$SmartGrid.renderHeaderInto(this$SmartGrid.header_ezfkrg$);
                   this$SmartGrid.makeHeaderSortable(this$SmartGrid.header_ezfkrg$);
-                  var viewPortHeight = Kotlin.numberToInt($(this$SmartGrid.cont_905dxb$.element).height());
-                  this$SmartGrid.visibleRows_psclms$ = Math.floor(viewPortHeight / this$SmartGrid.rowHeight | 0);
+                  this$SmartGrid.recalculateVisibleRows();
                   this$SmartGrid.createGrid();
                   _.net.yested.utils.registerResizeHandler_i57m1u$(this$SmartGrid.cont_905dxb$.element, _.net.yested.bootstrap.smartgrid.SmartGrid.f_17(this$SmartGrid));
                 };
