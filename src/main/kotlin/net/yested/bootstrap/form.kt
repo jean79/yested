@@ -60,6 +60,12 @@ public class Validator<T>(val inputElement: InputComponent<T>, override val erro
             for (listener in onChangeListeners) {
                 listener(this)
             }
+            if (this) {
+                removeTooltip(inputElement.element);
+            } else {
+                addTooltip(element = inputElement.element, options = TooltipOptions(), title = { errorText })
+                showTooltip(inputElement.element)
+            }
         }
 
     override fun isValid(): Boolean = revalidate()
@@ -100,7 +106,7 @@ public class Form(private val formStyle: FormStyle = FormStyle.DEFAULT, private 
         validator?.onchange {
             isValid ->
                 divFormGroup.clazz = if (isValid) "form-group" else "form-group has-error"
-                spanErrMsg.setContent(if (isValid) "" else validator!!.errorText)
+                //spanErrMsg.setContent(if (isValid) "" else validator!!.errorText)
         }
     }
 

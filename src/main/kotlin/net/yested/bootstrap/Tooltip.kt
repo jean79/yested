@@ -43,3 +43,15 @@ public fun addTooltip(element: HTMLElement, options: TooltipOptions = TooltipOpt
         })
     }
 }
+
+public fun removeTooltip(element: HTMLElement) {
+    element.whenAddedToDom {
+        jq(element).tooltip("destroy")
+    }
+}
+
+public fun showTooltip(element: HTMLElement) {
+    element.whenAddedToDom {
+        jq(element).tooltip("show")
+    }
+}
