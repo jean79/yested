@@ -63,8 +63,7 @@ public class Validator<T>(val inputElement: InputComponent<T>, override val erro
             if (this) {
                 removeTooltip(inputElement.element);
             } else {
-                addTooltip(element = inputElement.element, options = TooltipOptions(), title = { errorText })
-                showTooltip(inputElement.element)
+                addTooltip(element = inputElement.element, options = TooltipOptions(placement = TooltipPlacement.BOTTOM), title = { errorText })
             }
         }
 
@@ -94,10 +93,9 @@ public class Form(private val formStyle: FormStyle = FormStyle.DEFAULT, private 
 
     public fun item(forId:String = "", label: HTMLComponent.()->Unit, validator:ValidatorI? = null, content: HTMLComponent.()->Unit) {
 
-        val spanErrMsg = Span() with { clazz = "help-block"; "style".."display:inline;" }
         val divInput = if (formStyle == FormStyle.HORIZONTAL) {
-            div(clazz = "$inputDef", init = content) with { +spanErrMsg }
-        } else span(init = content) with { +spanErrMsg }
+            div(clazz = "$inputDef", init = content)
+        } else span(init = content)
 
         val divFormGroup = div(clazz = "form-group ${inputSize.code}") {
                 label(forId = forId, clazz= if (formStyle == FormStyle.HORIZONTAL) "${labelDef} control-label" else "", init = label)
@@ -106,7 +104,6 @@ public class Form(private val formStyle: FormStyle = FormStyle.DEFAULT, private 
         validator?.onchange {
             isValid ->
                 divFormGroup.clazz = if (isValid) "form-group" else "form-group has-error"
-                //spanErrMsg.setContent(if (isValid) "" else validator!!.errorText)
         }
     }
 
