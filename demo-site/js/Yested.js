@@ -3626,82 +3626,7 @@
       },
       effectsPage: function () {
         return _.net.yested.div_5rsex9$(void 0, void 0, _.bootstrap.effectsPage$f);
-      },
-      sample: Kotlin.definePackage(function () {
-        this.persons = [new _.bootstrap.sample.Person('Steven', 27, 'Prague'), new _.bootstrap.sample.Person('Martin', 57, 'New York')];
-        var tmp$0, tmp$1;
-        var filter_dgtl0h$result;
-        var tmp$6;
-        var destination = new Kotlin.ArrayList();
-        var filterTo_pw4f83$result;
-        var tmp$4, tmp$3, tmp$2, tmp$5;
-        tmp$4 = _.bootstrap.sample.persons, tmp$3 = tmp$4.length;
-        for (var tmp$2 = 0; tmp$2 !== tmp$3; ++tmp$2) {
-          var element = tmp$4[tmp$2];
-          tmp$5 = Kotlin.equals(element.city, 'Prague');
-          if (tmp$5) {
-            destination.add_za3rmp$(element);
-          }
-        }
-        filterTo_pw4f83$result = destination;
-        tmp$6 = filterTo_pw4f83$result;
-        filter_dgtl0h$result = tmp$6;
-        tmp$0 = filter_dgtl0h$result;
-        var map_m3yiqg$result;
-        var tmp$9;
-        var destination_0 = new Kotlin.ArrayList();
-        var mapTo_e7zafy$result;
-        var tmp$7, tmp$8;
-        tmp$7 = tmp$0.iterator();
-        while (tmp$7.hasNext()) {
-          var item = tmp$7.next();
-          tmp$8 = item.age;
-          destination_0.add_za3rmp$(tmp$8);
-        }
-        mapTo_e7zafy$result = destination_0;
-        tmp$9 = mapTo_e7zafy$result;
-        map_m3yiqg$result = tmp$9;
-        tmp$1 = map_m3yiqg$result;
-        this.maxAge = Kotlin.modules['stdlib'].kotlin.first_fvq2g0$(Kotlin.modules['stdlib'].kotlin.sortDescending_77rvyy$(tmp$1));
-      }, /** @lends _.bootstrap.sample */ {
-        Person: Kotlin.createClass(null, function (name, age, city) {
-          this.name = name;
-          this.age = age;
-          this.city = city;
-        }, /** @lends _.bootstrap.sample.Person.prototype */ {
-          component1: function () {
-            return this.name;
-          },
-          component2: function () {
-            return this.age;
-          },
-          component3: function () {
-            return this.city;
-          },
-          copy: function (name, age, city) {
-            return new _.bootstrap.sample.Person(name === void 0 ? this.name : name, age === void 0 ? this.age : age, city === void 0 ? this.city : city);
-          },
-          toString: function () {
-            return 'Person(name=' + Kotlin.toString(this.name) + (', age=' + Kotlin.toString(this.age)) + (', city=' + Kotlin.toString(this.city)) + ')';
-          },
-          hashCode: function () {
-            var result = 0;
-            result = result * 31 + Kotlin.hashCode(this.name) | 0;
-            result = result * 31 + Kotlin.hashCode(this.age) | 0;
-            result = result * 31 + Kotlin.hashCode(this.city) | 0;
-            return result;
-          },
-          equals_za3rmp$: function (other) {
-            return this === other || (other !== null && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.name, other.name) && Kotlin.equals(this.age, other.age) && Kotlin.equals(this.city, other.city))));
-          }
-        }),
-        test: function () {
-          var colorized = new _.net.yested.Colorized(_.net.yested.Colors.object.BLUE.color);
-          colorized.setContent_61zpoe$('Blue text');
-          var div = new _.net.yested.Div();
-          div.appendChild_5f0h2k$(colorized);
-        }
-      })
+      }
     }),
     complex: Kotlin.definePackage(null, /** @lends _.complex */ {
       Continent: Kotlin.createEnumClass(function () {
@@ -8872,6 +8797,11 @@
                 }
               };
             },
+            f: function (this$Validator) {
+              return function () {
+                return this$Validator.errorText;
+              };
+            },
             revalidate$f: function (this$Validator) {
               return function () {
                 var tmp$0;
@@ -8879,6 +8809,12 @@
                 while (tmp$0.hasNext()) {
                   var listener = tmp$0.next();
                   listener(this);
+                }
+                if (this) {
+                  _.net.yested.bootstrap.removeTooltip_suuxpq$(this$Validator.inputElement.element);
+                }
+                 else {
+                  _.net.yested.bootstrap.addTooltip_ccaakq$(this$Validator.inputElement.element, new _.net.yested.bootstrap.TooltipOptions(void 0, void 0, void 0, _.net.yested.bootstrap.TooltipPlacement.object.BOTTOM), _.net.yested.bootstrap.Validator.f(this$Validator));
                 }
               };
             }
@@ -8933,42 +8869,26 @@
                 forId = '';
               if (validator === void 0)
                 validator = null;
-              var spanErrMsg = _.net.yested.with_owvm91$(new _.net.yested.Span(), _.net.yested.bootstrap.Form.item_gthhqa$f);
               if ((tmp$0 = this.formStyle_85hrfw$) != null ? tmp$0.equals_za3rmp$(_.net.yested.bootstrap.FormStyle.object.HORIZONTAL) : null) {
-                tmp$1 = _.net.yested.with_owvm91$(this.div_5rsex9$(void 0, this.inputDef_mlmxkk$.toString(), content), _.net.yested.bootstrap.Form.item_gthhqa$f_0(spanErrMsg));
+                tmp$1 = this.div_5rsex9$(void 0, this.inputDef_mlmxkk$.toString(), content);
               }
                else
-                tmp$1 = _.net.yested.with_owvm91$(this.span_dkuwo$(void 0, content), _.net.yested.bootstrap.Form.item_gthhqa$f_1(spanErrMsg));
+                tmp$1 = this.span_dkuwo$(void 0, content);
               var divInput = tmp$1;
-              var divFormGroup = this.div_5rsex9$(void 0, 'form-group ' + this.inputSize_9o3yq6$.code, _.net.yested.bootstrap.Form.item_gthhqa$f_2(forId, this, label, divInput));
-              validator != null ? validator.onchange_ra2fzg$(_.net.yested.bootstrap.Form.item_gthhqa$f_3(divFormGroup, spanErrMsg, validator)) : null;
+              var divFormGroup = this.div_5rsex9$(void 0, 'form-group ' + this.inputSize_9o3yq6$.code, _.net.yested.bootstrap.Form.item_gthhqa$f(forId, this, label, divInput));
+              validator != null ? validator.onchange_ra2fzg$(_.net.yested.bootstrap.Form.item_gthhqa$f_0(divFormGroup)) : null;
             }
           }, /** @lends _.net.yested.bootstrap.Form */ {
-            item_gthhqa$f: function () {
-              this.clazz = 'help-block';
-              this.rangeTo_94jgcu$('style', 'display:inline;');
-            },
-            item_gthhqa$f_0: function (spanErrMsg) {
-              return function () {
-                this.plus_pv6laa$(spanErrMsg);
-              };
-            },
-            item_gthhqa$f_1: function (spanErrMsg) {
-              return function () {
-                this.plus_pv6laa$(spanErrMsg);
-              };
-            },
-            item_gthhqa$f_2: function (forId, this$Form, label, divInput) {
+            item_gthhqa$f: function (forId, this$Form, label, divInput) {
               return function () {
                 var tmp$0;
                 this.label_aisbro$(forId, ((tmp$0 = this$Form.formStyle_85hrfw$) != null ? tmp$0.equals_za3rmp$(_.net.yested.bootstrap.FormStyle.object.HORIZONTAL) : null) ? this$Form.labelDef_hl3t2u$ + ' control-label' : '', label);
                 this.plus_pv6laa$(divInput);
               };
             },
-            item_gthhqa$f_3: function (divFormGroup, spanErrMsg, validator) {
+            item_gthhqa$f_0: function (divFormGroup) {
               return function (isValid) {
                 divFormGroup.clazz = isValid ? 'form-group' : 'form-group has-error';
-                spanErrMsg.setContent_61zpoe$(isValid ? '' : (validator != null ? validator : Kotlin.throwNPE()).errorText);
               };
             }
           }),
@@ -11451,6 +11371,22 @@
               options = new _.net.yested.bootstrap.TooltipOptions();
             _.net.yested.whenAddedToDom_v3j3j2$(element, _.net.yested.bootstrap.addTooltip_ccaakq$f(element, options, title));
           },
+          removeTooltip_suuxpq$f: function (element) {
+            return function () {
+              $(element).tooltip('destroy');
+            };
+          },
+          removeTooltip_suuxpq$: function (element) {
+            _.net.yested.whenAddedToDom_v3j3j2$(element, _.net.yested.bootstrap.removeTooltip_suuxpq$f(element));
+          },
+          showTooltip_suuxpq$f: function (element) {
+            return function () {
+              $(element).tooltip('show');
+            };
+          },
+          showTooltip_suuxpq$: function (element) {
+            _.net.yested.whenAddedToDom_v3j3j2$(element, _.net.yested.bootstrap.showTooltip_suuxpq$f(element));
+          },
           TextAlign: Kotlin.createEnumClass(function () {
             return [Kotlin.Enum];
           }, function $fun(code) {
@@ -12441,7 +12377,7 @@
               },
               element$f: function (this$SmartGrid) {
                 return function () {
-                  this.row(_.net.yested.pct_s8ev3o$(100), _.net.yested.px_s8ev3o$(30), _.net.yested.bootstrap.smartgrid.SmartGrid.f_7(this$SmartGrid));
+                  this.row(_.net.yested.pct_s8ev3o$(100), _.net.yested.px_s8ev3o$(this$SmartGrid.rowHeight), _.net.yested.bootstrap.smartgrid.SmartGrid.f_7(this$SmartGrid));
                   this.row(_.net.yested.pct_s8ev3o$(100), _.net.yested.pct_s8ev3o$(100), _.net.yested.bootstrap.smartgrid.SmartGrid.f_11(this$SmartGrid));
                   this.row(_.net.yested.pct_s8ev3o$(100), _.net.yested.px_s8ev3o$(15), _.net.yested.bootstrap.smartgrid.SmartGrid.f_16(this$SmartGrid));
                 };
