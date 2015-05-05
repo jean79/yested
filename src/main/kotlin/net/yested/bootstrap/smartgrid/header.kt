@@ -1,10 +1,12 @@
 package net.yested.bootstrap.smartgrid
 
-import net.yested.HTMLComponent
-import net.yested.Span
+import jquery.jq
+import net.yested.*
 import net.yested.bootstrap.Glyphicon
-import net.yested.bootstrap.InputSize
-import net.yested.bootstrap.StringInputField
+import net.yested.bootstrap.glyphicon
+import net.yested.utils.*
+import org.w3c.dom.Element
+import kotlin.js.dom.html.window
 
 /**
  * Internal class of SmartGrid
@@ -12,21 +14,82 @@ import net.yested.bootstrap.StringInputField
 class GridColumnHeader<T>(
         val column:GridColumn<T>,
         sortingSupported:Boolean,
-        sortFunction:((GridColumn<T>) -> Unit)?) : HTMLComponent("span") {
+        val filterHandler: Function1<Filter<T>?, Unit>,
+        filterConfig:String? = null,
+        sortFunction:((GridColumn<T>) -> Unit)?) : HTMLComponent("div") {
 
-    var arrowPlaceholder = Span()
+    private val arrowPlaceholder = Span()
+    private var filterContainer:Div?
+    private var filterDisplayed = false
+
+    private fun displayFilter() {
+        positionFilter()
+        Show().apply(filterContainer!!) {
+            filterDisplayed = true
+        }
+        /*jq(window).on( "scroll") {
+            if (filterDisplayed) {
+                positionFilter()
+            }
+        }*/
+    }
+
+    private fun positionFilter() {
+
+        val headerCellOffset = jq(this.element).offset()
+        var posY = headerCellOffset.top - jq(window).scrollTop() + jq(this.element).height() as Int
+        var posX = headerCellOffset.left - jq(window).scrollLeft()
+
+        jq(filterContainer!!.element).css("top", "${posY}px")
+        jq(filterContainer!!.element).css("left", "${posX}px")
+
+    }
 
     init {
-        if (sortingSupported) {
-            div {
-                a(href = null, onclick = { sortFunction!!(column)} ) {
-                    "style".."cursor: pointer;"
-                    +column.label
+
+        if (column.filterFactory != null) {
+            filterContainer = (Div() with {
+                "style".."position: fixed; z-index: 1; display: none;"
+            })
+            createFilter(filterConfig)
+            jq(window).on("click", { event ->
+                if (filterDisplayed) {
+                    if (jq(event.target as Element).closest(filterContainer!!.element).length == 0) {
+                        filterDisplayed = false
+                        Hide().apply(filterContainer!!)
+                    }
                 }
-                +arrowPlaceholder
+            })
+        } else {
+            filterContainer = null
+        }
+
+        if (sortingSupported) {
+            div { "style".."position: relative"
+                div {
+                    a(href = null, onclick = { sortFunction!!(column) }) {
+                        "style".."cursor: pointer;"
+                        +column.label
+                    }
+                    +arrowPlaceholder
+                    if (filterContainer != null) {
+                        +filterContainer!!
+                        a(href = null, onclick = { displayFilter() }) {
+                            "style".."cursor: pointer;"
+                            glyphicon(icon = "filter")
+                        }
+                    }
+                }
             }
         } else {
             +column.label
+        }
+    }
+
+    private fun createFilter(filterConfig: String?) {
+        filterContainer!!.removeAllChildren()
+        filterContainer!! with {
+            +column.filterFactory!!.createFilterElement(filterHandler, filterConfig)
         }
     }
 
@@ -35,6 +98,12 @@ class GridColumnHeader<T>(
             arrowPlaceholder.setContent("")
         } else {
             arrowPlaceholder.setChild(Glyphicon("arrow-${if (sortAscending) "up" else "down"}"))
+        }
+    }
+
+    fun repositionFilter() {
+        if (filterDisplayed) {
+            positionFilter()
         }
     }
 

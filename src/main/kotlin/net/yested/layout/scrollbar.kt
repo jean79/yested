@@ -131,11 +131,13 @@ public class ScrollBar(
         jq(handle.element).css(orientation.cssPosProperty, "${position}px")
     }
 
-    public fun setup(numberOfItems: Int, visibleItems: Int) {
+    public fun setup(numberOfItems: Int, visibleItems: Int, newPosition: Int) {
         this.numberOfItems = numberOfItems
         this.visibleItems = visibleItems
-        position = 0
-        element.whenAddedToDom { recalculate() }
+        element.whenAddedToDom {
+            recalculate()
+            position = newPosition
+        }
     }
 
     private fun recalculate() {

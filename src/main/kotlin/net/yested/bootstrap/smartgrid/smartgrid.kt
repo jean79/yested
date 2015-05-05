@@ -12,9 +12,19 @@ import org.w3c.dom.Node
 import java.util.ArrayList
 import java.util.HashMap
 import kotlin.js.dom.html.HTMLElement
+import kotlin.js.dom.html.window
 
 public trait CellEditorFactory<TYPE> {
     fun createEditor(width:String, item:TYPE, closeHandler: ()->Unit):HTMLElement
+}
+
+public class Filter<T>(
+        val filteringFunction: Function1<T, Boolean>,
+        val filterConfig: String
+)
+
+public trait FilterFactory<T> {
+    fun createFilterElement(newFilterHandler : Function1<Filter<T>?, Unit>, filterConfig : String? = null): Component
 }
 
 public data class GridColumn<T>(
@@ -24,6 +34,7 @@ public data class GridColumn<T>(
         val render: HTMLComponent.(T) -> Unit,
         val editor: CellEditorFactory<T>? = null,
         val align:Align = Align.LEFT,
+        val filterFactory: FilterFactory<T>? = null,
         val sortFunction:((T, T) -> Int)? = null)
 
 /**
@@ -73,7 +84,7 @@ public class SmartGrid<TYPE, KEY>(
 
     override val element =
             (VerticalContainer(width = 100.pct(), height = 100.pct()) with {
-                row(width = 100.pct(), height = rowHeight.px()) {
+                row(width = 100.pct(), height = (rowHeight).px()) {
                     horizontalContainer(width = 100.pct()) {
                         column(width = 100.pct()) {
                             scrollPane(horizontal = Overflow.HIDDEN) {
@@ -127,12 +138,15 @@ public class SmartGrid<TYPE, KEY>(
 
     private var gridIsCreated:Boolean = false
 
+    private val filters = hashMapOf<String, Filter<TYPE>>()
+
     private fun showDialogCustom() {
         openConfigurationDialog(columns.values(), visibleColumns, {
             visibleColumns = it;
-            renderHeaderInto(header)
             createRowsWithColumns()
+            renderHeaderInto(header)
             redisplayTheReorderedDataSet()
+            updateHorizontalScrollbar()
         })
     }
 
@@ -167,7 +181,7 @@ public class SmartGrid<TYPE, KEY>(
             val diffX:Int = xUp - touchStartX
 
             val newRow = touchStartRow - (diffY.toDouble()/rowHeight).toInt()
-            val limitedNewRow = Math.max(0, Math.min(newRow, dataList.size() - visibleRows))
+            val limitedNewRow = Math.max(0, Math.min(newRow, filteredDataList.size() - visibleRows))
             val newHorizontalScrollPosition = Math.max(0, Math.min(horizontalScrollStart - diffX, scrollBarHorizontal.numberOfItems))
 
             if (gridIsCreated) {
@@ -190,13 +204,22 @@ public class SmartGrid<TYPE, KEY>(
             createGrid()
             registerResizeHandler(cont.element) { x,y->
                 recalculateVisibleRows()
-                if (dataList.size() > 0) {
-                    createRowsWithColumns()
-                    redisplayTheReorderedDataSet()
-                } else {
-                    updateHorizontalScrollbar()
+                createRowsWithColumns()
+                if (filteredDataList.size() > 0) {
+                    displayNewData()
                 }
+                updateHorizontalScrollbar()
             }
+        }
+
+        jq(window).on("scroll") {
+            columnHeaders?.forEach { it.repositionFilter() }
+        }
+        jq(cont.element).on("scroll") {
+            columnHeaders?.forEach { it.repositionFilter() }
+        }
+        jq(window).on("resize") {
+            columnHeaders?.forEach { it.repositionFilter() }
         }
 
     }
@@ -206,26 +229,42 @@ public class SmartGrid<TYPE, KEY>(
         visibleRows = Math.floor(viewPortHeight / rowHeight)
     }
 
-    private var dataList: ArrayList<TYPE> = arrayListOf()
+    private var fullDataList: ArrayList<TYPE> = arrayListOf()
+    private var filteredDataList: ArrayList<TYPE> = arrayListOf()
     private var dataListAsKeyMap: MutableMap<KEY, TYPE> = hashMapOf()
 
     public var list: ArrayList<TYPE>?
-        get() = dataList
+        get() = fullDataList
         set(value) {
-            dataList = value ?: arrayListOf()
-            dataListAsKeyMap = dataList.toMap { getKey(it) } as MutableMap
+            fullDataList = value ?: arrayListOf()
+            dataListAsKeyMap = fullDataList.toMap { getKey(it) } as MutableMap
             currentRow = 0
+            refilterData()
             repeatWithDelayUntil( { gridIsCreated }, 100) {
                 createRowsWithColumns()
-                redisplayTheReorderedDataSet()
-                scrollBarVertical.setup(numberOfItems = dataList.size() - visibleRows, visibleItems = visibleRows)
-                if (dataList.size() <= visibleRows) {
-                    scrollBarVertical.setTrackerVisible(false)
-                } else {
-                    scrollBarVertical.setTrackerVisible(true)
-                }
+                displayNewData()
             }
         }
+
+    private fun displayNewData() {
+        currentRow = Math.min(currentRow, Math.max(0, filteredDataList.size() - visibleRows))
+        redisplayTheReorderedDataSet()
+        updateVerticalScrollbarToReflectChangeNumberOfItems()
+    }
+
+    private fun updateVerticalScrollbarToReflectChangeNumberOfItems() {
+        val adjustedVisibleRows = calculateAdjustedVisibleRowsForVerticalScrollbar()
+        println("${filteredDataList.size()} ${filteredDataList.size()-visibleRows} ${adjustedVisibleRows}")
+        scrollBarVertical.setup(numberOfItems = filteredDataList.size() - visibleRows, visibleItems = adjustedVisibleRows, newPosition = currentRow)
+        if (filteredDataList.size() <= visibleRows) {
+            scrollBarVertical.setTrackerVisible(false)
+        } else {
+            scrollBarVertical.setTrackerVisible(true)
+        }
+    }
+
+    private fun calculateAdjustedVisibleRowsForVerticalScrollbar() =
+            Math.max(1, (visibleRows * ((filteredDataList.size() - visibleRows).toDouble() / filteredDataList.size().toDouble())).toInt())
 
     private fun verticalScrollBarMoved(newPosition:Int) {
         currentRow = newPosition
@@ -259,7 +298,7 @@ public class SmartGrid<TYPE, KEY>(
     private fun sortData() {
 
         if (sortColumn?.sortFunction != null) {
-            dataList = dataList.sortBy(object : java.util.Comparator<TYPE> {
+            filteredDataList = filteredDataList.sortBy(object : java.util.Comparator<TYPE> {
                 override fun compare(obj1: TYPE, obj2: TYPE): Int {
                     return (sortColumn!!.sortFunction!!(obj1, obj2)) * (if (asc) 1 else -1)
                 }
@@ -276,6 +315,8 @@ public class SmartGrid<TYPE, KEY>(
                     GridColumnHeader(
                             column = it,
                             sortingSupported = it.sortFunction != null,
+                            filterHandler = { filter -> updateFilter(it.id, filter)},
+                            filterConfig = filters.get(it.id)?.filterConfig ?: null,
                             sortFunction = { sortByColumn(it) } )}
 
         headerDiv.removeAllContent()
@@ -284,13 +325,60 @@ public class SmartGrid<TYPE, KEY>(
                 .map { createColumnHeader(it) }
                 .forEach { headerDiv.appendChild(it.element) }
 
+        val filtersOfHiddenColumns = filters.keySet().filter { !visibleColumns.contains(it) }
+        filtersOfHiddenColumns.forEach {
+            filters.remove(it)
+        }
+
+        if (gridIsCreated) {
+            filtersChanged()
+        }
+
+    }
+
+    private fun updateFilter(columnId:String, filter: Filter<TYPE>?) {
+        if (filter != null) {
+            filters.put(columnId, filter)
+        } else {
+            filters.remove(columnId)
+        }
+        filtersChanged()
+    }
+
+    private fun filtersChanged() {
+        refilterData()
+        displayNewData()
+    }
+
+    private fun refilterData() {
+        if (filters.size() == 0) {
+            filteredDataList = fullDataList
+        } else {
+            filteredDataList = fullDataList
+                    .filter {
+                        isItemMatchingFilters(it)
+                    }
+                    .toArrayList()
+        }
+    }
+
+    private fun isItemMatchingFilters(item: TYPE): Boolean {
+        var matching = true
+        for (filter in filters.values()) {
+            if (!filter.filteringFunction(item)) {
+                matching = false
+                break
+            }
+        }
+        return matching
     }
 
     private fun updateHorizontalScrollbar() {
         val range = jq(dataTable).width().toInt() - jq(cont.element).width().toInt()
         if (range > 0) {
             val handlerSize = range * (jq(cont.element).width().toDouble() / jq(header).width().toDouble())
-            scrollBarHorizontal.setup(numberOfItems = range.toInt(), visibleItems = handlerSize.toInt())
+            val newHorizontalPosition = Math.min(scrollBarHorizontal.position, range.toInt())
+            scrollBarHorizontal.setup(numberOfItems = range.toInt(), visibleItems = handlerSize.toInt(), newPosition = newHorizontalPosition)
             scrollBarHorizontal.setTrackerVisible(true)
         } else {
             scrollBarHorizontal.setTrackerVisible(false)
@@ -328,7 +416,7 @@ public class SmartGrid<TYPE, KEY>(
                 if (td.getAttribute("editing") != "true") {
                     td.setAttribute("editing", "true")
                     val rowIndex = getTBody().getIndexOfChildNode(td.parentNode)
-                    val item = dataList.get(currentRow + rowIndex)
+                    val item = filteredDataList.get(currentRow + rowIndex)
                     val editor = column.editor.createEditor(
                             column.width,
                             item,
@@ -357,7 +445,7 @@ public class SmartGrid<TYPE, KEY>(
             val delta = Math.max(-1, Math.min(1, (e.wheelDelta || -e.detail) as Int));
             event.preventDefault()
             if (delta < 0) {
-                currentRow = Math.min(currentRow + 1, dataList.size() - visibleRows)
+                currentRow = Math.min(currentRow + 1, filteredDataList.size() - visibleRows)
             } else {
                 currentRow = Math.max(0, currentRow - 1)
             }
@@ -407,37 +495,55 @@ public class SmartGrid<TYPE, KEY>(
         val tbody = getTBody()
         val rows = tbody.childNodes
 
-        rowsReferences.clear()
-
         val maxOptimizedMove:Int = Math.min(1, visibleRows / 2);
 
-        if (previousRow != null && previousRow in (currentRow - maxOptimizedMove) .. (currentRow - 1)) {
+        if (previousRow != null && previousRow in (currentRow - maxOptimizedMove) .. (currentRow - 1)) { //scrolling down
             val movedRowsCount:Int = currentRow - previousRow
+
             (1..movedRowsCount).forEach { index ->
+
+                //remove previous records from rowsReferences
+                val removedItem = filteredDataList.get(previousRow + index - 1)
+                rowsReferences.remove(getKey(removedItem))
+
                 val movedRow = rows.item(0)
                 tbody.appendChild(movedRow)
-                val itemForLastRow = dataList.get(visibleRows + currentRow - (movedRowsCount - index + 1))
+                val itemForLastRow = filteredDataList.get(visibleRows + currentRow - (movedRowsCount - index + 1))
                 updateRow(columns, itemForLastRow, movedRow)
                 rowsReferences.put(getKey(itemForLastRow), movedRow as HTMLElement)
+                //TODO: remove references to removed rows from rowsReferences
             }
-        } else if (previousRow != null && previousRow in ((currentRow + 1) .. (currentRow + maxOptimizedMove))) {
+        } else if (previousRow != null && previousRow in ((currentRow + 1) .. (currentRow + maxOptimizedMove))) { //scrolling up
             val movedRowsCount:Int = previousRow -currentRow
             (1..movedRowsCount).forEach { index ->
+
+                //remove previous records from rowsReferences
+                val removedItem = filteredDataList.get(previousRow + visibleRows - index)
+                rowsReferences.remove(getKey(removedItem))
+
                 val movedRow = rows.item(visibleRows-1)
                 val firstRow = rows.item(0)
                 tbody.insertBefore(movedRow, firstRow)
-                val itemForLastRow = dataList.get(currentRow - index + 1)
+                val itemForLastRow = filteredDataList.get(currentRow - index + 1)
                 updateRow(columns, itemForLastRow, movedRow)
                 rowsReferences.put(getKey(itemForLastRow), movedRow as HTMLElement)
+                //TODO: remove references to removed rows from rowsReferences
             }
         } else {
-            (1..Math.min(visibleRows, dataList.size()))
+            rowsReferences.clear()
+            val rowsToRender = Math.min(visibleRows, filteredDataList.size())
+            (1..rowsToRender)
                     .forEach {
                         val tr = rows.item(it - 1) as HTMLElement
-                        val item = dataList.get(it + currentRow - 1)
+                        val item = filteredDataList.get(it + currentRow - 1)
                         updateRow(columns, item, tr)
                         rowsReferences.put(getKey(item), tr)
                     }
+            ((rowsToRender+1)..visibleRows)
+                .forEach {
+                    val tr = rows.item(it - 1) as HTMLElement
+                    clearRow(columns, tr)
+                }
         }
 
     }
@@ -456,6 +562,17 @@ public class SmartGrid<TYPE, KEY>(
         }
     }
 
+    private fun clearRow(columns: List<GridColumn<TYPE>>, tr: Node, columnsToUpdate: Collection<String>? = null) {
+        columns.forEachIndexed { columnIndex, column ->
+            if (columnsToUpdate == null || columnsToUpdate.contains(column.id)) {
+                val td = tr.childNodes.item(columnIndex) as HTMLElement
+                HTMLComponent("", td) with {
+                    removeAllChildren()
+                }
+            }
+        }
+    }
+
     public fun updateItem(item: TYPE, columnsToUpdate: Collection<String>? = null) {
 
         val originalItem = dataListAsKeyMap.get(getKey(item))
@@ -463,19 +580,31 @@ public class SmartGrid<TYPE, KEY>(
             throw Exception("Item ${item}} not found in the list")
         }
 
-        val index = dataList.indexOf(originalItem)
+        val index = fullDataList.indexOf(originalItem)
 
-        dataList.remove(originalItem)
-        dataList.add(index, item)
+        fullDataList.remove(originalItem)
+        fullDataList.add(index, item)
         dataListAsKeyMap.put(getKey(item), item)
 
-        val tr = rowsReferences.get(getKey(item))
-        if (tr != null) {
-            updateRow(getVisibleColumns(), item, tr, columnsToUpdate)
+        val wasInList = filteredDataList.remove(originalItem)
+        val isMatchingFilter = isItemMatchingFilters(item)
+        if (isMatchingFilter) {
+            filteredDataList.add(item)
         }
+
         //disable sorting for performance reason
         sortColumn = null
         setSortingArrow()
+
+        if (wasInList == isMatchingFilter) {
+            val tr = rowsReferences.get(getKey(item))
+            if (tr != null) {
+                updateRow(getVisibleColumns(), item, tr, columnsToUpdate)
+            }
+        } else {
+            //item was either added or removed from the filtered list, better to redisplay whole content,
+            displayNewData()
+        }
 
     }
 
