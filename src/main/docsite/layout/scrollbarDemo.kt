@@ -50,7 +50,8 @@ fun createScrollBarSection(): Div {
                         btsButton(size = ButtonSize.SMALL, label = { +"Set scrollbar"}) {
                             scrollBarVetical.setup(
                                     numberOfItems = fieldTotalNumber.data?:100,
-                                    visibleItems = fieldViewportSize.data?:20)
+                                    visibleItems = fieldViewportSize.data?:20,
+                                    newPosition = 10)
                         }
                     }
                     item(label = {} ) { br() }

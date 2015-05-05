@@ -2,16 +2,14 @@ package complex
 
 import kotlin.browser.document
 import kotlin.js.dom.html.window
-import net.yested.bootstrap.smartgrid.SmartGrid
-import net.yested.bootstrap.smartgrid.GridColumn
 import kotlin.js.dom.html.HTMLElement
 import jquery.jq
 import net.yested.*
 import net.yested.utils.on
 import net.yested.utils.isIncludedInDOM
 import net.yested.utils.keypress
-import net.yested.bootstrap.smartgrid.CellEditorFactory
 import net.yested.bootstrap.*
+import net.yested.bootstrap.smartgrid.*
 import net.yested.layout.ScrollBar
 import net.yested.layout.ScrollBarOrientation
 import kotlin.dom.addText
@@ -101,6 +99,8 @@ fun generateData() =
                             col15 = Math.random()*100) }
                 .toArrayList()
 
+
+
 class CustomizableGridSection: Component {
 
     override val element: HTMLElement
@@ -111,8 +111,12 @@ class CustomizableGridSection: Component {
             defaultSortColumn = "ticker",
             defaultSortOrderAsc = true,
             columns = array(
-                    GridColumn(id = "ticker", width = "80px", label = "Ticker", render = { +it.ticker }, sortFunction = compareByValue<MarketData, String> { it.ticker }),
-                    GridColumn(id = "price",  width = "80px", label = "Price", render = { +"${it.price.toFixed(2)}" }, sortFunction = compareByValue<MarketData, Double> { it.price },
+                    GridColumn(id = "ticker", width = "80px", label = "Ticker", render = { +it.ticker },
+                            filterFactory = TextInputFilterFactory { text -> { item:MarketData -> item.ticker.contains(text)} },
+                            sortFunction = compareByValue<MarketData, String> { it.ticker }),
+                    GridColumn(id = "price",  width = "80px", label = "Price", render = { +"${it.price.toFixed(2)}" },
+                            filterFactory = TextInputFilterFactory { text -> val value = parseInt(text); { item:MarketData -> item.price >= value} },
+                            sortFunction = compareByValue<MarketData, Double> { it.price },
                             editor = DoubleEditor(getValue = {it.price}, saveValue = {item, value -> updateItem(item.copy(price = value), "price")} ) ),
                     GridColumn(id = "move", width = "80px", label = "Move", render = { coloredNumber(it.move) }, sortFunction = compareByValue<MarketData, Double> { it.move }),
                     GridColumn(id = "min", width = "80px", label = "Min", render = { +"${it.min.toFixed(2)}" }, sortFunction = compareByValue<MarketData, Double> { it.min }),
