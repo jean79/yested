@@ -3626,82 +3626,7 @@
       },
       effectsPage: function () {
         return _.net.yested.div_5rsex9$(void 0, void 0, _.bootstrap.effectsPage$f);
-      },
-      sample: Kotlin.definePackage(function () {
-        this.persons = [new _.bootstrap.sample.Person('Steven', 27, 'Prague'), new _.bootstrap.sample.Person('Martin', 57, 'New York')];
-        var tmp$0, tmp$1;
-        var filter_dgtl0h$result;
-        var tmp$6;
-        var destination = new Kotlin.ArrayList();
-        var filterTo_pw4f83$result;
-        var tmp$4, tmp$3, tmp$2, tmp$5;
-        tmp$4 = _.bootstrap.sample.persons, tmp$3 = tmp$4.length;
-        for (var tmp$2 = 0; tmp$2 !== tmp$3; ++tmp$2) {
-          var element = tmp$4[tmp$2];
-          tmp$5 = Kotlin.equals(element.city, 'Prague');
-          if (tmp$5) {
-            destination.add_za3rmp$(element);
-          }
-        }
-        filterTo_pw4f83$result = destination;
-        tmp$6 = filterTo_pw4f83$result;
-        filter_dgtl0h$result = tmp$6;
-        tmp$0 = filter_dgtl0h$result;
-        var map_m3yiqg$result;
-        var tmp$9;
-        var destination_0 = new Kotlin.ArrayList();
-        var mapTo_e7zafy$result;
-        var tmp$7, tmp$8;
-        tmp$7 = tmp$0.iterator();
-        while (tmp$7.hasNext()) {
-          var item = tmp$7.next();
-          tmp$8 = item.age;
-          destination_0.add_za3rmp$(tmp$8);
-        }
-        mapTo_e7zafy$result = destination_0;
-        tmp$9 = mapTo_e7zafy$result;
-        map_m3yiqg$result = tmp$9;
-        tmp$1 = map_m3yiqg$result;
-        this.maxAge = Kotlin.modules['stdlib'].kotlin.first_fvq2g0$(Kotlin.modules['stdlib'].kotlin.sortDescending_77rvyy$(tmp$1));
-      }, /** @lends _.bootstrap.sample */ {
-        Person: Kotlin.createClass(null, function (name, age, city) {
-          this.name = name;
-          this.age = age;
-          this.city = city;
-        }, /** @lends _.bootstrap.sample.Person.prototype */ {
-          component1: function () {
-            return this.name;
-          },
-          component2: function () {
-            return this.age;
-          },
-          component3: function () {
-            return this.city;
-          },
-          copy: function (name, age, city) {
-            return new _.bootstrap.sample.Person(name === void 0 ? this.name : name, age === void 0 ? this.age : age, city === void 0 ? this.city : city);
-          },
-          toString: function () {
-            return 'Person(name=' + Kotlin.toString(this.name) + (', age=' + Kotlin.toString(this.age)) + (', city=' + Kotlin.toString(this.city)) + ')';
-          },
-          hashCode: function () {
-            var result = 0;
-            result = result * 31 + Kotlin.hashCode(this.name) | 0;
-            result = result * 31 + Kotlin.hashCode(this.age) | 0;
-            result = result * 31 + Kotlin.hashCode(this.city) | 0;
-            return result;
-          },
-          equals_za3rmp$: function (other) {
-            return this === other || (other !== null && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.name, other.name) && Kotlin.equals(this.age, other.age) && Kotlin.equals(this.city, other.city))));
-          }
-        }),
-        test: function () {
-          var colorized = new _.net.yested.Colorized(_.net.yested.Colors.object.BLUE.color);
-          colorized.setContent_61zpoe$('Blue text');
-          var div = new _.net.yested.Div();
-          div.appendChild_5f0h2k$(colorized);
-        }
-      })
+      }
     }),
     complex: Kotlin.definePackage(null, /** @lends _.complex */ {
       Continent: Kotlin.createEnumClass(function () {
@@ -12241,7 +12166,6 @@
               },
               updateVerticalScrollbarToReflectChangeNumberOfItems: function () {
                 var adjustedVisibleRows = this.calculateAdjustedVisibleRowsForVerticalScrollbar();
-                Kotlin.println(this.filteredDataList_x74uz6$.size().toString() + ' ' + (this.filteredDataList_x74uz6$.size() - this.visibleRows_psclms$) + ' ' + adjustedVisibleRows);
                 this.scrollBarVertical_o0ibxp$.setup_qt1dr2$(this.filteredDataList_x74uz6$.size() - this.visibleRows_psclms$, adjustedVisibleRows, this.currentRow_ud8t5c$);
                 if (this.filteredDataList_x74uz6$.size() <= this.visibleRows_psclms$) {
                   this.scrollBarVertical_o0ibxp$.setTrackerVisible_6taknv$(false);
@@ -12589,6 +12513,19 @@
                   }
                 }
               },
+              findByKey: function (collection, key) {
+                var tmp$0;
+                var index = 0;
+                tmp$0 = collection.iterator();
+                while (tmp$0.hasNext()) {
+                  var item = tmp$0.next();
+                  if (Kotlin.equals(this.getKey(item), key)) {
+                    return index;
+                  }
+                  index++;
+                }
+                return -1;
+              },
               updateItem_9w143m$: function (item, columnsToUpdate) {
                 if (columnsToUpdate === void 0)
                   columnsToUpdate = null;
@@ -12597,13 +12534,25 @@
                   throw new Kotlin.Exception('Item ' + item + '} not found in the list');
                 }
                 var index = this.fullDataList_2ybsuy$.indexOf_za3rmp$(originalItem);
-                this.fullDataList_2ybsuy$.remove_za3rmp$(originalItem);
+                this.fullDataList_2ybsuy$.remove_za3lpa$(index);
                 this.fullDataList_2ybsuy$.add_vux3hl$(index, item);
                 this.dataListAsKeyMap_deynhi$.put_wn2jw4$(this.getKey(item), item);
-                var wasInList = this.filteredDataList_x74uz6$.remove_za3rmp$(originalItem);
+                var indexInFilteredList = this.findByKey(this.filteredDataList_x74uz6$, this.getKey(item));
+                var wasInList = indexInFilteredList >= 0;
+                if (wasInList) {
+                  this.filteredDataList_x74uz6$.remove_za3lpa$(indexInFilteredList);
+                  Kotlin.println('removing');
+                }
                 var isMatchingFilter = this.isItemMatchingFilters(item);
                 if (isMatchingFilter) {
-                  this.filteredDataList_x74uz6$.add_za3rmp$(item);
+                  if (wasInList) {
+                    Kotlin.println('replacing in filtered list');
+                    this.filteredDataList_x74uz6$.add_vux3hl$(indexInFilteredList, item);
+                  }
+                   else {
+                    Kotlin.println('adding as new');
+                    this.filteredDataList_x74uz6$.add_za3rmp$(item);
+                  }
                 }
                 this.sortColumn_vt3fdp$ = null;
                 this.setSortingArrow();
@@ -12959,19 +12908,30 @@
               },
               createGrid$f: function (this$SmartGrid) {
                 return function (event) {
+                  var tmp$0, tmp$1;
                   var previousRow = this$SmartGrid.currentRow_ud8t5c$;
                   var e = event.originalEvent;
-                  var delta = Math.max(-1, Math.min(1, e.wheelDelta || -e.detail));
                   event.preventDefault();
-                  if (delta < 0) {
-                    this$SmartGrid.currentRow_ud8t5c$ = Math.min(this$SmartGrid.currentRow_ud8t5c$ + 1, this$SmartGrid.filteredDataList_x74uz6$.size() - this$SmartGrid.visibleRows_psclms$);
+                  if (Math.abs(e.wheelDeltaY) > Math.abs(e.wheelDeltaX)) {
+                    var deltaY = Math.max(-1, Math.min(1, (tmp$0 = e.wheelDeltaY) != null ? tmp$0 : Kotlin.throwNPE()));
+                    if (deltaY < 0) {
+                      this$SmartGrid.currentRow_ud8t5c$ = Math.min(this$SmartGrid.currentRow_ud8t5c$ + 1, this$SmartGrid.filteredDataList_x74uz6$.size() - this$SmartGrid.visibleRows_psclms$);
+                    }
+                     else if (deltaY > 0) {
+                      this$SmartGrid.currentRow_ud8t5c$ = Math.max(0, this$SmartGrid.currentRow_ud8t5c$ - 1);
+                    }
+                    if (previousRow !== this$SmartGrid.currentRow_ud8t5c$) {
+                      this$SmartGrid.redisplayTheReorderedDataSet(previousRow);
+                      this$SmartGrid.scrollBarVertical_o0ibxp$.position = this$SmartGrid.currentRow_ud8t5c$;
+                    }
                   }
-                   else {
-                    this$SmartGrid.currentRow_ud8t5c$ = Math.max(0, this$SmartGrid.currentRow_ud8t5c$ - 1);
-                  }
-                  if (previousRow !== this$SmartGrid.currentRow_ud8t5c$) {
-                    this$SmartGrid.redisplayTheReorderedDataSet(previousRow);
-                    this$SmartGrid.scrollBarVertical_o0ibxp$.position = this$SmartGrid.currentRow_ud8t5c$;
+                  if (Math.abs(e.wheelDeltaX) > Math.abs(e.wheelDeltaY)) {
+                    var deltaX = Math.max(-1, Math.min(1, (tmp$1 = e.wheelDeltaX) != null ? tmp$1 : Kotlin.throwNPE()));
+                    if (deltaX !== 0) {
+                      var newHorizontalScrollPosition = Math.max(0, Math.min(this$SmartGrid.scrollBarHorizontal_c3iy1n$.position - deltaX * 10, this$SmartGrid.scrollBarHorizontal_c3iy1n$.numberOfItems));
+                      this$SmartGrid.scrollBarHorizontal_c3iy1n$.position = newHorizontalScrollPosition;
+                      this$SmartGrid.cont_905dxb$.element.scrollLeft = newHorizontalScrollPosition;
+                    }
                   }
                 };
               },

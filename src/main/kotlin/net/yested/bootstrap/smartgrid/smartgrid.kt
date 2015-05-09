@@ -254,7 +254,6 @@ public class SmartGrid<TYPE, KEY>(
 
     private fun updateVerticalScrollbarToReflectChangeNumberOfItems() {
         val adjustedVisibleRows = calculateAdjustedVisibleRowsForVerticalScrollbar()
-        println("${filteredDataList.size()} ${filteredDataList.size()-visibleRows} ${adjustedVisibleRows}")
         scrollBarVertical.setup(numberOfItems = filteredDataList.size() - visibleRows, visibleItems = adjustedVisibleRows, newPosition = currentRow)
         if (filteredDataList.size() <= visibleRows) {
             scrollBarVertical.setTrackerVisible(false)
@@ -442,16 +441,26 @@ public class SmartGrid<TYPE, KEY>(
         jq(dataTable).on("mousewheel") { event ->
             val previousRow = currentRow
             val e = event.originalEvent
-            val delta = Math.max(-1, Math.min(1, (e.wheelDelta || -e.detail) as Int));
             event.preventDefault()
-            if (delta < 0) {
-                currentRow = Math.min(currentRow + 1, filteredDataList.size() - visibleRows)
-            } else {
-                currentRow = Math.max(0, currentRow - 1)
+            if (Math.abs(e.wheelDeltaY) > Math.abs(e.wheelDeltaX)) {
+                val deltaY = Math.max(-1, Math.min(1, (e.wheelDeltaY ) as Int)); //|| -e.detail
+                if (deltaY < 0) {
+                    currentRow = Math.min(currentRow + 1, filteredDataList.size() - visibleRows)
+                } else if (deltaY > 0) {
+                    currentRow = Math.max(0, currentRow - 1)
+                }
+                if (previousRow != currentRow) {
+                    redisplayTheReorderedDataSet(previousRow)
+                    scrollBarVertical.position = currentRow
+                }
             }
-            if (previousRow != currentRow) {
-                redisplayTheReorderedDataSet(previousRow)
-                scrollBarVertical.position = currentRow
+            if (Math.abs(e.wheelDeltaX) > Math.abs(e.wheelDeltaY)) {
+                val deltaX = Math.max(-1, Math.min(1, (e.wheelDeltaX) as Int));
+                if (deltaX != 0) {
+                    val newHorizontalScrollPosition = Math.max(0, Math.min(scrollBarHorizontal.position - deltaX * 10, scrollBarHorizontal.numberOfItems))
+                    scrollBarHorizontal.position = newHorizontalScrollPosition
+                    cont.element.scrollLeft = newHorizontalScrollPosition.toDouble()
+                }
             }
         }
 
@@ -573,6 +582,17 @@ public class SmartGrid<TYPE, KEY>(
         }
     }
 
+    private fun findByKey(collection:Collection<TYPE>, key: KEY): Int {
+        var index = 0
+        for (item in collection) {
+            if (getKey(item) == key) {
+                return index
+            }
+            index++
+        }
+        return -1
+    }
+
     public fun updateItem(item: TYPE, columnsToUpdate: Collection<String>? = null) {
 
         val originalItem = dataListAsKeyMap.get(getKey(item))
@@ -582,14 +602,22 @@ public class SmartGrid<TYPE, KEY>(
 
         val index = fullDataList.indexOf(originalItem)
 
-        fullDataList.remove(originalItem)
+        fullDataList.remove(index)
         fullDataList.add(index, item)
         dataListAsKeyMap.put(getKey(item), item)
 
-        val wasInList = filteredDataList.remove(originalItem)
+        val indexInFilteredList = findByKey(filteredDataList, getKey(item))
+        val wasInList = indexInFilteredList >= 0
+        if (wasInList) {
+            filteredDataList.remove(indexInFilteredList)
+        }
         val isMatchingFilter = isItemMatchingFilters(item)
         if (isMatchingFilter) {
-            filteredDataList.add(item)
+            if (wasInList) {
+                filteredDataList.add(indexInFilteredList, item)
+            } else {
+                filteredDataList.add(item)
+            }
         }
 
         //disable sorting for performance reason
