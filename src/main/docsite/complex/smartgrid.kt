@@ -14,7 +14,7 @@ import net.yested.layout.ScrollBar
 import net.yested.layout.ScrollBarOrientation
 import kotlin.dom.addText
 
-data class MarketData(val ticker:String, var price:Double, var move:Double,
+data class MarketData(val ticker:String, val country:String, val ccy:String, var price:Double, var move:Double,
                       val min:Double, val max:Double, val avg:Double, val quantity:Double,
                       val fair:Double, val ask:Double,
                       val col1:Double, val col2:Double, val col3:Double, val col4:Double, val col5:Double,
@@ -69,11 +69,16 @@ public class DoubleEditor<TYPE>(
 
 }
 
+val currencies = array("CZK", "USD", "ZAR", "GBP", "AUD")
+val countries = array("Czech Republic", "USA", "Austria", "Hungary")
+
 fun generateData() =
         (1..500)
-                .map {
+                .mapIndexed { index, it ->
                     MarketData(
                             ticker= "A${it}",
+                            ccy = currencies[index % currencies.size()],
+                            country = countries[index % countries.size()],
                             price = Math.random()*100,
                             min = Math.random()*100,
                             max = Math.random()*100,
@@ -111,15 +116,24 @@ class CustomizableGridSection: Component {
             defaultSortColumn = "ticker",
             defaultSortOrderAsc = true,
             columns = array(
-                    GridColumn(id = "ticker", width = "80px", label = "Ticker", render = { +it.ticker },
+                    GridColumn(id = "ticker", width = "100px", label = "Ticker", render = { +it.ticker },
                             filterFactory = TextInputFilterFactory { text -> { item:MarketData -> item.ticker.contains(text)} },
-                            sortFunction = compareByValue<MarketData, String> { it.ticker }),
+                            sortFunction = compareByValue<MarketData, String> { it.ticker },
+                            groupBy = { it.ticker.substring(0, 2)}),
+                    GridColumn(id = "country", width = "140px", label = "Country", render = { +it.country },
+                            filterFactory = TextInputFilterFactory { text -> { item:MarketData -> item.country.contains(text)} },
+                            sortFunction = compareByValue<MarketData, String> { it.country },
+                            groupBy = { it.country }),
+                    GridColumn(id = "ccy", width = "90px", label = "Ccy", render = { +it.ccy },
+                            filterFactory = TextInputFilterFactory { text -> { item:MarketData -> item.ccy.contains(text)} },
+                            sortFunction = compareByValue<MarketData, String> { it.ccy },
+                            groupBy = { it.ccy }),
                     GridColumn(id = "price",  width = "80px", label = "Price", render = { +"${it.price.toFixed(2)}" },
                             filterFactory = TextInputFilterFactory { text -> val value = parseInt(text); { item:MarketData -> item.price >= value} },
                             sortFunction = compareByValue<MarketData, Double> { it.price },
                             editor = DoubleEditor(getValue = {it.price}, saveValue = {item, value -> updateItem(item.copy(price = value), "price")} ) ),
-                    GridColumn(id = "move", width = "80px", label = "Move", render = { coloredNumber(it.move) }, sortFunction = compareByValue<MarketData, Double> { it.move }),
-                    GridColumn(id = "min", width = "80px", label = "Min", render = { +"${it.min.toFixed(2)}" }, sortFunction = compareByValue<MarketData, Double> { it.min }),
+                    GridColumn(id = "move", width = "80px", label = "Move", render = { coloredNumber(it.move) }, sortFunction = compareByValue<MarketData, Double> { it.move }, getNumber = { it.move }),
+                    GridColumn(id = "min", width = "80px", label = "Min", render = { +"${it.min.toFixed(2)}" }, sortFunction = compareByValue<MarketData, Double> { it.min }, getNumber = { it.min }),
                     GridColumn(id = "max", width = "80px", label = "Max", render = { +"${it.max.toFixed(2)}" }, sortFunction = compareByValue<MarketData, Double> { it.max }),
                     GridColumn(id = "avg", width = "80px", label = "Avg", render = { +"${it.avg.toFixed(2)}" }, sortFunction = compareByValue<MarketData, Double> { it.avg }),
                     GridColumn(id = "fair", width = "80px", label = "Fair", render = { +"${it.fair.toFixed(2)}" }, sortFunction = compareByValue<MarketData, Double> { it.fair }),
@@ -176,7 +190,8 @@ class CustomizableGridSection: Component {
                     li { +"Sorting (optional per cell) is enabled via provided sorting functions." }
                     li { +"Columns can be re-sorted via Drag&amp;Drop." }
                     li { +"Columns visibility is set in a dedicated Configuration Dialog." }
-
+                    li { +"Support customizable filtering." }
+                    li { +"Support customizable aggregation and aggregation functions.." }
                 }
             }
             col(Small(6)) {

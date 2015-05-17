@@ -16,7 +16,11 @@ class GridColumnHeader<T>(
         sortingSupported:Boolean,
         val filterHandler: Function1<Filter<T>?, Unit>,
         filterConfig:String? = null,
-        sortFunction:((GridColumn<T>) -> Unit)?) : HTMLComponent("div") {
+        sortFunction: Function1<GridColumn<T>, Unit>,
+        groupFunction: Function1<GridColumn<T>, Unit>,
+        openAggregatedGroups: Function0<Unit>,
+        closeAggregatedGroups: Function0<Unit>,
+        cancelAggregation: Function0<Unit>) : HTMLComponent("div") {
 
     private val arrowPlaceholder = Span()
     private var filterContainer:Div?
@@ -27,11 +31,6 @@ class GridColumnHeader<T>(
         Show().apply(filterContainer!!) {
             filterDisplayed = true
         }
-        /*jq(window).on( "scroll") {
-            if (filterDisplayed) {
-                positionFilter()
-            }
-        }*/
     }
 
     private fun positionFilter() {
@@ -78,11 +77,31 @@ class GridColumnHeader<T>(
                             "style".."cursor: pointer;"
                             glyphicon(icon = "filter")
                         }
+                        if (column.groupBy != null) {
+                            a(href = null, onclick = { groupFunction(column) }) {
+                                "style".."cursor: pointer;"
+                                glyphicon(icon = "folder-open")
+                            }
+                        }
                     }
                 }
             }
         } else {
-            +column.label
+            if (column.id == "root") { //render aggregated column header
+                a(onclick = { openAggregatedGroups() }) { "style".."cursor: pointer;"
+                    glyphicon("plus")
+                }
+                nbsp()
+                a(onclick = { closeAggregatedGroups() }) { "style".."cursor: pointer;"
+                    glyphicon("minus")
+                }
+                nbsp()
+                a(onclick = { cancelAggregation() }) { "style".."cursor: pointer;"
+                    glyphicon("remove")
+                }
+            } else {
+                +column.label
+            }
         }
     }
 
