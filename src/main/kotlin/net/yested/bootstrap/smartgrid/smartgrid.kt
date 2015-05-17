@@ -1,5 +1,6 @@
 package net.yested.bootstrap.smartgrid
 
+import complex.MarketData
 import jquery.jq
 import net.yested.*
 import net.yested.bootstrap.Align
@@ -35,7 +36,89 @@ public data class GridColumn<T>(
         val editor: CellEditorFactory<T>? = null,
         val align:Align = Align.LEFT,
         val filterFactory: FilterFactory<T>? = null,
-        val sortFunction:((T, T) -> Int)? = null)
+        val sortFunction:((T, T) -> Int)? = null,
+        val groupBy: ((T) -> String)? = null,
+        val getNumber: ((T) -> Double?)? = null)
+
+private class Group<T>(
+        val groupName:String,
+        var subgroups:List<Group<T>>? = null,
+        var items:List<T>? = null,
+        var open:Boolean = true,
+        var aggregated:MutableMap<String, Double>? = null
+)
+
+private open class VisibleItem<T>
+
+private class VisibleItemGroup<T>(
+        val groupName:Comparable<*>,
+        val group:Group<T>,
+        val level:Int
+) : VisibleItem<T>()
+
+private class VisibleOneItem<T>(
+        val item:T
+) : VisibleItem<T>()
+
+fun group<T>(items: Collection<T>, aggregatingColumns: List<GridColumn<T>>, aggregateByColumn:Int): List<Group<T>> {
+    val aggregatingColumn = aggregatingColumns.get(aggregateByColumn)
+    return items
+            .groupBy { aggregatingColumn.groupBy!!(it) }
+            .entrySet()
+            .map { entry ->
+                if (aggregateByColumn < aggregatingColumns.size() - 1) {
+                    //do additional grouping
+                    Group(groupName = entry.getKey(), subgroups = group(entry.getValue(), aggregatingColumns, aggregateByColumn+1))
+                } else {
+                    Group(groupName = entry.getKey(), items = entry.getValue())
+                }
+            }
+}
+
+fun renderGroupInto<T>(group: Group<T>, visibleItems:MutableCollection<VisibleItem<T>>, level: Int) {
+    if (group.groupName != "root") {
+        visibleItems.add(VisibleItemGroup(groupName = group.groupName, group = group, level = level)) //add summary row
+    }
+    if (group.open) {
+        if (group.subgroups != null) {
+            group.subgroups!!.forEach { renderGroupInto(it, visibleItems, level + 1) }
+        } else {
+            group.items!!.map { VisibleOneItem(item = it) }.forEach { visibleItems.add(it) }
+        }
+    }
+}
+
+fun onEachSubGroup<T>(group: Group<T>, action:(Group<T>)->Unit) {
+    if (group.subgroups != null) {
+        group.subgroups!!.forEach { subGroup ->
+            onEachSubGroup(subGroup, action)
+            action(subGroup)
+        }
+    }
+}
+
+fun calculateAggregatedNumber(numbers:Collection<Double?>):Double =
+    numbers.filter { it != null }.fold(0.0, { fold,n -> fold+n!! } )
+
+fun calculateAggregations<T>(columnsWithGroupFunctions:List<GridColumn<T>>, group:Group<T>) {
+    group.aggregated = hashMapOf()
+    if (group.items != null) {
+        columnsWithGroupFunctions.forEach { column ->
+            val numbers = group.items!!.map { column.getNumber!!(it) }.filter { it != null }
+            group.aggregated!!.put(column.id, calculateAggregatedNumber(numbers))
+        }
+    } else if (group.subgroups != null) {
+        columnsWithGroupFunctions.forEach { column ->
+            group.aggregated!!.put(column.id, calculateAggregatedNumber(group.subgroups!!.map { it.aggregated!!.get(column.id) }))
+        }
+    }
+}
+
+fun clearAggregationsOfAll<T>(group:Group<T>) {
+    onEachSubGroup(group) {
+        it.aggregated = null
+    }
+}
 
 /**
  * .on('mousemove', $.throttle(interval, function(e)
@@ -126,9 +209,15 @@ public class SmartGrid<TYPE, KEY>(
     private var asc:Boolean = true;
     private var columnHeaders:List<GridColumnHeader<TYPE>>? = null
 
-    private var visibleColumns = listOf<String>()
+    private var visibleColumns:List<String> = listOf()
 
-    private val columns = columns.toMap { it.id };
+    private val columns = columns
+                            .plus(GridColumn<TYPE>(
+                                id="root",
+                                width = 200.px().toHtml(),
+                                label = "",
+                                render = { }))
+                            .toMap { it.id };
 
     private var rowsReferences = hashMapOf<KEY, HTMLElement>();
 
@@ -140,11 +229,41 @@ public class SmartGrid<TYPE, KEY>(
 
     private val filters = hashMapOf<String, Filter<TYPE>>()
 
+    private var fullDataList: ArrayList<TYPE> = arrayListOf()
+    private var filteredDataList: ArrayList<TYPE> = arrayListOf()
+    private var group:Group<TYPE> = Group<TYPE>(groupName = "root", open = true, items = arrayListOf())
+    private var visibleDataList: ArrayList<VisibleItem<TYPE>> = arrayListOf()
+
+    private var dataListAsKeyMap: MutableMap<KEY, TYPE> = hashMapOf()
+
+    private val groupingColumns: ArrayList<GridColumn<TYPE>> = arrayListOf()
+
+    public var list: ArrayList<TYPE>?
+        get() = fullDataList
+        set(value) {
+            fullDataList = value ?: arrayListOf()
+            dataListAsKeyMap = fullDataList.toMap { getKey(it) } as MutableMap
+            currentRow = 0
+            refilterData()
+            regroupData()
+            renderGroupedData()
+            repeatWithDelayUntil( { gridIsCreated }, 100) {
+                createRowsWithColumns()
+                displayNewData()
+            }
+        }
+
     private fun showDialogCustom() {
-        openConfigurationDialog(columns.values(), visibleColumns, {
-            visibleColumns = it;
+        val columnsWithoutAggregatingColumn = visibleColumns.filter { it != "root" }
+        openConfigurationDialog(columns.values().filter { it.id != "root" }, columnsWithoutAggregatingColumn, { newVisibleColumns ->
+            val newList = newVisibleColumns.toArrayList()
+            if (groupingColumns.size() > 0) {
+                newList.add(0, "root")
+            }
+            visibleColumns = newList;
             createRowsWithColumns()
             renderHeaderInto(header)
+            filtersChanged()
             redisplayTheReorderedDataSet()
             updateHorizontalScrollbar()
         })
@@ -181,7 +300,7 @@ public class SmartGrid<TYPE, KEY>(
             val diffX:Int = xUp - touchStartX
 
             val newRow = touchStartRow - (diffY.toDouble()/rowHeight).toInt()
-            val limitedNewRow = Math.max(0, Math.min(newRow, filteredDataList.size() - visibleRows))
+            val limitedNewRow = Math.max(0, Math.min(newRow, visibleDataList.size() - visibleRows))
             val newHorizontalScrollPosition = Math.max(0, Math.min(horizontalScrollStart - diffX, scrollBarHorizontal.numberOfItems))
 
             if (gridIsCreated) {
@@ -205,7 +324,7 @@ public class SmartGrid<TYPE, KEY>(
             registerResizeHandler(cont.element) { x,y->
                 recalculateVisibleRows()
                 createRowsWithColumns()
-                if (filteredDataList.size() > 0) {
+                if (visibleDataList.size() > 0) {
                     displayNewData()
                 }
                 updateHorizontalScrollbar()
@@ -229,33 +348,16 @@ public class SmartGrid<TYPE, KEY>(
         visibleRows = Math.floor(viewPortHeight / rowHeight)
     }
 
-    private var fullDataList: ArrayList<TYPE> = arrayListOf()
-    private var filteredDataList: ArrayList<TYPE> = arrayListOf()
-    private var dataListAsKeyMap: MutableMap<KEY, TYPE> = hashMapOf()
-
-    public var list: ArrayList<TYPE>?
-        get() = fullDataList
-        set(value) {
-            fullDataList = value ?: arrayListOf()
-            dataListAsKeyMap = fullDataList.toMap { getKey(it) } as MutableMap
-            currentRow = 0
-            refilterData()
-            repeatWithDelayUntil( { gridIsCreated }, 100) {
-                createRowsWithColumns()
-                displayNewData()
-            }
-        }
-
     private fun displayNewData() {
-        currentRow = Math.min(currentRow, Math.max(0, filteredDataList.size() - visibleRows))
+        currentRow = Math.min(currentRow, Math.max(0, visibleDataList.size() - visibleRows))
         redisplayTheReorderedDataSet()
         updateVerticalScrollbarToReflectChangeNumberOfItems()
     }
 
     private fun updateVerticalScrollbarToReflectChangeNumberOfItems() {
         val adjustedVisibleRows = calculateAdjustedVisibleRowsForVerticalScrollbar()
-        scrollBarVertical.setup(numberOfItems = filteredDataList.size() - visibleRows, visibleItems = adjustedVisibleRows, newPosition = currentRow)
-        if (filteredDataList.size() <= visibleRows) {
+        scrollBarVertical.setup(numberOfItems = visibleDataList.size() - visibleRows, visibleItems = adjustedVisibleRows, newPosition = currentRow)
+        if (visibleDataList.size() <= visibleRows) {
             scrollBarVertical.setTrackerVisible(false)
         } else {
             scrollBarVertical.setTrackerVisible(true)
@@ -263,7 +365,7 @@ public class SmartGrid<TYPE, KEY>(
     }
 
     private fun calculateAdjustedVisibleRowsForVerticalScrollbar() =
-            Math.max(1, (visibleRows * ((filteredDataList.size() - visibleRows).toDouble() / filteredDataList.size().toDouble())).toInt())
+            Math.max(1, (visibleRows * ((visibleDataList.size() - visibleRows).toDouble() / visibleDataList.size().toDouble())).toInt())
 
     private fun verticalScrollBarMoved(newPosition:Int) {
         currentRow = newPosition
@@ -290,20 +392,69 @@ public class SmartGrid<TYPE, KEY>(
             sortColumn = column
         }
         sortData()
+        renderGroupedData()
         redisplayTheReorderedDataSet()
         setSortingArrow()
     }
 
-    private fun sortData() {
-
-        if (sortColumn?.sortFunction != null) {
-            filteredDataList = filteredDataList.sortBy(object : java.util.Comparator<TYPE> {
-                override fun compare(obj1: TYPE, obj2: TYPE): Int {
-                    return (sortColumn!!.sortFunction!!(obj1, obj2)) * (if (asc) 1 else -1)
-                }
-            }).toArrayList()
+    private fun groupByColumn(column:GridColumn<TYPE>):Unit {
+        if (groupingColumns.size() == 0) {
+            val newList = visibleColumns.toArrayList()
+            newList.add(0, "root")
+            visibleColumns = newList
         }
+        visibleColumns = visibleColumns.filter { it != column.id } //remove column from visible columns
+        groupingColumns.add(column)
 
+        renderGridCompletely()
+
+    }
+
+    private fun renderGridCompletely() {
+        createRowsWithColumns()
+        renderHeaderInto(headerDiv = header)
+        updateHorizontalScrollbar()
+        regroupData()
+        sortData()
+        renderGroupedData()
+        displayNewData()
+    }
+
+    private fun cancelAggregation() {
+
+        val newVisibleColumnsList = visibleColumns.toArrayList()
+        newVisibleColumnsList.remove(0)//remove old root column
+        groupingColumns.reverse().forEach { //show again columns which where used for aggregation
+            if (!newVisibleColumnsList.contains(it.id)) {
+                newVisibleColumnsList.add(0, it.id)
+            }
+        }
+        visibleColumns = newVisibleColumnsList
+        groupingColumns.clear()
+
+        renderGridCompletely()
+    }
+
+    private fun openCloseGroup(group:Group<TYPE>) {
+        group.open = !group.open
+        renderGroupedData()
+        displayNewData()
+    }
+
+    private fun openAggregatedGroups() {
+        onEachSubGroup(group) {
+            it.open = true
+        }
+        renderGroupedData()
+        displayNewData()
+    }
+
+    private fun closeAggregatedGroups() {
+        onEachSubGroup(group) {
+            it.open = false
+        }
+        renderGroupedData()
+        displayNewData()
     }
 
     private fun renderHeaderInto(headerDiv: HTMLElement) {
@@ -316,7 +467,12 @@ public class SmartGrid<TYPE, KEY>(
                             sortingSupported = it.sortFunction != null,
                             filterHandler = { filter -> updateFilter(it.id, filter)},
                             filterConfig = filters.get(it.id)?.filterConfig ?: null,
-                            sortFunction = { sortByColumn(it) } )}
+                            sortFunction = { sortByColumn(it) },
+                            groupFunction = { groupByColumn(it) },
+                            openAggregatedGroups = { openAggregatedGroups() },
+                            closeAggregatedGroups = { closeAggregatedGroups() },
+                            cancelAggregation = { cancelAggregation() })
+                }
 
         headerDiv.removeAllContent()
 
@@ -327,10 +483,6 @@ public class SmartGrid<TYPE, KEY>(
         val filtersOfHiddenColumns = filters.keySet().filter { !visibleColumns.contains(it) }
         filtersOfHiddenColumns.forEach {
             filters.remove(it)
-        }
-
-        if (gridIsCreated) {
-            filtersChanged()
         }
 
     }
@@ -346,7 +498,45 @@ public class SmartGrid<TYPE, KEY>(
 
     private fun filtersChanged() {
         refilterData()
+        regroupData()
+        renderGroupedData()
         displayNewData()
+    }
+
+    private fun renderGroupedData() {
+        visibleDataList.clear()
+        renderGroupInto(group, visibleDataList, 0)
+        calculateAggregationsOfGroups()
+    }
+
+    private fun calculateAggregationsOfGroups(forColumns: Collection<String>? = null) {
+        val columnsWithGetFunction = getVisibleColumns().filter { it.getNumber != null }.filter { forColumns == null || forColumns.contains(it.id) }
+        if (columnsWithGetFunction.size() > 0) {
+            onEachSubGroup(group) {
+                calculateAggregations(columnsWithGetFunction, it)
+            }
+        } else {
+            clearAggregationsOfAll(group)
+        }
+    }
+
+    private fun sortData() {
+        if (sortColumn?.sortFunction != null) {
+            sortItemsInGroup(group)
+        }
+    }
+
+    private fun sortItemsInGroup(group: Group<TYPE>) {
+        if (group.items != null) {
+            group.items = group.items!!.sortBy(object : java.util.Comparator<TYPE> {
+                override fun compare(obj1: TYPE, obj2: TYPE): Int {
+                    return (sortColumn!!.sortFunction!!(obj1, obj2)) * (if (asc) 1 else -1)
+                }
+            }).toArrayList()
+        } else {
+            group.subgroups = group.subgroups!!.sortBy { it.groupName }
+            group.subgroups!!.forEach { sortItemsInGroup(it) }
+        }
     }
 
     private fun refilterData() {
@@ -358,6 +548,14 @@ public class SmartGrid<TYPE, KEY>(
                         isItemMatchingFilters(it)
                     }
                     .toArrayList()
+        }
+    }
+
+    private fun regroupData() {
+        if (groupingColumns.size() > 0) {
+            group = Group(groupName = "root", subgroups = group(filteredDataList, groupingColumns, 0));
+        } else {
+            group = Group(groupName = "root", items = filteredDataList)
         }
     }
 
@@ -406,6 +604,7 @@ public class SmartGrid<TYPE, KEY>(
                         createRowsWithColumns()
                         redisplayTheReorderedDataSet()
                     }
+                    val delay = 150
                 })
     }
 
@@ -415,20 +614,21 @@ public class SmartGrid<TYPE, KEY>(
                 if (td.getAttribute("editing") != "true") {
                     td.setAttribute("editing", "true")
                     val rowIndex = getTBody().getIndexOfChildNode(td.parentNode)
-                    val item = filteredDataList.get(currentRow + rowIndex)
-                    val editor = column.editor.createEditor(
-                            column.width,
-                            item,
-                            {
-                                td.removeAttribute("editing")
-                                td.removeAllContent()
-                                HTMLComponent("", td) with {
-                                    column.render(item)
-                                }
-                            })
-                    td.removeAllContent()
-                    td.appendChild(editor)
-
+                    val item = visibleDataList.get(currentRow + rowIndex)
+                    if (item is VisibleOneItem<TYPE>) {
+                        val editor = column.editor.createEditor(
+                                column.width,
+                                item.item,
+                                {
+                                    td.removeAttribute("editing")
+                                    td.removeAllContent()
+                                    HTMLComponent("", td) with {
+                                        column.render(item.item)
+                                    }
+                                })
+                        td.removeAllContent()
+                        td.appendChild(editor)
+                    }
                 }
             }
         } else {
@@ -443,9 +643,9 @@ public class SmartGrid<TYPE, KEY>(
             val e = event.originalEvent
             event.preventDefault()
             if (Math.abs(e.wheelDeltaY) > Math.abs(e.wheelDeltaX)) {
-                val deltaY = Math.max(-1, Math.min(1, (e.wheelDeltaY ) as Int)); //|| -e.detail
+                val deltaY = Math.max(-1, Math.min(1, (e.wheelDeltaY )));
                 if (deltaY < 0) {
-                    currentRow = Math.min(currentRow + 1, filteredDataList.size() - visibleRows)
+                    currentRow = Math.min(currentRow + 1, visibleDataList.size() - visibleRows)
                 } else if (deltaY > 0) {
                     currentRow = Math.max(0, currentRow - 1)
                 }
@@ -455,7 +655,7 @@ public class SmartGrid<TYPE, KEY>(
                 }
             }
             if (Math.abs(e.wheelDeltaX) > Math.abs(e.wheelDeltaY)) {
-                val deltaX = Math.max(-1, Math.min(1, (e.wheelDeltaX) as Int));
+                val deltaX = Math.max(-1, Math.min(1, (e.wheelDeltaX)));
                 if (deltaX != 0) {
                     val newHorizontalScrollPosition = Math.max(0, Math.min(scrollBarHorizontal.position - deltaX * 10, scrollBarHorizontal.numberOfItems))
                     scrollBarHorizontal.position = newHorizontalScrollPosition
@@ -512,41 +712,50 @@ public class SmartGrid<TYPE, KEY>(
             (1..movedRowsCount).forEach { index ->
 
                 //remove previous records from rowsReferences
-                val removedItem = filteredDataList.get(previousRow + index - 1)
-                rowsReferences.remove(getKey(removedItem))
+                val removedItem = visibleDataList.get(previousRow + index - 1)
+                if (removedItem is VisibleOneItem) {
+                    rowsReferences.remove(getKey(removedItem.item))
+                }
 
                 val movedRow = rows.item(0)
                 tbody.appendChild(movedRow)
-                val itemForLastRow = filteredDataList.get(visibleRows + currentRow - (movedRowsCount - index + 1))
+                val itemForLastRow = visibleDataList.get(visibleRows + currentRow - (movedRowsCount - index + 1))
                 updateRow(columns, itemForLastRow, movedRow)
-                rowsReferences.put(getKey(itemForLastRow), movedRow as HTMLElement)
-                //TODO: remove references to removed rows from rowsReferences
+                if (itemForLastRow is VisibleOneItem) {
+                    rowsReferences.put(getKey(itemForLastRow.item), movedRow as HTMLElement)
+                }
             }
+
         } else if (previousRow != null && previousRow in ((currentRow + 1) .. (currentRow + maxOptimizedMove))) { //scrolling up
             val movedRowsCount:Int = previousRow -currentRow
             (1..movedRowsCount).forEach { index ->
 
                 //remove previous records from rowsReferences
-                val removedItem = filteredDataList.get(previousRow + visibleRows - index)
-                rowsReferences.remove(getKey(removedItem))
+                val removedItem = visibleDataList.get(previousRow + visibleRows - index)
+                if (removedItem is VisibleOneItem) {
+                    rowsReferences.remove(getKey(removedItem.item))
+                }
 
                 val movedRow = rows.item(visibleRows-1)
                 val firstRow = rows.item(0)
                 tbody.insertBefore(movedRow, firstRow)
-                val itemForLastRow = filteredDataList.get(currentRow - index + 1)
+                val itemForLastRow = visibleDataList.get(currentRow - index + 1)
                 updateRow(columns, itemForLastRow, movedRow)
-                rowsReferences.put(getKey(itemForLastRow), movedRow as HTMLElement)
-                //TODO: remove references to removed rows from rowsReferences
+                if (itemForLastRow is VisibleOneItem) {
+                    rowsReferences.put(getKey(itemForLastRow.item), movedRow as HTMLElement)
+                }
             }
         } else {
             rowsReferences.clear()
-            val rowsToRender = Math.min(visibleRows, filteredDataList.size())
+            val rowsToRender = Math.min(visibleRows, visibleDataList.size())
             (1..rowsToRender)
                     .forEach {
                         val tr = rows.item(it - 1) as HTMLElement
-                        val item = filteredDataList.get(it + currentRow - 1)
+                        val item = visibleDataList.get(it + currentRow - 1)
                         updateRow(columns, item, tr)
-                        rowsReferences.put(getKey(item), tr)
+                        if (item is VisibleOneItem) {
+                            rowsReferences.put(getKey(item.item), tr)
+                        }
                     }
             ((rowsToRender+1)..visibleRows)
                 .forEach {
@@ -559,13 +768,34 @@ public class SmartGrid<TYPE, KEY>(
 
     private fun getTBody() = dataTable.getElementsByTagName("tbody").item(0)
 
-    private fun updateRow(columns: List<GridColumn<TYPE>>, item: TYPE, tr: Node, columnsToUpdate: Collection<String>? = null) {
+    private fun updateRow(columns: List<GridColumn<TYPE>>, visibleItem: VisibleItem<TYPE>, tr: Node, columnsToUpdate: Collection<String>? = null) {
         columns.forEachIndexed { columnIndex, column ->
             if (columnsToUpdate == null || columnsToUpdate.contains(column.id)) {
                 val td = tr.childNodes.item(columnIndex) as HTMLElement
                 HTMLComponent("", td) with {
                     removeAllChildren()
-                    column.render(item)
+                    if (visibleItem is VisibleOneItem) {
+                        column.render(visibleItem.item)
+                    } else if (visibleItem is VisibleItemGroup){
+                        //it is aggregated row, only render if column is aggregating one
+                        if (column.id == "root") {
+                            nbsp(times = (visibleItem.level-1)*2)
+                            a(onclick = { openCloseGroup(visibleItem.group) }) { "style".."cursor: pointer;"
+                                if (visibleItem.group.open) {
+                                    glyphicon("chevron-down")
+                                } else {
+                                    glyphicon("chevron-right")
+                                }
+                            }
+                            +(visibleItem.groupName.toString())
+
+                        } else {
+                            val aggregatedValue:Double? = visibleItem.group.aggregated?.get(column.id) ?: null
+                            if (aggregatedValue != null) {
+                                +aggregatedValue.toFixed(2)
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -593,7 +823,10 @@ public class SmartGrid<TYPE, KEY>(
         return -1
     }
 
-    public fun updateItem(item: TYPE, columnsToUpdate: Collection<String>? = null) {
+    private fun isOneOfAffectedColumnsAGroupingOne(affectedColumns: Collection<String>) =
+        groupingColumns.filter { affectedColumns.contains(it.id) }.size() > 0
+
+    public fun updateItem(item: TYPE, affectedColumns: Collection<String>? = null) {
 
         val originalItem = dataListAsKeyMap.get(getKey(item))
         if (originalItem == null) {
@@ -624,15 +857,38 @@ public class SmartGrid<TYPE, KEY>(
         sortColumn = null
         setSortingArrow()
 
-        if (wasInList == isMatchingFilter) {
-            val tr = rowsReferences.get(getKey(item))
-            if (tr != null) {
-                updateRow(getVisibleColumns(), item, tr, columnsToUpdate)
+        if (groupingColumns.size() > 0) {
+            //only do the regroupping if affected column is one of the groupping one
+            if (affectedColumns == null || isOneOfAffectedColumnsAGroupingOne(affectedColumns) || wasInList != isMatchingFilter) {
+                regroupData()
+                renderGroupedData()
+                displayNewData()
+            } else {
+                if (visibleColumns.filter { affectedColumns.contains(it) }.map { columns.get(it) }.filter { it!!.getNumber != null }.size() > 0) {
+                    calculateAggregationsOfGroups(affectedColumns)
+                }
+                //val affectedGridColumns = getVisibleColumns().filter { affectedColumns.contains(it.id) }
+                val rowsToRender = Math.min(visibleRows, visibleDataList.size())
+                val rows = getTBody().childNodes
+                (1..rowsToRender)
+                        .forEach {
+                            val tr = rows.item(it - 1) as HTMLElement
+                            val visibleItem = visibleDataList.get(it + currentRow - 1)
+                            updateRow(getVisibleColumns(), visibleItem, tr, affectedColumns)
+                        }
             }
         } else {
-            //item was either added or removed from the filtered list, better to redisplay whole content,
-            displayNewData()
+            group.items = filteredDataList
+            if (wasInList == isMatchingFilter) {
+                val tr = rowsReferences.get(getKey(item))
+                if (tr != null) {
+                    updateRow(getVisibleColumns(), VisibleOneItem(item), tr, affectedColumns)
+                }
+            } else {
+                displayNewData()
+            }
         }
+
 
     }
 
