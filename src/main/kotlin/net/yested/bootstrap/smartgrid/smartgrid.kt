@@ -1,6 +1,5 @@
 package net.yested.bootstrap.smartgrid
 
-import complex.MarketData
 import jquery.jq
 import net.yested.*
 import net.yested.bootstrap.Align
