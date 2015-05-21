@@ -4550,6 +4550,12 @@
           this.plus_pdl1w0$('Columns visibility is set in a dedicated Configuration Dialog.');
         },
         f_17: function () {
+          this.plus_pdl1w0$('Support customizable filtering.');
+        },
+        f_18: function () {
+          this.plus_pdl1w0$('Support customizable aggregation and aggregation functions..');
+        },
+        f_19: function () {
           this.li_8y48wp$(_.complex.CustomizableGridSection.f_8);
           this.li_8y48wp$(_.complex.CustomizableGridSection.f_9);
           this.li_8y48wp$(_.complex.CustomizableGridSection.f_10);
@@ -4559,67 +4565,69 @@
           this.li_8y48wp$(_.complex.CustomizableGridSection.f_14);
           this.li_8y48wp$(_.complex.CustomizableGridSection.f_15);
           this.li_8y48wp$(_.complex.CustomizableGridSection.f_16);
+          this.li_8y48wp$(_.complex.CustomizableGridSection.f_17);
+          this.li_8y48wp$(_.complex.CustomizableGridSection.f_18);
         },
-        f_18: function () {
+        f_20: function () {
           this.plus_pdl1w0$('Smart Grid is a fully customizable grid with a lot of fancy features.');
           this.br();
           this.br();
           this.emph_kv1miw$(_.complex.CustomizableGridSection.f_7);
-          this.ul_8qfrsd$(_.complex.CustomizableGridSection.f_17);
-        },
-        f_19: function () {
-          this.plus_pdl1w0$('Please note!');
-        },
-        f_20: function () {
-          this.plus_pdl1w0$('When update is delivered into a grid, it disables sorting due to performance reasons.');
+          this.ul_8qfrsd$(_.complex.CustomizableGridSection.f_19);
         },
         f_21: function () {
-          this.li_8y48wp$(_.complex.CustomizableGridSection.f_20);
+          this.plus_pdl1w0$('Please note!');
         },
         f_22: function () {
-          this.emph_kv1miw$(_.complex.CustomizableGridSection.f_19);
-          this.ul_8qfrsd$(_.complex.CustomizableGridSection.f_21);
-          this.br();
+          this.plus_pdl1w0$('When update is delivered into a grid, it disables sorting due to performance reasons.');
         },
         f_23: function () {
-          this.col_zcukl0$([new _.net.yested.bootstrap.Small(6)], _.complex.CustomizableGridSection.f_18);
-          this.col_zcukl0$([new _.net.yested.bootstrap.Small(6)], _.complex.CustomizableGridSection.f_22);
+          this.li_8y48wp$(_.complex.CustomizableGridSection.f_22);
         },
         f_24: function () {
-          this.plus_pdl1w0$('Demo');
+          this.emph_kv1miw$(_.complex.CustomizableGridSection.f_21);
+          this.ul_8qfrsd$(_.complex.CustomizableGridSection.f_23);
+          this.br();
         },
         f_25: function () {
+          this.col_zcukl0$([new _.net.yested.bootstrap.Small(6)], _.complex.CustomizableGridSection.f_20);
+          this.col_zcukl0$([new _.net.yested.bootstrap.Small(6)], _.complex.CustomizableGridSection.f_24);
+        },
+        f_26: function () {
+          this.plus_pdl1w0$('Demo');
+        },
+        f_27: function () {
           this.plus_pdl1w0$('Source code is deployed on GitHub');
         },
-        f_26: function (this$CustomizableGridSection) {
+        f_28: function (this$CustomizableGridSection) {
           return function () {
             this.style = 'width: 100%; height: 300px; position: relative';
             this.plus_pv6laa$(this$CustomizableGridSection.grid);
           };
         },
-        f_27: function (this$CustomizableGridSection) {
+        f_29: function (this$CustomizableGridSection) {
           return function () {
-            this.h4_kv1miw$(_.complex.CustomizableGridSection.f_24);
-            this.a_xjhihl$(void 0, void 0, 'https://github.com/jean79/yested/blob/master/src/main/docsite/complex/smartgrid.kt', void 0, _.complex.CustomizableGridSection.f_25);
+            this.h4_kv1miw$(_.complex.CustomizableGridSection.f_26);
+            this.a_xjhihl$(void 0, void 0, 'https://github.com/jean79/yested/blob/master/src/main/docsite/complex/smartgrid.kt', void 0, _.complex.CustomizableGridSection.f_27);
             this.br();
             this.plus_pv6laa$(this$CustomizableGridSection.tickingToggleButton);
             this.br();
             this.plus_pdl1w0$(' Click the button to start ticking of Move column.');
             this.br();
             this.plus_pdl1w0$(' Click any cell in a Price column to edit it.');
-            this.div_5rsex9$(void 0, void 0, _.complex.CustomizableGridSection.f_26(this$CustomizableGridSection));
+            this.div_5rsex9$(void 0, void 0, _.complex.CustomizableGridSection.f_28(this$CustomizableGridSection));
           };
         },
-        f_28: function (this$CustomizableGridSection) {
+        f_30: function (this$CustomizableGridSection) {
           return function () {
-            this.col_zcukl0$([new _.net.yested.bootstrap.Medium(12)], _.complex.CustomizableGridSection.f_27(this$CustomizableGridSection));
+            this.col_zcukl0$([new _.net.yested.bootstrap.Medium(12)], _.complex.CustomizableGridSection.f_29(this$CustomizableGridSection));
           };
         },
         content$f: function (this$CustomizableGridSection) {
           return function () {
             _.net.yested.bootstrap.row_xnql8t$(this, _.complex.CustomizableGridSection.f_6);
-            _.net.yested.bootstrap.row_xnql8t$(this, _.complex.CustomizableGridSection.f_23);
-            _.net.yested.bootstrap.row_xnql8t$(this, _.complex.CustomizableGridSection.f_28(this$CustomizableGridSection));
+            _.net.yested.bootstrap.row_xnql8t$(this, _.complex.CustomizableGridSection.f_25);
+            _.net.yested.bootstrap.row_xnql8t$(this, _.complex.CustomizableGridSection.f_30(this$CustomizableGridSection));
           };
         },
         updateRandomValues$f: function (this$CustomizableGridSection) {
@@ -13086,8 +13094,8 @@
                   td.onclick = _.net.yested.bootstrap.smartgrid.SmartGrid.setOnClick$f_0;
                 }
               },
-              createGrid: function () {
-                $(this.dataTable_ynouqd$).on('mousewheel', _.net.yested.bootstrap.smartgrid.SmartGrid.createGrid$f(this));
+              registerMouseWheelScroll: function () {
+                $(this.dataTable_ynouqd$).on('mousewheel DOMMouseScroll', _.net.yested.bootstrap.smartgrid.SmartGrid.registerMouseWheelScroll$f(this));
                 this.gridIsCreated_q2bzpl$ = true;
               },
               createRowsWithColumns: function () {
@@ -13512,7 +13520,7 @@
                   this$SmartGrid.renderHeaderInto(this$SmartGrid.header_ezfkrg$);
                   this$SmartGrid.makeHeaderSortable(this$SmartGrid.header_ezfkrg$);
                   this$SmartGrid.recalculateVisibleRows();
-                  this$SmartGrid.createGrid();
+                  this$SmartGrid.registerMouseWheelScroll();
                   _.net.yested.utils.registerResizeHandler_i57m1u$(this$SmartGrid.cont_905dxb$.element, _.net.yested.bootstrap.smartgrid.SmartGrid.f_17(this$SmartGrid));
                 };
               },
@@ -13720,13 +13728,14 @@
               },
               setOnClick$f_0: function () {
               },
-              createGrid$f: function (this$SmartGrid) {
+              registerMouseWheelScroll$f: function (this$SmartGrid) {
                 return function (event) {
                   var previousRow = this$SmartGrid.currentRow_ud8t5c$;
                   var e = event.originalEvent;
                   event.preventDefault();
-                  if (Math.abs(e.wheelDeltaY) > Math.abs(e.wheelDeltaX)) {
-                    var deltaY = Math.max(-1, Math.min(1, e.wheelDeltaY));
+                  var mouseDeltaY = _.net.yested.utils.toZero_14dthe$(e.wheelDeltaY) + _.net.yested.utils.toZero_14dthe$(e.wheelDelta) + _.net.yested.utils.toZero_14dthe$(e.detail) * -1.0;
+                  if (Math.abs(mouseDeltaY) > Math.abs(_.net.yested.utils.toZero_14dthe$(e.wheelDeltaX))) {
+                    var deltaY = Math.max(-1.0, Math.min(1.0, mouseDeltaY));
                     if (deltaY < 0) {
                       this$SmartGrid.currentRow_ud8t5c$ = Math.min(this$SmartGrid.currentRow_ud8t5c$ + 1, this$SmartGrid.visibleDataList_rh7ofp$.size() - this$SmartGrid.visibleRows_psclms$);
                     }
@@ -13738,7 +13747,7 @@
                       this$SmartGrid.scrollBarVertical_o0ibxp$.position = this$SmartGrid.currentRow_ud8t5c$;
                     }
                   }
-                  if (Math.abs(e.wheelDeltaX) > Math.abs(e.wheelDeltaY)) {
+                  if (Math.abs(e.wheelDeltaX) > Math.abs(mouseDeltaY)) {
                     var deltaX = Math.max(-1, Math.min(1, e.wheelDeltaX));
                     if (deltaX !== 0) {
                       var newHorizontalScrollPosition = Math.max(0, Math.min(this$SmartGrid.scrollBarHorizontal_c3iy1n$.position - deltaX * 10, this$SmartGrid.scrollBarHorizontal_c3iy1n$.numberOfItems));
@@ -15108,6 +15117,22 @@
           }),
           format_hliocp$: function (init) {
             return init.call(new _.net.yested.utils.FormatStringBuilder());
+          },
+          insteadNaN_iiedj2$: function ($receiver, instead) {
+            if (isNaN($receiver)) {
+              return instead;
+            }
+             else {
+              return $receiver;
+            }
+          },
+          toZero_14dthe$: function (n) {
+            if (isNaN(n)) {
+              return 0.0;
+            }
+             else {
+              return n;
+            }
           },
           ResizeHandler: Kotlin.createClass(null, function (element, handler) {
             this.element = element;

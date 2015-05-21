@@ -1,6 +1,5 @@
 package net.yested.bootstrap.smartgrid
 
-import complex.MarketData
 import jquery.jq
 import net.yested.*
 import net.yested.bootstrap.Align
@@ -320,7 +319,7 @@ public class SmartGrid<TYPE, KEY>(
             renderHeaderInto(header)
             makeHeaderSortable(header)
             recalculateVisibleRows()
-            createGrid()
+            registerMouseWheelScroll()
             registerResizeHandler(cont.element) { x,y->
                 recalculateVisibleRows()
                 createRowsWithColumns()
@@ -636,14 +635,15 @@ public class SmartGrid<TYPE, KEY>(
         }
     }
 
-    private fun createGrid() {
+    private fun registerMouseWheelScroll() {
 
-        jq(dataTable).on("mousewheel") { event ->
+        jq(dataTable).on("mousewheel DOMMouseScroll") { event ->
             val previousRow = currentRow
             val e = event.originalEvent
             event.preventDefault()
-            if (Math.abs(e.wheelDeltaY) > Math.abs(e.wheelDeltaX)) {
-                val deltaY = Math.max(-1, Math.min(1, (e.wheelDeltaY )));
+            val mouseDeltaY = toZero(e.wheelDeltaY) + toZero(e.wheelDelta) + toZero(e.detail)*(-1.0)
+            if (Math.abs(mouseDeltaY) > Math.abs(toZero(e.wheelDeltaX))) {
+                val deltaY = Math.max(-1.0, Math.min(1.0, (mouseDeltaY )));
                 if (deltaY < 0) {
                     currentRow = Math.min(currentRow + 1, visibleDataList.size() - visibleRows)
                 } else if (deltaY > 0) {
@@ -654,7 +654,7 @@ public class SmartGrid<TYPE, KEY>(
                     scrollBarVertical.position = currentRow
                 }
             }
-            if (Math.abs(e.wheelDeltaX) > Math.abs(e.wheelDeltaY)) {
+            if (Math.abs(e.wheelDeltaX) > Math.abs(mouseDeltaY)) {
                 val deltaX = Math.max(-1, Math.min(1, (e.wheelDeltaX)));
                 if (deltaX != 0) {
                     val newHorizontalScrollPosition = Math.max(0, Math.min(scrollBarHorizontal.position - deltaX * 10, scrollBarHorizontal.numberOfItems))
