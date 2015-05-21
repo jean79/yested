@@ -13094,8 +13094,8 @@
                   td.onclick = _.net.yested.bootstrap.smartgrid.SmartGrid.setOnClick$f_0;
                 }
               },
-              createGrid: function () {
-                $(this.dataTable_ynouqd$).on('mousewheel', _.net.yested.bootstrap.smartgrid.SmartGrid.createGrid$f(this));
+              registerMouseWheelScroll: function () {
+                $(this.dataTable_ynouqd$).on('mousewheel DOMMouseScroll', _.net.yested.bootstrap.smartgrid.SmartGrid.registerMouseWheelScroll$f(this));
                 this.gridIsCreated_q2bzpl$ = true;
               },
               createRowsWithColumns: function () {
@@ -13520,7 +13520,7 @@
                   this$SmartGrid.renderHeaderInto(this$SmartGrid.header_ezfkrg$);
                   this$SmartGrid.makeHeaderSortable(this$SmartGrid.header_ezfkrg$);
                   this$SmartGrid.recalculateVisibleRows();
-                  this$SmartGrid.createGrid();
+                  this$SmartGrid.registerMouseWheelScroll();
                   _.net.yested.utils.registerResizeHandler_i57m1u$(this$SmartGrid.cont_905dxb$.element, _.net.yested.bootstrap.smartgrid.SmartGrid.f_17(this$SmartGrid));
                 };
               },
@@ -13728,13 +13728,14 @@
               },
               setOnClick$f_0: function () {
               },
-              createGrid$f: function (this$SmartGrid) {
+              registerMouseWheelScroll$f: function (this$SmartGrid) {
                 return function (event) {
                   var previousRow = this$SmartGrid.currentRow_ud8t5c$;
                   var e = event.originalEvent;
                   event.preventDefault();
-                  if (Math.abs(e.wheelDeltaY) > Math.abs(e.wheelDeltaX)) {
-                    var deltaY = Math.max(-1, Math.min(1, e.wheelDeltaY));
+                  var mouseDeltaY = _.net.yested.utils.toZero_14dthe$(e.wheelDeltaY) + _.net.yested.utils.toZero_14dthe$(e.wheelDelta) + _.net.yested.utils.toZero_14dthe$(e.detail) * -1.0;
+                  if (Math.abs(mouseDeltaY) > Math.abs(_.net.yested.utils.toZero_14dthe$(e.wheelDeltaX))) {
+                    var deltaY = Math.max(-1.0, Math.min(1.0, mouseDeltaY));
                     if (deltaY < 0) {
                       this$SmartGrid.currentRow_ud8t5c$ = Math.min(this$SmartGrid.currentRow_ud8t5c$ + 1, this$SmartGrid.visibleDataList_rh7ofp$.size() - this$SmartGrid.visibleRows_psclms$);
                     }
@@ -13746,7 +13747,7 @@
                       this$SmartGrid.scrollBarVertical_o0ibxp$.position = this$SmartGrid.currentRow_ud8t5c$;
                     }
                   }
-                  if (Math.abs(e.wheelDeltaX) > Math.abs(e.wheelDeltaY)) {
+                  if (Math.abs(e.wheelDeltaX) > Math.abs(mouseDeltaY)) {
                     var deltaX = Math.max(-1, Math.min(1, e.wheelDeltaX));
                     if (deltaX !== 0) {
                       var newHorizontalScrollPosition = Math.max(0, Math.min(this$SmartGrid.scrollBarHorizontal_c3iy1n$.position - deltaX * 10, this$SmartGrid.scrollBarHorizontal_c3iy1n$.numberOfItems));
@@ -15116,6 +15117,22 @@
           }),
           format_hliocp$: function (init) {
             return init.call(new _.net.yested.utils.FormatStringBuilder());
+          },
+          insteadNaN_iiedj2$: function ($receiver, instead) {
+            if (isNaN($receiver)) {
+              return instead;
+            }
+             else {
+              return $receiver;
+            }
+          },
+          toZero_14dthe$: function (n) {
+            if (isNaN(n)) {
+              return 0.0;
+            }
+             else {
+              return n;
+            }
           },
           ResizeHandler: Kotlin.createClass(null, function (element, handler) {
             this.element = element;
