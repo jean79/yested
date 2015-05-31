@@ -20,17 +20,17 @@ import net.yested.Fade
 import net.yested.bootstrap.FormStyle
 import net.yested.bootstrap.Small
 import net.yested.Component
-import kotlin.js.dom.html.HTMLElement
+import org.w3c.dom.HTMLElement
 import java.util.ArrayList
 import net.yested.bootstrap.InputField
 import net.yested.compareByValue
 import net.yested.bootstrap.StringInputField
 
 enum class Continent(val label:String) {
-    EUROPE : Continent("Europe");
-    AMERICA : Continent("America");
-    ASIA : Continent("Asia");
-    AFRICA : Continent("Africa")
+    EUROPE("Europe"),
+    AMERICA("America"),
+    ASIA("Asia"),
+    AFRICA("Africa")
 }
 
 data class City(val name:String, val continent:Continent)
@@ -79,7 +79,7 @@ class DetailScreen(
 class MasterScreen(val list:ArrayList<City>, val editHandler:Function1<City?, Unit>) : Component {
 
     val grid =
-            Grid(columns = array(
+            Grid(columns = arrayOf(
                     Column(label = { +"City name"},
                             render = { +it.name }, sortFunction = compareByValue<City, String> { it.name },
                             defaultSort = true),
@@ -87,10 +87,10 @@ class MasterScreen(val list:ArrayList<City>, val editHandler:Function1<City?, Un
                             render = { +it.continent.label},
                             sortFunction = compareByValue<City, String> { it.continent.label }),
                     Column(label = { },
-                            render = { btsButton(size = ButtonSize.EXTRA_SMALL, label = { +"Edit" }, onclick = { editHandler(it) })},
+                            render = { city -> btsButton(size = ButtonSize.EXTRA_SMALL, label = { +"Edit" }, onclick = { editHandler(city) })},
                             sortFunction = compareByValue<City, String> { it.name }),
                     Column(label = { },
-                            render = { btsButton(size = ButtonSize.EXTRA_SMALL, look = ButtonLook.DANGER, label = { +"Delete" }, onclick = { deleteCity(it) })},
+                            render = { city -> btsButton(size = ButtonSize.EXTRA_SMALL, look = ButtonLook.DANGER, label = { +"Delete" }, onclick = { deleteCity(city) })},
                             sortFunction = compareByValue<City, String> { it.name })));
 
     fun deleteCity(city: City) {

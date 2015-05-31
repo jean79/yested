@@ -36,9 +36,6 @@ fun generateDownloadSection(version:String):Div {
     }
 }
 
-/**
- * Created by jean on 1.2.2015.
- */
 fun createDownloadSection():Div {
 
     val placeholder = Div() with {
@@ -52,7 +49,7 @@ fun createDownloadSection():Div {
     }
 
     ajaxGet<String>(url = "http://nexus.yested.net/latest") {
-        placeholder.setChild(generateDownloadSection(it!!.trim()))
+        placeholder.setChild(generateDownloadSection(it.trim()))
     }
 
     return placeholder

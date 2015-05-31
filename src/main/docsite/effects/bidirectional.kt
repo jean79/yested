@@ -32,7 +32,7 @@ fun createPanel(n:Int) =
 fun createBidirectionalEffectsSection(): Div {
 
     var index = 0
-    val panels = array(createPanel(0), createPanel(1))
+    val panels = arrayOf(createPanel(0), createPanel(1))
     val container = Div()
     var effect: BiDirectionEffect = Fade()
 
@@ -45,10 +45,10 @@ fun createBidirectionalEffectsSection(): Div {
             }
     }
 
-    fun toogleContent() =
+    fun toggleContent() =
         container.setChild(panels.get(index++ % panels.size()), effect)
 
-    toogleContent()
+    toggleContent()
 
     return div {
         row {
@@ -63,7 +63,7 @@ fun createBidirectionalEffectsSection(): Div {
                 h4 { +"Demo" }
                 row {
                     col(ExtraSmall(4)) {
-                        btsButton(look = ButtonLook.PRIMARY, label = { +"Toogle it" }, onclick = ::toogleContent)
+                        btsButton(look = ButtonLook.PRIMARY, label = { +"Toggle it" }, onclick = { toggleContent() })
                     }
                     col(ExtraSmall(8)) {
                         aligned(align = TextAlign.RIGHT) {

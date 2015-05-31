@@ -10,14 +10,11 @@ import net.yested.lighten
 
 class Data(val countryCode:String, val temperature:Double)
 
-/**
- * Created by jean on 30.1.2015.
- */
 fun createPieChartSection(): Div {
 
     val chart = Chart(width = 300, height = 250)
 
-    val temperaturesData = array(
+    val temperaturesData = arrayOf(
         Data("BEL", 9.51),
         Data("BEN", 27.46),
         Data("BFA", 28.18),
@@ -42,7 +39,7 @@ fun createPieChartSection(): Div {
                 highlight = color.lighten(30).toHTMLColor(),
                 label = it.countryCode
         )
-    }.copyToArray()
+    }.toTypedArray()
 
     val options = object {
         val responsive = true

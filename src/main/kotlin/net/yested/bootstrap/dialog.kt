@@ -31,9 +31,9 @@ public native fun JQuery.modal(options: String):Unit = noImpl;
  */
 
 public enum class DialogSize(val code:String) {
-    DEFAULT: DialogSize("")
-    SMALL: DialogSize("modal-sm")
-    LARGE: DialogSize("modal-lg")
+    DEFAULT(""),
+    SMALL("modal-sm"),
+    LARGE("modal-lg")
 }
 
 public class Dialog(val size: DialogSize = DialogSize.DEFAULT) {

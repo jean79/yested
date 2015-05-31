@@ -1,12 +1,9 @@
 package net.yested
 
 import jquery.JQuery
-import kotlin.js.dom.html.HTMLElement
+import org.w3c.dom.HTMLElement
 import jquery.jq
 
-/**
- * Created by jean on 21/01/15.
- */
 native fun JQuery.fadeOut(duration:Int, callback:()->Unit) :Unit = noImpl;
 native fun JQuery.fadeIn(duration:Int, callback:()->Unit) :Unit = noImpl;
 native fun JQuery.slideUp(duration:Int, callback:()->Unit) :Unit = noImpl
@@ -17,11 +14,11 @@ native fun JQuery.hide(callback:()->Unit) :Unit = noImpl;
 private val DURATION = 200
 private val SLIDE_DURATION = DURATION * 2
 
-public trait Effect {
+public interface Effect {
     fun apply(component:Component, callback:Function0<Unit>? = null)
 }
 
-public trait BiDirectionEffect {
+public interface BiDirectionEffect {
     fun applyIn(component:Component, callback:Function0<Unit>? = null)
     fun applyOut(component:Component, callback:Function0<Unit>? = null)
 }

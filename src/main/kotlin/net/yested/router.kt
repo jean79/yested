@@ -1,9 +1,9 @@
 package net.yested
 
-import kotlin.js.dom.html.window
+import kotlin.browser.window
 
 native
-private trait JQRouter {
+private interface JQRouter {
     fun on(eventName:String, listener:() -> Unit):Unit = noImpl
 }
 

@@ -2,10 +2,10 @@ package net.yested.utils
 
 import org.w3c.dom.Node
 import net.yested.with
-import kotlin.js.dom.html.HTMLElement
-import kotlin.js.dom.html.Window
+import org.w3c.dom.HTMLElement
+import org.w3c.dom.Window
 import kotlin.js.dom.html.document
-import kotlin.js.dom.html.window
+import kotlin.browser.window
 
 /**
  * @return true if given element is included in page DOM

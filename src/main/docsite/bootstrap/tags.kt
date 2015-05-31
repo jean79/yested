@@ -17,7 +17,7 @@ import net.yested.bootstrap.Medium
 import net.yested.bootstrap.TagsInputField
 import net.yested.bootstrap.TagsInputFieldType
 import net.yested.Component
-import kotlin.js.dom.html.HTMLElement
+import org.w3c.dom.HTMLElement
 import net.yested.hide
 import net.yested.fadeIn
 import net.yested.with
@@ -55,7 +55,7 @@ class TagsSection(id: String) : Component {
             }
     )
 
-    val randomPeople = array(People("Luke Skywalker", 22), People("Leia Organa", 22), People("Yoda", 900), People("Obi-Wan Kenobi", 57), People("Darth Vader", 46))
+    val randomPeople = arrayOf(People("Luke Skywalker", 22), People("Leia Organa", 22), People("Yoda", 900), People("Obi-Wan Kenobi", 57), People("Darth Vader", 46))
     var iterator = randomPeople.iterator()
     val btn = BtsButton(label = { +"Add People" }) {
         tagsField.add(if (iterator.hasNext()) iterator.next() else {
@@ -135,7 +135,7 @@ tagsField.onBeforeItemRemove = { item ->
 
     init {
         element.whenAddedToDom {
-            tagsField.tags = someData.copyToArray()
+            tagsField.tags = someData.toTypedArray()
         }
         tagsField.onAddExistingTag = { addingPeople, jqTag ->
             jqTag.hide { jqTag.fadeIn(400, {}) }

@@ -9,7 +9,6 @@ import net.yested.layout.containers.verticalContainer
 fun createHorizontalLayoutSection(): Div {
 
     return div {
-        this.id = id
         row {
             col(Medium(12)) {
                 pageHeader { h3 { +"Layout" } }

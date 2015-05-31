@@ -4,7 +4,7 @@ import java.util.ArrayList
 import java.util.HashMap
 import net.yested.HTMLComponent
 import net.yested.Component
-import kotlin.js.dom.html.HTMLElement
+import org.w3c.dom.HTMLElement
 import net.yested.createElement
 import net.yested.appendComponent
 import net.yested.with

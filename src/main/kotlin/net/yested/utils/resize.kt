@@ -2,8 +2,8 @@ package net.yested.utils
 
 import jquery.jq
 import net.yested.Component
-import kotlin.js.dom.html.HTMLElement
-import kotlin.js.dom.html.window
+import org.w3c.dom.HTMLElement
+import kotlin.browser.window
 
 private class ResizeHandler(
         val element:HTMLElement,
@@ -24,7 +24,7 @@ private class ResizeHandler(
 
 }
 
-private var timerId:Long = -1
+private var timerId:Int = -1
 
 private var resizeHandlers = arrayListOf<ResizeHandler>()
 

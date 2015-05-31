@@ -4,7 +4,7 @@ import net.yested.Div
 import net.yested.HTMLComponent
 import net.yested.with
 import net.yested.div
-import kotlin.js.dom.html.HTMLElement
+import org.w3c.dom.HTMLElement
 import net.yested.el
 import net.yested.Component
 import net.yested.createElement
@@ -29,8 +29,8 @@ public class Row(): Component {
 }
 
 public enum class ContainerLayout(val code:String) {
-    DEFAULT : ContainerLayout("container")
-    FLUID : ContainerLayout("container-fluid")
+    DEFAULT("container"),
+    FLUID("container-fluid")
 }
 
 public class Page(val element: HTMLElement, val layout: ContainerLayout = ContainerLayout.DEFAULT) {

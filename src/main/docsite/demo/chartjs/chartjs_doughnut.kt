@@ -10,14 +10,11 @@ import net.yested.lighten
 
 class Data3(val countryCode:String, val temperature:Double)
 
-/**
- * Created by jean on 30.1.2015.
- */
 fun createDoughnutChartSection(): Div {
 
     val chart = Chart(width = 300, height = 250)
 
-    val temperaturesData = array(
+    val temperaturesData = arrayOf(
             Data3("BEL", 9.51),
             Data3("BEN", 27.46),
             Data3("BFA", 28.18),
@@ -42,7 +39,7 @@ fun createDoughnutChartSection(): Div {
                 highlight = color.lighten(30).toHTMLColor(),
                 label = it.countryCode
         )
-    }.copyToArray()
+    }.toTypedArray()
 
     val options = object {
         val responsive = true

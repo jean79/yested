@@ -9,7 +9,7 @@ import net.yested.bootstrap.Medium
 import net.yested.bootstrap.enableScrollSpy
 import net.yested.HTMLComponent
 import net.yested.Component
-import kotlin.js.dom.html.HTMLElement
+import org.w3c.dom.HTMLElement
 import net.yested.with
 
 class BootstrapPage : Component {

@@ -8,7 +8,7 @@
     <artifactId>Yested</artifactId>
     <version>SNAPSHOT-1</version>
     <properties>
-        <kotlin.version>0.11.91</kotlin.version>
+        <kotlin.version>0.12.200</kotlin.version>
         <build.number>0.0.0.1</build.number>
     </properties>
     <packaging>jar</packaging>
@@ -239,7 +239,7 @@
                 </executions>
             </plugin>
 
-           <plugin>
+           <!--<plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-gpg-plugin</artifactId>
                 <version>1.5</version>
@@ -255,7 +255,7 @@
                         </configuration>
                     </execution>
                 </executions>
-            </plugin>
+            </plugin>-->
 
         </plugins>
     </build>

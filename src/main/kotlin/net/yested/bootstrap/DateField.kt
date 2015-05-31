@@ -1,7 +1,6 @@
 package net.yested.bootstrap
 
 import net.yested.InputElementComponent
-import kotlin.js.dom.html.HTMLInputElement
 import net.yested.Div
 import net.yested.createElement
 import net.yested.with
@@ -13,6 +12,7 @@ import net.yested.utils.Moment
 import net.yested.utils.FormatStringBuilder
 import net.yested.whenAddedToDom
 import net.yested.utils.on
+import org.w3c.dom.HTMLInputElement
 import kotlin.dom.on
 
 //TODO: support Locales: http://momentjs.com/docs/#/i18n/

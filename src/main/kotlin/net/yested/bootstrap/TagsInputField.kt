@@ -8,16 +8,15 @@ import net.yested.hide
 import net.yested.fadeIn
 import net.yested.utils.on
 import net.yested.utils.off
-import kotlin.js.dom.html.HTMLInputElement
 import net.yested.whenAddedToDom
 
 public enum class TagsInputFieldType(val className: String) {
-    INFO : TagsInputFieldType("info")
-    PRIMARY : TagsInputFieldType("primary")
-    DANGER : TagsInputFieldType("danger")
-    SUCCESS : TagsInputFieldType("success")
-    DEFAULT : TagsInputFieldType("default")
-    WARNING : TagsInputFieldType("warning")
+    INFO("info"),
+    PRIMARY("primary"),
+    DANGER("danger"),
+    SUCCESS("success"),
+    DEFAULT("default"),
+    WARNING("warning")
 }
 
 native
@@ -27,7 +26,7 @@ private data class TagsInputBeforeEvent<T>(val item: T, var cancel: Boolean)
 private data class TagsInputAfterEvent<T>(val item: T)
 
 public enum class BeforeEventPermission {
-    PREVENT
+    PREVENT,
     ALLOW
 }
 
@@ -134,7 +133,7 @@ public class TagsInputField<T>(val textFactory: (T) -> String = { it.toString() 
         val jqElement = jq(this.element)
         this.element.removeAttribute("placeholder")
         val options = object {
-            val tagClass = {(item: T) -> "label label-${typeFactory(item).className}" }
+            val tagClass = { item: T -> "label label-${typeFactory(item).className}" }
             val itemValue = idFactory
             val itemText = textFactory
             val maxTags = maxTagCount
@@ -161,7 +160,7 @@ public class TagsInputField<T>(val textFactory: (T) -> String = { it.toString() 
             return if (initialized) {
                 jq(this.element).tagsinput("items")
             } else {
-                array<T>()
+                arrayOf<T>()
             }
         }
         set(value) {

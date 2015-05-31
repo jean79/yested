@@ -6,7 +6,7 @@ import net.yested.bootstrap.Medium
 import net.yested.bootstrap.pageHeader
 import net.yested.bootstrap.row
 import net.yested.with
-import kotlin.js.dom.html.HTMLElement
+import org.w3c.dom.HTMLElement
 
 class LayoutPage : Component {
 

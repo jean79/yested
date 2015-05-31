@@ -78,7 +78,7 @@ public class Moment(private val moment: MomentJs) {
             moment.year(value)
         }
 
-    class object {
+    companion object {
         public fun now(): Moment = Moment(moment_js())
 
         public fun parse(input: String, format: String): Moment = Moment(moment_js(input, format))

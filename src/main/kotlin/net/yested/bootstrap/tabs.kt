@@ -114,7 +114,7 @@ public class Tabs(canChangeOrder:Boolean = false) : Component {
             }
 
             if (previousContent != null) {
-                FadeOut().apply(previousContent!!) {
+                FadeOut().apply(previousContent) {
                     if (!alreadyAdded) {
                         currentContent!!.style = "display: none;"
                         content.appendChild(currentContent!!)

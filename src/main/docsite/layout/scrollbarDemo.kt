@@ -30,7 +30,6 @@ fun createScrollBarSection(): Div {
     val fieldNewPosition = IntInputField() with { data = 30 }
 
     return div {
-        this.id = id
         row {
             col(Medium(12)) {
                 pageHeader { h3 { +"ScrollBar" } }

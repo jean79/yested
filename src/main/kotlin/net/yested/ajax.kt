@@ -5,7 +5,7 @@ data class AjaxRequest<RESULT>(val url:String, val type:String = "POST", val dat
                        val dataType:String = "json", val success: ((RESULT) -> Unit))
 
 native
-trait JQAjax {
+interface JQAjax {
     fun <T> get(url:String, loaded:(response: T) -> Unit) : Unit = noImpl
     //fun post(url:String, data:Any?, handler:()->Unit, type:String = "json") : Unit = noImpl
     //fun ajax(url:String, type:String, contentType:String, dataType:String, data:Any, success:()->Unit) : Unit = noImpl

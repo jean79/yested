@@ -34,7 +34,7 @@ import net.yested.with
 import net.yested.ObservableInput
 import net.yested.InputComponent
 
-public trait ValidatorI {
+public interface ValidatorI {
     fun onchange(invoke:(valid:Boolean)->Unit)
     fun isValid():Boolean
     val errorText:String
@@ -72,15 +72,15 @@ public class Validator<T>(val inputElement: InputComponent<T>, override val erro
 }
 
 public enum class FormStyle(val code:String) {
-    DEFAULT: FormStyle("form-default")
-    INLINE: FormStyle("form-inline")
-    HORIZONTAL: FormStyle("form-horizontal")
+    DEFAULT("form-default"),
+    INLINE("form-inline"),
+    HORIZONTAL("form-horizontal")
 }
 
 public enum class FormInputSize(val code:String) {
-    DEFAULT: FormInputSize("")
-    LARGE: FormInputSize("form-group-lg")
-    SMALL: FormInputSize("form-group-sm")
+    DEFAULT(""),
+    LARGE("form-group-lg"),
+    SMALL("form-group-sm")
 }
 
 public class Form(private val formStyle: FormStyle = FormStyle.DEFAULT, private val inputSize:FormInputSize = FormInputSize.DEFAULT, private val labelDef:DeviceSize = Small(4), private val inputDef:DeviceSize = Small(8)) : HTMLComponent("form") {

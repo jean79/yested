@@ -1,7 +1,6 @@
 package net.yested.bootstrap
 
 import net.yested.Component
-import kotlin.js.dom.html.HTMLElement
 import net.yested.createElement
 import net.yested.with
 import jquery.jq
@@ -11,13 +10,11 @@ import net.yested.HTMLComponent
 import net.yested.Div
 import net.yested.utils.disableSelection
 import net.yested.utils.sortable
+import org.w3c.dom.HTMLElement
 
-/**
- * Created by jean on 1.2.2015.
- */
 public abstract class PanelContainer(layoutChangeHandler:Function0<Unit>? = null) : Component {
 
-    override val element:HTMLElement = createElement("ul");
+    override val element: HTMLElement = createElement("ul");
 
     private val panels = arrayListOf<Panel>()
 
@@ -37,14 +34,14 @@ public abstract class PanelContainer(layoutChangeHandler:Function0<Unit>? = null
 
     }
 
-    public fun getPanels(): Array<Panel> = panels.copyToArray()
+    public fun getPanels(): Array<Panel> = panels.toTypedArray()
 
     protected fun insertPanel(containerItem: Div, panel: Panel) {
 
         element.appendChild(containerItem.element)
 
         panel.dismissibleHandler = {
-            element.removeChild(it.element.parentNode)
+            element.removeChild(it.element.parentNode!!)
             panels.remove(it)
         }
 

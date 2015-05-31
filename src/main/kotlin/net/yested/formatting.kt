@@ -9,10 +9,10 @@ public data class Color(
 public fun Color.toHTMLColor(): String = "rgba(${this.red},${this.green},${this.blue},${this.alpha})"
 
 public enum class Colors(val color:Color) {
-    WHITE: Colors(Color(256, 256, 256, 1.0))
-    RED: Colors(Color(256, 0, 0, 1.0))
-    GREEN: Colors(Color(0, 256, 0, 1.0))
-    BLUE: Colors(Color(0, 0, 256, 1.0))
+    WHITE(Color(256, 256, 256, 1.0)),
+    RED(Color(256, 0, 0, 1.0)),
+    GREEN(Color(0, 256, 0, 1.0)),
+    BLUE(Color(0, 0, 256, 1.0))
 }
 
 private fun randomColorPart(): Int = (Math.random() * 256).toInt()
