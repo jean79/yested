@@ -63,7 +63,7 @@ public enum class NavbarLook(val code:String) {
     INVERSE("inverse")
 }
 
-public class Navbar(id:String, position: NavbarPosition? = null, look:NavbarLook = NavbarLook.DEFAULT, val layout: ContainerLayout = ContainerLayout.DEFAULT) : Component {
+public class Navbar(id:String, position: NavbarPosition = NavbarPosition.STATIC_TOP, look:NavbarLook = NavbarLook.DEFAULT, val layout: ContainerLayout = ContainerLayout.DEFAULT) : Component {
 
     override public var element = createElement("nav")
 
@@ -75,7 +75,7 @@ public class Navbar(id:String, position: NavbarPosition? = null, look:NavbarLook
 
     init {
 
-        element.setAttribute("class", "navbar navbar-${look.code} navbar-${position?.code?:"NONE"}")
+        element.setAttribute("class", "navbar navbar-${look.code} navbar-${position.code}")
         element.setAttribute("role", "navigation")
 
         element.appendComponent(
@@ -188,7 +188,7 @@ class NavBarDropdown(private val deselectFun:() -> Unit, label: Anchor.()->Unit)
 
 }
 
-public fun HTMLComponent.navbar(id:String, position: NavbarPosition? = null, look:NavbarLook = NavbarLook.DEFAULT,
+public fun HTMLComponent.navbar(id:String, position: NavbarPosition = NavbarPosition.STATIC_TOP, look:NavbarLook = NavbarLook.DEFAULT,
                                 layout: ContainerLayout = ContainerLayout.DEFAULT, init: Navbar.() -> Unit):Unit {
     +(Navbar(id = id, position = position, look = look, layout = layout) with { init() })
 }

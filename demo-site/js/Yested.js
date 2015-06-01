@@ -14436,12 +14436,11 @@
         createDoughnutChartSection: function () {
           var chart = new _.net.yested.Chart(300, 250);
           var temperaturesData = [new _.demo.chartjs.Data3('BEL', 9.51), new _.demo.chartjs.Data3('BEN', 27.46), new _.demo.chartjs.Data3('BFA', 28.18), new _.demo.chartjs.Data3('BGD', 25.47), new _.demo.chartjs.Data3('BGR', 10.4), new _.demo.chartjs.Data3('BHS', 25.06), new _.demo.chartjs.Data3('BIH', 9.02), new _.demo.chartjs.Data3('BLR', 6.29), new _.demo.chartjs.Data3('BLZ', 25.06), new _.demo.chartjs.Data3('BOL', 20.98), new _.demo.chartjs.Data3('BRA', 24.92), new _.demo.chartjs.Data3('BRN', 25.93), new _.demo.chartjs.Data3('BTN', 8.58), new _.demo.chartjs.Data3('BWA', 21.48), new _.demo.chartjs.Data3('CAF', 24.84)];
-          var tmp$0 = Kotlin.isInstanceOf(_.net.yested.PieChartSeries);
           var destination = new Kotlin.ArrayList(temperaturesData.length);
-          var tmp$3, tmp$1, tmp$2;
-          tmp$3 = temperaturesData, tmp$1 = tmp$3.length;
+          var tmp$0, tmp$1, tmp$2;
+          tmp$0 = temperaturesData, tmp$1 = tmp$0.length;
           for (var tmp$2 = 0; tmp$2 !== tmp$1; ++tmp$2) {
-            var item = tmp$3[tmp$2];
+            var item = tmp$0[tmp$2];
             var color = _.net.yested.randomColor_14dthe$(1.0);
             destination.add_za3rmp$(new _.net.yested.PieChartSeries(item.temperature, _.net.yested.toHTMLColor_p73cws$(color), _.net.yested.toHTMLColor_p73cws$(_.net.yested.lighten_7ca9a6$(color, 30)), item.countryCode));
           }
