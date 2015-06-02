@@ -3931,6 +3931,7 @@
             this.code = code;
           }, function () {
             return {
+              DEFAULT: new _.net.yested.bootstrap.NavbarPosition('def'),
               STATIC_TOP: new _.net.yested.bootstrap.NavbarPosition('static-top'),
               FIXED_TOP: new _.net.yested.bootstrap.NavbarPosition('fixed-top'),
               FIXED_BOTTOM: new _.net.yested.bootstrap.NavbarPosition('fixed-bottom')
@@ -3951,19 +3952,18 @@
             return [_.net.yested.Component];
           }, function (id, position, look, layout) {
             if (position === void 0)
-              position = null;
+              position = _.net.yested.bootstrap.NavbarPosition.object.DEFAULT;
             if (look === void 0)
               look = _.net.yested.bootstrap.NavbarLook.object.DEFAULT;
             if (layout === void 0)
               layout = _.net.yested.bootstrap.ContainerLayout.object.DEFAULT;
-            var tmp$0;
             this.layout = layout;
             this.$element_cd9gsv$ = _.net.yested.createElement_61zpoe$('nav');
             this.ul_6lssbo$ = _.net.yested.with_ji1yox$(new _.net.yested.UL(), _.net.yested.bootstrap.Navbar.ul_6lssbo$f);
             this.collapsible_lhbokj$ = _.net.yested.div_kb10gb$(id, 'navbar-collapse collapse', _.net.yested.bootstrap.Navbar.collapsible_lhbokj$f(this));
             this.menuItems_2kpyr8$ = new Kotlin.ArrayList();
             this.brandLink_f4xx9w$ = new _.net.yested.Anchor();
-            this.element.setAttribute('class', 'navbar navbar-' + look.code + ' navbar-' + ((tmp$0 = position != null ? position.code : null) != null ? tmp$0 : 'NONE'));
+            this.element.setAttribute('class', 'navbar navbar-' + look.code + ' navbar-' + position.code);
             this.element.setAttribute('role', 'navigation');
             _.net.yested.appendComponent_x7kbiy$(this.element, _.net.yested.div_kb10gb$(void 0, this.layout.code, _.net.yested.bootstrap.Navbar.Navbar$f(id, this)));
           }, /** @lends _.net.yested.bootstrap.Navbar.prototype */ {
@@ -4181,7 +4181,7 @@
           },
           navbar_t9jknv$: function ($receiver, id, position, look, layout, init) {
             if (position === void 0)
-              position = null;
+              position = _.net.yested.bootstrap.NavbarPosition.object.DEFAULT;
             if (look === void 0)
               look = _.net.yested.bootstrap.NavbarLook.object.DEFAULT;
             if (layout === void 0)
@@ -8173,6 +8173,14 @@
             millisecondsSinceUnixEpoch: {
               get: function () {
                 return this.moment_qmho9s$.valueOf();
+              }
+            },
+            unix: {
+              get: function () {
+                return this.moment_qmho9s$.unix();
+              },
+              set: function (value) {
+                this.moment_qmho9s$.unix(value);
               }
             },
             millisecond: {
