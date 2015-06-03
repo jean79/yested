@@ -27,8 +27,8 @@ private class MomentJs {
     fun isoWeekYear(value: Int? = null): Int = noImpl
     fun weeksInYear(): Int = noImpl
     fun locale(localeName: String): Unit = noImpl
-    fun unix():Long = noImpl
-    fun unix(t:Long): Unit = noImpl
+    fun unix():Int = noImpl
+    fun unix(t:Int): Unit = noImpl
 }
 
 public class Moment(private val moment: MomentJs) {
@@ -39,7 +39,7 @@ public class Moment(private val moment: MomentJs) {
     public val millisecondsSinceUnixEpoch: Long
 		get() = moment.valueOf()
 
-    public var unix: Long
+    public var unix: Int
         get() = moment.unix()
         set(value) {
             moment.unix(value)

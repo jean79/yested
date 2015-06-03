@@ -3931,7 +3931,6 @@
             this.code = code;
           }, function () {
             return {
-              DEFAULT: new _.net.yested.bootstrap.NavbarPosition('def'),
               STATIC_TOP: new _.net.yested.bootstrap.NavbarPosition('static-top'),
               FIXED_TOP: new _.net.yested.bootstrap.NavbarPosition('fixed-top'),
               FIXED_BOTTOM: new _.net.yested.bootstrap.NavbarPosition('fixed-bottom')
@@ -3952,7 +3951,7 @@
             return [_.net.yested.Component];
           }, function (id, position, look, layout) {
             if (position === void 0)
-              position = _.net.yested.bootstrap.NavbarPosition.object.DEFAULT;
+              position = _.net.yested.bootstrap.NavbarPosition.object.STATIC_TOP;
             if (look === void 0)
               look = _.net.yested.bootstrap.NavbarLook.object.DEFAULT;
             if (layout === void 0)
@@ -4181,7 +4180,7 @@
           },
           navbar_t9jknv$: function ($receiver, id, position, look, layout, init) {
             if (position === void 0)
-              position = _.net.yested.bootstrap.NavbarPosition.object.DEFAULT;
+              position = _.net.yested.bootstrap.NavbarPosition.object.STATIC_TOP;
             if (look === void 0)
               look = _.net.yested.bootstrap.NavbarLook.object.DEFAULT;
             if (layout === void 0)
@@ -14611,5 +14610,3 @@
   Kotlin.defineModule('Yested', _);
   _.main([]);
 }(Kotlin));
-
-//@ sourceMappingURL=Yested.js.map
