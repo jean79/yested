@@ -1,9 +1,5 @@
-/**
- * Created by jean on 21.11.2014.
- */
 package net.yested.bootstrap
 
-import kotlin.js.dom.html.HTMLInputElement
 import java.util.ArrayList
 import net.yested.Attribute
 import net.yested.HTMLComponent
@@ -12,11 +8,9 @@ import kotlin.dom.addText
 import net.yested.Div
 import net.yested.Span
 import net.yested.with
-import kotlin.js.dom.html.HTMLSelectElement
-import kotlin.js.dom.html.HTMLOptionElement
 import java.util.HashMap
 import net.yested.Component
-import kotlin.js.dom.html.HTMLElement
+import org.w3c.dom.HTMLElement
 import net.yested.createElement
 import net.yested.appendComponent
 import net.yested.BooleanAttribute
@@ -25,18 +19,21 @@ import net.yested.CheckBox
 import net.yested.ObservableInput
 import net.yested.onchange
 import net.yested.InputElementComponent
+import org.w3c.dom.HTMLInputElement
+import org.w3c.dom.HTMLOptionElement
+import org.w3c.dom.HTMLSelectElement
 
 public enum class InputSize(val code:String) {
-    DEFAULT: InputSize("")
-    LARGE: InputSize("input-lg")
-    SMALL: InputSize("input-sm")
+    DEFAULT(""),
+    LARGE("input-lg"),
+    SMALL("input-sm")
 }
 
 public abstract class InputField<T>(val inputSize: InputSize = InputSize.DEFAULT, placeholder:String? = null, type: String) : InputElementComponent<T>() {
 
     override val element: HTMLInputElement = createElement("input") as HTMLInputElement
 
-    public var id: String by Attribute()
+    public var id: String? by Attribute()
 
 
     init {
@@ -136,7 +133,7 @@ public fun HTMLComponent.btsCheckBox(label:HTMLComponent.()->Unit):Unit {
     +(BtsCheckBox(label))
 }
 
-private data class SelectOption<T>(val tag:HTMLOptionElement, val value:T)
+private data class SelectOption<T>(val tag: HTMLOptionElement, val value:T)
 
 public class Select<T>(val options: List<T>,
 					   val inputSize: InputSize = InputSize.DEFAULT,

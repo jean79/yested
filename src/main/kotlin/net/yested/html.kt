@@ -1,31 +1,26 @@
 package net.yested
 
-import kotlin.js.dom.html.HTMLElement
-import kotlin.js.dom.html.document
 import kotlin.dom.addText
 import kotlin.dom.first
 import jquery.jq
 import jquery.JQuery
-import org.w3c.dom.Element
+import org.w3c.dom.*
 import java.util.ArrayList
-import kotlin.js.dom.html.HTMLInputElement
-import org.w3c.dom.Node
+import org.w3c.dom.events.Event
 import org.w3c.dom.events.MouseEvent
-import kotlin.js.dom.html.HTMLTextAreaElement
-import kotlin.js.dom.html.CSSStyleDeclaration
-import kotlin.js.dom.html.Stylesheet
+import kotlin.browser.document
 import kotlin.properties.Delegates
 
 
-public class Attribute(val attributeName:String? = null, val element:HTMLElement? = null) {
+public class Attribute(val attributeName:String? = null, val element: HTMLElement? = null) {
 
     private fun getElement(thisRef: Component?) = element ?: thisRef!!.element
 
-    public fun get(thisRef: Component?, prop: PropertyMetadata):String =
+    public fun get(thisRef: Component?, prop: PropertyMetadata):String? =
             getElement(thisRef).getAttribute(attributeName ?: prop.name)
 
-    public fun set(thisRef: Component?, prop: PropertyMetadata, value: String):Unit =
-            getElement(thisRef).setAttribute(attributeName ?: prop.name, value)
+    public fun set(thisRef: Component?, prop: PropertyMetadata, value: String?):Unit =
+            getElement(thisRef).setAttribute(attributeName ?: prop.name, value!!)
 
 }
 
@@ -45,7 +40,7 @@ public class BooleanAttribute(val attributeName:String? = null, val element:HTML
  * Each UI component must implement this interface.
  * There is only one requirement for the component: It must return an HTML element.
  */
-public trait Component {
+public interface Component {
 
     /**
      * Each component must return an HTML element.
@@ -61,93 +56,85 @@ public fun HTMLElement.appendComponent(component:Component):Unit {
 }
 
 public fun HTMLElement.removeChildByName(childElementName:String) {
-    val child = this.getElementsByTagName(childElementName).first;
-    if (child != null) {
-        this.removeChild(child)
+    val elements = this.getElementsByTagName(childElementName)
+    (0..elements.length-1).forEach {
+        this.removeChild(elements.get(it)!!)
     }
 }
 
-private native trait HTMLElementOtherEvents : HTMLElement {
-    public native var onscroll: () -> Unit
-    public native var ondragstart: (MouseEvent) -> Unit
-    public native var ondrag: (MouseEvent) -> Unit
-    public native var ondragend: (MouseEvent) -> Unit
-}
-
-public trait ElementEvents {
+public interface ElementEvents {
 
     val element : HTMLElement
 
-    public var onblur:Function0<Unit>
+    public var onblur: ((Event) -> dynamic)?
         get() = element.onblur
         set(value) { element.onblur = value}
 
-    public var onclick:Function0<Unit>
+    public var onclick: ((Event) -> dynamic)?
         get() = element.onclick
         set(value) { element.onclick = value}
 
-    public var ondblclick:Function0<Unit>
+    public var ondblclick: ((Event) -> dynamic)?
         get() = element.ondblclick
         set(value) { element.ondblclick = value}
 
-    public var onfocus:Function0<Unit>
+    public var onfocus: ((Event) -> dynamic)?
         get() = element.onfocus
         set(value) { element.onfocus = value}
 
-    public var onkeydown:Function0<Unit>
+    public var onkeydown: ((Event) -> dynamic)?
         get() = element.onkeydown
         set(value) { element.onkeydown = value}
 
-    public var onkeyup:Function0<Unit>
+    public var onkeyup: ((Event) -> dynamic)?
         get() = element.onkeyup
         set(value) { element.onkeyup = value}
 
-    public var onmouseup:Function0<Unit>
+    public var onmouseup: ((Event) -> dynamic)?
         get() = element.onmouseup
         set(value) { element.onmouseup = value}
 
-    public var onmousedown:Function0<Unit>
+    public var onmousedown: ((Event) -> dynamic)?
         get() = element.onmousedown
         set(value) { element.onmousedown = value}
 
-    public var onmouseout:Function0<Unit>
+    public var onmouseout: ((Event) -> dynamic)?
         get() = element.onmouseout
         set(value) { element.onmouseout = value}
 
-    public var onmouseover:Function0<Unit>
+    public var onmouseover: ((Event) -> dynamic)?
         get() = element.onmouseover
         set(value) { element.onmouseover = value}
 
-    public var onmousemove:Function0<Unit>
+    public var onmousemove: ((Event) -> dynamic)?
         get() = element.onmousemove
         set(value) { element.onmousemove = value}
 
-    public var onresize:Function0<Unit>
+    public var onresize: ((Event) -> dynamic)?
         get() = element.onresize
         set(value) { element.onresize = value}
 
-    public var onscroll:Function0<Unit>
-        get() = (element as HTMLElementOtherEvents).onscroll
-        set(value) { (element as HTMLElementOtherEvents).onscroll = value}
+    public var onscroll: ((Event) -> dynamic)?
+        get() = element.onscroll
+        set(value) { element.onscroll = value}
 
-    public var ondragstart:Function1<MouseEvent, Unit>
-        get() = el().ondragstart
-        set(value) { el().ondragstart = value}
+    public var ondragstart: ((Event) -> dynamic)?
+        get() = element.ondragstart
+        set(value) { element.ondragstart = value}
 
-    public var ondrag:Function1<MouseEvent, Unit>
-        get() = el().ondrag
-        set(value) { el().ondrag = value}
+    public var ondrag: ((Event) -> dynamic)?
+        get() = element.ondrag
+        set(value) { element.ondrag = value}
 
-    public var ondragend:Function1<MouseEvent, Unit>
-        get() = el().ondragend
-        set(value) { el().ondragend = value}
+    public var ondragend: ((Event) -> dynamic)?
+        get() = element.ondragend
+        set(value) { element.ondragend = value}
 
-    private fun el() = element as HTMLElementOtherEvents
 }
 
 public fun HTMLElement.removeAllContent() {
     while (lastChild != null) {
-        removeChild(lastChild);
+        removeChild(lastChild!!);
     }
 }
 
@@ -155,10 +142,10 @@ public open class HTMLComponent(tagName:String, htmlElement:HTMLElement? = null)
 
     override public var element = htmlElement?:createElement(tagName)
 
-    public var role:String by Attribute()
-    public var style:String by Attribute()
-    public var id:String by Attribute()
-    public var clazz:String by Attribute("class")
+    public var role:String? by Attribute()
+    public var style:String? by Attribute()
+    public var id:String? by Attribute()
+    public var clazz:String? by Attribute("class")
 
     public fun String.rangeTo(value:String):Unit = element.setAttribute(this, value)
 
@@ -200,7 +187,7 @@ public open class HTMLComponent(tagName:String, htmlElement:HTMLElement? = null)
         }
     }
 
-    open public fun a(clazz:String? = null, target:String? = null, href:String?=null, onclick:Function0<Unit>? = null, init:Anchor.() -> Unit = {}) {
+    open public fun a(clazz:String? = null, target:String? = null, href:String?=null, onclick: ((Event) -> Unit)? = null, init:Anchor.() -> Unit = {}) {
         val anchor = Anchor()
         if (href != null) {
             anchor.href = href
@@ -256,7 +243,7 @@ public open class HTMLComponent(tagName:String, htmlElement:HTMLElement? = null)
         +(CheckBox() with { init() })
     }
 
-    public fun button(label: HTMLComponent.() -> Unit, type: ButtonType = ButtonType.BUTTON, onclick:() -> Unit) {
+    public fun button(label: HTMLComponent.() -> Unit, type: ButtonType = ButtonType.BUTTON, onclick:(Event) -> dynamic) {
         +(Button(type = type) with {
             label()
             element.onclick = onclick
@@ -343,12 +330,12 @@ public class TextArea(rows:Int) : ObservableInput<String>(), ElementEvents {
 
     override val element = createElement("textarea") as HTMLTextAreaElement
 
-    public var style:String by Attribute()
-    public var id:String by Attribute()
-    public var clazz:String by Attribute("class")
+    public var style:String? by Attribute()
+    public var id:String? by Attribute()
+    public var clazz:String? by Attribute("class")
 
     public var rows:Int
-        get() = parseInt(element.getAttribute("rows"))
+        get() = parseInt(element.getAttribute("rows")?:"1")
         set(value) { element.setAttribute("rows", value.toString()) }
 
     init {
@@ -373,7 +360,7 @@ public class Table : Component {
 
     override public var element = createElement("table")
 
-    public var border:String by Attribute()
+    public var border:String? by Attribute()
 
     public fun thead(init:THead.() -> Unit) {
         element.appendComponent(THead() with { init() })
@@ -455,7 +442,7 @@ public native var HTMLElement.onchange: (() -> Unit)?
     set(value) = noImpl
 
 
-public trait InputComponent<T> : Component {
+public interface InputComponent<T> : Component {
     var data: T
     fun addOnChangeListener(invoke:()->Unit)
     fun addOnChangeLiveListener(invoke:()->Unit)
@@ -551,9 +538,9 @@ open public class CheckBox() : InputElementComponent<Boolean>() {
         set(value) { element.value = value }
 }
 
-native trait Context { }
+native interface Context { }
 
-native trait CanvasI {
+native interface CanvasI {
     public fun getContext(id:String):Context = noImpl
 }
 
@@ -570,9 +557,9 @@ public class Div : HTMLComponent("div") { }
 public class Span : HTMLComponent("span") { }
 
 public enum class ButtonType(val code:String) {
-    BUTTON : ButtonType("button")
-    SUBMIT : ButtonType("submit")
-    RESET : ButtonType("reset")
+    BUTTON("button"),
+    SUBMIT("submit"),
+    RESET("reset")
 }
 
 public class Button(type:ButtonType = ButtonType.BUTTON) : HTMLComponent("button") {
@@ -584,8 +571,8 @@ public class Button(type:ButtonType = ButtonType.BUTTON) : HTMLComponent("button
 public class Image : Component {
 
     override val element = createElement("img")
-    public var src:String by Attribute()
-    public var alt:String by Attribute()
+    public var src:String? by Attribute()
+    public var alt:String? by Attribute()
 
 }
 
@@ -595,8 +582,8 @@ public class Li : HTMLComponent("li") { }
 
 public class Anchor() : HTMLComponent("a") {
 
-    public var href : String by Attribute()
-    public var target: String by Attribute()
+    public var href : String? by Attribute()
+    public var target: String? by Attribute()
 
 }
 

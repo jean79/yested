@@ -10,9 +10,6 @@ import net.yested.bootstrap.Medium
 import net.yested.spin.spinner
 import net.yested.spin.SpinnerOptions
 
-/**
- * Created by jean on 20.12.2014.
- */
 fun createSpinner(): Div {
 
     return div {

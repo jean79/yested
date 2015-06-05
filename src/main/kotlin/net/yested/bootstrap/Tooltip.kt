@@ -1,7 +1,7 @@
 package net.yested.bootstrap
 
 import jquery.JQuery
-import kotlin.js.dom.html.HTMLElement
+import org.w3c.dom.HTMLElement
 import net.yested.whenAddedToDom
 import jquery.jq
 
@@ -9,16 +9,16 @@ native
 private fun JQuery.tooltip(options: Any): Unit = noImpl
 public data class TooltipDelay(val show: Int, val hide: Int)
 public enum class TooltipPlacement {
-    TOP
-    BOTTOM
-    LEFT
-    RIGHT
+    TOP,
+    BOTTOM,
+    LEFT,
+    RIGHT,
     AUTO
 }
 public enum class TooltipTrigger {
-    CLICK
-    HOVER
-    FOCUS
+    CLICK,
+    HOVER,
+    FOCUS,
     MANUAL
 }
 public data class TooltipViewPort(val selector: String, val padding: Int)
@@ -26,7 +26,7 @@ public data class TooltipOptions(val animation: Boolean = true,
                                  val delay: TooltipDelay = TooltipDelay(0, 0),
                                  val html: Boolean = false,
                                  val placement: TooltipPlacement = TooltipPlacement.TOP,
-                                 val trigger: Array<TooltipTrigger> = array(TooltipTrigger.HOVER, TooltipTrigger.FOCUS),
+                                 val trigger: Array<TooltipTrigger> = arrayOf(TooltipTrigger.HOVER, TooltipTrigger.FOCUS),
                                  val viewPort: TooltipViewPort = TooltipViewPort("body", 0)
 )
 

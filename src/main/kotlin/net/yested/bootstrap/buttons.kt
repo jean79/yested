@@ -9,26 +9,27 @@ import net.yested.Attribute
 import net.yested.Li
 import net.yested.UL
 import net.yested.Component
-import kotlin.js.dom.html.HTMLElement
+import org.w3c.dom.HTMLElement
 import net.yested.div
 import net.yested.Div
 import net.yested.Span
+import org.w3c.dom.events.Event
 
 public enum class ButtonLook(val code:String) {
-    DEFAULT: ButtonLook("default")
-    PRIMARY: ButtonLook("primary")
-    SUCCESS: ButtonLook("success")
-    INFO: ButtonLook("info")
-    WARNING: ButtonLook("warning")
-    DANGER: ButtonLook("danger")
-    LINK: ButtonLook("link")
+    DEFAULT("default"),
+    PRIMARY("primary"),
+    SUCCESS("success"),
+    INFO("info"),
+    WARNING("warning"),
+    DANGER("danger"),
+    LINK("link")
 }
 
 public enum class ButtonSize(val code:String) {
-    DEFAULT: ButtonSize("default")
-    LARGE: ButtonSize("lg")
-    SMALL: ButtonSize("sm")
-    EXTRA_SMALL: ButtonSize("xs")
+    DEFAULT("default"),
+    LARGE("lg"),
+    SMALL("sm"),
+    EXTRA_SMALL("xs")
 }
 
 public class BtsButton(type: ButtonType = ButtonType.BUTTON,
@@ -37,7 +38,7 @@ public class BtsButton(type: ButtonType = ButtonType.BUTTON,
              val size:ButtonSize = ButtonSize.DEFAULT,
              val block:Boolean = false,
              badge:String? = null,
-             onclick:() -> Unit = {} ) :  HTMLComponent("button") {
+             onclick:(Event) -> Unit = {} ) :  HTMLComponent("button") {
 
     private var buttonActive:Boolean = false
 
@@ -86,7 +87,7 @@ public class BtsAnchor(href:String,
                 size:ButtonSize = ButtonSize.DEFAULT,
                 block:Boolean = false) :  HTMLComponent("a") {
 
-    public var href:String by Attribute()
+    public var href:String? by Attribute()
 
     init {
         this.href = href
@@ -100,7 +101,7 @@ public open class Dropdown(id:String,
 					  val splitted: Boolean = false,
                       val look:ButtonLook = ButtonLook.DEFAULT,
                       val size:ButtonSize = ButtonSize.DEFAULT,
-					  val onClick: ()->Unit = {}) : Component {
+					  val onClick: (Event)->dynamic = {}) : Component {
 
     private val list = UL() with {
         "class".."dropdown-menu"
@@ -137,7 +138,7 @@ public open class Dropdown(id:String,
 	}).element
 
 
-    public fun link(href:String = "#", onclick: Function0<Unit>? = null, init: Anchor.() -> Unit) {
+    public fun link(href:String = "#", onclick: Function1<Event, Unit>? = null, init: Anchor.() -> Unit) {
         list.li {
             "role".."presentation"
             a(href = href, onclick = onclick) {
@@ -169,7 +170,7 @@ public fun HTMLComponent.btsButton(type: ButtonType = ButtonType.BUTTON,
                                    size:ButtonSize = ButtonSize.DEFAULT,
                                    block:Boolean = false,
                                    badge:String? = null,
-                                   onclick:() -> Unit = {}):Unit {
+                                   onclick:(Event) -> Unit = {}):Unit {
     +BtsButton(type = type, label = label, look = look, size = size, block = block, badge = badge, onclick = onclick)
 }
 
@@ -185,7 +186,7 @@ public fun HTMLComponent.splitButtonDropdown(id: String,
 								  label: HTMLComponent.()->Unit,
 								  look: ButtonLook = ButtonLook.DEFAULT,
 								  size: ButtonSize = ButtonSize.DEFAULT,
-								  onClick: ()->Unit,
+								  onClick: (Event)->dynamic,
 								  init: Dropdown.()->Unit) {
 	+(Dropdown(id = id, label = label, look = look, size = size, splitted = true, onClick = onClick) with { init() })
 }

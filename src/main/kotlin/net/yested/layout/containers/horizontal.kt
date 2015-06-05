@@ -14,7 +14,7 @@ import net.yested.spin.SpinnerOptions
 import net.yested.utils.css
 import net.yested.utils.registerResizeHandler
 import java.util.ArrayList
-import kotlin.js.dom.html.HTMLElement
+import org.w3c.dom.HTMLElement
 
 class HorizontalContainer(width: Dimension, val height: Dimension? = null, val gap:Int = 0) : Component {
 

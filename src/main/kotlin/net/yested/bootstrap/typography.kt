@@ -6,11 +6,11 @@ import net.yested.with
 import net.yested.P
 
 public enum class TextAlign(val code:String) {
-    LEFT : TextAlign("left")
-    CENTER : TextAlign("center")
-    RIGHT : TextAlign("right")
-    JUSTIFY : TextAlign("justify")
-    NOWRAP : TextAlign("nowrap")
+    LEFT("left"),
+    CENTER("center"),
+    RIGHT("right"),
+    JUSTIFY("justify"),
+    NOWRAP("nowrap")
 }
 
 public fun HTMLComponent.aligned(align:TextAlign, init:P.() -> Unit) {

@@ -13,7 +13,7 @@ import net.yested.bootstrap.NavbarLook
 import net.yested.bootstrap.NavbarPosition
 import bootstrap.effectsPage
 import net.yested.Fade
-import kotlin.js.dom.html.window
+import kotlin.browser.window
 import demo.chartjs.chartJsPage
 import complex.CustomizableGridSection
 import bootstrap.BootstrapPage
@@ -63,7 +63,7 @@ fun main(args: Array<String>) {
             "#layout" -> divContainer.setChild(LayoutPage(), Fade())
 		}
         if (hash.get(0) != previousHash) {
-            window.scrollTo(0, 0)
+            window.scrollTo(0.0, 0.0)
         }
         previousHash = hash.get(0)
 	}

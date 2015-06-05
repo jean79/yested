@@ -15,6 +15,7 @@ import net.yested.bootstrap.Medium
 import net.yested.with
 import net.yested.bootstrap.InputField
 import net.yested.bootstrap.StringInputField
+import org.w3c.dom.events.Event
 
 fun createInputs(id: String): Div {
 
@@ -28,7 +29,7 @@ fun createInputs(id: String): Div {
         }
     }
 
-    val button = BtsButton(label = { +"Send" }, onclick = ::submit)
+    val button = BtsButton(label = { +"Send" }, onclick = { submit() })
 
     return div {
         this.id = id

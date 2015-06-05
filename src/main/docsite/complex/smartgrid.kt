@@ -1,8 +1,8 @@
 package complex
 
 import kotlin.browser.document
-import kotlin.js.dom.html.window
-import kotlin.js.dom.html.HTMLElement
+import kotlin.browser.window
+import org.w3c.dom.HTMLElement
 import jquery.jq
 import net.yested.*
 import net.yested.utils.on
@@ -69,8 +69,8 @@ public class DoubleEditor<TYPE>(
 
 }
 
-val currencies = array("CZK", "USD", "ZAR", "GBP", "AUD")
-val countries = array("Czech Republic", "USA", "Austria", "Hungary")
+val currencies = arrayOf("CZK", "USD", "ZAR", "GBP", "AUD")
+val countries = arrayOf("Czech Republic", "USA", "Austria", "Hungary")
 
 fun generateData() =
         (1..500)
@@ -115,8 +115,8 @@ class CustomizableGridSection: Component {
             getKey = {it.ticker},
             defaultSortColumn = "ticker",
             defaultSortOrderAsc = true,
-            columns = array(
-                    GridColumn(id = "ticker", width = "100px", label = "Ticker", render = { +it.ticker },
+            columns = arrayOf
+                    (GridColumn(id = "ticker", width = "100px", label = "Ticker", render = { +it.ticker },
                             filterFactory = TextInputFilterFactory { text -> { item:MarketData -> item.ticker.contains(text)} },
                             sortFunction = compareByValue<MarketData, String> { it.ticker },
                             groupBy = { it.ticker.substring(0, 2)}),
@@ -156,13 +156,11 @@ class CustomizableGridSection: Component {
                     GridColumn(id = "col15", width = "80px", label = "Col 15", render = { +"${it.col15.toFixed(2)}" }, sortFunction = compareByValue<MarketData, Double> { it.col15 })
             ))
 
-    var timerId : Number? = null
+    var timerId : Int? = null
 
     val data = generateData()
 
     val tickingToggleButton = BtsButton(label = { +"Toggle ticking"}, size = ButtonSize.SMALL, onclick = { toogleTicking() })
-
-    var lastChangedRow = 0
 
     fun updateItem(item:MarketData, columnToUpdate:String) {
         grid.updateItem(item, listOf(columnToUpdate))

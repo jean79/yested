@@ -23,15 +23,12 @@ import net.yested.bootstrap.InputField
 import net.yested.bootstrap.FormStyle
 import net.yested.bootstrap.StringInputField
 
-/**
- * Created by jean on 24.12.2014.
- */
-native trait Coordinates {
+native interface Coordinates {
     val lon : Double
     val lat : Double
 }
 
-native trait Sys {
+native interface Sys {
     val type : Int
     val id : Int
     val message: Double
@@ -40,14 +37,14 @@ native trait Sys {
     val sunset: Int
 }
 
-native trait Weather {
+native interface Weather {
     val id: Int
     val main: String
     val description : String
     val icon: String
 }
 
-native trait Main {
+native interface Main {
     val temp : Double
     val pressure : Int
     val humidity: Int
@@ -55,16 +52,16 @@ native trait Main {
     val temp_max : Double
 }
 
-native trait Wind {
+native interface Wind {
     val speed : Double
     val deg : Int
 }
 
-native trait Clouds {
+native interface Clouds {
     val all : Int
 }
 
-native trait WeatherData {
+native interface WeatherData {
     val coord: Coordinates?
     val sys: Sys?
     val weather: Array<Weather>?
@@ -92,7 +89,7 @@ fun createAjaxGetSection(): Div {
 
     fun fetchWeather() {
         if (validator.isValid()) {
-            ajaxGet<WeatherData>("http://api.openweathermap.org/data/2.5/weather?q=${textInput.data}&units=${btnGroup.value}") {
+            ajaxGet<WeatherData?>("http://api.openweathermap.org/data/2.5/weather?q=${textInput.data}&units=${btnGroup.value}") {
                 weatherData ->
                 if (weatherData != null && weatherData.main != null) {
                     temperatureSpan.setChild(

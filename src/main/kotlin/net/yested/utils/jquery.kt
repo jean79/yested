@@ -1,10 +1,10 @@
 package net.yested.utils
 
 import jquery.JQuery
-import kotlin.js.dom.html.HTMLElement
+import org.w3c.dom.HTMLElement
 import org.w3c.dom.Element
+import org.w3c.dom.Window
 import java.util.ArrayList
-import kotlin.js.dom.html.Window
 
 public class Position(val top:Int, val left:Int)
 
@@ -23,9 +23,9 @@ public native fun JQuery.scrollLeft():Int = noImpl
 public native fun JQuery.scrollTop():Int = noImpl
 public native fun JQuery.closest(element: Element):JSArray = noImpl
 
-native("$") public fun jq(window:Window): JQuery = JQuery();
+native("$") public fun jq(window: Window): JQuery = JQuery();
 
-native trait JQStatic {
+native interface JQStatic {
     //throttle: https://github.com/cowboy/jquery-throttle-debounce
     fun <EVENT> throttle(duration:Int, handler:(event:EVENT) -> Unit): Function1<EVENT, Unit> = noImpl
 }

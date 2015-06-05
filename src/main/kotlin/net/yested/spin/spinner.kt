@@ -1,7 +1,7 @@
 package net.yested.spin
 
 import net.yested.Component
-import kotlin.js.dom.html.HTMLElement
+import org.w3c.dom.HTMLElement
 import net.yested.PieChartSeries
 import net.yested.LineChartData
 import net.yested.Context

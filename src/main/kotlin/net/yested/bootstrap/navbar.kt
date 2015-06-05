@@ -12,6 +12,7 @@ import net.yested.Span
 import net.yested.createElement
 import net.yested.Component
 import net.yested.appendComponent
+import org.w3c.dom.events.Event
 
 /**
  * Created by jean on 24.11.2014.
@@ -52,17 +53,17 @@ import net.yested.appendComponent
  */
 
 public enum class NavbarPosition(val code:String) {
-    STATIC_TOP : NavbarPosition("static-top")
-    FIXED_TOP : NavbarPosition("fixed-top")
-    FIXED_BOTTOM : NavbarPosition("fixed-bottom")
+    STATIC_TOP("static-top"),
+    FIXED_TOP("fixed-top"),
+    FIXED_BOTTOM("fixed-bottom")
 }
 
 public enum class NavbarLook(val code:String) {
-    DEFAULT : NavbarLook("default")
-    INVERSE : NavbarLook("inverse")
+    DEFAULT("default"),
+    INVERSE("inverse")
 }
 
-public class Navbar(id:String, position: NavbarPosition? = null, look:NavbarLook = NavbarLook.DEFAULT, val layout: ContainerLayout = ContainerLayout.DEFAULT) : Component {
+public class Navbar(id:String, position: NavbarPosition = NavbarPosition.STATIC_TOP, look:NavbarLook = NavbarLook.DEFAULT, val layout: ContainerLayout = ContainerLayout.DEFAULT) : Component {
 
     override public var element = createElement("nav")
 
@@ -74,7 +75,7 @@ public class Navbar(id:String, position: NavbarPosition? = null, look:NavbarLook
 
     init {
 
-        element.setAttribute("class", "navbar navbar-${look.code} navbar-${position?.code?:"NONE"}")
+        element.setAttribute("class", "navbar navbar-${look.code} navbar-${position.code}")
         element.setAttribute("role", "navigation")
 
         element.appendComponent(
@@ -121,7 +122,7 @@ public class Navbar(id:String, position: NavbarPosition? = null, look:NavbarLook
         }
 
         li with {
-            a(href = href, onclick = ::linkClicked, init = init)
+            a(href = href, onclick = { linkClicked() }, init = init)
         }
         ul.appendChild(li)
         menuItems.add(li)
@@ -174,9 +175,9 @@ class NavBarDropdown(private val deselectFun:() -> Unit, label: Anchor.()->Unit)
         element.setAttribute("class", "dropdown active");
     }
 
-    public fun item(href:String = "#", onclick: Function0<Unit>? = null, init: Anchor.() -> Unit) {
+    public fun item(href:String = "#", onclick: Function1<Event, dynamic>? = null, init: Anchor.() -> Unit) {
         val li = Li() with {
-            a(href = href, onclick = { selectThis(); onclick?.let { onclick() } }, init = init)
+            a(href = href, onclick = { event-> selectThis(); onclick?.let { onclick!!(event) } }, init = init)
         }
         ul.appendChild(li)
     }
@@ -187,7 +188,7 @@ class NavBarDropdown(private val deselectFun:() -> Unit, label: Anchor.()->Unit)
 
 }
 
-public fun HTMLComponent.navbar(id:String, position: NavbarPosition? = null, look:NavbarLook = NavbarLook.DEFAULT,
+public fun HTMLComponent.navbar(id:String, position: NavbarPosition = NavbarPosition.STATIC_TOP, look:NavbarLook = NavbarLook.DEFAULT,
                                 layout: ContainerLayout = ContainerLayout.DEFAULT, init: Navbar.() -> Unit):Unit {
     +(Navbar(id = id, position = position, look = look, layout = layout) with { init() })
 }

@@ -6,6 +6,7 @@ import net.yested.div
 import net.yested.Anchor
 import net.yested.with
 import net.yested.isTrue
+import org.w3c.dom.events.Event
 
 /**
  * Created by jean on 25.12.2014.
@@ -13,10 +14,10 @@ import net.yested.isTrue
  */
 
 public enum class AlertStyle(val code:String) {
-    SUCCESS :   AlertStyle("success")
-    INFO :      AlertStyle("info")
-    WARNING :   AlertStyle("warning")
-    DANGER :    AlertStyle("danger")
+    SUCCESS("success"),
+    INFO("info"),
+    WARNING("warning"),
+    DANGER("danger")
 }
 
 public class Alert(style: AlertStyle, dismissible: Boolean = false) : HTMLComponent("div") {
@@ -34,7 +35,7 @@ public class Alert(style: AlertStyle, dismissible: Boolean = false) : HTMLCompon
         }
     }
 
-    override fun a(clazz: String?, target: String?, href: String?, onclick: (() -> Unit)?, init: Anchor.() -> Unit) {
+    override fun a(clazz: String?, target: String?, href: String?, onclick: ((Event) -> Unit)?, init: Anchor.() -> Unit) {
         super<HTMLComponent>.a(clazz = clazz?:"alert-link", target = target, href = href, onclick = onclick, init = init)
     }
 

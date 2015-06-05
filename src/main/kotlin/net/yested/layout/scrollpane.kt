@@ -3,13 +3,13 @@ package net.yested.layout
 import jquery.jq
 import net.yested.*
 import net.yested.utils.registerResizeHandler
-import kotlin.js.dom.html.HTMLElement
+import org.w3c.dom.HTMLElement
 
 public enum class Overflow(val code: String) {
-    NONE : Overflow("")
-    AUTO : Overflow("auto")
-    HIDDEN : Overflow("hidden")
-    SCROLL : Overflow("scroll")
+    NONE(""),
+    AUTO("auto"),
+    HIDDEN("hidden"),
+    SCROLL("scroll")
 }
 
 public class ScrollPane(val horizontal: Overflow = Overflow.NONE,

@@ -11,10 +11,10 @@ import net.yested.utils.*
 import org.w3c.dom.Node
 import java.util.ArrayList
 import java.util.HashMap
-import kotlin.js.dom.html.HTMLElement
-import kotlin.js.dom.html.window
+import org.w3c.dom.HTMLElement
+import kotlin.browser.window
 
-public trait CellEditorFactory<TYPE> {
+public interface CellEditorFactory<TYPE> {
     fun createEditor(width:String, item:TYPE, closeHandler: ()->Unit):HTMLElement
 }
 
@@ -23,7 +23,7 @@ public class Filter<T>(
         val filterConfig: String
 )
 
-public trait FilterFactory<T> {
+public interface FilterFactory<T> {
     fun createFilterElement(newFilterHandler : Function1<Filter<T>?, Unit>, filterConfig : String? = null): Component
 }
 
@@ -274,7 +274,10 @@ public class SmartGrid<TYPE, KEY>(
 
         //register scrolling
         cont.onscroll = {
-            columnHeaderContainer.element.scrollLeft = cont.element.scrollLeft
+            val a = columnHeaderContainer.element
+            val b = cont.element
+            js("a.scrollLeft = b.scrollLeft")
+            //TODO: columnHeaderContainer.element.scrollLeft = cont.element.scrollLeft
         }
 
         //http://stackoverflow.com/questions/2264072/detect-a-finger-swipe-through-javascript-on-the-iphone-and-android
@@ -591,7 +594,7 @@ public class SmartGrid<TYPE, KEY>(
 
     private fun readCurrentColumnLayout() =
         (0..(header.childNodes.length-1)).map {
-            (header.childNodes.item(it) as HTMLElement).getAttribute("columnid")
+            (header.childNodes.item(it) as HTMLElement).getAttribute("columnid")!!
         }.toList()
 
     private fun makeHeaderSortable(headerDiv:HTMLElement) {
@@ -612,7 +615,7 @@ public class SmartGrid<TYPE, KEY>(
             td.onclick = {
                 if (td.getAttribute("editing") != "true") {
                     td.setAttribute("editing", "true")
-                    val rowIndex = getTBody().getIndexOfChildNode(td.parentNode)
+                    val rowIndex = getTBody().getIndexOfChildNode(td.parentNode!!)
                     val item = visibleDataList.get(currentRow + rowIndex)
                     if (item is VisibleOneItem<TYPE>) {
                         val editor = column.editor.createEditor(
@@ -717,7 +720,7 @@ public class SmartGrid<TYPE, KEY>(
                     rowsReferences.remove(getKey(removedItem.item))
                 }
 
-                val movedRow = rows.item(0)
+                val movedRow = rows.item(0)!!
                 tbody.appendChild(movedRow)
                 val itemForLastRow = visibleDataList.get(visibleRows + currentRow - (movedRowsCount - index + 1))
                 updateRow(columns, itemForLastRow, movedRow)
@@ -736,7 +739,7 @@ public class SmartGrid<TYPE, KEY>(
                     rowsReferences.remove(getKey(removedItem.item))
                 }
 
-                val movedRow = rows.item(visibleRows-1)
+                val movedRow = rows.item(visibleRows-1)!!
                 val firstRow = rows.item(0)
                 tbody.insertBefore(movedRow, firstRow)
                 val itemForLastRow = visibleDataList.get(currentRow - index + 1)
@@ -766,7 +769,7 @@ public class SmartGrid<TYPE, KEY>(
 
     }
 
-    private fun getTBody() = dataTable.getElementsByTagName("tbody").item(0)
+    private fun getTBody() = dataTable.getElementsByTagName("tbody").item(0)!!
 
     private fun updateRow(columns: List<GridColumn<TYPE>>, visibleItem: VisibleItem<TYPE>, tr: Node, columnsToUpdate: Collection<String>? = null) {
         columns.forEachIndexed { columnIndex, column ->

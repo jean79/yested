@@ -1,10 +1,10 @@
 package net.yested.utils
 
-import kotlin.js.dom.html.HTMLElement
+import org.w3c.dom.HTMLElement
 import net.yested.AjaxRequest
 
 native
-trait Performance {
+interface Performance {
     fun now(): Int = noImpl
 }
 

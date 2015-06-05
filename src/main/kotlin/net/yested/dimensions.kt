@@ -1,6 +1,6 @@
 package net.yested
 
-public trait Dimension {
+public interface Dimension {
     fun toHtml():String
 }
 

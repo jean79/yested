@@ -3,10 +3,7 @@ package net.yested.bootstrap
 import net.yested.AjaxRequest
 import net.yested.ajaxJQuery
 
-/**
- * Created by jean on 14.1.2015.
- */
-native private trait JQAffix {
+native private interface JQAffix {
     fun scrollspy(parameters:Any?) : Unit = noImpl
 }
 

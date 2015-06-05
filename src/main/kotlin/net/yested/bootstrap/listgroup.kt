@@ -3,13 +3,13 @@ package net.yested.bootstrap
 import jquery.jq
 import net.yested.*
 import net.yested.utils.sortable
-import kotlin.js.dom.html.HTMLElement
+import org.w3c.dom.HTMLElement
 import java.util.ArrayList
 
 public enum class SelectionMode() {
-    NONE: SelectionMode()
-    SINGLE: SelectionMode()
-    MULTI: SelectionMode()
+    NONE(),
+    SINGLE(),
+    MULTI()
 }
 
 public class ListGroup<TYPE>(val selectionMode: SelectionMode = SelectionMode.MULTI, val sortable:Boolean = false, val renderer: Anchor.(item:TYPE)->Unit) : InputComponent<List<TYPE>> {

@@ -4,11 +4,11 @@ import jquery.jq
 import jquery.ui.draggable
 import net.yested.*
 import net.yested.utils.*
-import kotlin.js.dom.html.HTMLElement
+import org.w3c.dom.HTMLElement
 
 public enum class ScrollBarOrientation(val directionProperty:String, val nonDirectionProperty:String, val axis:String, val cssPosProperty:String) {
-    VERTICAL: ScrollBarOrientation(directionProperty = "height", nonDirectionProperty = "width", axis = "y", cssPosProperty = "top")
-    HORIZONTAL: ScrollBarOrientation(directionProperty = "width", nonDirectionProperty = "height", axis = "x", cssPosProperty = "left")
+    VERTICAL(directionProperty = "height", nonDirectionProperty = "width", axis = "y", cssPosProperty = "top"),
+    HORIZONTAL(directionProperty = "width", nonDirectionProperty = "height", axis = "x", cssPosProperty = "left")
 }
 
 /**

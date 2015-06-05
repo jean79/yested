@@ -6,7 +6,7 @@ import net.yested.bootstrap.Glyphicon
 import net.yested.bootstrap.glyphicon
 import net.yested.utils.*
 import org.w3c.dom.Element
-import kotlin.js.dom.html.window
+import kotlin.browser.window
 
 /**
  * Internal class of SmartGrid
@@ -66,7 +66,7 @@ class GridColumnHeader<T>(
         if (sortingSupported) {
             div { "style".."position: relative"
                 div {
-                    a(href = null, onclick = { sortFunction!!(column) }) {
+                    a(href = null, onclick = { sortFunction(column) }) {
                         "style".."cursor: pointer;"
                         +column.label
                     }

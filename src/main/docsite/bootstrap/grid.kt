@@ -13,10 +13,6 @@ import net.yested.colorized
 import net.yested.Color
 import net.yested.Colors
 
-/**
- * Created by jean on 17.12.2014.
- */
-
 data class Person(val name: String, val age: Int, val hair: Color)
 
 fun createGrid(id: String): Div {
@@ -26,9 +22,9 @@ fun createGrid(id: String): Div {
             Person("Peter", 30, Colors.RED.color),
             Person("Martin", 31, Colors.BLUE.color))
 
-    val grid = Grid(columns = array(
+    val grid = Grid(columns = arrayOf(
             Column(label = text("Name"), render = { +it.name },
-                    sortFunction = {(l, r) -> compareValues(l.name, r.name) }),
+                    sortFunction = { l, r -> compareValues(l.name, r.name) }),
             Column(label = text("Age"), render = { +"${it.age}" },
                     sortFunction = compareByValue<Person, Int> { it.age },
                     defaultSort = true, defaultSortOrderAsc = true),

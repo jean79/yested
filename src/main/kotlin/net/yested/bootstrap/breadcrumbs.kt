@@ -6,10 +6,8 @@ import net.yested.with
 import net.yested.createElement
 import net.yested.Component
 import net.yested.appendComponent
+import org.w3c.dom.events.Event
 
-/**
- * Created by jean on 30.11.2014.
- */
 public class Breadcrumbs : Component {
 
     override val element = createElement("ol")
@@ -18,7 +16,7 @@ public class Breadcrumbs : Component {
         element.setAttribute("class", "breadcrumb")
     }
 
-    fun link(href:String? = null, onclick:Function0<Unit>? = null, init: HTMLComponent.() -> Unit) {
+    fun link(href:String? = null, onclick:Function1<Event, Unit>? = null, init: HTMLComponent.() -> Unit) {
         element.appendComponent(Li() with {
             a(href = href, onclick = onclick, init = init)
         })

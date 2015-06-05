@@ -8,23 +8,20 @@ import net.yested.BarChartSeries
 import net.yested.randomColor
 import net.yested.toHTMLColor
 
-/**
- * Created by jean on 30.1.2015.
- */
 fun createChartJSBarSection(): Div {
 
     val chart = Chart(width = 300, height = 250)
 
-    val temperatureCZE = array(-2.81,-1.06,2.80,7.49,12.30,15.41,17.11,16.90,13.49,8.59,2.82,-1.06)
-    val temperatureSVK = array(-2.03,0.85,5.44,10.72,15.49,18.52,20.11,19.70,16.13,10.81,4.89,0.11)
+    val temperatureCZE = arrayOf(-2.81, -1.06, 2.80, 7.49, 12.30, 15.41, 17.11, 16.90, 13.49, 8.59, 2.82, -1.06)
+    val temperatureSVK = arrayOf(-2.03, 0.85, 5.44, 10.72, 15.49, 18.52, 20.11, 19.70, 16.13, 10.81, 4.89, 0.11)
 
     val colorCZE = randomColor(1.0)
     val colorSVK = randomColor(1.0)
 
     val chartData =
             BarChartData(
-                    labels = array("Jan", "Feb", "Mar", "Apr", "May", "Jun", "July", "Aug", "Sept", "Oct", "Nov", "Dec"),
-                    datasets = array(
+                    labels = arrayOf("Jan", "Feb", "Mar", "Apr", "May", "Jun", "July", "Aug", "Sept", "Oct", "Nov", "Dec"),
+                    datasets = arrayOf(
                             BarChartSeries(
                                     label = "Czech Republic",
                                     strokeColor = colorCZE.copy(alpha = 0.8).toHTMLColor(),

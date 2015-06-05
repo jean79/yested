@@ -7,7 +7,7 @@ import net.yested.bootstrap.Medium
 import net.yested.bootstrap.pageHeader
 import net.yested.bootstrap.DateField
 import net.yested.Component
-import kotlin.js.dom.html.HTMLElement
+import org.w3c.dom.HTMLElement
 import net.yested.whenAddedToDom
 
 

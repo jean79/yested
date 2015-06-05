@@ -9,12 +9,12 @@ import net.yested.appendComponent
 import net.yested.Button
 
 public enum class PanelStyle(val code:String) {
-    DEFAULT : PanelStyle("default")
-    PRIMARY : PanelStyle("primary")
-    SUCCESS : PanelStyle("success")
-    INFO : PanelStyle("info")
-    WARNING : PanelStyle("warning")
-    DANGER : PanelStyle("danger")
+    DEFAULT("default"),
+    PRIMARY("primary"),
+    SUCCESS("success"),
+    INFO("info"),
+    WARNING("warning"),
+    DANGER("danger")
 }
 
 public class Panel(style : PanelStyle = PanelStyle.DEFAULT, val dismissible: Boolean = false) : Component {
@@ -41,7 +41,7 @@ public class Panel(style : PanelStyle = PanelStyle.DEFAULT, val dismissible: Boo
         if (dismissibleHandler != null) {
             dismissibleHandler!!(this)
         } else {
-            element.parentNode.removeChild(element)
+            element.parentNode?.removeChild(element)
         }
     }
 

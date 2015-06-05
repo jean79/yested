@@ -6,8 +6,8 @@ import net.yested.Anchor
 import org.w3c.dom.Element
 
 public enum class MediaAlign(val className: String) {
-	Left : MediaAlign("pull-left")
-	Right : MediaAlign("pull-right")
+	Left("pull-left"),
+	Right("pull-right")
 }
 
 public class MediaBody() : HTMLComponent("div") {
@@ -43,7 +43,7 @@ public class MediaObject(align: MediaAlign) : HTMLComponent("div") {
 	public fun media(init: HTMLComponent.() -> Unit) {
 		media.init()
 		val childElement = media.element.firstChild as Element
-		val clazz = childElement.getAttribute("class") as String? ?: ""
+		val clazz = childElement.getAttribute("class") ?: ""
 		childElement.setAttribute("class", "$clazz media-object")
 	}
 

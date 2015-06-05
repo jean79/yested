@@ -18,16 +18,16 @@ fun createChartJSRadarSection(): Div {
 
     val chart = Chart(width = 300, height = 250)
 
-    val dataSet1 = array(65.0, 59.0, 90.0, 81.0, 56.0, 55.0, 40.0)
-    val dataSet2 = array(28.0, 48.0, 40.0, 19.0, 96.0, 27.0, 100.0)
+    val dataSet1 = arrayOf(65.0, 59.0, 90.0, 81.0, 56.0, 55.0, 40.0)
+    val dataSet2 = arrayOf(28.0, 48.0, 40.0, 19.0, 96.0, 27.0, 100.0)
 
     val colorDataSet1 = randomColor(1.0)
     val colorDataSet2 = randomColor(1.0)
 
     val chartData =
             RadarChartData(
-                    labels = array("Eating", "Drinking", "Sleeping", "Designing", "Coding", "Cycling", "Running"),
-                    datasets = array(
+                    labels = arrayOf("Eating", "Drinking", "Sleeping", "Designing", "Coding", "Cycling", "Running"),
+                    datasets = arrayOf(
                             RadarChartSeries(
                                     label = "Data Set 1",
                                     fillColor = colorDataSet1.copy(alpha = 0.2).toHTMLColor(),

@@ -11,14 +11,11 @@ import net.yested.PolarAreaChartSeries
 
 class Data2(val countryCode:String, val temperature:Double)
 
-/**
- * Created by jean on 30.1.2015.
- */
 fun createPolarChartSection(): Div {
 
     val chart = Chart(width = 300, height = 250)
 
-    val temperaturesData = array(
+    val temperaturesData = arrayOf(
             Data2("BEL", 9.51),
             Data2("BEN", 15.46),
             Data2("BFA", 28.18),
@@ -32,7 +29,7 @@ fun createPolarChartSection(): Div {
                 highlight = color.lighten(30).toHTMLColor(),
                 label = it.countryCode
         )
-    }.copyToArray()
+    }.toTypedArray()
 
     val options = object {
         val responsive = true

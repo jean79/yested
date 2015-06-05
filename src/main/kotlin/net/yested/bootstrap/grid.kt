@@ -1,6 +1,3 @@
-/**
- * Created by jean on 20.11.2014.
- */
 package net.yested.bootstrap
 
 import net.yested.HTMLComponent
@@ -13,7 +10,7 @@ import net.yested.appendComponent
 import net.yested.THead
 import net.yested.TBody
 import net.yested.removeChildByName
-import kotlin.js.dom.html.HTMLElement
+import org.w3c.dom.HTMLElement
 import net.yested.div
 
 public data class Column<T>(
@@ -78,7 +75,7 @@ public class Grid<T>(responsive: Boolean = false, val columns:Array<Column<T>>) 
                     sortFunction = { sortByColumn(it) } )}
 
         renderHeader()
-        sortColumn = (columns.filter { it.defaultSort } : Iterable<Column<T>>).firstOrNull()
+        sortColumn = columns.filter { it.defaultSort }.firstOrNull()
         asc = sortColumn?.defaultSortOrderAsc ?: true
         setSortingArrow()
     }
