@@ -63,7 +63,7 @@ public class Validator<T>(val inputElement: InputComponent<T>, override val erro
             if (this) {
                 removeTooltip(inputElement.element);
             } else {
-                addTooltip(element = inputElement.element, options = TooltipOptions(placement = TooltipPlacement.BOTTOM), title = { errorText })
+                addTooltip(element = inputElement.element, options = TooltipOptions(placement = TooltipPlacement.TOP), title = { errorText })
             }
         }
 

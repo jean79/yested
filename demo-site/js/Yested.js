@@ -2797,7 +2797,7 @@
                   _.net.yested.bootstrap.removeTooltip_lt8gi4$(this$Validator.inputElement.element);
                 }
                  else {
-                  _.net.yested.bootstrap.addTooltip_ajs87k$(this$Validator.inputElement.element, new _.net.yested.bootstrap.TooltipOptions(void 0, void 0, void 0, _.net.yested.bootstrap.TooltipPlacement.object.BOTTOM), _.net.yested.bootstrap.Validator.f(this$Validator));
+                  _.net.yested.bootstrap.addTooltip_ajs87k$(this$Validator.inputElement.element, new _.net.yested.bootstrap.TooltipOptions(void 0, void 0, void 0, _.net.yested.bootstrap.TooltipPlacement.object.TOP), _.net.yested.bootstrap.Validator.f(this$Validator));
                 }
               };
             }
