@@ -181,7 +181,7 @@
                 </executions>
             </plugin>
 
-            <plugin>
+            <!--<plugin>
                 <groupId>org.jetbrains.kotlin</groupId>
                 <artifactId>kdoc-maven-plugin</artifactId>
                 <version>${kotlin.version}</version>
@@ -201,9 +201,9 @@
                     </ignorePackages>
                     <sourceRootHref>https://github.com/jean79/yested</sourceRootHref>
                     <projectRootDir>${basedir}/src/main/kotlin</projectRootDir>
-                    <!--<packageDescriptionFiles>
+                    &lt;!&ndash;<packageDescriptionFiles>
                         <kotlin.swing>${basedir}/src/main/kotlin/libraries/kotlin-swing/ReadMe.md</kotlin.swing>
-                    </packageDescriptionFiles>-->
+                    </packageDescriptionFiles>&ndash;&gt;
                     <packageSummaryText>
                         <net.yested>Yested Framework</net.yested>
                         <net.yested.bootstrap>Twitter Bootstrap Wrappers</net.yested.bootstrap>
@@ -219,7 +219,7 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
+            </plugin>-->
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
