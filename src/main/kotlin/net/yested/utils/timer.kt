@@ -3,12 +3,12 @@ package net.yested.utils
 import org.w3c.dom.HTMLElement
 import net.yested.AjaxRequest
 
-native
+@native
 interface Performance {
     fun now(): Int = noImpl
 }
 
-native("performance") public var performance: Performance = null!!
+@native("performance") public var performance: Performance = null!!
 
 fun measure(title:String = "Execution", code:()->Unit) {
     val start = performance.now()

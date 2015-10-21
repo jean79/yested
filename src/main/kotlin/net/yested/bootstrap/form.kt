@@ -1,7 +1,3 @@
-/**
- * Created by jean on 21.11.2014.
- */
-
 package net.yested.bootstrap
 
 /**
@@ -29,9 +25,7 @@ package net.yested.bootstrap
 </form>
  */
 import net.yested.HTMLComponent
-import net.yested.Span
 import net.yested.with
-import net.yested.ObservableInput
 import net.yested.InputComponent
 
 public interface ValidatorI {
@@ -63,7 +57,7 @@ public class Validator<T>(val inputElement: InputComponent<T>, override val erro
             if (this) {
                 removeTooltip(inputElement.element);
             } else {
-                addTooltip(element = inputElement.element, options = TooltipOptions(placement = TooltipPlacement.BOTTOM), title = { errorText })
+                addTooltip(element = inputElement.element, options = TooltipOptions(placement = TooltipPlacement.TOP), title = { errorText })
             }
         }
 
@@ -98,7 +92,7 @@ public class Form(private val formStyle: FormStyle = FormStyle.DEFAULT, private 
         } else span(init = content)
 
         val divFormGroup = div(clazz = "form-group ${inputSize.code}") {
-                label(forId = forId, clazz= if (formStyle == FormStyle.HORIZONTAL) "${labelDef} control-label" else "", init = label)
+                label(forId = forId, clazz= if (formStyle == FormStyle.HORIZONTAL) "$labelDef control-label" else "", init = label)
                 + divInput
             }
         validator?.onchange {

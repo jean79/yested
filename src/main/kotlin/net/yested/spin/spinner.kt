@@ -7,15 +7,15 @@ import net.yested.LineChartData
 import net.yested.Context
 import net.yested.HTMLComponent
 
-public native class SpinnerNative() {
+public @native class SpinnerNative() {
     public fun spin(): SpinnerCreated = noImpl
 }
 
-public native class SpinnerCreated() {
+public @native class SpinnerCreated() {
     public val el: HTMLElement = noImpl
 }
 
-public native("new Spinner") fun createSpinner(options: Any? = null): SpinnerNative = SpinnerNative();
+public @native("new Spinner") fun createSpinner(options: Any? = null): SpinnerNative = SpinnerNative();
 
 data class SpinnerOptions(
         val lines: Int = 13, // The number of lines to draw

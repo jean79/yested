@@ -83,7 +83,7 @@ public class Navbar(id:String, position: NavbarPosition = NavbarPosition.STATIC_
                 div(clazz = "navbar-header") {
                     +(HTMLComponent("button") with {
                         "type".."button"; "class".."navbar-toggle collapsed";
-                        "data-toggle".."collapse"; "data-target".."#${id}"
+                        "data-toggle".."collapse"; "data-target".."#$id"
                         "aria-expanded".."false"; "aria-controls".."navbar"
                         span(clazz = "sr-only") { + "Toogle navigation" }
                         span(clazz = "icon-bar") { }
@@ -118,7 +118,7 @@ public class Navbar(id:String, position: NavbarPosition = NavbarPosition.STATIC_
         fun linkClicked() {
             deselectAll()
             li.clazz = "active"
-            onclick?.let { onclick!!() }
+            onclick?.let { onclick() }
         }
 
         li with {
@@ -177,7 +177,7 @@ class NavBarDropdown(private val deselectFun:() -> Unit, label: Anchor.()->Unit)
 
     public fun item(href:String = "#", onclick: Function1<Event, dynamic>? = null, init: Anchor.() -> Unit) {
         val li = Li() with {
-            a(href = href, onclick = { event-> selectThis(); onclick?.let { onclick!!(event) } }, init = init)
+            a(href = href, onclick = { event-> selectThis(); onclick?.let { onclick(event) } }, init = init)
         }
         ul.appendChild(li)
     }

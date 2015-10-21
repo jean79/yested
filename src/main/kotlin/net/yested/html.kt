@@ -147,13 +147,13 @@ public open class HTMLComponent(tagName:String, htmlElement:HTMLElement? = null)
     public var id:String? by Attribute()
     public var clazz:String? by Attribute("class")
 
-    public fun String.rangeTo(value:String):Unit = element.setAttribute(this, value)
+    operator public fun String.rangeTo(value:String):Unit = element.setAttribute(this, value)
 
-    public fun String.plus(): Unit {
+    operator public fun String.plus(): Unit {
         jq(element).append(this)
     }
 
-    public fun Component.plus() {
+    operator public fun Component.plus() {
         this@HTMLComponent.appendChild(this)
     }
 
@@ -215,7 +215,7 @@ public open class HTMLComponent(tagName:String, htmlElement:HTMLElement? = null)
     public fun span(clazz:String? = null, init:Span.() -> Unit = {}):Span {
         val span = Span()
         span.init()
-        clazz?.let { span.clazz = clazz!! }
+        clazz?.let { span.clazz = clazz }
         element.appendComponent(span)
         return span
     }
@@ -312,8 +312,8 @@ public open class HTMLComponent(tagName:String, htmlElement:HTMLElement? = null)
 
     public fun label(forId:String? = null, clazz:String? = null, init: HTMLComponent.() -> Unit): HTMLComponent {
         val l = HTMLComponent("label") with {
-            forId?.let { "for"..forId!! }
-            clazz?.let { "class"..clazz!! }
+            forId?.let { "for"..forId }
+            clazz?.let { "class"..clazz }
             init()
         }
         +l
@@ -437,7 +437,7 @@ public class DL : HTMLComponent("dl") {
 
 }
 
-public native var HTMLElement.onchange: (() -> Unit)?
+public @native var HTMLElement.onchange: (() -> Unit)?
     get() = noImpl
     set(value) = noImpl
 
@@ -538,9 +538,9 @@ open public class CheckBox() : InputElementComponent<Boolean>() {
         set(value) { element.value = value }
 }
 
-native interface Context { }
+@native interface Context { }
 
-native interface CanvasI {
+@native interface CanvasI {
     public fun getContext(id:String):Context = noImpl
 }
 

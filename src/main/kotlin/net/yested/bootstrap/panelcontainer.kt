@@ -4,8 +4,6 @@ import net.yested.Component
 import net.yested.createElement
 import net.yested.with
 import jquery.jq
-import jquery.JQuery
-import org.w3c.dom.Element
 import net.yested.HTMLComponent
 import net.yested.Div
 import net.yested.utils.disableSelection

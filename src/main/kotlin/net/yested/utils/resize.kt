@@ -1,7 +1,6 @@
 package net.yested.utils
 
 import jquery.jq
-import net.yested.Component
 import org.w3c.dom.HTMLElement
 import kotlin.browser.window
 

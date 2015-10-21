@@ -51,7 +51,7 @@ public class Pagination(val count:Int, val defaultSelection:Int = 1, val listene
         val newList = ArrayList<Li>()
         newList.add(Li().with { "style" .. "cursor: pointer;"; a(onclick = { backward() }) { span { +"&laquo;" } } })
         for (i in 1..count) {
-            newList.add(Li() with { a(onclick = { select(i) } ) { "style" .. "cursor: pointer;"; span { +"${i}" } } })
+            newList.add(Li() with { a(onclick = { select(i) } ) { "style" .. "cursor: pointer;"; span { +"$i" } } })
         }
         newList.add(Li() with { "style" .. "cursor: pointer;"; a(onclick = { forward() }) { span() { +"&raquo;"}} })
         return newList

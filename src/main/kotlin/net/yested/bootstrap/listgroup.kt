@@ -3,7 +3,6 @@ package net.yested.bootstrap
 import jquery.jq
 import net.yested.*
 import net.yested.utils.sortable
-import org.w3c.dom.HTMLElement
 import java.util.ArrayList
 
 public enum class SelectionMode() {
@@ -90,7 +89,7 @@ public class ListGroup<TYPE>(val selectionMode: SelectionMode = SelectionMode.MU
     public var dataProvider:Collection<TYPE>
         get() = itemToAnchorMap
                 .entrySet()
-                .sortBy(order = { element.getIndexOfChildNode(it.getValue().element)})
+                .sortedBy(selector = { element.getIndexOfChildNode(it.getValue().element)})
                 .map { it.getKey() }
         set(newDataProvider) {
             selectedItems.clear()

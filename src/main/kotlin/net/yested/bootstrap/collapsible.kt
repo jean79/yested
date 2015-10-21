@@ -14,9 +14,6 @@ import net.yested.BiDirectionEffect
 import net.yested.Fade
 import net.yested.Slide
 
-/**
- * Created by jean on 21.2.2015.
- */
 public class Collapsible(opened:Boolean = false, private val effect:BiDirectionEffect = Slide()) : Component {
 
     private val arrowPlaceholder = Span();

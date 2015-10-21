@@ -1,12 +1,7 @@
 package basics
 
-import net.yested.bootstrap.btsButton
-import net.yested.bootstrap.ButtonSize
-import net.yested.bootstrap.ButtonLook
-import net.yested.text
-import net.yested.div
-import net.yested.bootstrap.BtsCheckBox
 import net.yested.Div
+import net.yested.div
 
 /**
  * Created by jean on 20.12.2014.

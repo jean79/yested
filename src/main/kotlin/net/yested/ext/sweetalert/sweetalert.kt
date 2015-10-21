@@ -1,7 +1,5 @@
 package net.yested.ext.sweetalert
 
-import net.yested.JQAjax
-
 public data class SwalOptions(
 
         /**
@@ -64,4 +62,4 @@ public data class SwalOptions(
         val timer: Number? = null
 )
 
-native("swal") public fun swal(option:SwalOptions, handler:Function1<Boolean?, Unit>? = null):Unit = null!!
+@native("swal") public fun swal(option:SwalOptions, handler:Function1<Boolean?, Unit>? = null):Unit = null!!

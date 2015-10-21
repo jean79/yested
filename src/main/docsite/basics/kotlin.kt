@@ -1,17 +1,10 @@
 package basics
 
-import net.yested.bootstrap.Grid
-import net.yested.bootstrap.Column
-import net.yested.text
-import net.yested.bootstrap.row
-import net.yested.bootstrap.pageHeader
-import net.yested.div
 import net.yested.Div
-import net.yested.bootstrap.btsButton
-import net.yested.ButtonType
-import net.yested.bootstrap.ButtonLook
-import net.yested.bootstrap.ButtonSize
 import net.yested.bootstrap.Medium
+import net.yested.bootstrap.pageHeader
+import net.yested.bootstrap.row
+import net.yested.div
 
 fun kotlinSection(): Div {
 

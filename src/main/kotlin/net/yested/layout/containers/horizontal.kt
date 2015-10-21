@@ -1,19 +1,10 @@
 package net.yested.layout.containers
 
-import jquery.JQuery
 
 import jquery.jq
 import net.yested.*
-import net.yested.bootstrap.btsButton
-import net.yested.bootstrap.smartgrid.GridColumn
-import net.yested.bootstrap.smartgrid.SmartGrid
-import net.yested.layout.Overflow
-import net.yested.layout.scrollPane
-import net.yested.spin.Spinner
-import net.yested.spin.SpinnerOptions
 import net.yested.utils.css
 import net.yested.utils.registerResizeHandler
-import java.util.ArrayList
 import org.w3c.dom.HTMLElement
 
 class HorizontalContainer(width: Dimension, val height: Dimension? = null, val gap:Int = 0) : Component {

@@ -4,7 +4,6 @@ import net.yested.bootstrap.row
 import net.yested.bootstrap.pageHeader
 import net.yested.div
 import net.yested.Div
-import net.yested.bootstrap.btsButton
 import net.yested.bootstrap.ButtonLook
 import net.yested.bootstrap.btsAnchor
 import net.yested.bootstrap.ButtonSize

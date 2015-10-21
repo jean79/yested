@@ -8,7 +8,7 @@ import net.yested.with
 import jquery.jq
 import net.yested.isTrue
 
-public native fun JQuery.modal(options: String):Unit = noImpl;
+public @native fun JQuery.modal(options: String):Unit = noImpl;
 
 /**
  * <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

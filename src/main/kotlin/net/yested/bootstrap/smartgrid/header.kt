@@ -77,11 +77,11 @@ class GridColumnHeader<T>(
                             "style".."cursor: pointer;"
                             glyphicon(icon = "filter")
                         }
-                        if (column.groupBy != null) {
-                            a(href = null, onclick = { groupFunction(column) }) {
-                                "style".."cursor: pointer;"
-                                glyphicon(icon = "folder-open")
-                            }
+                    }
+                    if (column.groupBy != null) {
+                        a(href = null, onclick = { groupFunction(column) }) {
+                            "style".."cursor: pointer;"
+                            glyphicon(icon = "folder-open")
                         }
                     }
                 }

@@ -5,7 +5,7 @@ import org.w3c.dom.HTMLElement
 import net.yested.whenAddedToDom
 import jquery.jq
 
-native
+@native
 private fun JQuery.tooltip(options: Any): Unit = noImpl
 public data class TooltipDelay(val show: Int, val hide: Int)
 public enum class TooltipPlacement {

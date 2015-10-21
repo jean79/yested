@@ -3,21 +3,12 @@ package net.yested.bootstrap
 import java.util.ArrayList
 import net.yested.Attribute
 import net.yested.HTMLComponent
-import kotlin.dom.addElement
-import kotlin.dom.addText
-import net.yested.Div
 import net.yested.Span
 import net.yested.with
-import java.util.HashMap
-import net.yested.Component
-import org.w3c.dom.HTMLElement
 import net.yested.createElement
 import net.yested.appendComponent
-import net.yested.BooleanAttribute
-import net.yested.InputComponent
 import net.yested.CheckBox
 import net.yested.ObservableInput
-import net.yested.onchange
 import net.yested.InputElementComponent
 import org.w3c.dom.HTMLInputElement
 import org.w3c.dom.HTMLOptionElement
@@ -222,11 +213,11 @@ public fun HTMLComponent.inputAddOn<T>(prefix:String? = null, suffix:String? = n
     +(
         div(clazz = "input-group") {
             prefix?.let {
-                div(clazz = "input-group-addon") { +prefix!! }
+                div(clazz = "input-group-addon") { +prefix }
             }
             +textInput
             suffix?.let {
-                div(clazz = "input-group-addon") { +suffix!! }
+                div(clazz = "input-group-addon") { +suffix }
             }
         })
 

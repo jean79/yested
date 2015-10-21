@@ -1,26 +1,8 @@
-/**
- * Created by jean on 21.11.2014.
- */
 package net.yested.bootstrap
 
-import net.yested.UL
-import net.yested.Div
-import net.yested.HTMLComponent
-import net.yested.Li
-import net.yested.Anchor
-import net.yested.with
-import java.util.HashMap
-import net.yested.Component
-import net.yested.createElement
-import net.yested.appendComponent
-import net.yested.Fade
 import jquery.jq
+import net.yested.*
 import net.yested.utils.sortable
-import net.yested.FadeOut
-import net.yested.FadeIn
-import net.yested.Hide
-import net.yested.hide
-import net.yested.show
 
 /**
  * <div role="tabpanel">

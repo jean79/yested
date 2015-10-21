@@ -6,12 +6,10 @@ import net.yested.Button
 import net.yested.Anchor
 import net.yested.with
 import net.yested.Attribute
-import net.yested.Li
 import net.yested.UL
 import net.yested.Component
 import org.w3c.dom.HTMLElement
 import net.yested.div
-import net.yested.Div
 import net.yested.Span
 import org.w3c.dom.events.Event
 
