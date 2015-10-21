@@ -4,7 +4,7 @@ data class AjaxRequest<RESULT>(val url:String, val type:String = "POST", val dat
                        val contentType:String = "application/json; charset=utf-8",
                        val dataType:String = "json", val success: ((RESULT) -> Unit))
 
-native
+@native
 interface JQAjax {
     fun <T> get(url:String, loaded:(response: T) -> Unit) : Unit = noImpl
     //fun post(url:String, data:Any?, handler:()->Unit, type:String = "json") : Unit = noImpl
@@ -12,7 +12,7 @@ interface JQAjax {
     fun ajax<RESULT>(request:AjaxRequest<RESULT>) : Unit = noImpl
 }
 
-native("$") public var ajaxJQuery: JQAjax = null!!
+@native("$") public var ajaxJQuery: JQAjax = null!!
 
 
 public fun <T> ajaxGet(url:String, loaded:(response:T) -> Unit) : Unit {

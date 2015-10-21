@@ -11,7 +11,6 @@ import net.yested.THead
 import net.yested.TBody
 import net.yested.removeChildByName
 import org.w3c.dom.HTMLElement
-import net.yested.div
 
 public data class Column<T>(
         val label: HTMLComponent.() -> Unit,
@@ -122,11 +121,7 @@ public class Grid<T>(responsive: Boolean = false, val columns:Array<Column<T>>) 
         if (sortColumn?.sortFunction == null) {
             return toSort
         }
-        return toSort.sortBy(object: java.util.Comparator<T> {
-            override fun compare(obj1: T, obj2: T): Int {
-                return (sortColumn!!.sortFunction!!(obj1, obj2)) * (if (asc) 1 else -1)
-            }
-        })
+        return toSort.sortedWith(comparator { obj1: T, obj2: T ->  (sortColumn!!.sortFunction!!(obj1, obj2)) * (if (asc) 1 else -1)})
     }
 
     public fun displayData() {

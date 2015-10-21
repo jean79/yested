@@ -15,10 +15,10 @@ import kotlin.browser.window
 * return (node as HTMLElement).offsetParent != null // this is fast but does not work in IE9
  */
 
-native class CSSStyleDeclaration(
+@native class CSSStyleDeclaration(
         val display:String)
 
-native fun Window.getComputedStyle(node:Node):CSSStyleDeclaration = noImpl
+@native fun Window.getComputedStyle(node:Node):CSSStyleDeclaration = noImpl
 
 public fun isIncludedInDOM(node:Node):Boolean {
     /*var style = window.getComputedStyle(node);

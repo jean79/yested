@@ -10,7 +10,6 @@ import net.yested.layout.containers.horizontalContainer
 import net.yested.utils.*
 import org.w3c.dom.Node
 import java.util.ArrayList
-import java.util.HashMap
 import org.w3c.dom.HTMLElement
 import kotlin.browser.window
 
@@ -125,8 +124,6 @@ fun clearAggregationsOfAll<T>(group:Group<T>) {
 public class SmartGrid<TYPE, KEY>(
         val rowHeight:Int = 30,
         val getKey:(TYPE)->KEY,
-        val defaultSortColumn:String? = null,
-        val defaultSortOrderAsc:Boolean = true,
         columns:Array<GridColumn<TYPE>>) : Component {
 
     private val dataTable = createElement("table") with {
@@ -426,7 +423,7 @@ public class SmartGrid<TYPE, KEY>(
 
         val newVisibleColumnsList = visibleColumns.toArrayList()
         newVisibleColumnsList.remove(0)//remove old root column
-        groupingColumns.reverse().forEach { //show again columns which where used for aggregation
+        groupingColumns.reversed().forEach { //show again columns which where used for aggregation
             if (!newVisibleColumnsList.contains(it.id)) {
                 newVisibleColumnsList.add(0, it.id)
             }
@@ -530,13 +527,17 @@ public class SmartGrid<TYPE, KEY>(
 
     private fun sortItemsInGroup(group: Group<TYPE>) {
         if (group.items != null) {
-            group.items = group.items!!.sortBy(object : java.util.Comparator<TYPE> {
+            group.items = group.items!!.sortedWith(comparator {
+                obj1: TYPE, obj2: TYPE ->
+                (sortColumn!!.sortFunction!!(obj1, obj2)) * (if (asc) 1 else -1)
+            }).toArrayList()
+           /* group.items = group.items!!.sortedBy(object : java.util.Comparator<TYPE> {
                 override fun compare(obj1: TYPE, obj2: TYPE): Int {
                     return (sortColumn!!.sortFunction!!(obj1, obj2)) * (if (asc) 1 else -1)
                 }
-            }).toArrayList()
+            }).toArrayList()*/
         } else {
-            group.subgroups = group.subgroups!!.sortBy { it.groupName }
+            group.subgroups = group.subgroups!!.sortedBy { it.groupName }
             group.subgroups!!.forEach { sortItemsInGroup(it) }
         }
     }

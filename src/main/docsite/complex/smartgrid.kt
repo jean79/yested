@@ -28,7 +28,7 @@ fun HTMLComponent.coloredNumber(value:Double) {
     })
 }
 
-native fun HTMLElement.focus() : Unit = noImpl
+@native fun HTMLElement.focus() : Unit = noImpl
 
 public class DoubleEditor<TYPE>(
         val getValue:(TYPE)->Double?,
@@ -113,8 +113,6 @@ class CustomizableGridSection: Component {
 
     val grid = SmartGrid<MarketData, String>(
             getKey = {it.ticker},
-            defaultSortColumn = "ticker",
-            defaultSortOrderAsc = true,
             columns = arrayOf
                     (GridColumn(id = "ticker", width = "100px", label = "Ticker", render = { +it.ticker },
                             filterFactory = TextInputFilterFactory { text -> { item:MarketData -> item.ticker.contains(text)} },

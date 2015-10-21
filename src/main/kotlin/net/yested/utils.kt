@@ -45,7 +45,7 @@ public fun <T, V : Comparable<V>> compareByValue(get: (T) -> V?): (T, T) -> Int 
     return { l, r -> compareValues(get(l), get(r)) }
 }
 
-public native fun Node.isSameNode(node:Node):Boolean = noImpl
+public @native fun Node.isSameNode(node:Node):Boolean = noImpl
 
 public fun Node.getIndexOfChildNode(childElement:Node):Int {
     var index = 0

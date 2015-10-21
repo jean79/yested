@@ -1,11 +1,11 @@
 package net.yested.utils
 
 
-native("moment") private fun moment_js(): MomentJs = noImpl
-native("moment") private fun moment_js(millisecondsSinceUnixEpoch: Long): MomentJs = noImpl
-native("moment") private fun moment_js(input: String, format: String): MomentJs = noImpl
+@native("moment") private fun moment_js(): MomentJs = noImpl
+@native("moment") private fun moment_js(millisecondsSinceUnixEpoch: Long): MomentJs = noImpl
+@native("moment") private fun moment_js(input: String, format: String): MomentJs = noImpl
 
-native("Moment")
+@native("Moment")
 private class MomentJs {
     fun format(formatString: String? = null): String = noImpl
     fun valueOf(): Long = noImpl

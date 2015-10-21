@@ -3,10 +3,8 @@ package basics
 import net.yested.Div
 import net.yested.div
 import net.yested.ajaxGet
-import net.yested.Span
 import net.yested.with
 import net.yested.spin.spinner
-import net.yested.spin.SpinnerOptions
 import net.yested.bootstrap.aligned
 import net.yested.bootstrap.TextAlign
 

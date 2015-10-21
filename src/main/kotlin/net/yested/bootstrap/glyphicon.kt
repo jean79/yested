@@ -1,10 +1,8 @@
 package net.yested.bootstrap
 
-import net.yested.Span
-import net.yested.HTMLComponent
-import net.yested.with
-import net.yested.createElement
 import net.yested.Component
+import net.yested.HTMLComponent
+import net.yested.createElement
 
 public class Glyphicon(icon:String) : Component {
 

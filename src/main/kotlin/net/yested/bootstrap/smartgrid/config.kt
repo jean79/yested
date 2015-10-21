@@ -4,7 +4,6 @@ import net.yested.*
 import net.yested.bootstrap.*
 import net.yested.layout.containers.horizontalContainer
 import net.yested.layout.containers.verticalContainer
-import net.yested.utils.throttle
 import java.util.ArrayList
 
 class ConfigurationDialog<T>(
@@ -122,7 +121,7 @@ class ConfigurationDialog<T>(
     }
 
     private fun initialDistribution() {
-        availableColumns.addAll( columns.filter { !selectedColumnIds.contains(it.id) }.sortBy { it.label } )
+        availableColumns.addAll( columns.filter { !selectedColumnIds.contains(it.id) }.sortedBy { it.label } )
         val columnsById = columns.toMap { it.id }
         val selectedColumns = selectedColumnIds.map { columnsById.get(it)!! }
         listGroupSelectedColumns.dataProvider = selectedColumns
@@ -130,7 +129,7 @@ class ConfigurationDialog<T>(
     }
 
     private fun populateAvailableListGroup() {
-        listGroupAvailableColumns.dataProvider = getVisibleAvailableColumns().sortBy { it.label }
+        listGroupAvailableColumns.dataProvider = getVisibleAvailableColumns().sortedBy { it.label }
     }
 
     private fun getVisibleAvailableColumns(): Collection<GridColumn<T>> {

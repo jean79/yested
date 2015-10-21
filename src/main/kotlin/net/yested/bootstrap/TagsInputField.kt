@@ -19,7 +19,7 @@ public enum class TagsInputFieldType(val className: String) {
     WARNING("warning")
 }
 
-native
+@native
 private fun JQuery.tagsinput(command: dynamic = null, data: dynamic = null): dynamic = noImpl
 
 private data class TagsInputBeforeEvent<T>(val item: T, var cancel: Boolean)

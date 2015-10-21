@@ -7,9 +7,6 @@ import net.yested.bootstrap.row
 import net.yested.bootstrap.Medium
 import net.yested.bootstrap.pageHeader
 
-/**
- * Created by jean on 20/01/15.
- */
 fun createBreadcrumbsSection(id: String): Div {
 
     return div(id = id) {

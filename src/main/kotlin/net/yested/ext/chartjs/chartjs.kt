@@ -54,7 +54,7 @@ public data class PolarAreaChartSeries(
         val highlight: String,
         val label: String) {}
 
-private native class ChartNative() {
+private @native class ChartNative() {
     public fun Pie(data: Array<PieChartSeries>, options: Any?): dynamic = noImpl;
     public fun Doughnut(data: Array<PieChartSeries>, options: Any?): dynamic = noImpl;
     public fun Line(data: LineChartData, options: Any?): dynamic = noImpl;
@@ -63,7 +63,7 @@ private native class ChartNative() {
     public fun PolarArea(data: Array<PolarAreaChartSeries>, options: Any?): dynamic = noImpl;
 }
 
-private native("new Chart") fun jsChart(context: Context): ChartNative = ChartNative();
+private @native("new Chart") fun jsChart(context: Context): ChartNative = ChartNative();
 
 public class Chart(width: Int, height: Int) : Canvas(width, height) {
 

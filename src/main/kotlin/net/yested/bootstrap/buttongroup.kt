@@ -1,13 +1,7 @@
 package net.yested.bootstrap
 
-import java.util.ArrayList
-import java.util.HashMap
-import net.yested.HTMLComponent
-import net.yested.Component
-import org.w3c.dom.HTMLElement
-import net.yested.createElement
-import net.yested.appendComponent
-import net.yested.with
+import net.yested.*
+import java.util.*
 
 /**
  * Created by jean on 24.12.2014.

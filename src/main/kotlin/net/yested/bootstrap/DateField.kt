@@ -77,4 +77,4 @@ public class DateField(formatter: FormatStringBuilder.()->FormatString) : InputE
     }
 }
 
-private native fun JQuery.datetimepicker(param: Any? ): Unit = noImpl;
+private @native fun JQuery.datetimepicker(param: Any? ): Unit = noImpl;

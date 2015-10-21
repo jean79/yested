@@ -4,12 +4,12 @@ import jquery.JQuery
 import org.w3c.dom.HTMLElement
 import jquery.jq
 
-native fun JQuery.fadeOut(duration:Int, callback:()->Unit) :Unit = noImpl;
-native fun JQuery.fadeIn(duration:Int, callback:()->Unit) :Unit = noImpl;
-native fun JQuery.slideUp(duration:Int, callback:()->Unit) :Unit = noImpl
-native fun JQuery.slideDown(duration:Int, callback:()->Unit) :Unit = noImpl
-native fun JQuery.show(callback:()->Unit) :Unit = noImpl;
-native fun JQuery.hide(callback:()->Unit) :Unit = noImpl;
+@native fun JQuery.fadeOut(duration:Int, callback:()->Unit) :Unit = noImpl;
+@native fun JQuery.fadeIn(duration:Int, callback:()->Unit) :Unit = noImpl;
+@native fun JQuery.slideUp(duration:Int, callback:()->Unit) :Unit = noImpl
+@native fun JQuery.slideDown(duration:Int, callback:()->Unit) :Unit = noImpl
+@native fun JQuery.show(callback:()->Unit) :Unit = noImpl;
+@native fun JQuery.hide(callback:()->Unit) :Unit = noImpl;
 
 private val DURATION = 200
 private val SLIDE_DURATION = DURATION * 2

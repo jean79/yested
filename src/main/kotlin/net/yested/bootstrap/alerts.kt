@@ -1,8 +1,6 @@
 package net.yested.bootstrap
 
 import net.yested.HTMLComponent
-import net.yested.Div
-import net.yested.div
 import net.yested.Anchor
 import net.yested.with
 import net.yested.isTrue
@@ -36,7 +34,7 @@ public class Alert(style: AlertStyle, dismissible: Boolean = false) : HTMLCompon
     }
 
     override fun a(clazz: String?, target: String?, href: String?, onclick: ((Event) -> Unit)?, init: Anchor.() -> Unit) {
-        super<HTMLComponent>.a(clazz = clazz?:"alert-link", target = target, href = href, onclick = onclick, init = init)
+        super.a(clazz = clazz?:"alert-link", target = target, href = href, onclick = onclick, init = init)
     }
 
 }

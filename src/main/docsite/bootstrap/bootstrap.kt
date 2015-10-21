@@ -1,16 +1,13 @@
 package bootstrap
 
-import net.yested.Div
-import net.yested.div
-import net.yested.bootstrap.row
-import net.yested.bootstrap.pageHeader
-import net.yested.bootstrap.Medium
-
-import net.yested.bootstrap.enableScrollSpy
-import net.yested.HTMLComponent
 import net.yested.Component
-import org.w3c.dom.HTMLElement
+import net.yested.Div
+import net.yested.bootstrap.Medium
+import net.yested.bootstrap.enableScrollSpy
+import net.yested.bootstrap.pageHeader
+import net.yested.bootstrap.row
 import net.yested.with
+import org.w3c.dom.HTMLElement
 
 class BootstrapPage : Component {
 

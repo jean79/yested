@@ -5,13 +5,9 @@ import net.yested.div
 import net.yested.bootstrap.row
 import net.yested.bootstrap.Medium
 import net.yested.bootstrap.pageHeader
-import net.yested.bootstrap.breadcrumbs
 import net.yested.bootstrap.alert
 import net.yested.bootstrap.AlertStyle
 
-/**
- * Created by jean on 20/01/15.
- */
 fun createAlertsSection(id: String): Div {
 
     return div(id = id) {
