@@ -1,7 +1,6 @@
 package net.yested.bootstrap
 
 import net.yested.HTMLComponent
-import java.util.ArrayList
 import net.yested.Span
 import net.yested.with
 import net.yested.Component
@@ -22,18 +21,17 @@ public data class Column<T>(
 
 public class ColumnHeader<T>(val column:Column<T>, sortingSupported:Boolean, sortFunction:((Column<T>) -> Unit)?) : HTMLComponent("span") {
 
-    var sortOrderAsc:Boolean = column.defaultSortOrderAsc
     var arrowPlaceholder = Span()
 
     init {
         if (sortingSupported) {
             a(href = null, onclick = { sortFunction!!(column)} ) {
                 "style".."cursor: pointer;"
-                column.label()
+                column.label(this)
             }
             +arrowPlaceholder
         } else {
-            column.label()
+            column.label(this)
         }
     }
 
@@ -55,7 +53,6 @@ public class Grid<T>(responsive: Boolean = false, val columns:Array<Column<T>>) 
 
     private var sortColumn:Column<T>? = null
     private var asc:Boolean = true;
-    private val arrowsPlaceholders = ArrayList<Span>();
     private var columnHeaders:List<ColumnHeader<T>>? = null
 
     private fun createResponsiveWrapper():HTMLElement {
@@ -136,7 +133,7 @@ public class Grid<T>(responsive: Boolean = false, val columns:Array<Column<T>>) 
                             columns.forEach { column ->
                                 td {
                                     "class" .. "text-${column.align.code}";
-                                    column.render(item)
+                                    column.render(this, item)
 								}
 							}
                         }

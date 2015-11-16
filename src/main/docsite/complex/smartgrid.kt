@@ -1,18 +1,17 @@
 package complex
 
-import kotlin.browser.document
-import kotlin.browser.window
-import org.w3c.dom.HTMLElement
 import jquery.jq
 import net.yested.*
-import net.yested.utils.on
+import net.yested.bootstrap.*
+import net.yested.bootstrap.smartgrid.CellEditorFactory
+import net.yested.bootstrap.smartgrid.GridColumn
+import net.yested.bootstrap.smartgrid.SmartGrid
+import net.yested.bootstrap.smartgrid.TextInputFilterFactory
 import net.yested.utils.isIncludedInDOM
 import net.yested.utils.keypress
-import net.yested.bootstrap.*
-import net.yested.bootstrap.smartgrid.*
-import net.yested.layout.ScrollBar
-import net.yested.layout.ScrollBarOrientation
-import kotlin.dom.addText
+import net.yested.utils.on
+import org.w3c.dom.HTMLElement
+import kotlin.browser.window
 
 data class MarketData(val ticker:String, val country:String, val ccy:String, var price:Double, var move:Double,
                       val min:Double, val max:Double, val avg:Double, val quantity:Double,
@@ -53,7 +52,7 @@ public class DoubleEditor<TYPE>(
             }
         })
 
-        jq(inputField.element).keypress( { event ->
+        jq(inputField.element).keypress( { event:dynamic ->
             val d = safeParseDouble(inputField.data)
             if (event.which == 13 && d != null) {
                 closeCalled = true
@@ -77,8 +76,8 @@ fun generateData() =
                 .mapIndexed { index, it ->
                     MarketData(
                             ticker= "A${it}",
-                            ccy = currencies[index % currencies.size()],
-                            country = countries[index % countries.size()],
+                            ccy = currencies[index % currencies.size],
+                            country = countries[index % countries.size],
                             price = Math.random()*100,
                             min = Math.random()*100,
                             max = Math.random()*100,
@@ -221,8 +220,8 @@ class CustomizableGridSection: Component {
     }
 
     fun updateRandomValues() {
-        (0..Math.min(100, (data.size()/5))).forEach {
-            val item = data.get((Math.random()*data.size()).toInt())
+        (0..Math.min(100, (data.size/5))).forEach {
+            val item = data.get((Math.random()*data.size).toInt())
             item.move = Math.random()*10-5
             grid.updateItem(item, listOf("move"))
         }

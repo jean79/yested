@@ -7,7 +7,7 @@ import org.w3c.dom.HTMLElement
 import kotlin.browser.document
 import kotlin.browser.window
 
-public fun <T> T.with(init:T.()->Unit):T {
+public infix fun <T> T.with(init:T.()->Unit):T {
     this.init()
     return this
 }
@@ -45,7 +45,7 @@ public fun <T, V : Comparable<V>> compareByValue(get: (T) -> V?): (T, T) -> Int 
     return { l, r -> compareValues(get(l), get(r)) }
 }
 
-public @native fun Node.isSameNode(node:Node):Boolean = noImpl
+public @kotlin.js.native fun Node.isSameNode(node:Node):Boolean = noImpl
 
 public fun Node.getIndexOfChildNode(childElement:Node):Int {
     var index = 0

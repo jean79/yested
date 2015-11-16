@@ -76,7 +76,7 @@ import net.yested.bootstrap.StringInputField
 fun createAjaxGetSection(): Div {
 
     val textInput = StringInputField(placeholder = "Type city name and press Enter")
-    val validator = Validator(inputElement = textInput, errorText = "Enter at least 3 characters", validator = { it.length() > 2})
+    val validator = Validator(inputElement = textInput, errorText = "Enter at least 3 characters", validator = { it.length > 2})
     val temperatureSpan = Div()
 
     val btnGroup = ButtonGroup() with {

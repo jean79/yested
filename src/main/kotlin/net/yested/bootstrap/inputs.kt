@@ -170,7 +170,7 @@ public class Select<T>(val options: List<T>,
 
     private fun selectThese(selectedItems:List<T>) {
         optionTags.forEach {
-            it.tag.selected = selectedItems.contains(it.value)
+            it.tag.selected = selectedItems.containsRaw(it.value)
         }
     }
 
@@ -209,7 +209,7 @@ public class Select<T>(val options: List<T>,
 <div class="input-group-addon">.00</div>
 </div>
  */
-public fun HTMLComponent.inputAddOn<T>(prefix:String? = null, suffix:String? = null, textInput : InputField<T>):Unit =
+public fun <T> HTMLComponent.inputAddOn(prefix:String? = null, suffix:String? = null, textInput : InputField<T>):Unit =
     +(
         div(clazz = "input-group") {
             prefix?.let {

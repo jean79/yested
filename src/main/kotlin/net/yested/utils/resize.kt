@@ -35,7 +35,7 @@ public fun registerResizeHandler(element: HTMLElement, handler:(width:Number, he
 
     resizeHandlers.add(ResizeHandler(element, handler))
 
-    if (resizeHandlers.size() == 1) {
+    if (resizeHandlers.size == 1) {
         timerId = window.setInterval( { checkAllHandlers() }, 200)
     }
 

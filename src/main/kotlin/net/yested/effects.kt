@@ -24,7 +24,7 @@ public interface BiDirectionEffect {
 }
 
 private fun call(function:Function0<Unit>?) {
-    function?.let { function!!() }
+    function?.let { function() }
 }
 
 public class Show() : Effect {

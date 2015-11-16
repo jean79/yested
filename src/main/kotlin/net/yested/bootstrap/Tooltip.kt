@@ -36,8 +36,8 @@ public fun addTooltip(element: HTMLElement, options: TooltipOptions = TooltipOpt
             val animation = options.animation
             val delay = object {val show = options.delay.show; val hide = options.delay.hide}
             val html = options.html
-            val placement = options.placement.name().toLowerCase()
-            val trigger = options.trigger map { it.name().toLowerCase() } joinToString(" ")
+            val placement = options.placement.name.toLowerCase()
+            val trigger = options.trigger.map { it.name.toLowerCase() }.joinToString(" ")
             val viewPort = object {val selector = options.viewPort.selector; val padding = options.viewPort.padding}
             val title = title
         })

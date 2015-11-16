@@ -1,25 +1,26 @@
 package net.yested
 
-import kotlin.dom.addText
-import kotlin.dom.first
 import jquery.jq
 import jquery.JQuery
-import org.w3c.dom.*
-import java.util.ArrayList
+import org.w3c.dom.HTMLElement
+import org.w3c.dom.HTMLInputElement
+import org.w3c.dom.HTMLTextAreaElement
 import org.w3c.dom.events.Event
 import org.w3c.dom.events.MouseEvent
 import kotlin.browser.document
 import kotlin.properties.Delegates
+import kotlin.reflect.KProperty
+import kotlin.reflect.KProperty0
 
 
 public class Attribute(val attributeName:String? = null, val element: HTMLElement? = null) {
 
-    private fun getElement(thisRef: Component?) = element ?: thisRef!!.element
+    private fun getElement(thisRef: Component?):HTMLElement = element ?: thisRef!!.element
 
-    public fun get(thisRef: Component?, prop: PropertyMetadata):String? =
+    public operator fun getValue(thisRef: Component, prop: KProperty<*>):String? =
             getElement(thisRef).getAttribute(attributeName ?: prop.name)
 
-    public fun set(thisRef: Component?, prop: PropertyMetadata, value: String?):Unit =
+    public operator fun setValue(thisRef: Component, prop: KProperty<*>, value: String?):Unit =
             getElement(thisRef).setAttribute(attributeName ?: prop.name, value!!)
 
 }
@@ -28,10 +29,10 @@ public class BooleanAttribute(val attributeName:String? = null, val element:HTML
 
     private fun getElement(thisRef: Component?) = element ?: thisRef!!.element
 
-    public fun get(thisRef: Component?, prop: PropertyMetadata):Boolean =
+    public fun getValue(thisRef: Component, prop: KProperty<Boolean>):Boolean =
             getElement(thisRef).getAttribute(attributeName ?: prop.name) == "true"
 
-    public fun set(thisRef: Component?, prop: PropertyMetadata, value: Boolean):Unit =
+    public fun setValue(thisRef: Component, prop: KProperty<Boolean>, value: Boolean):Unit =
             getElement(thisRef).setAttribute(attributeName ?: prop.name, if (value) "true" else "false")
 
 }
@@ -149,11 +150,11 @@ public open class HTMLComponent(tagName:String, htmlElement:HTMLElement? = null)
 
     operator public fun String.rangeTo(value:String):Unit = element.setAttribute(this, value)
 
-    operator public fun String.plus(): Unit {
+    operator public fun String.unaryPlus(): Unit {
         jq(element).append(this)
     }
 
-    operator public fun Component.plus() {
+    operator public fun Component.unaryPlus() {
         this@HTMLComponent.appendChild(this)
     }
 
@@ -250,6 +251,7 @@ public open class HTMLComponent(tagName:String, htmlElement:HTMLElement? = null)
         })
     }
 
+    @Suppress("UNUSED_PARAMETER")
     public fun code(lang:String? = "javascript", content : String) {
         tag("pre") {
             tag("code") {
@@ -467,8 +469,8 @@ public abstract class InputElementComponent<T>(): ObservableInput<T>() {
 }
 
 public abstract class ObservableInput<T>(): InputComponent<T> {
-    protected val onChangeListeners: ArrayList<Function0<Unit>> = ArrayList();
-    protected val onChangeLiveListeners: ArrayList<Function0<Unit>> = ArrayList();
+    protected val onChangeListeners = arrayListOf<Function0<Unit>>();
+    protected val onChangeLiveListeners = arrayListOf<Function0<Unit>>();
 
     override fun addOnChangeListener(invoke: () -> Unit) {
         onChangeListeners.add(invoke)

@@ -31,7 +31,7 @@ class HorizontalContainer(width: Dimension, val height: Dimension? = null, val g
             style = "position: absolute; overflow-x: hidden; height: ${height?.toHtml()};"
             init()
         }
-        if (items.size() > 0 && gap > 0) {
+        if (items.size > 0 && gap > 0) {
             val gap = createElement("div") with { setAttribute("style", "width: ${gap}px;")}
             element.appendChild(gap)
         }
@@ -48,7 +48,7 @@ class HorizontalContainer(width: Dimension, val height: Dimension? = null, val g
 
     private fun recalculatePositions() {
 
-        val gaps = (items.size() - 1) * gap
+        val gaps = (items.size - 1) * gap
         val totalDimension = jq(element).width()
         val totalFixed = items.filter { it.dimension is Pixels }.map { (it.dimension as Pixels).value }.sum()
         val totalPercents = items.filter { it.dimension is Percent }.map { (it.dimension as Percent).value }.sum()
@@ -71,7 +71,7 @@ class HorizontalContainer(width: Dimension, val height: Dimension? = null, val g
 
     private fun recalculateHeight() {
         val maxHeightOfChildren = items.map { jq(it.div.element).height().toInt() }.max()
-        jq(element).css("height", "${maxHeightOfChildren}")
+        jq(element).css("height", "$maxHeightOfChildren")
     }
 
 }

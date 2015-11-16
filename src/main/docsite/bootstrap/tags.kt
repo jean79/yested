@@ -1,30 +1,10 @@
 package bootstrap
 
-import net.yested.bootstrap.row
-import net.yested.bootstrap.pageHeader
-import net.yested.div
-import net.yested.Div
-import net.yested.bootstrap.btsButton
-import net.yested.ButtonType
-import net.yested.bootstrap.ButtonLook
-import net.yested.bootstrap.ButtonSize
-import net.yested.bootstrap.Validator
-import net.yested.bootstrap.btsForm
-import net.yested.bootstrap.BtsButton
-import net.yested.bootstrap.Select
-import net.yested.Span
-import net.yested.bootstrap.Medium
-import net.yested.bootstrap.TagsInputField
-import net.yested.bootstrap.TagsInputFieldType
-import net.yested.Component
+import net.yested.*
+import net.yested.bootstrap.*
 import org.w3c.dom.HTMLElement
-import net.yested.hide
-import net.yested.fadeIn
-import net.yested.with
-import net.yested.bootstrap.BeforeEventPermission
-import net.yested.whenAddedToDom
 
-private data class People(val name: String, val age: Int)
+data class People(val name: String, val age: Int)
 
 class TagsSection(id: String) : Component {
 

@@ -6,7 +6,7 @@ package net.yested.utils
 @native("moment") private fun moment_js(input: String, format: String): MomentJs = noImpl
 
 @native("Moment")
-private class MomentJs {
+class MomentJs {
     fun format(formatString: String? = null): String = noImpl
     fun valueOf(): Long = noImpl
     fun millisecond(value: Int? = null): Int = noImpl
@@ -108,24 +108,24 @@ public class FormatElement (val str: String) {
         return FormatString(arrayListOf(this, b))
     }
 
-    fun plus(b: String): FormatString {
+    operator fun plus(b: String): FormatString {
         return FormatString(arrayListOf(this, FormatElement(b)))
     }
 }
 
 public class FormatString(private val elements: MutableList<FormatElement> = arrayListOf()) {
 
-    public fun plus(b: FormatElement): FormatString {
+    public operator fun plus(b: FormatElement): FormatString {
         elements.add(b)
         return FormatString(elements)
     }
 
-    public fun plus(b: String): FormatString {
+    public operator fun plus(b: String): FormatString {
         elements.add(FormatElement(b))
         return FormatString(elements)
     }
 
-    override fun toString(): String = elements.map { it.str }.join(separator = "")
+    override fun toString(): String = elements.map { it.str }.joinToString(separator = "")
 }
 
 class Digit(private val oneDigitFactory: ()->FormatElement, private val twoDigitsFactory: ()->FormatElement, private val fourDigitsFactory: ()->FormatElement) {
@@ -139,7 +139,7 @@ class Digit(private val oneDigitFactory: ()->FormatElement, private val twoDigit
 
 public class FormatStringBuilder() {
 
-	public val year: Digit = Digit({throw UnsupportedOperationException()}, {FormatElement("YY")}, {FormatElement("YYYY")})
+	public val year: Digit = Digit({throw UnsupportedOperationException("bla")}, {FormatElement("YY")}, {FormatElement("YYYY")})
 	public val month: Digit = Digit({FormatElement("M")}, {FormatElement("MM")}, {throw UnsupportedOperationException()})
 	public val dayOfMonth: Digit = Digit({FormatElement("D")}, {FormatElement("DD")}, {throw UnsupportedOperationException()})
 	public val hour24: Digit = Digit({FormatElement("H")}, {FormatElement("HH")}, {throw UnsupportedOperationException()})

@@ -1,14 +1,12 @@
 package bootstrap
 
-import net.yested.div
-import net.yested.Div
-import net.yested.bootstrap.row
+import net.yested.Component
+import net.yested.bootstrap.DateField
 import net.yested.bootstrap.Medium
 import net.yested.bootstrap.pageHeader
-import net.yested.bootstrap.DateField
-import net.yested.Component
+import net.yested.bootstrap.row
+import net.yested.div
 import org.w3c.dom.HTMLElement
-import net.yested.whenAddedToDom
 
 
 class DateFieldSection(id: String): Component {

@@ -34,7 +34,7 @@ fun createSelectSection(id: String): Div {
     val resultMultiSelect = Div()
     val multiSelect = Select(options = someData, multiple = true, size = 4, renderer = { "${it.model} (${it.color})" })
     multiSelect.addOnChangeListener {
-        resultMultiSelect.setContent( "Selected: " + multiSelect.selectedItems.map { "${it.model}" }.join(" and "))
+        resultMultiSelect.setContent( "Selected: " + multiSelect.selectedItems.map { "${it.model}" }.joinToString(" and "))
     }
 
     val btn = BtsButton(label = { +"Select Skoda and Ford" }) {

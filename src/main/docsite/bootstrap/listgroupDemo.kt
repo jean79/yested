@@ -15,7 +15,7 @@ fun createListGroupSection(id: String): Div {
 
     listGroup.dataProvider = data
     listGroup.addOnChangeListener {
-        selectedItems.setContent(listGroup.data.map { it.name }.join(","))
+        selectedItems.setContent(listGroup.data.map { it.name }.joinToString(","))
     }
 
     var someIndex = 1;
@@ -55,7 +55,7 @@ fun createListGroupSection(id: String): Div {
                 })
                 nbsp()
                 btsButton(size = ButtonSize.EXTRA_SMALL, label = { +"Remove first"}, onclick = {
-                    if (listGroup.dataProvider.size() > 0) {
+                    if (listGroup.dataProvider.size > 0) {
                         listGroup.removeItem(listGroup.dataProvider.first())
                     }
                 })

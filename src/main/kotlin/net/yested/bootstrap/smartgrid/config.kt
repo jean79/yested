@@ -4,7 +4,6 @@ import net.yested.*
 import net.yested.bootstrap.*
 import net.yested.layout.containers.horizontalContainer
 import net.yested.layout.containers.verticalContainer
-import java.util.ArrayList
 
 class ConfigurationDialog<T>(
         private val columns: Collection<GridColumn<T>>,
@@ -19,7 +18,7 @@ class ConfigurationDialog<T>(
 
     private val fieldFilterAvailableColumns = StringInputField()
 
-    private val availableColumns = ArrayList<GridColumn<T>>()
+    private val availableColumns = arrayListOf<GridColumn<T>>()
 
     private val dialog = Dialog(size = DialogSize.DEFAULT) with {
         header  { + "Grid configuration" }
@@ -70,11 +69,11 @@ class ConfigurationDialog<T>(
         buttonToDeselect.disabled = true
 
         listGroupAvailableColumns.addOnChangeListener {
-            buttonToSelect.disabled = listGroupAvailableColumns.data.size() == 0
+            buttonToSelect.disabled = listGroupAvailableColumns.data.size == 0
         }
 
         listGroupSelectedColumns.addOnChangeListener {
-            buttonToDeselect.disabled = listGroupSelectedColumns.data.size() == 0
+            buttonToDeselect.disabled = listGroupSelectedColumns.data.size == 0
         }
 
         fieldFilterAvailableColumns.addOnChangeLiveListener {
@@ -122,7 +121,7 @@ class ConfigurationDialog<T>(
 
     private fun initialDistribution() {
         availableColumns.addAll( columns.filter { !selectedColumnIds.contains(it.id) }.sortedBy { it.label } )
-        val columnsById = columns.toMap { it.id }
+        val columnsById = columns.toMapBy { it.id }
         val selectedColumns = selectedColumnIds.map { columnsById.get(it)!! }
         listGroupSelectedColumns.dataProvider = selectedColumns
         populateAvailableListGroup()
@@ -134,7 +133,7 @@ class ConfigurationDialog<T>(
 
     private fun getVisibleAvailableColumns(): Collection<GridColumn<T>> {
         val filterText = fieldFilterAvailableColumns.data.toLowerCase()
-        if (filterText.length() > 0) {
+        if (filterText.length > 0) {
             return availableColumns.filter { it.label.toLowerCase().contains(filterText) }
         } else {
             return availableColumns

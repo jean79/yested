@@ -41,8 +41,6 @@ public class Tabs(canChangeOrder:Boolean = false) : Component {
 
     private var tabIndexDisplayed = 0
 
-    private var leftMostIndex = 0
-
     private var currentContent:Div? = null
 
     init {
@@ -81,7 +79,7 @@ public class Tabs(canChangeOrder:Boolean = false) : Component {
             val link: Li = headersRendered.get(tabId)!!
             link.clazz = "active"
 
-            headersRendered.values().filter { it != link }.forEach { it.clazz = "" }
+            headersRendered.values.filter { it != link }.forEach { it.clazz = "" }
 
             val previousContent = currentContent
 
@@ -108,10 +106,7 @@ public class Tabs(canChangeOrder:Boolean = false) : Component {
                     content.appendChild(currentContent!!)
                 }
             }
-
-            if (tabDefinition.onSelect != null) {
-                tabDefinition.onSelect!!()
-            }
+            tabDefinition.onSelect?.invoke()
         }
     }
 
@@ -123,17 +118,17 @@ public class Tabs(canChangeOrder:Boolean = false) : Component {
             throw Exception("Tab does not exists.")
         } else {
 
-            val link: Li = headersRendered.get(tabId)!!
+            val link: Li = headersRendered[tabId]!!
             bar.element.removeChild(link.element)
 
-            headersRendered.remove(link)
+            headersRendered.remove(tabId)
             tabsRendered.remove(tabId)
 
             if (tabIndexDisplayed == tabId) {
 
                 if (tabDefinitions.indexOf(tabDefinition) == 0) {
                     //if it is leftmost tab
-                    if (tabDefinitions.size() == 1) {
+                    if (tabDefinitions.size == 1) {
                         //this was the last tab available
                         content.removeAllChildren()
                     } else {
