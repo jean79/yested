@@ -32,10 +32,10 @@ public class ListGroup<TYPE>(val selectionMode: SelectionMode = SelectionMode.MU
             selectedItems.clear()
             selectedItems.addAll(newSelection)
             itemToAnchorMap.forEach {
-                if (newSelection.contains(it.getKey())) {
-                    jq(it.getValue().element).addClass("active")
+                if (newSelection.contains(it.key)) {
+                    jq(it.value.element).addClass("active")
                 } else {
-                    jq(it.getValue().element).removeClass("active")
+                    jq(it.value.element).removeClass("active")
                 }
             }
             notifyListeners()
@@ -58,14 +58,14 @@ public class ListGroup<TYPE>(val selectionMode: SelectionMode = SelectionMode.MU
 
     private fun deselectAll() {
         selectedItems.clear()
-        itemToAnchorMap.values().forEach {
+        itemToAnchorMap.values.forEach {
             jq(it.element).removeClass("active")
         }
     }
 
     private fun clickedOnItem(item:TYPE) {
 
-        val anchor:Anchor = itemToAnchorMap.get(item)!!
+        val anchor:Anchor = itemToAnchorMap[item]!!
 
         if (selectedItems.contains(item)) {
             selectedItems.remove(item)
@@ -88,9 +88,9 @@ public class ListGroup<TYPE>(val selectionMode: SelectionMode = SelectionMode.MU
 
     public var dataProvider:Collection<TYPE>
         get() = itemToAnchorMap
-                .entrySet()
-                .sortedBy(selector = { element.getIndexOfChildNode(it.getValue().element)})
-                .map { it.getKey() }
+                .entries
+                .sortedBy(selector = { element.getIndexOfChildNode(it.value.element)})
+                .map { it.key }
         set(newDataProvider) {
             selectedItems.clear()
             itemToAnchorMap.clear()

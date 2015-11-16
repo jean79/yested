@@ -84,10 +84,10 @@ public class Pagination(val count:Int, val defaultSelection:Int = 1, val listene
     }
 
     private fun redisplay(position:Int) {
-        for (i in 1 .. count) { items.get(i).clazz = "" }
-        items.get(position).clazz = "active"
-        items.get(0).clazz = if (position == 1) "disabled" else ""
-        items.get(items.size() - 1).clazz = if (position == count) "disabled" else ""
+        for (i in 1 .. count) { items[i].clazz = "" }
+        items[position].clazz = "active"
+        items[0].clazz = if (position == 1) "disabled" else ""
+        items[items.size - 1].clazz = if (position == count) "disabled" else ""
     }
 
 }

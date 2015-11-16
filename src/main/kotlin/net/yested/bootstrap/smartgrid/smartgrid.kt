@@ -58,22 +58,22 @@ private class VisibleOneItem<T>(
         val item:T
 ) : VisibleItem<T>()
 
-fun group<T>(items: Collection<T>, aggregatingColumns: List<GridColumn<T>>, aggregateByColumn:Int): List<Group<T>> {
+private fun <T> group(items: Collection<T>, aggregatingColumns: List<GridColumn<T>>, aggregateByColumn:Int): List<Group<T>> {
     val aggregatingColumn = aggregatingColumns.get(aggregateByColumn)
     return items
             .groupBy { aggregatingColumn.groupBy!!(it) }
-            .entrySet()
+            .entries
             .map { entry ->
-                if (aggregateByColumn < aggregatingColumns.size() - 1) {
+                if (aggregateByColumn < aggregatingColumns.size - 1) {
                     //do additional grouping
-                    Group(groupName = entry.getKey(), subgroups = group(entry.getValue(), aggregatingColumns, aggregateByColumn+1))
+                    Group(groupName = entry.key, subgroups = group(entry.value, aggregatingColumns, aggregateByColumn+1))
                 } else {
-                    Group(groupName = entry.getKey(), items = entry.getValue())
+                    Group(groupName = entry.key, items = entry.value)
                 }
             }
 }
 
-fun renderGroupInto<T>(group: Group<T>, visibleItems:MutableCollection<VisibleItem<T>>, level: Int) {
+private fun <T> renderGroupInto(group: Group<T>, visibleItems:MutableCollection<VisibleItem<T>>, level: Int) {
     if (group.groupName != "root") {
         visibleItems.add(VisibleItemGroup(groupName = group.groupName, group = group, level = level)) //add summary row
     }
@@ -86,7 +86,7 @@ fun renderGroupInto<T>(group: Group<T>, visibleItems:MutableCollection<VisibleIt
     }
 }
 
-fun onEachSubGroup<T>(group: Group<T>, action:(Group<T>)->Unit) {
+private fun <T> onEachSubGroup(group: Group<T>, action:(Group<T>)->Unit) {
     if (group.subgroups != null) {
         group.subgroups!!.forEach { subGroup ->
             onEachSubGroup(subGroup, action)
@@ -98,7 +98,7 @@ fun onEachSubGroup<T>(group: Group<T>, action:(Group<T>)->Unit) {
 fun calculateAggregatedNumber(numbers:Collection<Double?>):Double =
     numbers.filter { it != null }.fold(0.0, { fold,n -> fold+n!! } )
 
-fun calculateAggregations<T>(columnsWithGroupFunctions:List<GridColumn<T>>, group:Group<T>) {
+private fun <T> calculateAggregations(columnsWithGroupFunctions:List<GridColumn<T>>, group:Group<T>) {
     group.aggregated = hashMapOf()
     if (group.items != null) {
         columnsWithGroupFunctions.forEach { column ->
@@ -112,7 +112,7 @@ fun calculateAggregations<T>(columnsWithGroupFunctions:List<GridColumn<T>>, grou
     }
 }
 
-fun clearAggregationsOfAll<T>(group:Group<T>) {
+private fun <T> clearAggregationsOfAll(group:Group<T>) {
     onEachSubGroup(group) {
         it.aggregated = null
     }
@@ -213,7 +213,7 @@ public class SmartGrid<TYPE, KEY>(
                                 width = 200.px().toHtml(),
                                 label = "",
                                 render = { }))
-                            .toMap { it.id };
+                            .toMapBy { it.id };
 
     private var rowsReferences = hashMapOf<KEY, HTMLElement>();
 
@@ -238,7 +238,7 @@ public class SmartGrid<TYPE, KEY>(
         get() = fullDataList
         set(value) {
             fullDataList = value ?: arrayListOf()
-            dataListAsKeyMap = fullDataList.toMap { getKey(it) } as MutableMap
+            dataListAsKeyMap = fullDataList.toMapBy { getKey(it) } as MutableMap
             currentRow = 0
             refilterData()
             regroupData()
@@ -251,9 +251,9 @@ public class SmartGrid<TYPE, KEY>(
 
     private fun showDialogCustom() {
         val columnsWithoutAggregatingColumn = visibleColumns.filter { it != "root" }
-        openConfigurationDialog(columns.values().filter { it.id != "root" }, columnsWithoutAggregatingColumn, { newVisibleColumns ->
+        openConfigurationDialog(columns.values.filter { it.id != "root" }, columnsWithoutAggregatingColumn, { newVisibleColumns ->
             val newList = newVisibleColumns.toArrayList()
-            if (groupingColumns.size() > 0) {
+            if (groupingColumns.size > 0) {
                 newList.add(0, "root")
             }
             visibleColumns = newList;
@@ -299,7 +299,7 @@ public class SmartGrid<TYPE, KEY>(
             val diffX:Int = xUp - touchStartX
 
             val newRow = touchStartRow - (diffY.toDouble()/rowHeight).toInt()
-            val limitedNewRow = Math.max(0, Math.min(newRow, visibleDataList.size() - visibleRows))
+            val limitedNewRow = Math.max(0, Math.min(newRow, visibleDataList.size - visibleRows))
             val newHorizontalScrollPosition = Math.max(0, Math.min(horizontalScrollStart - diffX, scrollBarHorizontal.numberOfItems))
 
             if (gridIsCreated) {
@@ -323,7 +323,7 @@ public class SmartGrid<TYPE, KEY>(
             registerResizeHandler(cont.element) { x,y->
                 recalculateVisibleRows()
                 createRowsWithColumns()
-                if (visibleDataList.size() > 0) {
+                if (visibleDataList.size > 0) {
                     displayNewData()
                 }
                 updateHorizontalScrollbar()
@@ -348,15 +348,15 @@ public class SmartGrid<TYPE, KEY>(
     }
 
     private fun displayNewData() {
-        currentRow = Math.min(currentRow, Math.max(0, visibleDataList.size() - visibleRows))
+        currentRow = Math.min(currentRow, Math.max(0, visibleDataList.size - visibleRows))
         redisplayTheReorderedDataSet()
         updateVerticalScrollbarToReflectChangeNumberOfItems()
     }
 
     private fun updateVerticalScrollbarToReflectChangeNumberOfItems() {
         val adjustedVisibleRows = calculateAdjustedVisibleRowsForVerticalScrollbar()
-        scrollBarVertical.setup(numberOfItems = visibleDataList.size() - visibleRows, visibleItems = adjustedVisibleRows, newPosition = currentRow)
-        if (visibleDataList.size() <= visibleRows) {
+        scrollBarVertical.setup(numberOfItems = visibleDataList.size - visibleRows, visibleItems = adjustedVisibleRows, newPosition = currentRow)
+        if (visibleDataList.size <= visibleRows) {
             scrollBarVertical.setTrackerVisible(false)
         } else {
             scrollBarVertical.setTrackerVisible(true)
@@ -364,7 +364,7 @@ public class SmartGrid<TYPE, KEY>(
     }
 
     private fun calculateAdjustedVisibleRowsForVerticalScrollbar() =
-            Math.max(1, (visibleRows * ((visibleDataList.size() - visibleRows).toDouble() / visibleDataList.size().toDouble())).toInt())
+            Math.max(1, (visibleRows * ((visibleDataList.size - visibleRows).toDouble() / visibleDataList.size.toDouble())).toInt())
 
     private fun verticalScrollBarMoved(newPosition:Int) {
         currentRow = newPosition
@@ -397,7 +397,7 @@ public class SmartGrid<TYPE, KEY>(
     }
 
     private fun groupByColumn(column:GridColumn<TYPE>):Unit {
-        if (groupingColumns.size() == 0) {
+        if (groupingColumns.size == 0) {
             val newList = visibleColumns.toArrayList()
             newList.add(0, "root")
             visibleColumns = newList
@@ -422,7 +422,7 @@ public class SmartGrid<TYPE, KEY>(
     private fun cancelAggregation() {
 
         val newVisibleColumnsList = visibleColumns.toArrayList()
-        newVisibleColumnsList.remove(0)//remove old root column
+        newVisibleColumnsList.removeAt(0)//remove old root column
         groupingColumns.reversed().forEach { //show again columns which where used for aggregation
             if (!newVisibleColumnsList.contains(it.id)) {
                 newVisibleColumnsList.add(0, it.id)
@@ -479,7 +479,7 @@ public class SmartGrid<TYPE, KEY>(
                 .map { createColumnHeader(it) }
                 .forEach { headerDiv.appendChild(it.element) }
 
-        val filtersOfHiddenColumns = filters.keySet().filter { !visibleColumns.contains(it) }
+        val filtersOfHiddenColumns = filters.keys.filter { !visibleColumns.contains(it) }
         filtersOfHiddenColumns.forEach {
             filters.remove(it)
         }
@@ -510,7 +510,7 @@ public class SmartGrid<TYPE, KEY>(
 
     private fun calculateAggregationsOfGroups(forColumns: Collection<String>? = null) {
         val columnsWithGetFunction = getVisibleColumns().filter { it.getNumber != null }.filter { forColumns == null || forColumns.contains(it.id) }
-        if (columnsWithGetFunction.size() > 0) {
+        if (columnsWithGetFunction.size > 0) {
             onEachSubGroup(group) {
                 calculateAggregations(columnsWithGetFunction, it)
             }
@@ -543,7 +543,7 @@ public class SmartGrid<TYPE, KEY>(
     }
 
     private fun refilterData() {
-        if (filters.size() == 0) {
+        if (filters.size == 0) {
             filteredDataList = fullDataList
         } else {
             filteredDataList = fullDataList
@@ -555,7 +555,7 @@ public class SmartGrid<TYPE, KEY>(
     }
 
     private fun regroupData() {
-        if (groupingColumns.size() > 0) {
+        if (groupingColumns.size > 0) {
             group = Group(groupName = "root", subgroups = group(filteredDataList, groupingColumns, 0));
         } else {
             group = Group(groupName = "root", items = filteredDataList)
@@ -564,7 +564,7 @@ public class SmartGrid<TYPE, KEY>(
 
     private fun isItemMatchingFilters(item: TYPE): Boolean {
         var matching = true
-        for (filter in filters.values()) {
+        for (filter in filters.values) {
             if (!filter.filteringFunction(item)) {
                 matching = false
                 break
@@ -626,7 +626,7 @@ public class SmartGrid<TYPE, KEY>(
                                     td.removeAttribute("editing")
                                     td.removeAllContent()
                                     HTMLComponent("", td) with {
-                                        column.render(item.item)
+                                        column.render(this, item.item)
                                     }
                                 })
                         td.removeAllContent()
@@ -649,7 +649,7 @@ public class SmartGrid<TYPE, KEY>(
             if (Math.abs(mouseDeltaY) > Math.abs(toZero(e.wheelDeltaX))) {
                 val deltaY = Math.max(-1.0, Math.min(1.0, (mouseDeltaY )));
                 if (deltaY < 0) {
-                    currentRow = Math.min(currentRow + 1, visibleDataList.size() - visibleRows)
+                    currentRow = Math.min(currentRow + 1, visibleDataList.size - visibleRows)
                 } else if (deltaY > 0) {
                     currentRow = Math.max(0, currentRow - 1)
                 }
@@ -751,7 +751,7 @@ public class SmartGrid<TYPE, KEY>(
             }
         } else {
             rowsReferences.clear()
-            val rowsToRender = Math.min(visibleRows, visibleDataList.size())
+            val rowsToRender = Math.min(visibleRows, visibleDataList.size)
             (1..rowsToRender)
                     .forEach {
                         val tr = rows.item(it - 1) as HTMLElement
@@ -779,7 +779,7 @@ public class SmartGrid<TYPE, KEY>(
                 HTMLComponent("", td) with {
                     removeAllChildren()
                     if (visibleItem is VisibleOneItem) {
-                        column.render(visibleItem.item)
+                        column.render(this, visibleItem.item)
                     } else if (visibleItem is VisibleItemGroup){
                         //it is aggregated row, only render if column is aggregating one
                         if (column.id == "root") {
@@ -828,7 +828,7 @@ public class SmartGrid<TYPE, KEY>(
     }
 
     private fun isOneOfAffectedColumnsAGroupingOne(affectedColumns: Collection<String>) =
-        groupingColumns.filter { affectedColumns.contains(it.id) }.size() > 0
+        groupingColumns.filter { affectedColumns.contains(it.id) }.size > 0
 
     public fun updateItem(item: TYPE, affectedColumns: Collection<String>? = null) {
 
@@ -839,14 +839,14 @@ public class SmartGrid<TYPE, KEY>(
 
         val index = fullDataList.indexOf(originalItem)
 
-        fullDataList.remove(index)
+        fullDataList.removeAt(index)
         fullDataList.add(index, item)
         dataListAsKeyMap.put(getKey(item), item)
 
         val indexInFilteredList = findByKey(filteredDataList, getKey(item))
         val wasInList = indexInFilteredList >= 0
         if (wasInList) {
-            filteredDataList.remove(indexInFilteredList)
+            filteredDataList.removeAt(indexInFilteredList)
         }
         val isMatchingFilter = isItemMatchingFilters(item)
         if (isMatchingFilter) {
@@ -861,18 +861,18 @@ public class SmartGrid<TYPE, KEY>(
         sortColumn = null
         setSortingArrow()
 
-        if (groupingColumns.size() > 0) {
+        if (groupingColumns.size > 0) {
             //only do the regroupping if affected column is one of the groupping one
             if (affectedColumns == null || isOneOfAffectedColumnsAGroupingOne(affectedColumns) || wasInList != isMatchingFilter) {
                 regroupData()
                 renderGroupedData()
                 displayNewData()
             } else {
-                if (visibleColumns.filter { affectedColumns.contains(it) }.map { columns.get(it) }.filter { it!!.getNumber != null }.size() > 0) {
+                if (visibleColumns.filter { affectedColumns.contains(it) }.map { columns.get(it) }.filter { it!!.getNumber != null }.size > 0) {
                     calculateAggregationsOfGroups(affectedColumns)
                 }
                 //val affectedGridColumns = getVisibleColumns().filter { affectedColumns.contains(it.id) }
-                val rowsToRender = Math.min(visibleRows, visibleDataList.size())
+                val rowsToRender = Math.min(visibleRows, visibleDataList.size)
                 val rows = getTBody().childNodes
                 (1..rowsToRender)
                         .forEach {

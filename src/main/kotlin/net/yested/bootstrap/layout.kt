@@ -21,7 +21,7 @@ public class Row(): Component {
     public fun col(vararg modifiers: ColumnModifier, init: HTMLComponent.() -> Unit) {
         element.appendComponent(
             Div() with {
-                clazz = modifiers map {it.toString()} join(" ")
+                clazz = modifiers.map {it.toString()}.joinToString(" ")
                 init()
             })
     }

@@ -20,9 +20,6 @@ import net.yested.bootstrap.AlertStyle
 import net.yested.TextArea
 import net.yested.bootstrap.RowPanelContainer
 
-/**
- * Created by jean on 1.2.2015.
- */
 fun createRowPanelContainerSection(id: String): Div {
 
     val panelContainer = RowPanelContainer()
@@ -33,7 +30,7 @@ fun createRowPanelContainerSection(id: String): Div {
 
         val textArea = TextArea(2) with  { data = "Resize me!" }
         val panel = Panel(style = panelStyle, dismissible = true) with {
-            heading { +"A panel ${counter++} (${size})" }
+            heading { +"A panel ${counter++} ($size)" }
             content { +textArea }
         }
         panelContainer.add(panel, size)
@@ -48,8 +45,8 @@ fun createRowPanelContainerSection(id: String): Div {
     val sizes = arrayListOf(Medium(4), Medium(6), Medium(8))
     val selectSize = Select<DeviceSize>(options = sizes) { "${it.size}" }
 
-    val looks = PanelStyle.values().toList()
-    val selectLook = Select(options = looks) { it.name() }
+    val looks = PanelStyle.values.toList()
+    val selectLook = Select(options = looks) { it.name }
 
     return div(id = id) {
         row {

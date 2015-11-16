@@ -4,7 +4,6 @@ import org.w3c.dom.Node
 import net.yested.with
 import org.w3c.dom.HTMLElement
 import org.w3c.dom.Window
-import kotlin.js.dom.html.document
 import kotlin.browser.window
 
 /**
@@ -15,8 +14,7 @@ import kotlin.browser.window
 * return (node as HTMLElement).offsetParent != null // this is fast but does not work in IE9
  */
 
-@native class CSSStyleDeclaration(
-        val display:String)
+@native class CSSStyleDeclaration(val display:String)
 
 @native fun Window.getComputedStyle(node:Node):CSSStyleDeclaration = noImpl
 

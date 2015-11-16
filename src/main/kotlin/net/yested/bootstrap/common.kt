@@ -11,8 +11,8 @@ public abstract class ColumnModifier(val size: Int, val device: Device, val modi
     override fun toString(): String = "col-${device.code}${modifierString}-${size}"
 }
 
-public abstract data class DeviceSize(size: Int, device: Device) : ColumnModifier(size, device, "")
-public data class Offset(size: Int, device: Device) : ColumnModifier(size, device, "-offset")
+public abstract class DeviceSize(size: Int, device: Device) : ColumnModifier(size, device, "")
+public abstract class Offset(size: Int, device: Device) : ColumnModifier(size, device, "-offset")
 
 public class ExtraSmall(size: Int): DeviceSize(size, Device.EXTRA_SMALL)
 public class Small(size: Int): DeviceSize(size, Device.SMALL)

@@ -30,7 +30,7 @@ class VerticalContainer(val width: Dimension? = null, height: Dimension, val gap
             style = "position: absolute; width: ${width?.toHtml()};"
             init()
         }
-        if (items.size() > 0 && gap > 0) {
+        if (items.size > 0 && gap > 0) {
             val gap = createElement("div") with { setAttribute("style", "height: ${gap}px;")}
             element.appendChild(gap)
         }
@@ -47,7 +47,7 @@ class VerticalContainer(val width: Dimension? = null, height: Dimension, val gap
 
     private fun recalculatePositions() {
 
-        val gaps = (items.size() - 1) * gap
+        val gaps = (items.size - 1) * gap
         val totalWidth = jq(element).height()
         val totalFixed = items.filter { it.dimension is Pixels }.map { (it.dimension as Pixels).value }.sum()
         val totalPercents = items.filter { it.dimension is Percent }.map { (it.dimension as Percent).value }.sum()
@@ -70,7 +70,7 @@ class VerticalContainer(val width: Dimension? = null, height: Dimension, val gap
 
     private fun recalculateWidth() {
         val maxHeightOfChildren = items.map { jq(it.div.element).height().toInt() }.max()
-        jq(element).css("width", "${maxHeightOfChildren}")
+        jq(element).css("width", "$maxHeightOfChildren")
     }
 
 }

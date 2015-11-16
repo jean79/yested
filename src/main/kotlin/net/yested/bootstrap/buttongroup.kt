@@ -26,9 +26,7 @@ public class ButtonGroup(val size: ButtonSize = ButtonSize.DEFAULT, val onSelect
 
     public fun select(selectValue:String) {
         value = selectValue
-        if (onSelect != null) {
-            onSelect!!(selectValue)
-        }
+        onSelect?.invoke(selectValue)
         for ((key, button) in buttons) {
             if (key == selectValue) {
                 button.active = true

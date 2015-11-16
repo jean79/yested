@@ -68,7 +68,7 @@ public class BtsButton(type: ButtonType = ButtonType.BUTTON,
         this.label()
         badge?.let {
             nbsp()
-            span(clazz = "badge") { +badge!! }
+            span(clazz = "badge") { +badge }
         }
         this.onclick = onclick
     }

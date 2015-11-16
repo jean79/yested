@@ -30,7 +30,7 @@ public enum class BeforeEventPermission {
     ALLOW
 }
 
-private fun tagsInputBeforeEventHandler<T>(event: TagsInputBeforeEvent<T>, func: ((T) -> BeforeEventPermission)?) {
+private fun <T> tagsInputBeforeEventHandler(event: TagsInputBeforeEvent<T>, func: ((T) -> BeforeEventPermission)?) {
     event.cancel = when (func?.invoke(event.item) ?: BeforeEventPermission.ALLOW) {
         BeforeEventPermission.PREVENT -> true
         BeforeEventPermission.ALLOW -> false
