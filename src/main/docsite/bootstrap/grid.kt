@@ -23,7 +23,7 @@ fun createGrid(id: String): Div {
             Person("Martin", 31, Colors.BLUE.color))
 
     val grid = Grid(columns = arrayOf(
-            Column(label = text("Name"), render = { +it.name },
+            Column(label = { +"Name" }, render = { +it.name },
                     sortFunction = { l, r -> compareValues(l.name, r.name) }),
             Column(label = text("Age"), render = { +"${it.age}" },
                     sortFunction = compareByValue<Person, Int> { it.age },

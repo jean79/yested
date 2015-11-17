@@ -626,7 +626,7 @@ public class SmartGrid<TYPE, KEY>(
                                     td.removeAttribute("editing")
                                     td.removeAllContent()
                                     HTMLComponent("", td) with {
-                                        column.render(this, item.item)
+                                        column.render(item.item)
                                     }
                                 })
                         td.removeAllContent()
@@ -779,7 +779,7 @@ public class SmartGrid<TYPE, KEY>(
                 HTMLComponent("", td) with {
                     removeAllChildren()
                     if (visibleItem is VisibleOneItem) {
-                        column.render(this, visibleItem.item)
+                        column.render(visibleItem.item)
                     } else if (visibleItem is VisibleItemGroup){
                         //it is aggregated row, only render if column is aggregating one
                         if (column.id == "root") {
