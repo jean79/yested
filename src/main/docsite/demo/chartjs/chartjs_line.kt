@@ -43,7 +43,7 @@ fun createChartJSLineSection(): Div {
                             pointHighlightStroke = chartColorSVK,
                             data = temperatureSVK)))
 
-    var jsChart:dynamic
+    var jsChart:dynamic = null
 
     val options = object {
         val datasetFill = false;
@@ -54,7 +54,7 @@ fun createChartJSLineSection(): Div {
     chart.drawLineChart(chartData, options, { jsChart = it })
 
     fun updateChart() {
-        jsChart.addData(arrayOf(Math.random()*15, Math.random()*18), "Added");
+        jsChart?.addData(arrayOf(Math.random()*15, Math.random()*18), "Added");
     }
 
     return div {

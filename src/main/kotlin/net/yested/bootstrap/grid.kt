@@ -27,11 +27,11 @@ public class ColumnHeader<T>(val column:Column<T>, sortingSupported:Boolean, sor
         if (sortingSupported) {
             a(href = null, onclick = { sortFunction!!(column)} ) {
                 "style".."cursor: pointer;"
-                column.label()
+                (column.label)()
             }
             +arrowPlaceholder
         } else {
-            column.label()
+            (column.label)()
         }
     }
 
@@ -133,7 +133,7 @@ public class Grid<T>(responsive: Boolean = false, val columns:Array<Column<T>>) 
                             columns.forEach { column ->
                                 td {
                                     "class" .. "text-${column.align.code}";
-                                    column.render(item)
+                                    (column.render)(item)
 								}
 							}
                         }

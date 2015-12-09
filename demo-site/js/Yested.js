@@ -680,12 +680,12 @@
             if (times === void 0)
               times = 1;
             var $receiver = new Kotlin.NumberRange(1, times);
-            var operation = _.net.yested.HTMLComponent.nbsp_za3lpa$f(this);
+            var action = _.net.yested.HTMLComponent.nbsp_za3lpa$f(this);
             var tmp$0;
             tmp$0 = $receiver.iterator();
             while (tmp$0.hasNext()) {
               var element = tmp$0.next();
-              operation(element);
+              action(element);
             }
           },
           h1_6csr66$: function (init) {
@@ -3041,12 +3041,12 @@
             setSortingArrow: function () {
               var tmp$0;
               var $receiver = (tmp$0 = this.columnHeaders_13ipnd$) != null ? tmp$0 : Kotlin.throwNPE();
-              var operation = _.net.yested.bootstrap.Grid.setSortingArrow$f(this);
+              var action = _.net.yested.bootstrap.Grid.setSortingArrow$f(this);
               var tmp$1;
               tmp$1 = $receiver.iterator();
               while (tmp$1.hasNext()) {
                 var element = tmp$1.next();
-                operation(element);
+                action(element);
               }
             },
             sortByColumn: function (column) {
@@ -3111,12 +3111,12 @@
               return function () {
                 var tmp$0;
                 var $receiver = (tmp$0 = this$Grid.columnHeaders_13ipnd$) != null ? tmp$0 : Kotlin.throwNPE();
-                var operation = _.net.yested.bootstrap.Grid.f_1(this);
+                var action = _.net.yested.bootstrap.Grid.f_1(this);
                 var tmp$1;
                 tmp$1 = $receiver.iterator();
                 while (tmp$1.hasNext()) {
                   var element = tmp$1.next();
-                  operation(element);
+                  action(element);
                 }
               };
             },
@@ -3144,12 +3144,12 @@
             },
             f_5: function (this$Grid, item) {
               return function () {
-                var operation = _.net.yested.bootstrap.Grid.f_4(item, this);
+                var action = _.net.yested.bootstrap.Grid.f_4(item, this);
                 var tmp$0, tmp$1, tmp$2;
                 tmp$0 = this$Grid.columns, tmp$1 = tmp$0.length;
                 for (var tmp$2 = 0; tmp$2 !== tmp$1; ++tmp$2) {
                   var element = tmp$0[tmp$2];
-                  operation(element);
+                  action(element);
                 }
               };
             },
@@ -3160,12 +3160,12 @@
             },
             f_7: function (values, this$Grid) {
               return function () {
-                var operation = _.net.yested.bootstrap.Grid.f_6(this$Grid, this);
+                var action = _.net.yested.bootstrap.Grid.f_6(this$Grid, this);
                 var tmp$0;
                 tmp$0 = values.iterator();
                 while (tmp$0.hasNext()) {
                   var element = tmp$0.next();
-                  operation(element);
+                  action(element);
                 }
               };
             },
@@ -3475,12 +3475,12 @@
                 _.net.yested.appendComponent_x7kbiy$(this.element, optionTag);
               }
               var $receiver = this.options;
-              var operation = _.net.yested.bootstrap.Select.generateOptions$f_0(this);
+              var action = _.net.yested.bootstrap.Select.generateOptions$f_0(this);
               var tmp$0;
               tmp$0 = $receiver.iterator();
               while (tmp$0.hasNext()) {
                 var element = tmp$0.next();
-                operation(element);
+                action(element);
               }
             },
             data: {
@@ -3785,12 +3785,12 @@
                 this.selectedItems_i98pbb$.clear();
                 this.itemToAnchorMap_w1590b$.clear();
                 _.net.yested.removeAllContent_y4uc6y$(this.element);
-                var operation = _.net.yested.bootstrap.ListGroup.dataProvider$f_1(this);
+                var action = _.net.yested.bootstrap.ListGroup.dataProvider$f_1(this);
                 var tmp$0;
                 tmp$0 = newDataProvider.iterator();
                 while (tmp$0.hasNext()) {
                   var element = tmp$0.next();
-                  operation(element);
+                  action(element);
                 }
               }
             },
@@ -4210,12 +4210,12 @@
               this.items_o2ga03$ = this.generateItems();
               this.list_z57r8f$.setContent_61zpoe$('');
               var $receiver = this.items_o2ga03$;
-              var operation = _.net.yested.bootstrap.Pagination.replaceItems$f(this);
+              var action = _.net.yested.bootstrap.Pagination.replaceItems$f(this);
               var tmp$0;
               tmp$0 = $receiver.iterator();
               while (tmp$0.hasNext()) {
                 var element = tmp$0.next();
-                operation(element);
+                action(element);
               }
             },
             generateItems: function () {
@@ -5028,12 +5028,12 @@
               set: function (value) {
                 if (this.initialized) {
                   this.removeAll();
-                  var operation = _.net.yested.bootstrap.TagsInputField.tags$f(this);
+                  var action = _.net.yested.bootstrap.TagsInputField.tags$f(this);
                   var tmp$0, tmp$1, tmp$2;
                   tmp$0 = value, tmp$1 = tmp$0.length;
                   for (var tmp$2 = 0; tmp$2 !== tmp$1; ++tmp$2) {
                     var element = tmp$0[tmp$2];
-                    operation(element);
+                    action(element);
                   }
                 }
                  else {
@@ -5396,22 +5396,22 @@
               },
               moveToSelected: function () {
                 var $receiver = this.listGroupAvailableColumns_3h2985$.data;
-                var operation = _.net.yested.bootstrap.smartgrid.ConfigurationDialog.moveToSelected$f(this);
+                var action = _.net.yested.bootstrap.smartgrid.ConfigurationDialog.moveToSelected$f(this);
                 var tmp$0;
                 tmp$0 = $receiver.iterator();
                 while (tmp$0.hasNext()) {
                   var element = tmp$0.next();
-                  operation(element);
+                  action(element);
                 }
               },
               moveToAvailable: function () {
                 var $receiver = this.listGroupSelectedColumns_l3io1t$.data;
-                var operation = _.net.yested.bootstrap.smartgrid.ConfigurationDialog.moveToAvailable$f(this);
+                var action = _.net.yested.bootstrap.smartgrid.ConfigurationDialog.moveToAvailable$f(this);
                 var tmp$0;
                 tmp$0 = $receiver.iterator();
                 while (tmp$0.hasNext()) {
                   var element = tmp$0.next();
-                  operation(element);
+                  action(element);
                 }
               },
               initialDistribution: function () {
@@ -6275,12 +6275,12 @@
               setSortingArrow: function () {
                 var tmp$0;
                 var $receiver = (tmp$0 = this.columnHeaders_k62yht$) != null ? tmp$0 : Kotlin.throwNPE();
-                var operation = _.net.yested.bootstrap.smartgrid.SmartGrid.setSortingArrow$f(this);
+                var action = _.net.yested.bootstrap.smartgrid.SmartGrid.setSortingArrow$f(this);
                 var tmp$1;
                 tmp$1 = $receiver.iterator();
                 while (tmp$1.hasNext()) {
                   var element = tmp$1.next();
-                  operation(element);
+                  action(element);
                 }
               },
               sortByColumn: function (column) {
@@ -6396,12 +6396,12 @@
                   }
                 }
                 var filtersOfHiddenColumns = destination_1;
-                var operation = _.net.yested.bootstrap.smartgrid.SmartGrid.renderHeaderInto$f_3(this);
+                var action = _.net.yested.bootstrap.smartgrid.SmartGrid.renderHeaderInto$f_3(this);
                 var tmp$5;
                 tmp$5 = filtersOfHiddenColumns.iterator();
                 while (tmp$5.hasNext()) {
                   var element_1 = tmp$5.next();
-                  operation(element_1);
+                  action(element_1);
                 }
               },
               updateFilter: function (columnId, filter) {
@@ -6478,12 +6478,12 @@
                     return Kotlin.modules['stdlib'].kotlin.compareValues_cj5vqg$(a.groupName, b.groupName);
                   }}));
                   var $receiver_0 = (tmp$2 = group.subgroups) != null ? tmp$2 : Kotlin.throwNPE();
-                  var operation = _.net.yested.bootstrap.smartgrid.SmartGrid.sortItemsInGroup$f_1(this);
+                  var action = _.net.yested.bootstrap.smartgrid.SmartGrid.sortItemsInGroup$f_1(this);
                   var tmp$3;
                   tmp$3 = $receiver_0.iterator();
                   while (tmp$3.hasNext()) {
                     var element = tmp$3.next();
-                    operation(element);
+                    action(element);
                   }
                 }
               },
@@ -6574,12 +6574,12 @@
                 var visibleColumns = this.getVisibleColumns();
                 var tbody = {v: _.net.yested.createElement_61zpoe$('tbody')};
                 var $receiver = new Kotlin.NumberRange(1, this.visibleRows_psclms$);
-                var operation = _.net.yested.bootstrap.smartgrid.SmartGrid.createRowsWithColumns$f(this, visibleColumns, tbody);
+                var action = _.net.yested.bootstrap.smartgrid.SmartGrid.createRowsWithColumns$f(this, visibleColumns, tbody);
                 var tmp$0;
                 tmp$0 = $receiver.iterator();
                 while (tmp$0.hasNext()) {
                   var element = tmp$0.next();
-                  operation(element);
+                  action(element);
                 }
                 _.net.yested.removeChildByName_ym7gc$(this.dataTable_ynouqd$, 'tbody');
                 this.dataTable_ynouqd$.appendChild(tbody.v);
@@ -6595,43 +6595,43 @@
                 if (previousRow != null && (new Kotlin.NumberRange(this.currentRow_ud8t5c$ - maxOptimizedMove, this.currentRow_ud8t5c$ - 1)).contains_htax2k$(previousRow)) {
                   var movedRowsCount = this.currentRow_ud8t5c$ - previousRow;
                   var $receiver = new Kotlin.NumberRange(1, movedRowsCount);
-                  var operation = _.net.yested.bootstrap.smartgrid.SmartGrid.redisplayTheReorderedDataSet$f(this, previousRow, rows, tbody, movedRowsCount, columns);
+                  var action = _.net.yested.bootstrap.smartgrid.SmartGrid.redisplayTheReorderedDataSet$f(this, previousRow, rows, tbody, movedRowsCount, columns);
                   var tmp$0;
                   tmp$0 = $receiver.iterator();
                   while (tmp$0.hasNext()) {
                     var element = tmp$0.next();
-                    operation(element);
+                    action(element);
                   }
                 }
                  else if (previousRow != null && (new Kotlin.NumberRange(this.currentRow_ud8t5c$ + 1, this.currentRow_ud8t5c$ + maxOptimizedMove)).contains_htax2k$(previousRow)) {
                   var movedRowsCount_0 = previousRow - this.currentRow_ud8t5c$;
                   var $receiver_0 = new Kotlin.NumberRange(1, movedRowsCount_0);
-                  var operation_0 = _.net.yested.bootstrap.smartgrid.SmartGrid.redisplayTheReorderedDataSet$f_0(this, previousRow, rows, tbody, columns);
+                  var action_0 = _.net.yested.bootstrap.smartgrid.SmartGrid.redisplayTheReorderedDataSet$f_0(this, previousRow, rows, tbody, columns);
                   var tmp$1;
                   tmp$1 = $receiver_0.iterator();
                   while (tmp$1.hasNext()) {
                     var element_0 = tmp$1.next();
-                    operation_0(element_0);
+                    action_0(element_0);
                   }
                 }
                  else {
                   this.rowsReferences_yj25bk$.clear();
                   var rowsToRender = Math.min(this.visibleRows_psclms$, this.visibleDataList_rh7ofp$.size);
                   var $receiver_1 = new Kotlin.NumberRange(1, rowsToRender);
-                  var operation_1 = _.net.yested.bootstrap.smartgrid.SmartGrid.redisplayTheReorderedDataSet$f_1(rows, this, columns);
+                  var action_1 = _.net.yested.bootstrap.smartgrid.SmartGrid.redisplayTheReorderedDataSet$f_1(rows, this, columns);
                   var tmp$2;
                   tmp$2 = $receiver_1.iterator();
                   while (tmp$2.hasNext()) {
                     var element_1 = tmp$2.next();
-                    operation_1(element_1);
+                    action_1(element_1);
                   }
                   var $receiver_2 = new Kotlin.NumberRange(rowsToRender + 1, this.visibleRows_psclms$);
-                  var operation_2 = _.net.yested.bootstrap.smartgrid.SmartGrid.redisplayTheReorderedDataSet$f_2(rows, columns, this);
+                  var action_2 = _.net.yested.bootstrap.smartgrid.SmartGrid.redisplayTheReorderedDataSet$f_2(rows, columns, this);
                   var tmp$3;
                   tmp$3 = $receiver_2.iterator();
                   while (tmp$3.hasNext()) {
                     var element_2 = tmp$3.next();
-                    operation_2(element_2);
+                    action_2(element_2);
                   }
                 }
               },
@@ -6642,13 +6642,13 @@
               updateRow: function (columns, visibleItem, tr, columnsToUpdate) {
                 if (columnsToUpdate === void 0)
                   columnsToUpdate = null;
-                var operation = _.net.yested.bootstrap.smartgrid.SmartGrid.updateRow$f(columnsToUpdate, tr, visibleItem, this);
+                var action = _.net.yested.bootstrap.smartgrid.SmartGrid.updateRow$f(columnsToUpdate, tr, visibleItem, this);
                 var tmp$0;
                 var index = 0;
                 tmp$0 = columns.iterator();
                 while (tmp$0.hasNext()) {
                   var item = tmp$0.next();
-                  operation(index++, item);
+                  action(index++, item);
                 }
               },
               clearRow: function (columns, tr, columnsToUpdate) {
@@ -6760,12 +6760,12 @@
                     var rowsToRender = Math.min(this.visibleRows_psclms$, this.visibleDataList_rh7ofp$.size);
                     var rows = this.getTBody().childNodes;
                     var $receiver_0 = new Kotlin.NumberRange(1, rowsToRender);
-                    var operation = _.net.yested.bootstrap.smartgrid.SmartGrid.updateItem_9w143m$f_2(rows, this, affectedColumns);
+                    var action = _.net.yested.bootstrap.smartgrid.SmartGrid.updateItem_9w143m$f_2(rows, this, affectedColumns);
                     var tmp$3;
                     tmp$3 = $receiver_0.iterator();
                     while (tmp$3.hasNext()) {
                       var element_1 = tmp$3.next();
-                      operation(element_1);
+                      action(element_1);
                     }
                   }
                 }
@@ -7690,12 +7690,12 @@
                 var dimensionAvailableToPct = Kotlin.numberToInt(totalDimension) - totalFixed - gaps;
                 var position = {v: 0};
                 var $receiver_1 = this.items_icw4gq$;
-                var operation = _.net.yested.layout.containers.HorizontalContainer.recalculatePositions$f_3(totalPercents, dimensionAvailableToPct, position, this);
+                var action = _.net.yested.layout.containers.HorizontalContainer.recalculatePositions$f_3(totalPercents, dimensionAvailableToPct, position, this);
                 var tmp$4;
                 tmp$4 = $receiver_1.iterator();
                 while (tmp$4.hasNext()) {
                   var element_1 = tmp$4.next();
-                  operation(element_1);
+                  action(element_1);
                 }
               },
               recalculateHeight: function () {
@@ -7855,12 +7855,12 @@
                 var dimensionAvailableToPct = Kotlin.numberToInt(totalWidth) - totalFixed - gaps;
                 var position = {v: 0};
                 var $receiver_1 = this.items_xm3k30$;
-                var operation = _.net.yested.layout.containers.VerticalContainer.recalculatePositions$f_3(totalPercents, dimensionAvailableToPct, position, this);
+                var action = _.net.yested.layout.containers.VerticalContainer.recalculatePositions$f_3(totalPercents, dimensionAvailableToPct, position, this);
                 var tmp$4;
                 tmp$4 = $receiver_1.iterator();
                 while (tmp$4.hasNext()) {
                   var element_1 = tmp$4.next();
-                  operation(element_1);
+                  action(element_1);
                 }
               },
               recalculateWidth: function () {
@@ -12654,7 +12654,7 @@
         }
       }),
       generateData: function () {
-        var $receiver = new Kotlin.NumberRange(1, 500);
+        var $receiver = new Kotlin.NumberRange(1, 50000);
         var destination = new Kotlin.ArrayList(Kotlin.modules['stdlib'].kotlin.collectionSizeOrDefault_pjxt3m$($receiver, 10));
         var tmp$0;
         var index = 0;
@@ -12686,12 +12686,12 @@
         },
         updateRandomValues: function () {
           var $receiver = new Kotlin.NumberRange(0, Math.min(100, this.data.size / 5 | 0));
-          var operation = _.complex.CustomizableGridSection.updateRandomValues$f(this);
+          var action = _.complex.CustomizableGridSection.updateRandomValues$f(this);
           var tmp$0;
           tmp$0 = $receiver.iterator();
           while (tmp$0.hasNext()) {
             var element = tmp$0.next();
-            operation(element);
+            action(element);
           }
         },
         toogleTicking: function () {
@@ -14443,7 +14443,8 @@
         },
         createChartJSLineSection$updateChart: function (jsChart) {
           return function () {
-            jsChart.v.addData([Math.random() * 15, Math.random() * 18], 'Added');
+            var tmp$0;
+            (tmp$0 = jsChart.v) != null ? tmp$0.addData([Math.random() * 15, Math.random() * 18], 'Added') : null;
           };
         },
         f_18: function () {
