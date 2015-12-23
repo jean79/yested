@@ -42,7 +42,8 @@ fun createFloatingPanelContainerSection(id: String): Div {
     addPanel("300px", PanelStyle.SUCCESS)
     addPanel("400px", PanelStyle.INFO)
 
-    val looks = PanelStyle.values.toList()
+    //val looks = PanelStyle.values.toList()
+    val looks = arrayListOf(PanelStyle.DEFAULT, PanelStyle.PRIMARY, PanelStyle.SUCCESS, PanelStyle.INFO, PanelStyle.WARNING, PanelStyle.DANGER)
     val inputField = StringInputField(placeholder = "Size in Px") with { data = "150px" }
     val selectLook = Select(options = looks) { it.name }
 

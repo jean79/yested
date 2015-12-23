@@ -1,6 +1,5 @@
 package net.yested.bootstrap.smartgrid
 
-import complex.focus
 import net.yested.Component
 import net.yested.bootstrap.InputSize
 import net.yested.bootstrap.StringInputField

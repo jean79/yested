@@ -170,7 +170,7 @@ public class Select<T>(val options: List<T>,
 
     private fun selectThese(selectedItems:List<T>) {
         optionTags.forEach {
-            it.tag.selected = selectedItems.containsRaw(it.value)
+            it.tag.selected = selectedItems.contains(it.value as Any?)
         }
     }
 

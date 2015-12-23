@@ -45,7 +45,9 @@ fun createRowPanelContainerSection(id: String): Div {
     val sizes = arrayListOf(Medium(4), Medium(6), Medium(8))
     val selectSize = Select<DeviceSize>(options = sizes) { "${it.size}" }
 
-    val looks = PanelStyle.values.toList()
+    val looks = arrayListOf(PanelStyle.DEFAULT, PanelStyle.PRIMARY, PanelStyle.SUCCESS, PanelStyle.INFO, PanelStyle.WARNING, PanelStyle.DANGER)
+    //PanelStyle.values.toList()
+    
     val selectLook = Select(options = looks) { it.name }
 
     return div(id = id) {

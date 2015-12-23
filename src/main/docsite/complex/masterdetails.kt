@@ -21,7 +21,8 @@ class DetailScreen(
 
     val textInput = StringInputField(placeholder = "City name")
     val validator = Validator(inputElement = textInput, errorText = "Name is mandatory", validator = { it.size > 3})
-    val select = Select(options = Continent.values.toList(), renderer = { it.label })
+    val continents = arrayListOf(Continent.EUROPE, Continent.AFRICA, Continent.AMERICA, Continent.ASIA)
+    val select = Select(options = continents, renderer = { it.label })
 
     fun save() {
         if (validator.isValid()) {
