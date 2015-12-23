@@ -221,7 +221,7 @@ class CustomizableGridSection: Component {
 
     fun updateRandomValues() {
         (0..Math.min(100, (data.size/5))).forEach {
-            val item = data.get((Math.random()*data.size).toInt())
+            val item = data[(Math.random()*data.size).toInt()]
             item.move = Math.random()*10-5
             grid.updateItem(item, listOf("move"))
         }

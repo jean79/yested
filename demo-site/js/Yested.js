@@ -1175,8 +1175,8 @@
         ObservableInput: Kotlin.createClass(function () {
           return [_.net.yested.InputComponent];
         }, function () {
-          this.onChangeListeners = Kotlin.modules['stdlib'].kotlin.arrayListOf_9mqe4v$([]);
-          this.onChangeLiveListeners = Kotlin.modules['stdlib'].kotlin.arrayListOf_9mqe4v$([]);
+          this.onChangeListeners = Kotlin.modules['stdlib'].kotlin.collections.arrayListOf_9mqe4v$([]);
+          this.onChangeLiveListeners = Kotlin.modules['stdlib'].kotlin.collections.arrayListOf_9mqe4v$([]);
         }, /** @lends _.net.yested.ObservableInput.prototype */ {
           addOnChangeListener_qshda6$: function (invoke) {
             this.onChangeListeners.add_za3rmp$(invoke);
@@ -1422,7 +1422,7 @@
           return _.net.yested.text_61zpoe$f(text);
         },
         getHashSplitted: function () {
-          return Kotlin.copyToArray(Kotlin.modules['stdlib'].kotlin.split_l2gz7$(window.location.hash, ['_']));
+          return Kotlin.copyToArray(Kotlin.modules['stdlib'].kotlin.text.split_l2gz7$(window.location.hash, ['_']));
         },
         registerHashChangeListener_owl47g$f: function (listener) {
           return function () {
@@ -2037,7 +2037,7 @@
               var tmp$0, tmp$2;
               this.value = selectValue;
               (tmp$0 = this.onSelect) != null ? tmp$0(selectValue) : null;
-              tmp$2 = Kotlin.modules['stdlib'].kotlin.iterator_acfufl$(this.buttons_2b2nvz$);
+              tmp$2 = Kotlin.modules['stdlib'].kotlin.collections.iterator_acfufl$(this.buttons_2b2nvz$);
               while (tmp$2.hasNext()) {
                 var tmp$1 = tmp$2.next()
                 , key = tmp$1.key
@@ -2568,7 +2568,7 @@
             },
             data: {
               get: function () {
-                return Kotlin.modules['stdlib'].kotlin.isEmpty_gw00vq$(this.value) ? null : _.net.yested.utils.Moment.object.parse_puj7f4$(this.value, this.formatString);
+                return Kotlin.modules['stdlib'].kotlin.text.isEmpty_gw00vq$(this.value) ? null : _.net.yested.utils.Moment.object.parse_puj7f4$(this.value, this.formatString);
               },
               set: function (value) {
                 this.value = value == null ? '' : value.format_61zpoe$(this.formatString);
@@ -3013,7 +3013,7 @@
                 destination_0.add_za3rmp$(element);
               }
             }
-            this.sortColumn_xix3o5$ = Kotlin.modules['stdlib'].kotlin.firstOrNull_fvq2g0$(destination_0);
+            this.sortColumn_xix3o5$ = Kotlin.modules['stdlib'].kotlin.collections.firstOrNull_fvq2g0$(destination_0);
             this.asc_s2pzui$ = (tmp$1 = (tmp$0 = this.sortColumn_xix3o5$) != null ? tmp$0.defaultSortOrderAsc : null) != null ? tmp$1 : true;
             this.setSortingArrow();
             this.dataList_chk18h$ = null;
@@ -3069,7 +3069,7 @@
                 return toSort;
               }
               var comparison = _.net.yested.bootstrap.Grid.sortData$f(this);
-              return Kotlin.modules['stdlib'].kotlin.sortedWith_r48qxn$(toSort, Kotlin.createObject(function () {
+              return Kotlin.modules['stdlib'].kotlin.collections.sortedWith_r48qxn$(toSort, Kotlin.createObject(function () {
                 return [Kotlin.Comparator];
               }, null, {compare: function (a, b) {
                 return comparison(a, b);
@@ -3258,7 +3258,7 @@
             },
             data: {
               get: function () {
-                return Kotlin.modules['stdlib'].kotlin.isEmpty_gw00vq$(this.value) ? null : parseInt(this.value);
+                return Kotlin.modules['stdlib'].kotlin.text.isEmpty_gw00vq$(this.value) ? null : parseInt(this.value);
               },
               set: function (value) {
                 this.value = value == null ? '' : value.toString();
@@ -3280,7 +3280,7 @@
             data: {
               get: function () {
                 var tmp$0, tmp$1;
-                return Kotlin.modules['stdlib'].kotlin.isEmpty_gw00vq$(this.value) ? null : (tmp$1 = (tmp$0 = Kotlin.safeParseDouble(this.value)) != null ? tmp$0 : null) != null ? tmp$1 : Kotlin.modules['stdlib'].kotlin.error_za3rmp$('cannot convert ' + this.value + ' to Float');
+                return Kotlin.modules['stdlib'].kotlin.text.isEmpty_gw00vq$(this.value) ? null : (tmp$1 = (tmp$0 = Kotlin.safeParseDouble(this.value)) != null ? tmp$0 : null) != null ? tmp$1 : Kotlin.modules['stdlib'].kotlin.error_za3rmp$('cannot convert ' + this.value + ' to Float');
               },
               set: function (value) {
                 this.value = value == null ? '' : value.toString();
@@ -3427,7 +3427,7 @@
                     destination.add_za3rmp$(element);
                   }
                 }
-                var destination_0 = new Kotlin.ArrayList(Kotlin.modules['stdlib'].kotlin.collectionSizeOrDefault_pjxt3m$(destination, 10));
+                var destination_0 = new Kotlin.ArrayList(Kotlin.modules['stdlib'].kotlin.collections.collectionSizeOrDefault_pjxt3m$(destination, 10));
                 var tmp$1;
                 tmp$1 = destination.iterator();
                 while (tmp$1.hasNext()) {
@@ -3442,7 +3442,7 @@
               }
             },
             clear: function () {
-              this.selectedItems = Kotlin.modules['stdlib'].kotlin.emptyList();
+              this.selectedItems = Kotlin.modules['stdlib'].kotlin.collections.emptyList();
             },
             changeSelected: function () {
               if (!this.callbackIsInvoked_e497ms$) {
@@ -3463,7 +3463,7 @@
               tmp$0 = $receiver.iterator();
               while (tmp$0.hasNext()) {
                 var element = tmp$0.next();
-                element.tag.selected = Kotlin.modules['stdlib'].kotlin.contains_pjxz11$(selectedItems, element.value);
+                element.tag.selected = Kotlin.modules['stdlib'].kotlin.collections.contains_pjxz11$(selectedItems, element.value);
               }
             },
             generateOptions: function () {
@@ -3485,10 +3485,10 @@
             },
             data: {
               get: function () {
-                return Kotlin.modules['stdlib'].kotlin.first_fvq2g0$(this.selectedItems);
+                return Kotlin.modules['stdlib'].kotlin.collections.first_fvq2g0$(this.selectedItems);
               },
               set: function (value) {
-                this.selectedItems = Kotlin.modules['stdlib'].kotlin.listOf_za3rmp$(value);
+                this.selectedItems = Kotlin.modules['stdlib'].kotlin.collections.listOf_za3rmp$(value);
               }
             },
             decorate_6taknv$: function (valid) {
@@ -3578,7 +3578,7 @@
                   var item = tmp$0[tmp$2];
                   destination.add_za3rmp$(item.toString());
                 }
-                this.clazz = Kotlin.modules['stdlib'].kotlin.joinToString_sdec0h$(destination, ' ');
+                this.clazz = Kotlin.modules['stdlib'].kotlin.collections.joinToString_sdec0h$(destination, ' ');
                 init.call(this);
               };
             }
@@ -3686,8 +3686,8 @@
             this.renderer = renderer;
             this.onChangeListeners_at0a8i$ = new Kotlin.ArrayList();
             this.$element_6bc0ua$ = _.net.yested.with_ji1yox$(_.net.yested.createElement_61zpoe$('div'), _.net.yested.bootstrap.ListGroup.element$f(this));
-            this.selectedItems_i98pbb$ = Kotlin.modules['stdlib'].kotlin.arrayListOf_9mqe4v$([]);
-            this.itemToAnchorMap_w1590b$ = Kotlin.modules['stdlib'].kotlin.hashMapOf_eoa9s7$([]);
+            this.selectedItems_i98pbb$ = Kotlin.modules['stdlib'].kotlin.collections.arrayListOf_9mqe4v$([]);
+            this.itemToAnchorMap_w1590b$ = Kotlin.modules['stdlib'].kotlin.collections.hashMapOf_eoa9s7$([]);
           }, /** @lends _.net.yested.bootstrap.ListGroup.prototype */ {
             element: {
               get: function () {
@@ -3703,7 +3703,7 @@
                 this.selectedItems_i98pbb$.addAll_4fm7v2$(newSelection);
                 var $receiver = this.itemToAnchorMap_w1590b$;
                 var tmp$0;
-                tmp$0 = Kotlin.modules['stdlib'].kotlin.iterator_acfufl$($receiver);
+                tmp$0 = Kotlin.modules['stdlib'].kotlin.collections.iterator_acfufl$($receiver);
                 while (tmp$0.hasNext()) {
                   var element = tmp$0.next();
                   if (newSelection.contains_za3rmp$(element.key)) {
@@ -3767,12 +3767,12 @@
               get: function () {
                 var $receiver = this.itemToAnchorMap_w1590b$.entries;
                 var selector = _.net.yested.bootstrap.ListGroup.dataProvider$f(this);
-                var $receiver_0 = Kotlin.modules['stdlib'].kotlin.sortedWith_r48qxn$($receiver, Kotlin.createObject(function () {
+                var $receiver_0 = Kotlin.modules['stdlib'].kotlin.collections.sortedWith_r48qxn$($receiver, Kotlin.createObject(function () {
                   return [Kotlin.Comparator];
                 }, null, {compare: function (a, b) {
                   return Kotlin.modules['stdlib'].kotlin.compareValues_cj5vqg$(selector(a), selector(b));
                 }}));
-                var destination = new Kotlin.ArrayList(Kotlin.modules['stdlib'].kotlin.collectionSizeOrDefault_pjxt3m$($receiver_0, 10));
+                var destination = new Kotlin.ArrayList(Kotlin.modules['stdlib'].kotlin.collections.collectionSizeOrDefault_pjxt3m$($receiver_0, 10));
                 var tmp$0;
                 tmp$0 = $receiver_0.iterator();
                 while (tmp$0.hasNext()) {
@@ -4187,7 +4187,7 @@
             this.$element_z5clzt$ = _.net.yested.createElement_61zpoe$('nav');
             this.selectedItem_cr0avl$ = this.defaultSelection;
             this.list_z57r8f$ = _.net.yested.with_ji1yox$(new _.net.yested.UL(), _.net.yested.bootstrap.Pagination.list_z57r8f$f);
-            this.items_o2ga03$ = Kotlin.modules['stdlib'].kotlin.arrayListOf_9mqe4v$([]);
+            this.items_o2ga03$ = Kotlin.modules['stdlib'].kotlin.collections.arrayListOf_9mqe4v$([]);
             _.net.yested.appendComponent_x7kbiy$(this.element, this.list_z57r8f$);
             this.replaceItems();
             this.redisplay(this.selectedItem_cr0avl$);
@@ -4337,7 +4337,7 @@
             if (layoutChangeHandler === void 0)
               layoutChangeHandler = null;
             this.$element_7ec9wc$ = _.net.yested.createElement_61zpoe$('ul');
-            this.panels_gqmqq7$ = Kotlin.modules['stdlib'].kotlin.arrayListOf_9mqe4v$([]);
+            this.panels_gqmqq7$ = Kotlin.modules['stdlib'].kotlin.collections.arrayListOf_9mqe4v$([]);
             this.element.setAttribute('class', 'list-unstyled');
             $(this.element).disableSelection();
             $(this.element).sortable(_.net.yested.bootstrap.PanelContainer.PanelContainer$f(layoutChangeHandler));
@@ -4608,9 +4608,9 @@
             this.$element_s2egal$ = _.net.yested.createElement_61zpoe$('div');
             this.bar_83ssd0$ = _.net.yested.with_ji1yox$(new _.net.yested.UL(), _.net.yested.bootstrap.Tabs.bar_83ssd0$f);
             this.content_9tda2$ = _.net.yested.with_ji1yox$(new _.net.yested.Div(), _.net.yested.bootstrap.Tabs.content_9tda2$f);
-            this.tabDefinitions_5fozuy$ = Kotlin.modules['stdlib'].kotlin.arrayListOf_9mqe4v$([]);
-            this.headersRendered_izixlw$ = Kotlin.modules['stdlib'].kotlin.hashMapOf_eoa9s7$([]);
-            this.tabsRendered_rgvx82$ = Kotlin.modules['stdlib'].kotlin.hashMapOf_eoa9s7$([]);
+            this.tabDefinitions_5fozuy$ = Kotlin.modules['stdlib'].kotlin.collections.arrayListOf_9mqe4v$([]);
+            this.headersRendered_izixlw$ = Kotlin.modules['stdlib'].kotlin.collections.hashMapOf_eoa9s7$([]);
+            this.tabsRendered_rgvx82$ = Kotlin.modules['stdlib'].kotlin.collections.hashMapOf_eoa9s7$([]);
             this.index_nuub59$ = 0;
             this.tabIndexDisplayed_1f7wf9$ = 0;
             this.currentContent_dz3hy7$ = null;
@@ -4648,7 +4648,7 @@
                   destination.add_za3rmp$(element);
                 }
               }
-              return Kotlin.modules['stdlib'].kotlin.firstOrNull_fvq2g0$(destination);
+              return Kotlin.modules['stdlib'].kotlin.collections.firstOrNull_fvq2g0$(destination);
             },
             activateTab_za3lpa$: function (tabId) {
               var tmp$0, tmp$1, tmp$2, tmp$3, tmp$4;
@@ -5037,7 +5037,7 @@
                   }
                 }
                  else {
-                  this.value = Kotlin.modules['stdlib'].kotlin.joinToString_qtax42$(value, ',');
+                  this.value = Kotlin.modules['stdlib'].kotlin.collections.joinToString_qtax42$(value, ',');
                 }
               }
             }
@@ -5269,7 +5269,7 @@
                   var item = tmp$0[tmp$2];
                   destination.add_za3rmp$(item.name.toLowerCase());
                 }
-                this.trigger = Kotlin.modules['stdlib'].kotlin.joinToString_sdec0h$(destination, ' ');
+                this.trigger = Kotlin.modules['stdlib'].kotlin.collections.joinToString_sdec0h$(destination, ' ');
                 this.viewPort = _.net.yested.bootstrap.viewPort$f(options);
                 this.title = title;
               }));
@@ -5347,7 +5347,7 @@
               this.buttonToSelect_6pcnpz$ = new _.net.yested.bootstrap.BtsButton(void 0, _.net.yested.bootstrap.smartgrid.ConfigurationDialog.buttonToSelect_6pcnpz$f, void 0, _.net.yested.bootstrap.ButtonSize.object.SMALL, void 0, void 0, _.net.yested.bootstrap.smartgrid.ConfigurationDialog.buttonToSelect_6pcnpz$f_0(this));
               this.buttonToDeselect_i83ucq$ = new _.net.yested.bootstrap.BtsButton(void 0, _.net.yested.bootstrap.smartgrid.ConfigurationDialog.buttonToDeselect_i83ucq$f, void 0, _.net.yested.bootstrap.ButtonSize.object.SMALL, void 0, void 0, _.net.yested.bootstrap.smartgrid.ConfigurationDialog.buttonToDeselect_i83ucq$f_0(this));
               this.fieldFilterAvailableColumns_n29rra$ = new _.net.yested.bootstrap.StringInputField();
-              this.availableColumns_1s6h3o$ = Kotlin.modules['stdlib'].kotlin.arrayListOf_9mqe4v$([]);
+              this.availableColumns_1s6h3o$ = Kotlin.modules['stdlib'].kotlin.collections.arrayListOf_9mqe4v$([]);
               this.dialog_7c7zi0$ = _.net.yested.with_ji1yox$(new _.net.yested.bootstrap.Dialog(_.net.yested.bootstrap.DialogSize.object.DEFAULT), _.net.yested.bootstrap.smartgrid.ConfigurationDialog.dialog_7c7zi0$f(this));
               this.initialDistribution();
               this.dialog_7c7zi0$.open_6taknv$(false);
@@ -5359,7 +5359,7 @@
             }, /** @lends _.net.yested.bootstrap.smartgrid.ConfigurationDialog.prototype */ {
               getSelectedColumnIds: function () {
                 var $receiver = this.listGroupSelectedColumns_l3io1t$.dataProvider;
-                var destination = new Kotlin.ArrayList(Kotlin.modules['stdlib'].kotlin.collectionSizeOrDefault_pjxt3m$($receiver, 10));
+                var destination = new Kotlin.ArrayList(Kotlin.modules['stdlib'].kotlin.collections.collectionSizeOrDefault_pjxt3m$($receiver, 10));
                 var tmp$0;
                 tmp$0 = $receiver.iterator();
                 while (tmp$0.hasNext()) {
@@ -5370,7 +5370,7 @@
               },
               getAllColumnIds: function () {
                 var $receiver = this.columns_q3gi8z$;
-                var destination = new Kotlin.ArrayList(Kotlin.modules['stdlib'].kotlin.collectionSizeOrDefault_pjxt3m$($receiver, 10));
+                var destination = new Kotlin.ArrayList(Kotlin.modules['stdlib'].kotlin.collections.collectionSizeOrDefault_pjxt3m$($receiver, 10));
                 var tmp$0;
                 tmp$0 = $receiver.iterator();
                 while (tmp$0.hasNext()) {
@@ -5391,7 +5391,7 @@
               hideAll: function () {
                 this.availableColumns_1s6h3o$.clear();
                 this.availableColumns_1s6h3o$.addAll_4fm7v2$(this.columns_q3gi8z$);
-                this.listGroupSelectedColumns_l3io1t$.dataProvider = Kotlin.modules['stdlib'].kotlin.arrayListOf_9mqe4v$([]);
+                this.listGroupSelectedColumns_l3io1t$.dataProvider = Kotlin.modules['stdlib'].kotlin.collections.arrayListOf_9mqe4v$([]);
                 this.populateAvailableListGroup();
               },
               moveToSelected: function () {
@@ -5426,14 +5426,14 @@
                     destination.add_za3rmp$(element);
                   }
                 }
-                this.availableColumns_1s6h3o$.addAll_4fm7v2$(Kotlin.modules['stdlib'].kotlin.sortedWith_r48qxn$(destination, Kotlin.createObject(function () {
+                this.availableColumns_1s6h3o$.addAll_4fm7v2$(Kotlin.modules['stdlib'].kotlin.collections.sortedWith_r48qxn$(destination, Kotlin.createObject(function () {
                   return [Kotlin.Comparator];
                 }, null, {compare: function (a, b) {
                   return Kotlin.modules['stdlib'].kotlin.compareValues_cj5vqg$(a.label, b.label);
                 }})));
                 var $receiver_0 = this.columns_q3gi8z$;
                 var tmp$1;
-                var capacity = Kotlin.modules['stdlib'].kotlin.collectionSizeOrDefault_pjxt3m$($receiver_0, 10) / 0.75 + 1;
+                var capacity = Kotlin.modules['stdlib'].kotlin.collections.collectionSizeOrDefault_pjxt3m$($receiver_0, 10) / 0.75 + 1;
                 var result = new Kotlin.LinkedHashMap(Math.max(capacity | 0, 16));
                 tmp$1 = $receiver_0.iterator();
                 while (tmp$1.hasNext()) {
@@ -5442,7 +5442,7 @@
                 }
                 var columnsById = result;
                 var $receiver_1 = this.selectedColumnIds_lb5na1$;
-                var destination_0 = new Kotlin.ArrayList(Kotlin.modules['stdlib'].kotlin.collectionSizeOrDefault_pjxt3m$($receiver_1, 10));
+                var destination_0 = new Kotlin.ArrayList(Kotlin.modules['stdlib'].kotlin.collections.collectionSizeOrDefault_pjxt3m$($receiver_1, 10));
                 var tmp$2;
                 tmp$2 = $receiver_1.iterator();
                 while (tmp$2.hasNext()) {
@@ -5456,7 +5456,7 @@
               },
               populateAvailableListGroup: function () {
                 var $receiver = this.getVisibleAvailableColumns();
-                this.listGroupAvailableColumns_3h2985$.dataProvider = Kotlin.modules['stdlib'].kotlin.sortedWith_r48qxn$($receiver, Kotlin.createObject(function () {
+                this.listGroupAvailableColumns_3h2985$.dataProvider = Kotlin.modules['stdlib'].kotlin.collections.sortedWith_r48qxn$($receiver, Kotlin.createObject(function () {
                   return [Kotlin.Comparator];
                 }, null, {compare: function (a, b) {
                   return Kotlin.modules['stdlib'].kotlin.compareValues_cj5vqg$(a.label, b.label);
@@ -5471,7 +5471,7 @@
                   tmp$0 = $receiver.iterator();
                   while (tmp$0.hasNext()) {
                     var element = tmp$0.next();
-                    if (Kotlin.modules['stdlib'].kotlin.contains_kzp0od$(element.label.toLowerCase(), filterText)) {
+                    if (Kotlin.modules['stdlib'].kotlin.text.contains_kzp0od$(element.label.toLowerCase(), filterText)) {
                       destination.add_za3rmp$(element);
                     }
                   }
@@ -5959,29 +5959,26 @@
               tmp$0 = items.iterator();
               while (tmp$0.hasNext()) {
                 var element = tmp$0.next();
+                var tmp$2;
+                var key = ((tmp$2 = aggregatingColumn.groupBy) != null ? tmp$2 : Kotlin.throwNPE())(element);
                 var tmp$1;
-                var key = ((tmp$1 = aggregatingColumn.groupBy) != null ? tmp$1 : Kotlin.throwNPE())(element);
-                var list;
-                getOrPut_x00lr4$break: {
-                  var value = map.get_za3rmp$(key);
-                  if (value == null && !map.containsKey_za3rmp$(key)) {
-                    var answer = new Kotlin.ArrayList();
-                    map.put_wn2jw4$(key, answer);
-                    list = answer;
-                    break getOrPut_x00lr4$break;
-                  }
-                   else {
-                    list = value;
-                    break getOrPut_x00lr4$break;
-                  }
+                var value = map.get_za3rmp$(key);
+                if (value == null && !map.containsKey_za3rmp$(key)) {
+                  var answer = new Kotlin.ArrayList();
+                  map.put_wn2jw4$(key, answer);
+                  tmp$1 = answer;
                 }
+                 else {
+                  tmp$1 = value;
+                }
+                var list = tmp$1;
                 list.add_za3rmp$(element);
               }
-              var destination = new Kotlin.ArrayList(Kotlin.modules['stdlib'].kotlin.collectionSizeOrDefault_pjxt3m$(map.entries, 10));
-              var tmp$2;
-              tmp$2 = map.entries.iterator();
-              while (tmp$2.hasNext()) {
-                var item = tmp$2.next();
+              var destination = new Kotlin.ArrayList(Kotlin.modules['stdlib'].kotlin.collections.collectionSizeOrDefault_pjxt3m$(map.entries, 10));
+              var tmp$3;
+              tmp$3 = map.entries.iterator();
+              while (tmp$3.hasNext()) {
+                var item = tmp$3.next();
                 var group$f_0$result;
                 group$f_0$break: {
                   if (aggregateByColumn < aggregatingColumns.size - 1) {
@@ -6014,7 +6011,7 @@
                 }
                  else {
                   var $receiver_0 = (tmp$1 = group.items) != null ? tmp$1 : Kotlin.throwNPE();
-                  var destination = new Kotlin.ArrayList(Kotlin.modules['stdlib'].kotlin.collectionSizeOrDefault_pjxt3m$($receiver_0, 10));
+                  var destination = new Kotlin.ArrayList(Kotlin.modules['stdlib'].kotlin.collections.collectionSizeOrDefault_pjxt3m$($receiver_0, 10));
                   var tmp$3;
                   tmp$3 = $receiver_0.iterator();
                   while (tmp$3.hasNext()) {
@@ -6063,7 +6060,7 @@
               return accumulator;
             },
             calculateAggregations: function (columnsWithGroupFunctions, group) {
-              group.aggregated = Kotlin.modules['stdlib'].kotlin.hashMapOf_eoa9s7$([]);
+              group.aggregated = Kotlin.modules['stdlib'].kotlin.collections.hashMapOf_eoa9s7$([]);
               if (group.items != null) {
                 var tmp$0;
                 tmp$0 = columnsWithGroupFunctions.iterator();
@@ -6071,7 +6068,7 @@
                   var element = tmp$0.next();
                   var tmp$5, tmp$1;
                   var $receiver = (tmp$5 = group.items) != null ? tmp$5 : Kotlin.throwNPE();
-                  var destination = new Kotlin.ArrayList(Kotlin.modules['stdlib'].kotlin.collectionSizeOrDefault_pjxt3m$($receiver, 10));
+                  var destination = new Kotlin.ArrayList(Kotlin.modules['stdlib'].kotlin.collections.collectionSizeOrDefault_pjxt3m$($receiver, 10));
                   var tmp$2;
                   tmp$2 = $receiver.iterator();
                   while (tmp$2.hasNext()) {
@@ -6100,7 +6097,7 @@
                   var tmp$11, tmp$8;
                   var tmp$7 = (tmp$11 = group.aggregated) != null ? tmp$11 : Kotlin.throwNPE();
                   var $receiver_0 = (tmp$8 = group.subgroups) != null ? tmp$8 : Kotlin.throwNPE();
-                  var destination_1 = new Kotlin.ArrayList(Kotlin.modules['stdlib'].kotlin.collectionSizeOrDefault_pjxt3m$($receiver_0, 10));
+                  var destination_1 = new Kotlin.ArrayList(Kotlin.modules['stdlib'].kotlin.collections.collectionSizeOrDefault_pjxt3m$($receiver_0, 10));
                   var tmp$10;
                   tmp$10 = $receiver_0.iterator();
                   while (tmp$10.hasNext()) {
@@ -6135,7 +6132,7 @@
               this.sortColumn_vt3fdp$ = null;
               this.asc_u2smf2$ = true;
               this.columnHeaders_k62yht$ = null;
-              this.visibleColumns_rm3k9m$ = Kotlin.modules['stdlib'].kotlin.listOf();
+              this.visibleColumns_rm3k9m$ = Kotlin.modules['stdlib'].kotlin.collections.listOf();
               var element = new _.net.yested.bootstrap.smartgrid.GridColumn('root', _.net.yested.px_s8ev3o$(200).toHtml(), '', _.net.yested.bootstrap.smartgrid.SmartGrid.columns_u5fw5u$f);
               var $receiver = columns.concat([element]);
               var tmp$0, tmp$1, tmp$2;
@@ -6147,17 +6144,17 @@
                 result.put_wn2jw4$(element_0.id, element_0);
               }
               this.columns_u5fw5u$ = result;
-              this.rowsReferences_yj25bk$ = Kotlin.modules['stdlib'].kotlin.hashMapOf_eoa9s7$([]);
+              this.rowsReferences_yj25bk$ = Kotlin.modules['stdlib'].kotlin.collections.hashMapOf_eoa9s7$([]);
               this.visibleRows_psclms$ = 1;
               this.currentRow_ud8t5c$ = 0;
               this.gridIsCreated_q2bzpl$ = false;
-              this.filters_b1gfbg$ = Kotlin.modules['stdlib'].kotlin.hashMapOf_eoa9s7$([]);
-              this.fullDataList_2ybsuy$ = Kotlin.modules['stdlib'].kotlin.arrayListOf_9mqe4v$([]);
-              this.filteredDataList_x74uz6$ = Kotlin.modules['stdlib'].kotlin.arrayListOf_9mqe4v$([]);
-              this.group_522ceo$ = new _.net.yested.bootstrap.smartgrid.Group('root', void 0, Kotlin.modules['stdlib'].kotlin.arrayListOf_9mqe4v$([]), true);
-              this.visibleDataList_rh7ofp$ = Kotlin.modules['stdlib'].kotlin.arrayListOf_9mqe4v$([]);
-              this.dataListAsKeyMap_deynhi$ = Kotlin.modules['stdlib'].kotlin.hashMapOf_eoa9s7$([]);
-              this.groupingColumns_risqgb$ = Kotlin.modules['stdlib'].kotlin.arrayListOf_9mqe4v$([]);
+              this.filters_b1gfbg$ = Kotlin.modules['stdlib'].kotlin.collections.hashMapOf_eoa9s7$([]);
+              this.fullDataList_2ybsuy$ = Kotlin.modules['stdlib'].kotlin.collections.arrayListOf_9mqe4v$([]);
+              this.filteredDataList_x74uz6$ = Kotlin.modules['stdlib'].kotlin.collections.arrayListOf_9mqe4v$([]);
+              this.group_522ceo$ = new _.net.yested.bootstrap.smartgrid.Group('root', void 0, Kotlin.modules['stdlib'].kotlin.collections.arrayListOf_9mqe4v$([]), true);
+              this.visibleDataList_rh7ofp$ = Kotlin.modules['stdlib'].kotlin.collections.arrayListOf_9mqe4v$([]);
+              this.dataListAsKeyMap_deynhi$ = Kotlin.modules['stdlib'].kotlin.collections.hashMapOf_eoa9s7$([]);
+              this.groupingColumns_risqgb$ = Kotlin.modules['stdlib'].kotlin.collections.arrayListOf_9mqe4v$([]);
               var destination = new Kotlin.ArrayList(columns.length);
               var tmp$5, tmp$4, tmp$3;
               tmp$5 = columns, tmp$4 = tmp$5.length;
@@ -6188,11 +6185,11 @@
                   return this.fullDataList_2ybsuy$;
                 },
                 set: function (value) {
-                  this.fullDataList_2ybsuy$ = value != null ? value : Kotlin.modules['stdlib'].kotlin.arrayListOf_9mqe4v$([]);
+                  this.fullDataList_2ybsuy$ = value != null ? value : Kotlin.modules['stdlib'].kotlin.collections.arrayListOf_9mqe4v$([]);
                   var $receiver = this.fullDataList_2ybsuy$;
                   var selector = _.net.yested.bootstrap.smartgrid.SmartGrid.list$f(this);
                   var tmp$0;
-                  var capacity = Kotlin.modules['stdlib'].kotlin.collectionSizeOrDefault_pjxt3m$($receiver, 10) / 0.75 + 1;
+                  var capacity = Kotlin.modules['stdlib'].kotlin.collections.collectionSizeOrDefault_pjxt3m$($receiver, 10) / 0.75 + 1;
                   var result = new Kotlin.LinkedHashMap(Math.max(capacity | 0, 16));
                   tmp$0 = $receiver.iterator();
                   while (tmp$0.hasNext()) {
@@ -6263,7 +6260,7 @@
               getVisibleColumns: function () {
                 var $receiver = this.visibleColumns_rm3k9m$;
                 var transform = _.net.yested.bootstrap.smartgrid.SmartGrid.getVisibleColumns$f(this);
-                var destination = new Kotlin.ArrayList(Kotlin.modules['stdlib'].kotlin.collectionSizeOrDefault_pjxt3m$($receiver, 10));
+                var destination = new Kotlin.ArrayList(Kotlin.modules['stdlib'].kotlin.collections.collectionSizeOrDefault_pjxt3m$($receiver, 10));
                 var tmp$0;
                 tmp$0 = $receiver.iterator();
                 while (tmp$0.hasNext()) {
@@ -6298,7 +6295,7 @@
               },
               groupByColumn: function (column) {
                 if (this.groupingColumns_risqgb$.size === 0) {
-                  var newList = Kotlin.modules['stdlib'].kotlin.toArrayList_4m3c68$(this.visibleColumns_rm3k9m$);
+                  var newList = Kotlin.modules['stdlib'].kotlin.collections.toArrayList_4m3c68$(this.visibleColumns_rm3k9m$);
                   newList.add_vux3hl$(0, 'root');
                   this.visibleColumns_rm3k9m$ = newList;
                 }
@@ -6326,9 +6323,9 @@
                 this.displayNewData();
               },
               cancelAggregation: function () {
-                var newVisibleColumnsList = Kotlin.modules['stdlib'].kotlin.toArrayList_4m3c68$(this.visibleColumns_rm3k9m$);
+                var newVisibleColumnsList = Kotlin.modules['stdlib'].kotlin.collections.toArrayList_4m3c68$(this.visibleColumns_rm3k9m$);
                 newVisibleColumnsList.removeAt_za3lpa$(0);
-                var $receiver = Kotlin.modules['stdlib'].kotlin.reversed_ir3nkc$(this.groupingColumns_risqgb$);
+                var $receiver = Kotlin.modules['stdlib'].kotlin.collections.reversed_ir3nkc$(this.groupingColumns_risqgb$);
                 var tmp$0;
                 tmp$0 = $receiver.iterator();
                 while (tmp$0.hasNext()) {
@@ -6360,7 +6357,7 @@
                 var tmp$0;
                 var $receiver = this.getVisibleColumns();
                 var transform = _.net.yested.bootstrap.smartgrid.SmartGrid.renderHeaderInto$f(this);
-                var destination = new Kotlin.ArrayList(Kotlin.modules['stdlib'].kotlin.collectionSizeOrDefault_pjxt3m$($receiver, 10));
+                var destination = new Kotlin.ArrayList(Kotlin.modules['stdlib'].kotlin.collections.collectionSizeOrDefault_pjxt3m$($receiver, 10));
                 var tmp$1;
                 tmp$1 = $receiver.iterator();
                 while (tmp$1.hasNext()) {
@@ -6371,7 +6368,7 @@
                 _.net.yested.removeAllContent_y4uc6y$(headerDiv);
                 var $receiver_0 = (tmp$0 = this.columnHeaders_k62yht$) != null ? tmp$0 : Kotlin.throwNPE();
                 var transform_0 = _.net.yested.bootstrap.smartgrid.SmartGrid.renderHeaderInto$f_0(this);
-                var destination_0 = new Kotlin.ArrayList(Kotlin.modules['stdlib'].kotlin.collectionSizeOrDefault_pjxt3m$($receiver_0, 10));
+                var destination_0 = new Kotlin.ArrayList(Kotlin.modules['stdlib'].kotlin.collections.collectionSizeOrDefault_pjxt3m$($receiver_0, 10));
                 var tmp$2;
                 tmp$2 = $receiver_0.iterator();
                 while (tmp$2.hasNext()) {
@@ -6464,7 +6461,7 @@
                 var tmp$0, tmp$1, tmp$2;
                 if (group.items != null) {
                   var comparison = _.net.yested.bootstrap.smartgrid.SmartGrid.sortItemsInGroup$f(this);
-                  group.items = Kotlin.modules['stdlib'].kotlin.toArrayList_4m3c68$(Kotlin.modules['stdlib'].kotlin.sortedWith_r48qxn$((tmp$0 = group.items) != null ? tmp$0 : Kotlin.throwNPE(), Kotlin.createObject(function () {
+                  group.items = Kotlin.modules['stdlib'].kotlin.collections.toArrayList_4m3c68$(Kotlin.modules['stdlib'].kotlin.collections.sortedWith_r48qxn$((tmp$0 = group.items) != null ? tmp$0 : Kotlin.throwNPE(), Kotlin.createObject(function () {
                     return [Kotlin.Comparator];
                   }, null, {compare: function (a, b) {
                     return comparison(a, b);
@@ -6472,7 +6469,7 @@
                 }
                  else {
                   var $receiver = (tmp$1 = group.subgroups) != null ? tmp$1 : Kotlin.throwNPE();
-                  group.subgroups = Kotlin.modules['stdlib'].kotlin.sortedWith_r48qxn$($receiver, Kotlin.createObject(function () {
+                  group.subgroups = Kotlin.modules['stdlib'].kotlin.collections.sortedWith_r48qxn$($receiver, Kotlin.createObject(function () {
                     return [Kotlin.Comparator];
                   }, null, {compare: function (a, b) {
                     return Kotlin.modules['stdlib'].kotlin.compareValues_cj5vqg$(a.groupName, b.groupName);
@@ -6503,7 +6500,7 @@
                       destination.add_za3rmp$(element);
                     }
                   }
-                  this.filteredDataList_x74uz6$ = Kotlin.modules['stdlib'].kotlin.toArrayList_4m3c68$(destination);
+                  this.filteredDataList_x74uz6$ = Kotlin.modules['stdlib'].kotlin.collections.toArrayList_4m3c68$(destination);
                 }
               },
               regroupData: function () {
@@ -6545,14 +6542,14 @@
               readCurrentColumnLayout: function () {
                 var $receiver = new Kotlin.NumberRange(0, this.header_ezfkrg$.childNodes.length - 1);
                 var transform = _.net.yested.bootstrap.smartgrid.SmartGrid.readCurrentColumnLayout$f(this);
-                var destination = new Kotlin.ArrayList(Kotlin.modules['stdlib'].kotlin.collectionSizeOrDefault_pjxt3m$($receiver, 10));
+                var destination = new Kotlin.ArrayList(Kotlin.modules['stdlib'].kotlin.collections.collectionSizeOrDefault_pjxt3m$($receiver, 10));
                 var tmp$0;
                 tmp$0 = $receiver.iterator();
                 while (tmp$0.hasNext()) {
                   var item = tmp$0.next();
                   destination.add_za3rmp$(transform(item));
                 }
-                return Kotlin.modules['stdlib'].kotlin.toList_ir3nkc$(destination);
+                return Kotlin.modules['stdlib'].kotlin.collections.toList_ir3nkc$(destination);
               },
               makeHeaderSortable: function (headerDiv) {
                 $(headerDiv).disableSelection();
@@ -6738,7 +6735,7 @@
                       }
                     }
                     var transform = _.net.yested.bootstrap.smartgrid.SmartGrid.updateItem_9w143m$f_0(this);
-                    var destination_0 = new Kotlin.ArrayList(Kotlin.modules['stdlib'].kotlin.collectionSizeOrDefault_pjxt3m$(destination, 10));
+                    var destination_0 = new Kotlin.ArrayList(Kotlin.modules['stdlib'].kotlin.collections.collectionSizeOrDefault_pjxt3m$(destination, 10));
                     var tmp$1;
                     tmp$1 = destination.iterator();
                     while (tmp$1.hasNext()) {
@@ -6972,7 +6969,7 @@
               SmartGrid$f_4: function (this$SmartGrid) {
                 return function (it) {
                   var tmp$0;
-                  (tmp$0 = this$SmartGrid.columnHeaders_k62yht$) != null ? Kotlin.modules['stdlib'].kotlin.forEach_p7e0bo$(tmp$0, _.net.yested.bootstrap.smartgrid.SmartGrid.f_18) : null;
+                  (tmp$0 = this$SmartGrid.columnHeaders_k62yht$) != null ? Kotlin.modules['stdlib'].kotlin.collections.forEach_p7e0bo$(tmp$0, _.net.yested.bootstrap.smartgrid.SmartGrid.f_18) : null;
                 };
               },
               f_19: function (it) {
@@ -6981,7 +6978,7 @@
               SmartGrid$f_5: function (this$SmartGrid) {
                 return function (it) {
                   var tmp$0;
-                  (tmp$0 = this$SmartGrid.columnHeaders_k62yht$) != null ? Kotlin.modules['stdlib'].kotlin.forEach_p7e0bo$(tmp$0, _.net.yested.bootstrap.smartgrid.SmartGrid.f_19) : null;
+                  (tmp$0 = this$SmartGrid.columnHeaders_k62yht$) != null ? Kotlin.modules['stdlib'].kotlin.collections.forEach_p7e0bo$(tmp$0, _.net.yested.bootstrap.smartgrid.SmartGrid.f_19) : null;
                 };
               },
               f_20: function (it) {
@@ -6990,7 +6987,7 @@
               SmartGrid$f_6: function (this$SmartGrid) {
                 return function (it) {
                   var tmp$0;
-                  (tmp$0 = this$SmartGrid.columnHeaders_k62yht$) != null ? Kotlin.modules['stdlib'].kotlin.forEach_p7e0bo$(tmp$0, _.net.yested.bootstrap.smartgrid.SmartGrid.f_20) : null;
+                  (tmp$0 = this$SmartGrid.columnHeaders_k62yht$) != null ? Kotlin.modules['stdlib'].kotlin.collections.forEach_p7e0bo$(tmp$0, _.net.yested.bootstrap.smartgrid.SmartGrid.f_20) : null;
                 };
               },
               list$f: function (this$SmartGrid) {
@@ -7011,7 +7008,7 @@
               },
               showDialogCustom$f_1: function (this$SmartGrid) {
                 return function (newVisibleColumns) {
-                  var newList = Kotlin.modules['stdlib'].kotlin.toArrayList_4m3c68$(newVisibleColumns);
+                  var newList = Kotlin.modules['stdlib'].kotlin.collections.toArrayList_4m3c68$(newVisibleColumns);
                   if (this$SmartGrid.groupingColumns_risqgb$.size > 0) {
                     newList.add_vux3hl$(0, 'root');
                   }
@@ -7620,7 +7617,7 @@
                 gap = 0;
               this.height = height;
               this.gap = gap;
-              this.items_icw4gq$ = Kotlin.modules['stdlib'].kotlin.arrayListOf_9mqe4v$([]);
+              this.items_icw4gq$ = Kotlin.modules['stdlib'].kotlin.collections.arrayListOf_9mqe4v$([]);
               this.$element_hyfu8u$ = _.net.yested.with_ji1yox$(_.net.yested.createElement_61zpoe$('div'), _.net.yested.layout.containers.HorizontalContainer.element$f(width, this));
               _.net.yested.whenAddedToDom_is76nw$(this.element, _.net.yested.layout.containers.HorizontalContainer.HorizontalContainer$f(this));
             }, /** @lends _.net.yested.layout.containers.HorizontalContainer.prototype */ {
@@ -7661,14 +7658,14 @@
                     destination.add_za3rmp$(element);
                   }
                 }
-                var destination_0 = new Kotlin.ArrayList(Kotlin.modules['stdlib'].kotlin.collectionSizeOrDefault_pjxt3m$(destination, 10));
+                var destination_0 = new Kotlin.ArrayList(Kotlin.modules['stdlib'].kotlin.collections.collectionSizeOrDefault_pjxt3m$(destination, 10));
                 var tmp$1;
                 tmp$1 = destination.iterator();
                 while (tmp$1.hasNext()) {
                   var item = tmp$1.next();
                   destination_0.add_za3rmp$(item.dimension.value);
                 }
-                var totalFixed = Kotlin.modules['stdlib'].kotlin.sum_ivhwlr$(destination_0);
+                var totalFixed = Kotlin.modules['stdlib'].kotlin.collections.sum_ivhwlr$(destination_0);
                 var $receiver_0 = this.items_icw4gq$;
                 var destination_1 = new Kotlin.ArrayList();
                 var tmp$2;
@@ -7679,14 +7676,14 @@
                     destination_1.add_za3rmp$(element_0);
                   }
                 }
-                var destination_2 = new Kotlin.ArrayList(Kotlin.modules['stdlib'].kotlin.collectionSizeOrDefault_pjxt3m$(destination_1, 10));
+                var destination_2 = new Kotlin.ArrayList(Kotlin.modules['stdlib'].kotlin.collections.collectionSizeOrDefault_pjxt3m$(destination_1, 10));
                 var tmp$3;
                 tmp$3 = destination_1.iterator();
                 while (tmp$3.hasNext()) {
                   var item_0 = tmp$3.next();
                   destination_2.add_za3rmp$(item_0.dimension.value);
                 }
-                var totalPercents = Kotlin.modules['stdlib'].kotlin.sum_z1slkf$(destination_2);
+                var totalPercents = Kotlin.modules['stdlib'].kotlin.collections.sum_z1slkf$(destination_2);
                 var dimensionAvailableToPct = Kotlin.numberToInt(totalDimension) - totalFixed - gaps;
                 var position = {v: 0};
                 var $receiver_1 = this.items_icw4gq$;
@@ -7700,14 +7697,14 @@
               },
               recalculateHeight: function () {
                 var $receiver = this.items_icw4gq$;
-                var destination = new Kotlin.ArrayList(Kotlin.modules['stdlib'].kotlin.collectionSizeOrDefault_pjxt3m$($receiver, 10));
+                var destination = new Kotlin.ArrayList(Kotlin.modules['stdlib'].kotlin.collections.collectionSizeOrDefault_pjxt3m$($receiver, 10));
                 var tmp$0;
                 tmp$0 = $receiver.iterator();
                 while (tmp$0.hasNext()) {
                   var item = tmp$0.next();
                   destination.add_za3rmp$(Kotlin.numberToInt($(item.div.element).height()));
                 }
-                var maxHeightOfChildren = Kotlin.modules['stdlib'].kotlin.max_77rvyy$(destination);
+                var maxHeightOfChildren = Kotlin.modules['stdlib'].kotlin.collections.max_77rvyy$(destination);
                 $(this.element).css('height', Kotlin.toString(maxHeightOfChildren));
               }
             }, /** @lends _.net.yested.layout.containers.HorizontalContainer */ {
@@ -7785,7 +7782,7 @@
                 gap = 0;
               this.width = width;
               this.gap = gap;
-              this.items_xm3k30$ = Kotlin.modules['stdlib'].kotlin.arrayListOf_9mqe4v$([]);
+              this.items_xm3k30$ = Kotlin.modules['stdlib'].kotlin.collections.arrayListOf_9mqe4v$([]);
               this.$element_oofky8$ = _.net.yested.with_ji1yox$(_.net.yested.createElement_61zpoe$('div'), _.net.yested.layout.containers.VerticalContainer.element$f(this, height));
               _.net.yested.whenAddedToDom_is76nw$(this.element, _.net.yested.layout.containers.VerticalContainer.VerticalContainer$f(this));
             }, /** @lends _.net.yested.layout.containers.VerticalContainer.prototype */ {
@@ -7826,14 +7823,14 @@
                     destination.add_za3rmp$(element);
                   }
                 }
-                var destination_0 = new Kotlin.ArrayList(Kotlin.modules['stdlib'].kotlin.collectionSizeOrDefault_pjxt3m$(destination, 10));
+                var destination_0 = new Kotlin.ArrayList(Kotlin.modules['stdlib'].kotlin.collections.collectionSizeOrDefault_pjxt3m$(destination, 10));
                 var tmp$1;
                 tmp$1 = destination.iterator();
                 while (tmp$1.hasNext()) {
                   var item = tmp$1.next();
                   destination_0.add_za3rmp$(item.dimension.value);
                 }
-                var totalFixed = Kotlin.modules['stdlib'].kotlin.sum_ivhwlr$(destination_0);
+                var totalFixed = Kotlin.modules['stdlib'].kotlin.collections.sum_ivhwlr$(destination_0);
                 var $receiver_0 = this.items_xm3k30$;
                 var destination_1 = new Kotlin.ArrayList();
                 var tmp$2;
@@ -7844,14 +7841,14 @@
                     destination_1.add_za3rmp$(element_0);
                   }
                 }
-                var destination_2 = new Kotlin.ArrayList(Kotlin.modules['stdlib'].kotlin.collectionSizeOrDefault_pjxt3m$(destination_1, 10));
+                var destination_2 = new Kotlin.ArrayList(Kotlin.modules['stdlib'].kotlin.collections.collectionSizeOrDefault_pjxt3m$(destination_1, 10));
                 var tmp$3;
                 tmp$3 = destination_1.iterator();
                 while (tmp$3.hasNext()) {
                   var item_0 = tmp$3.next();
                   destination_2.add_za3rmp$(item_0.dimension.value);
                 }
-                var totalPercents = Kotlin.modules['stdlib'].kotlin.sum_z1slkf$(destination_2);
+                var totalPercents = Kotlin.modules['stdlib'].kotlin.collections.sum_z1slkf$(destination_2);
                 var dimensionAvailableToPct = Kotlin.numberToInt(totalWidth) - totalFixed - gaps;
                 var position = {v: 0};
                 var $receiver_1 = this.items_xm3k30$;
@@ -7865,14 +7862,14 @@
               },
               recalculateWidth: function () {
                 var $receiver = this.items_xm3k30$;
-                var destination = new Kotlin.ArrayList(Kotlin.modules['stdlib'].kotlin.collectionSizeOrDefault_pjxt3m$($receiver, 10));
+                var destination = new Kotlin.ArrayList(Kotlin.modules['stdlib'].kotlin.collections.collectionSizeOrDefault_pjxt3m$($receiver, 10));
                 var tmp$0;
                 tmp$0 = $receiver.iterator();
                 while (tmp$0.hasNext()) {
                   var item = tmp$0.next();
                   destination.add_za3rmp$(Kotlin.numberToInt($(item.div.element).height()));
                 }
-                var maxHeightOfChildren = Kotlin.modules['stdlib'].kotlin.max_77rvyy$(destination);
+                var maxHeightOfChildren = Kotlin.modules['stdlib'].kotlin.collections.max_77rvyy$(destination);
                 $(this.element).css('width', Kotlin.toString(maxHeightOfChildren));
               }
             }, /** @lends _.net.yested.layout.containers.VerticalContainer */ {
@@ -8119,7 +8116,7 @@
         }),
         utils: Kotlin.definePackage(function () {
           this.timerId_y7m4mm$ = -1;
-          this.resizeHandlers_2v1zqj$ = Kotlin.modules['stdlib'].kotlin.arrayListOf_9mqe4v$([]);
+          this.resizeHandlers_2v1zqj$ = Kotlin.modules['stdlib'].kotlin.collections.arrayListOf_9mqe4v$([]);
         }, /** @lends _.net.yested.utils */ {
           isIncludedInDOM_b3w3xb$: function (node) {
             return node.offsetParent != null;
@@ -8243,15 +8240,15 @@
             this.str = str;
           }, /** @lends _.net.yested.utils.FormatElement.prototype */ {
             plus_9xull5$: function (b) {
-              return new _.net.yested.utils.FormatString(Kotlin.modules['stdlib'].kotlin.arrayListOf_9mqe4v$([this, b]));
+              return new _.net.yested.utils.FormatString(Kotlin.modules['stdlib'].kotlin.collections.arrayListOf_9mqe4v$([this, b]));
             },
             plus_61zpoe$: function (b) {
-              return new _.net.yested.utils.FormatString(Kotlin.modules['stdlib'].kotlin.arrayListOf_9mqe4v$([this, new _.net.yested.utils.FormatElement(b)]));
+              return new _.net.yested.utils.FormatString(Kotlin.modules['stdlib'].kotlin.collections.arrayListOf_9mqe4v$([this, new _.net.yested.utils.FormatElement(b)]));
             }
           }),
           FormatString: Kotlin.createClass(null, function (elements) {
             if (elements === void 0)
-              elements = Kotlin.modules['stdlib'].kotlin.arrayListOf_9mqe4v$([]);
+              elements = Kotlin.modules['stdlib'].kotlin.collections.arrayListOf_9mqe4v$([]);
             this.elements_ovv2pb$ = elements;
           }, /** @lends _.net.yested.utils.FormatString.prototype */ {
             plus_9xull5$: function (b) {
@@ -8264,14 +8261,14 @@
             },
             toString: function () {
               var $receiver = this.elements_ovv2pb$;
-              var destination = new Kotlin.ArrayList(Kotlin.modules['stdlib'].kotlin.collectionSizeOrDefault_pjxt3m$($receiver, 10));
+              var destination = new Kotlin.ArrayList(Kotlin.modules['stdlib'].kotlin.collections.collectionSizeOrDefault_pjxt3m$($receiver, 10));
               var tmp$0;
               tmp$0 = $receiver.iterator();
               while (tmp$0.hasNext()) {
                 var item = tmp$0.next();
                 destination.add_za3rmp$(item.str);
               }
-              return Kotlin.modules['stdlib'].kotlin.joinToString_sdec0h$(destination, '');
+              return Kotlin.modules['stdlib'].kotlin.collections.joinToString_sdec0h$(destination, '');
             }
           }, /** @lends _.net.yested.utils.FormatString */ {
           }),
@@ -9039,7 +9036,7 @@
       },
       createDownloadSection$f_0: function (placeholder) {
         return function (it) {
-          placeholder.setChild_5f0h2k$(_.basics.generateDownloadSection_61zpoe$(Kotlin.modules['stdlib'].kotlin.trim_pdl1w0$(it)));
+          placeholder.setChild_5f0h2k$(_.basics.generateDownloadSection_61zpoe$(Kotlin.modules['stdlib'].kotlin.text.trim_pdl1w0$(it)));
         };
       },
       createDownloadSection: function () {
@@ -10251,7 +10248,7 @@
       },
       f_159: function (inputField, selectLook, addPanel) {
         return function (it) {
-          addPanel(inputField.data, Kotlin.modules['stdlib'].kotlin.first_fvq2g0$(selectLook.selectedItems));
+          addPanel(inputField.data, Kotlin.modules['stdlib'].kotlin.collections.first_fvq2g0$(selectLook.selectedItems));
         };
       },
       f_160: function (inputField, selectLook, addPanel) {
@@ -10297,7 +10294,7 @@
         addPanel('200px', _.net.yested.bootstrap.PanelStyle.object.DEFAULT);
         addPanel('300px', _.net.yested.bootstrap.PanelStyle.object.SUCCESS);
         addPanel('400px', _.net.yested.bootstrap.PanelStyle.object.INFO);
-        var looks = Kotlin.modules['stdlib'].kotlin.arrayListOf_9mqe4v$([_.net.yested.bootstrap.PanelStyle.object.DEFAULT, _.net.yested.bootstrap.PanelStyle.object.PRIMARY, _.net.yested.bootstrap.PanelStyle.object.SUCCESS, _.net.yested.bootstrap.PanelStyle.object.INFO, _.net.yested.bootstrap.PanelStyle.object.WARNING, _.net.yested.bootstrap.PanelStyle.object.DANGER]);
+        var looks = Kotlin.modules['stdlib'].kotlin.collections.arrayListOf_9mqe4v$([_.net.yested.bootstrap.PanelStyle.object.DEFAULT, _.net.yested.bootstrap.PanelStyle.object.PRIMARY, _.net.yested.bootstrap.PanelStyle.object.SUCCESS, _.net.yested.bootstrap.PanelStyle.object.INFO, _.net.yested.bootstrap.PanelStyle.object.WARNING, _.net.yested.bootstrap.PanelStyle.object.DANGER]);
         var inputField = _.net.yested.with_ji1yox$(new _.net.yested.bootstrap.StringInputField(void 0, 'Size in Px'), _.bootstrap.createFloatingPanelContainerSection_61zpoe$f);
         var selectLook = new _.net.yested.bootstrap.Select(looks, void 0, void 0, void 0, void 0, _.bootstrap.createFloatingPanelContainerSection_61zpoe$f_0);
         return _.net.yested.div_kb10gb$(id, void 0, _.bootstrap.createFloatingPanelContainerSection_61zpoe$f_1(inputField, selectLook, addPanel, panelContainer));
@@ -10473,7 +10470,7 @@
         };
       },
       createGrid_61zpoe$: function (id) {
-        var data = Kotlin.modules['stdlib'].kotlin.listOf_9mqe4v$([new _.bootstrap.Person('Jan', 15, _.net.yested.Colors.object.GREEN.color), new _.bootstrap.Person('Peter', 30, _.net.yested.Colors.object.RED.color), new _.bootstrap.Person('Martin', 31, _.net.yested.Colors.object.BLUE.color)]);
+        var data = Kotlin.modules['stdlib'].kotlin.collections.listOf_9mqe4v$([new _.bootstrap.Person('Jan', 15, _.net.yested.Colors.object.GREEN.color), new _.bootstrap.Person('Peter', 30, _.net.yested.Colors.object.RED.color), new _.bootstrap.Person('Martin', 31, _.net.yested.Colors.object.BLUE.color)]);
         var grid = new _.net.yested.bootstrap.Grid(void 0, [new _.net.yested.bootstrap.Column(_.bootstrap.createGrid_61zpoe$f, _.bootstrap.createGrid_61zpoe$f_0, _.bootstrap.createGrid_61zpoe$f_1), new _.net.yested.bootstrap.Column(_.net.yested.text_61zpoe$('Age'), _.bootstrap.createGrid_61zpoe$f_2, _.net.yested.compareByValue_lw40be$(_.bootstrap.createGrid_61zpoe$f_3), void 0, true, true), new _.net.yested.bootstrap.Column(_.net.yested.text_61zpoe$('Hair'), _.bootstrap.createGrid_61zpoe$f_4)]);
         grid.list = data;
         return _.net.yested.div_kb10gb$(void 0, void 0, _.bootstrap.createGrid_61zpoe$f_5(id, grid));
@@ -10629,14 +10626,14 @@
       },
       createListGroupSection_61zpoe$f_0: function (selectedItems, listGroup) {
         return function () {
-          var destination = new Kotlin.ArrayList(Kotlin.modules['stdlib'].kotlin.collectionSizeOrDefault_pjxt3m$(listGroup.data, 10));
+          var destination = new Kotlin.ArrayList(Kotlin.modules['stdlib'].kotlin.collections.collectionSizeOrDefault_pjxt3m$(listGroup.data, 10));
           var tmp$0;
           tmp$0 = listGroup.data.iterator();
           while (tmp$0.hasNext()) {
             var item = tmp$0.next();
             destination.add_za3rmp$(item.name);
           }
-          selectedItems.setContent_61zpoe$(Kotlin.modules['stdlib'].kotlin.joinToString_sdec0h$(destination, ','));
+          selectedItems.setContent_61zpoe$(Kotlin.modules['stdlib'].kotlin.collections.joinToString_sdec0h$(destination, ','));
         };
       },
       f_215: function () {
@@ -10709,7 +10706,7 @@
       f_234: function (listGroup) {
         return function (it) {
           if (listGroup.dataProvider.size > 0) {
-            listGroup.removeItem_za3rmp$(Kotlin.modules['stdlib'].kotlin.first_ir3nkc$(listGroup.dataProvider));
+            listGroup.removeItem_za3rmp$(Kotlin.modules['stdlib'].kotlin.collections.first_ir3nkc$(listGroup.dataProvider));
           }
         };
       },
@@ -10752,7 +10749,7 @@
       },
       createListGroupSection_61zpoe$: function (id) {
         var selectedItems = new _.net.yested.Span();
-        var data = Kotlin.modules['stdlib'].kotlin.arrayListOf_9mqe4v$([new _.bootstrap.MailFolder('Inbox', 15), new _.bootstrap.MailFolder('Sent', 3), new _.bootstrap.MailFolder('Work', 154)]);
+        var data = Kotlin.modules['stdlib'].kotlin.collections.arrayListOf_9mqe4v$([new _.bootstrap.MailFolder('Inbox', 15), new _.bootstrap.MailFolder('Sent', 3), new _.bootstrap.MailFolder('Work', 154)]);
         var listGroup = new _.net.yested.bootstrap.ListGroup(_.net.yested.bootstrap.SelectionMode.object.MULTI, true, _.bootstrap.createListGroupSection_61zpoe$f);
         listGroup.dataProvider = data;
         listGroup.addOnChangeListener_qshda6$(_.bootstrap.createListGroupSection_61zpoe$f_0(selectedItems, listGroup));
@@ -11292,7 +11289,7 @@
       },
       f_366: function (selectSize, selectLook, addPanel) {
         return function (it) {
-          addPanel(Kotlin.modules['stdlib'].kotlin.first_fvq2g0$(selectSize.selectedItems), Kotlin.modules['stdlib'].kotlin.first_fvq2g0$(selectLook.selectedItems));
+          addPanel(Kotlin.modules['stdlib'].kotlin.collections.first_fvq2g0$(selectSize.selectedItems), Kotlin.modules['stdlib'].kotlin.collections.first_fvq2g0$(selectLook.selectedItems));
         };
       },
       f_367: function (selectSize, selectLook, addPanel) {
@@ -11338,9 +11335,9 @@
         addPanel(new _.net.yested.bootstrap.Medium(4), _.net.yested.bootstrap.PanelStyle.object.DEFAULT);
         addPanel(new _.net.yested.bootstrap.Medium(6), _.net.yested.bootstrap.PanelStyle.object.SUCCESS);
         addPanel(new _.net.yested.bootstrap.Medium(4), _.net.yested.bootstrap.PanelStyle.object.INFO);
-        var sizes = Kotlin.modules['stdlib'].kotlin.arrayListOf_9mqe4v$([new _.net.yested.bootstrap.Medium(4), new _.net.yested.bootstrap.Medium(6), new _.net.yested.bootstrap.Medium(8)]);
+        var sizes = Kotlin.modules['stdlib'].kotlin.collections.arrayListOf_9mqe4v$([new _.net.yested.bootstrap.Medium(4), new _.net.yested.bootstrap.Medium(6), new _.net.yested.bootstrap.Medium(8)]);
         var selectSize = new _.net.yested.bootstrap.Select(sizes, void 0, void 0, void 0, void 0, _.bootstrap.createRowPanelContainerSection_61zpoe$f);
-        var looks = Kotlin.modules['stdlib'].kotlin.arrayListOf_9mqe4v$([_.net.yested.bootstrap.PanelStyle.object.DEFAULT, _.net.yested.bootstrap.PanelStyle.object.PRIMARY, _.net.yested.bootstrap.PanelStyle.object.SUCCESS, _.net.yested.bootstrap.PanelStyle.object.INFO, _.net.yested.bootstrap.PanelStyle.object.WARNING, _.net.yested.bootstrap.PanelStyle.object.DANGER]);
+        var looks = Kotlin.modules['stdlib'].kotlin.collections.arrayListOf_9mqe4v$([_.net.yested.bootstrap.PanelStyle.object.DEFAULT, _.net.yested.bootstrap.PanelStyle.object.PRIMARY, _.net.yested.bootstrap.PanelStyle.object.SUCCESS, _.net.yested.bootstrap.PanelStyle.object.INFO, _.net.yested.bootstrap.PanelStyle.object.WARNING, _.net.yested.bootstrap.PanelStyle.object.DANGER]);
         var selectLook = new _.net.yested.bootstrap.Select(looks, void 0, void 0, void 0, void 0, _.bootstrap.createRowPanelContainerSection_61zpoe$f_0);
         return _.net.yested.div_kb10gb$(id, void 0, _.bootstrap.createRowPanelContainerSection_61zpoe$f_1(selectSize, selectLook, addPanel, panelContainer));
       },
@@ -11375,7 +11372,7 @@
       },
       createSelectSection_61zpoe$f_0: function (resultSingleSelect, singleSelect) {
         return function () {
-          resultSingleSelect.setContent_61zpoe$('Selected: ' + Kotlin.modules['stdlib'].kotlin.first_fvq2g0$(singleSelect.selectedItems).model);
+          resultSingleSelect.setContent_61zpoe$('Selected: ' + Kotlin.modules['stdlib'].kotlin.collections.first_fvq2g0$(singleSelect.selectedItems).model);
         };
       },
       createSelectSection_61zpoe$f_1: function (it) {
@@ -11383,14 +11380,14 @@
       },
       createSelectSection_61zpoe$f_2: function (resultMultiSelect, multiSelect) {
         return function () {
-          var destination = new Kotlin.ArrayList(Kotlin.modules['stdlib'].kotlin.collectionSizeOrDefault_pjxt3m$(multiSelect.selectedItems, 10));
+          var destination = new Kotlin.ArrayList(Kotlin.modules['stdlib'].kotlin.collections.collectionSizeOrDefault_pjxt3m$(multiSelect.selectedItems, 10));
           var tmp$0;
           tmp$0 = multiSelect.selectedItems.iterator();
           while (tmp$0.hasNext()) {
             var item = tmp$0.next();
             destination.add_za3rmp$(item.model);
           }
-          resultMultiSelect.setContent_61zpoe$('Selected: ' + Kotlin.modules['stdlib'].kotlin.joinToString_sdec0h$(destination, ' and '));
+          resultMultiSelect.setContent_61zpoe$('Selected: ' + Kotlin.modules['stdlib'].kotlin.collections.joinToString_sdec0h$(destination, ' and '));
         };
       },
       createSelectSection_61zpoe$f_3: function () {
@@ -11464,7 +11461,7 @@
         };
       },
       createSelectSection_61zpoe$: function (id) {
-        var someData = Kotlin.modules['stdlib'].kotlin.listOf_9mqe4v$([new _.bootstrap.Car('Ford', 'Black'), new _.bootstrap.Car('Skoda', 'White'), new _.bootstrap.Car('Renault', 'Red'), new _.bootstrap.Car('Citroen', 'Purple')]);
+        var someData = Kotlin.modules['stdlib'].kotlin.collections.listOf_9mqe4v$([new _.bootstrap.Car('Ford', 'Black'), new _.bootstrap.Car('Skoda', 'White'), new _.bootstrap.Car('Renault', 'Red'), new _.bootstrap.Car('Citroen', 'Purple')]);
         var resultSingleSelect = new _.net.yested.Div();
         var singleSelect = new _.net.yested.bootstrap.Select(someData, void 0, void 0, void 0, void 0, _.bootstrap.createSelectSection_61zpoe$f);
         singleSelect.addOnChangeListener_qshda6$(_.bootstrap.createSelectSection_61zpoe$f_0(resultSingleSelect, singleSelect));
@@ -11766,7 +11763,7 @@
       TagsSection: Kotlin.createClass(function () {
         return [_.net.yested.Component];
       }, function (id) {
-        this.someData = Kotlin.modules['stdlib'].kotlin.listOf_9mqe4v$([new _.bootstrap.People('Bal\xE1zs', 25), new _.bootstrap.People('Jan', 35), new _.bootstrap.People('Eliza', 31)]);
+        this.someData = Kotlin.modules['stdlib'].kotlin.collections.listOf_9mqe4v$([new _.bootstrap.People('Bal\xE1zs', 25), new _.bootstrap.People('Jan', 35), new _.bootstrap.People('Eliza', 31)]);
         this.eventDiv = new _.net.yested.Div();
         this.tagsField = new _.net.yested.bootstrap.TagsInputField(_.bootstrap.TagsSection.tagsField$f, _.bootstrap.TagsSection.tagsField$f_0, _.bootstrap.TagsSection.tagsField$f_1);
         this.randomPeople = [new _.bootstrap.People('Luke Skywalker', 22), new _.bootstrap.People('Leia Organa', 22), new _.bootstrap.People('Yoda', 900), new _.bootstrap.People('Obi-Wan Kenobi', 57), new _.bootstrap.People('Darth Vader', 46)];
@@ -12194,16 +12191,16 @@
         this.cancelHandler = cancelHandler;
         this.textInput = new _.net.yested.bootstrap.StringInputField(void 0, 'City name');
         this.validator = new _.net.yested.bootstrap.Validator(this.textInput, 'Name is mandatory', _.complex.DetailScreen.validator$f);
-        this.continents = Kotlin.modules['stdlib'].kotlin.arrayListOf_9mqe4v$([_.complex.Continent.object.EUROPE, _.complex.Continent.object.AFRICA, _.complex.Continent.object.AMERICA, _.complex.Continent.object.ASIA]);
+        this.continents = Kotlin.modules['stdlib'].kotlin.collections.arrayListOf_9mqe4v$([_.complex.Continent.object.EUROPE, _.complex.Continent.object.AFRICA, _.complex.Continent.object.AMERICA, _.complex.Continent.object.ASIA]);
         this.select = new _.net.yested.bootstrap.Select(this.continents, void 0, void 0, void 0, void 0, _.complex.DetailScreen.select$f);
         if (this.editedCity != null) {
           this.textInput.data = this.editedCity.name;
-          this.select.selectedItems = Kotlin.modules['stdlib'].kotlin.listOf_za3rmp$(this.editedCity.continent);
+          this.select.selectedItems = Kotlin.modules['stdlib'].kotlin.collections.listOf_za3rmp$(this.editedCity.continent);
         }
       }, /** @lends _.complex.DetailScreen.prototype */ {
         save: function () {
           if (this.validator.isValid()) {
-            this.saveHandler(new _.complex.City(this.textInput.data, Kotlin.modules['stdlib'].kotlin.first_fvq2g0$(this.select.selectedItems)));
+            this.saveHandler(new _.complex.City(this.textInput.data, Kotlin.modules['stdlib'].kotlin.collections.first_fvq2g0$(this.select.selectedItems)));
           }
         },
         element: {
@@ -12363,7 +12360,7 @@
         return [_.net.yested.Component];
       }, function () {
         this.placeholder = new _.net.yested.Div();
-        this.list = Kotlin.modules['stdlib'].kotlin.arrayListOf_9mqe4v$([new _.complex.City('Prague', _.complex.Continent.object.EUROPE), new _.complex.City('London', _.complex.Continent.object.EUROPE), new _.complex.City('New York', _.complex.Continent.object.AMERICA)]);
+        this.list = Kotlin.modules['stdlib'].kotlin.collections.arrayListOf_9mqe4v$([new _.complex.City('Prague', _.complex.Continent.object.EUROPE), new _.complex.City('London', _.complex.Continent.object.EUROPE), new _.complex.City('New York', _.complex.Continent.object.AMERICA)]);
         this.displayMasterScreen();
       }, /** @lends _.complex.MasterDetailDemo.prototype */ {
         saveCity_jng91o$: function (originalCity, newCity) {
@@ -12654,8 +12651,8 @@
         }
       }),
       generateData: function () {
-        var $receiver = new Kotlin.NumberRange(1, 50000);
-        var destination = new Kotlin.ArrayList(Kotlin.modules['stdlib'].kotlin.collectionSizeOrDefault_pjxt3m$($receiver, 10));
+        var $receiver = new Kotlin.NumberRange(1, 500);
+        var destination = new Kotlin.ArrayList(Kotlin.modules['stdlib'].kotlin.collections.collectionSizeOrDefault_pjxt3m$($receiver, 10));
         var tmp$0;
         var index = 0;
         tmp$0 = $receiver.iterator();
@@ -12664,7 +12661,7 @@
           var index_0 = index++;
           destination.add_za3rmp$(new _.complex.MarketData('A' + item, _.complex.countries[index_0 % _.complex.countries.length], _.complex.currencies[index_0 % _.complex.currencies.length], Math.random() * 100, Math.random() * 10 - 5, Math.random() * 100, Math.random() * 100, Math.random() * 100, Math.random() * 1000, Math.random() * 100, Math.random() * 100, Math.random() * 100, Math.random() * 100, Math.random() * 100, Math.random() * 100, Math.random() * 100, Math.random() * 100, Math.random() * 100, Math.random() * 100, Math.random() * 100, Math.random() * 100, Math.random() * 100, Math.random() * 100, Math.random() * 100, Math.random() * 100, Math.random() * 100));
         }
-        return Kotlin.modules['stdlib'].kotlin.toArrayList_4m3c68$(destination);
+        return Kotlin.modules['stdlib'].kotlin.collections.toArrayList_4m3c68$(destination);
       },
       CustomizableGridSection: Kotlin.createClass(function () {
         return [_.net.yested.Component];
@@ -12682,7 +12679,7 @@
           }
         },
         updateItem_xvwgqy$: function (item, columnToUpdate) {
-          this.grid.updateItem_9w143m$(item, Kotlin.modules['stdlib'].kotlin.listOf_za3rmp$(columnToUpdate));
+          this.grid.updateItem_9w143m$(item, Kotlin.modules['stdlib'].kotlin.collections.listOf_za3rmp$(columnToUpdate));
         },
         updateRandomValues: function () {
           var $receiver = new Kotlin.NumberRange(0, Math.min(100, this.data.size / 5 | 0));
@@ -12723,7 +12720,7 @@
         },
         f: function (text) {
           return function (item) {
-            return Kotlin.modules['stdlib'].kotlin.contains_kzp0od$(item.ticker, text);
+            return Kotlin.modules['stdlib'].kotlin.text.contains_kzp0od$(item.ticker, text);
           };
         },
         grid$f_1: function (text) {
@@ -12740,7 +12737,7 @@
         },
         f_0: function (text) {
           return function (item) {
-            return Kotlin.modules['stdlib'].kotlin.contains_kzp0od$(item.country, text);
+            return Kotlin.modules['stdlib'].kotlin.text.contains_kzp0od$(item.country, text);
           };
         },
         grid$f_5: function (text) {
@@ -12757,7 +12754,7 @@
         },
         f_1: function (text) {
           return function (item) {
-            return Kotlin.modules['stdlib'].kotlin.contains_kzp0od$(item.ccy, text);
+            return Kotlin.modules['stdlib'].kotlin.text.contains_kzp0od$(item.ccy, text);
           };
         },
         grid$f_9: function (text) {
@@ -13065,7 +13062,7 @@
           return function (it) {
             var item = this$CustomizableGridSection.data.get_za3lpa$(Math.random() * this$CustomizableGridSection.data.size | 0);
             item.move = Math.random() * 10 - 5;
-            this$CustomizableGridSection.grid.updateItem_9w143m$(item, Kotlin.modules['stdlib'].kotlin.listOf_za3rmp$('move'));
+            this$CustomizableGridSection.grid.updateItem_9w143m$(item, Kotlin.modules['stdlib'].kotlin.collections.listOf_za3rmp$('move'));
           };
         },
         startTicking$f: function (this$CustomizableGridSection) {
