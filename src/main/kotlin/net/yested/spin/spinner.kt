@@ -33,7 +33,11 @@ data class SpinnerOptions(
         val className: String = "spinner", // The CSS class to assign to the spinner
         val zIndex: Double = 2e9, // The z-index (defaults to 2000000000)
         val top: String = "50%", // Top position relative to parent
-        val left: String = "50%" // Left position relative to parent
+        val left: String = "50%", // Left position relative to parent
+        val scale: Float = 1.0f, // Scales overall size of the spinner
+        val opacity: Float = 0.25f, // Opacity of the lines
+        val position: String = "absolute", // Element positioning
+        val fps: Int = 20 // Frames per second when using setTimeout() as a fallback for CSS
 )
 
 public class Spinner(val options:SpinnerOptions = SpinnerOptions()) : Component {
@@ -57,6 +61,10 @@ public class Spinner(val options:SpinnerOptions = SpinnerOptions()) : Component 
         val zIndex = options.zIndex
         val top = options.top
         val left = options.left
+        val scale = options.scale
+        val opacity = options.opacity
+        val position = options.position
+        val fps = options.fps
     }
 
     override val element: HTMLElement = jsSpinnerElement
