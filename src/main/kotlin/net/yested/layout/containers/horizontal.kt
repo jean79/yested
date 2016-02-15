@@ -26,7 +26,7 @@ class HorizontalContainer(width: Dimension, val height: Dimension? = null, val g
 
     private fun needToCalculateHeight() = height == null
 
-    public fun column(width: Dimension, height: Dimension? = null, init: HTMLComponent.() -> Unit) {
+     fun column(width: Dimension, height: Dimension? = null, init: HTMLComponent.() -> Unit) {
         val child = Div() with {
             style = "position: absolute; overflow-x: hidden; height: ${height?.toHtml()};"
             init()
@@ -76,6 +76,6 @@ class HorizontalContainer(width: Dimension, val height: Dimension? = null, val g
 
 }
 
-public fun HTMLComponent.horizontalContainer(width: Dimension, height: Dimension? = null, gap: Int = 0, init: HorizontalContainer.() -> Unit) {
+ fun HTMLComponent.horizontalContainer(width: Dimension, height: Dimension? = null, gap: Int = 0, init: HorizontalContainer.() -> Unit) {
     +(HorizontalContainer(width = width, height = height, gap = gap) with { init() })
 }

@@ -14,11 +14,11 @@ import jquery.jq
 private val DURATION = 200
 private val SLIDE_DURATION = DURATION * 2
 
-public interface Effect {
+ interface Effect {
     fun apply(component:Component, callback:Function0<Unit>? = null)
 }
 
-public interface BiDirectionEffect {
+ interface BiDirectionEffect {
     fun applyIn(component:Component, callback:Function0<Unit>? = null)
     fun applyOut(component:Component, callback:Function0<Unit>? = null)
 }
@@ -27,43 +27,43 @@ private fun call(function:Function0<Unit>?) {
     function?.let { function() }
 }
 
-public class Show() : Effect {
+ class Show() : Effect {
     override fun apply(component: Component, callback: (() -> Unit)?) {
         jq(component.element).show { call(callback) }
     }
 }
 
-public class Hide() : Effect {
+ class Hide() : Effect {
     override fun apply(component: Component, callback: (() -> Unit)?) {
         jq(component.element).hide { call(callback) }
     }
 }
 
-public class SlideUp() : Effect {
+ class SlideUp() : Effect {
     override fun apply(component: Component, callback:Function0<Unit>?) {
         jq(component.element).slideUp(SLIDE_DURATION) { call(callback) }
     }
 }
 
-public class SlideDown : Effect {
+ class SlideDown : Effect {
     override fun apply(component: Component, callback: (() -> Unit)?) {
         jq(component.element).slideDown(SLIDE_DURATION) { call(callback) }
     }
 }
 
-public class FadeOut : Effect {
+ class FadeOut : Effect {
     override fun apply(component: Component, callback: (() -> Unit)?) {
         jq(component.element).fadeOut(DURATION) { call(callback) }
     }
 }
 
-public class FadeIn : Effect {
+ class FadeIn : Effect {
     override fun apply(component: Component, callback: (() -> Unit)?) {
         jq(component.element).fadeIn(DURATION) { call(callback) }
     }
 }
 
-public class Fade : BiDirectionEffect {
+ class Fade : BiDirectionEffect {
     override fun applyIn(component: Component, callback: (() -> Unit)?) {
         FadeIn().apply(component, callback)
     }
@@ -73,7 +73,7 @@ public class Fade : BiDirectionEffect {
     }
 }
 
-public class Slide : BiDirectionEffect {
+ class Slide : BiDirectionEffect {
     override fun applyIn(component: Component, callback: (() -> Unit)?) {
         SlideDown().apply(component, callback)
     }

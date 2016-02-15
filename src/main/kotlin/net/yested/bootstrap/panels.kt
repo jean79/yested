@@ -8,7 +8,7 @@ import net.yested.createElement
 import net.yested.appendComponent
 import net.yested.Button
 
-public enum class PanelStyle(val code:String) {
+ enum class PanelStyle(val code:String) {
     DEFAULT("default"),
     PRIMARY("primary"),
     SUCCESS("success"),
@@ -17,9 +17,9 @@ public enum class PanelStyle(val code:String) {
     DANGER("danger")
 }
 
-public class Panel(style : PanelStyle = PanelStyle.DEFAULT, val dismissible: Boolean = false) : Component {
+ class Panel(style : PanelStyle = PanelStyle.DEFAULT, val dismissible: Boolean = false) : Component {
 
-    override public val element = createElement("div")
+    override  val element = createElement("div")
 
     private val heading = Div() with { clazz = "panel-heading" }
     private val body = Div() with { clazz = "panel-body" }
@@ -29,7 +29,7 @@ public class Panel(style : PanelStyle = PanelStyle.DEFAULT, val dismissible: Boo
      * Default dismiss removes this element from parent element,
      * but sometimes this behaviour must be overridden by a specific parent component.
      */
-    public var dismissibleHandler: Function1<Panel, Unit>? = null
+     var dismissibleHandler: Function1<Panel, Unit>? = null
 
     init {
         element.setAttribute("class", "panel panel-${style.code}")
@@ -59,24 +59,24 @@ public class Panel(style : PanelStyle = PanelStyle.DEFAULT, val dismissible: Boo
         }
     }
 
-    public fun heading(init: HTMLComponent.() -> Unit) {
+     fun heading(init: HTMLComponent.() -> Unit) {
         if (dismissible) {
             addDismissButton()
         }
         heading.init()
     }
 
-    public fun content(init: HTMLComponent.() -> Unit) {
+     fun content(init: HTMLComponent.() -> Unit) {
         body.init()
     }
 
-    public fun footer(init: HTMLComponent.() -> Unit) {
+     fun footer(init: HTMLComponent.() -> Unit) {
         footer.init()
         element.appendComponent(footer)
     }
 
 }
 
-public fun HTMLComponent.panel(style:PanelStyle = PanelStyle.DEFAULT, dismissible: Boolean = false, init:Panel.() -> Unit) {
+ fun HTMLComponent.panel(style:PanelStyle = PanelStyle.DEFAULT, dismissible: Boolean = false, init:Panel.() -> Unit) {
     + (Panel(style = style, dismissible = dismissible) with  { init() })
 }

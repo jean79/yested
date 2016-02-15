@@ -5,14 +5,14 @@ import net.yested.*
 import net.yested.utils.registerResizeHandler
 import org.w3c.dom.HTMLElement
 
-public enum class Overflow(val code: String) {
+ enum class Overflow(val code: String) {
     NONE(""),
     AUTO("auto"),
     HIDDEN("hidden"),
     SCROLL("scroll")
 }
 
-public class ScrollPane(val horizontal: Overflow = Overflow.NONE,
+ class ScrollPane(val horizontal: Overflow = Overflow.NONE,
                         val vertical: Overflow = Overflow.NONE,
                         val width: Dimension? = null,
                         val height: Dimension? = null,
@@ -45,7 +45,7 @@ public class ScrollPane(val horizontal: Overflow = Overflow.NONE,
 
 }
 
-public fun HTMLComponent.scrollPane(
+ fun HTMLComponent.scrollPane(
         horizontal: Overflow = Overflow.NONE,
         vertical: Overflow = Overflow.NONE,
         width: Dimension? = null,

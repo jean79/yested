@@ -22,7 +22,7 @@ fun effectsPage(): Div {
                     }
                     +"Effects are applied to components. They must implement the Effect interface:"
                     code(lang = "kotlin", content =
-"""public trait Effect {
+""" trait Effect {
     fun apply(component:Component)
 }""")
                     +"Effects are based on JQuery effects."
@@ -31,7 +31,7 @@ fun effectsPage(): Div {
                     br()
                     +"These effects must implement BiDirectionalEffect interface:"
                     code(lang = "kotlin", content =
-"""public trait BiDirectionEffect {
+""" trait BiDirectionEffect {
     fun applyIn(component:Component, callback:Function0<Unit>? = null)
     fun applyOut(component:Component, callback:Function0<Unit>? = null)
 }""")

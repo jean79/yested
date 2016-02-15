@@ -12,13 +12,13 @@ interface  JQAjax {
     fun <RESULT> ajax(request:AjaxRequest<RESULT>) : Unit = noImpl
 }
 
-@native("$") public var ajaxJQuery: JQAjax = null!!
+@native("$")  var ajaxJQuery: JQAjax = null!!
 
 
-public fun <T> ajaxGet(url:String, loaded:(response:T) -> Unit) : Unit {
+ fun <T> ajaxGet(url:String, loaded:(response:T) -> Unit) : Unit {
     ajaxJQuery.get(url = url, loaded = loaded)
 }
 
-public fun <RESULT> ajaxPost(ajaxRequest: AjaxRequest<RESULT>) : Unit {
+ fun <RESULT> ajaxPost(ajaxRequest: AjaxRequest<RESULT>) : Unit {
     ajaxJQuery.ajax(ajaxRequest)
 }

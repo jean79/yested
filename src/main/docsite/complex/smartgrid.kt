@@ -29,7 +29,7 @@ fun HTMLComponent.coloredNumber(value:Double) {
 
 @native fun HTMLElement.focus() : Unit = noImpl
 
-public class DoubleEditor<TYPE>(
+ class DoubleEditor<TYPE>(
         val getValue:(TYPE)->Double?,
         val saveValue:(TYPE, Double)->Unit) : CellEditorFactory<TYPE> {
 
@@ -69,7 +69,7 @@ public class DoubleEditor<TYPE>(
 }
 
 val currencies = arrayOf("CZK", "USD", "ZAR", "GBP", "AUD")
-val countries = arrayOf("Czech Republic", "USA", "Austria", "Hungary")
+val countries = arrayOf("Czech Re", "USA", "Austria", "Hungary")
 
 fun generateData() =
         (1..500)
@@ -101,7 +101,7 @@ fun generateData() =
                             col13 = Math.random()*100,
                             col14 = Math.random()*100,
                             col15 = Math.random()*100) }
-                .toArrayList()
+                .toMutableList()
 
 
 

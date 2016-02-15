@@ -10,7 +10,7 @@ import net.yested.utils.disableSelection
 import net.yested.utils.sortable
 import org.w3c.dom.HTMLElement
 
-public abstract class PanelContainer(layoutChangeHandler:Function0<Unit>? = null) : Component {
+ abstract class PanelContainer(layoutChangeHandler:Function0<Unit>? = null) : Component {
 
     override val element: HTMLElement = createElement("ul");
 
@@ -32,7 +32,7 @@ public abstract class PanelContainer(layoutChangeHandler:Function0<Unit>? = null
 
     }
 
-    public fun getPanels(): Array<Panel> = panels.toTypedArray()
+     fun getPanels(): Array<Panel> = panels.toTypedArray()
 
     protected fun insertPanel(containerItem: Div, panel: Panel) {
 
@@ -49,13 +49,13 @@ public abstract class PanelContainer(layoutChangeHandler:Function0<Unit>? = null
 
 }
 
-public class RowPanelContainer(layoutChangeHandler:Function0<Unit>? = null) : PanelContainer(layoutChangeHandler = layoutChangeHandler) {
+ class RowPanelContainer(layoutChangeHandler:Function0<Unit>? = null) : PanelContainer(layoutChangeHandler = layoutChangeHandler) {
 
-    public fun panel(size: DeviceSize, style:PanelStyle = PanelStyle.DEFAULT, dismissible: Boolean = false, init:Panel.() -> Unit) {
+     fun panel(size: DeviceSize, style:PanelStyle = PanelStyle.DEFAULT, dismissible: Boolean = false, init:Panel.() -> Unit) {
         add(panel = Panel(style = style, dismissible = dismissible) with { init() }, size = size)
     }
 
-    public fun add(panel:Panel, size: DeviceSize) {
+     fun add(panel:Panel, size: DeviceSize) {
 
         val containerItem = (Div() with {
             "class"..size.toString()
@@ -68,13 +68,13 @@ public class RowPanelContainer(layoutChangeHandler:Function0<Unit>? = null) : Pa
 
 }
 
-public class FloatingPanelContainer(layoutChangeHandler:Function0<Unit>? = null, val margin: String = "10px") : PanelContainer(layoutChangeHandler = layoutChangeHandler) {
+ class FloatingPanelContainer(layoutChangeHandler:Function0<Unit>? = null, val margin: String = "10px") : PanelContainer(layoutChangeHandler = layoutChangeHandler) {
 
-    public fun panel(size: String, style:PanelStyle = PanelStyle.DEFAULT, dismissible: Boolean = false, init:Panel.() -> Unit) {
+     fun panel(size: String, style:PanelStyle = PanelStyle.DEFAULT, dismissible: Boolean = false, init:Panel.() -> Unit) {
         add(panel = Panel(style = style, dismissible = dismissible) with { init() }, size = size)
     }
 
-    public fun add(panel:Panel, size: String) {
+     fun add(panel:Panel, size: String) {
 
         val containerItem = (Div() with {
             "style".."width: ${size}; float: left; margin: ${margin};"
@@ -88,10 +88,10 @@ public class FloatingPanelContainer(layoutChangeHandler:Function0<Unit>? = null,
 }
 
 
-public fun HTMLComponent.rowPanelContainer(init:RowPanelContainer.()->Unit) {
+ fun HTMLComponent.rowPanelContainer(init:RowPanelContainer.()->Unit) {
     +(RowPanelContainer() with { init() })
 }
 
-public fun HTMLComponent.floatingPanelContainer(margin: String = "10px", init:FloatingPanelContainer.()->Unit) {
+ fun HTMLComponent.floatingPanelContainer(margin: String = "10px", init:FloatingPanelContainer.()->Unit) {
     +(FloatingPanelContainer(margin = margin) with { init() })
 }

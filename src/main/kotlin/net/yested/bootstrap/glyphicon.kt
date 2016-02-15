@@ -4,9 +4,9 @@ import net.yested.Component
 import net.yested.HTMLComponent
 import net.yested.createElement
 
-public class Glyphicon(icon:String) : Component {
+ class Glyphicon(icon:String) : Component {
 
-    override public val element = createElement("span")
+    override  val element = createElement("span")
 
     init {
         element.className = "glyphicon glyphicon-${icon}"
@@ -14,6 +14,6 @@ public class Glyphicon(icon:String) : Component {
 
 }
 
-public fun HTMLComponent.glyphicon(icon:String): Unit {
+ fun HTMLComponent.glyphicon(icon:String): Unit {
     +Glyphicon(icon = icon)
 }

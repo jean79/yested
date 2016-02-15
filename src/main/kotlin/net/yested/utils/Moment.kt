@@ -31,67 +31,67 @@ class MomentJs {
     fun unix(t:Int): Unit = noImpl
 }
 
-public class Moment(private val moment: MomentJs) {
+ class Moment(private val moment: MomentJs) {
 
-    public fun format(format: String): String = moment.format(format)
-    public fun format(format: FormatString): String = moment.format(format.toString())
+     fun format(format: String): String = moment.format(format)
+     fun format(format: FormatString): String = moment.format(format.toString())
 
-    public val millisecondsSinceUnixEpoch: Long
+     val millisecondsSinceUnixEpoch: Long
 		get() = moment.valueOf()
 
-    public var unix: Int
+     var unix: Int
         get() = moment.unix()
         set(value) {
             moment.unix(value)
         }
 
-    public var millisecond: Int
+     var millisecond: Int
         get() = moment.millisecond()
         set(value) {
             moment.millisecond(value)
         }
-    public var second: Int
+     var second: Int
         get() = moment.second()
         set(value) {
             moment.second(value)
         }
-    public var minute: Int
+     var minute: Int
         get() = moment.minute()
         set(value) {
             moment.minute(value)
         }
-    public var hour: Int
+     var hour: Int
         get() = moment.hour()
         set(value) {
             moment.hour(value)
         }
-    public var dayOfMonth: Int
+     var dayOfMonth: Int
         get() = moment.date()
         set(value) {
             moment.date(value)
         }
-    public var dayOfYear: Int
+     var dayOfYear: Int
         get() = moment.dayOfYear()
         set(value) {
             moment.dayOfYear(value)
         }
-    public var month: Int
+     var month: Int
         get() = moment.month()
         set(value) {
             moment.month(value)
         }
-    public var year: Int
+     var year: Int
         get() = moment.year()
         set(value) {
             moment.year(value)
         }
 
     companion object {
-        public fun now(): Moment = Moment(moment_js())
+         fun now(): Moment = Moment(moment_js())
 
-        public fun parse(input: String, format: String): Moment = Moment(moment_js(input, format))
+         fun parse(input: String, format: String): Moment = Moment(moment_js(input, format))
 
-        public fun parseMillisecondsSinceUnixEpoch(millisecondsSinceUnixEpoch: Long): Moment{
+         fun parseMillisecondsSinceUnixEpoch(millisecondsSinceUnixEpoch: Long): Moment{
 			requireNotNull(millisecondsSinceUnixEpoch)
 			return Moment(moment_js(millisecondsSinceUnixEpoch))
 		}
@@ -102,9 +102,9 @@ public class Moment(private val moment: MomentJs) {
     }
 }
 
-public class FormatElement (val str: String) {
+ class FormatElement (val str: String) {
 
-    public fun plus(b: FormatElement): FormatString {
+     fun plus(b: FormatElement): FormatString {
         return FormatString(arrayListOf(this, b))
     }
 
@@ -113,14 +113,14 @@ public class FormatElement (val str: String) {
     }
 }
 
-public class FormatString(private val elements: MutableList<FormatElement> = arrayListOf()) {
+ class FormatString(private val elements: MutableList<FormatElement> = arrayListOf()) {
 
-    public operator fun plus(b: FormatElement): FormatString {
+     operator fun plus(b: FormatElement): FormatString {
         elements.add(b)
         return FormatString(elements)
     }
 
-    public operator fun plus(b: String): FormatString {
+     operator fun plus(b: String): FormatString {
         elements.add(FormatElement(b))
         return FormatString(elements)
     }
@@ -137,17 +137,17 @@ class Digit(private val oneDigitFactory: ()->FormatElement, private val twoDigit
 		get() = fourDigitsFactory()
 }
 
-public class FormatStringBuilder() {
+ class FormatStringBuilder() {
 
-	public val year: Digit = Digit({throw UnsupportedOperationException("bla")}, {FormatElement("YY")}, {FormatElement("YYYY")})
-	public val month: Digit = Digit({FormatElement("M")}, {FormatElement("MM")}, {throw UnsupportedOperationException()})
-	public val dayOfMonth: Digit = Digit({FormatElement("D")}, {FormatElement("DD")}, {throw UnsupportedOperationException()})
-	public val hour24: Digit = Digit({FormatElement("H")}, {FormatElement("HH")}, {throw UnsupportedOperationException()})
-	public val hour12: Digit = Digit({FormatElement("h")}, {FormatElement("hh")}, {throw UnsupportedOperationException()})
-	public val minutes: Digit = Digit({FormatElement("m")}, {FormatElement("mm")}, {throw UnsupportedOperationException()})
-	public val seconds: Digit = Digit({FormatElement("s")}, {FormatElement("ss")}, {throw UnsupportedOperationException()})
+	 val year: Digit = Digit({throw UnsupportedOperationException("bla")}, {FormatElement("YY")}, {FormatElement("YYYY")})
+	 val month: Digit = Digit({FormatElement("M")}, {FormatElement("MM")}, {throw UnsupportedOperationException()})
+	 val dayOfMonth: Digit = Digit({FormatElement("D")}, {FormatElement("DD")}, {throw UnsupportedOperationException()})
+	 val hour24: Digit = Digit({FormatElement("H")}, {FormatElement("HH")}, {throw UnsupportedOperationException()})
+	 val hour12: Digit = Digit({FormatElement("h")}, {FormatElement("hh")}, {throw UnsupportedOperationException()})
+	 val minutes: Digit = Digit({FormatElement("m")}, {FormatElement("mm")}, {throw UnsupportedOperationException()})
+	 val seconds: Digit = Digit({FormatElement("s")}, {FormatElement("ss")}, {throw UnsupportedOperationException()})
 }
 
-public fun format(init: FormatStringBuilder.() -> FormatString): FormatString {
+ fun format(init: FormatStringBuilder.() -> FormatString): FormatString {
     return FormatStringBuilder().init()
 }

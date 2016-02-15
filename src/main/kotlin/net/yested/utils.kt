@@ -6,8 +6,9 @@ import net.yested.utils.isIncludedInDOM
 import org.w3c.dom.HTMLElement
 import kotlin.browser.document
 import kotlin.browser.window
+import kotlin.comparisons.compareValues
 
-public infix fun <T> T.with(init:T.()->Unit):T {
+ infix fun <T> T.with(init:T.()->Unit):T {
     this.init()
     return this
 }
@@ -25,7 +26,7 @@ fun printMarkup(content:String):String =
 fun <T> Boolean.isTrue(value:T, default:T):T =
         if (this) value else default
 
-public fun HTMLElement.whenAddedToDom(run: () -> Unit) {
+ fun HTMLElement.whenAddedToDom(run: () -> Unit) {
     repeatWithDelayUntil (
             check = { isIncludedInDOM(this) },
             millisecondInterval = 100,
@@ -33,7 +34,7 @@ public fun HTMLElement.whenAddedToDom(run: () -> Unit) {
     )
 }
 
-public fun repeatWithDelayUntil(check:()->Boolean, millisecondInterval:Int, run:()->Unit) {
+ fun repeatWithDelayUntil(check:()->Boolean, millisecondInterval:Int, run:()->Unit) {
     if (check()) {
         run()
     } else {
@@ -41,13 +42,13 @@ public fun repeatWithDelayUntil(check:()->Boolean, millisecondInterval:Int, run:
     }
 }
 
-public fun <T, V : Comparable<V>> compareByValue(get: (T) -> V?): (T, T) -> Int {
+ fun <T, V : Comparable<V>> compareByValue(get: (T) -> V?): (T, T) -> Int {
     return { l, r -> compareValues(get(l), get(r)) }
 }
 
-public @kotlin.js.native fun Node.isSameNode(node:Node):Boolean = noImpl
+ @kotlin.js.native fun Node.isSameNode(node:Node):Boolean = noImpl
 
-public fun Node.getIndexOfChildNode(childElement:Node):Int {
+ fun Node.getIndexOfChildNode(childElement:Node):Int {
     var index = 0
     while (index < this.childNodes.length) {
         if (this.childNodes.item(index)!!.isSameNode(childElement)) {

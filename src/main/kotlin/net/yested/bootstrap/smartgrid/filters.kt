@@ -5,7 +5,7 @@ import net.yested.bootstrap.InputSize
 import net.yested.bootstrap.StringInputField
 import net.yested.with
 
-public class TextInputFilterFactory<TYPE>(val filterFunctionFactory : Function1<String, Function1<TYPE, Boolean>>) : FilterFactory<TYPE> {
+class TextInputFilterFactory<TYPE>(val filterFunctionFactory : Function1<String, Function1<TYPE, Boolean>>) : FilterFactory<TYPE> {
 
     override fun createFilterElement(newFilterHandler: (Filter<TYPE>?) -> Unit, filterConfig: String?): Component {
         return StringInputField(inputSize = InputSize.SMALL) with {

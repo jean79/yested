@@ -7,15 +7,15 @@ import net.yested.LineChartData
 import net.yested.Context
 import net.yested.HTMLComponent
 
-public @native class SpinnerNative() {
-    public fun spin(): SpinnerCreated = noImpl
+ @native class SpinnerNative() {
+     fun spin(): SpinnerCreated = noImpl
 }
 
-public @native class SpinnerCreated() {
-    public val el: HTMLElement = noImpl
+ @native class SpinnerCreated() {
+     val el: HTMLElement = noImpl
 }
 
-public @native("new Spinner") fun createSpinner(options: Any? = null): SpinnerNative = SpinnerNative();
+ @native("new Spinner") fun createSpinner(options: Any? = null): SpinnerNative = SpinnerNative();
 
 data class SpinnerOptions(
         val lines: Int = 13, // The number of lines to draw
@@ -40,7 +40,7 @@ data class SpinnerOptions(
         val fps: Int = 20 // Frames per second when using setTimeout() as a fallback for CSS
 )
 
-public class Spinner(val options:SpinnerOptions = SpinnerOptions()) : Component {
+ class Spinner(val options:SpinnerOptions = SpinnerOptions()) : Component {
 
     private val jsSpinnerElement = createSpinner(createOptions()).spin().el
 
@@ -71,6 +71,6 @@ public class Spinner(val options:SpinnerOptions = SpinnerOptions()) : Component 
 
 }
 
-public fun HTMLComponent.spinner(options:SpinnerOptions = SpinnerOptions()) {
+ fun HTMLComponent.spinner(options:SpinnerOptions = SpinnerOptions()) {
     +(Spinner(options))
 }

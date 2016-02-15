@@ -14,17 +14,17 @@ import org.w3c.dom.HTMLInputElement
 import org.w3c.dom.HTMLOptionElement
 import org.w3c.dom.HTMLSelectElement
 
-public enum class InputSize(val code:String) {
+ enum class InputSize(val code:String) {
     DEFAULT(""),
     LARGE("input-lg"),
     SMALL("input-sm")
 }
 
-public abstract class InputField<T>(val inputSize: InputSize = InputSize.DEFAULT, placeholder:String? = null, type: String) : InputElementComponent<T>() {
+ abstract class InputField<T>(val inputSize: InputSize = InputSize.DEFAULT, placeholder:String? = null, type: String) : InputElementComponent<T>() {
 
     override val element: HTMLInputElement = createElement("input") as HTMLInputElement
 
-    public var id: String? by Attribute()
+     var id: String? by Attribute()
 
 
     init {
@@ -43,7 +43,7 @@ public abstract class InputField<T>(val inputSize: InputSize = InputSize.DEFAULT
     }
 }
 
-public class StringInputField(inputSize: InputSize = InputSize.DEFAULT, placeholder:String? = null) :
+ class StringInputField(inputSize: InputSize = InputSize.DEFAULT, placeholder:String? = null) :
         InputField<String>(inputSize, placeholder, type = "text") {
 
     override fun clear() {
@@ -55,7 +55,7 @@ public class StringInputField(inputSize: InputSize = InputSize.DEFAULT, placehol
         set(value) {this.value = value}
 }
 
-public class IntInputField(inputSize: InputSize = InputSize.DEFAULT, placeholder:String? = null) :
+ class IntInputField(inputSize: InputSize = InputSize.DEFAULT, placeholder:String? = null) :
         InputField<Int?>(inputSize, placeholder, type = "number") {
 
     override fun clear() {
@@ -67,7 +67,7 @@ public class IntInputField(inputSize: InputSize = InputSize.DEFAULT, placeholder
         set(value) {this.value = if (value == null) "" else value.toString()}
 }
 
-public class FloatInputField(inputSize: InputSize = InputSize.DEFAULT, placeholder:String? = null) :
+ class FloatInputField(inputSize: InputSize = InputSize.DEFAULT, placeholder:String? = null) :
         InputField<Float?>(inputSize, placeholder, type = "number") {
     override fun clear() {
         data = null
@@ -78,7 +78,7 @@ public class FloatInputField(inputSize: InputSize = InputSize.DEFAULT, placehold
         set(value) {this.value = if (value == null) "" else value.toString()}
 }
 
-public class ColorInputField(inputSize: InputSize = InputSize.DEFAULT, placeholder:String? = null) :
+ class ColorInputField(inputSize: InputSize = InputSize.DEFAULT, placeholder:String? = null) :
         InputField<String?>(inputSize, placeholder, type = "color") {
     override fun clear() {
         data = null
@@ -90,11 +90,11 @@ public class ColorInputField(inputSize: InputSize = InputSize.DEFAULT, placehold
         }
 }
 
-/*public fun HTMLComponent.inputField(placeholder: String? = null, init: InputField.() -> Unit):Unit {
+/* fun HTMLComponent.inputField(placeholder: String? = null, init: InputField.() -> Unit):Unit {
     +(InputField(placeholder = placeholder) with  { init() })
 }*/
 
-public class BtsCheckBox(private val label:HTMLComponent.()->Unit) : CheckBox() {
+ class BtsCheckBox(private val label:HTMLComponent.()->Unit) : CheckBox() {
 
     private val inputCheckbox = (createElement("input") with {
                                                                     setAttribute("type", "checkbox")
@@ -109,7 +109,7 @@ public class BtsCheckBox(private val label:HTMLComponent.()->Unit) : CheckBox() 
                 })
             }) as HTMLInputElement
 
-    public override var disabled:Boolean
+     override var disabled:Boolean
         get() = inputCheckbox.disabled
         set(value) { inputCheckbox.disabled = value }
 
@@ -120,13 +120,13 @@ public class BtsCheckBox(private val label:HTMLComponent.()->Unit) : CheckBox() 
         }
 }
 
-public fun HTMLComponent.btsCheckBox(label:HTMLComponent.()->Unit):Unit {
+ fun HTMLComponent.btsCheckBox(label:HTMLComponent.()->Unit):Unit {
     +(BtsCheckBox(label))
 }
 
 private data class SelectOption<T>(val tag: HTMLOptionElement, val value:T)
 
-public class Select<T>(val options: List<T>,
+ class Select<T>(val options: List<T>,
 					   val inputSize: InputSize = InputSize.DEFAULT,
 					   multiple:Boolean = false,
 					   size:Int = 1,
@@ -139,7 +139,7 @@ public class Select<T>(val options: List<T>,
 
     private var callbackIsInvoked = false
 
-    public var selectedItems: List<T>
+     var selectedItems: List<T>
         get() = optionTags.filter { it.tag.selected && it.value != null}.map { it.value as T }
         set(newData) {
             selectThese(newData)
@@ -191,7 +191,7 @@ public class Select<T>(val options: List<T>,
         }
     }
 
-    override public var data: T
+    override  var data: T
         get() = selectedItems.first()
         set(value) {
             selectedItems = listOf(value)
@@ -209,7 +209,7 @@ public class Select<T>(val options: List<T>,
 <div class="input-group-addon">.00</div>
 </div>
  */
-public fun <T> HTMLComponent.inputAddOn(prefix:String? = null, suffix:String? = null, textInput : InputField<T>):Unit =
+ fun <T> HTMLComponent.inputAddOn(prefix:String? = null, suffix:String? = null, textInput : InputField<T>):Unit =
     +(
         div(clazz = "input-group") {
             prefix?.let {

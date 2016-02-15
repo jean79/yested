@@ -5,7 +5,7 @@ import net.yested.Span
 import net.yested.with
 import net.yested.P
 
-public enum class TextAlign(val code:String) {
+ enum class TextAlign(val code:String) {
     LEFT("left"),
     CENTER("center"),
     RIGHT("right"),
@@ -13,7 +13,7 @@ public enum class TextAlign(val code:String) {
     NOWRAP("nowrap")
 }
 
-public fun HTMLComponent.aligned(align:TextAlign, init:P.() -> Unit) {
+ fun HTMLComponent.aligned(align:TextAlign, init:P.() -> Unit) {
     +(P() with {
         clazz = "text-${align.code}"
         init()
@@ -27,11 +27,11 @@ private fun addSpan(parent: HTMLComponent, clazz:String, init:Span.() -> Unit) {
     })
 }
 
-public fun HTMLComponent.uppercase(init:Span.() -> Unit):Unit =
+ fun HTMLComponent.uppercase(init:Span.() -> Unit):Unit =
         addSpan(this, "text-uppercase", init)
 
-public fun HTMLComponent.lowercase(init:Span.() -> Unit):Unit =
+ fun HTMLComponent.lowercase(init:Span.() -> Unit):Unit =
         addSpan(this, "text-lowercase", init)
 
-public fun HTMLComponent.capitalize(init:Span.() -> Unit):Unit =
+ fun HTMLComponent.capitalize(init:Span.() -> Unit):Unit =
         addSpan(this, "text-capitalize", init)

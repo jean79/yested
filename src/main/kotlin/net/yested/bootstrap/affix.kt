@@ -6,6 +6,6 @@ package net.yested.bootstrap
 
 @native("$('body')") private var affixJQuery: JQAffix = null!!
 
-public fun enableScrollSpy(id:String) : Unit {
+ fun enableScrollSpy(id:String) : Unit {
     affixJQuery.scrollspy(object { val target = "#${id}" })
 }

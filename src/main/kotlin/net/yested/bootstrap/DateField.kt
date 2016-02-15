@@ -20,7 +20,7 @@ import kotlin.dom.on
  *
  * uses library: https://github.com/Eonasdan/bootstrap-datetimepicker/blob/master/build/js/bootstrap-datetimepicker.min.js
  */
-public class DateField(formatter: FormatStringBuilder.()->FormatString) : InputElementComponent<Moment?>() {
+ class DateField(formatter: FormatStringBuilder.()->FormatString) : InputElementComponent<Moment?>() {
 
     val formatString = FormatStringBuilder().formatter().toString()
 

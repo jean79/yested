@@ -18,9 +18,9 @@ import net.yested.appendComponent
 </ul>
 </nav>
  */
-public class Pagination(val count:Int, val defaultSelection:Int = 1, val listener:(Int) -> Unit) : Component {
+ class Pagination(val count:Int, val defaultSelection:Int = 1, val listener:(Int) -> Unit) : Component {
 
-    override public val element = createElement("nav")
+    override  val element = createElement("nav")
 
     private var selectedItem:Int = defaultSelection
 
@@ -28,7 +28,7 @@ public class Pagination(val count:Int, val defaultSelection:Int = 1, val listene
 
     private var items:List<Li> = arrayListOf()
 
-    public var selected:Int
+     var selected:Int
         get() = selectedItem
         set(newValue) {
             selectedItem = newValue
@@ -92,5 +92,5 @@ public class Pagination(val count:Int, val defaultSelection:Int = 1, val listene
 
 }
 
-public fun HTMLComponent.pagination(count:Int, defaultSelection:Int = 1, listener:(Int) -> Unit): Unit =
+ fun HTMLComponent.pagination(count:Int, defaultSelection:Int = 1, listener:(Int) -> Unit): Unit =
     +( Pagination(count,defaultSelection, listener) )
