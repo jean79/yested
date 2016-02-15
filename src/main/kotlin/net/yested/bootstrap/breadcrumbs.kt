@@ -8,7 +8,7 @@ import net.yested.Component
 import net.yested.appendComponent
 import org.w3c.dom.events.Event
 
-public class Breadcrumbs : Component {
+ class Breadcrumbs : Component {
 
     override val element = createElement("ol")
 
@@ -31,7 +31,7 @@ public class Breadcrumbs : Component {
 
 }
 
-public fun HTMLComponent.breadcrumbs(init: Breadcrumbs.() -> Unit): Breadcrumbs {
+ fun HTMLComponent.breadcrumbs(init: Breadcrumbs.() -> Unit): Breadcrumbs {
     val breadcrumbs = Breadcrumbs() with  { init() }
     +breadcrumbs
     return breadcrumbs

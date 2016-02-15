@@ -1,10 +1,10 @@
 package net.yested
 
-public interface Dimension {
+ interface Dimension {
     fun toHtml():String
 }
 
-public class Percent(val value:Double) : Dimension {
+ class Percent(val value:Double) : Dimension {
 
     override fun toHtml(): String {
         return "${value}%"
@@ -12,10 +12,10 @@ public class Percent(val value:Double) : Dimension {
 
 }
 
-public fun Int.pct():Percent = Percent(this.toDouble())
-public fun Double.pct():Percent = Percent(this)
+ fun Int.pct():Percent = Percent(this.toDouble())
+ fun Double.pct():Percent = Percent(this)
 
-public class Pixels(val value:Int) : Dimension {
+ class Pixels(val value:Int) : Dimension {
 
     override fun toHtml(): String {
         return "${value}px"
@@ -23,4 +23,4 @@ public class Pixels(val value:Int) : Dimension {
 
 }
 
-public fun Int.px():Pixels = Pixels(this)
+ fun Int.px():Pixels = Pixels(this)

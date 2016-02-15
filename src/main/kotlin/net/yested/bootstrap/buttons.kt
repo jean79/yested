@@ -13,7 +13,7 @@ import net.yested.div
 import net.yested.Span
 import org.w3c.dom.events.Event
 
-public enum class ButtonLook(val code:String) {
+ enum class ButtonLook(val code:String) {
     DEFAULT("default"),
     PRIMARY("primary"),
     SUCCESS("success"),
@@ -23,14 +23,14 @@ public enum class ButtonLook(val code:String) {
     LINK("link")
 }
 
-public enum class ButtonSize(val code:String) {
+ enum class ButtonSize(val code:String) {
     DEFAULT("default"),
     LARGE("lg"),
     SMALL("sm"),
     EXTRA_SMALL("xs")
 }
 
-public class BtsButton(type: ButtonType = ButtonType.BUTTON,
+ class BtsButton(type: ButtonType = ButtonType.BUTTON,
              label: HTMLComponent.()-> Unit,
              val look:ButtonLook = ButtonLook.DEFAULT,
              val size:ButtonSize = ButtonSize.DEFAULT,
@@ -80,12 +80,12 @@ public class BtsButton(type: ButtonType = ButtonType.BUTTON,
 }
 
 
-public class BtsAnchor(href:String,
+ class BtsAnchor(href:String,
                 look:ButtonLook = ButtonLook.DEFAULT,
                 size:ButtonSize = ButtonSize.DEFAULT,
                 block:Boolean = false) :  HTMLComponent("a") {
 
-    public var href:String? by Attribute()
+     var href:String? by Attribute()
 
     init {
         this.href = href
@@ -94,7 +94,7 @@ public class BtsAnchor(href:String,
 
 }
 
-public open class Dropdown(id:String,
+ open class Dropdown(id:String,
                       label: HTMLComponent.()->Unit,
 					  val splitted: Boolean = false,
                       val look:ButtonLook = ButtonLook.DEFAULT,
@@ -136,7 +136,7 @@ public open class Dropdown(id:String,
 	}).element
 
 
-    public fun link(href:String = "#", onclick: Function1<Event, Unit>? = null, init: Anchor.() -> Unit) {
+     fun link(href:String = "#", onclick: Function1<Event, Unit>? = null, init: Anchor.() -> Unit) {
         list.li {
             "role".."presentation"
             a(href = href, onclick = onclick) {
@@ -147,13 +147,13 @@ public open class Dropdown(id:String,
         }
     }
 
-    public fun divider() {
+     fun divider() {
         list.li {
             "class".."divider"
         }
     }
 
-    public fun header(label: HTMLComponent.()->Unit) {
+     fun header(label: HTMLComponent.()->Unit) {
         list.li {
             "role".."presentation"
             "class".."dropdown-header"
@@ -162,7 +162,7 @@ public open class Dropdown(id:String,
     }
 }
 
-public fun HTMLComponent.btsButton(type: ButtonType = ButtonType.BUTTON,
+ fun HTMLComponent.btsButton(type: ButtonType = ButtonType.BUTTON,
                                    label: HTMLComponent.()-> Unit,
                                    look:ButtonLook = ButtonLook.DEFAULT,
                                    size:ButtonSize = ButtonSize.DEFAULT,
@@ -172,7 +172,7 @@ public fun HTMLComponent.btsButton(type: ButtonType = ButtonType.BUTTON,
     +BtsButton(type = type, label = label, look = look, size = size, block = block, badge = badge, onclick = onclick)
 }
 
-public fun HTMLComponent.btsAnchor(href:String,
+ fun HTMLComponent.btsAnchor(href:String,
                                   look:ButtonLook = ButtonLook.DEFAULT,
                                   size:ButtonSize = ButtonSize.DEFAULT,
                                   block:Boolean = false,
@@ -180,7 +180,7 @@ public fun HTMLComponent.btsAnchor(href:String,
     +(BtsAnchor(href = href, look = look, size = size, block = block) with  { init() })
 }
 
-public fun HTMLComponent.splitButtonDropdown(id: String,
+ fun HTMLComponent.splitButtonDropdown(id: String,
 								  label: HTMLComponent.()->Unit,
 								  look: ButtonLook = ButtonLook.DEFAULT,
 								  size: ButtonSize = ButtonSize.DEFAULT,
@@ -189,7 +189,7 @@ public fun HTMLComponent.splitButtonDropdown(id: String,
 	+(Dropdown(id = id, label = label, look = look, size = size, splitted = true, onClick = onClick) with { init() })
 }
 
-public fun HTMLComponent.dropdown(id: String,
+ fun HTMLComponent.dropdown(id: String,
                                   label: HTMLComponent.()->Unit,
                                   look: ButtonLook = ButtonLook.DEFAULT,
                                   size: ButtonSize = ButtonSize.DEFAULT,
@@ -197,6 +197,6 @@ public fun HTMLComponent.dropdown(id: String,
     +(Dropdown(id = id, label = label, look = look, size = size) with { init() })
 }
 
-public fun HTMLComponent.badge(init:HTMLComponent.()->Unit) {
+ fun HTMLComponent.badge(init:HTMLComponent.()->Unit) {
     +(Span() with { "class".."badge"; init() })
 }

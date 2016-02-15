@@ -24,9 +24,9 @@ private data class TabDefinition(
         val init: HTMLComponent.()->Unit,
         val onSelect:Function0<Unit>?)
 
-public class Tabs(canChangeOrder:Boolean = false) : Component {
+ class Tabs(canChangeOrder:Boolean = false) : Component {
 
-    public override val element = createElement("div")
+     override val element = createElement("div")
 
     private val bar = UL() with { role = "tablist"; clazz = "nav nav-tabs"}
 
@@ -68,7 +68,7 @@ public class Tabs(canChangeOrder:Boolean = false) : Component {
 
     private fun getTabDefinition(tabId:Int) = tabDefinitions.filter { it.tabId == tabId }.firstOrNull()
 
-    public fun activateTab(tabId:Int) {
+     fun activateTab(tabId:Int) {
 
         val tabDefinition:TabDefinition? = getTabDefinition(tabId)
         if (tabDefinition == null) {
@@ -110,7 +110,7 @@ public class Tabs(canChangeOrder:Boolean = false) : Component {
         }
     }
 
-    public fun removeTab(tabId:Int) {
+     fun removeTab(tabId:Int) {
 
         val tabDefinition = getTabDefinition(tabId)
 
@@ -181,7 +181,7 @@ public class Tabs(canChangeOrder:Boolean = false) : Component {
     /**
      * @returns tabId
      */
-    public fun tab(dismissible: Boolean = false, header: HTMLComponent.()->Unit, onSelect:Function0<Unit>? = null, init: HTMLComponent.()->Unit):Int {
+     fun tab(dismissible: Boolean = false, header: HTMLComponent.()->Unit, onSelect:Function0<Unit>? = null, init: HTMLComponent.()->Unit):Int {
 
         val tabId = index++;
         val tabDefinition = TabDefinition(tabId, init, onSelect)
@@ -204,6 +204,6 @@ public class Tabs(canChangeOrder:Boolean = false) : Component {
 
 }
 
-public fun HTMLComponent.tabs(canChangeOrder:Boolean = false, init:Tabs.() -> Unit): Unit {
+ fun HTMLComponent.tabs(canChangeOrder:Boolean = false, init:Tabs.() -> Unit): Unit {
     +(Tabs(canChangeOrder = canChangeOrder) with  { init() })
 }

@@ -11,7 +11,7 @@ private class ResizeHandler(
     private var latestWidth = jq(element).width()
     private var latestHeight = jq(element).height()
 
-    public fun check() {
+     fun check() {
         val newWidth = jq(element).width()
         val newHeight = jq(element).height()
         if (newWidth != latestWidth || newHeight != latestHeight) {
@@ -31,7 +31,7 @@ private fun checkAllHandlers() {
     resizeHandlers.forEach { it.check() }
 }
 
-public fun registerResizeHandler(element: HTMLElement, handler:(width:Number, height:Number) -> Unit) {
+ fun registerResizeHandler(element: HTMLElement, handler:(width:Number, height:Number) -> Unit) {
 
     resizeHandlers.add(ResizeHandler(element, handler))
 

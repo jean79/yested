@@ -25,7 +25,7 @@ fun createChartJSLineSection(): Div {
         LineChartData(
             labels = arrayOf("Jan", "Feb", "Mar", "Apr", "May", "Jun", "July", "Aug", "Sept", "Oct", "Nov", "Dec"),
             datasets = arrayOf(LineChartSeries(
-                        label = "Czech Republic",
+                        label = "Czech Re",
                         fillColor = chartColorCZE,
                         pointColor = chartColorCZE,
                         strokeColor = chartColorCZE,

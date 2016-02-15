@@ -14,7 +14,7 @@ import net.yested.BiDirectionEffect
 import net.yested.Fade
 import net.yested.Slide
 
-public class Collapsible(opened:Boolean = false, private val effect:BiDirectionEffect = Slide()) : Component {
+ class Collapsible(opened:Boolean = false, private val effect:BiDirectionEffect = Slide()) : Component {
 
     private val arrowPlaceholder = Span();
 
@@ -24,7 +24,7 @@ public class Collapsible(opened:Boolean = false, private val effect:BiDirectionE
         style = "padding-left: 5px"
     }
 
-    override public val element = (Div() with {
+    override  val element = (Div() with {
         a(onclick = { toggle() }) {
             "style".."cursor: pointer;"
             +arrowPlaceholder
@@ -35,7 +35,7 @@ public class Collapsible(opened:Boolean = false, private val effect:BiDirectionE
 
     private var opened:Boolean
 
-    public val isOpen:Boolean
+     val isOpen:Boolean
         get() = opened
 
     init {
@@ -46,17 +46,17 @@ public class Collapsible(opened:Boolean = false, private val effect:BiDirectionE
         }
     }
 
-    public fun open() {
+     fun open() {
         opened = true
         update()
     }
 
-    public fun close() {
+     fun close() {
         opened = false
         update()
     }
 
-    public fun toggle() {
+     fun toggle() {
         opened = !opened
         update()
     }
@@ -77,14 +77,14 @@ public class Collapsible(opened:Boolean = false, private val effect:BiDirectionE
         }
     }
 
-    public fun header(init:HTMLComponent.()->Unit) {
+     fun header(init:HTMLComponent.()->Unit) {
         linkPlaceholder.removeAllChildren()
         linkPlaceholder with {
             init()
         }
     }
 
-    public fun content(init:HTMLComponent.()->Unit) {
+     fun content(init:HTMLComponent.()->Unit) {
         contentPlaceholder.removeAllChildren()
         contentPlaceholder with {
             init()
@@ -93,6 +93,6 @@ public class Collapsible(opened:Boolean = false, private val effect:BiDirectionE
 
 }
 
-public fun HTMLComponent.collapsible(opened:Boolean = false, effect:BiDirectionEffect = Slide(), init:Collapsible.() -> Unit) {
+ fun HTMLComponent.collapsible(opened:Boolean = false, effect:BiDirectionEffect = Slide(), init:Collapsible.() -> Unit) {
     + (Collapsible(opened = opened, effect = effect) with  { init() })
 }

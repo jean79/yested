@@ -11,14 +11,14 @@ import org.w3c.dom.events.Event
  *
  */
 
-public enum class AlertStyle(val code:String) {
+ enum class AlertStyle(val code:String) {
     SUCCESS("success"),
     INFO("info"),
     WARNING("warning"),
     DANGER("danger")
 }
 
-public class Alert(style: AlertStyle, dismissible: Boolean = false) : HTMLComponent("div") {
+ class Alert(style: AlertStyle, dismissible: Boolean = false) : HTMLComponent("div") {
 
     init {
         clazz = "alert alert-${style.code} ${dismissible.isTrue("alert-dismissible", "")}"

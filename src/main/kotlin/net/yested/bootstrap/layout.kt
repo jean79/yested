@@ -10,7 +10,7 @@ import net.yested.Component
 import net.yested.createElement
 import net.yested.appendComponent
 
-public class Row(): Component {
+ class Row(): Component {
 
     override val element = createElement("div")
 
@@ -18,7 +18,7 @@ public class Row(): Component {
         element.setAttribute("class", "row")
     }
 
-    public fun col(vararg modifiers: ColumnModifier, init: HTMLComponent.() -> Unit) {
+     fun col(vararg modifiers: ColumnModifier, init: HTMLComponent.() -> Unit) {
         element.appendComponent(
             Div() with {
                 clazz = modifiers.map {it.toString()}.joinToString(" ")
@@ -28,18 +28,18 @@ public class Row(): Component {
 
 }
 
-public enum class ContainerLayout(val code:String) {
+ enum class ContainerLayout(val code:String) {
     DEFAULT("container"),
     FLUID("container-fluid")
 }
 
-public class Page(val element: HTMLElement, val layout: ContainerLayout = ContainerLayout.DEFAULT) {
+ class Page(val element: HTMLElement, val layout: ContainerLayout = ContainerLayout.DEFAULT) {
 
-    public fun topMenu(navbar: Navbar) {
+     fun topMenu(navbar: Navbar) {
         element.appendComponent(navbar)
     }
 
-    public fun content(init: HTMLComponent.() -> Unit): Unit {
+     fun content(init: HTMLComponent.() -> Unit): Unit {
         element.appendChild(
                 div {
                     "class"..layout.code
@@ -47,7 +47,7 @@ public class Page(val element: HTMLElement, val layout: ContainerLayout = Contai
                 }.element)
     }
 
-    public fun footer(init: HTMLComponent.() -> Unit): Unit {
+     fun footer(init: HTMLComponent.() -> Unit): Unit {
         element.appendChild(
                 div {
                     div(clazz = "container") {
@@ -60,21 +60,21 @@ public class Page(val element: HTMLElement, val layout: ContainerLayout = Contai
 
 }
 
-public class PageHeader  : HTMLComponent("div") {
+ class PageHeader  : HTMLComponent("div") {
     init {
         clazz = "page-header"
     }
 }
 
-public fun HTMLComponent.pageHeader(init: HTMLComponent.() -> Unit) {
+ fun HTMLComponent.pageHeader(init: HTMLComponent.() -> Unit) {
     +(PageHeader() with  { init() })
 }
 
-public fun HTMLComponent.row(init:Row.()->Unit) {
+ fun HTMLComponent.row(init:Row.()->Unit) {
     +(Row() with  { init() })
 }
 
-public fun page(placeholderElementId:String, layout: ContainerLayout = ContainerLayout.DEFAULT, init:Page.() -> Unit):Unit {
+ fun page(placeholderElementId:String, layout: ContainerLayout = ContainerLayout.DEFAULT, init:Page.() -> Unit):Unit {
     Page(el(placeholderElementId) as HTMLElement, layout) with {
         this.init()
     }
