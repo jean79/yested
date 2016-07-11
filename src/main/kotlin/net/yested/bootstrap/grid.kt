@@ -10,8 +10,9 @@ import net.yested.THead
 import net.yested.TBody
 import net.yested.removeChildByName
 import org.w3c.dom.HTMLElement
+import java.util.*
 
-public data class Column<T>(
+data class Column<T>(
         val label: HTMLComponent.() -> Unit,
         val render: HTMLComponent.(T) -> Unit,
         val sortFunction:((T, T) -> Int)? = null,
@@ -19,7 +20,7 @@ public data class Column<T>(
         val defaultSort:Boolean = false,
         val defaultSortOrderAsc:Boolean = true)
 
-public class ColumnHeader<T>(val column:Column<T>, sortingSupported:Boolean, sortFunction:((Column<T>) -> Unit)?) : HTMLComponent("span") {
+class ColumnHeader<T>(val column:Column<T>, sortingSupported:Boolean, sortFunction:((Column<T>) -> Unit)?) : HTMLComponent("span") {
 
     var arrowPlaceholder = Span()
 
@@ -45,7 +46,7 @@ public class ColumnHeader<T>(val column:Column<T>, sortingSupported:Boolean, sor
 
 }
 
-public class Grid<T>(responsive: Boolean = false, val columns:Array<Column<T>>) : Component {
+class Grid<T>(responsive: Boolean = false, val columns:Array<Column<T>>) : Component {
 
     private val tableElement = createElement("table")
 
@@ -78,7 +79,7 @@ public class Grid<T>(responsive: Boolean = false, val columns:Array<Column<T>>) 
 
     private var dataList: Iterable<T>? = null
 
-    public var list: Iterable<T>?
+    var list: Iterable<T>?
         get() = dataList
         set(value) {
             dataList = value
@@ -118,10 +119,11 @@ public class Grid<T>(responsive: Boolean = false, val columns:Array<Column<T>>) 
         if (sortColumn?.sortFunction == null) {
             return toSort
         }
-        return toSort.sortedWith(comparator { obj1: T, obj2: T ->  (sortColumn!!.sortFunction!!(obj1, obj2)) * (if (asc) 1 else -1)})
+        //return toSort.sortedWith(comparator = Comparator { t, t ->  })
+        return toSort.sortedWith(comparator = Comparator { obj1: T, obj2: T ->  (sortColumn!!.sortFunction!!(obj1, obj2)) * (if (asc) 1 else -1)})
     }
 
-    public fun displayData() {
+    fun displayData() {
         tableElement.removeChildByName("tbody")
         dataList?.let {
 

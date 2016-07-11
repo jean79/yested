@@ -5,13 +5,13 @@ import net.yested.*
 import net.yested.utils.sortable
 import java.util.ArrayList
 
-public enum class SelectionMode() {
+ enum class SelectionMode() {
     NONE(),
     SINGLE(),
     MULTI()
 }
 
-public class ListGroup<TYPE>(val selectionMode: SelectionMode = SelectionMode.MULTI, val sortable:Boolean = false, val renderer: Anchor.(item:TYPE)->Unit) : InputComponent<List<TYPE>> {
+ class ListGroup<TYPE>(val selectionMode: SelectionMode = SelectionMode.MULTI, val sortable:Boolean = false, val renderer: Anchor.(item:TYPE)->Unit) : InputComponent<List<TYPE>> {
 
     private val onChangeListeners: ArrayList<Function0<Unit>> = ArrayList();
 
@@ -86,7 +86,7 @@ public class ListGroup<TYPE>(val selectionMode: SelectionMode = SelectionMode.MU
         onChangeListeners.forEach { it() }
     }
 
-    public var dataProvider:Collection<TYPE>
+     var dataProvider:Collection<TYPE>
         get() = itemToAnchorMap
                 .entries
                 .sortedBy(selector = { element.getIndexOfChildNode(it.value.element)})
@@ -99,7 +99,7 @@ public class ListGroup<TYPE>(val selectionMode: SelectionMode = SelectionMode.MU
             newDataProvider.forEach { addItem(it) }
         }
 
-    public fun addItem(item:TYPE) {
+     fun addItem(item:TYPE) {
         val anchor = Anchor() with {
             "class".."list-group-item"
             "style".."cursor:pointer"
@@ -112,7 +112,7 @@ public class ListGroup<TYPE>(val selectionMode: SelectionMode = SelectionMode.MU
         itemToAnchorMap.put(item, anchor)
     }
 
-    public fun removeItem(item:TYPE) {
+     fun removeItem(item:TYPE) {
         val anchor = itemToAnchorMap.remove(item)!!
         element.removeChild(anchor.element)
         if (selectedItems.contains(item)) {

@@ -8,7 +8,7 @@ interface Performance {
     fun now(): Int = noImpl
 }
 
-@native("performance") public var performance: Performance = null!!
+@native("performance")  var performance: Performance = null!!
 
 fun measure(title:String = "Execution", code:()->Unit) {
     val start = performance.now()

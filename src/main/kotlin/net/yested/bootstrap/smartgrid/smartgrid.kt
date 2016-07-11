@@ -9,24 +9,24 @@ import net.yested.layout.containers.VerticalContainer
 import net.yested.layout.containers.horizontalContainer
 import net.yested.utils.*
 import org.w3c.dom.Node
-import java.util.ArrayList
 import org.w3c.dom.HTMLElement
+import java.util.*
 import kotlin.browser.window
 
-public interface CellEditorFactory<TYPE> {
+interface CellEditorFactory<TYPE> {
     fun createEditor(width:String, item:TYPE, closeHandler: ()->Unit):HTMLElement
 }
 
-public class Filter<T>(
+class Filter<T>(
         val filteringFunction: Function1<T, Boolean>,
         val filterConfig: String
 )
 
-public interface FilterFactory<T> {
+interface FilterFactory<T> {
     fun createFilterElement(newFilterHandler : Function1<Filter<T>?, Unit>, filterConfig : String? = null): Component
 }
 
-public data class GridColumn<T>(
+data class GridColumn<T>(
         val id: String,
         val width: String,
         val label: String,
@@ -121,7 +121,7 @@ private fun <T> clearAggregationsOfAll(group:Group<T>) {
 /**
  * .on('mousemove', $.throttle(interval, function(e)
  */
-public class SmartGrid<TYPE, KEY>(
+ class SmartGrid<TYPE, KEY>(
         val rowHeight:Int = 30,
         val getKey:(TYPE)->KEY,
         columns:Array<GridColumn<TYPE>>) : Component {
@@ -213,7 +213,7 @@ public class SmartGrid<TYPE, KEY>(
                                 width = 200.px().toHtml(),
                                 label = "",
                                 render = { }))
-                            .toMapBy { it.id };
+                            .associateBy { it.id };
 
     private var rowsReferences = hashMapOf<KEY, HTMLElement>();
 
@@ -225,20 +225,20 @@ public class SmartGrid<TYPE, KEY>(
 
     private val filters = hashMapOf<String, Filter<TYPE>>()
 
-    private var fullDataList: ArrayList<TYPE> = arrayListOf()
-    private var filteredDataList: ArrayList<TYPE> = arrayListOf()
+    private var fullDataList: MutableList<TYPE> = arrayListOf()
+    private var filteredDataList: MutableList<TYPE> = arrayListOf()
     private var group:Group<TYPE> = Group<TYPE>(groupName = "root", open = true, items = arrayListOf())
-    private var visibleDataList: ArrayList<VisibleItem<TYPE>> = arrayListOf()
+    private var visibleDataList: MutableList<VisibleItem<TYPE>> = arrayListOf()
 
     private var dataListAsKeyMap: MutableMap<KEY, TYPE> = hashMapOf()
 
-    private val groupingColumns: ArrayList<GridColumn<TYPE>> = arrayListOf()
+    private val groupingColumns: MutableList<GridColumn<TYPE>> = arrayListOf()
 
-    public var list: ArrayList<TYPE>?
+     var list: MutableList<TYPE>?
         get() = fullDataList
         set(value) {
             fullDataList = value ?: arrayListOf()
-            dataListAsKeyMap = fullDataList.toMapBy { getKey(it) } as MutableMap
+            dataListAsKeyMap = fullDataList.associateBy { getKey(it) } as MutableMap
             currentRow = 0
             refilterData()
             regroupData()
@@ -252,7 +252,7 @@ public class SmartGrid<TYPE, KEY>(
     private fun showDialogCustom() {
         val columnsWithoutAggregatingColumn = visibleColumns.filter { it != "root" }
         openConfigurationDialog(columns.values.filter { it.id != "root" }, columnsWithoutAggregatingColumn, { newVisibleColumns ->
-            val newList = newVisibleColumns.toArrayList()
+            val newList = newVisibleColumns.toMutableList()
             if (groupingColumns.size > 0) {
                 newList.add(0, "root")
             }
@@ -375,7 +375,7 @@ public class SmartGrid<TYPE, KEY>(
         cont.element.scrollLeft = newPosition.toDouble()
     }
 
-    private fun getVisibleColumns() =
+    private fun getVisibleColumns():List<GridColumn<TYPE>> =
             visibleColumns.map { columns.get(it)!! }
 
 
@@ -398,7 +398,7 @@ public class SmartGrid<TYPE, KEY>(
 
     private fun groupByColumn(column:GridColumn<TYPE>):Unit {
         if (groupingColumns.size == 0) {
-            val newList = visibleColumns.toArrayList()
+            val newList = visibleColumns.toMutableList()
             newList.add(0, "root")
             visibleColumns = newList
         }
@@ -421,7 +421,7 @@ public class SmartGrid<TYPE, KEY>(
 
     private fun cancelAggregation() {
 
-        val newVisibleColumnsList = visibleColumns.toArrayList()
+        val newVisibleColumnsList = visibleColumns.toMutableList()
         newVisibleColumnsList.removeAt(0)//remove old root column
         groupingColumns.reversed().forEach { //show again columns which where used for aggregation
             if (!newVisibleColumnsList.contains(it.id)) {
@@ -527,15 +527,15 @@ public class SmartGrid<TYPE, KEY>(
 
     private fun sortItemsInGroup(group: Group<TYPE>) {
         if (group.items != null) {
-            group.items = group.items!!.sortedWith(comparator {
+            group.items = group.items!!.sortedWith(comparator = Comparator {
                 obj1: TYPE, obj2: TYPE ->
                 (sortColumn!!.sortFunction!!(obj1, obj2)) * (if (asc) 1 else -1)
-            }).toArrayList()
+            }).toMutableList()
            /* group.items = group.items!!.sortedBy(object : java.util.Comparator<TYPE> {
                 override fun compare(obj1: TYPE, obj2: TYPE): Int {
                     return (sortColumn!!.sortFunction!!(obj1, obj2)) * (if (asc) 1 else -1)
                 }
-            }).toArrayList()*/
+            }).toMutableList()*/
         } else {
             group.subgroups = group.subgroups!!.sortedBy { it.groupName }
             group.subgroups!!.forEach { sortItemsInGroup(it) }
@@ -550,7 +550,7 @@ public class SmartGrid<TYPE, KEY>(
                     .filter {
                         isItemMatchingFilters(it)
                     }
-                    .toArrayList()
+                    .toMutableList()
         }
     }
 
@@ -830,7 +830,7 @@ public class SmartGrid<TYPE, KEY>(
     private fun isOneOfAffectedColumnsAGroupingOne(affectedColumns: Collection<String>) =
         groupingColumns.filter { affectedColumns.contains(it.id) }.size > 0
 
-    public fun updateItem(item: TYPE, affectedColumns: Collection<String>? = null) {
+     fun updateItem(item: TYPE, affectedColumns: Collection<String>? = null) {
 
         val originalItem = dataListAsKeyMap.get(getKey(item))
         if (originalItem == null) {

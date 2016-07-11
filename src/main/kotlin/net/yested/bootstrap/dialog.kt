@@ -8,7 +8,7 @@ import net.yested.with
 import jquery.jq
 import net.yested.isTrue
 
-public @native fun JQuery.modal(options: String):Unit = noImpl;
+ @native fun JQuery.modal(options: String):Unit = noImpl;
 
 /**
  * <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -30,13 +30,13 @@ public @native fun JQuery.modal(options: String):Unit = noImpl;
     </div>
  */
 
-public enum class DialogSize(val code:String) {
+ enum class DialogSize(val code:String) {
     DEFAULT(""),
     SMALL("modal-sm"),
     LARGE("modal-lg")
 }
 
-public class Dialog(val size: DialogSize = DialogSize.DEFAULT) {
+ class Dialog(val size: DialogSize = DialogSize.DEFAULT) {
 
     var dialog:Div? = null
     var header: Div? = null

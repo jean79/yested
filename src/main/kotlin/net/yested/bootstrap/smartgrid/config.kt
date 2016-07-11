@@ -121,7 +121,7 @@ class ConfigurationDialog<T>(
 
     private fun initialDistribution() {
         availableColumns.addAll( columns.filter { !selectedColumnIds.contains(it.id) }.sortedBy { it.label } )
-        val columnsById = columns.toMapBy { it.id }
+        val columnsById = columns.associateBy { it.id }
         val selectedColumns = selectedColumnIds.map { columnsById.get(it)!! }
         listGroupSelectedColumns.dataProvider = selectedColumns
         populateAvailableListGroup()

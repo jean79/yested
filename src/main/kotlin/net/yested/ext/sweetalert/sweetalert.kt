@@ -1,6 +1,6 @@
 package net.yested.ext.sweetalert
 
-public data class SwalOptions(
+ data class SwalOptions(
 
         /**
          * 	The title of the modal. It can either be added to the object under the key "title" or passed as the first parameter of the function.
@@ -62,4 +62,4 @@ public data class SwalOptions(
         val timer: Number? = null
 )
 
-@native("swal") public fun swal(option:SwalOptions, handler:Function1<Boolean?, Unit>? = null):Unit = null!!
+@native("swal")  fun swal(option:SwalOptions, handler:Function1<Boolean?, Unit>? = null):Unit = null!!

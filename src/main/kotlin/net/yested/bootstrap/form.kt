@@ -28,13 +28,13 @@ import net.yested.HTMLComponent
 import net.yested.with
 import net.yested.InputComponent
 
-public interface ValidatorI {
+ interface ValidatorI {
     fun onchange(invoke:(valid:Boolean)->Unit)
     fun isValid():Boolean
     val errorText:String
 }
 
-public class Validator<T>(val inputElement: InputComponent<T>, override val errorText:String, val validator:(value:T)->Boolean) : ValidatorI {
+ class Validator<T>(val inputElement: InputComponent<T>, override val errorText:String, val validator:(value:T)->Boolean) : ValidatorI {
 
     private val onChangeListeners: java.util.ArrayList<Function1<Boolean, Unit>> = java.util.ArrayList();
 
@@ -65,19 +65,19 @@ public class Validator<T>(val inputElement: InputComponent<T>, override val erro
 
 }
 
-public enum class FormStyle(val code:String) {
+ enum class FormStyle(val code:String) {
     DEFAULT("form-default"),
     INLINE("form-inline"),
     HORIZONTAL("form-horizontal")
 }
 
-public enum class FormInputSize(val code:String) {
+ enum class FormInputSize(val code:String) {
     DEFAULT(""),
     LARGE("form-group-lg"),
     SMALL("form-group-sm")
 }
 
-public class Form(private val formStyle: FormStyle = FormStyle.DEFAULT, private val inputSize:FormInputSize = FormInputSize.DEFAULT, private val labelDef:DeviceSize = Small(4), private val inputDef:DeviceSize = Small(8)) : HTMLComponent("form") {
+ class Form(private val formStyle: FormStyle = FormStyle.DEFAULT, private val inputSize:FormInputSize = FormInputSize.DEFAULT, private val labelDef:DeviceSize = Small(4), private val inputDef:DeviceSize = Small(8)) : HTMLComponent("form") {
 
     init {
         element.setAttribute("class", "${formStyle.code}")
@@ -85,7 +85,7 @@ public class Form(private val formStyle: FormStyle = FormStyle.DEFAULT, private 
         element.setAttribute("onsubmit", "return false")
     }
 
-    public fun item(forId:String = "", label: HTMLComponent.()->Unit, validator:ValidatorI? = null, content: HTMLComponent.()->Unit) {
+     fun item(forId:String = "", label: HTMLComponent.()->Unit, validator:ValidatorI? = null, content: HTMLComponent.()->Unit) {
 
         val divInput = if (formStyle == FormStyle.HORIZONTAL) {
             div(clazz = "$inputDef", init = content)
@@ -103,7 +103,7 @@ public class Form(private val formStyle: FormStyle = FormStyle.DEFAULT, private 
 
 }
 
-public fun HTMLComponent.btsForm(formStyle: FormStyle = FormStyle.DEFAULT, labelDef:DeviceSize = Small(4), inputDef:DeviceSize = Small(8), init:Form.() -> Unit):Unit {
+ fun HTMLComponent.btsForm(formStyle: FormStyle = FormStyle.DEFAULT, labelDef:DeviceSize = Small(4), inputDef:DeviceSize = Small(8), init:Form.() -> Unit):Unit {
     val form = Form(formStyle = formStyle, labelDef = labelDef, inputDef = inputDef)
     form.init()
     +form

@@ -42,7 +42,7 @@ fun howItWorksSection(): Div {
                 h4 { nbsp() }
                 code(lang="kotlin", content="""class Anchor() : HTMLParentComponent("a") {
 
-    public var href : String by Attribute()
+     var href : String by Attribute()
 
 }""")
             }

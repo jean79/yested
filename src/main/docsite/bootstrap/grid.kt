@@ -12,6 +12,7 @@ import net.yested.compareByValue
 import net.yested.colorized
 import net.yested.Color
 import net.yested.Colors
+import kotlin.comparisons.compareValues
 
 data class Person(val name: String, val age: Int, val hair: Color)
 
@@ -43,11 +44,11 @@ fun createGrid(id: String): Div {
         row {
             col(Medium(4)) {
                 div {
-                    +"Grid is simply a renderred HTML Table element. It is not suitable for too many rows."
+                    +"Grid is simply a rendered HTML Table element. It is not suitable for too many rows."
                     br()
                     +"Columns can optionally support sorting vi provided sort function."
                     br()
-                    +"Each cell is renderred vi provided DSL function."
+                    +"Each cell is rendered vi provided DSL function."
                     br()
                     +"Check our "
                     a(href="#grid") { +"SmartGrid" }

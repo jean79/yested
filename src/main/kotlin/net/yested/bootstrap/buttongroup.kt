@@ -11,7 +11,7 @@ import java.util.*
 <button type="button" class="btn btn-default">Right</button>
 </div>
  */
-public class ButtonGroup(val size: ButtonSize = ButtonSize.DEFAULT, val onSelect:Function1<String, Unit>? = null) : Component {
+ class ButtonGroup(val size: ButtonSize = ButtonSize.DEFAULT, val onSelect:Function1<String, Unit>? = null) : Component {
 
     override val element = createElement("div")
 
@@ -22,9 +22,9 @@ public class ButtonGroup(val size: ButtonSize = ButtonSize.DEFAULT, val onSelect
         element.setAttribute("role", "group")
     }
 
-    public var value:String? = null
+     var value:String? = null
 
-    public fun select(selectValue:String) {
+     fun select(selectValue:String) {
         value = selectValue
         onSelect?.invoke(selectValue)
         for ((key, button) in buttons) {
@@ -36,7 +36,7 @@ public class ButtonGroup(val size: ButtonSize = ButtonSize.DEFAULT, val onSelect
         }
     }
 
-    public fun button(value:String, look: ButtonLook = ButtonLook.DEFAULT, label : HTMLComponent.() -> Unit) {
+     fun button(value:String, look: ButtonLook = ButtonLook.DEFAULT, label : HTMLComponent.() -> Unit) {
         val button = BtsButton(label = label, look = look, size = size) {
             select(value)
         }
@@ -46,6 +46,6 @@ public class ButtonGroup(val size: ButtonSize = ButtonSize.DEFAULT, val onSelect
 
 }
 
-public fun HTMLComponent.buttonGroup(size: ButtonSize = ButtonSize.DEFAULT, onSelect:Function1<String, Unit>? = null, init:ButtonGroup.() -> Unit) {
+ fun HTMLComponent.buttonGroup(size: ButtonSize = ButtonSize.DEFAULT, onSelect:Function1<String, Unit>? = null, init:ButtonGroup.() -> Unit) {
     +(ButtonGroup(size = size, onSelect = onSelect) with init)
 }

@@ -7,22 +7,22 @@ import jquery.jq
 
 @native
 private fun JQuery.tooltip(options: Any): Unit = noImpl
-public data class TooltipDelay(val show: Int, val hide: Int)
-public enum class TooltipPlacement {
+ data class TooltipDelay(val show: Int, val hide: Int)
+ enum class TooltipPlacement {
     TOP,
     BOTTOM,
     LEFT,
     RIGHT,
     AUTO
 }
-public enum class TooltipTrigger {
+ enum class TooltipTrigger {
     CLICK,
     HOVER,
     FOCUS,
     MANUAL
 }
-public data class TooltipViewPort(val selector: String, val padding: Int)
-public data class TooltipOptions(val animation: Boolean = true,
+ data class TooltipViewPort(val selector: String, val padding: Int)
+ data class TooltipOptions(val animation: Boolean = true,
                                  val delay: TooltipDelay = TooltipDelay(0, 0),
                                  val html: Boolean = false,
                                  val placement: TooltipPlacement = TooltipPlacement.TOP,
@@ -30,7 +30,7 @@ public data class TooltipOptions(val animation: Boolean = true,
                                  val viewPort: TooltipViewPort = TooltipViewPort("body", 0)
 )
 
-public fun addTooltip(element: HTMLElement, options: TooltipOptions = TooltipOptions(), title: HTMLElement.()->String) {
+ fun addTooltip(element: HTMLElement, options: TooltipOptions = TooltipOptions(), title: HTMLElement.()->String) {
     element.whenAddedToDom {
         jq(element).tooltip(object {
             val animation = options.animation
@@ -44,13 +44,13 @@ public fun addTooltip(element: HTMLElement, options: TooltipOptions = TooltipOpt
     }
 }
 
-public fun removeTooltip(element: HTMLElement) {
+ fun removeTooltip(element: HTMLElement) {
     element.whenAddedToDom {
         jq(element).tooltip("destroy")
     }
 }
 
-public fun showTooltip(element: HTMLElement) {
+ fun showTooltip(element: HTMLElement) {
     element.whenAddedToDom {
         jq(element).tooltip("show")
     }

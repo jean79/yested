@@ -20,7 +20,7 @@ import kotlin.dom.on
  *
  * uses library: https://github.com/Eonasdan/bootstrap-datetimepicker/blob/master/build/js/bootstrap-datetimepicker.min.js
  */
-public class DateField(formatter: FormatStringBuilder.()->FormatString) : InputElementComponent<Moment?>() {
+ class DateField(formatter: FormatStringBuilder.()->FormatString) : InputElementComponent<Moment?>() {
 
     val formatString = FormatStringBuilder().formatter().toString()
 
@@ -29,7 +29,7 @@ public class DateField(formatter: FormatStringBuilder.()->FormatString) : InputE
         className = "form-control"
     }) as HTMLInputElement
 
-    override val element =
+    override val element:HTMLInputElement =
             (Div() with {
                 clazz = "input-group date"
                 appendChild(inputElement)
@@ -37,7 +37,7 @@ public class DateField(formatter: FormatStringBuilder.()->FormatString) : InputE
                     clazz = "input-group-addon"
                     appendChild((Span() with { clazz = "glyphicon glyphicon-calendar"; style = "cursor: pointer;" }))
                 }))
-            }).element as HTMLInputElement
+            }).element.asDynamic()
 
     override fun clear() {
         data = null

@@ -6,7 +6,7 @@ import net.yested.*
 import net.yested.utils.*
 import org.w3c.dom.HTMLElement
 
-public enum class ScrollBarOrientation(val directionProperty:String, val nonDirectionProperty:String, val axis:String, val cssPosProperty:String) {
+ enum class ScrollBarOrientation(val directionProperty:String, val nonDirectionProperty:String, val axis:String, val cssPosProperty:String) {
     VERTICAL(directionProperty = "height", nonDirectionProperty = "width", axis = "y", cssPosProperty = "top"),
     HORIZONTAL(directionProperty = "width", nonDirectionProperty = "height", axis = "x", cssPosProperty = "left")
 }
@@ -14,7 +14,7 @@ public enum class ScrollBarOrientation(val directionProperty:String, val nonDire
 /**
  * https://github.com/cowboy/jquery-throttle-debounce
  */
-public class ScrollBar(
+ class ScrollBar(
         val orientation: ScrollBarOrientation,
         val size: Dimension,
         var numberOfItems: Int,
@@ -32,7 +32,7 @@ public class ScrollBar(
 
     private var handleDimension:Int = 0
 
-    public fun setTrackerVisible(visibleTracker:Boolean) {
+     fun setTrackerVisible(visibleTracker:Boolean) {
         if (visibleTracker) {
             jq(handle.element).css("visibility", "visible")
         } else {
@@ -119,7 +119,7 @@ public class ScrollBar(
         positionHandler(currentPosition)
     }
 
-    public var position:Int
+     var position:Int
         get() = currentPosition
         set(value:Int) {
             currentPosition = value
@@ -131,7 +131,7 @@ public class ScrollBar(
         jq(handle.element).css(orientation.cssPosProperty, "${position}px")
     }
 
-    public fun setup(numberOfItems: Int, visibleItems: Int, newPosition: Int) {
+     fun setup(numberOfItems: Int, visibleItems: Int, newPosition: Int) {
         this.numberOfItems = numberOfItems
         this.visibleItems = visibleItems
         element.whenAddedToDom {

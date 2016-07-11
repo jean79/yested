@@ -8,7 +8,7 @@
     <artifactId>Yested</artifactId>
     <version>SNAPSHOT-1</version>
     <properties>
-        <kotlin.version>1.0.0-beta-4583</kotlin.version>
+        <kotlin.version>1.0.2</kotlin.version>
         <build.number>0.0.0.1</build.number>
     </properties>
     <packaging>jar</packaging>

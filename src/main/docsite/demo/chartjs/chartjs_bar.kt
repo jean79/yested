@@ -23,7 +23,7 @@ fun createChartJSBarSection(): Div {
                     labels = arrayOf("Jan", "Feb", "Mar", "Apr", "May", "Jun", "July", "Aug", "Sept", "Oct", "Nov", "Dec"),
                     datasets = arrayOf(
                             BarChartSeries(
-                                    label = "Czech Republic",
+                                    label = "Czech Re",
                                     strokeColor = colorCZE.copy(alpha = 0.8).toHTMLColor(),
                                     fillColor = colorCZE.copy(alpha = 0.5).toHTMLColor(),
                                     highlightStroke = colorCZE.copy(alpha = 1.0).toHTMLColor(),

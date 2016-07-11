@@ -52,20 +52,20 @@ import org.w3c.dom.events.Event
  *
  */
 
-public enum class NavbarPosition(val code:String) {
+ enum class NavbarPosition(val code:String) {
     STATIC_TOP("static-top"),
     FIXED_TOP("fixed-top"),
     FIXED_BOTTOM("fixed-bottom")
 }
 
-public enum class NavbarLook(val code:String) {
+ enum class NavbarLook(val code:String) {
     DEFAULT("default"),
     INVERSE("inverse")
 }
 
-public class Navbar(id:String, position: NavbarPosition = NavbarPosition.STATIC_TOP, look:NavbarLook = NavbarLook.DEFAULT, val layout: ContainerLayout = ContainerLayout.DEFAULT) : Component {
+ class Navbar(id:String, position: NavbarPosition = NavbarPosition.STATIC_TOP, look:NavbarLook = NavbarLook.DEFAULT, val layout: ContainerLayout = ContainerLayout.DEFAULT) : Component {
 
-    override public var element = createElement("nav")
+    override  var element = createElement("nav")
 
     private val ul = UL() with { clazz = "nav navbar-nav" }
     private val collapsible = div(id = id, clazz = "navbar-collapse collapse") { +ul }
@@ -98,7 +98,7 @@ public class Navbar(id:String, position: NavbarPosition = NavbarPosition.STATIC_
 
     }
 
-    public fun brand(href:String = "/", init: HTMLComponent.() -> Unit):Unit {
+     fun brand(href:String = "/", init: HTMLComponent.() -> Unit):Unit {
         brandLink.href = href
         brandLink.clazz = "navbar-brand"
         brandLink.setChild( Span() with { init() })
@@ -111,7 +111,7 @@ public class Navbar(id:String, position: NavbarPosition = NavbarPosition.STATIC_
      * Top menu item
      * <li class="active"><a href="#">Home</a></li>
      */
-    public fun item(href:String = "#", onclick: Function0<Unit>? = null, init: Anchor.() -> Unit) {
+     fun item(href:String = "#", onclick: Function0<Unit>? = null, init: Anchor.() -> Unit) {
 
         val li = Li()
 
@@ -128,21 +128,21 @@ public class Navbar(id:String, position: NavbarPosition = NavbarPosition.STATIC_
         menuItems.add(li)
     }
 
-    public fun dropdown(label: Anchor.()->Unit, init:NavBarDropdown.()->Unit):Unit {
+     fun dropdown(label: Anchor.()->Unit, init:NavBarDropdown.()->Unit):Unit {
         val dropdown = NavBarDropdown({ deselectAll() }, label) with { init() }
         ul.appendChild(dropdown)
         menuItems.add(dropdown)
     }
 
-    public fun deselectAll() {
+     fun deselectAll() {
         menuItems.forEach { it.clazz = "" }
     }
 
-    public fun left(init : Div.()->Unit) {
+     fun left(init : Div.()->Unit) {
         collapsible.appendChild(div(clazz = "navbar-left") { init() })
     }
 
-    public fun right(init : Div.()->Unit) {
+     fun right(init : Div.()->Unit) {
         collapsible.appendChild(div(clazz = "navbar-right") { init() })
     }
 
@@ -175,20 +175,20 @@ class NavBarDropdown(private val deselectFun:() -> Unit, label: Anchor.()->Unit)
         element.setAttribute("class", "dropdown active");
     }
 
-    public fun item(href:String = "#", onclick: Function1<Event, dynamic>? = null, init: Anchor.() -> Unit) {
+     fun item(href:String = "#", onclick: Function1<Event, dynamic>? = null, init: Anchor.() -> Unit) {
         val li = Li() with {
             a(href = href, onclick = { event-> selectThis(); onclick?.let { onclick(event) } }, init = init)
         }
         ul.appendChild(li)
     }
 
-    public fun divider() {
+     fun divider() {
         ul.appendChild(HTMLComponent("li") with { "class".."divider" })
     }
 
 }
 
-public fun HTMLComponent.navbar(id:String, position: NavbarPosition = NavbarPosition.STATIC_TOP, look:NavbarLook = NavbarLook.DEFAULT,
+ fun HTMLComponent.navbar(id:String, position: NavbarPosition = NavbarPosition.STATIC_TOP, look:NavbarLook = NavbarLook.DEFAULT,
                                 layout: ContainerLayout = ContainerLayout.DEFAULT, init: Navbar.() -> Unit):Unit {
     +(Navbar(id = id, position = position, look = look, layout = layout) with { init() })
 }

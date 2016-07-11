@@ -13,7 +13,7 @@ private fun getHashSplitted(): Array<String> {
     return window.location.hash.split("_").toTypedArray()
 }
 
-public fun registerHashChangeListener(runNow:Boolean = true, listener:(Array<String>) -> Unit) {
+ fun registerHashChangeListener(runNow:Boolean = true, listener:(Array<String>) -> Unit) {
     routerJQuery.on("hashchange") {
         listener(getHashSplitted())
     }

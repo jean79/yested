@@ -25,7 +25,7 @@ class VerticalContainer(val width: Dimension? = null, height: Dimension, val gap
 
     private fun needToCalculateWidth() = width == null
 
-    public fun row(width: Dimension? = null, height: Dimension, init: HTMLComponent.() -> Unit) {
+     fun row(width: Dimension? = null, height: Dimension, init: HTMLComponent.() -> Unit) {
         val child = Div() with {
             style = "position: absolute; width: ${width?.toHtml()};"
             init()
@@ -75,6 +75,6 @@ class VerticalContainer(val width: Dimension? = null, height: Dimension, val gap
 
 }
 
-public fun HTMLComponent.verticalContainer(width: Dimension? = null, height: Dimension, gap: Int = 0, init: VerticalContainer.() -> Unit) {
+ fun HTMLComponent.verticalContainer(width: Dimension? = null, height: Dimension, gap: Int = 0, init: VerticalContainer.() -> Unit) {
     +(VerticalContainer(width = width, height = height, gap = gap) with { init() })
 }

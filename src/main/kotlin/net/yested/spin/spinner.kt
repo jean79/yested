@@ -7,15 +7,15 @@ import net.yested.LineChartData
 import net.yested.Context
 import net.yested.HTMLComponent
 
-public @native class SpinnerNative() {
-    public fun spin(): SpinnerCreated = noImpl
+ @native class SpinnerNative() {
+     fun spin(): SpinnerCreated = noImpl
 }
 
-public @native class SpinnerCreated() {
-    public val el: HTMLElement = noImpl
+ @native class SpinnerCreated() {
+     val el: HTMLElement = noImpl
 }
 
-public @native("new Spinner") fun createSpinner(options: Any? = null): SpinnerNative = SpinnerNative();
+ @native("new Spinner") fun createSpinner(options: Any? = null): SpinnerNative = SpinnerNative();
 
 data class SpinnerOptions(
         val lines: Int = 13, // The number of lines to draw
@@ -33,10 +33,14 @@ data class SpinnerOptions(
         val className: String = "spinner", // The CSS class to assign to the spinner
         val zIndex: Double = 2e9, // The z-index (defaults to 2000000000)
         val top: String = "50%", // Top position relative to parent
-        val left: String = "50%" // Left position relative to parent
+        val left: String = "50%", // Left position relative to parent
+        val scale: Float = 1.0f, // Scales overall size of the spinner
+        val opacity: Float = 0.25f, // Opacity of the lines
+        val position: String = "absolute", // Element positioning
+        val fps: Int = 20 // Frames per second when using setTimeout() as a fallback for CSS
 )
 
-public class Spinner(val options:SpinnerOptions = SpinnerOptions()) : Component {
+ class Spinner(val options:SpinnerOptions = SpinnerOptions()) : Component {
 
     private val jsSpinnerElement = createSpinner(createOptions()).spin().el
 
@@ -57,12 +61,16 @@ public class Spinner(val options:SpinnerOptions = SpinnerOptions()) : Component 
         val zIndex = options.zIndex
         val top = options.top
         val left = options.left
+        val scale = options.scale
+        val opacity = options.opacity
+        val position = options.position
+        val fps = options.fps
     }
 
     override val element: HTMLElement = jsSpinnerElement
 
 }
 
-public fun HTMLComponent.spinner(options:SpinnerOptions = SpinnerOptions()) {
+ fun HTMLComponent.spinner(options:SpinnerOptions = SpinnerOptions()) {
     +(Spinner(options))
 }

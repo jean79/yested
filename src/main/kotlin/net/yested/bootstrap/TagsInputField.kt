@@ -10,7 +10,7 @@ import net.yested.utils.on
 import net.yested.utils.off
 import net.yested.whenAddedToDom
 
-public enum class TagsInputFieldType(val className: String) {
+ enum class TagsInputFieldType(val className: String) {
     INFO("info"),
     PRIMARY("primary"),
     DANGER("danger"),
@@ -25,7 +25,7 @@ private fun JQuery.tagsinput(command: dynamic = null, data: dynamic = null): dyn
 private data class TagsInputBeforeEvent<T>(val item: T, var cancel: Boolean)
 private data class TagsInputAfterEvent<T>(val item: T)
 
-public enum class BeforeEventPermission {
+ enum class BeforeEventPermission {
     PREVENT,
     ALLOW
 }
@@ -37,25 +37,25 @@ private fun <T> tagsInputBeforeEventHandler(event: TagsInputBeforeEvent<T>, func
     }
 }
 
-public class TagsInputField<T>(val textFactory: (T) -> String = { it.toString() },
+ class TagsInputField<T>(val textFactory: (T) -> String = { it.toString() },
                                val typeFactory: (T) -> TagsInputFieldType = { TagsInputFieldType.DEFAULT },
                                val idFactory: ((T) -> Any)? = null,
                                inputSize: InputSize = InputSize.DEFAULT) : InputField<Array<T>>(inputSize, placeholder = null, type = "text") {
 
-    public var maxTagCount: Int? = null
-    public var onAddExistingTag: (T, JQuery) -> Unit = { item, jqTag -> jqTag.hide { jqTag.fadeIn(400, {}) } }
-    public var onBeforeItemAdd: ((T) -> BeforeEventPermission)? = null
-    public var onAfterItemAdded: ((T) -> Unit)? = null
-    public var onBeforeItemRemove: ((T) -> BeforeEventPermission)? = null
-    public var onAfterItemRemoved: ((T) -> Unit)? = null
-    public var maxLengthOfSingleTag: Int? = null
-    public var removeWhiteSpacesAroundTagsAutomatically: Boolean = false
-    public var allowDuplicates: Boolean = false
+     var maxTagCount: Int? = null
+     var onAddExistingTag: (T, JQuery) -> Unit = { item, jqTag -> jqTag.hide { jqTag.fadeIn(400, {}) } }
+     var onBeforeItemAdd: ((T) -> BeforeEventPermission)? = null
+     var onAfterItemAdded: ((T) -> Unit)? = null
+     var onBeforeItemRemove: ((T) -> BeforeEventPermission)? = null
+     var onAfterItemRemoved: ((T) -> Unit)? = null
+     var maxLengthOfSingleTag: Int? = null
+     var removeWhiteSpacesAroundTagsAutomatically: Boolean = false
+     var allowDuplicates: Boolean = false
 
-    public var dontInitializeAutomatically: Boolean = false
+     var dontInitializeAutomatically: Boolean = false
 
     // TODO freeInput, typeahead
-    public var initialized: Boolean = false
+     var initialized: Boolean = false
 
     override var data: Array<T>
         get() = tags
@@ -67,21 +67,21 @@ public class TagsInputField<T>(val textFactory: (T) -> String = { it.toString() 
         element.setAttribute("data-role", "tagsinput")
     }
 
-    public fun add(newElem: T) {
+     fun add(newElem: T) {
         if (!initialized) {
             return
         }
         jq(this.element).tagsinput("add", newElem)
     }
 
-    public fun remove(newElem: T) {
+     fun remove(newElem: T) {
         if (!initialized) {
             return
         }
         jq(this.element).tagsinput("remove", newElem)
     }
 
-    public fun removeAll() {
+     fun removeAll() {
         if (!initialized) {
             return
         }
@@ -92,28 +92,28 @@ public class TagsInputField<T>(val textFactory: (T) -> String = { it.toString() 
         removeAll()
     }
 
-    public fun focus() {
+     fun focus() {
         if (!initialized) {
             return
         }
         jq(this.element).tagsinput("focus")
     }
 
-    public fun input(): JQuery =
+     fun input(): JQuery =
             if (!initialized) {
                 jq(this.element)
             } else {
                 jq(this.element).tagsinput("input")
             }
 
-    public fun refresh() {
+     fun refresh() {
         if (!initialized) {
             return
         }
         jq(this.element).tagsinput("refresh")
     }
 
-    public fun destroy() {
+     fun destroy() {
         if (!initialized) {
             return
         }
@@ -126,7 +126,7 @@ public class TagsInputField<T>(val textFactory: (T) -> String = { it.toString() 
         initialized = false
     }
 
-    public fun init(calledAutomatically: Boolean = false) {
+     fun init(calledAutomatically: Boolean = false) {
         if (initialized || (calledAutomatically && dontInitializeAutomatically)) {
             return
         }
@@ -155,7 +155,7 @@ public class TagsInputField<T>(val textFactory: (T) -> String = { it.toString() 
         initialized = true
     }
 
-    public var tags: Array<T>
+     var tags: Array<T>
         get() {
             return if (initialized) {
                 jq(this.element).tagsinput("items")
