@@ -96,18 +96,18 @@ import org.w3c.dom.HTMLSelectElement
 
  class BtsCheckBox(private val label:HTMLComponent.()->Unit) : CheckBox() {
 
-    private val inputCheckbox = (createElement("input") with {
+    private val inputCheckbox:HTMLInputElement = (createElement("input") with {
                                                                     setAttribute("type", "checkbox")
-                                                                }) as HTMLInputElement
+                                                                }).asDynamic()
 
-    override val element =
+    override val element:HTMLInputElement =
             (createElement("div") with {
                 setAttribute("class", "checkbox")
                 appendChild(createElement("label") with {
                     appendChild(inputCheckbox)
                     appendChild((Span() with label).element)
                 })
-            }) as HTMLInputElement
+            }).asDynamic()
 
      override var disabled:Boolean
         get() = inputCheckbox.disabled

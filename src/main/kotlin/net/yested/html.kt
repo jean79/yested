@@ -551,7 +551,7 @@ open class Canvas(val width:Int, val height:Int) : HTMLComponent("canvas") {
         element.setAttribute("width", "${width}")
         element.setAttribute("height", "${height}")
     }
-    fun getContext(id:String):Context = (element as CanvasI).getContext(id)
+    fun getContext(id:String):Context = element.asDynamic().getContext(id)
 }
 
  class Div : HTMLComponent("div") { }

@@ -29,7 +29,7 @@ import kotlin.dom.on
         className = "form-control"
     }) as HTMLInputElement
 
-    override val element =
+    override val element:HTMLInputElement =
             (Div() with {
                 clazz = "input-group date"
                 appendChild(inputElement)
@@ -37,7 +37,7 @@ import kotlin.dom.on
                     clazz = "input-group-addon"
                     appendChild((Span() with { clazz = "glyphicon glyphicon-calendar"; style = "cursor: pointer;" }))
                 }))
-            }).element as HTMLInputElement
+            }).element.asDynamic()
 
     override fun clear() {
         data = null
