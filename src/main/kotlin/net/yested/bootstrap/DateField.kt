@@ -1,6 +1,6 @@
 package net.yested.bootstrap
 
-import net.yested.InputElementComponent
+import net.yested.ObservableInput
 import net.yested.Div
 import net.yested.createElement
 import net.yested.with
@@ -13,14 +13,13 @@ import net.yested.utils.FormatStringBuilder
 import net.yested.whenAddedToDom
 import net.yested.utils.on
 import org.w3c.dom.HTMLInputElement
-import kotlin.dom.on
 
 //TODO: support Locales: http://momentjs.com/docs/#/i18n/
 /**
  *
  * uses library: https://github.com/Eonasdan/bootstrap-datetimepicker/blob/master/build/js/bootstrap-datetimepicker.min.js
  */
- class DateField(formatter: FormatStringBuilder.()->FormatString) : InputElementComponent<Moment?>() {
+ class DateField(formatter: FormatStringBuilder.()->FormatString) : ObservableInput<Moment?>() {
 
     val formatString = FormatStringBuilder().formatter().toString()
 
@@ -29,7 +28,7 @@ import kotlin.dom.on
         className = "form-control"
     }) as HTMLInputElement
 
-    override val element:HTMLInputElement =
+    override val element =
             (Div() with {
                 clazz = "input-group date"
                 appendChild(inputElement)
@@ -37,13 +36,13 @@ import kotlin.dom.on
                     clazz = "input-group-addon"
                     appendChild((Span() with { clazz = "glyphicon glyphicon-calendar"; style = "cursor: pointer;" }))
                 }))
-            }).element.asDynamic()
+            }).element
 
     override fun clear() {
         data = null
     }
 
-    override protected var value: String
+    protected var value: String
         get():String = inputElement.value
         set(value: String) {
             inputElement.value = value
