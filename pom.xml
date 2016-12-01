@@ -114,13 +114,6 @@
                         <phase>compile</phase>
                         <configuration>
                             <target>
-                                <!--<delete dir="${project.build.outputDirectory}" failonerror="false" />-->
-                                <!--<mkdir dir="${basedir}/target/generated-js-library"/>-->
-                                <copy todir="${project.build.outputDirectory}">
-                                    <fileset dir="${basedir}/src/main/kotlin">
-                                        <include name="**/*.kt"/>
-                                    </fileset>
-                                </copy>
                                 <copy todir="${project.build.outputDirectory}">
                                     <fileset dir="${project.build.directory}/js">
                                         <include name="*.js"/>
@@ -145,7 +138,6 @@
                         <forced/>
                         <manifestEntries>
                             <Implementation-Version>${build.number}</Implementation-Version>
-                            <Specification-Title>Kotlin JavaScript Lib</Specification-Title>
                             <Kotlin-JS-Module-Name>${project.artifactId}</Kotlin-JS-Module-Name>
                         </manifestEntries>
                     </archive>
