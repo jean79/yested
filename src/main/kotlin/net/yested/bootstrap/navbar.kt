@@ -5,7 +5,6 @@ import net.yested.HTMLComponent
 import net.yested.UL
 import net.yested.Li
 import net.yested.Anchor
-import java.util.ArrayList
 import net.yested.with
 import net.yested.Div
 import net.yested.Span

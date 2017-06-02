@@ -1,16 +1,17 @@
 package net.yested
 
 
- @native class RegExp { }
+external class RegExp(regexp:String, parameters:String)
 
- @native("new RegExp") fun regExp(regexp:String, parameters:String): RegExp = RegExp();
-
- @native fun Number.toFixed(dp:Int):String = noImpl
- @native fun String.replace(regex:String, with:String):String = noImpl
- @native fun String.replace(regex:RegExp, with:String):String = noImpl
+ @Suppress("NOTHING_TO_INLINE")
+ inline fun Number.toFixed(dp:Int):String = asDynamic().toFixed(dp)
+ @Suppress("NOTHING_TO_INLINE")
+ inline fun String.replace(regex:String, with:String):String = asDynamic().replace(regex, with)
+ @Suppress("NOTHING_TO_INLINE")
+ inline fun String.replace(regex:RegExp, with:String):String = asDynamic().replace(regex, with)
 
  fun String.replaceAll(regex:String, with:String):String {
-   return this.replace(regExp(regex, "g"), with)
+   return this.replace(RegExp(regex, "g"), with)
 }
 
 //fun Number.asMoney():String = this.toFixed(2).replace("\\d(?=(\\d{3})+\\.)", "$&,");

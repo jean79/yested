@@ -3,7 +3,6 @@ package complex
 import net.yested.*
 import net.yested.bootstrap.*
 import org.w3c.dom.HTMLElement
-import java.util.*
 
 enum class Continent(val label:String) {
     EUROPE("Europe"),

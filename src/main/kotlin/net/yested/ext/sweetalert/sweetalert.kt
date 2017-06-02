@@ -62,4 +62,4 @@ package net.yested.ext.sweetalert
         val timer: Number? = null
 )
 
-@native("swal")  fun swal(option:SwalOptions, handler:Function1<Boolean?, Unit>? = null):Unit = null!!
+external fun swal(option:SwalOptions, handler:Function1<Boolean?, Unit>? = definedExternally):Unit

@@ -25,8 +25,8 @@ package net.yested.bootstrap
 </form>
  */
 import net.yested.HTMLComponent
-import net.yested.with
 import net.yested.InputComponent
+import net.yested.with
 
  interface ValidatorI {
     fun onchange(invoke:(valid:Boolean)->Unit)
@@ -36,7 +36,7 @@ import net.yested.InputComponent
 
  class Validator<T>(val inputElement: InputComponent<T>, override val errorText:String, val validator:(value:T)->Boolean) : ValidatorI {
 
-    private val onChangeListeners: java.util.ArrayList<Function1<Boolean, Unit>> = java.util.ArrayList();
+    private val onChangeListeners: MutableList<(Boolean) -> Unit> = mutableListOf()
 
     private var listen = false
 

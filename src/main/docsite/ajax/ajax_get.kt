@@ -21,12 +21,12 @@ import net.yested.Fade
 import net.yested.bootstrap.FormStyle
 import net.yested.bootstrap.StringInputField
 
-@native interface Coordinates {
+external interface Coordinates {
     val lon : Double
     val lat : Double
 }
 
-@native interface Sys {
+external interface Sys {
     val type : Int
     val id : Int
     val message: Double
@@ -35,14 +35,14 @@ import net.yested.bootstrap.StringInputField
     val sunset: Int
 }
 
-@native interface Weather {
+external interface Weather {
     val id: Int
     val main: String
     val description : String
     val icon: String
 }
 
-@native interface Main {
+external interface Main {
     val temp : Double
     val pressure : Int
     val humidity: Int
@@ -50,16 +50,16 @@ import net.yested.bootstrap.StringInputField
     val temp_max : Double
 }
 
-@native interface Wind {
+external interface Wind {
     val speed : Double
     val deg : Int
 }
 
-@native interface Clouds {
+external interface Clouds {
     val all : Int
 }
 
-@native interface WeatherData {
+external interface WeatherData {
     val coord: Coordinates?
     val sys: Sys?
     val weather: Array<Weather>?
@@ -118,9 +118,9 @@ fun createAjaxGetSection(): Div {
     response -> do something with response
 }""")
                 br()
-                +"""ResponseType is a @native trait. It is a special Kotlin interface.
+                +"""ResponseType is a external trait. It is a special Kotlin interface.
                     Kotlin data classes cannot be used here as JQuery returns simple JS object parsed from JSON response."""
-                code(lang = "kotlin", content="""@native trait Coordinates {
+                code(lang = "kotlin", content="""external trait Coordinates {
     val lon : Double
     val lat : Double
 }
@@ -159,7 +159,7 @@ fun createAjaxGetSection(): Div {
             col(Medium(12)) {
                 pageHeader { h4 { +"Source for demo" }}
                 code(lang = "kotlin", content="""//definition of response, just fragment
-@native trait Main {
+external trait Main {
     val temp : Double
     val pressure : Int
     val humidity: Int
@@ -167,7 +167,7 @@ fun createAjaxGetSection(): Div {
     val temp_max : Double
 }
 
-@native trait WeatherData {
+external trait WeatherData {
     ...
     val base: String?
     val main : Main?

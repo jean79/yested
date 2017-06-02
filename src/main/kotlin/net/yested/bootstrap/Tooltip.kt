@@ -1,12 +1,12 @@
 package net.yested.bootstrap
 
 import jquery.JQuery
-import org.w3c.dom.HTMLElement
-import net.yested.whenAddedToDom
 import jquery.jq
+import net.yested.whenAddedToDom
+import org.w3c.dom.HTMLElement
 
-@native
-private fun JQuery.tooltip(options: Any): Unit = noImpl
+@Suppress("NOTHING_TO_INLINE")
+inline private fun JQuery.tooltip(options: Any): Unit = asDynamic().tooltip(options)
  data class TooltipDelay(val show: Int, val hide: Int)
  enum class TooltipPlacement {
     TOP,

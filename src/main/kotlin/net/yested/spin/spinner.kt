@@ -1,21 +1,17 @@
 package net.yested.spin
 
 import net.yested.Component
-import org.w3c.dom.HTMLElement
-import net.yested.PieChartSeries
-import net.yested.LineChartData
-import net.yested.Context
 import net.yested.HTMLComponent
+import org.w3c.dom.HTMLElement
 
- @native class SpinnerNative() {
-     fun spin(): SpinnerCreated = noImpl
+external class SpinnerCreated {
+     val el: HTMLElement = definedExternally
 }
 
- @native class SpinnerCreated() {
-     val el: HTMLElement = noImpl
+@JsName("Spinner")
+external class SpinnerNative(options: Any? = definedExternally) {
+    fun spin(): SpinnerCreated = definedExternally
 }
-
- @native("new Spinner") fun createSpinner(options: Any? = null): SpinnerNative = SpinnerNative();
 
 data class SpinnerOptions(
         val lines: Int = 13, // The number of lines to draw
@@ -42,7 +38,7 @@ data class SpinnerOptions(
 
  class Spinner(val options:SpinnerOptions = SpinnerOptions()) : Component {
 
-    private val jsSpinnerElement = createSpinner(createOptions()).spin().el
+    private val jsSpinnerElement = SpinnerNative(createOptions()).spin().el
 
     private fun createOptions(): Any = object {
         val lines = options.lines

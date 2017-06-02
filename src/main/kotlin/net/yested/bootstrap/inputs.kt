@@ -1,15 +1,6 @@
 package net.yested.bootstrap
 
-import java.util.ArrayList
-import net.yested.Attribute
-import net.yested.HTMLComponent
-import net.yested.Span
-import net.yested.with
-import net.yested.createElement
-import net.yested.appendComponent
-import net.yested.CheckBox
-import net.yested.ObservableInput
-import net.yested.InputElementComponent
+import net.yested.*
 import org.w3c.dom.HTMLInputElement
 import org.w3c.dom.HTMLOptionElement
 import org.w3c.dom.HTMLSelectElement
@@ -63,7 +54,7 @@ import org.w3c.dom.HTMLSelectElement
     }
 
     override var data: Int?
-        get() = if (value.isEmpty()) null else parseInt(value)
+        get() = if (value.isEmpty()) null else value.toInt()
         set(value) {this.value = if (value == null) "" else value.toString()}
 }
 
@@ -74,7 +65,7 @@ import org.w3c.dom.HTMLSelectElement
     }
 
     override var data: Float?
-        get() = if (value.isEmpty()) null else safeParseDouble(value)?.toFloat() ?: error("cannot convert $value to Float")
+        get() = if (value.isEmpty()) null else value.toFloatOrNull() ?: error("Cannot convert $value to float")
         set(value) {this.value = if (value == null) "" else value.toString()}
 }
 

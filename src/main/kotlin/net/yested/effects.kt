@@ -1,15 +1,20 @@
 package net.yested
 
 import jquery.JQuery
-import org.w3c.dom.HTMLElement
 import jquery.jq
 
-@native fun JQuery.fadeOut(duration:Int, callback:()->Unit) :Unit = noImpl;
-@native fun JQuery.fadeIn(duration:Int, callback:()->Unit) :Unit = noImpl;
-@native fun JQuery.slideUp(duration:Int, callback:()->Unit) :Unit = noImpl
-@native fun JQuery.slideDown(duration:Int, callback:()->Unit) :Unit = noImpl
-@native fun JQuery.show(callback:()->Unit) :Unit = noImpl;
-@native fun JQuery.hide(callback:()->Unit) :Unit = noImpl;
+@Suppress("NOTHING_TO_INLINE")
+inline fun JQuery.fadeOut(duration:Int, noinline callback:()->Unit) :Unit = asDynamic().fadeOut(duration, callback)
+@Suppress("NOTHING_TO_INLINE")
+inline fun JQuery.fadeIn(duration:Int, noinline callback:()->Unit) :Unit = asDynamic().fadeIn(duration, callback)
+@Suppress("NOTHING_TO_INLINE")
+inline fun JQuery.slideUp(duration:Int, noinline callback:()->Unit) :Unit = asDynamic().slideUp(duration, callback)
+@Suppress("NOTHING_TO_INLINE")
+inline fun JQuery.slideDown(duration:Int, noinline callback:()->Unit) :Unit = asDynamic().slideDown(duration, callback)
+@Suppress("NOTHING_TO_INLINE")
+inline fun JQuery.show(noinline callback:()->Unit) :Unit = asDynamic().show(callback)
+@Suppress("NOTHING_TO_INLINE")
+inline fun JQuery.hide(noinline callback:()->Unit) :Unit = asDynamic().hide(callback)
 
 private val DURATION = 200
 private val SLIDE_DURATION = DURATION * 2

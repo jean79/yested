@@ -1,14 +1,11 @@
 package net.yested.bootstrap
 
 import jquery.JQuery
-import net.yested.HTMLComponent
-import net.yested.div
-import net.yested.Div
-import net.yested.with
 import jquery.jq
-import net.yested.isTrue
+import net.yested.*
 
- @native fun JQuery.modal(options: String):Unit = noImpl;
+ @Suppress("NOTHING_TO_INLINE")
+ inline fun JQuery.modal(options: String):Unit = asDynamic().modal(options)
 
 /**
  * <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

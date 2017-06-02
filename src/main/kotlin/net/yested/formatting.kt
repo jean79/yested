@@ -1,6 +1,8 @@
 package net.yested
 
- data class Color(
+import kotlin.js.Math
+
+data class Color(
         val red: Int,
         val green: Int,
         val blue: Int,

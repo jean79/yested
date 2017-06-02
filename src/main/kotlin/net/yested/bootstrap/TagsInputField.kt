@@ -1,13 +1,11 @@
 package net.yested.bootstrap
 
-import net.yested.BooleanAttribute
-import net.yested.HTMLComponent
 import jquery.JQuery
 import jquery.jq
-import net.yested.hide
 import net.yested.fadeIn
-import net.yested.utils.on
+import net.yested.hide
 import net.yested.utils.off
+import net.yested.utils.on
 import net.yested.whenAddedToDom
 
  enum class TagsInputFieldType(val className: String) {
@@ -19,8 +17,12 @@ import net.yested.whenAddedToDom
     WARNING("warning")
 }
 
-@native
-private fun JQuery.tagsinput(command: dynamic = null, data: dynamic = null): dynamic = noImpl
+@Suppress("NOTHING_TO_INLINE")
+inline
+private fun JQuery.tagsinput(command: dynamic, data: dynamic): dynamic = asDynamic().tagsinput(command, data)
+@Suppress("NOTHING_TO_INLINE")
+inline
+private fun JQuery.tagsinput(command: dynamic): dynamic = asDynamic().tagsinput(command)
 
 private data class TagsInputBeforeEvent<T>(val item: T, var cancel: Boolean)
 private data class TagsInputAfterEvent<T>(val item: T)

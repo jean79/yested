@@ -2,12 +2,13 @@ package net.yested
 
 import kotlin.browser.window
 
-@native
+external
 private interface JQRouter {
-    fun on(eventName:String, listener:() -> Unit):Unit = noImpl
+    fun on(eventName:String, listener:() -> Unit):Unit
 }
 
-@native("$(window)") private var routerJQuery: JQRouter = null!!
+inline private val routerJQuery: JQRouter
+    get() = js("$(window)")
 
 private fun getHashSplitted(): Array<String> {
     return window.location.hash.split("_").toTypedArray()

@@ -12,6 +12,7 @@ import net.yested.utils.keypress
 import net.yested.utils.on
 import org.w3c.dom.HTMLElement
 import kotlin.browser.window
+import kotlin.js.Math
 
 data class MarketData(val ticker:String, val country:String, val ccy:String, var price:Double, var move:Double,
                       val min:Double, val max:Double, val avg:Double, val quantity:Double,
@@ -27,9 +28,7 @@ fun HTMLComponent.coloredNumber(value:Double) {
     })
 }
 
-@native fun HTMLElement.focus() : Unit = noImpl
-
- class DoubleEditor<TYPE>(
+class DoubleEditor<TYPE>(
         val getValue:(TYPE)->Double?,
         val saveValue:(TYPE, Double)->Unit) : CellEditorFactory<TYPE> {
 
@@ -53,7 +52,7 @@ fun HTMLComponent.coloredNumber(value:Double) {
         })
 
         jq(inputField.element).keypress( { event:dynamic ->
-            val d = safeParseDouble(inputField.data)
+            val d = inputField.data.toDoubleOrNull()
             if (event.which == 13 && d != null) {
                 closeCalled = true
                 closeHandler()
@@ -126,7 +125,7 @@ class CustomizableGridSection: Component {
                             sortFunction = compareByValue<MarketData, String> { it.ccy },
                             groupBy = { it.ccy }),
                     GridColumn(id = "price",  width = "80px", label = "Price", render = { +"${it.price.toFixed(2)}" },
-                            filterFactory = TextInputFilterFactory { text -> val value = parseInt(text); { item:MarketData -> item.price >= value} },
+                            filterFactory = TextInputFilterFactory { text -> val value = text.toInt(); { item:MarketData -> item.price >= value} },
                             sortFunction = compareByValue<MarketData, Double> { it.price },
                             editor = DoubleEditor(getValue = {it.price}, saveValue = {item, value -> updateItem(item.copy(price = value), "price")} ) ),
                     GridColumn(id = "move", width = "80px", label = "Move", render = { coloredNumber(it.move) }, sortFunction = compareByValue<MarketData, Double> { it.move }, getNumber = { it.move }),

@@ -1,6 +1,6 @@
 package net.yested.utils
 
- @kotlin.js.native("isNaN") fun isNaN(n:Number):Boolean = noImpl
+ external fun isNaN(n:Number):Boolean = definedExternally
 
  fun toZero(n:Double):Double =
     if (isNaN(n)) {

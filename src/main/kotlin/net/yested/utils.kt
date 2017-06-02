@@ -1,12 +1,11 @@
 package net.yested
 
-import org.w3c.dom.Element
-import org.w3c.dom.Node
 import net.yested.utils.isIncludedInDOM
+import org.w3c.dom.Element
 import org.w3c.dom.HTMLElement
+import org.w3c.dom.Node
 import kotlin.browser.document
 import kotlin.browser.window
-import kotlin.comparisons.compareValues
 
  infix fun <T> T.with(init:T.()->Unit):T {
     this.init()
@@ -45,8 +44,6 @@ fun <T> Boolean.isTrue(value:T, default:T):T =
  fun <T, V : Comparable<V>> compareByValue(get: (T) -> V?): (T, T) -> Int {
     return { l, r -> compareValues(get(l), get(r)) }
 }
-
- @kotlin.js.native fun Node.isSameNode(node:Node):Boolean = noImpl
 
  fun Node.getIndexOfChildNode(childElement:Node):Int {
     var index = 0

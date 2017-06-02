@@ -8,10 +8,10 @@ import net.yested.layout.*
 import net.yested.layout.containers.VerticalContainer
 import net.yested.layout.containers.horizontalContainer
 import net.yested.utils.*
-import org.w3c.dom.Node
 import org.w3c.dom.HTMLElement
-import java.util.*
+import org.w3c.dom.Node
 import kotlin.browser.window
+import kotlin.js.Math
 
 interface CellEditorFactory<TYPE> {
     fun createEditor(width:String, item:TYPE, closeHandler: ()->Unit):HTMLElement

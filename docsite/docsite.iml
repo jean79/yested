@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet type="kotlin-language" name="Kotlin">
+      <configuration version="2" platform="JavaScript ">
+        <compilerSettings />
+        <compilerArguments>
+          <option name="moduleKind" value="plain" />
+          <option name="languageVersion" value="1.1" />
+          <option name="apiVersion" value="1.1" />
+          <option name="coroutinesWarn" value="true" />
+        </compilerArguments>
+      </configuration>
+    </facet>
+  </component>
+  <component name="NewModuleRootManager">
+    <output url="file://$MODULE_DIR$/../target/classes" />
+    <output-test url="file://$MODULE_DIR$/../target/test-classes" />
+    <exclude-output />
+    <content url="file://$MODULE_DIR$/../src/main/docsite">
+      <sourceFolder url="file://$MODULE_DIR$/../src/main/docsite" isTestSource="false" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Maven: org.jetbrains.kotlin:kotlin-stdlib-js:1.1.2" level="project" />
+    <orderEntry type="library" name="Maven: org.jetbrains.kotlin:kotlin-stdlib-js:1.1.2" level="project" />
+    <orderEntry type="module" module-name="Yested" />
+  </component>
+</module>
