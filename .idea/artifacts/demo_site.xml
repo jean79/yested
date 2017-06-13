@@ -1,9 +1,0 @@
-<component name="ArtifactManager">
-  <artifact build-on-make="true" name="demo-site">
-    <output-path>$PROJECT_DIR$/demo-site/js</output-path>
-    <root id="root">
-      <element id="module-output" name="docsite" />
-      <element id="module-output" name="Yested" />
-    </root>
-  </artifact>
-</component>
