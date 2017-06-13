@@ -1,10 +1,8 @@
 package net.yested.utils
 
-import org.w3c.dom.Node
-import net.yested.with
 import org.w3c.dom.HTMLElement
+import org.w3c.dom.Node
 import org.w3c.dom.Window
-import kotlin.browser.window
 
 /**
  * @return true if given element is included in page DOM
@@ -14,9 +12,12 @@ import kotlin.browser.window
 * return (node as HTMLElement).offsetParent != null // this is fast but does not work in IE9
  */
 
-@native class CSSStyleDeclaration(val display:String)
+external class CSSStyleDeclaration {
+    val display:String
+}
 
-@native fun Window.getComputedStyle(node:Node):CSSStyleDeclaration = noImpl
+@Suppress("NOTHING_TO_INLINE")
+inline fun Window.getComputedStyle(node:Node):CSSStyleDeclaration = asDynamic().getComputedStyle(node)
 
  fun isIncludedInDOM(node:Node):Boolean {
     /*var style = window.getComputedStyle(node);

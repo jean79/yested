@@ -4,7 +4,6 @@ import net.yested.HTMLComponent
 import net.yested.UL
 import net.yested.with
 import net.yested.Li
-import java.util.ArrayList
 import net.yested.createElement
 import net.yested.Component
 import net.yested.appendComponent

@@ -1,14 +1,10 @@
 package net.yested.utils
 
-import org.w3c.dom.HTMLElement
-import net.yested.AjaxRequest
-
-@native
-interface Performance {
-    fun now(): Int = noImpl
+external interface Performance {
+    fun now(): Int
 }
 
-@native("performance")  var performance: Performance = null!!
+external val performance: Performance
 
 fun measure(title:String = "Execution", code:()->Unit) {
     val start = performance.now()

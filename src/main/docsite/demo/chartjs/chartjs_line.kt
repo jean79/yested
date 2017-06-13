@@ -1,15 +1,10 @@
 package demo.chartjs
 
-import net.yested.Div
-import net.yested.div
-import net.yested.Chart
-import net.yested.LineChartData
-import net.yested.LineChartSeries
-import net.yested.bootstrap.btsButton
-import net.yested.bootstrap.ButtonSize
+import net.yested.*
 import net.yested.bootstrap.ButtonLook
-import net.yested.Colors
-import net.yested.toHTMLColor
+import net.yested.bootstrap.ButtonSize
+import net.yested.bootstrap.btsButton
+import kotlin.js.Math
 
 fun createChartJSLineSection(): Div {
 

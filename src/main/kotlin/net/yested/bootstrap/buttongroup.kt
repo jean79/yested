@@ -1,7 +1,6 @@
 package net.yested.bootstrap
 
 import net.yested.*
-import java.util.*
 
 /**
  * Created by jean on 24.12.2014.

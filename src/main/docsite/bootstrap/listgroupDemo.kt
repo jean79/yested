@@ -1,7 +1,10 @@
 package bootstrap
 
-import net.yested.*
+import net.yested.Div
+import net.yested.Span
 import net.yested.bootstrap.*
+import net.yested.div
+import kotlin.js.Math
 
 data class MailFolder(val name:String, val unread:Int)
 

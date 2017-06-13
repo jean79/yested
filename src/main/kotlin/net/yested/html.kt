@@ -1,16 +1,12 @@
 package net.yested
 
 import jquery.jq
-import jquery.JQuery
 import org.w3c.dom.HTMLElement
 import org.w3c.dom.HTMLInputElement
 import org.w3c.dom.HTMLTextAreaElement
 import org.w3c.dom.events.Event
-import org.w3c.dom.events.MouseEvent
 import kotlin.browser.document
-import kotlin.properties.Delegates
 import kotlin.reflect.KProperty
-import kotlin.reflect.KProperty0
 
 
  class Attribute(val attributeName:String? = null, val element: HTMLElement? = null) {
@@ -59,7 +55,7 @@ import kotlin.reflect.KProperty0
  fun HTMLElement.removeChildByName(childElementName:String) {
     val elements = this.getElementsByTagName(childElementName)
     (0..elements.length-1).forEach {
-        this.removeChild(elements.get(it)!!)
+        this.removeChild(elements.item(it)!!)
     }
 }
 
@@ -337,7 +333,7 @@ import kotlin.reflect.KProperty0
      var clazz:String? by Attribute("class")
 
      var rows:Int
-        get() = parseInt(element.getAttribute("rows")?:"1")
+        get() = (element.getAttribute("rows")?:"1").toInt()
         set(value) { element.setAttribute("rows", value.toString()) }
 
     init {
@@ -349,7 +345,7 @@ import kotlin.reflect.KProperty0
     }
 
      fun scrollDown() {
-        element.scrollTop = element.scrollHeight - jq(element).height().toInt()
+        element.scrollTop = (element.scrollHeight - jq(element).height().toInt()).toDouble()
     }
 
     override var data: String
@@ -439,12 +435,7 @@ import kotlin.reflect.KProperty0
 
 }
 
- @native var HTMLElement.onchange: (() -> Unit)?
-    get() = noImpl
-    set(value) = noImpl
-
-
- interface InputComponent<T> : Component {
+interface InputComponent<T> : Component {
     var data: T
     fun addOnChangeListener(invoke:()->Unit)
     fun addOnChangeLiveListener(invoke:()->Unit)
@@ -540,10 +531,10 @@ open  class CheckBox() : InputElementComponent<Boolean>() {
         set(value) { element.value = value }
 }
 
-@native interface Context { }
+external interface Context { }
 
-@native interface CanvasI {
-     fun getContext(id:String):Context = noImpl
+external interface CanvasI {
+     fun getContext(id:String):Context
 }
 
 open class Canvas(val width:Int, val height:Int) : HTMLComponent("canvas") {

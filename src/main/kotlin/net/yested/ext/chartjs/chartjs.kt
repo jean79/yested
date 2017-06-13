@@ -54,21 +54,20 @@ import net.yested.utils.isIncludedInDOM
         val highlight: String,
         val label: String) {}
 
-private @native class ChartNative() {
-     fun Pie(data: Array<PieChartSeries>, options: Any?): dynamic = noImpl;
-     fun Doughnut(data: Array<PieChartSeries>, options: Any?): dynamic = noImpl;
-     fun Line(data: LineChartData, options: Any?): dynamic = noImpl;
-     fun Bar(data: BarChartData, options: Any?): dynamic = noImpl;
-     fun Radar(data: RadarChartData, options: Any?): dynamic = noImpl;
-     fun PolarArea(data: Array<PolarAreaChartSeries>, options: Any?): dynamic = noImpl;
+@JsName("Chart")
+private external class ChartNative(context: Context) {
+     fun Pie(data: Array<PieChartSeries>, options: Any?): dynamic
+     fun Doughnut(data: Array<PieChartSeries>, options: Any?): dynamic
+     fun Line(data: LineChartData, options: Any?): dynamic
+     fun Bar(data: BarChartData, options: Any?): dynamic
+     fun Radar(data: RadarChartData, options: Any?): dynamic
+     fun PolarArea(data: Array<PolarAreaChartSeries>, options: Any?): dynamic
 }
 
-private @native("new Chart") fun jsChart(context: Context): ChartNative = ChartNative();
-
- class Chart(width: Int, height: Int) : Canvas(width, height) {
+class Chart(width: Int, height: Int) : Canvas(width, height) {
 
     private fun drawChart(draw:(ChartNative)->dynamic, chartHandler:Function1<dynamic, Unit>?) {
-        val generatedChart = draw(jsChart(getContext("2d")))
+        val generatedChart = draw(ChartNative(getContext("2d")))
         if (chartHandler != null) {
             chartHandler(generatedChart)
         }

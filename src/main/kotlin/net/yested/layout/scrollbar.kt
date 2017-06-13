@@ -3,10 +3,14 @@ package net.yested.layout
 import jquery.jq
 import jquery.ui.draggable
 import net.yested.*
-import net.yested.utils.*
+import net.yested.utils.css
+import net.yested.utils.on
+import net.yested.utils.registerResizeHandler
 import org.w3c.dom.HTMLElement
+import kotlin.js.Math
+import kotlin.js.json
 
- enum class ScrollBarOrientation(val directionProperty:String, val nonDirectionProperty:String, val axis:String, val cssPosProperty:String) {
+enum class ScrollBarOrientation(val directionProperty:String, val nonDirectionProperty:String, val axis:String, val cssPosProperty:String) {
     VERTICAL(directionProperty = "height", nonDirectionProperty = "width", axis = "y", cssPosProperty = "top"),
     HORIZONTAL(directionProperty = "width", nonDirectionProperty = "height", axis = "x", cssPosProperty = "left")
 }
@@ -57,14 +61,14 @@ import org.w3c.dom.HTMLElement
                         Pair("axis", orientation.axis),
                         Pair("containment", "parent"),
                         Pair("drag", {
-                            val top = parseInt(jq(handle.element).css(orientation.cssPosProperty))
+                            val top = jq(handle.element).css(orientation.cssPosProperty).toInt()
                             updatePosition(top)
                         })
                 ))
 
         jq(element).on("mousewheel") { event ->
             val e = event.originalEvent
-            val delta = Math.max(-1, Math.min(1, (e.wheelDelta || -e.detail) as Int));
+            val delta = Math.max(-1, Math.min(1, (e.wheelDelta ?: -e.detail) as Int))
             event.preventDefault()
             if (delta < 0) {
                 if (currentPosition < numberOfItems) {
@@ -85,7 +89,7 @@ import org.w3c.dom.HTMLElement
         var touchStartTop:Int = 0
 
         jq(handle.element).on("touchstart", { event->
-            touchStartTop = parseInt(jq(handle.element).css(orientation.cssPosProperty))
+            touchStartTop = jq(handle.element).css(orientation.cssPosProperty).toInt()
             touchStartMouse = getMouseTouchPosition(event)
             event.preventDefault()
         })

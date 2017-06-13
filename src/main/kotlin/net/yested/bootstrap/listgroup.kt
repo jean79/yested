@@ -3,7 +3,6 @@ package net.yested.bootstrap
 import jquery.jq
 import net.yested.*
 import net.yested.utils.sortable
-import java.util.ArrayList
 
  enum class SelectionMode() {
     NONE(),

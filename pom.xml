@@ -8,7 +8,8 @@
     <artifactId>Yested</artifactId>
     <version>SNAPSHOT-1</version>
     <properties>
-        <kotlin.version>1.0.5</kotlin.version>
+        <kotlin.version>1.1.2</kotlin.version>
+        <kotlin.compiler.incremental>true</kotlin.compiler.incremental>
         <build.number>0.0.0.1</build.number>
     </properties>
     <packaging>jar</packaging>
@@ -42,7 +43,7 @@
     <dependencies>
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
-            <artifactId>kotlin-js-library</artifactId>
+            <artifactId>kotlin-stdlib-js</artifactId>
             <version>${kotlin.version}</version>
             <scope>compile</scope>
         </dependency>
@@ -98,6 +99,9 @@
                         </goals>
                     </execution>
                 </executions>
+                <configuration>
+                    <sourceMap>true</sourceMap>
+                </configuration>
             </plugin>
 
             <plugin>
@@ -212,24 +216,6 @@
                     </execution>
                 </executions>
             </plugin>-->
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>empty-javadoc-jar</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                        <configuration>
-                            <classifier>javadoc</classifier>
-                            <classesDirectory>${basedir}/javadoc</classesDirectory>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
 
            <!--<plugin>
                 <groupId>org.apache.maven.plugins</groupId>

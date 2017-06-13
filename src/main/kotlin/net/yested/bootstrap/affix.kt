@@ -1,11 +1,12 @@
 package net.yested.bootstrap
 
-@native private interface JQAffix {
-    fun scrollspy(parameters:Any?) : Unit = noImpl
+external private interface JQAffix {
+    fun scrollspy(parameters:Any?) : Unit
 }
 
-@native("$('body')") private var affixJQuery: JQAffix = null!!
+private val affixJQuery: JQAffix
+    get() = js("$('body')")
 
- fun enableScrollSpy(id:String) : Unit {
+fun enableScrollSpy(id:String) : Unit {
     affixJQuery.scrollspy(object { val target = "#${id}" })
 }

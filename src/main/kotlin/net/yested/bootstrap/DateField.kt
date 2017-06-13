@@ -1,16 +1,11 @@
 package net.yested.bootstrap
 
-import net.yested.ObservableInput
-import net.yested.Div
-import net.yested.createElement
-import net.yested.with
-import net.yested.Span
-import jquery.jq
 import jquery.JQuery
+import jquery.jq
+import net.yested.*
 import net.yested.utils.FormatString
-import net.yested.utils.Moment
 import net.yested.utils.FormatStringBuilder
-import net.yested.whenAddedToDom
+import net.yested.utils.Moment
 import net.yested.utils.on
 import org.w3c.dom.HTMLInputElement
 
@@ -76,4 +71,5 @@ import org.w3c.dom.HTMLInputElement
     }
 }
 
-private @native fun JQuery.datetimepicker(param: Any? ): Unit = noImpl;
+@Suppress("NOTHING_TO_INLINE")
+inline private fun JQuery.datetimepicker(param: Any?): Unit = asDynamic().datetimepicker(param)

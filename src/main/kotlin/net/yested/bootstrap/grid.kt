@@ -10,7 +10,6 @@ import net.yested.THead
 import net.yested.TBody
 import net.yested.removeChildByName
 import org.w3c.dom.HTMLElement
-import java.util.*
 
 data class Column<T>(
         val label: HTMLComponent.() -> Unit,

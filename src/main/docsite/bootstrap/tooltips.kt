@@ -1,23 +1,9 @@
 package bootstrap
 
-import net.yested.bootstrap.Grid
-import net.yested.bootstrap.Column
-import net.yested.text
-import net.yested.bootstrap.row
-import net.yested.bootstrap.pageHeader
-import net.yested.div
 import net.yested.Div
-import net.yested.bootstrap.btsButton
-import net.yested.ButtonType
-import net.yested.bootstrap.ButtonLook
-import net.yested.bootstrap.ButtonSize
-import net.yested.bootstrap.Medium
-import net.yested.bootstrap.BtsButton
+import net.yested.bootstrap.*
+import net.yested.div
 import net.yested.with
-import net.yested.bootstrap.addTooltip
-import net.yested.bootstrap.TooltipOptions
-import net.yested.bootstrap.TooltipPlacement
-import jquery.jq
 
 fun createTooltips(id: String): Div {
 
@@ -37,16 +23,16 @@ fun createTooltips(id: String): Div {
                 h4 { +"Demo" }
                 div {
                     +(BtsButton(label = { +"Tooltip on left" }) with {
-                        addTooltip(element, TooltipOptions(placement = TooltipPlacement.LEFT), title = {this.innerHTML})
+                        addTooltip(element, TooltipOptions(placement = TooltipPlacement.LEFT), title = {element.innerHTML})
                     })
                     +(BtsButton(label = { +"Tooltip on top" }) with {
-                        addTooltip(element, TooltipOptions(placement = TooltipPlacement.TOP), title = {this.innerHTML})
+                        addTooltip(element, TooltipOptions(placement = TooltipPlacement.TOP), title = {element.innerHTML})
                     })
                     +(BtsButton(label = { +"Tooltip on bottom" }) with {
-                        addTooltip(element, TooltipOptions(placement = TooltipPlacement.BOTTOM), title = {this.innerHTML})
+                        addTooltip(element, TooltipOptions(placement = TooltipPlacement.BOTTOM), title = {element.innerHTML})
                     })
                     +(BtsButton(label = { +"Tooltip on right" }) with {
-                        addTooltip(element, TooltipOptions(placement = TooltipPlacement.RIGHT), title = {this.innerHTML})
+                        addTooltip(element, TooltipOptions(placement = TooltipPlacement.RIGHT), title = {element.innerHTML})
                     })
                 }
             }
