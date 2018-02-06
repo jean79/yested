@@ -6,7 +6,6 @@ Yested is a Kotlin framework for building single-page web applications in Javasc
 This project is no longer maintained. Please check: https://github.com/jean79/yested_fw
 
 # Project and Demo page
-Project page: [www.yested.net](http://www.yested.net)
 
 Demo page: [demo.yested.net](http://demo.yested.net)
 
